@@ -50,6 +50,9 @@ public:
     virtual void SetEmotion(const char* emotion) override;
     virtual void SetChatMessage(const char* role, const char* content) override; 
     virtual void SetPreviewImage(std::unique_ptr<LvglImage> image) override;
+    
+    // 🟢 新增：配网二维码显示接口实现
+    virtual void ShowQrCode(const char* url) override;
 
     // Add theme switching function
     virtual void SetTheme(Theme* theme) override;

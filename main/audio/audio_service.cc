@@ -1,6 +1,7 @@
 #include "audio_service.h"
 #include <esp_log.h>
 #include <cstring>
+#include <iterator>
 
 #if CONFIG_USE_AUDIO_PROCESSOR
 #include "processors/afe_audio_processor.h"
@@ -49,8 +50,13 @@ void AudioService::Initialize(AudioCodec* codec) {
     audio_processor_ = std::make_unique<NoAudioProcessor>();
 #endif
 
-    audio_processor_->OnOutput([this](std::vector<int16_t>&& data) {
-        PushTaskToEncodeQueue(kAudioTaskTypeEncodeToSendQueue, std::move(data));
+    // 【修改点】适配 SpiramAllocator
+    // 由于 AFE 现在在 PSRAM 中输出数据，但 EncodeQueue 依然期望标准 RAM 的 vector
+    // 这里需要进行一次显式的类型转换（拷贝）
+    audio_processor_->OnOutput([this](std::vector<int16_t, SpiramAllocator<int16_t>>&& data) {
+        // 将 PSRAM vector 转换为标准 vector
+        std::vector<int16_t> standard_data(data.begin(), data.end());
+        PushTaskToEncodeQueue(kAudioTaskTypeEncodeToSendQueue, std::move(standard_data));
     });
 
     audio_processor_->OnVadStateChange([this](bool speaking) {

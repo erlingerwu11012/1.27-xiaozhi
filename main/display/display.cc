@@ -54,3 +54,8 @@ void Display::SetTheme(Theme* theme) {
 void Display::SetPowerSaveMode(bool on) {
     ESP_LOGW(TAG, "SetPowerSaveMode: %d", on);
 }
+
+// 🟢 新增：显示配网二维码的基础实现
+void Display::ShowQrCode(const char* content) {
+    ESP_LOGW(TAG, "ShowQrCode: %s", content);
+}

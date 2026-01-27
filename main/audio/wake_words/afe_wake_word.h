@@ -38,17 +38,29 @@ private:
     srmodel_list_t *models_ = nullptr;
     const esp_afe_sr_iface_t* afe_iface_ = nullptr;
     esp_afe_sr_data_t* afe_data_ = nullptr;
-    char* wakenet_model_ = NULL;
+    char* wakenet_model_ = nullptr;
     std::vector<std::string> wake_words_;
     EventGroupHandle_t event_group_;
     std::function<void(const std::string& wake_word)> wake_word_detected_callback_;
     AudioCodec* codec_ = nullptr;
     std::string last_detected_wake_word_;
 
+    // --- 编码任务资源 ---
     TaskHandle_t wake_word_encode_task_ = nullptr;
     StaticTask_t* wake_word_encode_task_buffer_ = nullptr;
     StackType_t* wake_word_encode_task_stack_ = nullptr;
-    std::deque<std::vector<int16_t>> wake_word_pcm_;
+
+    // --- 检测任务资源 (新增，用于移至 PSRAM) ---
+    StaticTask_t* detection_task_buffer_ = nullptr;
+    StackType_t* detection_task_stack_ = nullptr;
+
+    // --- 唤醒词音频数据缓存 (修改为 PSRAM 环形缓冲区) ---
+    // 替代原有的 std::deque<std::vector<int16_t>> wake_word_pcm_;
+    int16_t* wake_buffer_ptr_ = nullptr;  // PSRAM 缓冲区指针
+    size_t wake_buffer_len_ = 0;          // 缓冲区总长度 (samples)
+    size_t wake_buffer_head_ = 0;         // 当前写入位置索引
+
+    // --- Opus 编码输出队列 ---
     std::deque<std::vector<uint8_t>> wake_word_opus_;
     std::mutex wake_word_mutex_;
     std::condition_variable wake_word_cv_;

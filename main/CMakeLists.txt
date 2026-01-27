@@ -36,9 +36,12 @@ set(SOURCES "audio/audio_codec.cc"
             "device_state_event.cc"
             "assets.cc"
             "main.cc"
+            # 蓝牙驱动源码
+            # "blue_tooth_drivers/ble_controller.cc"
             )
 
-set(INCLUDE_DIRS "." "display" "display/lvgl_display" "display/lvgl_display/jpg" "audio" "protocols")
+# 添加驱动头文件路径
+set(INCLUDE_DIRS "." "display" "display/lvgl_display" "display/lvgl_display/jpg" "audio" "protocols" )
 
 # Add board common files
 file(GLOB BOARD_COMMON_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/boards/common/*.cc)
@@ -704,12 +707,50 @@ if(CONFIG_IDF_TARGET_ESP32)
                              )
 endif()
 
-idf_component_register(SRCS ${SOURCES}
-                    EMBED_FILES ${LANG_SOUNDS} ${COMMON_SOUNDS}
-                    INCLUDE_DIRS ${INCLUDE_DIRS}
-                    WHOLE_ARCHIVE
-                    )
+# ==============================================================================
 
+
+idf_component_register(
+    SRCS ${SOURCES}
+    EMBED_FILES ${LANG_SOUNDS} ${COMMON_SOUNDS}
+    
+    # 保持原有的 INCLUDE_DIRS
+    INCLUDE_DIRS ${INCLUDE_DIRS}
+    
+    WHOLE_ARCHIVE
+    PRIV_REQUIRES 
+        # 蓝牙相关
+        # esp_hid 
+        bt
+        # 系统与内存
+        esp_psram 
+        esp_timer 
+        esp_event 
+        esp_system
+        efuse
+        # OTA 与 分区
+        app_update 
+        esp_app_format 
+        esp_partition 
+        spi_flash  
+        # 存储与配置
+        nvs_flash 
+        # 网络相关
+        esp_http_client 
+        esp_wifi 
+        esp_netif 
+        lwip 
+        mqtt
+        wifi_provisioning
+        protocomm 
+        # 硬件驱动
+        driver 
+        esp_lcd 
+        # 工具库
+        json 
+        log
+        lvgl
+)
 # Use target_compile_definitions to define BOARD_TYPE, BOARD_NAME
 # If BOARD_NAME is empty, use BOARD_TYPE
 if(NOT BOARD_NAME)
@@ -915,3 +956,4 @@ if ("${size}" AND "${offset}")
 else()
     message(STATUS "Assets partition not found, using v1 partition table")
 endif()
+

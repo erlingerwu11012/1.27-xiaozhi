@@ -71,7 +71,7 @@ std::unique_ptr<Http> Ota::SetupHttp() {
 /* 
  * Specification: https://ccnphfhqs21z.feishu.cn/wiki/FjW6wZmisimNBBkov6OcmfvknVd
  */
-esp_err_t Ota::CheckVersion() {
+bool Ota::CheckVersion() {
     auto& board = Board::GetInstance();
     auto app_desc = esp_app_get_description();
 
@@ -82,7 +82,7 @@ esp_err_t Ota::CheckVersion() {
     std::string url = GetCheckVersionUrl();
     if (url.length() < 10) {
         ESP_LOGE(TAG, "Check version URL is not properly set");
-        return ESP_ERR_INVALID_ARG;
+        return false;
     }
 
     auto http = SetupHttp();
@@ -92,15 +92,14 @@ esp_err_t Ota::CheckVersion() {
     http->SetContent(std::move(data));
 
     if (!http->Open(method, url)) {
-        int last_error = http->GetLastError();
-        ESP_LOGE(TAG, "Failed to open HTTP connection, code=0x%x", last_error);
-        return last_error;
+        ESP_LOGE(TAG, "Failed to open HTTP connection");
+        return false;
     }
 
     auto status_code = http->GetStatusCode();
     if (status_code != 200) {
         ESP_LOGE(TAG, "Failed to check version, status code: %d", status_code);
-        return status_code;
+        return false;
     }
 
     data = http->ReadAll();
@@ -113,7 +112,7 @@ esp_err_t Ota::CheckVersion() {
     cJSON *root = cJSON_Parse(data.c_str());
     if (root == NULL) {
         ESP_LOGE(TAG, "Failed to parse JSON response");
-        return ESP_ERR_INVALID_RESPONSE;
+        return false;
     }
 
     has_activation_code_ = false;
@@ -238,7 +237,7 @@ esp_err_t Ota::CheckVersion() {
     }
 
     cJSON_Delete(root);
-    return ESP_OK;
+    return true;
 }
 
 void Ota::MarkCurrentVersionValid() {

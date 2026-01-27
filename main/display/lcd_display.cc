@@ -13,6 +13,9 @@
 #include <esp_psram.h>
 #include <cstring>
 
+// 🟢 必须包含的核心头文件，确保二维码功能可用
+#include "lvgl.h" 
+
 #include "board.h"
 
 #define TAG "LcdDisplay"
@@ -1193,4 +1196,34 @@ void LcdDisplay::SetHideSubtitle(bool hide) {
             lv_obj_remove_flag(bottom_bar_, LV_OBJ_FLAG_HIDDEN);
         }
     }
+}
+
+// 🟢 新增：显示配网二维码的完整实现
+void LcdDisplay::ShowQrCode(const char* url) {
+    DisplayLockGuard lock(this);
+
+    // 1. 不要调用 lv_obj_clean！
+    // 我们创建一个新的、全屏的、黑色的容器，挡住后面的聊天和状态栏
+    lv_obj_t* overlay = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(overlay, LV_HOR_RES, LV_VER_RES);
+    lv_obj_set_style_bg_color(overlay, lv_color_hex(0x000000), 0);
+    lv_obj_set_style_border_width(overlay, 0, 0);
+    lv_obj_set_style_radius(overlay, 0, 0);
+    lv_obj_align(overlay, LV_ALIGN_CENTER, 0, 0);
+
+    // 2. 在这个“遮罩层”上画二维码
+    lv_obj_t* qr_bg = lv_obj_create(overlay);
+    lv_obj_set_size(qr_bg, 180, 180);
+    lv_obj_align(qr_bg, LV_ALIGN_CENTER, 0, -10);
+    lv_obj_set_style_bg_color(qr_bg, lv_color_hex(0xFFFFFF), 0);
+
+    lv_obj_t* qrcode = lv_qrcode_create(qr_bg);
+    lv_qrcode_set_size(qrcode, 160);
+    lv_qrcode_update(qrcode, url, strlen(url));
+    lv_obj_center(qrcode);
+
+    lv_obj_t* label = lv_label_create(overlay);
+    lv_label_set_text(label, "Scan to Setup Wi-Fi");
+    lv_obj_set_style_text_color(label, lv_color_white(), 0);
+    lv_obj_align(label, LV_ALIGN_BOTTOM_MID, 0, -10);
 }

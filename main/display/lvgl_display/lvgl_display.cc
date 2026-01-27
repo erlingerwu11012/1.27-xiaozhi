@@ -8,6 +8,23 @@
 #include "lvgl_display.h"
 #include "board.h"
 #include "application.h"
+
+// ==============================================================================
+// 【关键修复】解决宏定义冲突
+// application.h 引入了网络库 (sockets.h)，定义了 _IO/_IOR/_IOW
+// 后面的视频/摄像头驱动 (ioctl.h) 也要定义这些宏，导致冲突报错。
+// 这里强制取消定义，给摄像头驱动腾出位置。
+// ==============================================================================
+#ifdef _IO
+#undef _IO
+#endif
+#ifdef _IOR
+#undef _IOR
+#endif
+#ifdef _IOW
+#undef _IOW
+#endif
+
 #include "audio_codec.h"
 #include "settings.h"
 #include "assets/lang_config.h"

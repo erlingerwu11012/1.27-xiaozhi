@@ -131,18 +131,15 @@ void Application::CheckNewVersion(Ota& ota) {
         auto display = board.GetDisplay();
         display->SetStatus(Lang::Strings::CHECKING_NEW_VERSION);
 
-        esp_err_t err = ota.CheckVersion();
-        if (err != ESP_OK) {
+        if (!ota.CheckVersion()) {
             retry_count++;
             if (retry_count >= MAX_RETRY) {
                 ESP_LOGE(TAG, "Too many retries, exit version check");
                 return;
             }
 
-            char error_message[128];
-            snprintf(error_message, sizeof(error_message), "code=%d, url=%s", err, ota.GetCheckVersionUrl().c_str());
             char buffer[256];
-            snprintf(buffer, sizeof(buffer), Lang::Strings::CHECK_NEW_VERSION_FAILED, retry_delay, error_message);
+            snprintf(buffer, sizeof(buffer), Lang::Strings::CHECK_NEW_VERSION_FAILED, retry_delay, ota.GetCheckVersionUrl().c_str());
             Alert(Lang::Strings::ERROR, buffer, "cloud_slash", Lang::Sounds::OGG_EXCLAMATION);
 
             ESP_LOGW(TAG, "Check new version failed, retry in %d seconds (%d/%d)", retry_delay, retry_count, MAX_RETRY);
@@ -600,21 +597,26 @@ void Application::MainEventLoop() {
             }
         }
 
-        if (bits & MAIN_EVENT_CLOCK_TICK) {
+if (bits & MAIN_EVENT_CLOCK_TICK) {
             clock_ticks_++;
             auto display = Board::GetInstance().GetDisplay();
-            display->UpdateStatusBar();
+            
+            // 🔥🔥🔥 核心修复：加一个判断 🔥🔥🔥
+            // 如果处于配网模式，或者正在升级，绝对不要去更新状态栏！
+            // 因为此时屏幕可能已经被清空或者是二维码界面，状态栏对象根本不存在。
+            if (device_state_ != kDeviceStateWifiConfiguring && 
+                device_state_ != kDeviceStateUpgrading) {
+                
+                display->UpdateStatusBar();
+            }
+            // 🔥🔥🔥 修复结束 🔥🔥🔥
         
-            // Print the debug info every 10 seconds
             if (clock_ticks_ % 10 == 0) {
-                // SystemInfo::PrintTaskCpuUsage(pdMS_TO_TICKS(1000));
-                // SystemInfo::PrintTaskList();
                 SystemInfo::PrintHeapStats();
             }
         }
     }
 }
-
 void Application::OnWakeWordDetected() {
     if (!protocol_) {
         return;
@@ -633,7 +635,7 @@ void Application::OnWakeWordDetected() {
 
         auto wake_word = audio_service_.GetLastWakeWord();
         ESP_LOGI(TAG, "Wake word detected: %s", wake_word.c_str());
-#if CONFIG_SEND_WAKE_WORD_DATA
+#if CONFIG_USE_AFE_WAKE_WORD || CONFIG_USE_CUSTOM_WAKE_WORD
         // Encode and send the wake word data to the server
         while (auto packet = audio_service_.PopWakeWordPacket()) {
             protocol_->SendAudio(std::move(packet));
@@ -647,9 +649,15 @@ void Application::OnWakeWordDetected() {
         audio_service_.PlaySound(Lang::Sounds::OGG_POPUP);
 #endif
     } else if (device_state_ == kDeviceStateSpeaking) {
-        AbortSpeaking(kAbortReasonWakeWordDetected);
-    } else if (device_state_ == kDeviceStateActivating) {
-        SetDeviceState(kDeviceStateIdle);
+        Schedule([this]() {
+            AbortSpeaking(kAbortReasonNone);
+        });
+    } else if (device_state_ == kDeviceStateListening) {   
+        Schedule([this]() {
+            if (protocol_) {
+                protocol_->CloseAudioChannel();
+            }
+        });
     }
 }
 

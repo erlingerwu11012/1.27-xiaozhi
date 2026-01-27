@@ -125,8 +125,10 @@ void SingleLed::OnStateChanged() {
             StartContinuousBlink(100);
             break;
         case kDeviceStateWifiConfiguring:
+            // 🟢 【修改点】配网模式：蓝色
             SetColor(0, 0, DEFAULT_BRIGHTNESS);
-            StartContinuousBlink(500);
+            // 🟢 【修改点】慢速闪烁 (1000ms) 模拟呼吸/等待效果
+            StartContinuousBlink(1000);
             break;
         case kDeviceStateIdle:
             TurnOff();

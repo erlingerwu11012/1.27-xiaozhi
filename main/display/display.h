@@ -40,6 +40,9 @@ public:
     virtual void UpdateStatusBar(bool update_all = false);
     virtual void SetPowerSaveMode(bool on);
 
+    // 🟢 新增：显示配网二维码的虚函数接口
+    virtual void ShowQrCode(const char* content);
+
     inline int width() const { return width_; }
     inline int height() const { return height_; }
 
@@ -71,6 +74,10 @@ private:
 };
 
 class NoDisplay : public Display {
+public:
+    // 🟢 对新增接口的空实现
+    virtual void ShowQrCode(const char* content) override {}
+
 private:
     virtual bool Lock(int timeout_ms = 0) override {
         return true;

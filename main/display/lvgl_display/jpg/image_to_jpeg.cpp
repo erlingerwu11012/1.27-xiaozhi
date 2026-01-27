@@ -17,14 +17,20 @@
 #define TAG "image_to_jpeg"
 
 static void* malloc_psram(size_t size) {
-    void* p = malloc(size);
-    if (p)
-        return p;
-#if (CONFIG_SPIRAM_SUPPORT && (CONFIG_SPIRAM_USE_CAPS_ALLOC || CONFIG_SPIRAM_USE_MALLOC))
-    return heap_caps_malloc(size, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
-#else
-    return NULL;
-#endif
+    void* p = NULL;
+
+    // 优先从 PSRAM 分配
+    p = heap_caps_malloc(size, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+    
+    // 如果 PSRAM 失败了（虽然 8MB 很难失败），再尝试从普通内存分配
+    if (p == NULL) {
+        p = malloc(size);
+        if (p) {
+            ESP_LOGW("MEM", "PSRAM allocation failed, falling back to SRAM for size: %d", size);
+        }
+    }
+
+    return p;
 }
 
 static __always_inline uint8_t expand_5_to_8(uint8_t v) {
