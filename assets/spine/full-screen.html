@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><body style="margin:0;background:black"><canvas id="out" width="640" height="640"></canvas><script src="spine-webgl.js"></script><script>
+window.ready=false;
+(async()=>{
+const out=document.getElementById('out'),ctx=out.getContext('2d');
+const c=document.createElement('canvas');c.width=c.height=640;
+const gl=c.getContext('webgl',{alpha:true,premultipliedAlpha:true,preserveDrawingBuffer:true});
+const r=new spine.SceneRenderer(c,gl),a=new spine.AssetManager(gl);
+a.loadBinary('nvhai.skel');a.loadTextureAtlas('nvhai.atlas');
+while(!a.isLoadingComplete())await new Promise(x=>setTimeout(x,20));
+if(a.hasErrors())throw Error(JSON.stringify(a.getErrors()));
+const data=new spine.SkeletonBinary(new spine.AtlasAttachmentLoader(a.get('nvhai.atlas'))).readSkeletonData(a.get('nvhai.skel'));
+const s=new spine.Skeleton(data);s.setSkinByName('default');s.setToSetupPose();s.x=170.764;s.y=42.510;
+r.camera.position.x=r.camera.position.y=160;r.camera.viewportWidth=r.camera.viewportHeight=320;r.camera.update();
+const st=new spine.AnimationState(new spine.AnimationStateData(data));st.setAnimation(0,'idle',true);
+const bg=new Image();bg.src='room.png';await bg.decode();
+const rear=new Set(['shenti','dabir','dabil','yiling']);let prev=0;
+window.drawAt=t=>{
+const dt=Math.max(0,t-prev);prev=t;st.update(dt);st.apply(s);s.update(dt);s.updateWorldTransform(spine.Physics.update);
+gl.viewport(0,0,640,640);gl.disable(gl.SCISSOR_TEST);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+for(const slot of s.drawOrder){
+ if(rear.has(slot.data.name)){gl.enable(gl.SCISSOR_TEST);gl.scissor(0,104,640,536);}else gl.disable(gl.SCISSOR_TEST);
+ r.begin();r.drawSkeleton(s,false,slot.data.index,slot.data.index);r.end();
+}
+gl.disable(gl.SCISSOR_TEST);
+ctx.clearRect(0,0,640,640);ctx.drawImage(bg,0,0,640,640);ctx.drawImage(c,0,0);
+};
+drawAt(0);
+const o=new spine.Vector2(),z=new spine.Vector2();s.getBounds(o,z,[]);
+window.layout={version:data.version,animation:'idle',position:[170.764,42.510],scale:1,viewport:[320,320],tableScreenY:268,rearClippedSlots:[...rear],foregroundArmsUnclipped:true,wallpaper:'original room.png',bounds:{x:o.x,y:o.y,w:z.x,h:z.y}};
+window.ready=true;
+})().catch(e=>{console.error(e.stack);window.err=e.stack});
+</script></body></html>

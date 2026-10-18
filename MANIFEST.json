@@ -1,0 +1,632 @@
+[
+  {
+    "path": "ASSET_MAP.md",
+    "bytes": 3427,
+    "sha256": "aa7a47571516565f25173b90e0769a17a92c3564af401a395c921c3488f57d3d"
+  },
+  {
+    "path": "assets/boot-frames/000.png",
+    "bytes": 377,
+    "sha256": "d111373b51abee9658430e60529bc24c1aa03c69e94f647948b4df2a1e72369d"
+  },
+  {
+    "path": "assets/boot-frames/001.png",
+    "bytes": 377,
+    "sha256": "d111373b51abee9658430e60529bc24c1aa03c69e94f647948b4df2a1e72369d"
+  },
+  {
+    "path": "assets/boot-frames/002.png",
+    "bytes": 500,
+    "sha256": "d77df46769729ab9316481c8c2d1a1f99211167c53393ba029b4cc3ec6cd9c7b"
+  },
+  {
+    "path": "assets/boot-frames/003.png",
+    "bytes": 701,
+    "sha256": "96e6ff3c8055f9bc43690d44b40fe6931a3346107666e0a2387d183af5ecbbdf"
+  },
+  {
+    "path": "assets/boot-frames/004.png",
+    "bytes": 913,
+    "sha256": "7294c1ba9e48a596e5cf1cca0438c644a6afe5ef8c800008d2b5f0254bc1dd6a"
+  },
+  {
+    "path": "assets/boot-frames/005.png",
+    "bytes": 1150,
+    "sha256": "a8ad8529749f908b13ef516d57df5ee53b84f297b669c1ce40c38db3d4bbc05e"
+  },
+  {
+    "path": "assets/boot-frames/006.png",
+    "bytes": 1385,
+    "sha256": "d8726128a3803110bbbbe42494151a60239bb47d9ad39323333e1505d9e21af3"
+  },
+  {
+    "path": "assets/boot-frames/007.png",
+    "bytes": 1622,
+    "sha256": "d09edf296585601eed06579f40e0d6db7512e4707034f70aab9fa1166f69a973"
+  },
+  {
+    "path": "assets/boot-frames/008.png",
+    "bytes": 1816,
+    "sha256": "38f3a3de5e9d921dcd8837867d1367846f3cb17586de21ae8d2191b24b03702f"
+  },
+  {
+    "path": "assets/boot-frames/009.png",
+    "bytes": 2047,
+    "sha256": "38a6bae9ec6fb491df708a54ecfd21176665ffdddecd5adcfd7ce4086dcb7151"
+  },
+  {
+    "path": "assets/boot-frames/010.png",
+    "bytes": 2281,
+    "sha256": "2c4be7757b4f2c3cc986e6fc1a1589a4651e0857adfa5631ca6e41242547ad67"
+  },
+  {
+    "path": "assets/boot-frames/011.png",
+    "bytes": 2442,
+    "sha256": "ed496aa99262deeccedf69efdd441644cef92aca2ca695101ad1b9d48d94601d"
+  },
+  {
+    "path": "assets/boot-frames/012.png",
+    "bytes": 2610,
+    "sha256": "5050137d830c5f7aa8cccad70e1bf9a178b36e581e03143509cddba4609d37ad"
+  },
+  {
+    "path": "assets/boot-frames/013.png",
+    "bytes": 2839,
+    "sha256": "7c65f14a8175a3f096d76982ac965c7854c42e0aebac0e59815aa92fcd23c0ee"
+  },
+  {
+    "path": "assets/boot-frames/014.png",
+    "bytes": 3023,
+    "sha256": "f95281c13cb565fdee833a1325524e31c72455996c2f23a6ba7696a745eae436"
+  },
+  {
+    "path": "assets/boot-frames/015.png",
+    "bytes": 3145,
+    "sha256": "4a43259804cc4d4a058071fb44483a1698393e2a159be7c9b42cbac8b5f24fcd"
+  },
+  {
+    "path": "assets/boot-frames/016.png",
+    "bytes": 3168,
+    "sha256": "bf022ed29ac0a0c2da09ce6982974e66fe32bfffb639f7132545375d0c93171c"
+  },
+  {
+    "path": "assets/boot-frames/017.png",
+    "bytes": 3335,
+    "sha256": "d9b5282eea3960ef85587b03cb3c13132fc69d8903e80d29da0e5b02e856f0dc"
+  },
+  {
+    "path": "assets/boot-frames/018.png",
+    "bytes": 3558,
+    "sha256": "c6dcca020fd7ab5ea8a164789cf4257fec62648b8bc52f6b2771329580b7cbad"
+  },
+  {
+    "path": "assets/boot-frames/019.png",
+    "bytes": 3720,
+    "sha256": "7045e20ea698e2ddf0c4c2f974aaeaf6df6cdbac64bd7b50328cfb297b9e57c2"
+  },
+  {
+    "path": "assets/boot-frames/020.png",
+    "bytes": 3820,
+    "sha256": "4a38bb9e61191c6693447498f0aba0a85e07eabe01646a0124bc36cd39c63b05"
+  },
+  {
+    "path": "assets/boot-frames/021.png",
+    "bytes": 3932,
+    "sha256": "f92d29752dd4c4e507979c7138cbd8682e9075ccb193d3f0834a79867e3c9152"
+  },
+  {
+    "path": "assets/boot-frames/022.png",
+    "bytes": 3995,
+    "sha256": "e527e0d874a9d6c82a1bcc36f2f2fb408a28192d2711163387f0e97c5f7a2f8a"
+  },
+  {
+    "path": "assets/boot-frames/023.png",
+    "bytes": 4103,
+    "sha256": "4e3ee83573aef7e87b4d0671cd3a365bac098dd4c41956970232c1ede9b1d87a"
+  },
+  {
+    "path": "assets/boot-frames/024.png",
+    "bytes": 4274,
+    "sha256": "2378255cd5f5fa28e78806a2438a4a2d02c7145a66fef6be15af0c5e2a27f227"
+  },
+  {
+    "path": "assets/boot-frames/025.png",
+    "bytes": 4264,
+    "sha256": "f58c1c6524bec027ca16ec135b9f1580a66ad6be0e1755f3da7a7516dd6c0842"
+  },
+  {
+    "path": "assets/boot-frames/026.png",
+    "bytes": 4445,
+    "sha256": "91ed8401185d89751e2d893b93b8b2333adc86a5918677f590c9e89016965ba4"
+  },
+  {
+    "path": "assets/boot-frames/027.png",
+    "bytes": 4548,
+    "sha256": "6a7984458422bb8d56a83c344bd6eef76e134f510bbe7214edd93975cb544756"
+  },
+  {
+    "path": "assets/boot-frames/028.png",
+    "bytes": 4667,
+    "sha256": "531aa514fff7e996ed239dc23d349ce829594839c97dc65e0d9b845dee7bb2f3"
+  },
+  {
+    "path": "assets/boot-frames/029.png",
+    "bytes": 4735,
+    "sha256": "392b4d20945ce8f7a70535ca03d20f390de9cd8f8ae4efa0a1847f2bd0ff10ec"
+  },
+  {
+    "path": "assets/boot-frames/030.png",
+    "bytes": 4805,
+    "sha256": "edc3ce3065f44bfcb5cf4a6328fb4e583f18e930421b5d8422125203aec36b48"
+  },
+  {
+    "path": "assets/boot-frames/031.png",
+    "bytes": 4895,
+    "sha256": "2c38eb4407fd5234a745b0e76f59c3d1d5a26222603b8cdc5a9bed4ca86df1cc"
+  },
+  {
+    "path": "assets/boot-frames/032.png",
+    "bytes": 4903,
+    "sha256": "cf041cd1c9bccbd9f73f79180e278d38e8043777ad77e850ac20b6c83943705d"
+  },
+  {
+    "path": "assets/boot-frames/033.png",
+    "bytes": 4949,
+    "sha256": "86bae6f2d0cd33b5b7254984a9ecec8f2662ad4d2b97b637e50ca7b3260e77b2"
+  },
+  {
+    "path": "assets/boot-frames/034.png",
+    "bytes": 5000,
+    "sha256": "5b3ab3480de60448b93d346ef8594f4e1c484539e58005d777947863974faa60"
+  },
+  {
+    "path": "assets/boot-frames/035.png",
+    "bytes": 5058,
+    "sha256": "35bee19eae6520475684b9d158add85e0a02a78e2bc0c327a8222e1e58c6a137"
+  },
+  {
+    "path": "assets/boot-frames/036.png",
+    "bytes": 5071,
+    "sha256": "664ff5e19a1ecf4982795cd2ef9734c9d0b7eabc8f8a965839b007b99479770e"
+  },
+  {
+    "path": "assets/boot-frames/037.png",
+    "bytes": 5118,
+    "sha256": "c5df7e1cb19366a905a055ef6d5bfd5b845cece56aa8c7d3af6a2dc1c5458913"
+  },
+  {
+    "path": "assets/boot-frames/038.png",
+    "bytes": 5175,
+    "sha256": "a4cbe5d0736d25541501855dd41d0208da73fcdc9adbc3a1f4117c873111aea2"
+  },
+  {
+    "path": "assets/boot-frames/039.png",
+    "bytes": 5201,
+    "sha256": "d27eb772c9d5edb74b846bfdb4286da50b0b15b869dce370abba755d4ef5e062"
+  },
+  {
+    "path": "assets/boot-frames/040.png",
+    "bytes": 5159,
+    "sha256": "01233a2fa2e4c1a2de28fc467b2e0381d21eaefc5c11a2b5f3e8e03880332b31"
+  },
+  {
+    "path": "assets/boot-frames/041.png",
+    "bytes": 5212,
+    "sha256": "77c574f16da3d925c6548bf08a653617339e063957153942890080b17f3c42ef"
+  },
+  {
+    "path": "assets/boot-frames/042.png",
+    "bytes": 5171,
+    "sha256": "4ea61164bfdea19d0c90c5f4ab9b5aa92fb01837fd9a5529f6f225af9e6f49a7"
+  },
+  {
+    "path": "assets/boot-frames/043.png",
+    "bytes": 5214,
+    "sha256": "8e92a3b47f185765ff0f25cd1d02fc683441edc408791b755abe7755602712de"
+  },
+  {
+    "path": "assets/boot-frames/044.png",
+    "bytes": 5208,
+    "sha256": "746bdb0f4805ed84dcfe8f21731b7baea43db9a7693c95e3a6c8dbdeed809466"
+  },
+  {
+    "path": "assets/boot-frames/045.png",
+    "bytes": 5227,
+    "sha256": "5b648f3c75133a483bd04d417b06055388d80dad11062adfb6def81bbe972368"
+  },
+  {
+    "path": "assets/boot-frames/046.png",
+    "bytes": 5196,
+    "sha256": "d51e391c90e3e4017caebbfce2c35eff012d7f6b664b230f4a8f470aee67e78d"
+  },
+  {
+    "path": "assets/boot-frames/047.png",
+    "bytes": 5384,
+    "sha256": "cbd48cd786f34415ff6543f88a66eb41e75c662df67b584e0ef0cc49d0191b70"
+  },
+  {
+    "path": "assets/boot-frames/048.png",
+    "bytes": 5142,
+    "sha256": "bdb714f6bf36496fc6e7b7ffeca70f65120d0de0aa0308c15cd6d96c2ede86c6"
+  },
+  {
+    "path": "assets/boot-frames/049.png",
+    "bytes": 5193,
+    "sha256": "8bba9c96ec563769ad4c1e02dd3abfb0d716a4c504801d516285f4b03a6fef25"
+  },
+  {
+    "path": "assets/boot-frames/050.png",
+    "bytes": 5173,
+    "sha256": "a4a6efaa139050120485dc0be8cf29609b82fe12a8058b538a2e294a7fa55571"
+  },
+  {
+    "path": "assets/boot-frames/051.png",
+    "bytes": 5031,
+    "sha256": "d443a9ec830a2f3acd1553b475300fbf81532173965066942d3b3241d6b8e194"
+  },
+  {
+    "path": "assets/boot-frames/052.png",
+    "bytes": 5054,
+    "sha256": "f1b9e85f57d5f88c501fd92df5b6bb336b62ee19103b73fa134c2785459f7397"
+  },
+  {
+    "path": "assets/boot-frames/053.png",
+    "bytes": 5327,
+    "sha256": "96fa2faa4305676d552e4d745bd9ce64586e62faf5ddd14af8d0fabe0dedf9b6"
+  },
+  {
+    "path": "assets/boot-frames/054.png",
+    "bytes": 5196,
+    "sha256": "bdb3c158648e71c8690883ab8557b8774dcccf346eceac6ac5f58a12cf4ab81e"
+  },
+  {
+    "path": "assets/boot-frames/055.png",
+    "bytes": 5355,
+    "sha256": "27d55f8930debe33013bb711c8bbeec9fcd9c0287fe41980cecf9001ab2abe5c"
+  },
+  {
+    "path": "assets/boot-frames/056.png",
+    "bytes": 5394,
+    "sha256": "a00ce6cd3adb83e5498648876e7f2db62366c975caa19d3388e03ab5f0f16dcf"
+  },
+  {
+    "path": "assets/boot-frames/057.png",
+    "bytes": 5090,
+    "sha256": "3805363cb74860fe196a987ad532a5cd24ed779adaa4fb166db2cd8925626074"
+  },
+  {
+    "path": "assets/boot-frames/058.png",
+    "bytes": 5146,
+    "sha256": "dd2e0c4fe355e8c19748e5b37872c3f88b5a81382e9932a8ae3d5adee84c6c42"
+  },
+  {
+    "path": "assets/boot-frames/059.png",
+    "bytes": 5275,
+    "sha256": "ea08bf709c9fd2431adf20ea8f36be61412877adabb48cec9af516b6614d5ec0"
+  },
+  {
+    "path": "assets/boot-frames/060.png",
+    "bytes": 5034,
+    "sha256": "1b99c3e384b0950bc87c6fb6e39e8c5c14cf953c008ab51c6e8b13c7cc72ed4a"
+  },
+  {
+    "path": "assets/boot-frames/061.png",
+    "bytes": 5140,
+    "sha256": "699067cc72425a0f0c467c225221099e5635a81606a1485b3fb1789c4b1f59c2"
+  },
+  {
+    "path": "assets/boot-frames/062.png",
+    "bytes": 5540,
+    "sha256": "f8fd30f775c8c66cac885e1cea4d8f58d7c336c59584fe04a61e126f63568586"
+  },
+  {
+    "path": "assets/boot-frames/063.png",
+    "bytes": 5454,
+    "sha256": "082e5a7b1680126b816b6bd1e04ae2ce73f3f7c96a5810ca00deae501b983c57"
+  },
+  {
+    "path": "assets/boot-frames/064.png",
+    "bytes": 5346,
+    "sha256": "9b974b1372d90c2e6f5912a66d41b5a2ba068ee05e6e7d2f77317de4ba0e35b5"
+  },
+  {
+    "path": "assets/boot-frames/065.png",
+    "bytes": 5453,
+    "sha256": "028ea9f994b9d0ac7400e60fa4dcc1307345238f384f6428f7d7d8b1e99d1128"
+  },
+  {
+    "path": "assets/boot-frames/066.png",
+    "bytes": 5389,
+    "sha256": "dd38e8c395081de74336b55b228be40a534d8ec8bb3c82e2edfd000cb91794f9"
+  },
+  {
+    "path": "assets/boot-frames/067.png",
+    "bytes": 5175,
+    "sha256": "1ac7d7a457e670ab036022795ed1d9aba6c5378923329515b4be46eb5ff67df7"
+  },
+  {
+    "path": "assets/boot-frames/068.png",
+    "bytes": 5225,
+    "sha256": "13c851f80dc58795c05a4b2a85dfe940cf2b2f71bb23daf63103843f8e005c6e"
+  },
+  {
+    "path": "assets/boot-frames/069.png",
+    "bytes": 5341,
+    "sha256": "5977dac0c5887373e269dfbe290571cc24b3ec2f4fb3890efdc825d38b18628e"
+  },
+  {
+    "path": "assets/boot-frames/070.png",
+    "bytes": 5256,
+    "sha256": "77ddfb240e32e712b7fc5ba63c5950c1d5b983cbe49fd5fe59fe70dca0d99d76"
+  },
+  {
+    "path": "assets/boot-frames/071.png",
+    "bytes": 5407,
+    "sha256": "1e6564506b8ac1853b5853c9e36d478a7759b458d9543b18fc6583ad9c51059c"
+  },
+  {
+    "path": "assets/boot-frames/072.png",
+    "bytes": 5589,
+    "sha256": "b672ff9651356531f59965ccc7eddbdbbc4c0420b52b9c7b42ce2afb1962f12e"
+  },
+  {
+    "path": "assets/boot-frames/073.png",
+    "bytes": 5515,
+    "sha256": "194f20a3a2cc05f96c65800cada62d0ad2493b2bc1133083af0a6b9637ec2a50"
+  },
+  {
+    "path": "assets/boot-frames/074.png",
+    "bytes": 5465,
+    "sha256": "7b5392b098e8ad665f29c2e6fc9829e56a79d84cd7effee1b2c01207f7c60586"
+  },
+  {
+    "path": "assets/boot-frames/075.png",
+    "bytes": 5504,
+    "sha256": "9a8f6df5cb605ce2aba2fe01e66f525d105528ce1d57d44184ca230fbb6224d3"
+  },
+  {
+    "path": "assets/boot-frames/076.png",
+    "bytes": 5035,
+    "sha256": "433fede58a722f8fac8d24a62f3a4f2188f0bb004279ebef1648be6128d3726b"
+  },
+  {
+    "path": "assets/boot-frames/077.png",
+    "bytes": 4660,
+    "sha256": "06465af725bf27b9c8a64a2f509067ba20b077367743f8fc70a080b8f88d96a8"
+  },
+  {
+    "path": "assets/boot-frames/078.png",
+    "bytes": 3539,
+    "sha256": "8fa5daace1959178f9e5067640faaa95c63ca3132bc9505f0d4d02c6a9cdb55b"
+  },
+  {
+    "path": "assets/boot-frames/079.png",
+    "bytes": 377,
+    "sha256": "d111373b51abee9658430e60529bc24c1aa03c69e94f647948b4df2a1e72369d"
+  },
+  {
+    "path": "assets/boot.anim",
+    "bytes": 238332,
+    "sha256": "bc39187da0179fd5a1710ce3b84ff783dd7ba72fa4bac6b6394655a893c78245"
+  },
+  {
+    "path": "assets/boot.ogg",
+    "bytes": 15929,
+    "sha256": "64abc131a57805ee6933460398d4efd1a489b2b2b70d54de1c5f6a7f0096dfff"
+  },
+  {
+    "path": "assets/fonts/NotoSansSC-OFL.txt",
+    "bytes": 4388,
+    "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+  },
+  {
+    "path": "assets/fonts/NotoSansSC-VF.ttf",
+    "bytes": 17772300,
+    "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da"
+  },
+  {
+    "path": "assets/fonts/NotoSerifSC-OFL.txt",
+    "bytes": 4350,
+    "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
+  },
+  {
+    "path": "assets/fonts/NotoSerifSC-VF.ttf",
+    "bytes": 25125512,
+    "sha256": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9"
+  },
+  {
+    "path": "assets/fonts/SOURCES.json",
+    "bytes": 646,
+    "sha256": "676d79c04b1198969c1e25233f3052c2ae037c25dde027240bef95fb0be62b64"
+  },
+  {
+    "path": "assets/models/dimensions.json",
+    "bytes": 5496,
+    "sha256": "aafb128e22957a7f79fecc4ef64b2e80a6c0b0e21e0ab9977ce40686a77765e6"
+  },
+  {
+    "path": "assets/models/parts-data.json",
+    "bytes": 2147241,
+    "sha256": "9817fd2446e4edfa2d027995d527167f474e032cdf09681305b8e69da685d831"
+  },
+  {
+    "path": "assets/models/product-geometry.blend",
+    "bytes": 3787184,
+    "sha256": "137241f62a8ff411f1bb89ceda1803da4de1521dcd19541bd7c598b0b54191bb"
+  },
+  {
+    "path": "assets/models/step/base.step",
+    "bytes": 206985,
+    "sha256": "cd79bea532e463442178fefb9148cb504c17d35fe247c07487cd21f4ed6d695b"
+  },
+  {
+    "path": "assets/models/step/buttons.step",
+    "bytes": 70944,
+    "sha256": "a5439501c02a81d937ef8a78b91a4090d8c8ccb7f32738ac5748676a64a4e8bb"
+  },
+  {
+    "path": "assets/models/step/front.step",
+    "bytes": 2030798,
+    "sha256": "9d17e99886f4c411b173fb066d62770277c5b7ed355b46bda825148e0e58542c"
+  },
+  {
+    "path": "assets/models/step/left_knob.step",
+    "bytes": 542234,
+    "sha256": "8c57e6cf0d292eda60cb611c7165683354a6b193b9b65f0ed0c10cf72df3e87c"
+  },
+  {
+    "path": "assets/models/step/left_support.step",
+    "bytes": 82013,
+    "sha256": "59b6fd584a6ed76de683e967bc8ed543ad1761ad1eebf3f491c8dc0189430d68"
+  },
+  {
+    "path": "assets/models/step/rear.step",
+    "bytes": 743323,
+    "sha256": "078614d5a0894fe0fa3fdf60d0fcdbd05709fb6cfe9490c37fb6304f29044b7f"
+  },
+  {
+    "path": "assets/models/step/right_knob.step",
+    "bytes": 540304,
+    "sha256": "7303718e89bba18231b535406e4f6fda790b2c904244cd78ada242ac6aaaa7d4"
+  },
+  {
+    "path": "assets/models/step/right_support.step",
+    "bytes": 81922,
+    "sha256": "23ae7fd9e31527e6ad915dbe24d22b0c0a263721cced6d6d6e16ed993fc847fe"
+  },
+  {
+    "path": "assets/product-images/appearance-white-textless.png",
+    "bytes": 1580677,
+    "sha256": "48ea119a8a743ac238388843aa21699d190e0365bbc9dd1246f3d941b322e9ca"
+  },
+  {
+    "path": "assets/product-images/main-square-bright.png",
+    "bytes": 1725236,
+    "sha256": "80bb715f9bb313e0079af60c83be4a91b8b1d3d9f223255ae33a6f678c1d3d0b"
+  },
+  {
+    "path": "assets/product-images/prototype-front-side.jpg",
+    "bytes": 2857563,
+    "sha256": "538d2d7a67c7955d594b0a08bf0ac28147730249ddbcd1a263f8d2a6c6434feb"
+  },
+  {
+    "path": "assets/product-images/prototype-screen-on.jpg",
+    "bytes": 2944464,
+    "sha256": "047e2e68efc3a2bb95c0de9449c343760cb07666f12e3159c10b4252e6cc4595"
+  },
+  {
+    "path": "assets/product-images/prototype-side-back.jpg",
+    "bytes": 3365009,
+    "sha256": "3f2baba403a4e33295d81c69e777e7a3d59dd46edc45dd822b6cf20aa4dd31d7"
+  },
+  {
+    "path": "assets/product-images/screen-artwork-original.png",
+    "bytes": 2294493,
+    "sha256": "9a44f478e736d7f37c541e98021192b89570ac3d1b3be58cafcf5c6a77e242cf"
+  },
+  {
+    "path": "assets/screen-previews/idle-t0.png",
+    "bytes": 516607,
+    "sha256": "bd1953b94d5fee7a07bc2a88da4aaa9106416efaca9e243f5e09a9d49307276a"
+  },
+  {
+    "path": "assets/screen-previews/idle-t1.png",
+    "bytes": 515585,
+    "sha256": "65be45ae388d28678e6daf0b9c34b893ba447699f59b9738ec8e14521155d8eb"
+  },
+  {
+    "path": "assets/specs/YX40018ACT-specification.pdf",
+    "bytes": 1086935,
+    "sha256": "fe01e553831d94bf9068d8ed1309a2251995b1aee521eec16748c8caf5a1c1a6"
+  },
+  {
+    "path": "assets/spine/full-screen.html",
+    "bytes": 2267,
+    "sha256": "9c10be6ee4a44d9307f481d687f5c6b44a4a29ad3327eb5369aba2223e9d7e86"
+  },
+  {
+    "path": "assets/spine/LICENSE",
+    "bytes": 1468,
+    "sha256": "435774fb793b0f67892899fc934f98009e64fd90ad3ab964117274e279a0f50e"
+  },
+  {
+    "path": "assets/spine/nvhai.atlas",
+    "bytes": 1311,
+    "sha256": "b63f968bfa23b39b4c2f73fe030f4c6fd2d4e037ba75f51a2391b87d6f86980c"
+  },
+  {
+    "path": "assets/spine/nvhai.skel",
+    "bytes": 48625,
+    "sha256": "6c783103338225d99dabf7eedd3ce619eb310a151e9dc3fb35614cbeb57e5e6e"
+  },
+  {
+    "path": "assets/spine/room.png",
+    "bytes": 183379,
+    "sha256": "6712989e18caf16425560f33a70610695773aa8f700d89d26ce23e92a9916227"
+  },
+  {
+    "path": "assets/spine/spine-webgl.js",
+    "bytes": 554544,
+    "sha256": "98e11bb97abf3dd8df842b6409978d0cfdc6d4ab6d7095ba90ca7810bcf0ebec"
+  },
+  {
+    "path": "assets/spine/texture.png",
+    "bytes": 217086,
+    "sha256": "ddb31f0265f189fbb44af071540b7ef115d9c34c261800bda66edc1aebb64d4e"
+  },
+  {
+    "path": "CLAUDE_PROMPT.md",
+    "bytes": 3103,
+    "sha256": "37d2b471510da2e89c20076e0e794716fb193ed0b0583263d08a2cd2341b006d"
+  },
+  {
+    "path": "DESIGN_RULES.md",
+    "bytes": 1659,
+    "sha256": "544caf2ccefadc11de4a0d8db452f836413165ee4f16fb5ac53430eda92c038f"
+  },
+  {
+    "path": "DETAIL_PAGE_PLAN.md",
+    "bytes": 1789,
+    "sha256": "5bd9fa920e7b79c5145f3b163ab1df1f0f031a1635a02c9c5aab6a36840c303e"
+  },
+  {
+    "path": "MISSING_INPUTS.md",
+    "bytes": 1796,
+    "sha256": "fcb858f3fd84d85b5d14b8e503bb7e203c7911c814ef078db58751c89c069fb3"
+  },
+  {
+    "path": "PRODUCT_FACTS.md",
+    "bytes": 3541,
+    "sha256": "79968829bfc23733bf7313d48ac0d6adcb39df735b6b0e9d8e4ae921ad43d59d"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1704,
+    "sha256": "a182dc9d2d8efa1ce323f875c9151306b9d65520c89cef984d86a2ba159ca7e9"
+  },
+  {
+    "path": "reference/animation-inventory.json",
+    "bytes": 18274,
+    "sha256": "a708f04adbe9f6c89d3f1ae44573192d93b011f63878ba4858d4b46307c54e0d"
+  },
+  {
+    "path": "reference/screen-layout-source.md",
+    "bytes": 3188,
+    "sha256": "ac203af7b834bcd64e9870602948a281f2af626d1da27ffea354685d6153b648"
+  },
+  {
+    "path": "reference/screen-runtime-check.json",
+    "bytes": 651,
+    "sha256": "f7cb9aba784e4fb8a9b5f1a321bd77f163fe06510a96b9338a61650361883c0b"
+  },
+  {
+    "path": "RIGHTS.md",
+    "bytes": 736,
+    "sha256": "47040294db5f82ffc308d57627004fafc8702c3988565cb2c9f24a722f2a8c7c"
+  },
+  {
+    "path": "tools/import_product_blender.py",
+    "bytes": 2094,
+    "sha256": "74e943929dd58ae2daa4c55887f3a4def6e419d3e129397a0d159090e5808c30"
+  }
+]

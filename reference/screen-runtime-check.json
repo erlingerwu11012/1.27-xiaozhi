@@ -1,0 +1,33 @@
+{
+  "ready": true,
+  "layout": {
+    "version": "4.2.43",
+    "animation": "idle",
+    "position": [
+      170.764,
+      42.51
+    ],
+    "scale": 1,
+    "viewport": [
+      320,
+      320
+    ],
+    "tableScreenY": 268,
+    "rearClippedSlots": [
+      "shenti",
+      "dabir",
+      "dabil",
+      "yiling"
+    ],
+    "foregroundArmsUnclipped": true,
+    "wallpaper": "original room.png",
+    "bounds": {
+      "x": 56.56427321380406,
+      "y": 27.875018360793774,
+      "w": 217.6241928871045,
+      "h": 242.18584730342042
+    }
+  },
+  "errors": [],
+  "scope": "reference runtime load and two sampled frames; not final device visual acceptance"
+}

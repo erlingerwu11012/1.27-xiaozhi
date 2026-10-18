@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-19",
+  "manifest_entries": 126,
+  "hashes": "pass",
+  "relative_links": "pass",
+  "image_decode": "pass",
+  "cad_parts": 8,
+  "step_source_hashes": "pass",
+  "boot_frames": 80,
+  "blender_import_test": "Blender 4.5.14: imported 8 parts and saved product-geometry.blend",
+  "spine_runtime_test": "Chrome: 4.2.43 idle loaded; original wallpaper; t0 and t1 screenshots sampled",
+  "visual_acceptance": "not claimed; existing generated refs and legacy layout remain subject to review",
+  "third_party_video_redistributed": false
+}

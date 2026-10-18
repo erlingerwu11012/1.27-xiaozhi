@@ -1,0 +1,894 @@
+{
+  "version": "4.2.43",
+  "bones": 54,
+  "slots": 25,
+  "skins": [
+    "default"
+  ],
+  "animations": [
+    {
+      "name": "idle",
+      "duration": 5.333333492279053,
+      "timelines": [
+        {
+          "type": "AttachmentTimeline",
+          "slot": "biyanl"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "tongkongl"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "tongkongr"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "yanbair"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "zuiba1"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "shenti"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "shenti"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "shenti2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "lian"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "dabir"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabir2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabil"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "dabil"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabil4"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "meimaor"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "meimaor"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "meimaol"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "meimaol"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "diaozhui"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "lian4"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian5"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian6"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian7"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian9"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian10"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian11"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian20"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian21"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian22"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian8"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian12"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian23"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian1"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian3"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian4"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian13"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian14"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian16"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian17"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian15"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian18"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian19"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian24"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian27"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian26"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian25"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian31"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian30"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian29"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "lian5"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "lian5"
+        },
+        {
+          "type": "DeformTimeline",
+          "slot": "zuiba1"
+        }
+      ]
+    },
+    {
+      "name": "talk_start",
+      "duration": 5.333333492279053,
+      "timelines": [
+        {
+          "type": "AttachmentTimeline",
+          "slot": "biyanl"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "tongkongl"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "tongkongr"
+        },
+        {
+          "type": "AttachmentTimeline",
+          "slot": "yanbair"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "shenti"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "shenti"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "shenti2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "lian"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "dabir"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabir2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabil"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "dabil"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "dabil4"
+        },
+        {
+          "type": "ScaleTimeline",
+          "bone": "zuiba1"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "meimaor"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "meimaor"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "meimaol"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "meimaol"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "diaozhui"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "lian4"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian5"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian6"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian7"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian9"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian10"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian11"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian20"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian21"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian22"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian8"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian12"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian23"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian1"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian2"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian3"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian4"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian13"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian14"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian16"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian17"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian15"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian18"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian19"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian24"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian27"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian26"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian25"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian31"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian30"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "fapian29"
+        },
+        {
+          "type": "RotateTimeline",
+          "bone": "lian5"
+        },
+        {
+          "type": "TranslateTimeline",
+          "bone": "lian5"
+        }
+      ]
+    }
+  ],
+  "bonesDetail": [
+    {
+      "name": "root",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "bone",
+      "parent": "root",
+      "x": -0.2028961181640625,
+      "y": -19.966529846191406
+    },
+    {
+      "name": "shenti",
+      "parent": "bone",
+      "x": 7.19467830657959,
+      "y": 22.36684226989746
+    },
+    {
+      "name": "shenti2",
+      "parent": "shenti",
+      "x": 53.975608825683594,
+      "y": -0.11758089065551758
+    },
+    {
+      "name": "lian",
+      "parent": "shenti2",
+      "x": 22.087581634521484,
+      "y": 2.9376163482666016
+    },
+    {
+      "name": "dabir",
+      "parent": "shenti",
+      "x": 76.88129425048828,
+      "y": -37.257354736328125
+    },
+    {
+      "name": "dabir2",
+      "parent": "dabir",
+      "x": -0.24990081787109375,
+      "y": 0.06296539306640625
+    },
+    {
+      "name": "dabir3",
+      "parent": "bone",
+      "x": 50.27842712402344,
+      "y": 24.24332046508789
+    },
+    {
+      "name": "dabir4",
+      "parent": "dabir3",
+      "x": 80.45877075195312,
+      "y": -0.0000026226043701171875
+    },
+    {
+      "name": "dabil",
+      "parent": "shenti",
+      "x": 68.01483154296875,
+      "y": 43.46526336669922
+    },
+    {
+      "name": "dabil2",
+      "parent": "dabil",
+      "x": 0.3134613037109375,
+      "y": 0.01439666748046875
+    },
+    {
+      "name": "dabil3",
+      "parent": "bone",
+      "x": -43.694095611572266,
+      "y": 17.57206153869629
+    },
+    {
+      "name": "dabil4",
+      "parent": "lian",
+      "x": -6.564624786376953,
+      "y": 15.110787391662598
+    },
+    {
+      "name": "lian5",
+      "parent": "lian",
+      "x": 80.83984375,
+      "y": -4.403631210327148
+    },
+    {
+      "name": "fapian1",
+      "parent": "lian5",
+      "x": -4.0684967041015625,
+      "y": -0.5274639129638672
+    },
+    {
+      "name": "fapian2",
+      "parent": "fapian1",
+      "x": 19.226531982421875,
+      "y": 0.0000019073486328125
+    },
+    {
+      "name": "fapian3",
+      "parent": "fapian2",
+      "x": 19.383377075195312,
+      "y": 0
+    },
+    {
+      "name": "fapian5",
+      "parent": "lian5",
+      "x": 4.329071044921875,
+      "y": -11.177022933959961
+    },
+    {
+      "name": "fapian6",
+      "parent": "fapian5",
+      "x": 28.097885131835938,
+      "y": 0.19161224365234375
+    },
+    {
+      "name": "fapian7",
+      "parent": "fapian6",
+      "x": 24.715606689453125,
+      "y": -0.14482879638671875
+    },
+    {
+      "name": "fapian8",
+      "parent": "fapian7",
+      "x": 22.7467041015625,
+      "y": -0.42864990234375
+    },
+    {
+      "name": "fapian9",
+      "parent": "lian5",
+      "x": 7.8894500732421875,
+      "y": -11.122858047485352
+    },
+    {
+      "name": "fapian10",
+      "parent": "fapian9",
+      "x": 27.677242279052734,
+      "y": -0.4881744384765625
+    },
+    {
+      "name": "fapian11",
+      "parent": "fapian10",
+      "x": 28.92603302001953,
+      "y": -0.0496063232421875
+    },
+    {
+      "name": "fapian12",
+      "parent": "fapian11",
+      "x": 34.735198974609375,
+      "y": -0.756683349609375
+    },
+    {
+      "name": "fapian4",
+      "parent": "lian5",
+      "x": 1.539886474609375,
+      "y": 6.530908584594727
+    },
+    {
+      "name": "fapian13",
+      "parent": "fapian4",
+      "x": 20.04572296142578,
+      "y": 0.00000762939453125
+    },
+    {
+      "name": "fapian14",
+      "parent": "fapian13",
+      "x": 17.732032775878906,
+      "y": -0.00000762939453125
+    },
+    {
+      "name": "fapian15",
+      "parent": "fapian14",
+      "x": 19.951744079589844,
+      "y": 0.0000019073486328125
+    },
+    {
+      "name": "fapian16",
+      "parent": "lian5",
+      "x": 7.5421600341796875,
+      "y": -1.041025161743164
+    },
+    {
+      "name": "fapian17",
+      "parent": "fapian16",
+      "x": 33.20262908935547,
+      "y": 0.0591278076171875
+    },
+    {
+      "name": "fapian18",
+      "parent": "fapian17",
+      "x": 31.01611328125,
+      "y": 0
+    },
+    {
+      "name": "fapian19",
+      "parent": "fapian18",
+      "x": 32.91790771484375,
+      "y": 0.3266162872314453
+    },
+    {
+      "name": "fapian20",
+      "parent": "lian5",
+      "x": 2.964263916015625,
+      "y": -3.8193111419677734
+    },
+    {
+      "name": "fapian21",
+      "parent": "fapian20",
+      "x": 32.18891906738281,
+      "y": -0.05321502685546875
+    },
+    {
+      "name": "fapian22",
+      "parent": "fapian21",
+      "x": 26.146949768066406,
+      "y": 0
+    },
+    {
+      "name": "fapian23",
+      "parent": "fapian22",
+      "x": 25.785690307617188,
+      "y": 0.0000019073486328125
+    },
+    {
+      "name": "lian4",
+      "parent": "lian",
+      "x": 20.097366333007812,
+      "y": 4.4448394775390625
+    },
+    {
+      "name": "lian2",
+      "parent": "lian4",
+      "x": 1.4539566040039062,
+      "y": -19.577449798583984
+    },
+    {
+      "name": "lian3",
+      "parent": "lian4",
+      "x": 2.4510726928710938,
+      "y": 10.810070037841797
+    },
+    {
+      "name": "zuiba1",
+      "parent": "lian4",
+      "x": -11.431900024414062,
+      "y": -1.4978599548339844
+    },
+    {
+      "name": "tongkongr",
+      "parent": "lian2",
+      "x": 5.41802978515625,
+      "y": -0.3747100830078125
+    },
+    {
+      "name": "tongkongl",
+      "parent": "lian3",
+      "x": 5.317283630371094,
+      "y": -0.5046730041503906
+    },
+    {
+      "name": "meimaor",
+      "parent": "lian4",
+      "x": 18.980880737304688,
+      "y": -17.71710205078125
+    },
+    {
+      "name": "meimaol",
+      "parent": "lian4",
+      "x": 20.207077026367188,
+      "y": 13.353500366210938
+    },
+    {
+      "name": "diaozhui",
+      "parent": "shenti",
+      "x": 47.77326202392578,
+      "y": 1.2068710327148438
+    },
+    {
+      "name": "fapian24",
+      "parent": "lian5",
+      "x": 8.415283203125,
+      "y": 0.43950462341308594
+    },
+    {
+      "name": "fapian25",
+      "parent": "fapian24",
+      "x": 33.20262908935547,
+      "y": 0.0591278076171875
+    },
+    {
+      "name": "fapian26",
+      "parent": "fapian25",
+      "x": 31.01611328125,
+      "y": 0
+    },
+    {
+      "name": "fapian27",
+      "parent": "fapian26",
+      "x": 32.91790771484375,
+      "y": 0.3266162872314453
+    },
+    {
+      "name": "fapian28",
+      "parent": "lian5",
+      "x": 1.2420806884765625,
+      "y": -3.6457881927490234
+    },
+    {
+      "name": "fapian29",
+      "parent": "fapian28",
+      "x": 32.18891906738281,
+      "y": -0.05321502685546875
+    },
+    {
+      "name": "fapian30",
+      "parent": "fapian29",
+      "x": 26.146949768066406,
+      "y": 0
+    },
+    {
+      "name": "fapian31",
+      "parent": "fapian30",
+      "x": 25.785690307617188,
+      "y": 0.0000019073486328125
+    }
+  ],
+  "slotsDetail": [
+    {
+      "name": "shenti",
+      "attachment": "shenti",
+      "bone": "shenti"
+    },
+    {
+      "name": "diaozhui",
+      "attachment": "diaozhui",
+      "bone": "diaozhui"
+    },
+    {
+      "name": "dabir",
+      "attachment": "dabir",
+      "bone": "dabir2"
+    },
+    {
+      "name": "dabil",
+      "attachment": "dabil",
+      "bone": "dabil2"
+    },
+    {
+      "name": "lian",
+      "attachment": "lian",
+      "bone": "lian"
+    },
+    {
+      "name": "biyanl",
+      "attachment": "yanbail",
+      "bone": "lian3"
+    },
+    {
+      "name": "zuiba1",
+      "attachment": "zuiba1",
+      "bone": "zuiba1"
+    },
+    {
+      "name": "yanbair",
+      "attachment": "yanbair",
+      "bone": "lian2"
+    },
+    {
+      "name": "tongkongr",
+      "attachment": "tongkongr",
+      "bone": "tongkongr"
+    },
+    {
+      "name": "tongkongl",
+      "attachment": "tongkongl",
+      "bone": "tongkongl"
+    },
+    {
+      "name": "meimaor",
+      "attachment": "meimaor",
+      "bone": "meimaor"
+    },
+    {
+      "name": "meimaol",
+      "attachment": "meimaol",
+      "bone": "meimaol"
+    },
+    {
+      "name": "fapian2",
+      "attachment": "fapian2",
+      "bone": "fapian4"
+    },
+    {
+      "name": "fapian7",
+      "attachment": "fapian7",
+      "bone": "fapian16"
+    },
+    {
+      "name": "fapian9",
+      "attachment": "fapian9",
+      "bone": "root"
+    },
+    {
+      "name": "fapian6",
+      "attachment": "fapian6",
+      "bone": "fapian9"
+    },
+    {
+      "name": "fapian5",
+      "attachment": "fapian5",
+      "bone": "fapian5"
+    },
+    {
+      "name": "fapian1",
+      "attachment": "fapian1",
+      "bone": "fapian1"
+    },
+    {
+      "name": "xiaobil",
+      "attachment": "xiaobil",
+      "bone": "dabil3"
+    },
+    {
+      "name": "xiaobir",
+      "attachment": "xiaobir",
+      "bone": "root"
+    },
+    {
+      "name": "erduo",
+      "attachment": "erduo",
+      "bone": "lian"
+    },
+    {
+      "name": "fapian4",
+      "attachment": "fapian4",
+      "bone": "fapian20"
+    },
+    {
+      "name": "yiling",
+      "attachment": "yiling",
+      "bone": "dabir2"
+    },
+    {
+      "name": "fapian8",
+      "attachment": "fapian8",
+      "bone": "root"
+    },
+    {
+      "name": "qiazi",
+      "attachment": "qiazi",
+      "bone": "lian"
+    }
+  ]
+}
