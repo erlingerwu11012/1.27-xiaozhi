@@ -1,5 +1,10 @@
 [
   {
+    "path": ".gitattributes",
+    "bytes": 9,
+    "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+  },
+  {
     "path": "ASSET_MAP.md",
     "bytes": 3427,
     "sha256": "aa7a47571516565f25173b90e0769a17a92c3564af401a395c921c3488f57d3d"
