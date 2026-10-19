@@ -1,0 +1,277 @@
+{
+ "passed": 54,
+ "total": 54,
+ "results": [
+  {
+   "check": "[desktop] fonts loaded",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[desktop] no overflow on home (card view)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "4 demo agents rendered",
+   "pass": true,
+   "detail": "4"
+  },
+  {
+   "check": "search by device MAC finds owning agent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "matched MAC highlighted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no-result empty state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "reset filter restores list",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "filter bound → 2 agents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "filter unbound → 2 agents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "list view renders table rows",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no overflow in list view",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "chat history disabled for Memory_nomem (toast, no modal)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "config drawer opens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no overflow with drawer open",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preset fills role intro",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "empty name blocked with error",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "save updates card + closes drawer",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "memory off now disables chat on that card",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "Escape closes drawer",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "add-device modal opens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "code input keeps digits only",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "short code rejected",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "bind adds device to chosen agent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "manual add rejects bad MAC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "manual add succeeds",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "add agent requires name",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "new agent appears first",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "delete agent removes card",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "device page filtered to agent",
+   "pass": true,
+   "detail": "expected 3"
+  },
+  {
+   "check": "no overflow on device page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "remark change acknowledged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "unbind removes row",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "visual-assets placeholder opens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "user: no admin group in nav",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "user: no memory/user-admin entries",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "admin: admin group shown",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "admin opens memory placeholder",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "switching to user leaves admin page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page people",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page rolePack",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page wallpaper",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page tts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page knowledge",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page billing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "placeholder page orders",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "user menu opens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "logout is placeholder (no real logout)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "keyboard focus ring present",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[laptop] fonts loaded",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[laptop] no overflow on home (card view)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[mobile] fonts loaded",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[mobile] no overflow on home (card view)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "[mobile] nav drawer opens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no JS errors / warnings",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "console": []
+}
