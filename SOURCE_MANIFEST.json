@@ -1,0 +1,741 @@
+{
+  "files": [
+    {
+      "path": "manager-web/README.md",
+      "bytes": 519,
+      "sha256": "e9b066001e37eba296797bdb48efbb012c896cd8e4fab31302d32755bad64598"
+    },
+    {
+      "path": "manager-web/babel.config.js",
+      "bytes": 271,
+      "sha256": "8a8120fb0006238b5d510be4bd3d9d4d1fc776448e74692932ba2a6168094c95"
+    },
+    {
+      "path": "manager-web/jsconfig.json",
+      "bytes": 278,
+      "sha256": "6338f59b53638a7b36908bc72975973628ce23df736bd6f5b9fe1cbbe5eefcd6"
+    },
+    {
+      "path": "manager-web/package-lock.json",
+      "bytes": 456290,
+      "sha256": "fc78a20303b62fa46fd15e8133817ad21f25ae85ac99cf4733fa2761a0d2c5bc"
+    },
+    {
+      "path": "manager-web/package.json",
+      "bytes": 1306,
+      "sha256": "24b753ae0a48f3b22bb115488d78da693a11ac16bcfc89c9c049ad76f35f02c1"
+    },
+    {
+      "path": "manager-web/vue.config.js",
+      "bytes": 5999,
+      "sha256": "121b30cdf6a0f802f3a88c30e8ab73ed1e232e185432ff826871c370adc76483"
+    },
+    {
+      "path": "manager-web/public/favicon.ico",
+      "bytes": 4286,
+      "sha256": "fca9daf126f61c3c3808f773ce0d9c14dfef31774f834ceea55287e7177cfd68"
+    },
+    {
+      "path": "manager-web/public/index.html",
+      "bytes": 1125,
+      "sha256": "8a4b7cf06eb7c336b95a3f9687e361e384972f7d8d40d9946f0a0074b5dd56b4"
+    },
+    {
+      "path": "manager-web/public/offline.html",
+      "bytes": 1805,
+      "sha256": "4b8de18d8582efdd7cedc510be1b96c1c0b2bb6cf5141f98ff64a4aacb5690a1"
+    },
+    {
+      "path": "manager-web/scripts/check-i18n-ota.js",
+      "bytes": 3766,
+      "sha256": "84933c877966442f83fb815399864b7d9d9f9232919f8bee6a2cc7a116926230"
+    },
+    {
+      "path": "manager-web/src/App.vue",
+      "bytes": 6812,
+      "sha256": "4a151f4788f5123e68a3c3ce895dc266d1ed0302be9d955197468e35adcacf7c"
+    },
+    {
+      "path": "manager-web/src/main.js",
+      "bytes": 1836,
+      "sha256": "f3ca850c1952d62a98f99e1755363922c7250b1037006e2f07331eec28cd4153"
+    },
+    {
+      "path": "manager-web/src/registerServiceWorker.js",
+      "bytes": 5062,
+      "sha256": "c52a020d4393b5b7916680be299bb36b88f06f1f37e73dfd5b0a085f0115f14c"
+    },
+    {
+      "path": "manager-web/src/service-worker.js",
+      "bytes": 5276,
+      "sha256": "9f51d96dd4d60ccdca2a99cc27c754225d6491ad2c0351eaabfcf98d6a55897e"
+    },
+    {
+      "path": "manager-web/src/apis/api.js",
+      "bytes": 1291,
+      "sha256": "835310e28f4bf4b10a29ce2e6e97937f7958ce783be4ce66ef1b75cb97c7702e"
+    },
+    {
+      "path": "manager-web/src/apis/httpRequest.js",
+      "bytes": 5004,
+      "sha256": "07d282551a6bd087001fecd5c219ff47dfc2994bcf665ba38122810a2b91d807"
+    },
+    {
+      "path": "manager-web/src/apis/module/admin.js",
+      "bytes": 5645,
+      "sha256": "c8d47795a114b87fadb05ff9a94e110861a32febe52e9c1b27a8010275c38bed"
+    },
+    {
+      "path": "manager-web/src/apis/module/agent.js",
+      "bytes": 13913,
+      "sha256": "1bac9675ba16c1b7cc8d7ff66cf9139c313766cf0881497a084f2fe6bd81b7f0"
+    },
+    {
+      "path": "manager-web/src/apis/module/device.js",
+      "bytes": 5274,
+      "sha256": "3f5dca247f0c8a0e54f78853347091f75a57a88e5d84442462996131173bfb53"
+    },
+    {
+      "path": "manager-web/src/apis/module/dict.js",
+      "bytes": 8124,
+      "sha256": "d24e545885c0664c9ac7b1581a5c9b0265cf994053e5d33a1f2fe31757e08a6c"
+    },
+    {
+      "path": "manager-web/src/apis/module/face.js",
+      "bytes": 4655,
+      "sha256": "e12141d44f5a227790de3fce1536e4b0df7e259128810f8affdf7893447e979c"
+    },
+    {
+      "path": "manager-web/src/apis/module/habit.js",
+      "bytes": 2733,
+      "sha256": "7b4ace3114e4b778821257f1ed1b7b308ec664d18cf0b867ca585c9cbcab1d1e"
+    },
+    {
+      "path": "manager-web/src/apis/module/knowledgeBase.js",
+      "bytes": 10078,
+      "sha256": "277b2c48f7ff541e87b2159751990f5d1c352c68ee960731b21555776d18472b"
+    },
+    {
+      "path": "manager-web/src/apis/module/memory.js",
+      "bytes": 2247,
+      "sha256": "b8121dd58447b78dee543848c0d397ace7cc206be2ff766ea236b6ab39345409"
+    },
+    {
+      "path": "manager-web/src/apis/module/model.js",
+      "bytes": 11371,
+      "sha256": "e2de5689b5fb812c8c0ed1483f8104abf6ffde3313bbffafaebb72a16f56e18a"
+    },
+    {
+      "path": "manager-web/src/apis/module/officialTts.js",
+      "bytes": 9889,
+      "sha256": "d2486d7d7d15c76d82f1721d782375cd04bb521ca4c7c07838f6fb294dafb7f1"
+    },
+    {
+      "path": "manager-web/src/apis/module/pay.js",
+      "bytes": 4106,
+      "sha256": "2dd0cc4f15dd8e282100c35362cf5a29c439532bbbe19c5ae6c7d4ace8c4012b"
+    },
+    {
+      "path": "manager-web/src/apis/module/rolePack.js",
+      "bytes": 4216,
+      "sha256": "24a7dbd58cdce2e31a32a81f10080adaa260899b30f4d448c883d52745a67168"
+    },
+    {
+      "path": "manager-web/src/apis/module/timbre.js",
+      "bytes": 3384,
+      "sha256": "7b0128fcd75adbadcf85d3ed73b3ea907ac903342bdd755076337cae8f388655"
+    },
+    {
+      "path": "manager-web/src/apis/module/user.js",
+      "bytes": 6964,
+      "sha256": "9cc4213f74ccdeff44e3f6d5767ee1b4679674f29bdfa1bcb9c60e0b3c46d053"
+    },
+    {
+      "path": "manager-web/src/apis/module/userIdentity.js",
+      "bytes": 1754,
+      "sha256": "028a04e9d2251fd73f65e69cb67d62678829701f17ff69d67680301078963bed"
+    },
+    {
+      "path": "manager-web/src/apis/module/wallpaperPack.js",
+      "bytes": 4260,
+      "sha256": "d90e352f7f6cc1261ee21c40ea2785fbd0bdafab6a2a9e9280070f1a0b82a4c9"
+    },
+    {
+      "path": "manager-web/src/assets/user-avatar1.png",
+      "bytes": 10906,
+      "sha256": "6117c171530f677491b9ab5e2cb2a0adfc39860fa6c2191c482a7b9bcda2ec4e"
+    },
+    {
+      "path": "manager-web/src/assets/user-avatar2.png",
+      "bytes": 10720,
+      "sha256": "a80c649cc09c6e85437c6f48cb78c7517ad7a7c09a2574a48cf15e44042d29f4"
+    },
+    {
+      "path": "manager-web/src/assets/user-avatar3.png",
+      "bytes": 11231,
+      "sha256": "1863f9888e4ac2ac3817dfbb12335beae28cf587dd11bdc8a161de3f8f229634"
+    },
+    {
+      "path": "manager-web/src/assets/user-avatar4.png",
+      "bytes": 10297,
+      "sha256": "243ccd1d6522891dad5edf8edc608fe5ae51c927cca4236849c7e37781ca2207"
+    },
+    {
+      "path": "manager-web/src/assets/user-avatar5.png",
+      "bytes": 8330,
+      "sha256": "58f60ab0049b5883e8376b24d248b4e5ac65a296ab815fa947737f3b44969e22"
+    },
+    {
+      "path": "manager-web/src/assets/xiaozhi-ai.png",
+      "bytes": 1946,
+      "sha256": "c5fcaaa5e70b691d0ae197e21364415e08204fccb544553d9df45905e8fc0df5"
+    },
+    {
+      "path": "manager-web/src/assets/xiaozhi-logo.png",
+      "bytes": 13372,
+      "sha256": "2c70fe2f428be24ebf6355bc1d913e62c6e8444e8561e123189144a461ea00d6"
+    },
+    {
+      "path": "manager-web/src/assets/header/knowledge_base.png",
+      "bytes": 2832,
+      "sha256": "a2cc517922935276a7921a1c36ab7a324392f96ba5acc705b88539945c950642"
+    },
+    {
+      "path": "manager-web/src/assets/header/model_config.png",
+      "bytes": 54780,
+      "sha256": "4bbb3f17c6afdb15d7b89d1b660279a7fd7e7d2e56904a65fa105211c770cedd"
+    },
+    {
+      "path": "manager-web/src/assets/header/param_management.png",
+      "bytes": 6904,
+      "sha256": "42f33f3c26deddfe45539e71eda122bcb0fa9953e28bb6016903f6c65b8e6aa6"
+    },
+    {
+      "path": "manager-web/src/assets/header/robot.png",
+      "bytes": 13467,
+      "sha256": "9ee3b4b33f6a5e5f2cbd5b6410d834a36f8829a6f98192931983dd13a7ef663e"
+    },
+    {
+      "path": "manager-web/src/assets/header/user_management.png",
+      "bytes": 32843,
+      "sha256": "5be1a9ca9bf8b01989b19c82ef04cc4132d7c06a85fab26037793d2f221b5b1b"
+    },
+    {
+      "path": "manager-web/src/assets/header/voice.png",
+      "bytes": 1813,
+      "sha256": "542fbeb98ab6b9ce7c3e97d84f7b8842043bee80b28f6cf92a4844bf70b2e0af"
+    },
+    {
+      "path": "manager-web/src/assets/home/avatar.png",
+      "bytes": 2240,
+      "sha256": "585a7fd6136b9e022c666cab593e149dd5a6734e6ad500f10b24c9c9bdabb2f0"
+    },
+    {
+      "path": "manager-web/src/assets/home/close.png",
+      "bytes": 635,
+      "sha256": "390344bad0757347c10b2718a741777563e142e87d11e7f2a19e9c4d6ef0b1e4"
+    },
+    {
+      "path": "manager-web/src/assets/home/delete.png",
+      "bytes": 1514,
+      "sha256": "6b1f83ccaf476004f2b3b9ba5da83be719897d57a915e531e2f2b981be6463bd"
+    },
+    {
+      "path": "manager-web/src/assets/home/equipment.png",
+      "bytes": 907,
+      "sha256": "9796e285fa2902ddf288d37f6adf1b33dc764a645b5fcbab288dfb3288d6e1c2"
+    },
+    {
+      "path": "manager-web/src/assets/home/info.png",
+      "bytes": 1399,
+      "sha256": "41a461f3bd9b7a3707474309927964302d261f6c173ad65229fd8d1a600307cc"
+    },
+    {
+      "path": "manager-web/src/assets/home/main-top-bg.png",
+      "bytes": 978384,
+      "sha256": "594210c554adbe9edd36b3a74f3b3b11d94efae56e2548db744678e9e4ee2b46"
+    },
+    {
+      "path": "manager-web/src/assets/home/red-info.png",
+      "bytes": 1185,
+      "sha256": "257a6b2bcc2524602a90019f194d97e7441ac808db5ea4f3ebcc87ee1e0a627c"
+    },
+    {
+      "path": "manager-web/src/assets/home/search.png",
+      "bytes": 1025,
+      "sha256": "c15737394bec8777a3c2624ba7b7ddc68ef90618639879a7e958922572619008"
+    },
+    {
+      "path": "manager-web/src/assets/home/setting-user.png",
+      "bytes": 1860,
+      "sha256": "9de03a235e119c5f234e5bb14b1f85a54047fc7c9f03ccc09b70eb0230d0b0e3"
+    },
+    {
+      "path": "manager-web/src/assets/login/down-arrow.png",
+      "bytes": 455,
+      "sha256": "1f35dcde4054a5f68138efdf9f1ef61ca5d83497756a9a270c8ddd6424704178"
+    },
+    {
+      "path": "manager-web/src/assets/login/hi.png",
+      "bytes": 2988,
+      "sha256": "b3f60b1ef55d7e66c5465406d9731b0c03966e3362111849440619a0c1df0901"
+    },
+    {
+      "path": "manager-web/src/assets/login/login-person.png",
+      "bytes": 103575,
+      "sha256": "b367ed4de09c8321afa3a57d2190ae1256b924dc0380c4c259451b7379434454"
+    },
+    {
+      "path": "manager-web/src/assets/login/password.png",
+      "bytes": 1424,
+      "sha256": "fb936ae1640278211112132e329ddf579f4d12bd57d51ddcc51a3b866a6e5455"
+    },
+    {
+      "path": "manager-web/src/assets/login/phone.png",
+      "bytes": 1121,
+      "sha256": "d1f2087d639d9206fab15397c4cd2e289003342d5d90384578c9a273d06439d0"
+    },
+    {
+      "path": "manager-web/src/assets/login/register-person.png",
+      "bytes": 164494,
+      "sha256": "747b992597ad959066db5608ffd27cb4f828e2e62cfab0ae7e40756692eec7fa"
+    },
+    {
+      "path": "manager-web/src/assets/login/shield.png",
+      "bytes": 2136,
+      "sha256": "f8fb55b4528534faff6e42687db6c3d1983b72f4ab91099f01d8825522cc6f02"
+    },
+    {
+      "path": "manager-web/src/assets/login/username.png",
+      "bytes": 2125,
+      "sha256": "10efda6bae76ed099e828d94a1e9af9aaff98297df57ce218b1df25dccf783e4"
+    },
+    {
+      "path": "manager-web/src/assets/model/inner_conf.png",
+      "bytes": 3962,
+      "sha256": "bb81ad451eca2f275ae5c5e98b61f6268bb4a797110c3278236143c3c1783688"
+    },
+    {
+      "path": "manager-web/src/assets/model/model.png",
+      "bytes": 90263,
+      "sha256": "564d38a253ddeb2880eca97f970a1a4b7b2961cbf6b44270e83ab24a4332f25f"
+    },
+    {
+      "path": "manager-web/src/assets/model/output_conf.png",
+      "bytes": 5162,
+      "sha256": "b40a272f6cba5e2f703e4b1ca44df2cde560c0f1ddcab1e8cfba10f77981aa38"
+    },
+    {
+      "path": "manager-web/src/components/AddDeviceDialog.vue",
+      "bytes": 3619,
+      "sha256": "deaa9b457b3fba7b88bb8584c106739ff1bc87899d06e895e02d69de71f1ac84"
+    },
+    {
+      "path": "manager-web/src/components/AddModelDialog.vue",
+      "bytes": 13306,
+      "sha256": "164cde6ea07459c47ca666f68673ac88ac121f60bcfc049ab6342d677266453a"
+    },
+    {
+      "path": "manager-web/src/components/AddWisdomBodyDialog.vue",
+      "bytes": 3008,
+      "sha256": "382d12052f34a6e777b32ffd8f22a36b24b1532fd305b02ff638c9cdd0de3e51"
+    },
+    {
+      "path": "manager-web/src/components/AudioPlayer.vue",
+      "bytes": 8959,
+      "sha256": "10e1fd66b996ecbcc40043e1e13686a7c7fda9ca1925573c32fb853fa19d2ac5"
+    },
+    {
+      "path": "manager-web/src/components/AwakeningWizard.vue",
+      "bytes": 56128,
+      "sha256": "d17c1f4128c8d00eef40e5d194b42de29c20adf6ce0e6ec8026988bd16e1c6a6"
+    },
+    {
+      "path": "manager-web/src/components/CacheViewer.vue",
+      "bytes": 5721,
+      "sha256": "b59a3fe15fcedd5f80b835463d9e3c077e22ee82dde2663526a9ef64d0314cc8"
+    },
+    {
+      "path": "manager-web/src/components/ChangePasswordDialog.vue",
+      "bytes": 5058,
+      "sha256": "966aad3877a9434daa693f484122aa5bc02864c0507ec9d25fc931e0fa9ce52c"
+    },
+    {
+      "path": "manager-web/src/components/ChatHistoryDialog.vue",
+      "bytes": 16187,
+      "sha256": "243e7094297d19afa02cb76aa971be184d25b61200076f780f19e6bf22237ffb"
+    },
+    {
+      "path": "manager-web/src/components/DeviceAssetsDialog.vue",
+      "bytes": 7884,
+      "sha256": "02387159cd856564f1621c46d46dfad34b2dc138ffa88e5d138b7ea17d187915"
+    },
+    {
+      "path": "manager-web/src/components/DeviceItem.vue",
+      "bytes": 8109,
+      "sha256": "5581837deab1b74ca57ad35fa018cd2d5e10a4858fba5c391693f3a1b5d0d2f4"
+    },
+    {
+      "path": "manager-web/src/components/DictDataDialog.vue",
+      "bytes": 3426,
+      "sha256": "6c1242d0e9c3f53ff327db5226b5c4f44f6b66954b2f22dc004f49f83260d49b"
+    },
+    {
+      "path": "manager-web/src/components/DictTypeDialog.vue",
+      "bytes": 2788,
+      "sha256": "dc384cd1b50bb8f38bd1ce94768dbf5d916f422517370f9fc2dbca51ae102070"
+    },
+    {
+      "path": "manager-web/src/components/EditVoiceDialog.vue",
+      "bytes": 4324,
+      "sha256": "47bc8ebd6676097294bd69fe14f5ba9bbd9e4dcc50e77dedcf694d91e83571d2"
+    },
+    {
+      "path": "manager-web/src/components/FunctionDialog.vue",
+      "bytes": 23525,
+      "sha256": "b168138f84794c3d75329427cc6490730ddce948d60fd437e7c26218a00e6a18"
+    },
+    {
+      "path": "manager-web/src/components/HardwareCallBills.vue",
+      "bytes": 5133,
+      "sha256": "f08e6f75bf7f075a1d4fd51f66b8b3922632f1b520b4903e9ed57e2656996369"
+    },
+    {
+      "path": "manager-web/src/components/HeaderBar.vue",
+      "bytes": 27896,
+      "sha256": "5505cbeca3d001b3ab6a75bd9523a0ed3aaf4b08f13b972257788593d2e0b163"
+    },
+    {
+      "path": "manager-web/src/components/KnowledgeBaseDialog.vue",
+      "bytes": 7026,
+      "sha256": "822903bc20d4d20daf54889a1aee4901d6edc967f8223aeeacb49ab3b2f6974a"
+    },
+    {
+      "path": "manager-web/src/components/ManualAddDeviceDialog.vue",
+      "bytes": 4529,
+      "sha256": "e6233d338b1431da958c54d5e0be09760f3214ecc7270990fa25a5397e158fa5"
+    },
+    {
+      "path": "manager-web/src/components/ModelEditDialog.vue",
+      "bytes": 19954,
+      "sha256": "be01ddca536ac7daa4d22998ea226358d689408d204df58c55610697dc0dc7aa"
+    },
+    {
+      "path": "manager-web/src/components/OfficialTtsStudioShell.vue",
+      "bytes": 2221,
+      "sha256": "dc8d614d7b6b0901770ef3f9f95522e3cfb320b94cff9872966edc8893cc26d9"
+    },
+    {
+      "path": "manager-web/src/components/OfficialTtsVoiceLibrary.vue",
+      "bytes": 11157,
+      "sha256": "f6fd27f09cb6e0a0328cbc57002305cc972031b2bde2bc4d8b12cbe8b999eafa"
+    },
+    {
+      "path": "manager-web/src/components/ParamDialog.vue",
+      "bytes": 9134,
+      "sha256": "e6546da6a0f6b0d9c0bc49f113768f5d2a0af043c114bf3b7b1d0c58f2add482"
+    },
+    {
+      "path": "manager-web/src/components/PersonaPresetPicker.vue",
+      "bytes": 2931,
+      "sha256": "723d2d9fc9de787ed923e029e5bd7e469da2c151211cf15a5cc53f936c6b0e18"
+    },
+    {
+      "path": "manager-web/src/components/ProviderDialog.vue",
+      "bytes": 14398,
+      "sha256": "cb57286a9fabc54f80372ecec24e42502ceb13849028607a7bb9487252e68c5f"
+    },
+    {
+      "path": "manager-web/src/components/TtsModel.vue",
+      "bytes": 21759,
+      "sha256": "503b86537f859d968dd59b17e9da256f855f41cf8e7e7d739a18e6bf4017d6de"
+    },
+    {
+      "path": "manager-web/src/components/VersionFooter.vue",
+      "bytes": 3190,
+      "sha256": "6706348ee2e0011970c9c195e3b24a4a0e91401aacd28b2b4648c324727c848f"
+    },
+    {
+      "path": "manager-web/src/components/ViewPasswordDialog.vue",
+      "bytes": 2425,
+      "sha256": "8854d46023e97a2bef75e1a1c73b3c7acbb23ae674eb7e09e79ee6917abd97d4"
+    },
+    {
+      "path": "manager-web/src/components/VoiceCloneDialog.vue",
+      "bytes": 22571,
+      "sha256": "9914a378febdc3d6aedb0cf6e95881ea4962717ec997cf07b58cbeb052d9027b"
+    },
+    {
+      "path": "manager-web/src/components/VoicePrintDialog.vue",
+      "bytes": 11047,
+      "sha256": "7e0d4efd8520651c2729d1dd0eb92fd5abc1381e135ac809ac7b367ea9b406b0"
+    },
+    {
+      "path": "manager-web/src/components/VoiceResourceDialog.vue",
+      "bytes": 4213,
+      "sha256": "4bc8de842af3667258912caf17da68c95f2ab0539ee22e650973a9723c5c6cc7"
+    },
+    {
+      "path": "manager-web/src/constants/personaPresets.js",
+      "bytes": 4080,
+      "sha256": "e06c4e392136790968a1432545f91e184b026636ce7f163bb2982eb1efbc1930"
+    },
+    {
+      "path": "manager-web/src/i18n/de.js",
+      "bytes": 73250,
+      "sha256": "4a45d8d2c5728609ace00106fed3820a93e57ea22dd4a7e436a448544c605966"
+    },
+    {
+      "path": "manager-web/src/i18n/en.js",
+      "bytes": 83975,
+      "sha256": "c0146bd66d03b8df6fed401ebbfe8ec1d2f878782bd7772ab187f5805f810c0c"
+    },
+    {
+      "path": "manager-web/src/i18n/index.js",
+      "bytes": 1272,
+      "sha256": "ae448eb4ed4ea56d9c2289571affd01d8e95bfe8dcb639516846a6824ec140e8"
+    },
+    {
+      "path": "manager-web/src/i18n/vi.js",
+      "bytes": 77252,
+      "sha256": "bb3eb64fbc955effcea1349d59a811c95f89dd95145762cd36d388ad1e317090"
+    },
+    {
+      "path": "manager-web/src/i18n/zh_CN.js",
+      "bytes": 80583,
+      "sha256": "45014d551e97c776d4d0973581d908e34fdeba5a13b453f2a6b6c6102ef79e0b"
+    },
+    {
+      "path": "manager-web/src/i18n/zh_TW.js",
+      "bytes": 64169,
+      "sha256": "52dce61ce94e114b59bacf3bcdf3d41b4ca4b8baafedcb0de3de63ef69a5c525"
+    },
+    {
+      "path": "manager-web/src/router/index.js",
+      "bytes": 7876,
+      "sha256": "ec2699c1894b67410ffc7d094ec094d8fc5af612f53134bc5c0d3e1325fbec33"
+    },
+    {
+      "path": "manager-web/src/store/index.js",
+      "bytes": 2354,
+      "sha256": "1ef813f1a14f9502b06d86a59eb76ccc4ca836fa655986d66103d73fbda48f0b"
+    },
+    {
+      "path": "manager-web/src/styles/global.scss",
+      "bytes": 2357,
+      "sha256": "4e846dd8ad9aab26b4872defaf55522ae033e6d44196d4eec80ce742a7111be2"
+    },
+    {
+      "path": "manager-web/src/styles/official-tts-studio.scss",
+      "bytes": 34206,
+      "sha256": "cc95a1942b1bcbc883f6a01c37abdeb6ec8d592bdfbdbbc41c6af668a8a2f75a"
+    },
+    {
+      "path": "manager-web/src/utils/cacheViewer.js",
+      "bytes": 3368,
+      "sha256": "9cd12381d18bd8d92aadcefb4a75376f68403f5e1c35536792b2beb7343c7fee"
+    },
+    {
+      "path": "manager-web/src/utils/confirmDelete.js",
+      "bytes": 701,
+      "sha256": "a3e6048b48dcaaa16d25a199b745e7867ef8c8cad2b175aa7be87ae5c243febd"
+    },
+    {
+      "path": "manager-web/src/utils/constant.js",
+      "bytes": 496,
+      "sha256": "208114ec92950ab664be958c74938a56d6a1f7d23739cb565fc7fa6c72a18d24"
+    },
+    {
+      "path": "manager-web/src/utils/date.js",
+      "bytes": 1342,
+      "sha256": "d502a2ef92d8cfdb0f078bb5157fa73a032502693afe0a3c0a6ad4fa49142fec"
+    },
+    {
+      "path": "manager-web/src/utils/format.js",
+      "bytes": 802,
+      "sha256": "96d85d47fb1b01e8c17d2263810a7b245128de6a214f7dca132252e0fa15f924"
+    },
+    {
+      "path": "manager-web/src/utils/index.js",
+      "bytes": 6759,
+      "sha256": "b7a1b38ae1f111b543bc0cf171491e4a49b58cf51959fe46c51a3541ba21c112"
+    },
+    {
+      "path": "manager-web/src/utils/visualOtaI18n.js",
+      "bytes": 1631,
+      "sha256": "fea4745aca4193afcd4cf8f0620910e178f21e42797a3e82ab68f1b55d6f1811"
+    },
+    {
+      "path": "manager-web/src/views/AgentTemplateManagement.vue",
+      "bytes": 17509,
+      "sha256": "8f74757010252583ac389fcfed3e5d3a3f582099804751b851301351bc564a1a"
+    },
+    {
+      "path": "manager-web/src/views/BillingOrders.vue",
+      "bytes": 9171,
+      "sha256": "4c55a5d64576679230c24e34c80924b2294c2a16498e913e8b66894155e6193b"
+    },
+    {
+      "path": "manager-web/src/views/BillingPackages.vue",
+      "bytes": 18309,
+      "sha256": "43707318cbd411cc9a88e1927a163bc03b3799e1df0e883e652dd7162c169635"
+    },
+    {
+      "path": "manager-web/src/views/BillingResult.vue",
+      "bytes": 6472,
+      "sha256": "fe70342615d6e75b374b54da995923194b7814a868edcea3c9311d087f20005f"
+    },
+    {
+      "path": "manager-web/src/views/DeviceManagement.vue",
+      "bytes": 20709,
+      "sha256": "6babe278fbef966c5f1d87d58427bc64e7b0e0c869117adaecb196c988e1312e"
+    },
+    {
+      "path": "manager-web/src/views/DictManagement.vue",
+      "bytes": 28968,
+      "sha256": "7c15bfef27894defff026c9f7b02b670f2a92c4cab02ddc4ff19b55f2a046a5f"
+    },
+    {
+      "path": "manager-web/src/views/FaceManagement.vue",
+      "bytes": 28920,
+      "sha256": "f75598ca60a5017825dc26c399b5018660b87d863393b41d7ec82f0460109b89"
+    },
+    {
+      "path": "manager-web/src/views/HabitAnalyzeConfig.vue",
+      "bytes": 7397,
+      "sha256": "50d7a93334f7ca4f74b3d7ad1bf69bf65b55dd8b15ddcfa83dab798c0a933d81"
+    },
+    {
+      "path": "manager-web/src/views/HabitManagement.vue",
+      "bytes": 15950,
+      "sha256": "689bd181259edc4b67b6c3a986d82e36fa0d6a8efa0c5a67d3aada9aa96b9c36"
+    },
+    {
+      "path": "manager-web/src/views/KnowledgeBaseManagement.vue",
+      "bytes": 26605,
+      "sha256": "4775cf74368e6084ffe7a5183e553a6a625ee523f005e5fb67691a1abef3db69"
+    },
+    {
+      "path": "manager-web/src/views/KnowledgeFileUpload.vue",
+      "bytes": 58814,
+      "sha256": "cef9fca27fa197b641c8809d35f9ddbc1f01bbad375a58e21a216405193747f3"
+    },
+    {
+      "path": "manager-web/src/views/MemoryExtractConfig.vue",
+      "bytes": 7701,
+      "sha256": "f9f22c907b7f761a061d0e0d77308c1f8e1cd45bf807fdc0be2f3e34b8438d12"
+    },
+    {
+      "path": "manager-web/src/views/MemoryManagement.vue",
+      "bytes": 8410,
+      "sha256": "c93309292f2e91fd417f4c9fdaff6b9d464b0a393163466cc2ee88ef212689a0"
+    },
+    {
+      "path": "manager-web/src/views/ModelConfig.vue",
+      "bytes": 30471,
+      "sha256": "1fda3af39496d05a6df45f0d13777c28740ceac6821e08bd624d688cd38a14e0"
+    },
+    {
+      "path": "manager-web/src/views/OfficialTtsAdmin.vue",
+      "bytes": 11034,
+      "sha256": "ccaa505ec292c2660723da4e4fd4db21a7b7f280685f6d942f292b44ae8e0b0f"
+    },
+    {
+      "path": "manager-web/src/views/OfficialTtsDubbing.vue",
+      "bytes": 42532,
+      "sha256": "d60b86b144bc65abb89f1cd53857cb2180f397fd7964270a7d169fb91d02ba56"
+    },
+    {
+      "path": "manager-web/src/views/OfficialTtsVoices.vue",
+      "bytes": 31451,
+      "sha256": "9f16ab410bade648fe9462fee0caf5748670cbbda9ea665ac6700e8d8d55df27"
+    },
+    {
+      "path": "manager-web/src/views/ParamsManagement.vue",
+      "bytes": 22952,
+      "sha256": "69c5e9447762c82434cddd35e5ff489dbd491b92781e64bb405c7b3ebf0e6ce2"
+    },
+    {
+      "path": "manager-web/src/views/ProviderManagement.vue",
+      "bytes": 24995,
+      "sha256": "76c7d18608f096aee4f46ceb72e51c4e6f4e519b830d1c41f1d689e810b44a61"
+    },
+    {
+      "path": "manager-web/src/views/RolePackCatalog.vue",
+      "bytes": 14912,
+      "sha256": "b442bca0a3157947079e1feb2eaf02de29f193340fde46895bd617cd3db37aa5"
+    },
+    {
+      "path": "manager-web/src/views/ServerSideManager.vue",
+      "bytes": 10673,
+      "sha256": "b9ec1b2363e3fbc79da882b8c607168b51eef6dc34812c64d54c0fd3493563bd"
+    },
+    {
+      "path": "manager-web/src/views/TemplateQuickConfig.vue",
+      "bytes": 12458,
+      "sha256": "2845d25444ca68584bd9083af4aec6e42a3c84e6c0025a32cae6c06075c2d67a"
+    },
+    {
+      "path": "manager-web/src/views/UnifiedUserManagement.vue",
+      "bytes": 15208,
+      "sha256": "e5d73c9a289983e4e562c755961835f8b0aa6b6d0e47ebe50356f75d0aa9039b"
+    },
+    {
+      "path": "manager-web/src/views/UserManagement.vue",
+      "bytes": 20696,
+      "sha256": "25de0ad4b88631ee7c7e9da4048d892851115f6cba384128ed369bba12f3e701"
+    },
+    {
+      "path": "manager-web/src/views/VoicePrint.vue",
+      "bytes": 15316,
+      "sha256": "d6ea89e8acffc189e81ef1ff150b8a6e75442d263cde6d7d0ad4f9a7c46d0f30"
+    },
+    {
+      "path": "manager-web/src/views/WallpaperPackCatalog.vue",
+      "bytes": 17606,
+      "sha256": "37f22e69202f1ddb27efbca4dc9c37d115eddb3d3242616e0a60957219bebaf5"
+    },
+    {
+      "path": "manager-web/src/views/auth.scss",
+      "bytes": 2255,
+      "sha256": "a037e115c54e6d9e46228901eb83ec765a74d728e01e02e6a4d6bdebe2f36d14"
+    },
+    {
+      "path": "manager-web/src/views/home.vue",
+      "bytes": 9892,
+      "sha256": "4625e9b201f16da6da12dfaf82a0cdc188060ca86a1e9d681eb951d3514ced88"
+    },
+    {
+      "path": "manager-web/src/views/login.vue",
+      "bytes": 38464,
+      "sha256": "760e85f9ac2e5ccf11eb9724c278c7d93d7471593c22ce57cec90c4111b58837"
+    },
+    {
+      "path": "manager-web/src/views/register.vue",
+      "bytes": 12354,
+      "sha256": "b68e6c5103fcb05f8fff57d0ac839d3462556de4a197a82b0f4380282a54f79f"
+    },
+    {
+      "path": "manager-web/src/views/retrievePassword.vue",
+      "bytes": 10386,
+      "sha256": "bbca269597685d11b04f2711b07207cc7208733a4b690d3a7aed6f696c590f10"
+    },
+    {
+      "path": "manager-web/src/views/roleConfig.vue",
+      "bytes": 32813,
+      "sha256": "3daef3d3878eb4ce5f5ca1511fd1bf2a4c91d3d47c6afd7a6330623e100b1505"
+    }
+  ],
+  "excluded": [
+    ".env",
+    ".env.development",
+    ".env.production",
+    ".npmrc",
+    "backend.log",
+    "manager-web.log",
+    "public/pc_executor_update.tar.gz",
+    "public/pc_executor_update.zip"
+  ],
+  "scope": "manager-web only; mobile and one-api excluded by user",
+  "source_root": "/root/prjs/xiaozhi-esp32-server/main/manager-web"
+}

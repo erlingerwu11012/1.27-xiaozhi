@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-19",
+  "scope": "manager-web only; one-api and mobile excluded",
+  "source_files": 145,
+  "source_bytes": 3555336,
+  "source_hashes_unchanged": true,
+  "secret_scan": {
+    "blocking_findings": 0,
+    "reviewed_false_positives": 3,
+    "note": "UI attribute expressions, not credential literals. Original .env, .npmrc and logs were excluded."
+  },
+  "checks": {
+    "npm_ci": {
+      "passed": true,
+      "flags": "--ignore-scripts --no-audit --no-fund"
+    },
+    "ota_i18n": {
+      "passed": true,
+      "keys": 93
+    },
+    "production_build": {
+      "passed": true,
+      "hash": "1084615a32d347c2",
+      "warnings": [
+        "Webpack asset-size and entrypoint-size warnings; main JS ~1.34 MiB, gzip ~358 KiB.",
+        "Browserslist data is old. Existing dependency versions were preserved."
+      ]
+    }
+  },
+  "local_runtime": {
+    "node": "24.14.0",
+    "npm": "11.9.0"
+  },
+  "server_runtime": {
+    "node": "v20.20.0",
+    "npm": "10.8.2"
+  },
+  "deployment_comparison": {
+    "matching_files": 96,
+    "differing_files": 0,
+    "missing_files": 0
+  },
+  "not_tested": [
+    "Actual account login / registration / captcha",
+    "Payments, top-up and billing operations",
+    "Live device binding, configuration or OTA",
+    "User identities / face / voiceprint operations",
+    "Private memories or real database content",
+    "Authenticated page end-to-end flows"
+  ],
+  "production_modified": false,
+  "production_deployed": false
+}

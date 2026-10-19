@@ -1,0 +1,1297 @@
+{
+  "note": "Static source expressions, not an OpenAPI specification or live endpoint validation. No requests were made to these business APIs.",
+  "modules": [
+    {
+      "module": "admin",
+      "file": "manager-web/src/apis/module/admin.js",
+      "request_expressions": [
+        {
+          "line": 15,
+          "expression": ".url(`${getServiceUrl()}/admin/users?${queryParams}`)"
+        },
+        {
+          "line": 16,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 31,
+          "expression": ".url(`${getServiceUrl()}/admin/users/${id}`)"
+        },
+        {
+          "line": 32,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 47,
+          "expression": ".url(`${getServiceUrl()}/admin/users/${id}`)"
+        },
+        {
+          "line": 48,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 69,
+          "expression": ".url(`${getServiceUrl()}/admin/params/page?${queryParams}`)"
+        },
+        {
+          "line": 70,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 85,
+          "expression": ".url(`${getServiceUrl()}/admin/params`)"
+        },
+        {
+          "line": 86,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 102,
+          "expression": ".url(`${getServiceUrl()}/admin/params`)"
+        },
+        {
+          "line": 103,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 123,
+          "expression": ".url(`${getServiceUrl()}/admin/params/delete`)"
+        },
+        {
+          "line": 124,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 140,
+          "expression": ".url(`${getServiceUrl()}/admin/server/server-list`)"
+        },
+        {
+          "line": 141,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 156,
+          "expression": ".url(`${getServiceUrl()}/admin/server/emit-action`)"
+        },
+        {
+          "line": 157,
+          "expression": ".method('POST')"
+        }
+      ]
+    },
+    {
+      "module": "agent",
+      "file": "manager-web/src/apis/module/agent.js",
+      "request_expressions": [
+        {
+          "line": 9,
+          "expression": ".url(`${getServiceUrl()}/agent/list`)"
+        },
+        {
+          "line": 10,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 24,
+          "expression": ".url(`${getServiceUrl()}/agent`)"
+        },
+        {
+          "line": 25,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 40,
+          "expression": ".url(`${getServiceUrl()}/agent/${agentId}`)"
+        },
+        {
+          "line": 41,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 56,
+          "expression": ".url(`${getServiceUrl()}/agent/${agentId}`)"
+        },
+        {
+          "line": 57,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 74,
+          "expression": ".url(`${getServiceUrl()}/agent/${agentId}`)"
+        },
+        {
+          "line": 75,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 90,
+          "expression": ".url(`${getServiceUrl()}/agent/template`)"
+        },
+        {
+          "line": 91,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 107,
+          "expression": ".url(`${getServiceUrl()}/agent/template/page`)"
+        },
+        {
+          "line": 108,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 124,
+          "expression": ".url(`${getServiceUrl()}/agent/${agentId}/sessions`)"
+        },
+        {
+          "line": 125,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 140,
+          "expression": ".url(`${getServiceUrl()}/agent/${agentId}/chat-history/${sessionId}`)"
+        },
+        {
+          "line": 141,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 155,
+          "expression": ".url(`${getServiceUrl()}/agent/audio/${audioId}`)"
+        },
+        {
+          "line": 156,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 170,
+          "expression": ".url(`${getServiceUrl()}/agent/mcp/address/${agentId}`)"
+        },
+        {
+          "line": 171,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 185,
+          "expression": ".url(`${getServiceUrl()}/agent/mcp/tools/${agentId}`)"
+        },
+        {
+          "line": 186,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 200,
+          "expression": ".url(`${getServiceUrl()}/agent/voice-print`)"
+        },
+        {
+          "line": 201,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 216,
+          "expression": ".url(`${getServiceUrl()}/agent/voice-print/list/${id}`)"
+        },
+        {
+          "line": 217,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 231,
+          "expression": ".url(`${getServiceUrl()}/agent/voice-print/${id}`)"
+        },
+        {
+          "line": 232,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 246,
+          "expression": ".url(`${getServiceUrl()}/agent/voice-print`)"
+        },
+        {
+          "line": 247,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 262,
+          "expression": ".url(`${getServiceUrl()}/agent/${id}/chat-history/user`)"
+        },
+        {
+          "line": 263,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 277,
+          "expression": ".url(`${getServiceUrl()}/agent/${id}/chat-history/audio`)"
+        },
+        {
+          "line": 278,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 293,
+          "expression": ".url(`${getServiceUrl()}/agent/template`)"
+        },
+        {
+          "line": 294,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 310,
+          "expression": ".url(`${getServiceUrl()}/agent/template`)"
+        },
+        {
+          "line": 311,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 327,
+          "expression": ".url(`${getServiceUrl()}/agent/template/${id}`)"
+        },
+        {
+          "line": 328,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 343,
+          "expression": ".url(`${getServiceUrl()}/agent/template/batch-remove`) // 修改为新的URL"
+        },
+        {
+          "line": 344,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 359,
+          "expression": ".url(`${getServiceUrl()}/agent/template/${templateId}`)"
+        },
+        {
+          "line": 360,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 376,
+          "expression": ".url(`${getServiceUrl()}/agent/chat-history/getDownloadUrl/${agentId}/${sessionId}`)"
+        },
+        {
+          "line": 377,
+          "expression": ".method('POST')"
+        }
+      ]
+    },
+    {
+      "module": "device",
+      "file": "manager-web/src/apis/module/device.js",
+      "request_expressions": [
+        {
+          "line": 8,
+          "expression": ".url(`${getServiceUrl()}/device/bind/${agentId}`)"
+        },
+        {
+          "line": 9,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 24,
+          "expression": ".url(`${getServiceUrl()}/device/unbind`)"
+        },
+        {
+          "line": 25,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 41,
+          "expression": ".url(`${getServiceUrl()}/device/bind/${agentId}/${deviceCode}`)"
+        },
+        {
+          "line": 42,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 56,
+          "expression": ".url(`${getServiceUrl()}/device/update/${id}`)"
+        },
+        {
+          "line": 57,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 74,
+          "expression": ".url(`${getServiceUrl()}/device/manual-add`)"
+        },
+        {
+          "line": 75,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 95,
+          "expression": ".url(`${getServiceUrl()}/device/assets/upload`)"
+        },
+        {
+          "line": 96,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 112,
+          "expression": ".url(`${getServiceUrl()}/device/assets/list?device_id=${encodeURIComponent(deviceId)}`)"
+        },
+        {
+          "line": 113,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 128,
+          "expression": ".url(`${getServiceUrl()}/device/assets/sync-assets?device_id=${encodeURIComponent(deviceId)}`)"
+        },
+        {
+          "line": 129,
+          "expression": ".method('POST')"
+        }
+      ]
+    },
+    {
+      "module": "dict",
+      "file": "manager-web/src/apis/module/dict.js",
+      "request_expressions": [
+        {
+          "line": 15,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/type/page?${queryParams}`)"
+        },
+        {
+          "line": 16,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 33,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/type/${id}`)"
+        },
+        {
+          "line": 34,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 51,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/type/save`)"
+        },
+        {
+          "line": 52,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 70,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/type/update`)"
+        },
+        {
+          "line": 71,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 89,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/type/delete`)"
+        },
+        {
+          "line": 90,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 116,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/page?${queryParams}`)"
+        },
+        {
+          "line": 117,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 134,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/${id}`)"
+        },
+        {
+          "line": 135,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 152,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/save`)"
+        },
+        {
+          "line": 153,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 171,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/update`)"
+        },
+        {
+          "line": 172,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 190,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/delete`)"
+        },
+        {
+          "line": 191,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 210,
+          "expression": ".url(`${getServiceUrl()}/admin/dict/data/type/${dictType}`)"
+        },
+        {
+          "line": 211,
+          "expression": ".method('GET')"
+        }
+      ]
+    },
+    {
+      "module": "face",
+      "file": "manager-web/src/apis/module/face.js",
+      "request_expressions": [
+        {
+          "line": 8,
+          "expression": ".url(`${getServiceUrl()}/face/profiles?include_draft=${flag ? 'true' : 'false'}`)"
+        },
+        {
+          "line": 9,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 20,
+          "expression": ".url(`${getServiceUrl()}/face/profiles`)"
+        },
+        {
+          "line": 21,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 35,
+          "expression": ".url(`${getServiceUrl()}/face/profiles/${encodeURIComponent(userId)}/faces`)"
+        },
+        {
+          "line": 36,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 49,
+          "expression": ".url(`${getServiceUrl()}/face/profiles/${encodeURIComponent(userId)}/activate`)"
+        },
+        {
+          "line": 50,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 61,
+          "expression": ".url(`${getServiceUrl()}/face/profiles/${encodeURIComponent(userId)}`)"
+        },
+        {
+          "line": 62,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 73,
+          "expression": ".url(`${getServiceUrl()}/face/enrollment/sessions`)"
+        },
+        {
+          "line": 74,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 86,
+          "expression": ".url(`${getServiceUrl()}/face/enrollment/sessions/${encodeURIComponent(sessionId)}/preview`)"
+        },
+        {
+          "line": 87,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 105,
+          "expression": ".url(`${getServiceUrl()}/face/enrollment/sessions/${encodeURIComponent(sessionId)}/confirm`)"
+        },
+        {
+          "line": 106,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 118,
+          "expression": ".url(`${getServiceUrl()}/face/enrollment/sessions/${encodeURIComponent(sessionId)}`)"
+        },
+        {
+          "line": 119,
+          "expression": ".method('DELETE')"
+        }
+      ]
+    },
+    {
+      "module": "habit",
+      "file": "manager-web/src/apis/module/habit.js",
+      "request_expressions": [
+        {
+          "line": 6,
+          "expression": "RequestService.sendRequest().url(`${getServiceUrl()}/habits/options`).method('GET')"
+        },
+        {
+          "line": 11,
+          "expression": "RequestService.sendRequest().url(`${getServiceUrl()}/habits/${id}`).method('PUT').data(data)"
+        },
+        {
+          "line": 23,
+          "expression": ".url(`${getServiceUrl()}/habits?enabledOnly=${enabledOnly}`)"
+        },
+        {
+          "line": 24,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 43,
+          "expression": ".url(`${getServiceUrl()}/habits`)"
+        },
+        {
+          "line": 44,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 64,
+          "expression": ".url(`${getServiceUrl()}/habits/${id}`)"
+        },
+        {
+          "line": 65,
+          "expression": ".method('DELETE')"
+        }
+      ]
+    },
+    {
+      "module": "knowledgeBase",
+      "file": "manager-web/src/apis/module/knowledgeBase.js",
+      "request_expressions": [
+        {
+          "line": 28,
+          "expression": ".url(url)"
+        },
+        {
+          "line": 29,
+          "expression": ".method(method)"
+        }
+      ]
+    },
+    {
+      "module": "memory",
+      "file": "manager-web/src/apis/module/memory.js",
+      "request_expressions": [
+        {
+          "line": 20,
+          "expression": ".url(`${PYTHON_API}/admin/memory?${query.toString()}`)"
+        },
+        {
+          "line": 21,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 40,
+          "expression": ".url(`${PYTHON_API}/admin/memory/${id}`)"
+        },
+        {
+          "line": 41,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 60,
+          "expression": ".url(`${PYTHON_API}/admin/memory/device/${encodeURIComponent(device_id)}`)"
+        },
+        {
+          "line": 61,
+          "expression": ".method('DELETE')"
+        }
+      ]
+    },
+    {
+      "module": "model",
+      "file": "manager-web/src/apis/module/model.js",
+      "request_expressions": [
+        {
+          "line": 15,
+          "expression": ".url(`${getServiceUrl()}/models/list?${queryParams}`)"
+        },
+        {
+          "line": 16,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 31,
+          "expression": ".url(`${getServiceUrl()}/models/${modelType}/provideTypes`)"
+        },
+        {
+          "line": 32,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 62,
+          "expression": ".url(`${getServiceUrl()}/models/${modelType}/${provideCode}`)"
+        },
+        {
+          "line": 63,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 80,
+          "expression": ".url(`${getServiceUrl()}/models/${id}`)"
+        },
+        {
+          "line": 81,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 97,
+          "expression": ".url(`${getServiceUrl()}/models/names`)"
+        },
+        {
+          "line": 98,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 113,
+          "expression": ".url(`${getServiceUrl()}/models/llm/names`)"
+        },
+        {
+          "line": 114,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 132,
+          "expression": ".url(`${getServiceUrl()}/models/${modelId}/voices?${queryParams}`)"
+        },
+        {
+          "line": 133,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 147,
+          "expression": ".url(`${getServiceUrl()}/models/${id}`)"
+        },
+        {
+          "line": 148,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 164,
+          "expression": ".url(`${getServiceUrl()}/models/enable/${id}/${status}`)"
+        },
+        {
+          "line": 165,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 186,
+          "expression": ".url(`${getServiceUrl()}/models/${modelType}/${provideCode}/${id}`)"
+        },
+        {
+          "line": 187,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 204,
+          "expression": ".url(`${getServiceUrl()}/models/default/${id}`)"
+        },
+        {
+          "line": 205,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 233,
+          "expression": ".url(`${getServiceUrl()}/models/provider?${queryParams.toString()}`)"
+        },
+        {
+          "line": 234,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 262,
+          "expression": ".url(`${getServiceUrl()}/models/provider`)"
+        },
+        {
+          "line": 263,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 294,
+          "expression": ".url(`${getServiceUrl()}/models/provider`)"
+        },
+        {
+          "line": 295,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 311,
+          "expression": ".url(`${getServiceUrl()}/models/provider/delete`)"
+        },
+        {
+          "line": 312,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 328,
+          "expression": ".url(`${getServiceUrl()}/models/provider/plugin/names`)"
+        },
+        {
+          "line": 329,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 345,
+          "expression": ".url(`${getServiceUrl()}/datasets/rag-models`)"
+        },
+        {
+          "line": 346,
+          "expression": ".method('GET')"
+        }
+      ]
+    },
+    {
+      "module": "officialTts",
+      "file": "manager-web/src/apis/module/officialTts.js",
+      "request_expressions": [
+        {
+          "line": 14,
+          "expression": ".url(`${getServiceUrl()}/official-tts/capabilities`)"
+        },
+        {
+          "line": 15,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 22,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices`)"
+        },
+        {
+          "line": 23,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 30,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices`)"
+        },
+        {
+          "line": 31,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 44,
+          "expression": ".url(`${getServiceUrl()}/official-tts/assets`)"
+        },
+        {
+          "line": 45,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 54,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices/${id}`)"
+        },
+        {
+          "line": 55,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 63,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices/${id}`)"
+        },
+        {
+          "line": 64,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 75,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices/${id}/preview`)"
+        },
+        {
+          "line": 76,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 89,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices/${id}/preview`)"
+        },
+        {
+          "line": 90,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 102,
+          "expression": ".url(`${getServiceUrl()}/official-tts/voices/${id}/bind?agentId=${encodeURIComponent(agentId)}`)"
+        },
+        {
+          "line": 103,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 110,
+          "expression": ".url(`${getServiceUrl()}/official-tts/jobs`)"
+        },
+        {
+          "line": 111,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 118,
+          "expression": ".url(`${getServiceUrl()}/official-tts/jobs`)"
+        },
+        {
+          "line": 119,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 131,
+          "expression": ".url(`${getServiceUrl()}/official-tts/jobs/${id}/cancel`)"
+        },
+        {
+          "line": 132,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 139,
+          "expression": ".url(`${getServiceUrl()}/official-tts/jobs/${id}`)"
+        },
+        {
+          "line": 140,
+          "expression": ".method('DELETE')"
+        },
+        {
+          "line": 149,
+          "expression": ".url(`${getServiceUrl()}/official-tts/jobs/${id}/download`)"
+        },
+        {
+          "line": 150,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 162,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/overview`)"
+        },
+        {
+          "line": 163,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 170,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/prices`)"
+        },
+        {
+          "line": 171,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 179,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/prices/publish`)"
+        },
+        {
+          "line": 180,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 189,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/prices/draft-from`)"
+        },
+        {
+          "line": 190,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 199,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/prices/sync`)"
+        },
+        {
+          "line": 200,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 209,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/jobs/${Number(jobId)}/ledger`)"
+        },
+        {
+          "line": 210,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 217,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/notes`)"
+        },
+        {
+          "line": 218,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 227,
+          "expression": ".url(`${getServiceUrl()}/admin/official-tts/settle`)"
+        },
+        {
+          "line": 228,
+          "expression": ".method('POST')"
+        }
+      ]
+    },
+    {
+      "module": "pay",
+      "file": "manager-web/src/apis/module/pay.js",
+      "request_expressions": [
+        {
+          "line": 7,
+          "expression": ".url(`${getServiceUrl()}/pay/billing/calls?page=${encodeURIComponent(page || 1)}&limit=${encodeURIComponent(limit || 20)}`)"
+        },
+        {
+          "line": 8,
+          "expression": ".method('GET').success(res => { RequestService.clearRequestTime(); callback(res.data); })"
+        },
+        {
+          "line": 13,
+          "expression": "RequestService.sendRequest().url(`${getServiceUrl()}/pay/memory-bills?page=${encodeURIComponent(page || 1)}&limit=10`)"
+        },
+        {
+          "line": 14,
+          "expression": ".method('GET').success(res => { RequestService.clearRequestTime(); callback(res.data) })"
+        },
+        {
+          "line": 20,
+          "expression": ".url(`${getServiceUrl()}/pay/packages`)"
+        },
+        {
+          "line": 21,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 34,
+          "expression": ".url(`${getServiceUrl()}/pay/order/create`)"
+        },
+        {
+          "line": 35,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 49,
+          "expression": ".url(`${getServiceUrl()}/pay/order/query/${encodeURIComponent(orderNo)}`)"
+        },
+        {
+          "line": 50,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 66,
+          "expression": ".url(`${getServiceUrl()}/pay/orders${query ? '?' + query : ''}`)"
+        },
+        {
+          "line": 67,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 80,
+          "expression": ".url(`${getServiceUrl()}/pay/quota/me`)"
+        },
+        {
+          "line": 81,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 94,
+          "expression": ".url(`${getServiceUrl()}/pay/billing/summary?days=${encodeURIComponent(days || 7)}`)"
+        },
+        {
+          "line": 95,
+          "expression": ".method('GET')"
+        }
+      ]
+    },
+    {
+      "module": "rolePack",
+      "file": "manager-web/src/apis/module/rolePack.js",
+      "request_expressions": [
+        {
+          "line": 17,
+          "expression": ".url(`${getServiceUrl()}/role-packs/catalog`)"
+        },
+        {
+          "line": 18,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 32,
+          "expression": ".url(`${getServiceUrl()}/role-packs/${encodeURIComponent(packId)}`)"
+        },
+        {
+          "line": 33,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 46,
+          "expression": ".url(`${getServiceUrl()}/role-packs/${encodeURIComponent(packId)}/deploy/${encodeURIComponent(deviceId)}`)"
+        },
+        {
+          "line": 47,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 60,
+          "expression": ".url(`${getServiceUrl()}/role-packs/tasks/${encodeURIComponent(taskId)}`)"
+        },
+        {
+          "line": 61,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 76,
+          "expression": ".url(`${getServiceUrl()}/role-packs/inspect`)"
+        },
+        {
+          "line": 77,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 107,
+          "expression": ".url(`${getServiceUrl()}/role-packs/publish`)"
+        },
+        {
+          "line": 108,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 123,
+          "expression": ".url(`${getServiceUrl()}/role-packs/${encodeURIComponent(packId)}/disable`)"
+        },
+        {
+          "line": 124,
+          "expression": ".method('POST')"
+        }
+      ]
+    },
+    {
+      "module": "timbre",
+      "file": "manager-web/src/apis/module/timbre.js",
+      "request_expressions": [
+        {
+          "line": 15,
+          "expression": ".url(`${getServiceUrl()}/ttsVoice?${queryParams}`)"
+        },
+        {
+          "line": 16,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 31,
+          "expression": ".url(`${getServiceUrl()}/ttsVoice`)"
+        },
+        {
+          "line": 32,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 57,
+          "expression": ".url(`${getServiceUrl()}/ttsVoice/delete`)"
+        },
+        {
+          "line": 58,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 74,
+          "expression": ".url(`${getServiceUrl()}/ttsVoice/${params.id}`)"
+        },
+        {
+          "line": 75,
+          "expression": ".method('PUT')"
+        }
+      ]
+    },
+    {
+      "module": "user",
+      "file": "manager-web/src/apis/module/user.js",
+      "request_expressions": [
+        {
+          "line": 9,
+          "expression": ".url(`${getServiceUrl()}/user/login`)"
+        },
+        {
+          "line": 10,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 29,
+          "expression": ".url(`${getServiceUrl()}/user/captcha?uuid=${uuid}`)"
+        },
+        {
+          "line": 30,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 48,
+          "expression": ".url(`${getServiceUrl()}/user/smsVerification`)"
+        },
+        {
+          "line": 49,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 68,
+          "expression": ".url(`${getServiceUrl()}/user/register`)"
+        },
+        {
+          "line": 69,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 88,
+          "expression": ".url(`${getServiceUrl()}/user/configDevice/${device_id}`)"
+        },
+        {
+          "line": 89,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 105,
+          "expression": ".url(`${getServiceUrl()}/user/info`)"
+        },
+        {
+          "line": 106,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 121,
+          "expression": ".url(`${getServiceUrl()}/user/change-password`)"
+        },
+        {
+          "line": 122,
+          "expression": ".method('PUT')"
+        },
+        {
+          "line": 142,
+          "expression": ".url(`${getServiceUrl()}/admin/users/changeStatus/${status}`)"
+        },
+        {
+          "line": 143,
+          "expression": ".method('put')"
+        },
+        {
+          "line": 159,
+          "expression": ".url(`${getServiceUrl()}/user/pub-config`)"
+        },
+        {
+          "line": 160,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 181,
+          "expression": ".url(`${getServiceUrl()}/user/retrieve-password`)"
+        },
+        {
+          "line": 182,
+          "expression": ".method('PUT')"
+        }
+      ]
+    },
+    {
+      "module": "userIdentity",
+      "file": "manager-web/src/apis/module/userIdentity.js",
+      "request_expressions": [
+        {
+          "line": 6,
+          "expression": ".url(getServiceUrl() + path)"
+        },
+        {
+          "line": 7,
+          "expression": ".method(method)"
+        },
+        {
+          "line": 18,
+          "expression": "list(callback) { request('GET', '/user-identities/users', null, callback) },"
+        },
+        {
+          "line": 19,
+          "expression": "voices(callback) { request('GET', '/user-identities/voiceprints', null, callback) },"
+        },
+        {
+          "line": 20,
+          "expression": "remove(userId,callback) { request('DELETE','/user-identities/users/'+encodeURIComponent(userId),null,callback) },"
+        },
+        {
+          "line": 21,
+          "expression": "create(data, callback) { request('POST', '/user-identities/users', data, callback) },"
+        },
+        {
+          "line": 23,
+          "expression": "request('PUT', '/user-identities/users/' + encodeURIComponent(userId) + '/display-name', data, callback)"
+        },
+        {
+          "line": 26,
+          "expression": "request('POST', '/user-identities/users/' + encodeURIComponent(userId) + '/faces/' + encodeURIComponent(faceProfileId), null, callback)"
+        },
+        {
+          "line": 29,
+          "expression": "request('DELETE', '/user-identities/users/' + encodeURIComponent(userId) + '/faces/' + encodeURIComponent(faceProfileId), null, callback)"
+        },
+        {
+          "line": 32,
+          "expression": "request('POST', '/user-identities/users/' + encodeURIComponent(userId) + '/voiceprints/' + encodeURIComponent(voiceprintId), null, callback)"
+        },
+        {
+          "line": 35,
+          "expression": "request('DELETE', '/user-identities/users/' + encodeURIComponent(userId) + '/voiceprints/' + encodeURIComponent(voiceprintId), null, callback)"
+        }
+      ]
+    },
+    {
+      "module": "wallpaperPack",
+      "file": "manager-web/src/apis/module/wallpaperPack.js",
+      "request_expressions": [
+        {
+          "line": 17,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/catalog`)"
+        },
+        {
+          "line": 18,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 32,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/${encodeURIComponent(packId)}`)"
+        },
+        {
+          "line": 33,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 46,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/${encodeURIComponent(packId)}/deploy/${encodeURIComponent(deviceId)}`)"
+        },
+        {
+          "line": 47,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 60,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/tasks/${encodeURIComponent(taskId)}`)"
+        },
+        {
+          "line": 61,
+          "expression": ".method('GET')"
+        },
+        {
+          "line": 76,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/inspect`)"
+        },
+        {
+          "line": 77,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 107,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/publish`)"
+        },
+        {
+          "line": 108,
+          "expression": ".method('POST')"
+        },
+        {
+          "line": 123,
+          "expression": ".url(`${getServiceUrl()}/wallpaper-packs/${encodeURIComponent(packId)}/disable`)"
+        },
+        {
+          "line": 124,
+          "expression": ".method('POST')"
+        }
+      ]
+    }
+  ]
+}

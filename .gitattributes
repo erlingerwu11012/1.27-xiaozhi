@@ -1,0 +1,2 @@
+# Preserve the exact bytes of the server snapshot, including original line endings.
+* -text
