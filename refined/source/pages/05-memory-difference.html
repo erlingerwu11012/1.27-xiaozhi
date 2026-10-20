@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>05 Persistent memory</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .moment { margin-top: 84px; }
+  .moment + .moment { margin-top: 0; }
+  .when { display: flex; align-items: baseline; gap: 22px; margin-bottom: 26px; }
+  .when b { font-family: var(--serif); font-weight: 600; font-size: 46px; color: var(--accent-deep); }
+  .when span { font-size: 29px; color: var(--muted); }
+
+  .pair {
+    display: grid; grid-template-columns: 1fr 680px;
+    height: 520px; border-radius: var(--radius); overflow: hidden;
+    background: var(--card);
+    box-shadow: 0 24px 60px rgba(70, 60, 50, 0.08);
+  }
+  .pair.flip { grid-template-columns: 680px 1fr; }
+  .pair .pic { background-repeat: no-repeat; }
+  .pair .msg { display: flex; align-items: center; padding: 0 56px; }
+  .pair .msg .bubble { width: 100%; background: var(--paper); }
+  .pair.flip .msg .bubble { background: var(--card-mist); }
+  .pair .msg .say { font-size: 42px; }
+
+  /* Plate B at 780px: device top-half framed on the right */
+  .pic.day { background-image: url("../assets/product/scene-B-screen.png"); background-size: 780px; background-position: -60px -150px; }
+  /* Plate E at 760px: device framed with the evening lamp light */
+  .pic.later { background-image: url("../assets/product/scene-E-screen.png"); background-size: 760px; background-position: -10px -150px; }
+
+  .link { height: 64px; margin: 10px 0 18px 58px; border-left: 2px dashed rgba(77, 109, 130, 0.35); }
+  .moment.second { margin-top: 0; }
+
+  .sum { margin-top: 96px; padding-top: 52px; border-top: 1px solid var(--line); }
+  .sum .k { font-size: 36px; font-weight: 700; color: var(--accent-deep); line-height: 1.5; }
+  .sum .d { margin-top: 12px; font-size: 32px; line-height: 1.6; color: var(--body); }
+</style>
+</head>
+<body>
+<main class="page bg-stone">
+  <h1 class="headline"><span>你说过的小事，</span><span class="answer">我绝不会忘。</span></h1>
+  <p class="lead">换一次会话，也不必把重要的事重新交代。</p>
+
+  <section class="moment">
+    <div class="when"><b>几天前</b><span>你提过的一件小事</span></div>
+    <div class="pair">
+      <div class="msg"><div class="bubble"><div class="who">你</div><div class="say">周五要汇报，<br>有点紧张。</div></div></div>
+      <div class="pic day"></div>
+    </div>
+  </section>
+
+  <div class="link"></div>
+
+  <section class="moment second">
+    <div class="when"><b>几天后</b><span>新的会话，接上旧话题</span></div>
+    <div class="pair flip">
+      <div class="pic later"></div>
+      <div class="msg"><div class="bubble"><div class="who">小念</div><div class="say">上次汇报，<br>还顺利吗？</div></div></div>
+    </div>
+  </section>
+
+  <div class="sum">
+    <div class="k">对话中的重要信息，整理成为记忆。</div>
+    <div class="d">再次聊起相关事情时，延续你们之前的话题。</div>
+  </div>
+</main>
+</body>
+</html>

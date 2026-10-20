@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>07 Identity and personal memory</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .senses { margin-top: 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .sense { padding: 48px 44px 44px; border-radius: var(--radius); background: var(--card); display: flex; flex-direction: column; }
+  .sense .t { font-family: var(--serif); font-weight: 600; font-size: 48px; color: var(--accent-deep); }
+  .sense .k { margin-top: 10px; font-size: 28px; color: var(--muted); letter-spacing: 0.06em; }
+  .sense .vis { margin-top: 36px; height: 360px; border-radius: 20px; overflow: hidden; }
+  .sense .vis.cam { background: url("../assets/photos/camera-closeup.png") 50% 0 / cover no-repeat; position: relative; }
+  .sense .vis.cam::after {
+    /* focus ring around the camera opening */
+    content: ""; position: absolute; left: 50%; top: 52px; width: 106px; height: 106px;
+    margin-left: -53px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 10px rgba(77, 109, 130, 0.18);
+  }
+  .sense .vis.voice { background: var(--mist); display: flex; align-items: center; justify-content: center; }
+
+  .bind { margin-top: 110px; display: grid; grid-template-columns: 1fr 520px; gap: 60px; align-items: center; }
+  .bind .t { font-family: var(--serif); font-weight: 600; font-size: 72px; line-height: 1.4; color: var(--accent); }
+  .bind .d { margin-top: 36px; font-size: 32px; line-height: 1.65; color: var(--body); }
+  .mine { padding: 44px 48px 20px; border-radius: var(--radius); background: var(--card); }
+  .mine .h { font-family: var(--serif); font-weight: 600; font-size: 40px; color: var(--accent-deep); padding-bottom: 22px; }
+  .mine .i {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 32px; color: var(--body); padding: 26px 0; border-top: 1px solid var(--line);
+  }
+  .mine .i::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<main class="page bg-slate">
+  <h1 class="headline"><span>看见你，听见你，</span><span class="answer">也知道是你。</span></h1>
+  <p class="lead">通过人脸与声音识别，将身份与对话记忆关联。</p>
+
+  <div class="senses">
+    <div class="sense">
+      <div class="t">认出你的样子</div><div class="k">人脸识别</div>
+      <div class="vis cam"></div>
+    </div>
+    <div class="sense">
+      <div class="t">听出你的声音</div><div class="k">声音识别</div>
+      <div class="vis voice"><svg id="wave" width="460" height="220" viewBox="0 0 460 220"></svg></div>
+    </div>
+  </div>
+
+  <div class="bind">
+    <div>
+      <div class="t">让记忆，<br>找到属于它的人。</div>
+      <div class="d">将身份与对话记忆关联，<br>延续属于你的交流。</div>
+    </div>
+    <div class="mine">
+      <div class="h">属于你的记忆</div>
+      <div class="i">你的偏好</div>
+      <div class="i">你的习惯</div>
+      <div class="i">你说过的小事</div>
+    </div>
+  </div>
+</main>
+<script>
+  // Symmetric voice waveform
+  const h = [26, 44, 70, 104, 82, 128, 166, 120, 188, 148, 96, 130, 176, 204, 150, 110, 140, 92, 120, 74, 52, 36];
+  const svg = document.getElementById("wave");
+  h.forEach((v, i) => {
+    const x = 20 + i * 20;
+    svg.insertAdjacentHTML("beforeend", `<rect x="${x - 4}" y="${110 - v / 2}" width="8" height="${v}" rx="4" fill="#5f7f93"/>`);
+  });
+</script>
+</body>
+</html>

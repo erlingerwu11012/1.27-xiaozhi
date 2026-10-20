@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>08a Enclosure colors</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  /* The three fronts come from the same CAD camera; they are always drawn at
+     the same pixel scale relative to each other within a row. */
+  .main { margin-top: 110px; display: flex; flex-direction: column; align-items: center; }
+  .unit { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .unit img { display: block; position: relative; z-index: 1; }
+  .unit .floor {
+    width: 86%; height: 34px; margin-top: -18px; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(40, 55, 65, 0.22), rgba(40, 55, 65, 0));
+  }
+  .name { margin-top: 30px; display: flex; align-items: center; gap: 16px; font-family: var(--serif); font-weight: 600; font-size: 44px; color: var(--accent-deep); letter-spacing: 0.06em; }
+  .name i { width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 2px rgba(40, 55, 65, 0.28); }
+  .main img { width: 700px; }
+  .pair { margin-top: 110px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .pair .unit { padding: 64px 0 52px; border-radius: var(--radius); background: rgba(255, 255, 255, 0.55); }
+  .pair img { width: 470px; }
+</style>
+</head>
+<body>
+<main class="page bg-mist">
+  <h1 class="headline"><span>多一点颜色，</span><span class="answer">多一种喜欢。</span></h1>
+  <p class="lead">更多配色，将随众筹金额增长陆续解锁。</p>
+
+  <div class="main">
+    <div class="unit">
+      <img src="../assets/product/front-white.png" alt="">
+      <div class="floor"></div>
+      <div class="name"><i style="background:#f3f2ef"></i>经典白</div>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="unit">
+      <img src="../assets/product/front-lavender.png" alt="">
+      <div class="floor"></div>
+      <div class="name"><i style="background:#c9bddb"></i>雾紫</div>
+    </div>
+    <div class="unit">
+      <img src="../assets/product/front-pink.png" alt="">
+      <div class="floor"></div>
+      <div class="name"><i style="background:#efc6c2"></i>樱粉</div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

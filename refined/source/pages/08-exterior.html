@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>08 Exterior details</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .bleed {
+    margin: 90px calc(-1 * var(--gutter)) 0;
+    height: 1000px;
+    background: url("../assets/product/scene-M-knob.png") 0 -240px / 1440px 1440px no-repeat;
+  }
+  .points { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .point { padding-left: 34px; border-left: 3px solid var(--accent-soft); }
+  .point .t { font-family: var(--serif); font-weight: 600; font-size: 50px; color: var(--accent-deep); }
+  .point .d { margin-top: 18px; font-size: 32px; line-height: 1.62; color: var(--body); }
+  .swatches { display: flex; gap: 14px; margin-top: 26px; }
+  .swatches i { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12); }
+</style>
+</head>
+<body>
+<main class="page bg-stone">
+  <h1 class="headline"><span>把喜欢的细节，</span><span class="answer">留在每天的桌面。</span></h1>
+  <p class="lead">白色前壳与旋钮，搭配石墨灰支架和底座。</p>
+
+  <div class="bleed"></div>
+
+  <div class="points">
+    <div class="point">
+      <div class="t">熟悉的手动旋钮</div>
+      <div class="d">调节、固定屏幕角度，<br>找到适合你的观看位置。</div>
+    </div>
+    <div class="point">
+      <div class="t">克制的双色搭配</div>
+      <div class="d">白色与石墨灰，<br>融入日常的书桌。</div>
+      <div class="swatches"><i style="background:#f4f2ee"></i><i style="background:#3d4146"></i></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

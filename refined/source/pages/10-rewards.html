@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>10 Reward tiers</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .meta { margin-top: 36px; display: flex; gap: 16px; }
+  .meta span {
+    padding: 12px 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.6);
+    font-size: 30px; font-weight: 500; color: var(--accent-deep);
+  }
+  .tiers { margin-top: 80px; display: flex; flex-direction: column; gap: 28px; }
+  .tier {
+    display: grid; grid-template-columns: 400px 1fr; min-height: 372px;
+    border-radius: var(--radius); background: var(--card); overflow: hidden;
+    box-shadow: 0 18px 44px rgba(70, 60, 50, 0.06);
+  }
+  .tier .price { padding: 54px 0 54px 56px; }
+  .tier .name { font-size: 32px; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; }
+  .tier .num { margin-top: 10px; font-family: var(--sans); font-weight: 700; font-size: 112px; line-height: 1; color: var(--accent-deep); letter-spacing: -0.01em; }
+  .tier .num small { font-size: 56px; font-weight: 500; margin-right: 6px; }
+  .tier .tag {
+    display: inline-block; margin-top: 26px; padding: 8px 20px; border-radius: 10px;
+    background: var(--mist); font-size: 27px; font-weight: 700; color: var(--accent);
+  }
+  .tier .what { padding: 60px 56px 54px 0; display: flex; flex-direction: column; }
+  .tier .item { font-size: 40px; font-weight: 700; color: var(--ink); }
+  .tier .extra { margin-top: 18px; font-size: 33px; color: var(--body); }
+  .tier .foot {
+    margin-top: auto; padding-top: 26px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; font-size: 28px; color: var(--muted);
+  }
+
+  /* Featured first tier */
+  .tier.top { background: var(--accent); box-shadow: 0 26px 60px rgba(59, 87, 106, 0.28); }
+  .tier.top .name { color: rgba(255, 255, 255, 0.78); }
+  .tier.top .num { color: #fff; }
+  .tier.top .tag { background: rgba(255, 255, 255, 0.16); color: #fff; }
+  .tier.top .item { color: #fff; }
+  .tier.top .extra { color: rgba(255, 255, 255, 0.86); }
+  .tier.top .extra b { color: #fff; font-weight: 700; }
+  .tier.top .foot { border-top-color: rgba(255, 255, 255, 0.22); color: rgba(255, 255, 255, 0.72); }
+</style>
+</head>
+<body>
+<main class="page bg-stone">
+  <h1 class="headline"><span>选择一份支持，</span><span class="answer">开启一段陪伴。</span></h1>
+  <div class="meta"><span>三档均包邮</span><span>预计 2026 年 12 月内发货</span></div>
+
+  <div class="tiers">
+    <div class="tier top">
+      <div class="price">
+        <div class="name">超级早鸟价</div>
+        <div class="num"><small>¥</small>369</div>
+        <div class="tag">限 20 份</div>
+      </div>
+      <div class="what">
+        <div class="item">小念桌面陪伴助手 × 1</div>
+        <div class="extra">附赠 <b>20 元 Token 用量</b></div>
+        <div class="foot"><span>2026 年 12 月内发货</span><span>包邮</span></div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="price">
+        <div class="name">早鸟价</div>
+        <div class="num"><small>¥</small>399</div>
+        <div class="tag">限 20 份</div>
+      </div>
+      <div class="what">
+        <div class="item">小念桌面陪伴助手 × 1</div>
+        <div class="extra">配套 USB 数据线 × 1</div>
+        <div class="foot"><span>2026 年 12 月内发货</span><span>包邮</span></div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="price">
+        <div class="name">众筹价</div>
+        <div class="num"><small>¥</small>409</div>
+      </div>
+      <div class="what">
+        <div class="item">小念桌面陪伴助手 × 1</div>
+        <div class="extra">配套 USB 数据线 × 1</div>
+        <div class="foot"><span>2026 年 12 月内发货</span><span>包邮</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

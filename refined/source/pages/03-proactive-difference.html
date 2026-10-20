@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>03 Proactive conversation</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .stage { position: relative; margin-top: 90px; height: 860px; }
+  .stage .photo {
+    position: absolute; left: 0; top: 0;
+    width: 960px; height: 860px;
+    background-image: url("../assets/product/scene-F-screen.png");
+    background-size: 1000px 1000px;
+    background-position: -40px -84px;
+    box-shadow: 0 30px 70px rgba(40, 60, 75, 0.12);
+  }
+  .stage .bubble {
+    position: absolute; left: 812px; top: 168px; width: 436px;
+    padding: 34px 40px 40px;
+    box-shadow: 0 24px 60px rgba(40, 60, 75, 0.14);
+  }
+  .stage .bubble .say { font-size: 40px; }
+  .stage .note {
+    position: absolute; left: 860px; top: 520px; width: 388px;
+    font-family: var(--serif); font-size: 34px; line-height: 1.6; color: var(--accent);
+  }
+
+  .steps {
+    margin-top: 72px;
+    display: grid; grid-template-columns: 1fr 56px 1fr 56px 1fr;
+    align-items: start;
+    padding: 56px 40px 60px;
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+  .steps .s { text-align: center; }
+  .steps .s .h {
+    font-family: var(--serif); font-weight: 600; font-size: 60px;
+    color: var(--accent-deep); line-height: 1.2; white-space: nowrap;
+  }
+  .steps .s .h small { font-family: var(--sans); font-size: 30px; font-weight: 500; color: var(--accent); margin-left: 6px; }
+  .steps .s .d { margin-top: 22px; font-size: 30px; line-height: 1.6; color: var(--body); }
+  .steps .a { padding-top: 26px; text-align: center; }
+  .steps .a svg { width: 36px; height: 20px; }
+</style>
+</head>
+<body>
+<main class="page bg-mist">
+  <h1 class="headline"><span>你还没开口，</span><span class="answer">它已经留意到你。</span></h1>
+  <p class="lead">回到书桌前，先听到一句熟悉的关心。</p>
+
+  <div class="stage">
+    <div class="photo"></div>
+    <div class="bubble glass">
+      <div class="who">小念</div>
+      <div class="say">回来啦，<br>今天过得怎么样？</div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="s"><div class="h">停留<small>&gt;3秒</small></div><div class="d">雷达感知<br>有人靠近并停留</div></div>
+    <div class="a"><svg viewBox="0 0 36 20"><path d="M2 10h30M25 4l7 6-7 6" fill="none" stroke="#8fa7b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="s"><div class="h">认出你</div><div class="d">结合摄像头<br>识别你的身份</div></div>
+    <div class="a"><svg viewBox="0 0 36 20"><path d="M2 10h30M25 4l7 6-7 6" fill="none" stroke="#8fa7b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="s"><div class="h">先问候</div><div class="d">主动开口<br>发起这次交流</div></div>
+  </div>
+</main>
+</body>
+</html>

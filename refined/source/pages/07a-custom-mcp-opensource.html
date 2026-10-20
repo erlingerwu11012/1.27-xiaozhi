@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>07a Customization, MCP and open source</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .duo { margin-top: 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .box { border-radius: var(--radius); padding: 50px 48px 48px; }
+  .box .t { font-family: var(--serif); font-weight: 600; font-size: 50px; color: var(--accent-deep); }
+  .box .d { margin-top: 18px; font-size: 30px; line-height: 1.62; color: var(--body); }
+  .voice { background: var(--card-stone); }
+  .look { background: var(--card-mist); }
+  .voice .vis, .look .vis { margin-top: 44px; height: 200px; display: flex; align-items: center; }
+  .voice .vis { justify-content: center; }
+  .look .vis { gap: 28px; }
+  .look .avatar {
+    width: 196px; height: 196px; border-radius: 50%;
+    border: 6px solid var(--card);
+    background: url("../assets/photos/character.png") 50% 20% / 120% auto no-repeat;
+    box-shadow: 0 14px 30px rgba(40, 60, 75, 0.16);
+  }
+  .look .add {
+    width: 132px; height: 132px; border-radius: 50%;
+    border: 2px dashed rgba(77, 109, 130, 0.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .mcp { margin-top: 24px; border-radius: var(--radius); background: var(--slate); padding: 54px 52px 56px; }
+  .mcp .t { font-family: var(--serif); font-weight: 600; font-size: 54px; color: var(--accent-deep); }
+  .mcp .d { margin-top: 18px; font-size: 31px; line-height: 1.62; color: var(--body); }
+  .flow { margin-top: 50px; display: grid; grid-template-columns: 1fr 90px 1fr 90px 1fr; align-items: center; }
+  .flow .n {
+    height: 124px; border-radius: 20px; background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px; font-weight: 500; color: var(--accent-deep);
+  }
+  .flow .n.hub { background: var(--accent); color: #fff; font-weight: 700; font-size: 42px; letter-spacing: 0.06em; }
+  .flow .ln { height: 2px; background: rgba(77, 109, 130, 0.45); position: relative; margin: 0 10px; }
+  .flow .ln::after { content: ""; position: absolute; right: -2px; top: -6px; border: 7px solid transparent; border-left: 10px solid rgba(77, 109, 130, 0.6); border-right: 0; }
+
+  .oss { margin-top: 24px; border-radius: var(--radius); background: var(--card); padding: 52px 52px 54px; display: flex; gap: 44px; align-items: flex-start; }
+  .oss .icon {
+    flex: none; width: 120px; height: 120px; border-radius: 26px; background: var(--mist);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "DejaVu Sans Mono", monospace; font-size: 50px; color: var(--accent); letter-spacing: -0.04em;
+  }
+  .oss .t { font-family: var(--serif); font-weight: 600; font-size: 54px; color: var(--accent-deep); }
+  .oss .d { margin-top: 18px; font-size: 31px; line-height: 1.62; color: var(--body); }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>让小念，</span><span class="answer">更像你喜欢的样子。</span></h1>
+  <p class="lead">自定义音色与角色立绘，连接 MCP 工具，<br>也把继续创造的空间，留给你。</p>
+
+  <div class="duo">
+    <div class="box voice">
+      <div class="t">自定义音色</div>
+      <div class="d">按你的喜好设置声音，<br>让回应听起来更亲切。</div>
+      <div class="vis"><svg id="wave" width="460" height="160" viewBox="0 0 460 160"></svg></div>
+    </div>
+    <div class="box look">
+      <div class="t">自定义角色立绘</div>
+      <div class="d">使用你喜欢的角色形象，<br>让陪伴有熟悉的模样。</div>
+      <div class="vis">
+        <div class="avatar"></div>
+        <div class="add"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 6v32M6 22h32" stroke="#5f7f93" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mcp">
+    <div class="t">连接 MCP，拓展可用工具。</div>
+    <div class="d">按需接入 MCP 工具，<br>让小念的能力随你的需要继续扩展。</div>
+    <div class="flow">
+      <div class="n">小念</div><div class="ln"></div><div class="n hub">MCP</div><div class="ln"></div><div class="n">你接入的工具</div>
+    </div>
+  </div>
+
+  <div class="oss">
+    <div class="icon">{ }</div>
+    <div>
+      <div class="t">代码开源，支持二次开发。</div>
+      <div class="d">可自行修改代码、扩展功能与接入工具，<br>打造属于你的版本。</div>
+    </div>
+  </div>
+</main>
+<script>
+  // Voice waveform drawn as rounded capsules of varying height
+  const h = [18, 34, 56, 40, 76, 110, 84, 132, 100, 60, 92, 140, 108, 70, 96, 120, 74, 48, 64, 38, 22];
+  const svg = document.getElementById("wave");
+  h.forEach((v, i) => {
+    const x = 30 + i * 20;
+    svg.insertAdjacentHTML("beforeend", `<rect x="${x - 5}" y="${80 - v / 2}" width="10" height="${v}" rx="5" fill="${i % 2 ? "#8fa7b6" : "#5f7f93"}"/>`);
+  });
+</script>
+</body>
+</html>

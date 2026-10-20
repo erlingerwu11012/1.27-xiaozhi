@@ -1,0 +1,15 @@
+{
+  "name": "xiaonian-crowdfunding-pages",
+  "private": true,
+  "type": "module",
+  "description": "Editable sources for the Xiaonian crowdfunding detail-page images.",
+  "scripts": {
+    "assets": "python3 source/scripts/build_assets.py",
+    "render": "node source/scripts/render.mjs",
+    "assemble": "python3 source/scripts/assemble.py",
+    "build": "npm run assets && npm run render && npm run assemble"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>11 Development progress</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .done { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .done .i {
+    display: flex; align-items: center; gap: 24px;
+    padding: 34px 36px; border-radius: 22px; background: var(--mist);
+  }
+  .done .i .c {
+    flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .done .i .t { font-size: 34px; font-weight: 500; color: var(--accent-deep); line-height: 1.35; }
+  .done .i .s { font-size: 26px; color: var(--muted); margin-top: 4px; letter-spacing: 0.06em; }
+
+  .proto { margin-top: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .proto .ph { height: 400px; border-radius: 22px; background-size: cover; background-position: center; }
+  .proto .cap { margin-top: 22px; font-size: 29px; color: var(--muted); }
+  .proto .cap b { color: var(--accent-deep); font-weight: 500; }
+
+  .road { margin-top: 96px; position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+  .road::before { content: ""; position: absolute; left: 14px; right: 0; top: 14px; height: 2px; background: linear-gradient(90deg, var(--accent) 0, var(--accent-soft) 60%, rgba(143, 167, 182, 0.2)); }
+  .road .m { position: relative; padding-top: 56px; }
+  .road .m::before { content: ""; position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--paper); border: 3px solid var(--accent); box-sizing: border-box; }
+  .road .k { font-size: 29px; color: var(--muted); letter-spacing: 0.04em; }
+  .road .v { margin-top: 10px; font-family: var(--serif); font-weight: 600; font-size: 84px; line-height: 1.1; color: var(--accent-deep); }
+  .road .v small { font-size: 40px; margin-left: 2px; }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>从电路到样机，</span><span class="answer">一步步走到现在。</span></h1>
+
+  <div class="done" id="done"></div>
+
+  <div class="proto">
+    <div><div class="ph" style="background-image:url('../assets/photos/prototype-shell.png')"></div><div class="cap"><b>开发阶段</b> · 外壳与装配原型</div></div>
+    <div><div class="ph" style="background-image:url('../assets/photos/prototype-screen.png')"></div><div class="cap"><b>开发阶段</b> · 屏幕运行原型</div></div>
+  </div>
+
+  <div class="road">
+    <div class="m"><div class="k">2026 · 计划摩点上线</div><div class="v">11<small>月</small>1<small>日</small></div></div>
+    <div class="m"><div class="k">2026 · 预计发货</div><div class="v">12<small>月内</small></div></div>
+  </div>
+</main>
+<script>
+  const check = '<svg width="26" height="26" viewBox="0 0 26 26"><path d="M6 13.5l4.6 4.5L20 8" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  for (const t of ["PCB 开发", "云端服务器与代码开发", "功能调试", "样机制作"]) {
+    document.getElementById("done").insertAdjacentHTML("beforeend", `<div class="i"><div class="c">${check}</div><div><div class="t">${t}</div><div class="s">已完成</div></div></div>`);
+  }
+</script>
+</body>
+</html>

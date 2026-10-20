@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>13 Closing</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  /* Centered bookend to the hero; the evening scene fades up into the paper. */
+  .closing { height: 1860px; padding-top: 160px; text-align: center; background: var(--paper); }
+  .closing .scene {
+    position: absolute; left: 0; top: 420px; width: 1440px; height: 1440px;
+    background: url("../assets/product/scene-E-screen.png") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.6) 200px, #000 380px);
+  }
+  .closing .copy { position: relative; z-index: 2; }
+  .closing .headline { font-size: 128px; line-height: 1.22; }
+  .closing .sub { margin-top: 30px; font-family: var(--serif); font-weight: 500; font-size: 40px; letter-spacing: 0.24em; color: var(--accent); }
+  .closing .pillars {
+    position: absolute; z-index: 2; left: 0; right: 0; bottom: 0;
+    padding: 160px 0 96px;
+    background: linear-gradient(180deg, rgba(248, 245, 239, 0) 0, rgba(248, 245, 239, 0.88) 55%, var(--paper) 100%);
+    display: flex; justify-content: center; gap: 56px; align-items: center;
+  }
+  .closing .pillars div { font-family: var(--serif); font-weight: 600; font-size: 40px; letter-spacing: 0.12em; color: var(--accent-deep); }
+  .closing .pillars i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<main class="page closing">
+  <div class="scene"></div>
+  <div class="copy">
+    <h1 class="headline"><span>念念不忘，</span><span class="answer">必有回响。</span></h1>
+    <p class="sub">你贴心的人格 AI 伙伴</p>
+  </div>
+  <div class="pillars"><div>主动交互</div><i></i><div>自然对话</div><i></i><div>永久记忆</div></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>09 Dimensions and power</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .dims { margin-top: 56px; display: flex; align-items: baseline; gap: 22px; color: var(--accent); }
+  .dims b { font-family: var(--sans); font-weight: 500; font-size: 92px; letter-spacing: 0.01em; }
+  .dims span { font-size: 30px; line-height: 1.3; color: var(--muted); }
+
+  /* Both CAD views share one scale: 5 px per mm (120 mm -> 600 px, 66 mm -> 330 px). */
+  .views { position: relative; margin-top: 90px; height: 800px; }
+  .views img { position: absolute; display: block; }
+  .front { left: 120px; top: 0; width: 600px; height: 595px; }
+  .side { left: 900px; top: 0; width: 330px; height: 595px; }
+  .dim { position: absolute; color: var(--accent); font-size: 28px; font-weight: 500; letter-spacing: 0.04em; }
+  .dim .bar { position: absolute; background: var(--accent-soft); }
+  .dim .cap { position: absolute; background: var(--accent-soft); }
+  .h-dim { height: 24px; }
+  .h-dim .bar { left: 0; right: 0; top: 11px; height: 2px; }
+  .h-dim .cap { top: 0; width: 2px; height: 24px; }
+  .h-dim .cap.l { left: 0; } .h-dim .cap.r { right: 0; }
+  .h-dim em { position: absolute; left: 50%; top: 11px; transform: translate(-50%, -50%); background: var(--paper); padding: 0 16px; font-style: normal; }
+  .v-dim { width: 24px; }
+  .v-dim .bar { top: 0; bottom: 0; left: 11px; width: 2px; }
+  .v-dim .cap { left: 0; height: 2px; width: 24px; }
+  .v-dim .cap.t { top: 0; } .v-dim .cap.b { bottom: 0; }
+  .v-dim em { position: absolute; top: 50%; left: 11px; transform: translate(-50%, -50%) rotate(-90deg); background: var(--paper); padding: 0 16px; font-style: normal; white-space: nowrap; }
+  .cap-label { position: absolute; top: 740px; font-size: 30px; color: var(--muted); letter-spacing: 0.08em; text-align: center; }
+
+  .table { margin-top: 40px; border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 38px 0; border-bottom: 1px solid var(--line); }
+  .row .k { font-size: 30px; color: var(--muted); letter-spacing: 0.04em; }
+  .row .v { font-size: 36px; font-weight: 500; color: var(--accent-deep); }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>小小一方，</span><span class="answer">书桌上刚刚好。</span></h1>
+  <div class="dims"><b>120 × 119 × 66</b><span>mm<br>宽 × 高 × 深</span></div>
+
+  <div class="views">
+    <img class="front" src="../assets/product/cad-front.png" alt="">
+    <img class="side" src="../assets/product/cad-side.png" alt="">
+
+    <div class="dim h-dim" style="left:120px; top:636px; width:600px;"><div class="bar"></div><div class="cap l"></div><div class="cap r"></div><em>120 mm</em></div>
+    <div class="dim v-dim" style="left:44px; top:0; height:595px;"><div class="bar"></div><div class="cap t"></div><div class="cap b"></div><em>119 mm</em></div>
+    <div class="dim h-dim" style="left:900px; top:636px; width:330px;"><div class="bar"></div><div class="cap l"></div><div class="cap r"></div><em>66 mm</em></div>
+
+    <div class="cap-label" style="left:120px; width:600px;">正视图</div>
+    <div class="cap-label" style="left:900px; width:330px;">侧视图</div>
+  </div>
+
+  <div class="table">
+    <div class="row"><div class="k">供电方式</div><div class="v">Type-C 接口 · 插电使用</div></div>
+    <div class="row"><div class="k">内置电池</div><div class="v">无内置电池</div></div>
+    <div class="row"><div class="k">有效显示区</div><div class="v">71.14 × 69.82 mm</div></div>
+    <div class="row"><div class="k">外壳材质</div><div class="v">光固化树脂</div></div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>01 Hero</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  /* Full-bleed product scene; the wall above the device is extended with a
+     gradient sampled from the plate's top edge so the headline sits on it. */
+  .hero {
+    height: 1870px;
+    padding-top: 176px;
+    background: linear-gradient(180deg, #f7f3ed 0px, #eee8e1 360px, #e6dfd7 520px);
+  }
+  .hero .scene {
+    position: absolute;
+    left: 0; top: 430px;
+    width: 1440px; height: 1440px;
+    background: url("../assets/product/scene-B-screen.png") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 300px);
+  }
+  .hero .copy { position: relative; z-index: 2; }
+  .hero .headline { font-size: 136px; line-height: 1.2; }
+  .hero .lead { margin-top: 44px; font-size: 38px; color: #4c5961; }
+  .hero .pillars {
+    position: absolute; z-index: 2;
+    left: var(--gutter); right: var(--gutter); bottom: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 64px;
+    border-radius: 999px;
+    background: rgba(253, 251, 247, 0.72);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 16px 40px rgba(60, 50, 40, 0.08);
+  }
+  .hero .pillars div {
+    font-family: var(--serif); font-weight: 600;
+    font-size: 40px; letter-spacing: 0.12em; color: var(--accent-deep);
+  }
+  .hero .pillars i { width: 1px; height: 36px; background: rgba(77, 109, 130, 0.35); }
+</style>
+</head>
+<body>
+<main class="page hero">
+  <div class="scene"></div>
+  <div class="copy">
+    <h1 class="headline"><span>念念不忘，</span><span class="answer">必有回响。</span></h1>
+    <p class="lead">会主动问候，也记得你说过的重要小事。</p>
+  </div>
+  <div class="pillars"><div>主动交互</div><i></i><div>自然对话</div><i></i><div>永久记忆</div></div>
+</main>
+</body>
+</html>

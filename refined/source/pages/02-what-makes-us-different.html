@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>02 What makes us different</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  /* Owner-approved seven-row comparison. Structure kept as-is:
+     left = conventional usage (muted stone), right = Xiaonian (gray-blue). */
+  .cmp { margin-top: 96px; }
+  .cmp .grid {
+    display: grid;
+    grid-template-columns: 500px 64px 1fr;
+    row-gap: 22px;
+  }
+  .cmp .head {
+    height: 104px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 22px;
+    font-size: 36px; font-weight: 700; letter-spacing: 0.12em;
+  }
+  .cmp .head.them { background: var(--card-stone); color: #7d7870; }
+  .cmp .head.us { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 44px; letter-spacing: 0.2em; }
+
+  .cmp .cell { padding: 46px 44px 50px; min-height: 360px; }
+  .cmp .them.cell { background: #efebe4; }
+  .cmp .us.cell { background: var(--card-mist); }
+  .cmp .cell { border-radius: 22px; }
+
+  .cmp .k { font-size: 27px; font-weight: 500; letter-spacing: 0.06em; }
+  .cmp .t { font-family: var(--serif); font-weight: 600; line-height: 1.32; margin: 16px 0 18px; }
+  .cmp .d { font-size: 29px; line-height: 1.62; }
+
+  .cmp .them .k { color: #8f897f; }
+  .cmp .them .t { font-size: 44px; color: #78726a; font-weight: 500; }
+  .cmp .them .d { color: #857f76; }
+
+  .cmp .us .k { color: var(--accent); font-weight: 700; }
+  .cmp .us .t { font-size: 52px; color: var(--accent-deep); }
+  .cmp .us .d { color: var(--body); }
+
+  .cmp .arrow { display: flex; align-items: center; justify-content: center; }
+  .cmp .arrow b {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--paper); border: 1px solid rgba(77, 109, 130, 0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cmp .arrow svg { width: 20px; height: 20px; }
+  .cmp .head-gap { height: 104px; }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>会回答，</span><span class="answer">更会主动陪你聊。</span></h1>
+  <p class="lead">主动对话、记得你，也越来越了解你。</p>
+
+  <section class="cmp">
+    <div class="grid" id="grid">
+      <div class="head them">常规使用方式</div><div class="head-gap"></div><div class="head us">小念</div>
+    </div>
+  </section>
+</main>
+<script>
+  // Row data: [left label, left title, left text, right label, right title, right text]
+  const rows = [
+    ["对话怎样开始", "等你先开口", "你发出指令，<br>设备作出回应。", "主动对话", "它先来找你聊", "能够主动发起对话，<br>让问候先发生。"],
+    ["对话怎样继续", "围绕指令问答", "问一个问题，<br>得到一个答案。", "良好的对话体验", "为“好好聊天”打磨", "深度优化提示词模板<br>与 Harness 框架。"],
+    ["下一次再见", "重新交代背景", "一次交流结束，<br>下次再从头说起。", "永久记忆", "说过的小事，<br>绝不会忘。", "跨越会话，延续你们的故事。"],
+    ["相处久了以后", "每次单独交流", "关注眼前的问题，<br>完成当下的回应。", "持续了解你", "越聊，越了解你", "随着交流增多，逐渐了解<br>你的偏好、习惯与在意的事。"],
+    ["面对不同的人", "面向通用使用", "以统一的方式，<br>回应不同使用者。", "身份识别与专属记忆", "认出你，也听出你", "通过人脸与声音识别身份，<br>将对话与记忆关联到你。"],
+    ["怎样表达个性", "使用预设配置", "沿用既定的声音、形象<br>与功能组合。", "丰富自定义", "按你的喜好来", "音色与角色立绘可自定义，<br>还能通过 MCP 接入工具。"],
+    ["还能做些什么", "按既定功能使用", "在现有功能范围内，<br>使用设备。", "开源与二次开发", "代码全面开源", "可自行修改与扩展功能，<br>打造你自己的 AI 伙伴。"],
+  ];
+  const arrow = '<svg viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="#5f7d90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const grid = document.getElementById("grid");
+  for (const r of rows) {
+    grid.insertAdjacentHTML("beforeend",
+      `<div class="cell them"><div class="k">${r[0]}</div><div class="t">${r[1]}</div><div class="d">${r[2]}</div></div>` +
+      `<div class="arrow"><b>${arrow}</b></div>` +
+      `<div class="cell us"><div class="k">${r[3]}</div><div class="t">${r[4]}</div><div class="d">${r[5]}</div></div>`);
+  }
+</script>
+</body>
+</html>

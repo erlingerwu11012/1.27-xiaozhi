@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>12 Delivery and service</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .bill {
+    margin-top: 84px; padding: 60px 60px 62px;
+    border-radius: var(--radius); background: var(--card);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    box-shadow: 0 20px 50px rgba(40, 60, 75, 0.08);
+  }
+  .bill .t { font-family: var(--serif); font-weight: 600; font-size: 66px; line-height: 1.38; color: var(--accent-deep); }
+  .bill .d { font-size: 32px; line-height: 1.7; color: var(--body); padding-left: 44px; border-left: 1px solid var(--line); }
+
+  .rows { margin-top: 56px; }
+  .row { display: grid; grid-template-columns: 290px 1fr; padding: 44px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .row .k { font-family: var(--serif); font-weight: 600; font-size: 40px; color: var(--accent); padding-top: 2px; }
+  .row .v { font-size: 36px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .row .s { margin-top: 10px; font-size: 30px; color: var(--body); line-height: 1.6; }
+</style>
+</head>
+<body>
+<main class="page bg-mist">
+  <h1 class="headline"><span>关于使用与服务，</span><span class="answer">提前说清楚。</span></h1>
+
+  <div class="bill">
+    <div class="t">按量计费<br>不设固定月租</div>
+    <div class="d">云服务费用随使用量变化。<br>每月参考花费，测试后公布。</div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">交付安排</div><div><div class="v">预计 2026 年 12 月内 · 包邮</div><div class="s">按所选档位提供设备及对应配件或权益。</div></div></div>
+    <div class="row"><div class="k">售后保障</div><div><div class="v">半年质保 · 7 天无理由退货</div></div></div>
+    <div class="row"><div class="k">使用方式</div><div><div class="v">Type-C 插电使用</div><div class="s">无内置电池，需要连接电源。</div></div></div>
+    <div class="row"><div class="k">记忆使用</div><div><div class="v">通过对话，延续属于你的交流</div><div class="s">暂不提供用户记忆列表查看。</div></div></div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>06 Growing familiarity</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  /* Full-bleed band: breaks out of the side gutters for pacing variety */
+  .band {
+    position: relative;
+    margin: 90px calc(-1 * var(--gutter)) 0;
+    height: 900px;
+    background: url("../assets/product/scene-W-screen.png") 0 -390px / 1440px 1440px no-repeat;
+  }
+  .band::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(248, 245, 239, 0.55) 0%, rgba(248, 245, 239, 0) 55%);
+  }
+  .band .quote {
+    position: absolute; z-index: 1; left: var(--gutter); top: 150px;
+    font-family: var(--serif); font-weight: 500; font-size: 56px; line-height: 1.6;
+    color: var(--accent-deep);
+  }
+
+  .facets { margin-top: 70px; }
+  .facet {
+    display: grid; grid-template-columns: 400px 1fr; align-items: center;
+    padding: 46px 0; border-bottom: 1px solid var(--line);
+  }
+  .facet:last-child { border-bottom: 0; }
+  .facet .t { font-family: var(--serif); font-weight: 600; font-size: 54px; color: var(--accent-deep); }
+  .facet .d { font-size: 33px; line-height: 1.6; color: var(--body); }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>相处得越久，</span><span class="answer">越了解你的日常。</span></h1>
+  <p class="lead">随着交流增多，逐渐了解你的偏好、习惯与近况。</p>
+
+  <div class="band">
+    <div class="quote">你喜欢什么，<br>最近在忙什么，<br>都值得被了解。</div>
+  </div>
+
+  <div class="facets">
+    <div class="facet"><div class="t">你的偏好</div><div class="d">喜欢的聊天方式，<br>感兴趣的话题。</div></div>
+    <div class="facet"><div class="t">你的习惯</div><div class="d">日常的作息，<br>经常提起的小事。</div></div>
+    <div class="facet"><div class="t">你的近况</div><div class="d">正在准备的汇报，<br>最近投入的计划。</div></div>
+  </div>
+</main>
+</body>
+</html>

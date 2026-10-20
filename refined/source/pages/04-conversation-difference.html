@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>04 Conversation experience</title>
+<link rel="stylesheet" href="../styles/base.css">
+<style>
+  .talk { margin-top: 96px; display: grid; grid-template-columns: 468px 1fr; column-gap: 60px; }
+  .talk .side { display: flex; flex-direction: column; }
+  /* Arch portrait: the original screen artwork, uncropped horizontally */
+  .talk .arch {
+    width: 468px; height: 620px;
+    border-radius: 234px 234px 30px 30px;
+    background: url("../assets/photos/character.png") 50% 100% / auto 100% no-repeat;
+    box-shadow: 0 26px 60px rgba(40, 60, 75, 0.14);
+  }
+  .talk .quote {
+    margin-top: 64px;
+    font-family: var(--serif); font-weight: 500; font-size: 50px; line-height: 1.55;
+    color: var(--accent);
+  }
+  .chat { display: flex; flex-direction: column; gap: 26px; padding-top: 6px; }
+  .chat .bubble { max-width: 600px; }
+  .chat .you { align-self: flex-start; background: var(--card-stone); border-bottom-left-radius: 8px; }
+  .chat .you .say { color: #5d5850; }
+  .chat .xn { align-self: flex-end; background: var(--card-mist); border-bottom-right-radius: 8px; }
+  .chat .xn .who { color: var(--accent); }
+
+  .tech {
+    margin-top: 110px;
+    display: flex; gap: 44px; align-items: center;
+    padding: 50px 56px;
+    border-radius: var(--radius);
+    background: var(--mist);
+  }
+  .tech .icon {
+    flex: none; width: 96px; height: 96px; border-radius: 50%;
+    background: var(--card); display: flex; align-items: center; justify-content: center;
+  }
+  .tech .k { font-size: 34px; font-weight: 700; color: var(--accent-deep); line-height: 1.5; }
+  .tech .d { margin-top: 8px; font-size: 31px; color: var(--body); line-height: 1.6; }
+</style>
+</head>
+<body>
+<main class="page bg-paper">
+  <h1 class="headline"><span>接住你的话，</span><span class="answer">也关心你的心情。</span></h1>
+  <p class="lead">顺着刚刚说过的内容，让交流有来有回。</p>
+
+  <div class="talk">
+    <div class="side">
+      <div class="arch"></div>
+      <div class="quote">今天的心事，<br>可以慢慢说。</div>
+    </div>
+    <div class="chat">
+      <div class="bubble you"><div class="who">你</div><div class="say">今天有点累。</div></div>
+      <div class="bubble xn"><div class="who">小念</div><div class="say">怎么了？想说说吗？</div></div>
+      <div class="bubble you"><div class="who">你</div><div class="say">明天要做汇报，<br>有点紧张。</div></div>
+      <div class="bubble xn"><div class="who">小念</div><div class="say">要不要先说给我听？<br>我们一起捋一遍。</div></div>
+    </div>
+  </div>
+
+  <div class="tech">
+    <div class="icon"><svg width="48" height="48" viewBox="0 0 48 48"><path d="M8 12h32a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H22l-9 7v-7H8a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z" fill="none" stroke="#4d6d82" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16" cy="23" r="2.4" fill="#4d6d82"/><circle cx="24" cy="23" r="2.4" fill="#4d6d82"/><circle cx="32" cy="23" r="2.4" fill="#4d6d82"/></svg></div>
+    <div>
+      <div class="k">深度优化提示词模板与 Harness 框架。</div>
+      <div class="d">让回应连着上下文，也接得住你的话。</div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
