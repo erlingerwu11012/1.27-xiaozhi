@@ -22,7 +22,7 @@
       <template v-else>
         <el-table ref="templateTable" :data="templateList" v-loading="templateLoading" row-key="id">
           <el-table-column width="52" align="center">
-            <template slot="header">
+            <template slot="header" slot-scope="{}">
               <el-checkbox :value="isAllSelected" :indeterminate="hasSelected && !isAllSelected" :disabled="!templateList.length"
                 :aria-label="isAllSelected ? $t('agentTemplateManagement.deselectAll') : $t('agentTemplateManagement.selectAll')"
                 @change="handleSelectAll" />

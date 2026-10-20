@@ -23,6 +23,7 @@ function walk(dir, out = []) {
 function normalize(url) {
   let u = url.replace(/\$\{\s*(getServiceUrl\(\)|PYTHON_API|Api\.getServiceUrl\(\)|api\.getServiceUrl\(\))\s*\}/g, '')
     .replace(/^getServiceUrl\(\)\s*\+\s*/, '');
+  u = u.replace(/\$\{[^}]*\?[^}]*\}/g, ''); // ${query ? '?' + query : ''} 这类拼接查询串的写法
   u = u.split('?')[0];
   u = u.replace(/\$\{[^}]*\}/g, ':p').replace(/'\s*\+\s*[^+]+\+\s*'/g, ':p').replace(/'\s*\+\s*[A-Za-z_.()]+$/g, ':p');
   return u.replace(/\/+$/, '') || '/';
@@ -48,11 +49,17 @@ for (const file of walk(SRC)) {
 
 const routes = [];
 const HANDLERS = path.join(SRC, 'mock', 'handlers');
-for (const name of fs.readdirSync(HANDLERS)) {
-  const src = fs.readFileSync(path.join(HANDLERS, name), 'utf8');
-  const re = /route\(\s*'(\w+)'\s*,\s*'([^']+)'/g;
+const handlerSources = fs.readdirSync(HANDLERS).map((name) => fs.readFileSync(path.join(HANDLERS, name), 'utf8'));
+// 同一组路由用 `${cfg.base}/...` 注册时（角色包 / 壁纸包共用 registerPackRoutes），按各文件声明的 base: '...' 展开
+const bases = handlerSources.flatMap((src) => [...src.matchAll(/base:\s*'([^']+)'/g)].map((b) => b[1]));
+for (const src of handlerSources) {
+  const add = (method, p) => routes.push({ method: method.toUpperCase(), re: new RegExp('^' + p.replace(/:[A-Za-z_]\w*/g, '[^/]+') + '$') });
+  const re = /route\(\s*'(\w+)'\s*,\s*(['`])([^'`]+)\2/g;
   let m;
-  while ((m = re.exec(src))) routes.push({ method: m[1].toUpperCase(), re: new RegExp('^' + m[2].replace(/:[A-Za-z_]\w*/g, '[^/]+') + '$') });
+  while ((m = re.exec(src))) {
+    if (m[3].includes('${')) bases.forEach((b) => add(m[1], m[3].replace(/\$\{[^}]*\}/, b)));
+    else add(m[1], m[3]);
+  }
 }
 
 const seen = new Set();

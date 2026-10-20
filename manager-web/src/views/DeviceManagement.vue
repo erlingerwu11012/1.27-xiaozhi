@@ -38,7 +38,7 @@
         <template v-else>
           <el-table ref="deviceTable" :data="paginatedDeviceList" v-loading="loading" row-key="device_id">
             <el-table-column width="52" align="center">
-              <template slot="header">
+              <template slot="header" slot-scope="{}">
                 <el-checkbox :value="isCurrentPageAllSelected" :disabled="!paginatedDeviceList.length"
                   :aria-label="isCurrentPageAllSelected ? $t('common.deselectAll') : $t('common.selectAll')" @change="handleSelectAll" />
               </template>
