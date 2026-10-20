@@ -127,7 +127,19 @@ export default {
   watch: {
     tab() { this.codeError = ''; this.focusFirst(); },
   },
+  mounted() {
+    window.addEventListener('xn:request-failed', this.onRequestFailed);
+  },
+  beforeDestroy() {
+    window.removeEventListener('xn:request-failed', this.onRequestFailed);
+  },
   methods: {
+    // bindDevice / manualAddDevice 没有 fail 回调，业务错误时只会弹全局提示；这里结束加载并在验证码下方显示原因
+    onRequestFailed({ detail }) {
+      if (!this.loading || !/\/device\/(bind\/|manual-add)/.test(detail.url)) return;
+      this.loading = false;
+      if (this.tab !== 'manual') this.codeError = detail.msg || this.$t('device.bindFailed');
+    },
     onOpen() {
       this.tab = this.mode;
       this.resetCode();

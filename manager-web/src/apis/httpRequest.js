@@ -57,6 +57,7 @@ function sendRequest() {
             }).then((res) => {
                 const error = httpHandlerError(res, this._failCallback, this._networkFailCallback);
                 if (error) {
+                    notifyUnhandledFailure(this._url, res, res && res.status === 200 ? this._failCallback : this._networkFailCallback)
                     return
                 }
 
@@ -67,6 +68,7 @@ function sendRequest() {
                 // 打印失败响应
                 console.log('catch', res)
                 httpHandlerError(res, this._failCallback, this._networkFailCallback)
+                notifyUnhandledFailure(this._url, res, this._networkFailCallback)
             })
             return this
         },
@@ -122,6 +124,20 @@ function sendRequest() {
  * networkFailCallback 回调函数
  */
 // 在错误处理函数中添加日志
+/**
+ * 调用方没有传 fail / networkFail 回调时，原逻辑只弹出全局提示，页面收不到任何结果。
+ * 这里额外广播一个 window 事件 `xn:request-failed`（detail: { url, status, code, msg }），
+ * 让页面可以结束加载状态；不改变原有的提示、401 跳转与回调行为。
+ */
+function notifyUnhandledFailure(url, info, handler) {
+    if (handler || typeof window === 'undefined' || typeof window.CustomEvent !== 'function') return
+    const data = (info && info.data) || {}
+    if (info && info.status === 200 && data.code === 401) return
+    window.dispatchEvent(new window.CustomEvent('xn:request-failed', {
+        detail: { url: String(url || ''), status: info && info.status, code: data.code, msg: data.msg }
+    }))
+}
+
 function httpHandlerError(info, failCallback, networkFailCallback) {
 
     /** 请求成功，退出该函数 可以根据项目需求来判断是否请求成功。这里判断的是status为200的时候是成功 */
