@@ -431,37 +431,37 @@ export default {
       inspireCards: [
         {
           title: "有声书情感叙事",
-          meta: "温柔女声 · 故事旁白",
+          meta: "温柔女声，故事旁白",
           swatch: "ot-card__swatch--rose",
           text: "夜色渐深，窗外的风轻轻拂过树梢。她合上书本，轻声说道：明天会更好。",
         },
         {
           title: "智能客服问候",
-          meta: "清晰普通话 · 服务场景",
+          meta: "清晰普通话，服务场景",
           swatch: "",
           text: "您好，欢迎致电智播台客服中心。请问有什么可以帮您？",
         },
         {
           title: "儿童故事开场",
-          meta: "活泼童趣 · 睡前故事",
+          meta: "活泼童趣，睡前故事",
           swatch: "ot-card__swatch--warm",
           text: "从前有一座会发光的小森林，里面住着会说话的小狐狸和爱唱歌的星星。",
         },
         {
           title: "新闻播报风格",
-          meta: "沉稳旁白 · 资讯播报",
+          meta: "沉稳旁白，资讯播报",
           swatch: "ot-card__swatch--cool",
           text: "今日焦点：人工智能语音合成技术持续进步，正广泛应用于教育、娱乐与客服场景。",
         },
         {
           title: "产品介绍短片",
-          meta: "专业旁白 · 营销文案",
+          meta: "专业旁白，营销文案",
           swatch: "ot-card__swatch--warm",
           text: "一键生成自然流畅的人声音频，让你的内容更快抵达听众。现在就开始体验吧。",
         },
         {
           title: "诗词朗诵",
-          meta: "韵律感 · 文学朗读",
+          meta: "韵律感，文学朗读",
           swatch: "ot-card__swatch--rose",
           text: "床前明月光，疑是地上霜。举头望明月，低头思故乡。",
         },
