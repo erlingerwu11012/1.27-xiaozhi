@@ -1,719 +1,336 @@
 <template>
-    <div class="welcome">
-        <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('paramManagement.pageTitle')" :description="$t('xn.admin.params.desc')">
+      <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('paramManagement.addParam') }}</el-button>
+    </page-header>
 
-        <div class="operation-bar">
-            <h2 class="page-title">{{ $t('paramManagement.pageTitle') }}</h2>
-            <div class="right-operations">
-                <el-input :placeholder="$t('paramManagement.searchPlaceholder')" v-model="searchCode"
-                    class="search-input" @keyup.enter.native="handleSearch" clearable />
-                <el-button class="btn-search" @click="handleSearch">{{ $t('paramManagement.search') }}</el-button>
-            </div>
-        </div>
-
-        <div class="main-wrapper">
-            <div class="content-panel">
-                <div class="content-area">
-                    <el-card class="params-card" shadow="never">
-                        <el-table ref="paramsTable" :data="paramsList" class="transparent-table" v-loading="loading"
-                            element-loading-text="Loading" element-loading-spinner="el-icon-loading"
-                            element-loading-background="rgba(255, 255, 255, 0.7)"
-                            :header-cell-class-name="headerCellClassName">
-                            <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
-                                <template slot-scope="scope">
-                                    <el-checkbox v-model="scope.row.selected"></el-checkbox>
-                                </template>
-                            </el-table-column>
-                            <el-table-column :label="$t('paramManagement.paramCode')" prop="paramCode"
-                                align="center"></el-table-column>
-                            <el-table-column :label="$t('paramManagement.paramValue')" prop="paramValue" align="center"
-                                show-overflow-tooltip>
-                                <template slot-scope="scope">
-                                    <div v-if="isSensitiveParam(scope.row.paramCode)">
-                                        <span v-if="!scope.row.showValue">
-                                            {{ maskSensitiveValue(scope.row.paramValue) }}
-                                        </span>
-                                        <span v-else>{{ scope.row.paramValue }}</span>
-                                        <el-button size="mini" type="text" @click="toggleSensitiveValue(scope.row)">
-                                            {{ scope.row.showValue ? $t('paramManagement.hide') :
-                                                $t('paramManagement.view') }}
-                                        </el-button>
-                                    </div>
-                                    <span v-else>{{ scope.row.paramValue }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column :label="$t('paramManagement.remark')" prop="remark"
-                                align="center"></el-table-column>
-                            <el-table-column :label="$t('paramManagement.operation')" align="center">
-                                <template slot-scope="scope">
-                                    <el-button size="mini" type="text" @click="editParam(scope.row)">{{
-                                        $t('paramManagement.edit') }}</el-button>
-                                    <el-button size="mini" type="text" @click="deleteParam(scope.row)">{{
-                                        $t('paramManagement.delete') }}</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-
-                        <div class="table_bottom">
-                            <div class="ctrl_btn">
-                                <el-button size="mini" type="primary" class="select-all-btn" @click="handleSelectAll">
-                                    {{ isAllSelected ? $t('paramManagement.deselectAll') :
-                                        $t('paramManagement.selectAll') }}
-                                </el-button>
-                                <el-button size="mini" type="success" @click="showAddDialog">{{
-                                    $t('paramManagement.add') }}</el-button>
-                                <el-button size="mini" type="danger" icon="el-icon-delete"
-                                    @click="deleteSelectedParams">{{
-                                        $t('paramManagement.delete') }}</el-button>
-                            </div>
-                            <div class="custom-pagination">
-                                <el-select v-model="pageSize" @change="handlePageSizeChange" class="page-size-select">
-                                    <el-option v-for="item in pageSizeOptions" :key="item"
-                                        :label="`${item}${$t('paramManagement.itemsPerPage')}`" :value="item">
-                                    </el-option>
-                                </el-select>
-                                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                                    {{ $t('paramManagement.firstPage') }}
-                                </button>
-                                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                                    {{ $t('paramManagement.prevPage') }}
-                                </button>
-                                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                                    :class="{ active: page === currentPage }" @click="goToPage(page)">
-                                    {{ page }}
-                                </button>
-                                <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                                    {{ $t('paramManagement.nextPage') }}
-                                </button>
-                                <span class="total-text">{{ $t('paramManagement.totalRecords', { total }) }}</span>
-                            </div>
-                        </div>
-                    </el-card>
-                </div>
-            </div>
-        </div>
-
-        <!-- 新增/编辑参数对话框 -->
-        <param-dialog ref="paramDialog" :title="dialogTitle" :visible.sync="dialogVisible" :form="paramForm"
-            @submit="handleSubmit" @cancel="dialogVisible = false" />
-        <el-footer>
-            <version-footer />
-        </el-footer>
+    <div class="xn-toolbar">
+      <el-input :placeholder="$t('paramManagement.searchPlaceholder')" v-model="searchCode" clearable
+        @keyup.enter.native="handleSearch" @clear="handleSearch">
+        <xn-icon slot="prefix" name="search" class="xa-search-icon" />
+      </el-input>
+      <el-button @click="handleSearch">{{ $t('paramManagement.search') }}</el-button>
+      <span class="xn-toolbar__grow"></span>
+      <template v-if="selectedCount">
+        <span class="xn-muted">{{ $t('xn.admin.selected', { n: selectedCount }) }}</span>
+        <el-button type="danger" plain size="small" @click="deleteSelectedParams"><xn-icon name="trash" /> {{ $t('xn.admin.deleteSelected') }}</el-button>
+      </template>
     </div>
+
+    <div class="xn-panel xn-panel--flush xa-panel">
+      <xn-empty v-if="loadFailed && !loading" error @retry="fetchParams" />
+      <template v-else>
+        <el-table ref="paramsTable" :data="paramsList" v-loading="loading" row-key="id">
+          <el-table-column width="52" align="center">
+            <template slot="header">
+              <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
+                :disabled="!paramsList.length" :aria-label="$t('paramManagement.selectAll')" @change="handleSelectAll" />
+            </template>
+            <template slot-scope="scope"><el-checkbox v-model="scope.row.selected" /></template>
+          </el-table-column>
+          <el-table-column :label="$t('paramManagement.paramCode')" min-width="220">
+            <template slot-scope="{ row }"><span class="xa-code">{{ row.paramCode }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('paramManagement.paramValue')" min-width="260">
+            <template slot-scope="scope">
+              <div v-if="isSensitiveParam(scope.row.paramCode)" class="xa-secret">
+                <span class="xn-num xa-value">{{ scope.row.showValue ? scope.row.paramValue : maskSensitiveValue(scope.row.paramValue) }}</span>
+                <el-button type="text" @click="toggleSensitiveValue(scope.row)">
+                  {{ scope.row.showValue ? $t('paramManagement.hide') : $t('paramManagement.view') }}
+                </el-button>
+              </div>
+              <span v-else class="xa-value" :title="scope.row.paramValue">{{ scope.row.paramValue }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('paramDialog.valueType')" width="100">
+            <template slot-scope="{ row }"><span class="xn-tag xn-tag--muted">{{ row.valueType }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('paramManagement.remark')" prop="remark" min-width="200" show-overflow-tooltip />
+          <el-table-column :label="$t('paramManagement.operation')" width="130" align="right">
+            <template slot-scope="scope">
+              <el-button type="text" @click="editParam(scope.row)">{{ $t('paramManagement.edit') }}</el-button>
+              <el-button type="text" class="xa-danger" @click="deleteParam(scope.row)">{{ $t('paramManagement.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty v-if="lastSearch" icon="search" :title="$t('xn.admin.params.noMatch')" :description="$t('xn.admin.noMatchDesc')" />
+            <xn-empty v-else icon="tune" :title="$t('xn.admin.params.empty')" :description="$t('xn.admin.params.emptyDesc')">
+              <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('paramManagement.addParam') }}</el-button>
+            </xn-empty>
+          </template>
+        </el-table>
+        <div v-if="total" class="xa-foot">
+          <el-pagination background layout="total, sizes, prev, pager, next" :total="total" :page-size="pageSize"
+            :page-sizes="pageSizeOptions" :current-page="currentPage" @size-change="handlePageSizeChange" @current-change="goToPage" />
+        </div>
+      </template>
+    </div>
+
+    <!-- 新增/编辑参数对话框 -->
+    <param-dialog ref="paramDialog" :title="dialogTitle" :visible.sync="dialogVisible" :form="paramForm"
+      @submit="handleSubmit" @cancel="dialogVisible = false" />
+  </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
 import ParamDialog from "@/components/ParamDialog.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
+
 export default {
-    components: { HeaderBar, ParamDialog, VersionFooter },
-    data() {
-        return {
-            searchCode: "",
-            paramsList: [],
-            currentPage: 1,
-            loading: false,
-            pageSize: 10,
-            pageSizeOptions: [10, 20, 50, 100],
-            total: 0,
-            dialogVisible: false,
-            dialogTitle: "新增参数",
-            isAllSelected: false,
-            sensitive_keys: ["api_key", "personal_access_token", "access_token", "token", "secret", "access_key_secret", "secret_key", "password", "mqtt_signature_key", "private_key"],
-            paramForm: {
-                id: null,
-                paramCode: "",
-                paramValue: "",
-                valueType: "string",
-                remark: ""
-            },
-        };
+  components: { ParamDialog },
+  data() {
+    return {
+      searchCode: "",
+      lastSearch: "",
+      paramsList: [],
+      currentPage: 1,
+      loading: false,
+      loadFailed: false,
+      pageSize: 10,
+      pageSizeOptions: [10, 20, 50, 100],
+      total: 0,
+      dialogVisible: false,
+      dialogTitle: "新增参数",
+      sensitive_keys: ["api_key", "personal_access_token", "access_token", "token", "secret", "access_key_secret", "secret_key", "password", "mqtt_signature_key", "private_key"],
+      paramForm: {
+        id: null,
+        paramCode: "",
+        paramValue: "",
+        valueType: "string",
+        remark: ""
+      },
+    };
+  },
+  created() {
+    this.fetchParams();
+  },
+  beforeDestroy() {
+    clearTimeout(this._loadTimer);
+  },
+  computed: {
+    pageCount() {
+      return Math.ceil(this.total / this.pageSize);
     },
-    created() {
-        this.fetchParams();
-
+    selectedCount() {
+      return this.paramsList.filter((p) => p.selected).length;
     },
-
-    computed: {
-        pageCount() {
-            return Math.ceil(this.total / this.pageSize);
+    isAllSelected() {
+      return this.paramsList.length > 0 && this.paramsList.every((p) => p.selected);
+    },
+  },
+  methods: {
+    handlePageSizeChange(val) {
+      this.pageSize = val;
+      this.currentPage = 1;
+      this.fetchParams();
+    },
+    // 业务错误由请求层统一提示且不回调；超过 8 秒仍无结果时显示失败状态
+    startLoading() {
+      this.loading = true;
+      this.loadFailed = false;
+      clearTimeout(this._loadTimer);
+      this._loadTimer = setTimeout(() => {
+        if (this.loading) { this.loading = false; this.loadFailed = true; }
+      }, 8000);
+    },
+    fetchParams() {
+      this.startLoading();
+      Api.admin.getParamsList(
+        {
+          page: this.currentPage,
+          limit: this.pageSize,
+          paramCode: this.searchCode,
         },
-        visiblePages() {
-            const pages = [];
-            const maxVisible = 3;
-            let start = Math.max(1, this.currentPage - 1);
-            let end = Math.min(this.pageCount, start + maxVisible - 1);
-
-            if (end - start + 1 < maxVisible) {
-                start = Math.max(1, end - maxVisible + 1);
+        ({ data }) => {
+          this.loading = false;
+          clearTimeout(this._loadTimer);
+          if (data.code === 0) {
+            this.lastSearch = this.searchCode;
+            this.paramsList = data.data.list.map(item => ({
+              ...item,
+              valueType: item.valueType || "string",
+              selected: false,
+              showValue: false
+            }));
+            this.total = data.data.total;
+            // 删除最后一页的全部数据后回到上一页
+            if (!this.paramsList.length && this.currentPage > 1 && this.total) {
+              this.currentPage = Math.max(1, this.pageCount);
+              this.fetchParams();
             }
-
-            for (let i = start; i <= end; i++) {
-                pages.push(i);
-            }
-            return pages;
-        },
-    },
-    methods: {
-        handlePageSizeChange(val) {
-            this.pageSize = val;
-            this.currentPage = 1;
-            this.fetchParams();
-        },
-        fetchParams() {
-            this.loading = true;
-            Api.admin.getParamsList(
-                {
-                    page: this.currentPage,
-                    limit: this.pageSize,
-                    paramCode: this.searchCode,
-                },
-                ({ data }) => {
-                    this.loading = false;
-                    if (data.code === 0) {
-                        this.paramsList = data.data.list.map(item => ({
-                            ...item,
-                            valueType: item.valueType || "string",
-                            selected: false,
-                            showValue: false
-                        }));
-                        this.total = data.data.total;
-                    } else {
-                        this.$message.error({
-                            message: data.msg || this.$t('paramManagement.getParamsListFailed'),
-                            showClose: true
-                        });
-                    }
-                }
-            );
-        },
-        handleSearch() {
-            this.currentPage = 1;
-            this.fetchParams();
-        },
-        handleSelectAll() {
-            this.isAllSelected = !this.isAllSelected;
-            this.paramsList.forEach(row => {
-                row.selected = this.isAllSelected;
+          } else {
+            this.loadFailed = true;
+            this.$message.error({
+              message: data.msg || this.$t('paramManagement.getParamsListFailed'),
+              showClose: true
             });
-        },
-        showAddDialog() {
-            this.dialogTitle = this.$t('paramManagement.addParam');
-            this.paramForm = {
-                id: null,
-                paramCode: "",
-                paramValue: "",
-                valueType: "string", // 默认值
-                remark: ""
-            };
-            this.dialogVisible = true;
-        },
-        editParam(row) {
-            this.dialogTitle = this.$t('paramManagement.editParam');
-            this.paramForm = {
-                id: row.id,
-                paramCode: row.paramCode,
-                paramValue: row.paramValue,
-                valueType: row.valueType || "string", // 确保有值
-                remark: row.remark
-            };
-            this.dialogVisible = true;
-        },
-        handleSubmit(form) {
-            if (form.id) {
-                // 更新参数
-                Api.admin.updateParam(form, ({ data }) => {
-                    this.dialogVisible = false;
-                    this.fetchParams();
-                    this.$message.success({
-                        message: this.$t('paramManagement.updateSuccess'),
-                        showClose: true
-                    });
-                }, ({ data }) => {
-                    this.$message.error({
-                        message: data.msg || this.$t('paramManagement.updateFailed'),
-                        showClose: true
-                    });
-                    // 调用ParamDialog的resetSaving方法重置保存状态
-                    if (this.$refs.paramDialog && typeof this.$refs.paramDialog.resetSaving === 'function') {
-                        this.$refs.paramDialog.resetSaving();
-                    }
-                });
-            } else {
-                // 新增参数
-                Api.admin.addParam(form, ({ data }) => {
-                    if (data.code === 0) {
-                        this.dialogVisible = false;
-                        this.fetchParams();
-                        this.$message.success({
-                            message: this.$t('paramManagement.addSuccess'),
-                            showClose: true
-                        });
-                    } else {
-                        this.$message.error({
-                            message: data.msg || this.$t('paramManagement.addFailed'),
-                            showClose: true
-                        });
-                        // 调用ParamDialog的resetSaving方法重置保存状态
-                        if (this.$refs.paramDialog && typeof this.$refs.paramDialog.resetSaving === 'function') {
-                            this.$refs.paramDialog.resetSaving();
-                        }
-                    }
-                });
-            }
-        },
-        deleteSelectedParams() {
-            const selectedParams = this.paramsList.filter(row => row.selected);
-            if (selectedParams.length === 0) {
-                this.$message.warning({
-                    message: this.$t('paramManagement.selectParamsFirst'),
-                    showClose: true
-                });
-                return;
-            }
-            this.deleteParams(selectedParams);
-        },
-        deleteParam(row) {
-            if (!row.id) {
-                this.$message.warning({
-                    message: this.$t('paramManagement.selectParamsFirst'),
-                    showClose: true
-                });
-                return;
-            }
-            this.deleteParams([row]);
-        },
-        deleteParams(params) {
-            const paramCount = params.length;
-            const paramIds = params.map(param => param.id).filter(id => id);
-            if (paramIds.length === 0) {
-                this.$message.error({
-                    message: this.$t('paramManagement.invalidParamId'),
-                    showClose: true
-                });
-                return;
-            }
-            this.$confirm(this.$t('paramManagement.confirmBatchDelete', { paramCount }), this.$t('message.warning'), {
-                confirmButtonText: this.$t('button.ok'),
-                cancelButtonText: this.$t('button.cancel'),
-                type: 'warning'
-            }).then(() => {
-                Api.admin.deleteParam(paramIds, ({ data }) => {
-                    if (data.code === 0) {
-                        this.fetchParams();
-                        this.$message.success({
-                            message: this.$t('paramManagement.batchDeleteSuccess', { paramCount }),
-                            showClose: true
-                        });
-                    } else {
-                        this.$message.error({
-                            message: data.msg || this.$t('paramManagement.deleteFailed'),
-                            showClose: true
-                        });
-                    }
-                });
-            }).catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: this.$t('paramManagement.operationCancelled'),
-                    duration: 1000
-                });
-            });
-        },
-        goToPage(page) {
-            if (page !== this.currentPage) {
-                this.currentPage = page;
-                this.fetchParams();
-            }
-        },
-        goFirst() {
-            if (this.currentPage !== 1) {
-                this.currentPage = 1;
-                this.fetchParams();
-            }
-        },
-        goPrev() {
-            if (this.currentPage > 1) {
-                this.currentPage--;
-                this.fetchParams();
-            }
-        },
-        goNext() {
-            if (this.currentPage < this.pageCount) {
-                this.currentPage++;
-                this.fetchParams();
-            }
-        },
-        isSensitiveParam(paramCode) {
-            return this.sensitive_keys.some(key => paramCode.toLowerCase().includes(key));
-        },
-        maskSensitiveValue(value) {
-            if (value.length <= 4) {
-                return '****';
-            }
-            return value.substring(0, 2) + '****' + value.substring(value.length - 2);
-        },
-        toggleSensitiveValue(row) {
-            row.showValue = !row.showValue;
-        },
-        headerCellClassName() {
-            return 'header-cell';
+          }
         }
-    }
+      );
+    },
+    handleSearch() {
+      this.currentPage = 1;
+      this.fetchParams();
+    },
+    handleSelectAll() {
+      const next = !this.isAllSelected;
+      this.paramsList.forEach(row => {
+        row.selected = next;
+      });
+    },
+    showAddDialog() {
+      this.dialogTitle = this.$t('paramManagement.addParam');
+      this.paramForm = {
+        id: null,
+        paramCode: "",
+        paramValue: "",
+        valueType: "string", // 默认值
+        remark: ""
+      };
+      this.dialogVisible = true;
+    },
+    editParam(row) {
+      this.dialogTitle = this.$t('paramManagement.editParam');
+      this.paramForm = {
+        id: row.id,
+        paramCode: row.paramCode,
+        paramValue: row.paramValue,
+        valueType: row.valueType || "string", // 确保有值
+        remark: row.remark
+      };
+      this.dialogVisible = true;
+    },
+    handleSubmit(form) {
+      if (form.id) {
+        // 更新参数
+        Api.admin.updateParam(form, ({ data }) => {
+          this.dialogVisible = false;
+          this.fetchParams();
+          this.$message.success({
+            message: data && data.msg && data.msg !== 'success' ? data.msg : this.$t('paramManagement.updateSuccess'),
+            showClose: true
+          });
+        }, ({ data }) => {
+          this.$message.error({
+            message: data.msg || this.$t('paramManagement.updateFailed'),
+            showClose: true
+          });
+          // 调用ParamDialog的resetSaving方法重置保存状态
+          if (this.$refs.paramDialog && typeof this.$refs.paramDialog.resetSaving === 'function') {
+            this.$refs.paramDialog.resetSaving();
+          }
+        });
+      } else {
+        // 新增参数
+        Api.admin.addParam(form, ({ data }) => {
+          if (data.code === 0) {
+            this.dialogVisible = false;
+            this.fetchParams();
+            this.$message.success({
+              message: data.msg && data.msg !== 'success' ? data.msg : this.$t('paramManagement.addSuccess'),
+              showClose: true
+            });
+          } else {
+            this.$message.error({
+              message: data.msg || this.$t('paramManagement.addFailed'),
+              showClose: true
+            });
+            // 调用ParamDialog的resetSaving方法重置保存状态
+            if (this.$refs.paramDialog && typeof this.$refs.paramDialog.resetSaving === 'function') {
+              this.$refs.paramDialog.resetSaving();
+            }
+          }
+        });
+      }
+    },
+    deleteSelectedParams() {
+      const selectedParams = this.paramsList.filter(row => row.selected);
+      if (selectedParams.length === 0) {
+        this.$message.warning({
+          message: this.$t('paramManagement.selectParamsFirst'),
+          showClose: true
+        });
+        return;
+      }
+      this.deleteParams(selectedParams);
+    },
+    deleteParam(row) {
+      if (!row.id) {
+        this.$message.warning({
+          message: this.$t('paramManagement.selectParamsFirst'),
+          showClose: true
+        });
+        return;
+      }
+      this.deleteParams([row]);
+    },
+    deleteParams(params) {
+      const paramCount = params.length;
+      const paramIds = params.map(param => param.id).filter(id => id);
+      if (paramIds.length === 0) {
+        this.$message.error({
+          message: this.$t('paramManagement.invalidParamId'),
+          showClose: true
+        });
+        return;
+      }
+      this.$confirm(this.$t('paramManagement.confirmBatchDelete', { paramCount }), this.$t('xn.admin.params.deleteTitle'), {
+        confirmButtonText: this.$t('paramManagement.delete'),
+        cancelButtonText: this.$t('button.cancel'),
+        type: 'warning'
+      }).then(() => {
+        Api.admin.deleteParam(paramIds, ({ data }) => {
+          if (data.code === 0) {
+            this.fetchParams();
+            this.$message.success({
+              message: this.$t('paramManagement.batchDeleteSuccess', { paramCount }),
+              showClose: true
+            });
+          } else {
+            this.$message.error({
+              message: data.msg || this.$t('paramManagement.deleteFailed'),
+              showClose: true
+            });
+          }
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: this.$t('paramManagement.operationCancelled'),
+          duration: 1000
+        });
+      });
+    },
+    goToPage(page) {
+      if (page !== this.currentPage) {
+        this.currentPage = page;
+        this.fetchParams();
+      }
+    },
+    isSensitiveParam(paramCode) {
+      return this.sensitive_keys.some(key => String(paramCode || '').toLowerCase().includes(key));
+    },
+    maskSensitiveValue(value) {
+      value = String(value == null ? '' : value);
+      if (value.length <= 4) {
+        return '****';
+      }
+      return value.substring(0, 2) + '****' + value.substring(value.length - 2);
+    },
+    toggleSensitiveValue(row) {
+      row.showValue = !row.showValue;
+    },
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-    min-width: 900px;
-    min-height: 506px;
-    height: 100vh;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    background-size: cover;
-    background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    overflow: hidden;
-}
-
-.main-wrapper {
-    margin: 5px 22px;
-    border-radius: 15px;
-    min-height: calc(100vh - 24vh);
-    height: auto;
-    max-height: 80vh;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
-    background: rgba(237, 242, 255, 0.5);
-    display: flex;
-    flex-direction: column;
-}
-
-.operation-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-}
-
-.page-title {
-    font-size: 24px;
-    margin: 0;
-}
-
-.right-operations {
-    display: flex;
-    gap: 10px;
-    margin-left: auto;
-}
-
-.search-input {
-    width: 240px;
-}
-
-.btn-search {
-    background: linear-gradient(135deg, #6b8cff, #a966ff);
-    border: none;
-    color: white;
-}
-
-.content-panel {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-    height: 100%;
-    border-radius: 15px;
-    background: transparent;
-    border: 1px solid #fff;
-}
-
-.content-area {
-    flex: 1;
-    height: 100%;
-    min-width: 600px;
-    overflow: auto;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
-
-.params-card {
-    background: white;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    box-shadow: none;
-    overflow: hidden;
-
-    ::v-deep .el-card__body {
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: hidden;
-    }
-}
-
-.table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    padding-bottom: 10px;
-}
-
-.ctrl_btn {
-    display: flex;
-    gap: 8px;
-    padding-left: 26px;
-
-    .el-button {
-        min-width: 72px;
-        height: 32px;
-        padding: 7px 12px 7px 10px;
-        font-size: 12px;
-        border-radius: 4px;
-        line-height: 1;
-        font-weight: 500;
-        border: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-        &:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-    }
-
-    .el-button--primary {
-        background: #5f70f3;
-        color: white;
-    }
-
-    .el-button--danger {
-        background: #fd5b63;
-        color: white;
-    }
-}
-
-.custom-pagination {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    .el-select {
-        margin-right: 8px;
-    }
-
-    .pagination-btn {
-        min-width: 32px;
-        height: 30px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        background: transparent;
-        color: #475569;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-            background: rgba(148, 163, 184, 0.12);
-        }
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    }
-
-    .pagination-btn.active {
-        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%) !important;
-        color: #ffffff !important;
-        border-color: transparent !important;
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
-    }
-
-    .total-text {
-        color: #909399;
-        font-size: 14px;
-        margin-left: 10px;
-    }
-}
-
-:deep(.transparent-table) {
-    background: white;
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .el-table__body-wrapper {
-        flex: 1;
-        overflow-y: auto;
-        max-height: none !important;
-    }
-
-    .el-table__header-wrapper {
-        flex-shrink: 0;
-    }
-
-    .el-table__header th {
-        background: white !important;
-        color: black;
-    }
-
-    &::before {
-        display: none;
-    }
-
-    .el-table__body tr {
-        background-color: white;
-
-        td {
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        }
-    }
-}
-
-
-:deep(.el-checkbox__inner) {
-    background-color: #eeeeee !important;
-    border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-    border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-    background-color: #5f70f3 !important;
-    border-color: #5f70f3 !important;
-}
-
-@media (min-width: 1144px) {
-    .table_bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 40px;
-    }
-
-    :deep(.transparent-table) {
-        .el-table__body tr {
-            td {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
-
-            &+tr {
-                margin-top: 10px;
-            }
-        }
-    }
-}
-
-:deep(.el-table .el-button--text) {
-    color: #7079aa;
-}
-
-:deep(.el-table .el-button--text:hover) {
-    color: #5a64b5;
-}
-
-.el-button--success {
-    background: #5bc98c;
-    color: white;
-}
-
-:deep(.el-table .cell) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.page-size-select {
-    width: 100px;
-    margin-right: 10px;
-
-    :deep(.el-input__inner) {
-        height: 32px;
-        line-height: 32px;
-        border-radius: 4px;
-        border: 1px solid #e4e7ed;
-        background: #dee7ff;
-        color: #606266;
-        font-size: 14px;
-    }
-
-    :deep(.el-input__suffix) {
-        right: 6px;
-        width: 15px;
-        height: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 6px;
-        border-radius: 4px;
-    }
-
-    :deep(.el-input__suffix-inner) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    :deep(.el-icon-arrow-up:before) {
-        content: "";
-        display: inline-block;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 9px solid #606266;
-        position: relative;
-        transform: rotate(0deg);
-        transition: transform 0.3s;
-    }
-}
-
-:deep(.el-table) {
-    .el-table__body-wrapper {
-        transition: height 0.3s ease;
-    }
-}
-
-.el-table {
-    --table-max-height: calc(100vh - 40vh);
-    max-height: var(--table-max-height);
-
-    .el-table__body-wrapper {
-        max-height: calc(var(--table-max-height) - 40px);
-    }
-}
-
-:deep(.el-loading-mask) {
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(2px);
-}
-
-:deep(.el-loading-spinner .circular) {
-    width: 28px;
-    height: 28px;
-}
-
-:deep(.el-loading-spinner .path) {
-    stroke: #6b8cff;
-}
-
-:deep(.el-loading-text) {
-    color: #6b8cff !important;
-    font-size: 14px;
-    margin-top: 8px;
-}
+<style scoped>
+.xa-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.xa-panel { overflow: hidden; }
+.xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--xn-ink); word-break: break-all; }
+.xa-value { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; }
+.xa-secret { display: flex; align-items: center; gap: 8px; }
+.xa-danger { color: var(--xn-danger); }
+.xa-danger:hover, .xa-danger:focus { color: #8D3523; }
+.xa-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
 </style>
