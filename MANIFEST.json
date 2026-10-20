@@ -1,0 +1,112 @@
+{
+  "image_count": 15,
+  "original_images_unchanged": true,
+  "non_image_language": "English",
+  "images": [
+    {
+      "path": "images/01-hero.png",
+      "width": 1440,
+      "height": 1907,
+      "bytes": 1614414,
+      "sha256": "12338b5b41829610d807e59b93bfc5a077c904cb7d00bf5ee35a7977f9da236c"
+    },
+    {
+      "path": "images/02-what-makes-us-different.png",
+      "width": 1440,
+      "height": 3907,
+      "bytes": 490940,
+      "sha256": "e04066183115169a7f74d36593f0008aa802cf3046a8c977ab3518f33e106e8d"
+    },
+    {
+      "path": "images/03-proactive-difference.png",
+      "width": 1440,
+      "height": 1787,
+      "bytes": 828359,
+      "sha256": "92d5d9e9dc0b6b10b4bc72fe29878306b51b68668aa589eb6525ec05fb3df211"
+    },
+    {
+      "path": "images/04-conversation-difference.png",
+      "width": 1440,
+      "height": 1947,
+      "bytes": 529944,
+      "sha256": "57ac1955a5292641d93a1695b5e866583203bb309f636d0188408eaede5edf7c"
+    },
+    {
+      "path": "images/05-memory-difference.png",
+      "width": 1440,
+      "height": 1987,
+      "bytes": 1076198,
+      "sha256": "8130fadfb77094c6832256fdf57d17f4cc5ae16a032ca9b4111a9d958f452168"
+    },
+    {
+      "path": "images/06-understanding-you.png",
+      "width": 1440,
+      "height": 2087,
+      "bytes": 1042578,
+      "sha256": "938f9b4d69b88aaa77e601ae2d2f2a7c2bba4d10b17baded987b66bd93cffb4b"
+    },
+    {
+      "path": "images/07-recognize-you.png",
+      "width": 1440,
+      "height": 1933,
+      "bytes": 319027,
+      "sha256": "2954ff10f11e3bef538fbf143ff92fa4e3d8f37b318c776c26aaf57cd3ef377e"
+    },
+    {
+      "path": "images/07a-custom-mcp-opensource.png",
+      "width": 1440,
+      "height": 2149,
+      "bytes": 307167,
+      "sha256": "a4e4c2e6d408c0366693bd77985e378a6f9dd2cd14fd3e01cabc32ae836c2dd5"
+    },
+    {
+      "path": "images/08-exterior.png",
+      "width": 1440,
+      "height": 1768,
+      "bytes": 1136430,
+      "sha256": "133a234220c076874321a2d9984e55175f84b021d391c3b4d375e1eb28f2fc0c"
+    },
+    {
+      "path": "images/08a-colors.png",
+      "width": 1440,
+      "height": 2207,
+      "bytes": 927861,
+      "sha256": "4b5e6e44813845d25b4aa85e2871bd8526af65feca8cf73c343d48c2914aef84"
+    },
+    {
+      "path": "images/09-specifications.png",
+      "width": 1440,
+      "height": 1917,
+      "bytes": 303286,
+      "sha256": "5a39dd5269d1b76d2b338f82d365995342f484b3c7e48cadd90200b9e234e70b"
+    },
+    {
+      "path": "images/10-rewards.png",
+      "width": 1440,
+      "height": 1771,
+      "bytes": 178803,
+      "sha256": "458f5c39e8b6e17934b53fab2a4e0f2b2afbfb5444e2b1f4ae2094b14d1d2a23"
+    },
+    {
+      "path": "images/11-development.png",
+      "width": 1440,
+      "height": 1889,
+      "bytes": 889683,
+      "sha256": "3169805c09082f9e70c011f04dbc96b2ef943656d67401baf2c8fa81408a312e"
+    },
+    {
+      "path": "images/12-delivery-service.png",
+      "width": 1440,
+      "height": 1693,
+      "bytes": 184569,
+      "sha256": "4192af84ee7791f847e0bd84aa5dbdf8867a299f99f6b0df768e0ee2d0d9bc56"
+    },
+    {
+      "path": "images/13-closing.png",
+      "width": 1440,
+      "height": 1640,
+      "bytes": 1146962,
+      "sha256": "2d4c3b56c8a8619c56cef7153d5a6de7dc898c81a1b83d637f16b939909046f0"
+    }
+  ]
+}
