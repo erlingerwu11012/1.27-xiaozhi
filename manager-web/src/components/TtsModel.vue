@@ -45,33 +45,33 @@
             <span v-else>{{ scope.row.languageType }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.preview')" min-width="230">
+        <el-table-column v-if="!showReferenceColumns" key="preview" :label="$t('ttsModel.preview')" min-width="230">
           <template slot-scope="scope">
             <el-input v-if="scope.row.editing" v-model="scope.row.voiceDemo" size="small" :placeholder="$t('ttsModel.enterMp3Url')"></el-input>
             <AudioPlayer v-else-if="isValidAudioUrl(scope.row.voiceDemo)" :audioUrl="scope.row.voiceDemo" />
             <span v-else class="xn-muted">{{ $t('xn.admin.voice.noDemo') }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.remark')" min-width="140">
+        <el-table-column v-if="!showReferenceColumns" key="remark" :label="$t('ttsModel.remark')" min-width="140">
           <template slot-scope="scope">
             <el-input v-if="scope.row.editing" type="textarea" :rows="1" autosize v-model="scope.row.remark"
               :placeholder="$t('ttsModel.enterRemark')"></el-input>
             <span v-else>{{ scope.row.remark }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioPath')" min-width="200">
+        <el-table-column v-if="showReferenceColumns" key="refAudio" :label="$t('ttsModel.cloneAudioPath')" min-width="200">
           <template slot-scope="scope">
             <el-input v-if="scope.row.editing" v-model="scope.row.referenceAudio" size="small" :placeholder="$t('ttsModel.enterCloneAudioPath')"></el-input>
             <span v-else class="tm-mono">{{ scope.row.referenceAudio }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioText')" min-width="200">
+        <el-table-column v-if="showReferenceColumns" key="refText" :label="$t('ttsModel.cloneAudioText')" min-width="200">
           <template slot-scope="scope">
             <el-input v-if="scope.row.editing" v-model="scope.row.referenceText" size="small" :placeholder="$t('ttsModel.enterCloneAudioText')"></el-input>
             <span v-else>{{ scope.row.referenceText }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('ttsModel.operation')" width="130" align="right">
+        <el-table-column key="ops" :label="$t('ttsModel.operation')" width="130" align="right">
           <template slot-scope="scope">
             <template v-if="!scope.row.editing">
               <el-button type="text" @click="startEdit(scope.row)">{{ $t('ttsModel.edit') }}</el-button>
