@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "source": "saved real provider ASR transcripts",
+  "physical_microphone_samples": 0,
+  "new_model_calls": 0,
+  "hardware_actions": 0,
+  "sequence": [
+    "提醒我喝水。",
+    "明天上午十点。"
+  ],
+  "result": {
+    "content": "喝水",
+    "remind_time_str": "明天上午十点"
+  },
+  "cancel": "算了。"
+}

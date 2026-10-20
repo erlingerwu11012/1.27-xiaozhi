@@ -1,0 +1,23 @@
+{
+  "tests": 49,
+  "failures": [],
+  "errors": [],
+  "budget": {
+    "case": {
+      "used": 3885,
+      "limit": 4300
+    },
+    "model": {
+      "used": 1840,
+      "limit": 2200
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  }
+}

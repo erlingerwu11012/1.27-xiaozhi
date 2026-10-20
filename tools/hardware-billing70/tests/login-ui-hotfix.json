@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "domains": [
+    {
+      "host": "https://realecho.cn",
+      "captcha": {
+        "width": 150,
+        "height": 40
+      },
+      "requests": [
+        {
+          "path": "/xiaozhi/user/captcha",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/pub-config",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/pub-config",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/login",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "invalidLogin": {
+        "status": 200,
+        "code": 10067,
+        "synthetic": true
+      }
+    },
+    {
+      "host": "https://www.realecho.cn",
+      "captcha": {
+        "width": 150,
+        "height": 40
+      },
+      "requests": [
+        {
+          "path": "/xiaozhi/user/captcha",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/pub-config",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/pub-config",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        },
+        {
+          "path": "/xiaozhi/user/login",
+          "origin": "https://api.realecho.cn",
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "invalidLogin": {
+        "status": 200,
+        "code": 10067,
+        "synthetic": true
+      }
+    }
+  ]
+}

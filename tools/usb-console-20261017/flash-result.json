@@ -1,0 +1,14 @@
+{
+  "mac": "ac:a7:04:fd:20:5c",
+  "port": "COM11",
+  "application_offset": "0x20000",
+  "application_bytes": 4944032,
+  "application_sha256": "2fce5a7bf7152e0545a1964270e465f5eacfa91604aa25fd5a078a565cd8efb6",
+  "backup_sha256": "9b4fb2502bf4e8b892023a1490984a7d7ad1d7743cddcd0676462c6ada73f92f",
+  "flash_hash_verified": true,
+  "partition_nvs_phy_unchanged": true,
+  "userdata_unchanged": true,
+  "uvc_compiled_in": true,
+  "runtime_logs_verified": true,
+  "console_verified_bytes": 46252
+}

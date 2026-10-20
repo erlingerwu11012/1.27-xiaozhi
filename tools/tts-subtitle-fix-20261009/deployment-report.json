@@ -1,0 +1,100 @@
+{
+  "phase": "deployed_verified",
+  "release": "/root/prjs/releases/tts-subtitle-fix-20261009.31ge96js",
+  "old_sha256": "fd8758346c3c39e94689b896e7621723f78c166a180bc4ea763df169439598c7",
+  "new_sha256": "e4aa182ca5000c2cc0ee08b67e47f724b46d7037f7b9e65d7fcdb1d6ba26a873",
+  "pid_before": 48509,
+  "pm2_id": 7,
+  "preflight": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api_ws_root",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "hardware": false,
+  "deployed_at": 1791479219.7861037,
+  "unchanged_source_hashes": {
+    "core/handle/sendAudioHandle.py": "2705f60a70ac65956c7ab322609b266ea9a329c54bf3ed8d12c384413e2c5cb2",
+    "core/utils/tts_stream.py": "5b719e026ede6ba201d490b59db9433c6ce3392ff1f1cfbc57c4f01375950a63"
+  },
+  "health": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api_ws_root",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "pid_after": 56897,
+  "restart_count": 2
+}

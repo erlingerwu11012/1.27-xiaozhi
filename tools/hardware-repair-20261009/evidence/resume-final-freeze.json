@@ -1,0 +1,57 @@
+{
+  "source": {
+    "core/utils/tool_harness/runtime.py": "ecbc922d9283bc72c87b71d063136908814abe5f8345d2bc787a31c477501a3f",
+    "core/utils/tool_harness/contracts.py": "0ca830b92350645e21e25a867c82e8c37978e8bce29e0d642ddc61de7d9f3424",
+    "core/utils/tool_harness/presentation.py": "ea4a819ea81fde7e390e4aeab5d1ad38cb6d4751e869f4b94e25d9100e11637e",
+    "core/utils/tool_harness/memory_policy.py": "190352d0cce7eb90b1620e1f74d8e28db687b18c5cad2be438f31ad76fd3f538",
+    "core/utils/tool_harness/reply_composer.py": "fd1e37cf6ba0188264020cbd1b290957a105da8381ab8c4f83aea7c080a16b92",
+    "core/utils/recent_memory.py": "729678d8d2f407ab269f366fff2588bda3de42470524b54c5061668a6cd79d42",
+    "core/utils/voiceprint_provider.py": "f04e01142c15247ff455b4a119678ddfd0e553bb3814788b4d6ca37130561bd5",
+    "core/utils/vision_readiness.py": "9f4b473dab519a6b0033a68cd3038afb76bb653d367f2fc9e395134a83d445de",
+    "plugins_func/functions/person_memory.py": "b1d4b7e8545ddddb17a6ea47b89c8b647e8df6cbb7dcc3f981e5a30c67c6c31f",
+    "core/utils/tool_result.py": "d2d65e71e3a6e1108c7196ce543c4bc89cb80f7e1fa14839d8e3ddd17b215dba",
+    "core/utils/recipient_resolver.py": "955d95b3e0383a050977e77b6b4b1203934992af12cabcc7d6f016373245cd9d",
+    "core/utils/unified_recipient_resolver.py": "fa6d95abc45f0a1d77c318eb2eed5948061c09eedc68d5314c324b1a60f6392f"
+  },
+  "java_source": {
+    "PersonBehaviorService.java": "660bcc565ea0709fa2ae91aeae5976932033eb2c3defb2becb49f0252b7ca65c",
+    "MemoryDailyWorker.java": "30192d2b9c7793fdba529f4f0e459205240c08a55b3e91a31dbdc1272ff9918d",
+    "PersonMemoryController.java": "b235ae20b66b18990ab9396f768a70ff73906c1ade8f6a01c69881866c0c94f3",
+    "PersonTurnDTO.java": "06aaa2226956e4598226549b1fbe1a4384889324ecaa6500908c696e5157b2af",
+    "MemoryBillingController.java": "64e6e93769a2330422214e2cd899e0781a19a68b0c295cbbf6abe9d45b61efef",
+    "ArchiveRetentionWorker.java": "4d90cec846e6522ee1731bd6b736d3098e43ac9c7e9bbf77cbea41d13e28e67d",
+    "PersonMemoryService.java": "e1590253ca6a014100949c8dd37d7b7785c00e3dfcf433cc62198338021decbb",
+    "MemoryGatewayClient.java": "e796a237f64f200ed03011a1560ee21e779141a71a376a3f1ec10559d664db68",
+    "MemoryMaterialPolicy.java": "d11696879816a72d3773463330881b856f39c20b5ad58b7c9e4dd3173e13ecca",
+    "RecentArchiveService.java": "2d3b0394aafcfe62c4474cb9a6fbe4b376b6949e41b6824b252274c44ba8a281",
+    "MemoryBillingService.java": "ab680a903a1382ef44534c16dc2dbc0303ca405b36297643b5bd5dd78eee1ce3"
+  },
+  "jar_sha256": "2142df09b179ad084c93220a8d79d1426bc9abe6afe57c4a5b557e8fb3dbeed8",
+  "cases_sha256": "b672a9b1ce887de25053415d4b99675b170aed8c93a4a46edde5c844bfc2d6de",
+  "fixture_hashes": {
+    "wire_conversation.py": "938494e22def2ecf04f3220c8736761240d93883df097cb12c5883564c844407",
+    "stateful_device.py": "51b4f42d1e871551b5e5ab3a60a4cba6f7a6c8ddd9ccb1d31da3b43fa337c899",
+    "bootstrap.py": "834b157359fa84b48d06142c892eaa1501e6a6bd4e3d484ac4bfa1691d258a05",
+    "run_model.py": "247d906650a4542107b2133223f680d25068e79e1f4c36ef621e4b47ba37c956",
+    "experience_protocol.py": "8664b85d7a322dff1e0ea79844ba1349a260635ba08d05b6fcd078c2a16c2282"
+  },
+  "time": 1791564412.4283745,
+  "budget": {
+    "case": {
+      "used": 5636,
+      "limit": null
+    },
+    "model": {
+      "used": 3849,
+      "limit": null
+    },
+    "tts": {
+      "used": 3,
+      "limit": null
+    },
+    "vision": {
+      "used": 2,
+      "limit": null
+    }
+  }
+}

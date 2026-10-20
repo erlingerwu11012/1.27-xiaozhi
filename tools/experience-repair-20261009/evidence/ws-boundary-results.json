@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "ok",
+    "ok": true
+  },
+  {
+    "mode": "timeout",
+    "ok": false
+  },
+  {
+    "mode": "stale",
+    "ok": false
+  },
+  {
+    "query": "大声一点",
+    "speech": "当前音量已经是100，已到可调边界，无需重复设置。"
+  },
+  {
+    "query": "亮一点",
+    "speech": "当前亮度已经是5档，已到可调边界，无需重复设置。"
+  }
+]

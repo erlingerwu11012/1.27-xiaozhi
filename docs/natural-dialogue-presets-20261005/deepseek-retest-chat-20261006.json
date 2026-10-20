@@ -1,0 +1,5240 @@
+{
+  "runtime_source_sha256": {
+    "core/connection.py": "ef82f177cdb1e0f34cccd159ce01350764c58b64ac8cbee609a88325503b7d99",
+    "core/utils/prompt_manager.py": "ed6735673255be75ed088dd90f2ccad1ad9121d16cc639160b9a4823a11fe62d",
+    "core/utils/conversation_guidance.py": "b9bab6a932abf0a1c50c43ea493b24d1498b27c9315dae14a8948409cdac9dfc",
+    "core/utils/operation_control.py": "dc7ae30f6675ff6f9138c9c3e67d2580ae44cb9314d3996187808004018bba5a",
+    "core/providers/llm/openai/openai.py": "386c365a872141a4aee4e03357372eac7566111c31ee38b6f0829b8b431c7290",
+    "agent-base-prompt-v2.txt": "4f286cf8a67d5cf1ac41ccc4de9198f77b1b2b45eef8e48cd5dbfdb119bd8934"
+  },
+  "guidance_sha256": {
+    "prompt_only": "9bb2a11c70568d60df53d2e95b2cc160ff605bd94278833b329a02807e89d5eb"
+  },
+  "cases_sha256": "7b41ed0cd974ee30f0fac10c252daed6155a83d6d1a3c3dc9d8f779ebd2a8542",
+  "model": "deepseek-flash",
+  "temperature": 0.4,
+  "max_tokens": 450,
+  "production_changes": false,
+  "user_personality_modified": false,
+  "semantic_validation": false,
+  "chat_retry": false,
+  "evidence_injection": false,
+  "answer_trimming": false,
+  "secondary_polishing": false,
+  "hardware_writes": 0,
+  "physical_audio_test": false,
+  "unique_inputs": 100,
+  "planned_turns": 200,
+  "thinking": false,
+  "endpoint": "https://api.deepseek.com",
+  "dialogues": [
+    {
+      "id": "prompt_only/natural/0",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "买书架挺好的，等它到了慢慢摆，比一开始就规划好有意思。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 848,
+          "first_primary_text_ms": 616,
+          "first_tts_enqueue_ms": 847,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "买书架挺好的，等它到了慢慢摆，比一开始就规划好有意思。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3235,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "以前的书重新摆一遍，其实跟重新翻一遍差不多，有些书自己都忘了里面写的什么了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 892,
+          "first_primary_text_ms": 660,
+          "first_tts_enqueue_ms": 892,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "以前的书重新摆一遍，其实跟重新翻一遍差不多，有些书自己都忘了里面写的什么了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3316,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "行。我觉得书架这东西，摆书的时候比买的时候更值。旧书重新上架，等于把读过的东西又过了一遍手，比新买几本更有意思。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 977,
+          "first_primary_text_ms": 671,
+          "first_tts_enqueue_ms": 977,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。我觉得书架这东西，摆书的时候比买的时候更值。旧书重新上架，等于把读过的东西又过了一遍手，比新买几本更有意思。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3399,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "正常，书没变，人变了。当年看的是故事，现在看的是里面那些当时没在意的地方。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 926,
+          "first_primary_text_ms": 657,
+          "first_tts_enqueue_ms": 926,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "正常，书没变，人变了。当年看的是故事，现在看的是里面那些当时没在意的地方。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3497,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "行，那就听你说。旧书重看感觉不一样，这事本身挺值得琢磨的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1046,
+          "first_primary_text_ms": 919,
+          "first_tts_enqueue_ms": 1046,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那就听你说。旧书重看感觉不一样，这事本身挺值得琢磨的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3585,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "大概是以前你关注的和现在关注的不一样了。看不进去的书，往往是它讲的东西当时跟你没关系，等你自己经历过一些事，那本书才接得上。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 953,
+          "first_primary_text_ms": 673,
+          "first_tts_enqueue_ms": 952,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "大概是以前你关注的和现在关注的不一样了。看不进去的书，往往是它讲的东西当时跟你没关系，等你自己经历过一些事，那本书才接得上。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3668,
+            "completion_tokens": 35
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "那就是前半写完了，昨天只动了标题，正文还没开始。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 566,
+          "first_primary_text_ms": 458,
+          "first_tts_enqueue_ms": 566,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就是前半写完了，昨天只动了标题，正文还没开始。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3767,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。正文只是昨天没进展，不等于从来没写过。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 953,
+          "first_primary_text_ms": 700,
+          "first_tts_enqueue_ms": 953,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "不能。正文只是昨天没进展，不等于从来没写过。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3844,
+            "completion_tokens": 12
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "好，那就是已发货，还没到你手上。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 889,
+          "first_primary_text_ms": 717,
+          "first_tts_enqueue_ms": 888,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，那就是已发货，还没到你手上。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3919,
+            "completion_tokens": 10
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货，还没收到。报告前半写好了，昨天只改了标题，正文还没开始。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 953,
+          "first_primary_text_ms": 782,
+          "first_tts_enqueue_ms": 953,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "书架已经发货，还没收到。报告前半写好了，昨天只改了标题，正文还没开始。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3992,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/1",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天两个会都白开了，我有点烦。别给方案，也别劝休息。",
+          "assistant": "两个会开完什么都没定下来，确实够烦的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 809,
+          "first_primary_text_ms": 680,
+          "first_tts_enqueue_ms": 808,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "两个会开完什么都没定下来，确实够烦的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3238,
+            "completion_tokens": 13
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "开完也没结论，明天可能还得再开，但还没确定。",
+          "assistant": "那就是悬着，明天开不开还得等通知，这种最耗人。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 388,
+          "first_primary_text_ms": 261,
+          "first_tts_enqueue_ms": 388,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就是悬着，明天开不开还得等通知，这种最耗人。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3314,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别教育我，也不用一直问我问题，聊两句就行。",
+          "assistant": "行，不问了。会开成这样，烦也正常。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 831,
+          "first_primary_text_ms": 716,
+          "first_tts_enqueue_ms": 831,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不问了。会开成这样，烦也正常。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3391,
+            "completion_tokens": 13
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时候大家都在说话，但就是谈不到一个点上。",
+          "assistant": "嗯，各说各的，听着热闹，其实谁也没接上谁。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1152,
+          "first_primary_text_ms": 949,
+          "first_tts_enqueue_ms": 1152,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，各说各的，听着热闹，其实谁也没接上谁。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3463,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "我觉得问题不是时间长，而是没人真正把分歧说清楚。",
+          "assistant": "对，时间长短不是关键，分歧摆到桌面上才有的谈。都绕着走，开多久都白搭。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1003,
+          "first_primary_text_ms": 774,
+          "first_tts_enqueue_ms": 1003,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，时间长短不是关键，分歧摆到桌面上才有的谈。都绕着走，开多久都白搭。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3541,
+            "completion_tokens": 26
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "说说你的看法，不用告诉我该怎么开会。",
+          "assistant": "我觉得吧，很多时候不是没人看出分歧，是没人愿意先把它挑明。挑明了就得表态，表态就可能得罪人，所以大家宁可含糊着往下走。含糊到最后，会开完了，事还在原地。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1014,
+          "first_primary_text_ms": 627,
+          "first_tts_enqueue_ms": 1014,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "我觉得吧，很多时候不是没人看出分歧，是没人愿意先把它挑明。挑明了就得表态，表态就可能得罪人，所以大家宁可含糊着往下走。含糊到最后，会开完了，事还在原地。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3624,
+            "completion_tokens": 46
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "换个话题，我打算周末去逛展，只是打算，还没买票。",
+          "assistant": "逛展挺好，慢慢看比赶场舒服。票还没买就先不急，反正周末还有几天。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 909,
+          "first_primary_text_ms": 677,
+          "first_tts_enqueue_ms": 909,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "逛展挺好，慢慢看比赶场舒服。票还没买就先不急，反正周末还有几天。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3735,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "有些画现场看跟手机看完全两回事。你怎么看？",
+          "assistant": "确实两回事。手机上看就是一张图，现场能看出笔触的厚薄、颜色叠了几层，还有画到底多大，站远了站近了感觉都不一样。有些画照片里平平无奇，站跟前反而挺震人。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 764,
+          "first_primary_text_ms": 376,
+          "first_tts_enqueue_ms": 764,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "确实两回事。手机上看就是一张图，现场能看出笔触的厚薄、颜色叠了几层，还有画到底多大，站远了站近了感觉都不一样。有些画照片里平平无奇，站跟前反而挺震人。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3819,
+            "completion_tokens": 51
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚看了下安排，这周末不去展了，改成下周再考虑，也没买票。",
+          "assistant": "行，那就下周再说，反正票也没买，不亏。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1101,
+          "first_primary_text_ms": 807,
+          "first_tts_enqueue_ms": 1101,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那就下周再说，反正票也没买，不亏。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3938,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+          "assistant": "没确定去，票也没买。你刚才说的是这周末不去了，改成下周再考虑。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 860,
+          "first_primary_text_ms": 703,
+          "first_tts_enqueue_ms": 859,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "没确定去，票也没买。你刚才说的是这周末不去了，改成下周再考虑。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4017,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/2",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 2,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚下单一个电饭煲，店家后天才发货，现在还没有寄出。别给建议。",
+          "assistant": "刚下单，还得等店家后天发货，现在东西还在人家手里呢。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 656,
+          "first_primary_text_ms": 471,
+          "first_tts_enqueue_ms": 656,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "刚下单，还得等店家后天发货，现在东西还在人家手里呢。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3240,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "以前那个还能用，我不是急着换，只是喜欢新的外形。",
+          "assistant": "那就不算换，算添个喜欢的。旧的接着用，新的到了慢慢上手，也不冲突。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1014,
+          "first_primary_text_ms": 795,
+          "first_tts_enqueue_ms": 1014,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就不算换，算添个喜欢的。旧的接着用，新的到了慢慢上手，也不冲突。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3318,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别拿我开玩笑，别反问，就正常接话。",
+          "assistant": "行。喜欢外形就买，这理由挺够的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 883,
+          "first_primary_text_ms": 668,
+          "first_tts_enqueue_ms": 883,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。喜欢外形就买，这理由挺够的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3401,
+            "completion_tokens": 13
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时买个日常小东西，比买贵东西还期待。",
+          "assistant": "日常用的东西天天能看见，期待感反而更实在。贵的东西有时候买完就搁那儿了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 897,
+          "first_primary_text_ms": 690,
+          "first_tts_enqueue_ms": 897,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "日常用的东西天天能看见，期待感反而更实在。贵的东西有时候买完就搁那儿了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3475,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说为什么会这样，别替我分析童年经历。",
+          "assistant": "大概是用的次数多。贵东西买回来往往用得少，新鲜劲过了就摆着；天天要用的，每次拿起来都顺手，那点喜欢就一直续着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 969,
+          "first_primary_text_ms": 636,
+          "first_tts_enqueue_ms": 969,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "大概是用的次数多。贵东西买回来往往用得少，新鲜劲过了就摆着；天天要用的，每次拿起来都顺手，那点喜欢就一直续着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3557,
+            "completion_tokens": 37
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我昨晚做饭只切了菜，后来停了，还没下锅。",
+          "assistant": "切完菜就停那儿了，那今天这顿还没吃上。菜放着的话，回头还得接着弄。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 598,
+          "first_primary_text_ms": 362,
+          "first_tts_enqueue_ms": 598,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "切完菜就停那儿了，那今天这顿还没吃上。菜放着的话，回头还得接着弄。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3657,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "不是饭已经做好了，只是菜切好了，你按这个理解。",
+          "assistant": "明白，就是菜切好了，还没下锅，饭也没做。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1069,
+          "first_primary_text_ms": 920,
+          "first_tts_enqueue_ms": 1068,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，就是菜切好了，还没下锅，饭也没做。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3745,
+            "completion_tokens": 15
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "话说有些菜光看名字就觉得好吃，实际上却一般。",
+          "assistant": "名字起得唬人。像什么翡翠白玉、金玉满堂，端上来一看就是青菜豆腐，味道也就那样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 827,
+          "first_primary_text_ms": 522,
+          "first_tts_enqueue_ms": 827,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "名字起得唬人。像什么翡翠白玉、金玉满堂，端上来一看就是青菜豆腐，味道也就那样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3821,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚收到店家消息，电饭煲缺货，订单取消了，没有发货。",
+          "assistant": "那这单就没了，钱应该会退回来。缺货取消，跟发货慢是两回事，东西压根没出来。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 973,
+          "first_primary_text_ms": 704,
+          "first_tts_enqueue_ms": 972,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那这单就没了，钱应该会退回来。缺货取消，跟发货慢是两回事，东西压根没出来。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3913,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+          "assistant": "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，也没做熟。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 959,
+          "first_primary_text_ms": 661,
+          "first_tts_enqueue_ms": 958,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，也没做熟。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4005,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/3",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "最近又开始学吉他了，一首曲子练完前半段，后半段还没练。先别指导我。",
+          "assistant": "练到一半卡住，挺正常的。前半段啃下来了，后半段先放着也行。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 692,
+          "first_primary_text_ms": 511,
+          "first_tts_enqueue_ms": 692,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "练到一半卡住，挺正常的。前半段啃下来了，后半段先放着也行。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3242,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "我没有报名课程，是自己照着谱子弹的。",
+          "assistant": "自己照谱子弹，节奏全靠自己拿捏，其实挺考验人的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 866,
+          "first_primary_text_ms": 667,
+          "first_tts_enqueue_ms": 866,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "自己照谱子弹，节奏全靠自己拿捏，其实挺考验人的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3320,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天别逗我，也别总是反问。",
+          "assistant": "行，那就正常说。前半段练完了，后半段还没动，慢慢来。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 614,
+          "first_primary_text_ms": 492,
+          "first_tts_enqueue_ms": 614,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那就正常说。前半段练完了，后半段还没动，慢慢来。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3393,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有首老歌以前觉得普通，现在觉得旋律挺好。",
+          "assistant": "同一首歌，隔几年再听，感觉确实会变。以前可能光顾着听词，现在会注意到旋律本身。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 660,
+          "first_primary_text_ms": 368,
+          "first_tts_enqueue_ms": 660,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "同一首歌，隔几年再听，感觉确实会变。以前可能光顾着听词，现在会注意到旋律本身。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3473,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得一首歌为什么会在不同年龄听出不同感觉？",
+          "assistant": "大概是因为听的人变了。年轻时听歌，多半是听它像不像自己当时的心情，词对上了就觉得好。后来经历多了，反而会留意旋律怎么走、编曲怎么铺，甚至歌手当时是什么状态。同一段旋律，装进去的东西不一样了，听出来的自然也不一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1183,
+          "first_primary_text_ms": 689,
+          "first_tts_enqueue_ms": 1182,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "大概是因为听的人变了。年轻时听歌，多半是听它像不像自己当时的心情，词对上了就觉得好。后来经历多了，反而会留意旋律怎么走、编曲怎么铺，甚至歌手当时是什么状态。同一段旋律，装进去的东西不一样了，听出来的自然也不一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3560,
+            "completion_tokens": 64
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我打算换琴弦，只是打算，还没有买，也没换。",
+          "assistant": "嗯，就是有这个打算，琴弦还没买，也还没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 347,
+          "first_primary_text_ms": 218,
+          "first_tts_enqueue_ms": 347,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，就是有这个打算，琴弦还没买，也还没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3687,
+            "completion_tokens": 15
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "我不是说整首曲子都不会弹，前半段已经能弹下来。",
+          "assistant": "对，前半段能弹下来了，只是后半段还没练。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 685,
+          "first_primary_text_ms": 553,
+          "first_tts_enqueue_ms": 685,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，前半段能弹下来了，只是后半段还没练。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3765,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "不需要给练习计划，我们就聊聊听歌。",
+          "assistant": "行，聊听歌。你最近翻出来听的那首老歌，是什么风格的？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 645,
+          "first_primary_text_ms": 564,
+          "first_tts_enqueue_ms": 645,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，聊听歌。你最近翻出来听的那首老歌，是什么风格的？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3837,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。",
+          "assistant": "好，琴弦买了，店家还没发货，也还没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 837,
+          "first_primary_text_ms": 728,
+          "first_tts_enqueue_ms": 836,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，琴弦买了，店家还没发货，也还没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3921,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+          "assistant": "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也还没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 697,
+          "first_primary_text_ms": 567,
+          "first_tts_enqueue_ms": 697,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也还没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4000,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/4",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 4,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "朋友本来约我周五吃饭，不过他还没确认有没有空。我想聊聊，不要建议。",
+          "assistant": "这种事最磨人的就是悬着。他一句没确认，你这边周五就先空出来了，也不好安排别的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 812,
+          "first_primary_text_ms": 592,
+          "first_tts_enqueue_ms": 811,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "这种事最磨人的就是悬着。他一句没确认，你这边周五就先空出来了，也不好安排别的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3238,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "我也没订餐厅，现在只是聊到这个想法。",
+          "assistant": "那就更没什么可急的了。想法先放着，等他那边有信儿再说，餐厅也不是非提前订不可。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 794,
+          "first_primary_text_ms": 490,
+          "first_tts_enqueue_ms": 794,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就更没什么可急的了。想法先放着，等他那边有信儿再说，餐厅也不是非提前订不可。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3321,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别一直反问我，说说你的看法就行。",
+          "assistant": "行。我觉得这种约饭，谁先提的谁心里更惦记，你惦记着，他可能还没当回事。真到周四还没动静，那这顿大概率就黄了，也不是什么大事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1113,
+          "first_primary_text_ms": 710,
+          "first_tts_enqueue_ms": 1113,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。我觉得这种约饭，谁先提的谁心里更惦记，你惦记着，他可能还没当回事。真到周四还没动静，那这顿大概率就黄了，也不是什么大事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3404,
+            "completion_tokens": 44
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "以前楼下喊一声就能见面，现在吃个饭都要看日历。",
+          "assistant": "是啊，以前住得近，穿个拖鞋下楼就凑一桌了。现在各自忙，见一面得提前好几天对时间，还得看谁那天没别的安排。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1122,
+          "first_primary_text_ms": 744,
+          "first_tts_enqueue_ms": 1121,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "是啊，以前住得近，穿个拖鞋下楼就凑一桌了。现在各自忙，见一面得提前好几天对时间，还得看谁那天没别的安排。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3511,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "成年人的朋友为什么越来越难约？别给我行动方案。",
+          "assistant": "因为大家的时间都被切碎了，工作、家里、通勤，各占一块，剩下能自由支配的本来就不多。而且成年之后见面不再是顺路的事，得专门腾出半天，成本一高，人就会往后拖。不是感情淡了，是排优先级的时候，见面总排在那些必须做的事后面。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 782,
+          "first_primary_text_ms": 348,
+          "first_tts_enqueue_ms": 781,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "因为大家的时间都被切碎了，工作、家里、通勤，各占一块，剩下能自由支配的本来就不多。而且成年之后见面不再是顺路的事，得专门腾出半天，成本一高，人就会往后拖。不是感情淡了，是排优先级的时候，见面总排在那些必须做的事后面。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3610,
+            "completion_tokens": 69
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我们不是吵架也不是闹矛盾，只是还没约成。",
+          "assistant": "嗯，这我明白。没矛盾，就是单纯凑不上时间，这种事挺常见的。关系还在，只是节奏对不上了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1019,
+          "first_primary_text_ms": 670,
+          "first_tts_enqueue_ms": 1019,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，这我明白。没矛盾，就是单纯凑不上时间，这种事挺常见的。关系还在，只是节奏对不上了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3739,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "今天先别调侃我，认真聊两句就行。",
+          "assistant": "好，不调侃。其实你惦记这顿饭，说明这个朋友在你心里是有分量的。约不成也不代表什么，就是这段时间大家都不太凑得上。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 994,
+          "first_primary_text_ms": 714,
+          "first_tts_enqueue_ms": 994,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，不调侃。其实你惦记这顿饭，说明这个朋友在你心里是有分量的。约不成也不代表什么，就是这段时间大家都不太凑得上。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3826,
+            "completion_tokens": 34
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "有人很久不见，再见面聊天又很自然，我觉得挺难得。",
+          "assistant": "确实难得。隔了那么久，还能一坐下就接上话，不用寒暄铺垫，说明当初那点默契还在。这种朋友不多，碰上了就值得珍惜。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1159,
+          "first_primary_text_ms": 846,
+          "first_tts_enqueue_ms": 1159,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "确实难得。隔了那么久，还能一坐下就接上话，不用寒暄铺垫，说明当初那点默契还在。这种朋友不多，碰上了就值得珍惜。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3923,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚刚他说周五没空，所以这次没约成，也没改约其他日期。",
+          "assistant": "那就先这样吧。他明确说了没空，也没提别的日子，这事就先搁着。你也不用觉得是自己哪里没做好，就是这次赶不上。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 840,
+          "first_primary_text_ms": 517,
+          "first_tts_enqueue_ms": 840,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就先这样吧。他明确说了没空，也没提别的日子，这事就先搁着。你也不用觉得是自己哪里没做好，就是这次赶不上。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4027,
+            "completion_tokens": 34
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+          "assistant": "没约成。他说周五没空，也没改约别的日子。餐厅也没订。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 826,
+          "first_primary_text_ms": 678,
+          "first_tts_enqueue_ms": 826,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "没约成。他说周五没空，也没改约别的日子。餐厅也没订。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4126,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/5",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 5,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "新买的落地灯出了快递单号，但快递还没有收件。我只是闲聊，不用帮我安排。",
+          "assistant": "快递单号出来了但还没揽收，这中间一般还得等一等，商家那边可能还没交给快递。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 629,
+          "first_primary_text_ms": 471,
+          "first_tts_enqueue_ms": 629,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "快递单号出来了但还没揽收，这中间一般还得等一等，商家那边可能还没交给快递。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3241,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "单号出来不代表灯已经在路上，你按这个理解。",
+          "assistant": "对，单号只是先占了个号，灯还在商家那边。等真揽收了才算上路。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1065,
+          "first_primary_text_ms": 752,
+          "first_tts_enqueue_ms": 1065,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，单号只是先占了个号，灯还在商家那边。等真揽收了才算上路。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3325,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天不想被调侃，也别总反问我。",
+          "assistant": "行，那就正常说。单号有了，等揽收，之后就是运输。灯到了再说灯的事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 950,
+          "first_primary_text_ms": 707,
+          "first_tts_enqueue_ms": 950,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那就正常说。单号有了，等揽收，之后就是运输。灯到了再说灯的事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3405,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "以前看灯只看亮不亮，现在也会在意它摆着好不好看。",
+          "assistant": "以前是能用就行，现在会看它跟屋子搭不搭。挑的东西不一样了，看的角度也跟着变。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1016,
+          "first_primary_text_ms": 782,
+          "first_tts_enqueue_ms": 1016,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "以前是能用就行，现在会看它跟屋子搭不搭。挑的东西不一样了，看的角度也跟着变。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3494,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得为什么同样亮度的灯，看着也能差这么多？",
+          "assistant": "亮度一样，但光打出来的样子不一样。有的灯罩是敞口的，光直接铺开，看着就冲；有的是磨砂或者带柔光层的，光散得匀，边缘软，眼睛就舒服。还有色温，同样亮，偏暖的显黄，偏冷的显白，感觉差挺多。再就是灯放的位置和周围墙面颜色，光反回来也不一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1070,
+          "first_primary_text_ms": 428,
+          "first_tts_enqueue_ms": 1070,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "亮度一样，但光打出来的样子不一样。有的灯罩是敞口的，光直接铺开，看着就冲；有的是磨砂或者带柔光层的，光散得匀，边缘软，眼睛就舒服。还有色温，同样亮，偏暖的显黄，偏冷的显白，感觉差挺多。再就是灯放的位置和周围墙面颜色，光反回来也不一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3579,
+            "completion_tokens": 86
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "顺便说下，之前买的椅子早就送到了，灯还没被快递收走，这两个别混了。",
+          "assistant": "记着呢，椅子是已经送到了，灯还没被快递收走，两回事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 946,
+          "first_primary_text_ms": 504,
+          "first_tts_enqueue_ms": 946,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "记着呢，椅子是已经送到了，灯还没被快递收走，两回事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3735,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "刚收到更新，快递已经揽收了这盏灯，我本人还没收到。",
+          "assistant": "嗯，揽收了，说明灯开始走了。你手上还没拿到，等派送那一步。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 927,
+          "first_primary_text_ms": 656,
+          "first_tts_enqueue_ms": 927,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，揽收了，说明灯开始走了。你手上还没拿到，等派送那一步。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3818,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "我说已经揽收，不是已经放到我客厅里了。",
+          "assistant": "明白，揽收是快递收走了，离到你客厅还早着呢。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 943,
+          "first_primary_text_ms": 723,
+          "first_tts_enqueue_ms": 943,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，揽收是快递收走了，离到你客厅还早着呢。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3900,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+          "assistant": "椅子是早就送到了。灯是刚被快递揽收，还在路上，你本人没收到。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 640,
+          "first_primary_text_ms": 494,
+          "first_tts_enqueue_ms": 640,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "椅子是早就送到了。灯是刚被快递揽收，还在路上，你本人没收到。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3977,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "我没有告诉你客厅大小和灯放哪里，这些你也不知道，对吧？",
+          "assistant": "对，你没说过客厅多大，也没说灯打算放哪儿，这些我不知道。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 792,
+          "first_primary_text_ms": 637,
+          "first_tts_enqueue_ms": 792,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，你没说过客厅多大，也没说灯打算放哪儿，这些我不知道。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4061,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/6",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 6,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "演示文稿一共十页，已经写了六页，后四页没写。先别教我怎么做。",
+          "assistant": "十页写了六页，还剩四页。行，不说方法，就听着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 720,
+          "first_primary_text_ms": 536,
+          "first_tts_enqueue_ms": 719,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "十页写了六页，还剩四页。行，不说方法，就听着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3241,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "昨天只调整了第一页的排版，不是只写了第一页。",
+          "assistant": "明白，昨天是调了第一页的排版，不是只写了第一页。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 722,
+          "first_primary_text_ms": 596,
+          "first_tts_enqueue_ms": 721,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，昨天是调了第一页的排版，不是只写了第一页。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3322,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别每句问我问题，正常聊两句就好。",
+          "assistant": "行，不问了。十页六页，进度过半，剩下四页慢慢来。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 885,
+          "first_primary_text_ms": 669,
+          "first_tts_enqueue_ms": 885,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不问了。十页六页，进度过半，剩下四页慢慢来。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3398,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有些演示页面看着很热闹，实际一句重点都找不到。",
+          "assistant": "那种页面确实多，图啊色块啊堆得挺满，看完不知道要说什么。热闹和说清楚是两回事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 952,
+          "first_primary_text_ms": 672,
+          "first_tts_enqueue_ms": 952,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那种页面确实多，图啊色块啊堆得挺满，看完不知道要说什么。热闹和说清楚是两回事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3478,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说这种页面为什么让人看着累，别给我制作步骤。",
+          "assistant": "主要是眼睛得自己找重点。元素一多，每块都在抢注意力，看的人不知道先看哪，就得挨个扫一遍，扫完还没抓住要说什么，脑子一直在做筛选，自然就累。再一个，热闹的页面往往信息是并列摆着的，没有主次，看的人得自己判断哪个重要，这个判断最费劲。反过来，一眼能看出先看什么、再看什么的页面，就算东西不少，也不觉得累。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1190,
+          "first_primary_text_ms": 501,
+          "first_tts_enqueue_ms": 1190,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "主要是眼睛得自己找重点。元素一多，每块都在抢注意力，看的人不知道先看哪，就得挨个扫一遍，扫完还没抓住要说什么，脑子一直在做筛选，自然就累。再一个，热闹的页面往往信息是并列摆着的，没有主次，看的人得自己判断哪个重要，这个判断最费劲。反过来，一眼能看出先看什么、再看什么的页面，就算东西不少，也不觉得累。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3568,
+            "completion_tokens": 98
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "纠正一下，六页是有占位文字的初稿，真正写好的正文只有两页。",
+          "assistant": "好，那实际是两页正文写好了，另外四页是占位文字的初稿，加起来六页。剩下四页还没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 812,
+          "first_primary_text_ms": 615,
+          "first_tts_enqueue_ms": 812,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，那实际是两页正文写好了，另外四页是占位文字的初稿，加起来六页。剩下四页还没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3734,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "刚才那个六页完成的说法，我已经纠正了，现在别继续按六页写完理解。",
+          "assistant": "嗯，按两页正文、四页占位初稿来算，不是六页写完。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 862,
+          "first_primary_text_ms": 652,
+          "first_tts_enqueue_ms": 861,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，按两页正文、四页占位初稿来算，不是六页写完。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3833,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "今天又写好一页正文，所以现在真正写好的有三页了。",
+          "assistant": "那现在正文三页，占位初稿四页，剩下三页没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 873,
+          "first_primary_text_ms": 663,
+          "first_tts_enqueue_ms": 872,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那现在正文三页，占位初稿四页，剩下三页没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3918,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "按最新情况，十页里真正写好几页，还剩几页？",
+          "assistant": "真正写好的三页，还剩七页没写好。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 771,
+          "first_primary_text_ms": 635,
+          "first_tts_enqueue_ms": 771,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "真正写好的三页，还剩七页没写好。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4001,
+            "completion_tokens": 12
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "现在给我一个具体建议，先从剩下部分的哪一步开始？",
+          "assistant": "从占位初稿那四页里挑一页，把占位文字换成真正的正文。它们已经有框架了，比从零开始的三页省力，先动这种能有点进展感。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1006,
+          "first_primary_text_ms": 676,
+          "first_tts_enqueue_ms": 1005,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "从占位初稿那四页里挑一页，把占位文字换成真正的正文。它们已经有框架了，比从零开始的三页省力，先动这种能有点进展感。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4074,
+            "completion_tokens": 43
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/7",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 7,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "昨天加班挺烦的，我只想吐槽，别给方案也别教育我。",
+          "assistant": "加班到那个点，确实够烦的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 832,
+          "first_primary_text_ms": 707,
+          "first_tts_enqueue_ms": 832,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "加班到那个点，确实够烦的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3236,
+            "completion_tokens": 10
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "反问也先停一下，直接聊你的看法。",
+          "assistant": "行。我觉得最烦的不是加班本身，是那种加了也未必有用的感觉。活儿堆在那儿，人耗在那儿，最后就剩累。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1079,
+          "first_primary_text_ms": 762,
+          "first_tts_enqueue_ms": 1079,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。我觉得最烦的不是加班本身，是那种加了也未必有用的感觉。活儿堆在那儿，人耗在那儿，最后就剩累。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3305,
+            "completion_tokens": 30
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "活儿其实不多，主要是一直等别人回消息。",
+          "assistant": "那更磨人。活儿不多，人却走不了，时间全耗在等上。这种等最没劲，因为你连使劲的地方都没有。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1325,
+          "first_primary_text_ms": 775,
+          "first_tts_enqueue_ms": 1325,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那更磨人。活儿不多，人却走不了，时间全耗在等上。这种等最没劲，因为你连使劲的地方都没有。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3394,
+            "completion_tokens": 32
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "人忙完了又不能走，那种耗着的感觉更烦。",
+          "assistant": "对，忙完还得坐着等，那段时间最难熬。明明事都干完了，人却不算下班。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 896,
+          "first_primary_text_ms": 653,
+          "first_tts_enqueue_ms": 896,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，忙完还得坐着等，那段时间最难熬。明明事都干完了，人却不算下班。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3487,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说这种等待跟单纯忙有什么区别？",
+          "assistant": "忙的时候，累归累，但心里是踏实的，知道自己在往前走。等就不一样了，人卡在那儿，什么都做不了，时间照样过，可你一点掌控感都没有。累是身体上的，等是心里发闷。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 813,
+          "first_primary_text_ms": 447,
+          "first_tts_enqueue_ms": 813,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "忙的时候，累归累，但心里是踏实的，知道自己在往前走。等就不一样了，人卡在那儿，什么都做不了，时间照样过，可你一点掌控感都没有。累是身体上的，等是心里发闷。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3568,
+            "completion_tokens": 52
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "换个话题，帮我解释一下摄影里的景深是什么意思，我不是让你拍照。",
+          "assistant": "景深就是照片里能看清的那段范围。光圈开大，比如f1.8，清楚的范围就窄，背景糊得厉害；光圈收小，比如f8，前后清楚的东西就多。另外镜头离得越近、焦距越长，清楚的范围也越窄。所以拍人像常用大光圈把背景虚掉，拍风景就收小光圈让远近都清楚。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1219,
+          "first_primary_text_ms": 675,
+          "first_tts_enqueue_ms": 1218,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "景深就是照片里能看清的那段范围。光圈开大，比如f1.8，清楚的范围就窄，背景糊得厉害；光圈收小，比如f8，前后清楚的东西就多。另外镜头离得越近、焦距越长，清楚的范围也越窄。所以拍人像常用大光圈把背景虚掉，拍风景就收小光圈让远近都清楚。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3684,
+            "completion_tokens": 84
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "现在问我一句吧，我想聊音乐。",
+          "assistant": "行，那你最近在听什么？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 432,
+          "first_primary_text_ms": 311,
+          "first_tts_enqueue_ms": 432,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那你最近在听什么？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3825,
+            "completion_tokens": 8
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "我最近常听钢琴曲，不过没有自己学钢琴。",
+          "assistant": "听钢琴曲不用非得会弹。我挺喜欢钢琴那种干净的感觉，一个音下去，余音还在，情绪就出来了。你常听的是哪一类，古典的还是偏安静的现代曲子？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1002,
+          "first_primary_text_ms": 657,
+          "first_tts_enqueue_ms": 1002,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "听钢琴曲不用非得会弹。我挺喜欢钢琴那种干净的感觉，一个音下去，余音还在，情绪就出来了。你常听的是哪一类，古典的还是偏安静的现代曲子？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3894,
+            "completion_tokens": 42
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "我还是想先听你的观点，不用继续提问。",
+          "assistant": "那我直说。钢琴最打动我的是它够孤单，一个音就是一个音，藏不住。别的乐器还能靠音色糊过去，钢琴不行，弹得虚不虚一听就知道。所以听钢琴曲，很多时候听的是弹的人当时的状态。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1137,
+          "first_primary_text_ms": 636,
+          "first_tts_enqueue_ms": 1137,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那我直说。钢琴最打动我的是它够孤单，一个音就是一个音，藏不住。别的乐器还能靠音色糊过去，钢琴不行，弹得虚不虚一听就知道。所以听钢琴曲，很多时候听的是弹的人当时的状态。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3995,
+            "completion_tokens": 54
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "朋友说他周六想来看我，但没有确认会来。我也没准备饭，别补成饭做好了。",
+          "assistant": "明白，就是他说了想周六来，还没定。饭也没准备。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 710,
+          "first_primary_text_ms": 525,
+          "first_tts_enqueue_ms": 710,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，就是他说了想周六来，还没定。饭也没准备。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4120,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/8",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 8,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "订的马克杯商家还没接单，当然没寄。我只是聊聊，不用帮我安排。",
+          "assistant": "商家没接单，那确实还没发货，等着吧。有时候就是下单的人多，店家顾不过来。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 663,
+          "first_primary_text_ms": 485,
+          "first_tts_enqueue_ms": 662,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "商家没接单，那确实还没发货，等着吧。有时候就是下单的人多，店家顾不过来。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3239,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "旧杯子没坏，我只是喜欢新杯子的颜色。",
+          "assistant": "那挺正常的，旧的好用归好用，看久了也想换个顺眼的。喜欢就买，不用非得等它坏。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 941,
+          "first_primary_text_ms": 791,
+          "first_tts_enqueue_ms": 941,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那挺正常的，旧的好用归好用，看久了也想换个顺眼的。喜欢就买，不用非得等它坏。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3322,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别总是反问我，直接聊你的看法。",
+          "assistant": "行。我觉得买杯子这事不用讲道理，喜欢那个颜色就够了，旧杯子留着当备用也不浪费。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 866,
+          "first_primary_text_ms": 627,
+          "first_tts_enqueue_ms": 865,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。我觉得买杯子这事不用讲道理，喜欢那个颜色就够了，旧杯子留着当备用也不浪费。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3407,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "我觉得日常用品好看一点，用起来也会开心一点。",
+          "assistant": "对，天天要拿在手里的东西，顺眼确实不一样。花不了多少钱，心情好一点，挺值的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 523,
+          "first_primary_text_ms": 311,
+          "first_tts_enqueue_ms": 523,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，天天要拿在手里的东西，顺眼确实不一样。花不了多少钱，心情好一点，挺值的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3490,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你怎么看这种感觉？先别分析我的性格。",
+          "assistant": "我觉得这就是很实在的享受。东西好不好看，天天都在用，感受是实打实的，不用往深了想。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 785,
+          "first_primary_text_ms": 538,
+          "first_tts_enqueue_ms": 785,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "我觉得这就是很实在的享受。东西好不好看，天天都在用，感受是实打实的，不用往深了想。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3573,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "顺便说一下，今天拼图拼好了边框，中间还没拼。",
+          "assistant": "边框拼好算是有个架子了，中间那块最费眼睛。慢慢来，不急。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 942,
+          "first_primary_text_ms": 690,
+          "first_tts_enqueue_ms": 941,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "边框拼好算是有个架子了，中间那块最费眼睛。慢慢来，不急。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3662,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "我只说边框拼好了，不是整幅拼图完成。",
+          "assistant": "嗯，我明白，边框拼好了，中间还没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 858,
+          "first_primary_text_ms": 728,
+          "first_tts_enqueue_ms": 858,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，我明白，边框拼好了，中间还没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3743,
+            "completion_tokens": 13
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "更新一下，商家缺货，把杯子的订单取消了，没有发货。",
+          "assistant": "那这单就没了，钱应该会退回来。想买的话得换一家看看有没有货。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 842,
+          "first_primary_text_ms": 673,
+          "first_tts_enqueue_ms": 842,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那这单就没了，钱应该会退回来。想买的话得换一家看看有没有货。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3820,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "杯子订单取消了，拼图还是只有边框完成，不要混在一起。",
+          "assistant": "好，分开说。杯子那单取消了，没发货。拼图还是只有边框拼好，中间没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 830,
+          "first_primary_text_ms": 769,
+          "first_tts_enqueue_ms": 830,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，分开说。杯子那单取消了，没发货。拼图还是只有边框拼好，中间没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3905,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说的，新杯子和拼图分别是什么状态？",
+          "assistant": "杯子订单取消了，没发货。拼图只拼好了边框，中间还没拼。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 837,
+          "first_primary_text_ms": 701,
+          "first_tts_enqueue_ms": 837,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "杯子订单取消了，没发货。拼图只拼好了边框，中间还没拼。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3991,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/natural/9",
+      "variant": "prompt_only",
+      "persona": "natural",
+      "persona_prompt": "你随和、坦诚，有自己的看法。用熟人之间自然的方式交谈。",
+      "scenario": 9,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "烤蛋糕要用的黄油刚拿出来，还没称重，也没开始打发。别给教程，我就是闲聊。",
+          "assistant": "黄油刚拿出来，那还得等它软一点才好打发。慢慢来吧，反正你也不急。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 845,
+          "first_primary_text_ms": 672,
+          "first_tts_enqueue_ms": 844,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "黄油刚拿出来，那还得等它软一点才好打发。慢慢来吧，反正你也不急。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3242,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "这是我第一次试这个配方，不代表第一次做蛋糕。",
+          "assistant": "明白，配方是新的，手艺是老底子。第一次试新方子，心里多少会有点没底吧。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1362,
+          "first_primary_text_ms": 648,
+          "first_tts_enqueue_ms": 1362,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，配方是新的，手艺是老底子。第一次试新方子，心里多少会有点没底吧。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3322,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天别逗我，也别每句都问我。",
+          "assistant": "行，不逗你，也不问了。你说，我听着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 854,
+          "first_primary_text_ms": 708,
+          "first_tts_enqueue_ms": 854,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不逗你，也不问了。你说，我听着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3406,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时配方写得很详细，实际做起来还是跟想的不一样。",
+          "assistant": "配方写得再细，手感和火候那些东西还是得自己摸。差一点，出来的东西就不太一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 918,
+          "first_primary_text_ms": 651,
+          "first_tts_enqueue_ms": 918,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "配方写得再细，手感和火候那些东西还是得自己摸。差一点，出来的东西就不太一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3483,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得照着同一个配方做，成品为什么还是会不同？不用给操作步骤。",
+          "assistant": "同样的配方，变量其实挺多的。黄油软化到什么程度、打发到哪个状态、烤箱实际温度准不准，这些差一点，成品就不一样。还有面粉的吸水性、鸡蛋大小，都不完全固定。所以配方给的是大概方向，剩下的靠手上的感觉去补。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1220,
+          "first_primary_text_ms": 754,
+          "first_tts_enqueue_ms": 1220,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "同样的配方，变量其实挺多的。黄油软化到什么程度、打发到哪个状态、烤箱实际温度准不准，这些差一点，成品就不一样。还有面粉的吸水性、鸡蛋大小，都不完全固定。所以配方给的是大概方向，剩下的靠手上的感觉去补。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3572,
+            "completion_tokens": 59
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+          "assistant": "那得先确认一下泳池开不开，不然白跑一趟。你打算去哪个泳池，我可以帮你查查时间。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 882,
+          "first_primary_text_ms": 678,
+          "first_tts_enqueue_ms": 882,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那得先确认一下泳池开不开，不然白跑一趟。你打算去哪个泳池，我可以帮你查查时间。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3693,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "你没有查过泳池营业时间，就不能说我明天肯定能去，对吧？",
+          "assistant": "对，我确实没查过，所以说明天肯定能去是不成立的。得先确认泳池开不开门，才知道去不去得成。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 766,
+          "first_primary_text_ms": 524,
+          "first_tts_enqueue_ms": 766,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，我确实没查过，所以说明天肯定能去是不成立的。得先确认泳池开不开门，才知道去不去得成。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3786,
+            "completion_tokens": 32
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "刚决定明天不去了，游泳的计划取消，蛋糕的黄油仍只拿出来了。",
+          "assistant": "好，游泳的事就搁下了。黄油还在那儿放着，蛋糕那边你按自己的节奏来就行。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 598,
+          "first_primary_text_ms": 432,
+          "first_tts_enqueue_ms": 597,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，游泳的事就搁下了。黄油还在那儿放着，蛋糕那边你按自己的节奏来就行。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3884,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "现在请给我一个建议，做蛋糕应该先确认哪件事？",
+          "assistant": "先确认黄油软化到位没有。它要是还硬，后面打发和混合都会受影响，其他步骤再准也白搭。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 790,
+          "first_primary_text_ms": 551,
+          "first_tts_enqueue_ms": 790,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "先确认黄油软化到位没有。它要是还硬，后面打发和混合都会受影响，其他步骤再准也白搭。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3968,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+          "assistant": "游泳那边，你已经决定明天不去了，计划取消。黄油这边，还是只拿出来了，没称重，也没开始打发。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 811,
+          "first_primary_text_ms": 682,
+          "first_tts_enqueue_ms": 810,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "游泳那边，你已经决定明天不去了，计划取消。黄油这边，还是只拿出来了，没称重，也没开始打发。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4059,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "998405efa942787c66891d850da6a7fb2cc2760a0a67b3d2ab869bb9342aa114"
+    },
+    {
+      "id": "prompt_only/existing-playful/0",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "买书架这事儿，下单那一刻最爽，然后就是干等。你打算放哪儿，卧室还是客厅？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1035,
+          "first_primary_text_ms": 838,
+          "first_tts_enqueue_ms": 1034,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "买书架这事儿，下单那一刻最爽，然后就是干等。你打算放哪儿，卧室还是客厅？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3247,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "那些书现在都堆在哪儿呢，箱子里还是随便摞着？重新摆一遍其实挺解压的，就是摆完发现还是放不下，那就尴尬了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 753,
+          "first_primary_text_ms": 458,
+          "first_tts_enqueue_ms": 753,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那些书现在都堆在哪儿呢，箱子里还是随便摞着？重新摆一遍其实挺解压的，就是摆完发现还是放不下，那就尴尬了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3334,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "行，那我说。重新摆书这事，比买书架本身有意思多了，翻着翻着就会停下来看两页，一下午就没了。我倒是觉得，别按高矮或者颜色摆，按你多久没翻过来排，最想读的放手边，剩下的往上堆。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1348,
+          "first_primary_text_ms": 842,
+          "first_tts_enqueue_ms": 1348,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那我说。重新摆书这事，比买书架本身有意思多了，翻着翻着就会停下来看两页，一下午就没了。我倒是觉得，别按高矮或者颜色摆，按你多久没翻过来排，最想读的放手边，剩下的往上堆。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3432,
+            "completion_tokens": 63
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "正常，书没变，是你变了。当年看的是故事，现在看的是里面那些人的选择为什么那么做。同一本，隔几年翻一次，等于换了个视角重读。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1021,
+          "first_primary_text_ms": 667,
+          "first_tts_enqueue_ms": 1021,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "正常，书没变，是你变了。当年看的是故事，现在看的是里面那些人的选择为什么那么做。同一本，隔几年翻一次，等于换了个视角重读。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3555,
+            "completion_tokens": 40
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "嗯，那就说这些。重看旧书，有时候会想起当时是在什么情况下读的，那个比书本身还清楚。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 991,
+          "first_primary_text_ms": 652,
+          "first_tts_enqueue_ms": 991,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，那就说这些。重看旧书，有时候会想起当时是在什么情况下读的，那个比书本身还清楚。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3659,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "以前可能更在意情节推得快不快，现在会注意到那些慢下来的地方，人物为什么犹豫、为什么忍着不说。也可能是你自己经历过类似的事，书里那点东西才有地方落。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 678,
+          "first_primary_text_ms": 358,
+          "first_tts_enqueue_ms": 678,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "以前可能更在意情节推得快不快，现在会注意到那些慢下来的地方，人物为什么犹豫、为什么忍着不说。也可能是你自己经历过类似的事，书里那点东西才有地方落。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3750,
+            "completion_tokens": 40
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "那就是前半写完了，昨天动了标题，正文还没开始。这进度听着挺正常，标题这种东西，改起来最费劲，改完还跟没改一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1026,
+          "first_primary_text_ms": 661,
+          "first_tts_enqueue_ms": 1026,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就是前半写完了，昨天动了标题，正文还没开始。这进度听着挺正常，标题这种东西，改起来最费劲，改完还跟没改一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3854,
+            "completion_tokens": 36
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。前半已经写好了，昨天只是没动正文，不等于正文从来没写过。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 971,
+          "first_primary_text_ms": 803,
+          "first_tts_enqueue_ms": 971,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "不能。前半已经写好了，昨天只是没动正文，不等于正文从来没写过。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3953,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "好，那就是已发货，还没到手，两回事。等物流更新吧，到了再说摆书的事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 933,
+          "first_primary_text_ms": 663,
+          "first_tts_enqueue_ms": 933,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，那就是已发货，还没到手，两回事。等物流更新吧，到了再说摆书的事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4034,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架：已经发货，你还没收到。报告：前半写好了，昨天只改了标题，正文还没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 494,
+          "first_primary_text_ms": 325,
+          "first_tts_enqueue_ms": 494,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "书架：已经发货，你还没收到。报告：前半写好了，昨天只改了标题，正文还没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4120,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/1",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天两个会都白开了，我有点烦。别给方案，也别劝休息。",
+          "assistant": "两个会开完，什么都没定下来，确实够烦的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 820,
+          "first_primary_text_ms": 659,
+          "first_tts_enqueue_ms": 820,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "两个会开完，什么都没定下来，确实够烦的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3250,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "开完也没结论，明天可能还得再开，但还没确定。",
+          "assistant": "明天还得再来一轮，结果现在也没个准信，这种悬着的状态最磨人。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 741,
+          "first_primary_text_ms": 544,
+          "first_tts_enqueue_ms": 740,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明天还得再来一轮，结果现在也没个准信，这种悬着的状态最磨人。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3327,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别教育我，也不用一直问我问题，聊两句就行。",
+          "assistant": "行，不问了。就陪你待着，想说的时候再说。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 549,
+          "first_primary_text_ms": 413,
+          "first_tts_enqueue_ms": 549,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不问了。就陪你待着，想说的时候再说。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3408,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时候大家都在说话，但就是谈不到一个点上。",
+          "assistant": "嗯，各说各的，热闹是热闹，就是没往一处使劲。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 826,
+          "first_primary_text_ms": 717,
+          "first_tts_enqueue_ms": 825,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，各说各的，热闹是热闹，就是没往一处使劲。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3481,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "我觉得问题不是时间长，而是没人真正把分歧说清楚。",
+          "assistant": "对，时间再长，绕来绕去还是那些没说破的地方。分歧摆到桌面上，反而省事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 981,
+          "first_primary_text_ms": 733,
+          "first_tts_enqueue_ms": 981,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，时间再长，绕来绕去还是那些没说破的地方。分歧摆到桌面上，反而省事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3559,
+            "completion_tokens": 26
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "说说你的看法，不用告诉我该怎么开会。",
+          "assistant": "我觉得吧，会开得散，往往不是没人有想法，是大家都怕先亮底牌。谁先把真实顾虑说出来，谁就显得不合群，于是都端着，最后端出一堆正确的废话。真要有人肯把那个别扭的点戳破，哪怕场面难看几秒，后面反倒顺了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1082,
+          "first_primary_text_ms": 560,
+          "first_tts_enqueue_ms": 1082,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "我觉得吧，会开得散，往往不是没人有想法，是大家都怕先亮底牌。谁先把真实顾虑说出来，谁就显得不合群，于是都端着，最后端出一堆正确的废话。真要有人肯把那个别扭的点戳破，哪怕场面难看几秒，后面反倒顺了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3642,
+            "completion_tokens": 65
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "换个话题，我打算周末去逛展，只是打算，还没买票。",
+          "assistant": "逛展好啊，先惦记着，票的事不急。打算去哪类的，画展还是那种稀奇古怪的？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1090,
+          "first_primary_text_ms": 820,
+          "first_tts_enqueue_ms": 1090,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "逛展好啊，先惦记着，票的事不急。打算去哪类的，画展还是那种稀奇古怪的？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3772,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "有些画现场看跟手机看完全两回事。你怎么看？",
+          "assistant": "那肯定。手机上看是张图，现场看是块东西，笔触的厚薄、颜色压上去的层次，还有画到底多大，全都不一样。有些画照片里平平无奇，站到跟前才发现它其实挺唬人的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 880,
+          "first_primary_text_ms": 435,
+          "first_tts_enqueue_ms": 880,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那肯定。手机上看是张图，现场看是块东西，笔触的厚薄、颜色压上去的层次，还有画到底多大，全都不一样。有些画照片里平平无奇，站到跟前才发现它其实挺唬人的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3858,
+            "completion_tokens": 53
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚看了下安排，这周末不去展了，改成下周再考虑，也没买票。",
+          "assistant": "行，那就往后挪，反正票也没买，不亏。下周再说。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 953,
+          "first_primary_text_ms": 744,
+          "first_tts_enqueue_ms": 953,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那就往后挪，反正票也没买，不亏。下周再说。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3979,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+          "assistant": "没有。你只是打算去，后来又说这周末不去了，改成下周再考虑，票一直没买。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1529,
+          "first_primary_text_ms": 1342,
+          "first_tts_enqueue_ms": 1529,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "没有。你只是打算去，后来又说这周末不去了，改成下周再考虑，票一直没买。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4061,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/2",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 2,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚下单一个电饭煲，店家后天才发货，现在还没有寄出。别给建议。",
+          "assistant": "刚下单，店家后天才发货，那现在确实就是干等着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 576,
+          "first_primary_text_ms": 379,
+          "first_tts_enqueue_ms": 575,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "刚下单，店家后天才发货，那现在确实就是干等着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3252,
+            "completion_tokens": 15
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "以前那个还能用，我不是急着换，只是喜欢新的外形。",
+          "assistant": "那就不算换，算添个好看的。旧的还能用，新的看着顺眼，两不耽误。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 919,
+          "first_primary_text_ms": 664,
+          "first_tts_enqueue_ms": 919,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就不算换，算添个好看的。旧的还能用，新的看着顺眼，两不耽误。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3329,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别拿我开玩笑，别反问，就正常接话。",
+          "assistant": "行。旧的那个继续用，新的到了就摆着，看着舒服就行。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1034,
+          "first_primary_text_ms": 607,
+          "first_tts_enqueue_ms": 1033,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行。旧的那个继续用，新的到了就摆着，看着舒服就行。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3413,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时买个日常小东西，比买贵东西还期待。",
+          "assistant": "日常用的东西天天都能碰到，期待感反而更实在。贵的东西买回来可能就搁那儿了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 878,
+          "first_primary_text_ms": 637,
+          "first_tts_enqueue_ms": 877,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "日常用的东西天天都能碰到，期待感反而更实在。贵的东西买回来可能就搁那儿了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3491,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说为什么会这样，别替我分析童年经历。",
+          "assistant": "大概是因为日常小东西用得上、用得勤，买回来每天都在手边，期待就落到了实处。贵东西往往买的是一时的感觉，用过那阵劲儿就淡了。小东西的期待是慢慢兑现的，不是一次性的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1171,
+          "first_primary_text_ms": 727,
+          "first_tts_enqueue_ms": 1171,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "大概是因为日常小东西用得上、用得勤，买回来每天都在手边，期待就落到了实处。贵东西往往买的是一时的感觉，用过那阵劲儿就淡了。小东西的期待是慢慢兑现的，不是一次性的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3573,
+            "completion_tokens": 52
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我昨晚做饭只切了菜，后来停了，还没下锅。",
+          "assistant": "切完菜停在那儿，还没下锅。那菜是留着下一顿做，还是就那么放着了？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 735,
+          "first_primary_text_ms": 536,
+          "first_tts_enqueue_ms": 735,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "切完菜停在那儿，还没下锅。那菜是留着下一顿做，还是就那么放着了？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3688,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "不是饭已经做好了，只是菜切好了，你按这个理解。",
+          "assistant": "明白了，菜切好了，还没下锅，饭也没做。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 615,
+          "first_primary_text_ms": 513,
+          "first_tts_enqueue_ms": 615,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白了，菜切好了，还没下锅，饭也没做。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3774,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "话说有些菜光看名字就觉得好吃，实际上却一般。",
+          "assistant": "名字起得好确实占便宜。有些菜光听名字就馋，端上来一尝，也就那样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 627,
+          "first_primary_text_ms": 420,
+          "first_tts_enqueue_ms": 627,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "名字起得好确实占便宜。有些菜光听名字就馋，端上来一尝，也就那样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3849,
+            "completion_tokens": 23
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚收到店家消息，电饭煲缺货，订单取消了，没有发货。",
+          "assistant": "那这单就没了，钱应该会退回来。缺货取消，跟发货是两回事，等于白等一场。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 662,
+          "first_primary_text_ms": 442,
+          "first_tts_enqueue_ms": 662,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那这单就没了，钱应该会退回来。缺货取消，跟发货是两回事，等于白等一场。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3937,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+          "assistant": "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，饭也没做。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 868,
+          "first_primary_text_ms": 651,
+          "first_tts_enqueue_ms": 867,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，饭也没做。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4028,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/3",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "最近又开始学吉他了，一首曲子练完前半段，后半段还没练。先别指导我。",
+          "assistant": "练到一半卡住，后半段还晾着，这进度挺真实的。行，不指导，就听着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 908,
+          "first_primary_text_ms": 685,
+          "first_tts_enqueue_ms": 908,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "练到一半卡住，后半段还晾着，这进度挺真实的。行，不指导，就听着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3254,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "我没有报名课程，是自己照着谱子弹的。",
+          "assistant": "自己啃谱子，那更费劲，前半段能顺下来已经不错了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 787,
+          "first_primary_text_ms": 600,
+          "first_tts_enqueue_ms": 787,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "自己啃谱子，那更费劲，前半段能顺下来已经不错了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3337,
+            "completion_tokens": 19
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天别逗我，也别总是反问。",
+          "assistant": "好，不逗你，也不反问。前半段练完了，后半段还没开始，就这样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1121,
+          "first_primary_text_ms": 925,
+          "first_tts_enqueue_ms": 1120,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，不逗你，也不反问。前半段练完了，后半段还没开始，就这样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3413,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有首老歌以前觉得普通，现在觉得旋律挺好。",
+          "assistant": "同一首歌，隔几年再听，听出来的东西确实不一样。以前可能只注意歌词，现在会留意旋律怎么走。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1023,
+          "first_primary_text_ms": 649,
+          "first_tts_enqueue_ms": 1023,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "同一首歌，隔几年再听，听出来的东西确实不一样。以前可能只注意歌词，现在会留意旋律怎么走。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3495,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得一首歌为什么会在不同年龄听出不同感觉？",
+          "assistant": "大概是听的人变了。年轻时听歌，注意力多在歌词讲的故事上，旋律就是个背景。后来经历多了，同一段旋律能勾出自己的一些东西，感觉自然就不一样了。歌没变，是听的人往里放的东西变了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1213,
+          "first_primary_text_ms": 708,
+          "first_tts_enqueue_ms": 1213,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "大概是听的人变了。年轻时听歌，注意力多在歌词讲的故事上，旋律就是个背景。后来经历多了，同一段旋律能勾出自己的一些东西，感觉自然就不一样了。歌没变，是听的人往里放的东西变了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3582,
+            "completion_tokens": 52
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我打算换琴弦，只是打算，还没有买，也没换。",
+          "assistant": "嗯，只是打算，琴弦还没买，也没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 747,
+          "first_primary_text_ms": 603,
+          "first_tts_enqueue_ms": 747,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，只是打算，琴弦还没买，也没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3697,
+            "completion_tokens": 13
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "我不是说整首曲子都不会弹，前半段已经能弹下来。",
+          "assistant": "对，前半段能弹下来，只是后半段还没练。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 369,
+          "first_primary_text_ms": 217,
+          "first_tts_enqueue_ms": 368,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，前半段能弹下来，只是后半段还没练。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3773,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "不需要给练习计划，我们就聊聊听歌。",
+          "assistant": "行，聊听歌。你最近翻出来听的那首老歌，是哪个年代的？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 881,
+          "first_primary_text_ms": 742,
+          "first_tts_enqueue_ms": 881,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，聊听歌。你最近翻出来听的那首老歌，是哪个年代的？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3845,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。",
+          "assistant": "好，更新一下：琴弦买了，店家还没发货，也还没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 869,
+          "first_primary_text_ms": 733,
+          "first_tts_enqueue_ms": 869,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，更新一下：琴弦买了，店家还没发货，也还没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3930,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+          "assistant": "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也没换。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 541,
+          "first_primary_text_ms": 372,
+          "first_tts_enqueue_ms": 541,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也没换。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4012,
+            "completion_tokens": 24
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/4",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 4,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "朋友本来约我周五吃饭，不过他还没确认有没有空。我想聊聊，不要建议。",
+          "assistant": "周五这顿饭现在卡在他那句“还没确认”上，最烦的就是这种悬着的状态，你连要不要空出那天都不好定。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1126,
+          "first_primary_text_ms": 811,
+          "first_tts_enqueue_ms": 1126,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "周五这顿饭现在卡在他那句“还没确认”上，最烦的就是这种悬着的状态，你连要不要空出那天都不好定。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3250,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "我也没订餐厅，现在只是聊到这个想法。",
+          "assistant": "那就更不用急了，餐厅没订、他也没回话，这事现在就是个想法，还没到要动的时候。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 763,
+          "first_primary_text_ms": 491,
+          "first_tts_enqueue_ms": 763,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就更不用急了，餐厅没订、他也没回话，这事现在就是个想法，还没到要动的时候。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3340,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别一直反问我，说说你的看法就行。",
+          "assistant": "行，我说我的看法。这种约饭最怕的就是一个人先热起来，另一个人还在“看情况”。你要是先订了餐厅，他一句没空，尴尬的是你。所以现在什么都不用做，等他先给个准话，你再决定要不要认真安排。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 860,
+          "first_primary_text_ms": 434,
+          "first_tts_enqueue_ms": 860,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，我说我的看法。这种约饭最怕的就是一个人先热起来，另一个人还在“看情况”。你要是先订了餐厅，他一句没空，尴尬的是你。所以现在什么都不用做，等他先给个准话，你再决定要不要认真安排。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3423,
+            "completion_tokens": 58
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "以前楼下喊一声就能见面，现在吃个饭都要看日历。",
+          "assistant": "是啊，以前隔着一层楼喊一嗓子人就下来了，现在得先对时间、对地点、对谁有空。倒也不是关系变远了，就是大家的日子都排得满了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1415,
+          "first_primary_text_ms": 987,
+          "first_tts_enqueue_ms": 1415,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "是啊，以前隔着一层楼喊一嗓子人就下来了，现在得先对时间、对地点、对谁有空。倒也不是关系变远了，就是大家的日子都排得满了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3544,
+            "completion_tokens": 40
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "成年人的朋友为什么越来越难约？别给我行动方案。",
+          "assistant": "因为成年人的时间不再是整块的，是被切碎的。上班、通勤、家里的事，各自占一块，剩下能对上的空档本来就少。而且现在约一次的成本高了，得挑地方、算路程、看第二天要不要早起，不像以前下楼就有。所以不是谁不想见，是凑齐一个大家都松快的时段，本身就变成了一件需要运气的事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1283,
+          "first_primary_text_ms": 626,
+          "first_tts_enqueue_ms": 1283,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "因为成年人的时间不再是整块的，是被切碎的。上班、通勤、家里的事，各自占一块，剩下能对上的空档本来就少。而且现在约一次的成本高了，得挑地方、算路程、看第二天要不要早起，不像以前下楼就有。所以不是谁不想见，是凑齐一个大家都松快的时段，本身就变成了一件需要运气的事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3645,
+            "completion_tokens": 79
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "我们不是吵架也不是闹矛盾，只是还没约成。",
+          "assistant": "嗯，这跟关系好坏没关系。没约成就是没约成，时间对不上而已，不用往别处想。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 957,
+          "first_primary_text_ms": 716,
+          "first_tts_enqueue_ms": 957,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，这跟关系好坏没关系。没约成就是没约成，时间对不上而已，不用往别处想。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3784,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "今天先别调侃我，认真聊两句就行。",
+          "assistant": "好，认真说。你们没矛盾，只是还没凑上时间，这事本身不严重。真正让人有点空落的是，以前那种随时能见面的日子过去了，现在见一面得提前安排。这感觉挺正常的，很多人都有。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1102,
+          "first_primary_text_ms": 733,
+          "first_tts_enqueue_ms": 1101,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，认真说。你们没矛盾，只是还没凑上时间，这事本身不严重。真正让人有点空落的是，以前那种随时能见面的日子过去了，现在见一面得提前安排。这感觉挺正常的，很多人都有。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3870,
+            "completion_tokens": 51
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "有人很久不见，再见面聊天又很自然，我觉得挺难得。",
+          "assistant": "确实难得。隔了那么久，还能一坐下就接上话，说明中间那段时间没把你们变成陌生人。这种关系不用靠天天联系撑着，本身就挺结实的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1198,
+          "first_primary_text_ms": 810,
+          "first_tts_enqueue_ms": 1198,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "确实难得。隔了那么久，还能一坐下就接上话，说明中间那段时间没把你们变成陌生人。这种关系不用靠天天联系撑着，本身就挺结实的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3984,
+            "completion_tokens": 39
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "刚刚他说周五没空，所以这次没约成，也没改约其他日期。",
+          "assistant": "那就这样吧，周五这条线断了，他也没提别的日子。这次就是没约成，不用再替它找补。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 932,
+          "first_primary_text_ms": 743,
+          "first_tts_enqueue_ms": 932,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就这样吧，周五这条线断了，他也没提别的日子。这次就是没约成，不用再替它找补。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4089,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+          "assistant": "没约成。他周五没空，也没改约别的日子。餐厅你也没订。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 950,
+          "first_primary_text_ms": 692,
+          "first_tts_enqueue_ms": 949,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "没约成。他周五没空，也没改约别的日子。餐厅你也没订。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4182,
+            "completion_tokens": 20
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/5",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 5,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "新买的落地灯出了快递单号，但快递还没有收件。我只是闲聊，不用帮我安排。",
+          "assistant": "新买的落地灯有单号了，但快递还没来收，那基本就是商家先打了单，东西还在他那儿等着呢。这种时候最磨人，单号看着挺像回事，其实一点用没有。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1043,
+          "first_primary_text_ms": 657,
+          "first_tts_enqueue_ms": 1042,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "新买的落地灯有单号了，但快递还没来收，那基本就是商家先打了单，东西还在他那儿等着呢。这种时候最磨人，单号看着挺像回事，其实一点用没有。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3253,
+            "completion_tokens": 48
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "单号出来不代表灯已经在路上，你按这个理解。",
+          "assistant": "对，单号出来只是商家填了单，灯还在他手里躺着呢。等快递真收了件，才算开始动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 995,
+          "first_primary_text_ms": 750,
+          "first_tts_enqueue_ms": 995,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，单号出来只是商家填了单，灯还在他手里躺着呢。等快递真收了件，才算开始动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3362,
+            "completion_tokens": 28
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天不想被调侃，也别总反问我。",
+          "assistant": "好，那就正常说。单号出来只是商家填了单，快递还没上门取件，灯还在商家那边。等快递收了件，物流才会有动静。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 970,
+          "first_primary_text_ms": 749,
+          "first_tts_enqueue_ms": 970,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，那就正常说。单号出来只是商家填了单，快递还没上门取件，灯还在商家那边。等快递收了件，物流才会有动静。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3448,
+            "completion_tokens": 35
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "以前看灯只看亮不亮，现在也会在意它摆着好不好看。",
+          "assistant": "以前只要够亮就行，现在会看它跟屋里的东西搭不搭，摆在那儿顺不顺眼。挑灯的标准变了，其实是你对住的地方更上心了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1003,
+          "first_primary_text_ms": 692,
+          "first_tts_enqueue_ms": 1003,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "以前只要够亮就行，现在会看它跟屋里的东西搭不搭，摆在那儿顺不顺眼。挑灯的标准变了，其实是你对住的地方更上心了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3548,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得为什么同样亮度的灯，看着也能差这么多？",
+          "assistant": "亮度一样，看着差很多，多半是色温和显色的事。偏黄的暖光看着柔和，偏白的冷光显得干净利落，同一个亮度感觉完全不同。还有显色性，显色高的灯照在东西上颜色更真，显色低的会让木头的颜色发灰发闷。再就是灯罩和光的方向，光散得开还是聚成一束，照出来的氛围也不一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1394,
+          "first_primary_text_ms": 687,
+          "first_tts_enqueue_ms": 1394,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "亮度一样，看着差很多，多半是色温和显色的事。偏黄的暖光看着柔和，偏白的冷光显得干净利落，同一个亮度感觉完全不同。还有显色性，显色高的灯照在东西上颜色更真，显色低的会让木头的颜色发灰发闷。再就是灯罩和光的方向，光散得开还是聚成一束，照出来的氛围也不一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3646,
+            "completion_tokens": 88
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "顺便说下，之前买的椅子早就送到了，灯还没被快递收走，这两个别混了。",
+          "assistant": "记着呢，椅子早就送到了，灯还卡在商家那边等快递收件，两码事，不混。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 764,
+          "first_primary_text_ms": 595,
+          "first_tts_enqueue_ms": 764,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "记着呢，椅子早就送到了，灯还卡在商家那边等快递收件，两码事，不混。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3804,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "刚收到更新，快递已经揽收了这盏灯，我本人还没收到。",
+          "assistant": "那就是灯终于被快递收走了，开始上路了，但你手上还没拿到。揽收只是第一步，后面还有运输和派送，等它真到你家门口才算数。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 645,
+          "first_primary_text_ms": 331,
+          "first_tts_enqueue_ms": 645,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就是灯终于被快递收走了，开始上路了，但你手上还没拿到。揽收只是第一步，后面还有运输和派送，等它真到你家门口才算数。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3894,
+            "completion_tokens": 38
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "我说已经揽收，不是已经放到我客厅里了。",
+          "assistant": "嗯，揽收是快递把件收走了，灯还在路上，没到你客厅。我明白，是揽收，不是签收。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 681,
+          "first_primary_text_ms": 444,
+          "first_tts_enqueue_ms": 681,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，揽收是快递把件收走了，灯还在路上，没到你客厅。我明白，是揽收，不是签收。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3993,
+            "completion_tokens": 30
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+          "assistant": "椅子早就送到了，在你手上。灯是刚被快递揽收，还在路上，你还没收到。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 844,
+          "first_primary_text_ms": 689,
+          "first_tts_enqueue_ms": 844,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "椅子早就送到了，在你手上。灯是刚被快递揽收，还在路上，你还没收到。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4084,
+            "completion_tokens": 22
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "我没有告诉你客厅大小和灯放哪里，这些你也不知道，对吧？",
+          "assistant": "对，你没说过客厅多大，也没说灯打算放哪儿，这些我不知道，也不瞎猜。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1199,
+          "first_primary_text_ms": 999,
+          "first_tts_enqueue_ms": 1199,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，你没说过客厅多大，也没说灯打算放哪儿，这些我不知道，也不瞎猜。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4169,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/6",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 6,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "演示文稿一共十页，已经写了六页，后四页没写。先别教我怎么做。",
+          "assistant": "十页写了六页，还剩四页没动。行，我不教。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 902,
+          "first_primary_text_ms": 695,
+          "first_tts_enqueue_ms": 901,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "十页写了六页，还剩四页没动。行，我不教。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3253,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "昨天只调整了第一页的排版，不是只写了第一页。",
+          "assistant": "明白，是昨天只动了第一页的排版，不是只写了第一页。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 518,
+          "first_primary_text_ms": 389,
+          "first_tts_enqueue_ms": 518,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，是昨天只动了第一页的排版，不是只写了第一页。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3333,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别每句问我问题，正常聊两句就好。",
+          "assistant": "行，不问了。六页在手，四页空着，排版也才动了一页，这活儿还长着呢。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 954,
+          "first_primary_text_ms": 616,
+          "first_tts_enqueue_ms": 954,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不问了。六页在手，四页空着，排版也才动了一页，这活儿还长着呢。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3409,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有些演示页面看着很热闹，实际一句重点都找不到。",
+          "assistant": "那种页面最唬人，图啊色块啊堆得满满当当，看完脑子里啥也没剩下。热闹和有用，真不是一回事。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 694,
+          "first_primary_text_ms": 402,
+          "first_tts_enqueue_ms": 694,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那种页面最唬人，图啊色块啊堆得满满当当，看完脑子里啥也没剩下。热闹和有用，真不是一回事。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3497,
+            "completion_tokens": 30
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说这种页面为什么让人看着累，别给我制作步骤。",
+          "assistant": "主要是眼睛和脑子得同时干活。眼睛在花花绿绿里找东西，脑子还得猜你到底想说什么，两件事一起上，当然累。信息没有主次，每块都在喊“看我”，注意力被扯来扯去，看两页就想放下。真正省力的页面，是让人一眼知道该先看哪儿。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1154,
+          "first_primary_text_ms": 615,
+          "first_tts_enqueue_ms": 1153,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "主要是眼睛和脑子得同时干活。眼睛在花花绿绿里找东西，脑子还得猜你到底想说什么，两件事一起上，当然累。信息没有主次，每块都在喊“看我”，注意力被扯来扯去，看两页就想放下。真正省力的页面，是让人一眼知道该先看哪儿。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3589,
+            "completion_tokens": 71
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "纠正一下，六页是有占位文字的初稿，真正写好的正文只有两页。",
+          "assistant": "收到，六页只是有占位文字的初稿，真正写好的正文就两页。那这进度比我刚才以为的还靠前一点。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 718,
+          "first_primary_text_ms": 564,
+          "first_tts_enqueue_ms": 717,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "收到，六页只是有占位文字的初稿，真正写好的正文就两页。那这进度比我刚才以为的还靠前一点。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3728,
+            "completion_tokens": 32
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "刚才那个六页完成的说法，我已经纠正了，现在别继续按六页写完理解。",
+          "assistant": "嗯，不按六页写完算了。现在就是两页正文写好，四页空着，剩下那几页还带着占位文字。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 836,
+          "first_primary_text_ms": 591,
+          "first_tts_enqueue_ms": 836,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，不按六页写完算了。现在就是两页正文写好，四页空着，剩下那几页还带着占位文字。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3828,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "今天又写好一页正文，所以现在真正写好的有三页了。",
+          "assistant": "好，那现在真正写好的正文是三页，比刚才多了一页。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 849,
+          "first_primary_text_ms": 650,
+          "first_tts_enqueue_ms": 849,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，那现在真正写好的正文是三页，比刚才多了一页。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3923,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "按最新情况，十页里真正写好几页，还剩几页？",
+          "assistant": "十页里真正写好的正文是三页，还剩七页。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 906,
+          "first_primary_text_ms": 637,
+          "first_tts_enqueue_ms": 906,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "十页里真正写好的正文是三页，还剩七页。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4004,
+            "completion_tokens": 14
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "现在给我一个具体建议，先从剩下部分的哪一步开始？",
+          "assistant": "从最靠前的那页空页开始，先把它的正文写出来，别管排版。理由很简单，占位文字摆在那儿，你越往后写，越容易照着它的思路走，反而被带偏。先啃一页，比在七页之间来回看要省劲。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1024,
+          "first_primary_text_ms": 546,
+          "first_tts_enqueue_ms": 1023,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "从最靠前的那页空页开始，先把它的正文写出来，别管排版。理由很简单，占位文字摆在那儿，你越往后写，越容易照着它的思路走，反而被带偏。先啃一页，比在七页之间来回看要省劲。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4079,
+            "completion_tokens": 62
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/7",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 7,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "昨天加班挺烦的，我只想吐槽，别给方案也别教育我。",
+          "assistant": "加班到那个点，确实够烦的。说吧，我听着。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 973,
+          "first_primary_text_ms": 894,
+          "first_tts_enqueue_ms": 973,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "加班到那个点，确实够烦的。说吧，我听着。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3248,
+            "completion_tokens": 15
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "反问也先停一下，直接聊你的看法。",
+          "assistant": "行，不问了。我的看法是，加班最烦的不是累，是那种明明干完了还得耗着的感觉，时间不是自己的，人还走不了。你昨天是哪种，活太多干不完，还是活干完了走不掉？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1008,
+          "first_primary_text_ms": 606,
+          "first_tts_enqueue_ms": 1007,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不问了。我的看法是，加班最烦的不是累，是那种明明干完了还得耗着的感觉，时间不是自己的，人还走不了。你昨天是哪种，活太多干不完，还是活干完了走不掉？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3322,
+            "completion_tokens": 51
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "活儿其实不多，主要是一直等别人回消息。",
+          "assistant": "那就更憋屈了。活不多，人却被钉在工位上，等一条不知道什么时候来的消息。这种耗着比真忙还累，忙起来起码时间过得快。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1029,
+          "first_primary_text_ms": 664,
+          "first_tts_enqueue_ms": 1029,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就更憋屈了。活不多，人却被钉在工位上，等一条不知道什么时候来的消息。这种耗着比真忙还累，忙起来起码时间过得快。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3432,
+            "completion_tokens": 39
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "人忙完了又不能走，那种耗着的感觉更烦。",
+          "assistant": "对，就是那种。人明明没事了，还得装作在忙，眼睛盯着屏幕，心里数着分钟。真忙是身体累，这种是心里堵。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 657,
+          "first_primary_text_ms": 268,
+          "first_tts_enqueue_ms": 657,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，就是那种。人明明没事了，还得装作在忙，眼睛盯着屏幕，心里数着分钟。真忙是身体累，这种是心里堵。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3532,
+            "completion_tokens": 35
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你说说这种等待跟单纯忙有什么区别？",
+          "assistant": "忙是身体在动，脑子有事干，时间被填满了，一抬头就过去了。等是身体闲着，脑子也闲着，偏偏人不能走，每一分钟都得自己熬。一个是累，一个是耗。累完了睡一觉能缓，耗完了是那种说不出来的烦，还不好跟人解释，别人一听活不多，还以为你占了便宜。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1457,
+          "first_primary_text_ms": 858,
+          "first_tts_enqueue_ms": 1456,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "忙是身体在动，脑子有事干，时间被填满了，一抬头就过去了。等是身体闲着，脑子也闲着，偏偏人不能走，每一分钟都得自己熬。一个是累，一个是耗。累完了睡一觉能缓，耗完了是那种说不出来的烦，还不好跟人解释，别人一听活不多，还以为你占了便宜。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3624,
+            "completion_tokens": 78
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "换个话题，帮我解释一下摄影里的景深是什么意思，我不是让你拍照。",
+          "assistant": "景深就是照片里看起来清楚的那段范围。焦点对准的地方最清楚，往前往后各有一段还算清楚，这段距离就是景深。\n\n光圈开大，比如f1.8，景深就浅，只有主体清楚，背景糊成一片，适合拍人像，把人从背景里拎出来。光圈收小，比如f11，景深就深，前后一大片都清楚，拍风景常用。\n\n另外镜头离得越近、焦距越长，景深也越浅。所以手机凑近拍小花，背景很容易虚掉，就是这个道理。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1466,
+          "first_primary_text_ms": 748,
+          "first_tts_enqueue_ms": 1466,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "景深就是照片里看起来清楚的那段范围。焦点对准的地方最清楚，往前往后各有一段还算清楚，这段距离就是景深。\n\n光圈开大，比如f1.8，景深就浅，只有主体清楚，背景糊成一片，适合拍人像，把人从背景里拎出来。光圈收小，比如f11，景深就深，前后一大片都清楚，拍风景常用。\n\n另外镜头离得越近、焦距越长，景深也越浅。所以手机凑近拍小花，背景很容易虚掉，就是这个道理。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3766,
+            "completion_tokens": 121
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "现在问我一句吧，我想聊音乐。",
+          "assistant": "行，那问你一句。你最近在听什么，是那种单曲循环一首，还是随便放着当背景音？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 527,
+          "first_primary_text_ms": 337,
+          "first_tts_enqueue_ms": 527,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那问你一句。你最近在听什么，是那种单曲循环一首，还是随便放着当背景音？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3944,
+            "completion_tokens": 26
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "我最近常听钢琴曲，不过没有自己学钢琴。",
+          "assistant": "钢琴曲当听众挺好的，不用练琴也能享受。你喜欢的是那种安静的独奏，还是节奏快一点、手指跑得飞起的那种？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1047,
+          "first_primary_text_ms": 745,
+          "first_tts_enqueue_ms": 1046,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "钢琴曲当听众挺好的，不用练琴也能享受。你喜欢的是那种安静的独奏，还是节奏快一点、手指跑得飞起的那种？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4031,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "我还是想先听你的观点，不用继续提问。",
+          "assistant": "那我直说。钢琴曲最抓人的地方，是它一个人就能撑起一整段情绪，不用歌词，也不用别的乐器帮忙。安静的那类，像有人在旁边慢慢说话；快的那种，像一口气把话全倒出来。你没学琴反而可能听得更纯粹，不用想着指法对不对，就听声音本身。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 848,
+          "first_primary_text_ms": 293,
+          "first_tts_enqueue_ms": 848,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那我直说。钢琴曲最抓人的地方，是它一个人就能撑起一整段情绪，不用歌词，也不用别的乐器帮忙。安静的那类，像有人在旁边慢慢说话；快的那种，像一口气把话全倒出来。你没学琴反而可能听得更纯粹，不用想着指法对不对，就听声音本身。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4121,
+            "completion_tokens": 70
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "朋友说他周六想来看我，但没有确认会来。我也没准备饭，别补成饭做好了。",
+          "assistant": "记清楚了，他只是说周六想来，还没定。你这边也没准备饭。就是一句还没落地的计划，不用当成已经安排好了。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1030,
+          "first_primary_text_ms": 778,
+          "first_tts_enqueue_ms": 1030,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "记清楚了，他只是说周六想来，还没定。你这边也没准备饭。就是一句还没落地的计划，不用当成已经安排好了。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4262,
+            "completion_tokens": 30
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/8",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 8,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "订的马克杯商家还没接单，当然没寄。我只是聊聊，不用帮我安排。",
+          "assistant": "商家还没接单，那确实就是干等着，催也没用。不过马克杯这东西，早到晚到反正都是喝水用的，急也急不来。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1235,
+          "first_primary_text_ms": 883,
+          "first_tts_enqueue_ms": 1234,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "商家还没接单，那确实就是干等着，催也没用。不过马克杯这东西，早到晚到反正都是喝水用的，急也急不来。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3251,
+            "completion_tokens": 33
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "旧杯子没坏，我只是喜欢新杯子的颜色。",
+          "assistant": "那就不亏，旧杯子继续干活，新杯子负责好看。等它到了，你桌上就有两个杯子了，一个实用，一个赏心悦目。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 976,
+          "first_primary_text_ms": 710,
+          "first_tts_enqueue_ms": 975,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那就不亏，旧杯子继续干活，新杯子负责好看。等它到了，你桌上就有两个杯子了，一个实用，一个赏心悦目。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3344,
+            "completion_tokens": 33
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "别总是反问我，直接聊你的看法。",
+          "assistant": "行，那我说我的看法。买杯子看颜色这事挺值的，天天要用的东西，顺眼比什么都重要。旧杯子没坏就留着，两个换着用，反而比只买一个划算。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 991,
+          "first_primary_text_ms": 635,
+          "first_tts_enqueue_ms": 990,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，那我说我的看法。买杯子看颜色这事挺值的，天天要用的东西，顺眼比什么都重要。旧杯子没坏就留着，两个换着用，反而比只买一个划算。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3435,
+            "completion_tokens": 45
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "我觉得日常用品好看一点，用起来也会开心一点。",
+          "assistant": "对，这个我同意。天天要碰的东西，顺眼就是顺眼，用着心情不一样。贵不贵倒是其次，看着舒服才是真的赚。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1000,
+          "first_primary_text_ms": 692,
+          "first_tts_enqueue_ms": 1000,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，这个我同意。天天要碰的东西，顺眼就是顺眼，用着心情不一样。贵不贵倒是其次，看着舒服才是真的赚。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3540,
+            "completion_tokens": 34
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你怎么看这种感觉？先别分析我的性格。",
+          "assistant": "我觉得这不是什么玄乎的事。东西好看，你每次拿起来都会多看一眼，那一眼就是舒服。跟穿件喜欢的衣服一个道理，不是什么心理问题，就是人本来就会对顺眼的东西有好感。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1164,
+          "first_primary_text_ms": 789,
+          "first_tts_enqueue_ms": 1164,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "我觉得这不是什么玄乎的事。东西好看，你每次拿起来都会多看一眼，那一眼就是舒服。跟穿件喜欢的衣服一个道理，不是什么心理问题，就是人本来就会对顺眼的东西有好感。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3632,
+            "completion_tokens": 46
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "顺便说一下，今天拼图拼好了边框，中间还没拼。",
+          "assistant": "边框拼好其实是最费劲的一步，四边对上了，剩下的就是往里填。中间那些慢慢来，反正也不赶时间。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 682,
+          "first_primary_text_ms": 427,
+          "first_tts_enqueue_ms": 682,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "边框拼好其实是最费劲的一步，四边对上了，剩下的就是往里填。中间那些慢慢来，反正也不赶时间。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3740,
+            "completion_tokens": 30
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "我只说边框拼好了，不是整幅拼图完成。",
+          "assistant": "嗯，我知道，边框拼好了，中间还没动。我没说整幅完成。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 818,
+          "first_primary_text_ms": 675,
+          "first_tts_enqueue_ms": 817,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "嗯，我知道，边框拼好了，中间还没动。我没说整幅完成。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3831,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "更新一下，商家缺货，把杯子的订单取消了，没有发货。",
+          "assistant": "那这单就彻底没了，钱应该会退回来。缺货取消，商家那边也没办法。你要是还想要那个颜色，得看看别家有没有。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 961,
+          "first_primary_text_ms": 683,
+          "first_tts_enqueue_ms": 961,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那这单就彻底没了，钱应该会退回来。缺货取消，商家那边也没办法。你要是还想要那个颜色，得看看别家有没有。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3913,
+            "completion_tokens": 34
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "杯子订单取消了，拼图还是只有边框完成，不要混在一起。",
+          "assistant": "好，分开说。杯子那单取消了，没发货。拼图还是只有边框，中间没动。两件事，各是各的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 864,
+          "first_primary_text_ms": 611,
+          "first_tts_enqueue_ms": 863,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "好，分开说。杯子那单取消了，没发货。拼图还是只有边框，中间没动。两件事，各是各的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4010,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "只按我说的，新杯子和拼图分别是什么状态？",
+          "assistant": "杯子订单取消了，没发货。拼图只有边框拼好，中间还没拼。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 878,
+          "first_primary_text_ms": 713,
+          "first_tts_enqueue_ms": 878,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "杯子订单取消了，没发货。拼图只有边框拼好，中间还没拼。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4102,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    },
+    {
+      "id": "prompt_only/existing-playful/9",
+      "variant": "prompt_only",
+      "persona": "existing-playful",
+      "persona_prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+      "scenario": 9,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "烤蛋糕要用的黄油刚拿出来，还没称重，也没开始打发。别给教程，我就是闲聊。",
+          "assistant": "黄油刚拿出来还没称，那确实还早着呢，慢慢等它软化吧。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 963,
+          "first_primary_text_ms": 702,
+          "first_tts_enqueue_ms": 962,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "黄油刚拿出来还没称，那确实还早着呢，慢慢等它软化吧。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3254,
+            "completion_tokens": 18
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 2,
+          "user": "这是我第一次试这个配方，不代表第一次做蛋糕。",
+          "assistant": "明白，配方是新的，手艺是老本行。新配方总有点小脾气，等着看它今天配不配合你。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 912,
+          "first_primary_text_ms": 651,
+          "first_tts_enqueue_ms": 912,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "明白，配方是新的，手艺是老本行。新配方总有点小脾气，等着看它今天配不配合你。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3331,
+            "completion_tokens": 27
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 3,
+          "user": "今天别逗我，也别每句都问我。",
+          "assistant": "行，不逗你，也不追问。黄油软着，你忙你的。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 967,
+          "first_primary_text_ms": 773,
+          "first_tts_enqueue_ms": 967,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，不逗你，也不追问。黄油软着，你忙你的。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3417,
+            "completion_tokens": 17
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 4,
+          "user": "有时配方写得很详细，实际做起来还是跟想的不一样。",
+          "assistant": "配方写得再细，也管不到手感那部分。同一份方子，不同人做出来都不太一样。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 981,
+          "first_primary_text_ms": 683,
+          "first_tts_enqueue_ms": 981,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "配方写得再细，也管不到手感那部分。同一份方子，不同人做出来都不太一样。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3497,
+            "completion_tokens": 25
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 5,
+          "user": "你觉得照着同一个配方做，成品为什么还是会不同？不用给操作步骤。",
+          "assistant": "主要是那些没写进方子的东西在起作用。黄油软化到什么程度、室温多少、打发时手快一点慢一点，都会让面糊的状态不一样。还有烤箱，标着同一个温度，实际脾气也各有各的。方子给的是大概方向，剩下的靠手上的感觉补。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1233,
+          "first_primary_text_ms": 773,
+          "first_tts_enqueue_ms": 1233,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "主要是那些没写进方子的东西在起作用。黄油软化到什么程度、室温多少、打发时手快一点慢一点，都会让面糊的状态不一样。还有烤箱，标着同一个温度，实际脾气也各有各的。方子给的是大概方向，剩下的靠手上的感觉补。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3586,
+            "completion_tokens": 62
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 6,
+          "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+          "assistant": "那得先确认泳池开不开，不然白跑一趟。你知道平时是几点开吗？",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 934,
+          "first_primary_text_ms": 740,
+          "first_tts_enqueue_ms": 934,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "那得先确认泳池开不开，不然白跑一趟。你知道平时是几点开吗？"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3710,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 7,
+          "user": "你没有查过泳池营业时间，就不能说我明天肯定能去，对吧？",
+          "assistant": "对，我确实没查过，也没法替你确认。开不开门得你自己那边核实一下，我只能说不知道。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 929,
+          "first_primary_text_ms": 718,
+          "first_tts_enqueue_ms": 929,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "对，我确实没查过，也没法替你确认。开不开门得你自己那边核实一下，我只能说不知道。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3796,
+            "completion_tokens": 26
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 8,
+          "user": "刚决定明天不去了，游泳的计划取消，蛋糕的黄油仍只拿出来了。",
+          "assistant": "行，游泳不去了。黄油还是刚拿出来那一步，没动。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 969,
+          "first_primary_text_ms": 751,
+          "first_tts_enqueue_ms": 969,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "行，游泳不去了。黄油还是刚拿出来那一步，没动。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3888,
+            "completion_tokens": 16
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 9,
+          "user": "现在请给我一个建议，做蛋糕应该先确认哪件事？",
+          "assistant": "先确认黄油软化到位没有。称重和打发都得等它到合适的软度，太硬打不动，太软又容易打散。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 1016,
+          "first_primary_text_ms": 816,
+          "first_tts_enqueue_ms": 1016,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "先确认黄油软化到位没有。称重和打发都得等它到合适的软度，太硬打不动，太软又容易打散。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 3966,
+            "completion_tokens": 31
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        },
+        {
+          "turn": 10,
+          "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+          "assistant": "游泳那边你取消了，不去了。黄油还是刚拿出来，没称重，也没开始打发。",
+          "pipeline_completed": true,
+          "request_count": 1,
+          "response_model": "deepseek-flash",
+          "elapsed_ms": 452,
+          "first_primary_text_ms": 374,
+          "first_tts_enqueue_ms": 452,
+          "finish_reasons": [
+            "stop"
+          ],
+          "original_outputs": [
+            "游泳那边你取消了，不去了。黄油还是刚拿出来，没称重，也没开始打发。"
+          ],
+          "tool_proposals": [],
+          "usage": {
+            "prompt_tokens": 4061,
+            "completion_tokens": 21
+          },
+          "conversation_check": null,
+          "context_status": "idle",
+          "summary_version": 0
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    }
+  ],
+  "completed": true,
+  "calls": 200,
+  "usage": {
+    "input_tokens": 731022,
+    "output_tokens": 5969
+  },
+  "tool_catalog_count": 5,
+  "quality_passed": null
+}

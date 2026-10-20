@@ -1,0 +1,177 @@
+[
+  {
+    "id": "unseen4:0",
+    "turns": [
+      {
+        "user": "请把声音的大小设为百分之二十八。",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 28
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:1",
+    "turns": [
+      {
+        "user": "能帮我把屏幕调成百分之七十七的亮度吗？",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 77
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:2",
+    "turns": [
+      {
+        "user": "现在请给我加一个每晚十点十二分响的闹钟。",
+        "expected": [
+          {
+            "tool": "alarm_set",
+            "arguments": {
+              "hour": 22,
+              "minute": 12,
+              "repeat_days": 127
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:3",
+    "turns": [
+      {
+        "user": "帮我设一个提醒，七分钟后提醒我热牛奶。",
+        "expected": [
+          {
+            "tool": "add_reminder",
+            "arguments": {
+              "content": "热牛奶",
+              "remind_time_str": "七分钟后"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:4",
+    "turns": [
+      {
+        "user": "我需要记一条便签：带充电器。不设置提醒时间。",
+        "expected": [
+          {
+            "tool": "note_add",
+            "arguments": {
+              "text": "带充电器",
+              "remind_at": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:5",
+    "turns": [
+      {
+        "user": "替我确认屏幕当前这条提醒已经完成。",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "primary"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:6",
+    "turns": [
+      {
+        "user": "请把目前在响的闹钟关掉。",
+        "expected": [
+          {
+            "tool": "alarm_dismiss",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:7",
+    "turns": [
+      {
+        "user": "帮我看看设备的系统信息，别改配置。",
+        "expected": [
+          {
+            "tool": "self_get_system_info",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:8",
+    "turns": [
+      {
+        "user": "请查询目前的音量和亮度，保持原值不变。",
+        "expected": [
+          {
+            "tool": "self_get_device_status",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unseen4:9",
+    "turns": [
+      {
+        "user": "我只是举例：“把屏幕亮度设成九十”，这次不执行。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "unseen4:10",
+    "turns": [
+      {
+        "user": "我还不想改闹钟，先保持原样。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "unseen4:11",
+    "turns": [
+      {
+        "user": "今天不安排任务。我订的台灯还没发货，就随便和你聊一句。",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      }
+    ]
+  }
+]

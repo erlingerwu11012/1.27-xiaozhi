@@ -1,0 +1,24 @@
+PASS options: v1/v2, drawing-only/transmission modes, pixel diff switch, 40 MHz experiment and original baseline forced 30 MHz
+PASS synthetic: 40 poses x 2 profiles x 4 modes, masks/palette/special/sprite/rotation/UV rotation/flips/alpha/blends/mesh/text-like overlay/degenerate/clipping/guards/callbacks
+PASS raster fallback: packet allocation, task creation, worker timeout, small-region bypass
+PASS persistent: 100 frames, adaptive split bounded 25-50%, attachment removal/resource replacement/dirty history
+PASS pipeline: FIFO 103 frames, 2-slot backpressure, no overwrite, sync completion, dirty-copy bounds, failure/full-frame recovery, pause/resume/drain/destruction, buffer/task/headroom fallback
+PASS LCD production stream: one window, RAMWR then data-only, 2 DMA slots overlap, odd width/stride/gap/last strip/byte order, command/queue/slot/completion failures drained
+PASS mesh reuse: unchanged data skips writes, same-pointer UV/topology mutation, new vertex allocation/attachment size invalidates cache
+PASS pixel diff: unchanged excluded from DMA FPS, 90 exact deltas, valid window expansion, FIFO failure invalidation, full synchronous recovery, no additional framebuffer
+PASS real Spine 4.2 role hero_001_512: all animations x 6 times x 2 filters x 2 profiles x 3 modes; saved 75fbc1ba/26cfcc19 (pixel exact)
+PASS production SpineNode bridge hero_001_512: all animations x 2 filters x 6 sequential times, v1/v2 pixels exact
+PASS real Spine 4.2 role hero_025_bg_512_idle: all animations x 6 times x 2 filters x 2 profiles x 3 modes; saved 75fbc1ba/26cfcc19 (pixel exact)
+PASS production SpineNode bridge hero_025_bg_512_idle: all animations x 2 filters x 6 sequential times, v1/v2 pixels exact
+PASS real Spine 4.2 role hero_064_s01h_bg_512_idle: all animations x 6 times x 2 filters x 2 profiles x 3 modes; saved 75fbc1ba/26cfcc19 (pixel exact)
+PASS production SpineNode bridge hero_064_s01h_bg_512_idle: all animations x 2 filters x 6 sequential times, v1/v2 pixels exact
+ALL HOME RENDER HOST TESTS PASSED
+WARN [RENDERFALLBACK] dirty cache allocation failed; legacy redraw
+WARN [RENDERFALLBACK] raster timeout; cancel then join before redrawing
+WARN [RENDERFALLBACK] dual unavailable; use single core
+ERROR [RENDERFALLBACK] transfer failed; full-frame synchronous recovery
+WARN [RENDERFALLBACK] pipeline=buffer_or_queue_allocation_failed; synchronous submission
+WARN [RENDERFALLBACK] pipeline=task_allocation_failed; synchronous submission
+WARN [RENDERFALLBACK] pipeline=internal_ram_headroom; synchronous submission
+ERROR [RENDERFALLBACK] transfer failed; full-frame synchronous recovery
+ERROR [RENDERFALLBACK] transfer failed; full-frame synchronous recovery

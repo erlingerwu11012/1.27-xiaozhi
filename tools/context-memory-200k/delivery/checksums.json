@@ -1,0 +1,13 @@
+{
+  "baseline.json": "4772cfd7d1798725e592e6a1e41a236b461f1e44156e5708998e50623e8281e2",
+  "business-patch-published.json": "1a9c4f041c57fc6e798b5e7686c3325218ac82d29ff5a345fd35db8505bd57fa",
+  "delivery-report.json": "a0f160f00ca1a36bf768fc9310db0681db911caa987b8373efac2dfca4f034c9",
+  "final-patch-published.json": "f03a97885e63a2f51c09232411d7a4a391b8ae013298b936221d027579c43619",
+  "frontend-check.json": "5f69f39ed83d32a5d8408925a484b1df517eb7dc33fb48a48db5873527fff5bc",
+  "manifest.json": "1af9e3debb527270bf46988658f37a18ade9d46ac90a1b946b02c5b2e47ae6ba",
+  "overlay.tar.gz": "e8be3bc1585dea2150e7cbee9dd7004bfb5c725eae3938a2f464e9c462c5d289",
+  "prompt-memory-flow.html": "2acb3bf8385b095534b5cf95a10912930903d4d0ae86a3dc924f069aa3cd965d",
+  "published.json": "7f75eb5a753505acac9590e1269177489869c6e52a631a129ffb96aed5d854aa",
+  "verification.json": "5ca3583e632c03006f5010a884fcbaedf59c42044c7537603ec88c3ab1740729",
+  "visual-check.json": "ec1f29f0b2577c71f8a376caab3ae9f0dbb548a718bc14c2beae803a14ed154e"
+}

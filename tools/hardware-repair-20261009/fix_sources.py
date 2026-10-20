@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('main/application.cc');p.write_text(p.read_text(encoding='utf-8').replace('\ufeff',''),encoding='utf-8')
+p=Path('tools/hardware-repair-20261009/stateful_device.py');s=p.read_text().replace("        from core.providers.tools.base import ToolDefinition,ToolType", "        from core.providers.tools.base import ToolDefinition,ToolType\n        from plugins_func.functions import person_memory\n        from plugins_func.register import all_function_registry\n        for name in ('memory_search','memory_correct','memory_forget'):\n            self.tools[name].description=copy.deepcopy(all_function_registry[name].description)");p.write_text(s)

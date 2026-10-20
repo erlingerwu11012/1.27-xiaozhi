@@ -1,0 +1,14 @@
+{
+  "core/utils/tool_harness/runtime.py": "d496b993c62a8267d8c66b14aa2b8ab5ffaa5baeef46342aeafdb4f8b6712773",
+  "core/utils/tool_harness/contracts.py": "0ca830b92350645e21e25a867c82e8c37978e8bce29e0d642ddc61de7d9f3424",
+  "core/utils/tool_harness/presentation.py": "9af6b1645665a49bef37752a6f43e926549f99b6505879db0eeee628b631126a",
+  "core/utils/tool_harness/memory_policy.py": "b9c4afae67585c1b7261cb15e9b0b48b1935938a7ba7ec298b74f3d7c64be036",
+  "core/utils/tool_harness/reply_composer.py": "ac3290dab9d73af2a4189472566b12efc7723f839a6f57a85c08d98131fba8dd",
+  "core/utils/recent_memory.py": "729678d8d2f407ab269f366fff2588bda3de42470524b54c5061668a6cd79d42",
+  "core/utils/voiceprint_provider.py": "f04e01142c15247ff455b4a119678ddfd0e553bb3814788b4d6ca37130561bd5",
+  "core/utils/vision_readiness.py": "9f4b473dab519a6b0033a68cd3038afb76bb653d367f2fc9e395134a83d445de",
+  "plugins_func/functions/person_memory.py": "b1d4b7e8545ddddb17a6ea47b89c8b647e8df6cbb7dcc3f981e5a30c67c6c31f",
+  "core/utils/tool_result.py": "e3b4764bc70ea81fc9f6b956823e1585b825994c147746a7bdc5da8768a2e6d4",
+  "core/utils/recipient_resolver.py": "955d95b3e0383a050977e77b6b4b1203934992af12cabcc7d6f016373245cd9d",
+  "core/utils/unified_recipient_resolver.py": "fa6d95abc45f0a1d77c318eb2eed5948061c09eedc68d5314c324b1a60f6392f"
+}

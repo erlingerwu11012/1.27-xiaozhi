@@ -1,0 +1,22 @@
+{
+  "production_commit": "35236f03a2741d9b63e5be113db9befd9f98a1d0",
+  "tracked_changes_preserved": "M main/xiaozhi-server/config/assets/wakeup_words/83dca73ebd19180d2b8b39723dae401b.wav",
+  "model": "qwen3.8-flash",
+  "temperature": 0.4,
+  "source_hashes_unchanged": true,
+  "services": [
+    {
+      "name": "manager-api",
+      "status": "online"
+    },
+    {
+      "name": "mcp-gateway",
+      "status": "online"
+    },
+    {
+      "name": "xiaozhi-server",
+      "status": "online"
+    }
+  ],
+  "public_http_status": 200
+}

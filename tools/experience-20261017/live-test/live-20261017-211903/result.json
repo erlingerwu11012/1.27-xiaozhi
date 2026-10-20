@@ -1,0 +1,9 @@
+{
+  "duration_seconds": 1800,
+  "counts": {
+    "firmware": 3,
+    "server": 1
+  },
+  "errors": [],
+  "server_exit": null
+}

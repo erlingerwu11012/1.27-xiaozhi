@@ -1,0 +1,232 @@
+{
+  "winner": "qwen3.7-plus",
+  "summary": [
+    {
+      "model": "qwen3.7-plus",
+      "passed": 415,
+      "total": 420,
+      "automatic_passed": 415,
+      "positive": {
+        "passed": 299,
+        "total": 300
+      },
+      "negative": {
+        "passed": 116,
+        "total": 120
+      },
+      "rounds": [
+        {
+          "trial": 1,
+          "passed": 139,
+          "total": 140
+        },
+        {
+          "trial": 2,
+          "passed": 138,
+          "total": 140
+        },
+        {
+          "trial": 3,
+          "passed": 138,
+          "total": 140
+        }
+      ],
+      "groups": [
+        {
+          "group": "live_time",
+          "passed": 72,
+          "total": 72
+        },
+        {
+          "group": "live_random",
+          "passed": 36,
+          "total": 36
+        },
+        {
+          "group": "server_fixture",
+          "passed": 72,
+          "total": 72
+        },
+        {
+          "group": "clarify",
+          "passed": 18,
+          "total": 18
+        },
+        {
+          "group": "device_fixture",
+          "passed": 60,
+          "total": 60
+        },
+        {
+          "group": "dependency",
+          "passed": 15,
+          "total": 15
+        },
+        {
+          "group": "multi_action",
+          "passed": 15,
+          "total": 15
+        },
+        {
+          "group": "failure_receipt",
+          "passed": 29,
+          "total": 30
+        },
+        {
+          "group": "missing_capability",
+          "passed": 14,
+          "total": 18
+        },
+        {
+          "group": "no_operation",
+          "passed": 36,
+          "total": 36
+        },
+        {
+          "group": "device_no_operation",
+          "passed": 48,
+          "total": 48
+        }
+      ],
+      "all_three_passed": 137,
+      "api_errors": 0,
+      "reasoning_chars": 0,
+      "response_models": [
+        "qwen3.7-plus"
+      ],
+      "input_tokens": 2808843,
+      "output_tokens": 17133,
+      "max_request_context_tokens": 4129,
+      "first_decision_p50_ms": 891,
+      "first_decision_p95_ms": 1163,
+      "failures": {
+        "unrequested_call": 4,
+        "unknown_tool_or_invalid_schema": 1
+      }
+    },
+    {
+      "model": "qwen3.8-flash",
+      "passed": 292,
+      "total": 420,
+      "automatic_passed": 290,
+      "positive": {
+        "passed": 176,
+        "total": 300
+      },
+      "negative": {
+        "passed": 116,
+        "total": 120
+      },
+      "rounds": [
+        {
+          "trial": 1,
+          "passed": 96,
+          "total": 140
+        },
+        {
+          "trial": 2,
+          "passed": 96,
+          "total": 140
+        },
+        {
+          "trial": 3,
+          "passed": 100,
+          "total": 140
+        }
+      ],
+      "groups": [
+        {
+          "group": "live_time",
+          "passed": 58,
+          "total": 72
+        },
+        {
+          "group": "live_random",
+          "passed": 27,
+          "total": 36
+        },
+        {
+          "group": "server_fixture",
+          "passed": 36,
+          "total": 72
+        },
+        {
+          "group": "clarify",
+          "passed": 17,
+          "total": 18
+        },
+        {
+          "group": "device_fixture",
+          "passed": 36,
+          "total": 60
+        },
+        {
+          "group": "dependency",
+          "passed": 5,
+          "total": 15
+        },
+        {
+          "group": "multi_action",
+          "passed": 1,
+          "total": 15
+        },
+        {
+          "group": "failure_receipt",
+          "passed": 13,
+          "total": 30
+        },
+        {
+          "group": "missing_capability",
+          "passed": 17,
+          "total": 18
+        },
+        {
+          "group": "no_operation",
+          "passed": 34,
+          "total": 36
+        },
+        {
+          "group": "device_no_operation",
+          "passed": 48,
+          "total": 48
+        }
+      ],
+      "all_three_passed": 72,
+      "api_errors": 0,
+      "reasoning_chars": 0,
+      "response_models": [
+        "qwen3.8-flash"
+      ],
+      "input_tokens": 2347942,
+      "output_tokens": 17808,
+      "max_request_context_tokens": 4143,
+      "first_decision_p50_ms": 564,
+      "first_decision_p95_ms": 1577,
+      "failures": {
+        "missing_native_call": 52,
+        "wrong_tool_or_arguments": 70,
+        "unknown_tool_or_invalid_schema": 2,
+        "unrequested_call": 4
+      }
+    }
+  ],
+  "live": [
+    {
+      "model": "qwen3.7-plus",
+      "passed": 11,
+      "total": 11
+    },
+    {
+      "model": "qwen3.8-flash",
+      "passed": 9,
+      "total": 11
+    }
+  ],
+  "paired_summary": {
+    "both_pass": 288,
+    "plus_only_pass": 127,
+    "flash_only_pass": 4,
+    "both_fail": 1
+  },
+  "pack_sha256": "441d28a622dfb0898fd215f56f96f2ec28ec69351089395495c3749717248a45"
+}

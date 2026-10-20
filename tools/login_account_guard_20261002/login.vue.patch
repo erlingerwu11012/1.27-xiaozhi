@@ -1,0 +1,155 @@
+--- a/main/manager-web/src/views/login.vue
++++ b/main/manager-web/src/views/login.vue
+@@ -72,12 +72,14 @@
+             </div>
+           </div>
+ 
+-          <form class="form-body" @submit.prevent="handleSubmit" @keyup.enter="handleSubmit">
++          <form v-if="showLogin" key="login-form" class="form-body" autocomplete="off" @submit.prevent="handleSubmit" @keyup.enter="handleSubmit">
+             <!-- 用户名登录 -->
+             <template v-if="!isMobileLogin">
+               <div class="input-group">
+                 <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+-                <el-input v-model="form.username" :placeholder="$t('login.usernamePlaceholder')" name="username" autocomplete="username" id="username" />
++                <el-input ref="loginUsername" :value="form.username" :placeholder="$t('login.usernamePlaceholder')" name="username" autocomplete="off" id="username"
++                  :readonly="!credentialEditing.username" @focus="beginCredentialEdit('username')" @blur="endCredentialEdit('username')"
++                  @input="updateLoginCredential('username', $event)" @change="updateLoginCredential('username', $event)" />
+               </div>
+             </template>
+ 
+@@ -94,7 +96,9 @@
+ 
+             <div class="input-group">
+               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+-              <el-input v-model="form.password" :placeholder="$t('login.passwordPlaceholder')" type="password" name="password" autocomplete="current-password" id="password" show-password />
++              <el-input ref="loginPassword" :value="form.password" :placeholder="$t('login.passwordPlaceholder')" type="password" name="password" autocomplete="off" id="password" show-password
++                :readonly="!credentialEditing.password" @focus="beginCredentialEdit('password')" @blur="endCredentialEdit('password')"
++                @input="updateLoginCredential('password', $event)" @change="updateLoginCredential('password', $event)" />
+             </div>
+ 
+             <div class="captcha-row">
+@@ -144,7 +148,7 @@
+             </div>
+           </div>
+ 
+-          <form class="form-body" @submit.prevent="handleSubmit">
++          <form v-if="showLogin" key="register-form" class="form-body" @submit.prevent="handleSubmit">
+             <div class="input-group">
+               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+               <el-input v-model="form.username" :placeholder="$t('register.usernamePlaceholder')" name="username" autocomplete="username" id="register-username" />
+@@ -259,17 +263,26 @@
+       isPreparing: false,
+       isDiving: false,
+       fetchCaptchaTimer: null,
++      credentialEditing: { username: false, password: false },
++      credentialGuardTimer: null,
++      // Values live only in this component. Never persist credentials in storage.
++      credentialGuardReady: false,
+     };
+   },
+   mounted() {
+     this.fetchCaptcha();
+     this.$store.dispatch("fetchPubConfig").then(() => {
+-      this.isMobileLogin = this.enableMobileRegister;
++      // A delayed response must not replace fields the user is already using.
++      if (!this.showLogin) this.isMobileLogin = this.enableMobileRegister;
+     });
+     this.initCodeRain();
+     window.addEventListener("resize", this.resizeCodeRain);
+   },
++  updated() {
++    this.restoreInactiveCredentials();
++  },
+   beforeDestroy() {
++    this.stopCredentialGuard();
+     if (this.codeRainTimer) clearInterval(this.codeRainTimer);
+     if (this.fetchCaptchaTimer) {
+       clearTimeout(this.fetchCaptchaTimer);
+@@ -281,16 +294,20 @@
+     openLogin() {
+       this.showLogin = true;
+       this.isRegisterMode = false;
++      this.startCredentialGuard();
+     },
+     openRegister() {
++      this.stopCredentialGuard();
+       this.showLogin = true;
+       this.isRegisterMode = true;
+       this.fetchCaptcha();
+     },
+     closeLogin() {
++      this.stopCredentialGuard();
+       this.showLogin = false;
+     },
+     switchToRegister() {
++      this.stopCredentialGuard();
+       this.isRegisterMode = true;
+       this.form.confirmPassword = "";
+       this.fetchCaptcha();
+@@ -298,6 +315,58 @@
+     switchToLogin() {
+       this.isRegisterMode = false;
+       this.form.confirmPassword = "";
++      this.startCredentialGuard();
++    },
++    credentialInput(field) {
++      const component = this.$refs[field === 'username' ? 'loginUsername' : 'loginPassword'];
++      return component && component.getInput ? component.getInput() : null;
++    },
++    startCredentialGuard() {
++      this.stopCredentialGuard();
++      this.credentialGuardReady = true;
++      this.credentialGuardTimer = setInterval(() => this.restoreInactiveCredentials(), 200);
++      this.$nextTick(() => this.restoreInactiveCredentials());
++    },
++    stopCredentialGuard() {
++      if (this.credentialGuardTimer) clearInterval(this.credentialGuardTimer);
++      this.credentialGuardTimer = null;
++      this.credentialGuardReady = false;
++      this.credentialEditing.username = false;
++      this.credentialEditing.password = false;
++    },
++    beginCredentialEdit(field) {
++      if (!this.credentialGuardReady) return;
++      // Remove readonly immediately so the first key/paste does not get lost.
++      this.credentialEditing[field] = true;
++      const input = this.credentialInput(field);
++      if (input) { input.readOnly = false; input.value = this.form[field]; }
++    },
++    endCredentialEdit(field) {
++      this.credentialEditing[field] = false;
++      this.restoreInactiveCredentials();
++    },
++    updateLoginCredential(field, value) {
++      const input = this.credentialInput(field);
++      // Browser/extension fills arriving after focus moved to captcha must not
++      // replace the selected account, or pair it with a different password.
++      if (!this.credentialGuardReady || !this.credentialEditing[field] ||
++          !input || document.activeElement !== input) {
++        this.$nextTick(() => this.restoreInactiveCredentials());
++        return;
++      }
++      this.form[field] = value;
++    },
++    restoreInactiveCredentials() {
++      if (!this.credentialGuardReady || !this.showLogin || this.isRegisterMode) return;
++      for (const field of ['username', 'password']) {
++        const component = this.$refs[field === 'username' ? 'loginUsername' : 'loginPassword'];
++        const input = this.credentialInput(field);
++        if (input) {
++          input.readOnly = !this.credentialEditing[field];
++          // Silent fills must not desynchronise the shown value and Vue state.
++          if (!input.composing && !component.isComposing && input.value !== this.form[field]) input.value = this.form[field];
++        }
++      }
+     },
+     handleSubmit() {
+       if (this.isRegisterMode) {
+@@ -491,6 +560,7 @@
+     },
+ 
+     async login() {
++      this.restoreInactiveCredentials();
+       if (this.isMobileLogin) {
+         if (!validateMobile(this.form.mobile, this.form.areaCode)) {
+           showDanger(this.$t("login.requiredMobile"));

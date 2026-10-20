@@ -1,0 +1,228 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "name": "missing_auth",
+      "status": 401,
+      "result": {
+        "code": 401,
+        "msg": "服务器密钥不能为空",
+        "data": null
+      }
+    },
+    {
+      "name": "state",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "account_id": "99003",
+          "mode": "default",
+          "default_user_id": "usr_0d573d20458f410489ef2e4a063be521",
+          "default_generation": "1",
+          "directory_version": "1",
+          "updated_at": "2026-10-10 00:26:57",
+          "members": [
+            {
+              "user_id": "usr_0d573d20458f410489ef2e4a063be521",
+              "display_name": "默认用户",
+              "status": "active",
+              "kind": "default"
+            }
+          ],
+          "voice_profiles": [],
+          "cleanup_tasks": [],
+          "agent_ids": [
+            "agent_http"
+          ]
+        }
+      }
+    },
+    {
+      "name": "search_before",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [
+            {
+              "record_id": "archive:3688",
+              "text": "我喜欢咖啡",
+              "version": "a86d97cf2d21417e6a38fd8cba2c924e8a7e44158f70e363442ac16eb55619d4",
+              "owner": "usr_0d573d20458f410489ef2e4a063be521",
+              "source": "local_user_fact",
+              "created_at": "1791563217000"
+            }
+          ],
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我喜欢咖啡"
+        }
+      }
+    },
+    {
+      "name": "correct",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "local_applied": true,
+          "status": "completed",
+          "operation": "correct",
+          "operation_id": "usr_da3922ff4eb64133a8c62d31fdfb2d61",
+          "cloud_sync": "disabled",
+          "resolved_match": "我喜欢咖啡"
+        }
+      }
+    },
+    {
+      "name": "search_after_correct",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [
+            {
+              "record_id": "override:usr_da3922ff4eb64133a8c62d31fdfb2d61",
+              "text": "我现在不喝咖啡了",
+              "version": "4bad0e6d1ca9bc8d3fd26fe941ce8fd3c635e7c9572cfd67bbc1e56ae15c1799",
+              "owner": "usr_0d573d20458f410489ef2e4a063be521",
+              "source": "local_user_fact",
+              "created_at": "1791563217000"
+            }
+          ],
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我现在不喝咖啡了"
+        }
+      }
+    },
+    {
+      "name": "unrelated_preserved",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [
+            {
+              "record_id": "archive:3689",
+              "text": "我的台灯叫银杏灯",
+              "version": "8dd5487860047a036dbc87a42d4a2683627741b17fe44153bd9398cad6ee9a18",
+              "owner": "usr_0d573d20458f410489ef2e4a063be521",
+              "source": "local_user_fact",
+              "created_at": "1791563217000"
+            }
+          ],
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我的台灯叫银杏灯"
+        }
+      }
+    },
+    {
+      "name": "foreign_device",
+      "status": 200,
+      "result": {
+        "code": 500,
+        "msg": "设备归属已变更",
+        "data": null
+      }
+    },
+    {
+      "name": "forget",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "local_applied": true,
+          "status": "completed",
+          "operation": "forget",
+          "operation_id": "usr_f5a539881a704a8fa09abb0f9b23c292",
+          "cloud_sync": "disabled",
+          "resolved_match": "我的台灯叫银杏灯"
+        }
+      }
+    },
+    {
+      "name": "after_forget",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [],
+          "reliable": false,
+          "status": "suppressed",
+          "source": "local",
+          "text": ""
+        }
+      }
+    },
+    {
+      "name": "correct_persists_restart",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [
+            {
+              "record_id": "override:usr_da3922ff4eb64133a8c62d31fdfb2d61",
+              "text": "我现在不喝咖啡了",
+              "version": "4bad0e6d1ca9bc8d3fd26fe941ce8fd3c635e7c9572cfd67bbc1e56ae15c1799",
+              "owner": "usr_0d573d20458f410489ef2e4a063be521",
+              "source": "local_user_fact",
+              "created_at": "1791563217000"
+            }
+          ],
+          "text": "我现在不喝咖啡了",
+          "source": "local",
+          "status": "ok",
+          "reliable": true
+        }
+      }
+    },
+    {
+      "name": "forget_persists_restart",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [],
+          "text": "",
+          "source": "local",
+          "status": "suppressed",
+          "reliable": false
+        }
+      }
+    }
+  ],
+  "budget": {
+    "case": {
+      "used": 4134,
+      "limit": null
+    },
+    "model": {
+      "used": 2869,
+      "limit": null
+    },
+    "tts": {
+      "used": 3,
+      "limit": null
+    },
+    "vision": {
+      "used": 2,
+      "limit": null
+    }
+  }
+}

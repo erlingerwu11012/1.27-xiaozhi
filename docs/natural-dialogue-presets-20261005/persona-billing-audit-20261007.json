@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "signed_test_requests": 182,
+  "settled_bills": 182,
+  "duplicate_request_ids": 0,
+  "upstream_cost_cny_exact": "13003/31250",
+  "sale_currency_cny_exact": "13003/9375",
+  "upstream_cost_cny_display": 0.416096,
+  "sale_currency_cny_display": 1.386987,
+  "token_usage": {
+    "input_tokens": 673824,
+    "output_tokens": 5668,
+    "cached_tokens": 610560
+  },
+  "single_request_input_min": 3613,
+  "single_request_input_max": 3836,
+  "original_recharge_policy_preserved": true,
+  "model": "qwen3.7-plus",
+  "thinking": false
+}

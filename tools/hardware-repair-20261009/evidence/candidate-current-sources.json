@@ -1,0 +1,22 @@
+{
+  "python": {
+    "core/utils/tool_harness/runtime.py": "772f8e2781312994b8812052a18d58b3b41391d52bc4f66a6f9eb1c316b51471",
+    "core/utils/tool_harness/contracts.py": "0ca830b92350645e21e25a867c82e8c37978e8bce29e0d642ddc61de7d9f3424",
+    "core/utils/tool_harness/presentation.py": "9af6b1645665a49bef37752a6f43e926549f99b6505879db0eeee628b631126a",
+    "core/utils/tool_harness/memory_policy.py": "42ae585573a66d7f8f06716795803d67fb1be44152dd81f61156c72f9385f34f",
+    "core/utils/tool_harness/reply_composer.py": "23d9c6c4fae9d900cf35a3ad5cb8f8d74c6bb2f0a2d3146c52ac80d391e3a6fc",
+    "core/utils/recent_memory.py": "729678d8d2f407ab269f366fff2588bda3de42470524b54c5061668a6cd79d42",
+    "core/utils/voiceprint_provider.py": "f04e01142c15247ff455b4a119678ddfd0e553bb3814788b4d6ca37130561bd5",
+    "core/utils/vision_readiness.py": "9f4b473dab519a6b0033a68cd3038afb76bb653d367f2fc9e395134a83d445de",
+    "plugins_func/functions/person_memory.py": "b1d4b7e8545ddddb17a6ea47b89c8b647e8df6cbb7dcc3f981e5a30c67c6c31f",
+    "core/utils/tool_result.py": "d2d65e71e3a6e1108c7196ce543c4bc89cb80f7e1fa14839d8e3ddd17b215dba",
+    "core/utils/recipient_resolver.py": "955d95b3e0383a050977e77b6b4b1203934992af12cabcc7d6f016373245cd9d",
+    "core/utils/unified_recipient_resolver.py": "fa6d95abc45f0a1d77c318eb2eed5948061c09eedc68d5314c324b1a60f6392f"
+  },
+  "java": {
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java": "5c117f2644c2f4dfbab497fbcd07c49cc3322b611145e8c52953ae70b1af82e7",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java": "e1590253ca6a014100949c8dd37d7b7785c00e3dfcf433cc62198338021decbb",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java": "b235ae20b66b18990ab9396f768a70ff73906c1ade8f6a01c69881866c0c94f3",
+    "src/main/java/xiaozhi/modules/config/service/impl/ConfigServiceImpl.java": "e8cd0409dd5004b9583fb7fce1df26ad877d9734bc9bd862488fc07a7dcb80db"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "tests": 15,
+  "passed": true,
+  "rows": [
+    {
+      "query": "声音比现在低十个点就行",
+      "passed": true
+    },
+    {
+      "query": "音量比当前高五个点",
+      "passed": true
+    },
+    {
+      "query": "声音比原来的小二十个点",
+      "passed": true
+    },
+    {
+      "query": "把声音往下调十个点",
+      "passed": true
+    },
+    {
+      "speech": "看旧照片会激活当时的情境记忆，让人感慨时光早已无法重来。",
+      "passed": true
+    },
+    {
+      "speech": "记忆中的环境早已改变，看到旧照片会怀念。",
+      "passed": true
+    },
+    {
+      "speech": "闹钟设好啦。",
+      "passed": true
+    },
+    {
+      "speech": "亮度已经调到四档了。",
+      "passed": true
+    },
+    {
+      "speech": "卡片已经关闭了。",
+      "passed": true
+    },
+    {
+      "speech": "我先不标记完成，等你收到货。",
+      "passed": true
+    },
+    {
+      "speech": "我已经帮你设好了。",
+      "passed": true
+    },
+    {
+      "speech": "还没收到完成回执，不能说闹钟已经设好。",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "speech": "音量已调到40。",
+      "passed": true
+    },
+    {
+      "speech": "看旧照片会激活当时的情境记忆，让人感慨时光早已无法重来。",
+      "passed": true
+    }
+  ]
+}

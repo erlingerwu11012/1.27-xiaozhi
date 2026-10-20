@@ -1,0 +1,83 @@
+{
+  "phase": "complete",
+  "charge": 1462,
+  "started_at": 1791855638.0554614,
+  "release": "/root/prjs/releases/harness-followup-20261013",
+  "rollback_release": "/root/prjs/releases/harness-stream-20261012",
+  "old_pm2_ids": {
+    "manager-api": 9,
+    "xiaozhi-server": 10
+  },
+  "model_calls": 0,
+  "tts_calls": 0,
+  "vision_calls": 0,
+  "hardware_operations": 0,
+  "production_business_writes": 0,
+  "nginx_backups": {
+    "/etc/nginx/sites-enabled/www.realecho.cn": "/root/prjs/tmp/hardware-followup-20261013/deployment-private/www.realecho.cn.before",
+    "/etc/nginx/conf.d/tool-harness-internal.conf": "/root/prjs/tmp/hardware-followup-20261013/deployment-private/tool-harness-internal.conf.before"
+  },
+  "backup": {
+    "fresh_database_sha256": "91a24453bbe9cbe16292fa7e236c78263a95e52aa623e04da98761c90e83af93",
+    "sqlite_snapshots": [
+      "sqlite-person-material-outbox.sqlite3",
+      "sqlite-harness-operations.sqlite3"
+    ],
+    "source_config_restore_rehearsal": "predeploy-backup02/manifest.json",
+    "immutable_old_release_retained": true
+  },
+  "migration": {
+    "required": false,
+    "business_rows_changed": 0
+  },
+  "new_api_pm2_id": 11,
+  "new_server_pm2_id": 12,
+  "cutover_at": 1791855656.9185326,
+  "completed_at": 1791855658.2880394,
+  "checks": [
+    "fresh_database_and_ledger_backup",
+    "restore_rehearsal_reused",
+    "final_source_and_jar_hashes",
+    "candidate_authenticated_hello_mcp",
+    "api_ready",
+    "three_server_listeners",
+    "nginx_valid",
+    "public_https_200",
+    "public_invalid_token_1008",
+    "unchanged_model_persona_billing_official_display",
+    "unchanged_root_config",
+    "same_production_ledger",
+    "old_exact_pm2_ids_retained"
+  ],
+  "model_config": {
+    "model": "qwen3.7-plus",
+    "temperature": 0.4,
+    "hardware_billing": true,
+    "account_bound": true,
+    "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+    "thinking": "unchanged; non-thinking adapter verified in isolated real model requests"
+  },
+  "extended_observation_waived": true,
+  "hardware_accepted": false,
+  "firmware_flashed": false,
+  "public_valid_handshake_evidence": "same release real candidate entry with isolated API; production only negative token to avoid business writes",
+  "free_bytes": 175775744,
+  "budget": {
+    "case": {
+      "used": 800,
+      "limit": 800
+    },
+    "model": {
+      "used": 652,
+      "limit": 700
+    },
+    "tts": {
+      "used": 10,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  }
+}

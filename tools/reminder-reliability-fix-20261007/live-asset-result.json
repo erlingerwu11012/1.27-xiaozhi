@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "format": "ogg_opus",
+  "bytes": 1847,
+  "elapsed_ms": 680,
+  "same_customer_gateway": true,
+  "hardware_billing": true,
+  "live_session_unchanged": true,
+  "hardware_writes": 0,
+  "production_modified": false
+}

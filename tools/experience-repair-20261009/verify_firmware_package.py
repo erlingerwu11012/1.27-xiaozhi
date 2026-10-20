@@ -1,0 +1,4 @@
+from pathlib import Path
+import importlib.util,json,hashlib
+root=Path('releases/experience-repair-20261009').resolve();spec=importlib.util.spec_from_file_location('upgrade_package_check',root/'upgrade_preserve.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);manifest=m.verify_package(root)
+layout=m.partitions((root/'partition-table.bin').read_bytes().ljust(4096,b'\xff'));result={'package_checksums_passed':True,'partition_layout':layout,'app_fits':len((root/'xiaozhi.bin').read_bytes())<=layout['factory'][1],'source_app_identical_to_build':hashlib.sha256((root/'xiaozhi.bin').read_bytes()).digest()==hashlib.sha256(Path('build-experience-repair-20261009/xiaozhi.bin').read_bytes()).digest(),'flash_performed':False};assert result['app_fits'] and result['source_app_identical_to_build'];Path('tools/experience-repair-20261009/evidence/firmware-package-check.json').write_text(json.dumps(result,indent=2),encoding='utf-8');print(json.dumps(result))

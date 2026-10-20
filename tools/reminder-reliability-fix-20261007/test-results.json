@@ -1,0 +1,74 @@
+[
+  {
+    "suite": "reminder_reliability",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 14
+  },
+  {
+    "suite": "operation_control",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 44
+  },
+  {
+    "suite": "operation_pipeline",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 25
+  },
+  {
+    "suite": "unified_recipient_outbound",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 3
+  },
+  {
+    "suite": "reminder_interaction",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 8
+  },
+  {
+    "suite": "reminder_voice",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 50
+  },
+  {
+    "suite": "reminder_voice_abort",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 3
+  },
+  {
+    "suite": "reminder_voice_download",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 12
+  },
+  {
+    "suite": "device_send_auth",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 6
+  },
+  {
+    "suite": "qwen_audio_tts_plus",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 28
+  },
+  {
+    "suite": "recipient_resolver",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 35
+  },
+  {
+    "suite": "device_reminder",
+    "exit_code": 0,
+    "passed": true,
+    "test_count": 40
+  }
+]

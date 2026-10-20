@@ -1,0 +1,1 @@
+{"reason": "319 complete,317 passed. Two failures preserved: pure list missing planner authority fields; correction reread blocked as duplicate. Fixed and verified with actual MCP transport,49 latest regressions pass. Failed card session retained in full,60 new independent fact/feedback holdouts.", "time": 1791533840.2384212}

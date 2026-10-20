@@ -1,0 +1,81 @@
+--- before/main/vision_credentials.h
++++ after/main/vision_credentials.h
+@@ -59,6 +59,7 @@
+     bool TryAcquireIdentitySnapshot(VisionCredentialSnapshot* out) const;
+ 
+     bool IsExplainReady() const;
++    std::string ExplainNotReadyReason() const;
+     bool IsIdentityReady() const;
+ 
+     VisionCredentialSnapshot DebugCopy() const;
+--- before/main/vision_credentials.cc
++++ after/main/vision_credentials.cc
+@@ -216,6 +216,16 @@
+ bool VisionCredentialStore::IsExplainReady() const {
+     std::lock_guard<std::mutex> lock(mutex_);
+     return published_.explain_ready && !IsExpiredLocked(published_.expires_at);
++}
++
++std::string VisionCredentialStore::ExplainNotReadyReason() const {
++    std::lock_guard<std::mutex> lock(mutex_);
++    if (!generation_accepting_) return "connection_closed";
++    if (!last_reject_reason_.empty()) return last_reject_reason_;
++    if (!pending_hello_seen_) return "awaiting_hello";
++    if (!pending_initialize_seen_) return "awaiting_initialize";
++    if (IsExpiredLocked(published_.expires_at)) return "expired";
++    return published_.explain_ready ? "ready" : "incomplete_pending";
+ }
+ 
+ bool VisionCredentialStore::IsIdentityReady() const {
+--- before/main/mcp_tools/mcp_tools_camera.cc
++++ after/main/mcp_tools/mcp_tools_camera.cc
+@@ -163,6 +163,8 @@
+             ESP_LOGI("CameraTools", "[CAMERA] Explicit user request: capturing a frame for VLM upload");
+ 
+             if (!VisionCredentialStore::GetInstance().IsExplainReady()) {
++                ESP_LOGW("CameraMCP", "event=explain_rejected reason=%s",
++                         VisionCredentialStore::GetInstance().ExplainNotReadyReason().c_str());
+                 return McpError{"视觉服务尚未就绪，请稍后再试", "vision_not_ready"};
+             }
+ 
+--- before/main/reminder_coordinator.cc
++++ after/main/reminder_coordinator.cc
+@@ -2458,6 +2458,20 @@
+         const std::string actor =
+             UserContext::GetInstance().GetEffectiveUserId();
+         const bool can_read = CanReadDetails(instance, actor);
++        // An authorized fresh read grants this exact visible version to the
++        // current connection. Keep Act's session, actor and revision guards.
++        const std::string session = Application::GetInstance().GetAudioSessionId();
++        if (can_read && !session.empty()) {
++            auto* self = const_cast<ReminderCoordinator*>(this);
++            std::lock_guard<std::mutex> lock(self->mutex_);
++            auto* live = self->FindLocked(instance.instance_id);
++            if (live && live->revision == instance.revision &&
++                self->current_instance_id_ == instance.instance_id &&
++                IsActive(*live) && live->bound_session_id != session) {
++                live->bound_session_id = session;
++                ESP_LOGI(kTag, "[REMINDER_CARD] event=session_rebound reason=authorized_current_read revision=%u", static_cast<unsigned>(instance.revision));
++            }
++        }
+         cJSON_AddBoolToObject(root, "active", true);
+         AddString(root, "instance_id", instance.instance_id);
+         cJSON_AddNumberToObject(root, "revision", instance.revision);
+--- before/tools/test_vision_credentials_host.cpp
++++ after/tools/test_vision_credentials_host.cpp
+@@ -373,6 +373,15 @@
+ }  // namespace
+ 
+ int main() {
++    {
++        auto& store = VisionCredentialStore::GetInstance();
++        auto gen = store.BeginConnection();
++        CHECK(store.ExplainNotReadyReason() == "awaiting_hello");
++        store.ApplyHelloSession(gen, "experience-repair-session");
++        CHECK(store.ExplainNotReadyReason() == "awaiting_initialize");
++        store.EndConnection(gen);
++        CHECK(store.ExplainNotReadyReason() == "connection_closed");
++    }
+     TestInitialConnectReady();
+     TestReconnectInvalidatesUntilNewReady();
+     TestHelloWithoutInitialize();

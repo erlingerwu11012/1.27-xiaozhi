@@ -1,0 +1,9 @@
+{
+  "flashed_at": "2026-10-13T10:33:07.935075+00:00",
+  "port": "COM10",
+  "mac": "ac:a7:04:fd:20:2c",
+  "app_sha256": "13c957ffdc9ddbd68e8acd58111b6117a5537d5969c9629cc95391ed34344f26",
+  "only_factory_written": true,
+  "esptool_hash_verified": true,
+  "hardware_accepted": false
+}

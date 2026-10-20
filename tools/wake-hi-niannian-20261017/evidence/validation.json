@@ -1,0 +1,14 @@
+{
+  "build_exit_code": 0,
+  "wake_host_fault_injection_passed": true,
+  "existing_tts_scenarios_passed": 24,
+  "migration_checks_passed": 6,
+  "flash_hash_verified": true,
+  "partition_table_readback_verified": true,
+  "protected_data_unchanged": true,
+  "acoustic_acceptance": "pending user test",
+  "candidate_source_unchanged_after_build": true,
+  "runtime_serial_bytes": 0,
+  "startup_verified": false,
+  "runtime_console": "UART0; COM11 native USB used for flashing"
+}

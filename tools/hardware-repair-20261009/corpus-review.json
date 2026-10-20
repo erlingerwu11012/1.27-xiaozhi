@@ -1,0 +1,69 @@
+{
+  "count": 267,
+  "fresh_independent_holdout": 66,
+  "stronger_time_expectations": [
+    {
+      "id": "reg-67",
+      "old_expectation": {
+        "id": "reg-67",
+        "query": "把已分析确认的喝水规律保存为每天8点的习惯规则，提前2分钟，来源auto",
+        "tool": "habit_learn",
+        "arguments": {
+          "intent": "drink_water",
+          "description": "喝水",
+          "hour": 8,
+          "minute": 0,
+          "advance_minutes": 2,
+          "source": "auto",
+          "repeat_days": 127
+        },
+        "group": "tool",
+        "setup": "habit_learn",
+        "holdout": false,
+        "independent_holdout": false
+      },
+      "reason": "User did not specify morning/afternoon; clarification is required, not an inferred morning write."
+    },
+    {
+      "id": "reg-68",
+      "old_expectation": {
+        "id": "reg-68",
+        "query": "帮我把已分析确认的喝水规律保存为每天8点的习惯规则，提前2分钟，来源auto",
+        "tool": "habit_learn",
+        "arguments": {
+          "intent": "drink_water",
+          "description": "喝水",
+          "hour": 8,
+          "minute": 0,
+          "advance_minutes": 2,
+          "source": "auto",
+          "repeat_days": 127
+        },
+        "group": "tool",
+        "setup": "habit_learn",
+        "holdout": false,
+        "independent_holdout": false
+      },
+      "reason": "User did not specify morning/afternoon; clarification is required, not an inferred morning write."
+    },
+    {
+      "id": "reg-114",
+      "old_expectation": {
+        "id": "reg-114",
+        "query": "工作日七点半设一个闹钟",
+        "tool": "alarm_set",
+        "arguments": {
+          "hour": 7,
+          "minute": 30,
+          "repeat_days": 62
+        },
+        "group": "common",
+        "setup": "alarm_set",
+        "holdout": false,
+        "independent_holdout": false
+      },
+      "reason": "User did not specify morning/afternoon; clarification is required, not an inferred morning write."
+    }
+  ],
+  "prior_failed_samples_retained": true
+}

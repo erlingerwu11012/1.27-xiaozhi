@@ -1,0 +1,232 @@
+File exists: True
+File size: 27519
+
+Sheets: ['普通模式', '工厂模式', '版本记录']
+
+=== 普通模式 (rows=68, cols=9) ===
+寄存器页面  | 工作模式 |  |  |  |  |  |  | 
+切换方式 | 写0x00到寄存器0x00 |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+寄存器地址 | 长度 | 读写 | 寄存器符号 | 寄存器名称 | 取值范围 |  |  | 寄存器描述
+ |  |  |  |  | 默认值 | 最小值 | 最大值 | 
+0x00 | 1 Byte | 读写(RW) | Mode_Switch | 寄存器页面（模式）切换 |  |  |  | 写0x40到寄存器0x00切换到工厂模式读出值为0
+0x01 | 1 Byte | 只读(RO) | Reserved |  | 0x00 |  |  | 
+0x02 | 1 Byte | 只读(RO) | TD_STATUS | 报点个数 | 0x00 | 0x00 | 0x02 | 最大支持同时报两点
+0x03 | 1 Byte | 只读(RO) | P1_XH | 第1点的X坐标高4位 | 0xFF |  |  | bit7-bit6为第1点触摸事件标志，bit3-bit0为第1点的X坐标高4位。
+0x04 | 1 Byte | 只读(RO) | P1_XL | 第1点的X坐标低8位 | 0xFF |  |  | 
+0x05 | 1 Byte | 只读(RO) | P1_YH | 第1点的Y坐标高4位 | 0xFF |  |  | bit7-bit4为第1点的ID，bit3-bit0为第1点的Y坐标高4位。
+0x06 | 1 Byte | 只读(RO) | P1_YL | 第1点的Y坐标低8位 | 0xFF |  |  | 
+0x07 | 1 Byte | 只读(RO) | P1_WEIGHT |  | 0xFF |  |  | 
+0x08 | 1 Byte | 只读(RO) | P1_MISC |  | 0xFF |  |  | 
+0x09 | 1 Byte | 只读(RO) | P2_XH | 第2点的X坐标高4位 | 0xFF |  |  | bit7-bit6为第2点触摸事件标志，bit3-bit0为第1点的X坐标高4位。
+0x0A | 1 Byte | 只读(RO) | P2_XL | 第2点的X坐标低8位 | 0xFF |  |  | 
+0x0B | 1 Byte | 只读(RO) | P2_YH | 第2点的Y坐标高4位 | 0xFF |  |  | bit7-bit4为第2点的ID，bit3-bit0为第2点的Y坐标高4位。
+0x0C | 1 Byte | 只读(RO) | P2_YL | 第2点的Y坐标低8位 | 0xFF |  |  | 
+0x0D | 1 Byte | 只读(RO) | P2_WEIGHT |  | 0xFF |  |  | 
+0x0E | 1 Byte | 只读(RO) | P2_MISC |  | 0xFF |  |  | 
+0x0F～0x7F |  |  | Reserved |  |  |  |  | 
+0x80 | 1 Byte | 读写(RW) | ID_G_THGROUP | 触摸阈值 | 0xBB |  |  | 触摸阈值 / 16
+0x81～0x84 |  |  | Reserved |  |  |  |  | 
+0x85 | 1 Byte | 读写(RW) | ID_G_THDIFF | 点滤波范围阈值 | 0xA0 | 0x00 | 0xFF | 约等于RV_G_THDIFF/16
+0x86 | 1 Byte | 读写(RW) | ID_G_CTRL | monitor模式开关 | 0x01 | 0x00 | 0x01 | 是否允许进入monitor模式
+0x01 : 允许
+0x00 : 禁止
+0x87 | 1 Byte | 读写(RW) | ID_G_TIMEENTERMONITOR | 没触摸进入monitor延时 | 0x1E | 0x00 | 0x64 | 在指定时间内没有触摸则进入MONITOR状态，需要与参数“monitor模式开关”配合使用。单位为秒。
+0x88 | 1 Byte | 读写(RW) | ID_G_PERIODACTIVE | 工作模式扫描周期  | 0x08 | 0x04 | 0x14 | 用于控制报点率
+0x89 | 1 Byte | 读写(RW) | ID_G_PERIODMONITOR | MONITOR模式扫描周期 | 0x08 | 0x04 | 0x14 | 用于控制报点率
+0x8A |  | 读写(RW) | Reserved |  |  |  |  | 
+0x8B | 1 Byte | 读写(RW) | ID_G_FREQ_HOPPING_EN | 充电器标识 | 0x00 | 0x00 | 0x01 | 需要Host在插拔充电器时操作该寄存器
+0x00:充电器plug out
+0x01:充电器plug in
+0x8C～0x95 |  |  | Reserved |  |  |  |  | 
+0x96 | 1 Byte | 读写(RW) | ID_G_TEST_MODE_FILTER | 量产测试模式下Alpha滤波使能 | 0x00 | 0x00 | 0x01 | 
+0x97～0x9E |  |  | Reserved |  |  |  |  | 
+0x9F | 1 Byte | 只读(RO) | ID_G_CIPHER_MID | 芯片代号（中字节） | 0x26 | 0x00 | 0xFF | 
+0xA0 | 1 Byte | 只读(RO) | ID_G_CIPHER_LOW | 芯片代号（低字节） | 0x00 | 0x00 | 0x03 | 0x00: Ft6236G                                                                           0x01: Ft6336G                                                                           0x02: Ft6336U                                                                           0x03: Ft6426
+0xA1 | 1 Byte | 只读(RO) | ID_G_LIB_VERSION_H | APP 库文件版本号高字节 | 0x10 | 0x00 | 0xFF | APP 库文件版本号高字节
+0xA2 | 1 Byte | 只读(RO) | ID_G_LIB_VERSION_L | APP 库文件版本号低字节 | 0x01 | 0x00 | 0xFF | APP 库文件版本号低字节
+0xA3 | 1 Byte | 只读(RO) | ID_G_CIPHER_HIGH | 芯片代号（高字节） | 0x64 | 0x00 | 0xFF | 
+0xA4 | 1 Byte | 读写(RW) | ID_G_MODE | 报点INT模式 | 0x01 | 0x00 | 0x01 | 用于控制报点INT模式
+0x00 : 不拉长报点时INT低电平时间
+0x00 : 拉长报点时INT低电平时间
+0xA5 | 1 Byte | 读写(RW) | ID_G_PMODE | 芯片工作模式 | 0x00 | 0x00 | 0x03 | 功耗模式
+0x00 : P_ACTIVE
+0x01 : P_MONITOR
+0x02 : P_STANDBY
+0x03 : P_HIBERNATE
+0xA6 | 1 Byte | 只读(RO) | ID_G_FIRMID | Firmware Verson | 0x00 | 0x00 | 0xFF | 
+0xA7 |  |  | Reserved |  |  |  |  | 
+0xA8 | 1 Byte | 只读(RO) | ID_G_FOCALTECH_ID | VENDOR ID | 0x11 | 0x00 | 0xFF | 
+0xA9 | 1 Byte | 读写(RW) | ID_G_VIRTUAL_KEY_THRES | 量产测试模式下的虚拟按键阈值 | 0X19 | 0x00 | 0xFF | 约等于VIRTUAL_KEY_THRESHOLD / 40
+0xAA～0xAC |  |  | Reserved |  |  |  |  | 
+0xAD | 1 Byte | 读写(RW) | ID_G_IS_CALLING | 通话标志字 | 0x00 | 0x00 | 0x01 | 用于HOST通知芯片是否在通话中
+0xAE | 1 Byte | 读写(RW) | ID_G_FACTORY_MODE | 工厂模式种类 | 0x00 | 0x00 | 0x02 | 0x00 : F_NORMAL
+0x01 : F_TESTMODE_1
+0x02 : F_TESTMODE_2
+0xAF | 1 Byte | 只读(RO) | ID_G_RELEASE_CODE_ID | 公版release code ID | 0x01 | 0x00 | 0x01 | 
+0xB0 | 1 Byte | 读写(RW) | ID_G_FACE_DEC_MODE | 近距离感应使能 | 0x00 | 0x00 | 0x01 | 0x00 : Disable
+0x01 : Enable
+0xB1-0xBB |  | 读写(RW) | Reserved |  |  |  |  | 
+0xBC | 1 Byte | 写（W) | ID_G_STATE | 工作模式 | 0x01 | 0x00 | 0x04 | 写0xAA，0x55到这个寄存器触发升级流程
+0x00: InFO模式
+0x01: 正常工作模式
+0x03: 工厂模式
+0x04: 自动校正模式 
+0xBD～0xCF |  | 读写(RW) | Reserved |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+0xD0 | 1 Byte | 读写(RW) | ID_G_SPEC_GESTURE_ENABLE | 特殊手势模式使能 | 0x00 | 0x00 | 0x01 | A. 进入手势状态,正常工作状态下向0xd0寄存器写1,退出手势0xd0寄存器写0；
+B. 使能手势,0xd1,0xd2,0xd5—0xd8寄存器.对应的bit写1,使能相应的手势；
+0xD1～0xDA |  | 读写（RW) | Reserved |  |  |  |  | 
+ | Bit7 | Bit6 | Bit5 | Bit4 | Bit3 | Bit2 | Bit1 | Bit0
+0xD1 | 保留 | 保留 | 数字，字符识别总开关 | 双击使能 | 下滑直线 | 上滑直线 | 右滑直线 | 左滑直线
+0xD2 | d | a | g | c | e | m | w | o
+0xD3 | 手势ID号 |  |  |  |  |  |  | 
+0xD4 | 保留 |  |  |  |  |  |  | 
+0xD5 | u | s | P | L | q | b | 保留 | n
+0xD6 | 保留 | 保留 | △ | v | ^ | >  | 保留 | @
+0xD7 | 保留 | 保留 | 2 | 8 | 7 | 9 | 6 | 3
+0xD8 | 保留 | 保留 | 保留 | 保留 | r | y | k | h
+0xD9 | 保留 |  |  |  |  |  |  | 
+0xDA | DEBUG USE |  |  |  |  |  |  | 
+
+=== 工厂模式 (rows=72, cols=9) ===
+寄存器页面  | 工厂模式（TEST0）第1页 |  |  |  |  |  |  | 
+切换方式 | 写0x40到寄存器0x00 |  |  |  |  |  |  | 
+第1页 |  |  |  |  |  |  |  | 
+寄存器地址 | 长度 | 读写 | 寄存器符号 | 寄存器名称 | 取值范围 |  |  | 寄存器描述
+ |  |  |  |  | 默认值 | 最小值 | 最大值 | 
+0x00 | 1 Byte | 读写(RW) | Mode_Switch | 寄存器页面（模式）切换 |  |  |  | 寄存器页面（模式）切换
+0x01 |  |  | Reserved |  |  |  |  | 
+0x02 | 1 Byte | 读写(RW) | Work_Mode | 工作模式 | 0x01 | 0x00 | 0x04 | 0x00: InFO模式
+0x01: 正常工作模式
+0x03: 工厂模式
+0x04: 自动校正模式 
+0x03～0x06 |  |  | Reserved |  |  |  |  | 
+0x07 | 1 Byte | 读写(RW) | RS_MODE_EN | 微短测试开关 | 0x00 | 0x00 | 0x01 | 0x00：关闭微短测试功能                                                                     0x01：开启微短测试功能
+0x08 | 1 Byte | 读写(RW) | AcmdREG | 通信ACK寄存器 | 0x00 | 0x00 | 0xFF | 0x00: RAWDATA数据已准备好，HOST可以读取
+0x01-0xff : 可以开始准备下一帧RAWDATA数据
+0x09 |  |  | Reserved |  |  |  |  | 
+0x0A | 1 Byte | 只读(RO) | TP_Channel_Num | 通道数 | 0x28 | 0x00 | 0x3F | VA区通道个数 最大值为63.为TP_CHANNEL_NUM宏定义值
+0x0B | 1 Byte | 只读(RO) | TP_Key_Num | 虚拟按键数 | 0x00 | 0x00 | 0x3F | 虚拟按键个数 最大值为63。为(TP_KEY_NUM - KEY_CH_INVALID_NUM)宏定义值
+0x0C | 1 Byte | 读写(RW) | AFE_Sample_Cycle | 扫描采样次数 | 0x07 | 0x00 | 0x1F | (AFE_Sample_Cycle + 1) * 8
+0x0D | 1 Byte | 读写(RW) | Area1_K1_Delay | 第1区充电延时时间 | 0x10 | 0x08 | 0xFF | 
+0x0E | 1 Byte | 读写(RW) | Area1_K2_Delay | 第1区采样延时时间 | 0x10 | 0x08 | 0xFF | 
+0x0F | 1 Byte | 读写(RW) | Area2_K1_Delay | 第2区充电延时时间 | 0x14 | 0x08 | 0xFF | 
+0x10 | 1 Byte | 读写(RW) | Area2_K2_Delay | 第2区采样延时时间 | 0x14 | 0x08 | 0xFF | 
+0x11 | 1 Byte | 读写(RW) | Area3_K1_Delay | 第3区充电延时时间 | 0x10 | 0x08 | 0xFF | 
+0x12 | 1 Byte | 读写(RW) | Area3_K2_Delay | 第3区采样延时时间 | 0x10 | 0x08 | 0xFF | 
+0x13 | 1 Byte | 读写(RW) | Area2_K_Cnt | 第2区起始通道序号 | 0 | 0 | 0x2D | 第2区起始通道序号 （为0时，不起作用）
+0x14 | 1 Byte | 读写(RW) | Area3_K_Cnt | 第3区起始通道序号 | 0 | 0 | 0x2D | 第3区起始通道序号 （为0时，不起作用.）
+0x15 | 1 Byte | 读写(RW) | AFE_Sample_Mode | AFE采样方式 | 0x01 | 0x00 | 0x01 | 0x00 : 单边采样
+0x01 : 双边采样
+0x16 | 1 Byte | 读写(RW) | AFE_Split_En | Split功能 | 0x00 | 0x00 | 0x01 | 0x00：关闭Split功能                                                                     0x01：开启Split功能
+0x17 | 1 Byte | 读写(RW) | AFE_Split_Sel | Split模式选择 | 0x00 | 0x00 | 0x01 | 0x00：AFE输出 ACC、A(前一半次扫描ACC累加值)、B(后一半次扫描ACC累加值)                                                                     0x01：AFE输出 ACC、abs(A - B)
+0x18 | 1 Byte | 读写(RW) | Water_Proof_Level | 防水功能等级 | 0x03 | 0x00 | 0x03 | 0x00 : 防水功能关闭
+0x01 : 防水功能开启，等级1
+0x02 : 防水功能开启，等级2
+0x03 : 防水功能开启，全防水
+0x19 | 1 Byte | 读写(RW) | Close_Mode_EN | 近距离感应模式开关 | 0x00 | 0x00 | 0x01 | 需要在代码里打开FACE_DETECTION宏开关
+0x00 : 近距离感应模式关闭
+0x01 : 近距离感应模式打开
+0x1A | 1 Byte | 读写(RW) | VDD5_Value | VDD5电压等级 | 0x03 | 0x00 | 0x07 | 0x00 : 4.1V
+0x01 : 4.4V
+0x02 : 4.7V
+0x03 : 5.0V
+0x04 : 5.3V
+0x05 : 5.5V
+0x06 : 5.8V
+0x07 : 6.2V
+0x1B | 1 Byte | 读写(RW) | CF_Value | CF 范围 | 0x30 | 0x00 | 0x3F | 
+0x1C | 1 Byte | 读写(RW) | Auto_CLB_Sample_Cycles | 自动校正扫描次数 | 0x00 | 0x00 | 0x03 | 0:8次扫描
+1:16次扫描
+2:24次扫描                                                                              3:32次扫描
+其他：8次扫描
+0x1D | 1 Byte | 读写(RW) | 2nd_Auto_CLB | 二次自动校正 | 0x00 | 0x00 | 0x01 | 0:关闭二次自动校正
+1:开启二次自动校正
+其他：开启二次自动校正
+0x1E | 1 Byte | 读写(RW) | Mid5_En | Mid5算法 | 0x00 | 0x00 | 0x01 | 0x00 : Mid5关闭
+0x01 : Mid5开启
+0x1F | 1 Byte | 读写(RW) | NLC_En | NLC算法 | 0x00 | 0x00 | 0x01 | 0x00 : NLC关闭
+0x01 : NLC开启
+0x20 | 1 Byte | 读写(RW) | NLC_THR | NLC阈值 | 0x1c | 0x00 | 0xFF | 阈值 = NLC_THR << 2
+0x21 | 1 Byte | 读写(RW) | IIR_En | IIR算法 | 0x00 | 0x00 | 0x01 | 0x00 : IIR关闭
+0x01 : IIR开启
+0x22 | 1 Byte | 读写(RW) | Sync_Mode | Vsync、Hsync模式选择 | 0x00 | 0x00 | 0x03 | 0x00:Sync模式关闭
+0x01:Vsync Only
+0x02:Hsync Only                                                                              0x03:Vsync + Hsync
+0x23～0x24 | 2 Bytes | 读写(RW) | Vsync_Width | Vsync信号时间宽度 | 0x9AF2 | 0x0000 | 0xFFFF | Tvsync =  Vsync_Width / adcclk 。
+0x25 | 1 Byte | 读写(RW) | Vsync_Front_Porch | vsync front porch时间 | 0x20 | 0x00 | 0xFF | Tvfp = (Vsync_Front_Porch << 4) / adcclk
+0x26 | 1 Byte | 读写(RW) | Vsync_Back_Porch | vsync back porch时间 | 0x20 | 0x00 | 0xFF | Tvbp = (Vsync_Back_Porch << 4) / adcclk
+0x27 | 1 Byte | 读写(RW) | Hsync_Offset1 | 第1扫描分区的Hsync延时时间 | 0x20 | 0x00 | 0xFF | Thsyncoff1 = (Hsync_Offset1 << 2) /adcclk
+0x28 | 1 Byte | 读写(RW) | Hsync_Offset2 | 第2扫描分区的Hsync延时时间 | 0x20 | 0x00 | 0xFF | Thsyncoff2 = (Hsync_Offset2 << 2) /adcclk
+0x29 | 1 Byte | 读写(RW) | Hsync_Offset3 | 第3扫描分区的Hsync延时时间 | 0x20 | 0x00 | 0xFF | Thsyncoff3 = (Hsync_Offset3 << 2) /adcclk
+0x2A | 1 Byte | 读写(RW) | Hsync_Cycle | Hsync下单边、双边采样次数 | 0x00 | 0x00 | 0x01 | 0x00 : 单边采样，1个Hsync完成1次采样；双边采样，1个Hsync完成1次正采样或负采样。
+0x01 : 单边采样，2个Hsync完成1次采样；双边采样，1个Hsync完成1次正采样和1次负采样。
+0x2B | 1 Byte | 读写(RW) | SSCG_Mode | SSCG模式 | 0x00 | 0x00 | 0x03 | 0x00:SSCG模式关闭
+0x01:(Fsys * 99%) -> Fsys -> (Fsys * 99%)
+0x02:(Fsys * 101%) -> Fsys -> (Fsys * 101%)                                                                              0x03:(Fsys * 99%) -> (Fsys * 101%) -> (Fsys * 99%)
+0x2C | 1 Byte | 读写(RW) | SSCG_Delay | SSCG延时 | 0x00 | 0x00 | 0x03 | 0x00:5us
+0x01:10us
+0x02:15us                                                                              0x03:20us
+0x2D | 1 Byte | 读写(RW) | Big_Noise_Mask | 大噪声区域屏蔽 | 0x00 | 0x00 | 0x01 | 0x00 : 不屏蔽
+0x01 : 屏蔽
+0x2E | 1 Byte | 读写(RW) | Big_Noise_Dummy | 大噪声区域dummy | 0x00 | 0x00 | 0x01 | 0x00 : 不增加dummy
+0x01 : 增加1个Hsync作为dummy
+0x2F | 1 Byte | 只读(RO) | Chip_Type | IC 型号 | 0x00 | 0x00 | 0x03 | 0x00: Ft6236U                                                                           0x01: Ft6336G                                                                           0x02: Ft6336U                                                                           0x03: Ft6436U
+0x30 |  |  | Reserved |  |  |  |  | 
+0x31 | 1 Byte | 读写(RW) | Channel_Order_addr_R | 读通道顺序开始地址 | 0x00 | 0x00 | 0xFF | 用于定义读通道顺序时起始计数器
+0x32 | 1 Byte | 读写(RW) | CB_addr_W | 写CB开始地址 | 0x00 | 0x00 | 0xFF | 用于定义写CB通道时起始计数器
+0x33 | 1 Byte | 读写(RW) | CB_addr_R | 读CB开始地址 | 0x00 | 0x00 | 0xFF | 用于定义读CB通道时起始计数器
+0x34 | 1 Byte | 读写(RW) | RawData_addr_R | 读Rawdata开始地址 | 0x00 | 0x00 | 0xFF | 用于定义读RAWDATA通道时起始计数器
+0x35 | 1 Byte | 只读(RO) | RawData_buf | Raw Data 数据 | NA | 0x00 | 0xFF | 见表格下方说明
+0x36 |  |  | Reserved |  |  |  |  | 
+0x37 | 1 Byte | 只读(RO) | Channel_Order_buf | 通道顺序 | NA | 0x00 | 0x3F | 见表格下方说明
+0x38 |  |  | Reserved |  |  |  |  | 
+0x39 | 1 Byte | 读写(RW) | CB_buf | CB 数据 | NA | 0x00 | 0xFF | 见表格下方说明
+0x3A～0x40 |  |  | Reserved |  |  |  |  | 
+0x41 | 1 Byte | 读写(RW) | Test_1xCb_8xCb | 工厂Test_modeX Cb选择方式 | 0x01 | 0x00 | 0x01 | 0x00: 1xCb （与正常工作模式扫描方式一样）                                               0x01: 8xCb（使用close mode进行扫描，通道Cb为8个Cb累加和）
+0x3A～0xAD |  |  | Reserved |  |  |  |  | 
+0xAE | 1 Byte | 读写(RW) | ID_G_FACTORY_MODE | 工厂模式种类 | 0x00 | 0x00 | 0x72 | Bit7:
+0:Auto Calibration正在进行
+1:Auto Calibration完成
+Bit6~0:
+0x00 : F_NORMAL
+0x01 : F_TESTMODE_1
+0x02 : F_TESTMODE_2
+0xAF～0xF3 |  |  | Reserved |  |  |  |  | 
+0xF4 | 1 Byte | 只读(RO) | RS_DATA_BUF | 微短测试数据 | NA | 0x00 | 0xFF | 
+0xF5～0xFF |  |  | Reserved |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+ | 读通道顺序操作说明
+1. 写地址为0x31的“读通道顺序开始地址”寄存器00，如需要从中间某个通道开始读可输入需要的数据。代码：w 31 00
+2. 读地址为0x37的通往顺序数据，一共读(“通道数”+“虚拟按键数”)个。代码：w 37 r X |  |  |  |  |  |  | 
+ | 读Raw Data操作说明
+1. 写地址为0x34的“读Rawdata开始地址”寄存器00，如需要从中间某个通道开始读可输入需要的数据。代码：w 34 00
+2. 读地址为0x35的Raw Data 数据，一共读X个。一通道对应2字节，因此长度是 2*N(N为VA区+KEY区通道个数总和）。第2*N和第(2*N)+1为close mode 的rawdata.代码：w 35 r X |  |  |  |  |  |  | 
+ | 读CB操作说明
+1. 写地址为0x33的“读CB开始地址”寄存器00，如需要从中间某个通道开始读可输入需要的数据。代码：w 33 00
+2. 读地址为0x39的CB 数据，一共读X个。一通道对应2字节，因此长度是 2*N(N为VA区+KEY区通道个数总和）。第2*N和第(2*N)+1为close mode 的rawdata.代码：w 39 r X |  |  |  |  |  |  | 
+ | 读RS测试数据操作说明
+1. 写地址为0x34的“读RS测试数据开始地址”寄存器00，如需要从中间某个通道开始读可输入需要的数据。代码：w 34 00
+2. 读地址为0xF4的RS测试数据，一共读X个。一通道对应2字节，因此长度是 2*N(N为VA区+KEY区通道个数总和）。第2*N和第(2*N)+1为close mode 的rawdata.代码：w F4 r X |  |  |  |  |  |  | 
+
+=== 版本记录 (rows=16, cols=4) ===
+版本 | 作者/修改者 | 时间 | 备注
+V1.0 | 张晓毅 | 2015-02-25 00:00:00 | 初版
+V1.1 | 张晓毅 | 2015-02-27 00:00:00 | 在工厂模式下，增加SSCG和BIG NOISE寄存器
+V1.2 | 张晓毅 | 2015-03-27 00:00:00 | 增加普通模式下，报点数据寄存器定义，把不用寄存器删除
+V1.3 | 张晓毅 | 2015-07-03 00:00:00 | 删除未用到寄存器。修改IC命名
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 
+ |  |  | 

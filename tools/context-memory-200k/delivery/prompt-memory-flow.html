@@ -1,0 +1,292 @@
+<div id="prompt-memory-flow">
+  <h2>你的设备如何边聊、边整理、边记住</h2>
+  <div class="text-small text-muted">20万输入预算 · 16万准备 / 18万切换 / 约5万目标 · 百炼画像关闭</div>
+  <div class="viz-controls" role="group" aria-label="选择工作场景">
+    <button type="button" class="btn" data-scene="prompt" aria-pressed="true">提示词分层</button>
+    <button type="button" class="btn" data-scene="search" aria-pressed="false">查历史</button>
+    <button type="button" class="btn" data-scene="compact" aria-pressed="false">自动压缩</button>
+    <button type="button" class="btn" data-scene="habit" aria-pressed="false">习惯与每日写入</button>
+  </div>
+  <div id="pm-scene-label" class="text-small" aria-live="polite"></div>
+  <div id="pm-diagram"></div>
+  <div id="pm-caption" class="text-small text-muted"></div>
+  <style>
+    #prompt-memory-flow { color:var(--foreground); width:100%; }
+    #prompt-memory-flow .viz-controls { margin-top:16px; margin-bottom:12px; }
+    #pm-diagram { width:100%; margin-top:12px; }
+    #pm-diagram svg { display:block; width:100%; overflow:visible; }
+    #pm-diagram text { fill:var(--foreground); font-size:var(--font-size-base); font-weight:400; }
+    #pm-diagram .pm-node-title { font-weight:500; }
+    #pm-diagram .pm-secondary { fill:var(--muted-foreground); }
+    #pm-caption { margin-top:10px; }
+  </style>
+  <script>
+  (() => {
+    const root = document.getElementById("prompt-memory-flow");
+    const diagram = root.querySelector("#pm-diagram");
+    const label = root.querySelector("#pm-scene-label");
+    const caption = root.querySelector("#pm-caption");
+    const ns = "http://www.w3.org/2000/svg";
+    const descriptions = {
+      prompt: "一轮请求的逻辑结构：固定三层 + 历史资料 + 当前问题；工具能力清单另行携带。",
+      search: "示例问题：我以前说过喜欢什么早餐？主模型判断是否需要检索。",
+      compact: "输入接近16万时准备摘要，18万验证后切换；20万保护完整请求。",
+      habit: "长期模式下：对话材料与真实行为按人物归集，每日错峰写入百炼。"
+    };
+    const captions = {
+      prompt: "“爸爸”、早餐等均为示例。摘要和记忆是参考资料，不能覆盖平台规则或用户当前指令。",
+      search: "短期模式只允许本地召回；长期模式可查询百炼。身份未知：保存录入素材和连续临时聊天，不读写个人记忆。",
+      compact: "5万为整理目标，图中分配为算术示意；实际保留量由提示词、工具和对话长度决定。",
+      habit: "摘要延续当前聊天；百炼保存长期事实。习惯副模型保留，画像当前不写入、不注入。"
+    };
+    const scenes = Object.keys(descriptions);
+    let scene = scenes.includes(window.openai?.widgetState?.modelContent?.scene)
+      ? window.openai.widgetState.modelContent.scene : "prompt";
+    let svg, width, baseSize;
+    const measuring = document.createElement("canvas").getContext("2d");
+    function el(tag, attrs={}, content) {
+      const item=document.createElementNS(ns,tag);
+      Object.entries(attrs).forEach(([name,value])=>item.setAttribute(name,String(value)));
+      if(content!==undefined) item.textContent=content;
+      return item;
+    }
+    function linesFor(content,maxWidth) {
+      measuring.font=baseSize+"px "+getComputedStyle(root).fontFamily;
+      const output=[]; let part="";
+      for(const char of String(content)) {
+        if(part && measuring.measureText(part+char).width>maxWidth) {
+          output.push(part); part=char;
+        } else part+=char;
+      }
+      if(part) output.push(part);
+      return output.length?output:[""];
+    }
+    function textBlock(x,y,lines,classes="") {
+      const text=el("text",{x,y,class:classes});
+      lines.forEach((line,index)=>text.appendChild(el("tspan",{x,dy:index?baseSize*1.45:0},line)));
+      svg.appendChild(text);
+      return lines.length*baseSize*1.45;
+    }
+    function node(x,y,w,title,detail,tone="neutral",minimum=62) {
+      const titles=linesFor(title,w-28);
+      const details=detail?linesFor(detail,w-28):[];
+      const h=Math.max(minimum,24+(titles.length+details.length)*baseSize*1.45+(details.length?5:0));
+      const fill=tone==="neutral"?"var(--muted)":"color-mix(in srgb, var(--viz-series-"+tone+") 10%, transparent)";
+      svg.appendChild(el("rect",{x,y,width:w,height:h,rx:4,fill,stroke:"var(--border)","stroke-width":1}));
+      const titleHeight=textBlock(x+14,y+20,titles,"pm-node-title");
+      if(details.length) textBlock(x+14,y+20+titleHeight+5,details,"pm-secondary");
+      return {x,y,w,h,bottom:y+h,cx:x+w/2};
+    }
+    function arrow(points,tone="neutral") {
+      svg.appendChild(el("polyline",{
+        points:points.map(p=>p.join(",")).join(" "),fill:"none",
+        stroke:tone==="neutral"?"var(--muted-foreground)":"var(--viz-series-"+tone+")",
+        "stroke-width":1.4,"marker-end":"url(#pm-arrow-"+tone+")"
+      }));
+    }
+    function join(a,b,tone="neutral") {
+      arrow([[a.cx,a.bottom+2],[a.cx,(a.bottom+b.y)/2],[b.cx,(a.bottom+b.y)/2],[b.cx,b.y-4]],tone);
+    }
+    function heading(y,value) {
+      return y+textBlock(0,y+baseSize,linesFor(value,width),"pm-node-title")+14;
+    }
+    function sequential(y,items) {
+      let prior=null;
+      for(const item of items) {
+        const current=node(0,y,width,item.title,item.detail,item.tone||"neutral");
+        if(prior) join(prior,current);
+        y=current.bottom+28; prior=current;
+      }
+      return {y,prior};
+    }
+    function begin() {
+      width=Math.max(280,Math.floor(diagram.getBoundingClientRect().width));
+      baseSize=parseFloat(getComputedStyle(root).fontSize)||14;
+      svg=el("svg",{role:"img","aria-labelledby":"pm-svg-title pm-svg-desc"});
+      svg.appendChild(el("title",{id:"pm-svg-title"},descriptions[scene]));
+      svg.appendChild(el("desc",{id:"pm-svg-desc"},captions[scene]));
+      const defs=el("defs");
+      ["neutral","1","2","3"].forEach(tone=>{
+        const marker=el("marker",{id:"pm-arrow-"+tone,viewBox:"0 0 10 10",refX:8,refY:5,markerWidth:6,markerHeight:6,orient:"auto-start-reverse"});
+        marker.appendChild(el("path",{d:"M 0 0 L 10 5 L 0 10 Z",fill:tone==="neutral"?"var(--muted-foreground)":"var(--viz-series-"+tone+")"}));
+        defs.appendChild(marker);
+      });
+      svg.appendChild(defs);
+    }
+    function finish(height) {
+      svg.setAttribute("viewBox","0 0 "+width+" "+Math.ceil(height));
+      svg.setAttribute("height",String(Math.ceil(height)));
+      diagram.replaceChildren(svg);
+      label.textContent=descriptions[scene];
+      caption.textContent=captions[scene];
+      root.querySelectorAll("[data-scene]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.scene===scene)));
+    }
+    function promptView() {
+      let y=0;
+      const identity=node(0,y,width,"服务端先确认本轮说话人","声纹认出爸爸 → 个人上下文；未认出 → 当前会话临时上下文");
+      y=heading(identity.bottom+24,"每次发给主模型的一包信息");
+      const fixed=[
+        ["固定第1层 · 平台规则","工具使用、真实结果、摄像头与语音表达约束"],
+        ["固定第2层 · 你填写的角色设定","性格、语气、扮演方式；压缩时保留"],
+        ["固定第3层 · 会话固定资料","助手名称、语言、时区等设备配置"]
+      ];
+      let previous=null;
+      for(const [title,detail] of fixed) {
+        const current=node(0,y,width,title,detail);
+        previous=current; y=current.bottom+10;
+      }
+      y+=22;
+      const dynamic=[
+        ["动态资料 · 历史摘要","有才加入；目标3000字、最多6000字；保留旧约定与待办","1"],
+        ["动态资料 · 近期对话原文","按token预算保留完整轮次，供模型精确衔接","1"],
+        ["本轮问题与上下文","“今天早餐吃什么？”＋爸爸的身份＋本轮时间","neutral"],
+        ["工具结果 · 按需要加入","设备真实结果，或召回的片段、百炼相关事实","2"]
+      ];
+      for(const [title,detail,tone] of dynamic) {
+        const current=node(0,y,width,title,detail,tone);
+        previous=current; y=current.bottom+10;
+      }
+      y+=22;
+      const tools=node(0,y,width,"同一请求还携带：工具能力清单","记忆检索、提醒、音量等；独立字段，也占上下文");
+      y=tools.bottom+28;
+      const llm=node(0,y,width,"主大模型","直接回答，或先调用工具再根据结果回答","3");
+      join(tools,llm); y=llm.bottom+28;
+      const reply=node(0,y,width,"语音回复 → TTS → 设备播报","用户继续正常聊天，无需手动重新开始");
+      join(llm,reply); finish(reply.bottom+6);
+    }
+    function searchView() {
+      const intro=sequential(0,[
+        {title:"爸爸问：我以前说过喜欢什么早餐？",detail:"服务端固定人物身份，模型不能自行指定其他人"},
+        {title:"主模型判断：是否需要历史？",detail:"不需要：直接回答；需要：调用下方检索工具",tone:"3"}
+      ]);
+      let y=intro.y;
+      const narrow=width<620;
+      const inset=narrow?18:0;
+      const local=node(inset,y,width-inset*2,"先召回已有文字与业务记录","同账号＋同人物＋同智能体＋同代次；最近24小时原话与真实执行结果","1");
+      join(intro.prior,local); y=local.bottom+28;
+      let direct,gateway,cloud;
+      if(!narrow) {
+        const w=(width-28)/2;
+        direct=node(0,y,w,"近期片段足够","把相关原话返回模型","1");
+        gateway=node(w+28,y,w,"仍需长期事实：One API","仅长期模式允许；校验账号和人物","2");
+        arrow([[local.cx,local.bottom+2],[local.cx,y-14],[direct.cx,y-14],[direct.cx,y-4]],"1");
+        arrow([[local.cx,local.bottom+2],[local.cx,y-14],[gateway.cx,y-14],[gateway.cx,y-4]],"2");
+        y=Math.max(direct.bottom,gateway.bottom)+28;
+        cloud=node(w+28,y,w,"百炼 · Lite Search","只查爸爸；每轮最多1次真实Search","2");
+        join(gateway,cloud,"2"); y=cloud.bottom+28;
+      } else {
+        gateway=node(inset,y,width-inset*2,"未找到且开启长期 → One API","找到近期片段时，跳过下方百炼查询","2");
+        join(local,gateway,"2"); y=gateway.bottom+28;
+        cloud=node(inset,y,width-inset*2,"百炼 · Lite Search","只查爸爸；每轮最多1次真实Search","2");
+        join(gateway,cloud,"2"); y=cloud.bottom+28;
+      }
+      const result=node(inset,y,width-inset*2,"把检索结果加入本轮工具结果","示例：“爸爸偏好清淡早餐”；只带相关内容","2");
+      if(!narrow) {
+        arrow([[direct.cx,direct.bottom+2],[direct.cx,y-14],[result.cx,y-14],[result.cx,y-4]],"1");
+        arrow([[cloud.cx,cloud.bottom+2],[cloud.cx,y-14],[result.cx,y-14],[result.cx,y-4]],"2");
+      } else {
+        arrow([[local.x,local.bottom+1],[6,local.bottom+14],[6,y-14],[result.cx,y-14],[result.cx,y-4]],"1");
+        join(cloud,result,"2");
+      }
+      y=result.bottom+28;
+      const llm=node(0,y,width,"主模型再次收到：原上下文＋检索结果","结合今天的问题组织答案；没查到就说明不确定","3");
+      join(result,llm); y=llm.bottom+28;
+      const reply=node(0,y,width,"设备播报回答","普通聊天、音量操作等不会每轮自动Search");
+      join(llm,reply); finish(reply.bottom+6);
+    }
+    function budgetBar(y,title,values) {
+      y=heading(y,title);
+      let x=0;
+      svg.appendChild(el("rect",{x:0,y,width,height:18,fill:"var(--muted)"}));
+      for(const item of values) {
+        const w=item.value*width/100000;
+        svg.appendChild(el("rect",{x,y,width:w,height:18,fill:"var(--viz-series-"+item.tone+")"}));
+        x+=w;
+      }
+      y+=40;
+      const detail=values.map(v=>v.name+" "+v.value/10000+"万").join(" · ");
+      return y+textBlock(0,y,linesFor(detail,width),"pm-secondary")+8;
+    }
+    function compactView() {
+      const start=sequential(0,[
+        {title:"接近16万：后台准备",detail:"从已结束的旧对话提炼分段摘要；当前原文继续保留",tone:"1"},
+        {title:"达到18万：合并并校验",detail:"上一份有效摘要＋完整旧片段＋新更正；通过才切换",tone:"1"}
+      ]);
+      let y=budgetBar(start.y+2,"整理前：输入约18万tokens（示意）",[
+        {name:"固定提示词与工具",value:10000,tone:"3"},
+        {name:"历史与本轮资料",value:170000,tone:"1"}
+      ]);
+      y=budgetBar(y+14,"整理后：输入目标约5万tokens（示意）",[
+        {name:"固定提示词与工具",value:10000,tone:"3"},
+        {name:"近期原文",value:35000,tone:"1"},
+        {name:"摘要及其他",value:5000,tone:"2"}
+      ])+14;
+      const next=node(0,y,width,"继续聊天：近期原文＋新摘要","角色设定保留；下一次按16万准备、18万切换","3");
+      y=next.bottom+28;
+      const older=node(0,y,width,"移出模型输入的旧原文","原语音文字存档保留原保存期限；自动近期召回只查24小时","1");
+      join(next,older); y=older.bottom+28;
+      const failure=node(0,y,width,"摘要失败：保留原文和上一份有效摘要","接近保护线时缩小本轮输入；明确超限最多重试1次");
+      y=failure.bottom+18;
+      y+=textBlock(0,y+baseSize,linesFor("输入保护线20万；缓存命中仍占上下文；输出另预留并服从模型上限。",width),"pm-secondary");
+      finish(y+10);
+    }
+    function habitView() {
+      const input=node(0,0,width,"确认身份后的对话与真实行为","账号A / 爸爸；当前问题正常交给主模型回答");
+      let y=input.bottom+32;
+      const narrow=width<620;
+      let material,analysis,confirmed;
+      if(!narrow) {
+        const w=(width-28)/2;
+        material=node(0,y,w,"用户原始对话材料","进入按人隔离的持久化材料队列","1");
+        analysis=node(w+28,y,w,"实际结果 → 习惯副模型","分析规律，保留失败与暂停状态","3");
+        arrow([[input.cx,input.bottom+2],[input.cx,y-16],[material.cx,y-16],[material.cx,y-4]],"1");
+        arrow([[input.cx,input.bottom+2],[input.cx,y-16],[analysis.cx,y-16],[analysis.cx,y-4]],"3");
+        y=Math.max(material.bottom,analysis.bottom)+28;
+        confirmed=node(w+28,y,w,"习惯业务库＋分析材料","规则先落库；真实结果参与分析");
+        join(analysis,confirmed); y=confirmed.bottom+28;
+      } else {
+        material=node(18,y,width-36,"对话支路：原始材料进入队列","与即时聊天并行；按账号、人物归集","1");
+        join(input,material); y=material.bottom+28;
+        analysis=node(18,y,width-36,"行为支路：真实结果 → 习惯副模型","分析规律；失败留材料，暂停不自动复活","3");
+        arrow([[input.x+5,input.bottom+2],[5,analysis.y-14],[analysis.cx,analysis.y-14],[analysis.cx,analysis.y-4]],"3");
+        y=analysis.bottom+28;
+        confirmed=node(18,y,width-36,"习惯业务库＋分析材料","提醒和习惯按业务规则执行，分析结果持久化");
+        join(analysis,confirmed); y=confirmed.bottom+28;
+      }
+      const daily=node(0,y,width,"每天北京时间03:00起：分人、错峰整理","合并新增材料、去重、分批；没有新材料就跳过");
+      if(!narrow) {
+        arrow([[material.cx,material.bottom+2],[material.cx,y-15],[daily.cx,y-15],[daily.cx,y-4]],"1");
+        arrow([[confirmed.cx,confirmed.bottom+2],[confirmed.cx,y-15],[daily.cx,y-15],[daily.cx,y-4]]);
+      } else {
+        arrow([[material.x+material.w,material.bottom+2],[width-5,material.bottom+14],[width-5,y-15],[daily.cx,y-15],[daily.cx,y-4]],"1");
+        join(confirmed,daily);
+      }
+      y=daily.bottom+28;
+      const gateway=node(0,y,width,"One API → 百炼 Lite 事实写入","异步跟踪结果；调用及存储费用归属产品账号","2");
+      join(daily,gateway); y=gateway.bottom+28;
+      const cloud=node(0,y,width,"阿里云托管长期事实","账号A → 爸爸 / 孩子；各自写入，各自检索","2");
+      join(gateway,cloud,"2"); y=cloud.bottom+28;
+      const future=node(0,y,width,"以后需要历史：按需检索 → 主模型回答","副模型分析习惯，百炼提供长期事实，摘要衔接当前话题","3");
+      join(cloud,future,"2"); finish(future.bottom+6);
+    }
+    function draw() {
+      begin();
+      ({prompt:promptView,search:searchView,compact:compactView,habit:habitView})[scene]();
+    }
+    root.querySelectorAll("[data-scene]").forEach(button=>button.addEventListener("click",()=>{
+      scene=button.dataset.scene; draw();
+      if(window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{scene},privateContent:null}).catch(()=>{});
+    }));
+    window.addEventListener("openai:set_globals",event=>{
+      const saved=event.detail?.globals?.widgetState?.modelContent?.scene;
+      if(scenes.includes(saved) && saved!==scene) {scene=saved;draw();}
+    });
+    let priorWidth=0;
+    new ResizeObserver(()=>{
+      const nextWidth=Math.floor(diagram.getBoundingClientRect().width);
+      if(nextWidth!==priorWidth) {priorWidth=nextWidth;draw();}
+    }).observe(diagram);
+    draw();
+  })();
+  </script>
+</div>

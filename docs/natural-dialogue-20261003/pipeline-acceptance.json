@@ -1,0 +1,58 @@
+{
+  "synthetic_text_injection": true,
+  "physical_microphone_samples": 0,
+  "source_sha256": "bdaa94c0922aec027dc4934cffb5ce0096dead6bdf265d29c8fd67ad8f24ba08",
+  "persona_before": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+  "cases": [
+    {
+      "text": "你好，随便聊聊。",
+      "receipt": {
+        "online": true,
+        "ok": true,
+        "answers": [
+          "好，最近有什么让你想聊一聊的事？"
+        ]
+      },
+      "success": true,
+      "style_flag": false
+    },
+    {
+      "text": "别哄我，说说你真实的看法。",
+      "receipt": {
+        "online": true,
+        "ok": true,
+        "answers": [
+          "你想听哪件事的看法？"
+        ]
+      },
+      "success": true,
+      "style_flag": false
+    },
+    {
+      "text": "23乘以17等于多少？",
+      "receipt": {
+        "online": true,
+        "ok": true,
+        "answers": [
+          "391。"
+        ]
+      },
+      "success": true,
+      "style_flag": false
+    },
+    {
+      "text": "查看设备当前状态",
+      "receipt": {
+        "online": true,
+        "ok": true,
+        "answers": [
+          "当前设备状态：音量100，屏幕亮度100，Wi-Fi信号强，现在是2026年10月3日15点17分。今天没有闹钟、习惯提醒和待办便签。"
+        ]
+      },
+      "success": true,
+      "style_flag": false
+    }
+  ],
+  "persona_unchanged": true,
+  "success": true
+}

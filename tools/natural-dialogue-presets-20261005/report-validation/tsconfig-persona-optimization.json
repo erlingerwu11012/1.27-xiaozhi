@@ -1,0 +1,26 @@
+{
+  "files": [
+    "C:/Users/Administrator/.cursor/projects/e-github-github-code-all-4-30/canvases/persona-optimization-review.canvas.tsx"
+  ],
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "types": [],
+    "paths": {
+      "cursor/canvas": [
+        "C:/Users/Administrator/.cursor/skills-cursor/canvas/sdk/index.d.ts"
+      ],
+      "react": [
+        "E:\\github\\github_code\\all\\4.30\\tools\\natural-dialogue-presets-20261005\\report-validation\\node_modules\\@types\\react\\index.d.ts"
+      ],
+      "react/jsx-runtime": [
+        "E:\\github\\github_code\\all\\4.30\\tools\\natural-dialogue-presets-20261005\\report-validation\\node_modules\\@types\\react\\jsx-runtime.d.ts"
+      ]
+    }
+  }
+}

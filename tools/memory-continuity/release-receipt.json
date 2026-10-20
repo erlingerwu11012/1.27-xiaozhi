@@ -1,0 +1,115 @@
+{
+  "java": {
+    "tests": 214,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python_tests": 136,
+  "python_suites": 11,
+  "test_wallet_cny": "6.187468",
+  "upstream_upper_estimate_cny": "13.56603",
+  "compression": {
+    "estimated_before": 184967,
+    "estimated_after": 37251,
+    "summary_chars": 279,
+    "summary_version": 1,
+    "retained_user_turns": 5,
+    "final_answer": "测试口令是“河岸”，最新更正的时间是工作日18点。"
+  },
+  "long_input": {
+    "estimated_tokens": 185095,
+    "actual_usage": {
+      "completion_tokens": 1,
+      "prompt_tokens": 140328,
+      "total_tokens": 140329,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "tier": "128k<input<=256k",
+    "cache_tokens": "unknown"
+  },
+  "cloud_test_nodes": 2,
+  "test_facts_cleaned": true,
+  "local_production_passed": true,
+  "local_test_rows_cleaned": true,
+  "published": {
+    "published": true,
+    "at": "2026-09-30 23:30:48 +0800",
+    "jar_sha256": "97bc4ffe982a2be300e1e00e2d5ef6656b3d873ce13bafabe1f8de1493c022ef",
+    "source_files": 21,
+    "min_user_tokens": 10000,
+    "audio_max_hours": 72,
+    "archive_max_turns": 50,
+    "portraits_enabled": false,
+    "firmware_ota": false,
+    "frontend_changed": false,
+    "gateway_changed": false,
+    "automation_recreated": false,
+    "domains": [
+      "api.realecho.cn",
+      "www.realecho.cn",
+      "realecho.cn"
+    ],
+    "post_release_hardening": [
+      "main/xiaozhi-server/core/connection.py"
+    ]
+  },
+  "postcheck": {
+    "passed": true,
+    "at": "2026-10-01 00:01:15 +0800",
+    "services": {
+      "manager-api": "online",
+      "xiaozhi-server": "online"
+    },
+    "health": {
+      "https://api.realecho.cn/xiaozhi/user/pub-config": 200,
+      "https://www.realecho.cn": 200,
+      "https://realecho.cn": 200,
+      "http://127.0.0.1:8006/openapi.json": 200
+    },
+    "counts": {
+      "audio_rows": 50,
+      "audio_bytes": 4222360,
+      "archive_rows": 288,
+      "cleanup_pending": 0,
+      "pending_material": 4,
+      "extraction_pending": 0,
+      "pending_user_tokens": 0
+    },
+    "expired_audio_references": 0,
+    "error_tail_aggregates": {
+      "manager-api": {
+        "Traceback": 0,
+        "archive retention deferred": 0,
+        "memory worker deferred": 0
+      },
+      "xiaozhi-server": {
+        "Traceback": 0,
+        "archive retention deferred": 0,
+        "memory worker deferred": 0
+      }
+    },
+    "portraits": false,
+    "physical_device_pending": true,
+    "actual_next_0300_window": "not_yet_observed"
+  },
+  "manual_error_window": {
+    "manual_observation_seconds": 30,
+    "errors": {
+      "manager-api": {
+        "new_error_bytes": 0,
+        "new_tracebacks": 0,
+        "retention_deferrals": 0,
+        "memory_deferrals": 0
+      },
+      "xiaozhi-server": {
+        "new_error_bytes": 0,
+        "new_tracebacks": 0,
+        "retention_deferrals": 0,
+        "memory_deferrals": 0
+      }
+    },
+    "passed": true
+  }
+}

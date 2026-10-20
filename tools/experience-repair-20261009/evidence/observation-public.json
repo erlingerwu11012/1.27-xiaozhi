@@ -1,0 +1,2051 @@
+{
+  "records": [
+    {
+      "at": 1791534216.0338032,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534276.6414685,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534337.2496853,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534397.8583117,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534458.456651,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534519.057563,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534579.6592505,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534640.2761052,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534700.8781307,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534761.4829135,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534822.0888526,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534882.689936,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791534943.2964113,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535003.8990967,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535064.5049927,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535125.1084142,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535185.7064369,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535246.3246017,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535306.921187,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535367.5399535,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535428.1378176,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535488.7417603,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535549.3634465,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535610.0041175,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535670.6628647,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535731.273383,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535791.930239,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535852.5322752,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535913.1512883,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791535973.7641482,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    },
+    {
+      "at": 1791536015.7753232,
+      "passed": true,
+      "checks": [
+        {
+          "name": "http",
+          "status": 404,
+          "passed": true
+        },
+        {
+          "name": "internal_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "habit_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "manager_auth",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "www",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "api",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "public_ws",
+          "passed": true,
+          "code": "invalid_token"
+        },
+        {
+          "name": "api_ws",
+          "passed": true,
+          "code": "invalid_token"
+        }
+      ],
+      "metadata": {
+        "source_matches": true,
+        "jar_matches": true,
+        "java_matches": true,
+        "config_matches": true,
+        "processes_healthy": true,
+        "billing_env_matches": true,
+        "states": {
+          "accepted": 2,
+          "completed": 6,
+          "failed": 4
+        },
+        "duplicate_groups": 0,
+        "ledger_private": true
+      }
+    }
+  ],
+  "hardware": false
+}

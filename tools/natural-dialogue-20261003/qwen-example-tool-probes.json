@@ -1,0 +1,176 @@
+{
+  "production_default_unchanged": true,
+  "production_model": "qwen-plus",
+  "credential_source": "existing active Alibaba upstream channel; secret not exported",
+  "api_host": "dashscope.aliyuncs.com",
+  "persona": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。",
+  "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+  "prompt_source": "synthetic public rules plus public examples; not production prompt",
+  "system_prompt": "你叫小智，与用户用中文日常交谈。把用户当作有自主判断的成年人，先接住这一句话，再决定是否需要多说。\n对话质量规则优先于人格的表演：\n- 尊重已知事实。计划还没有发生；未知的物品、经历和状态不补写。工具操作只用可用的结构化tool_calls，成功之前不报告完成，没有该工具就说目前做不了。\n- 人格影响措辞，不要求每句都调侃。用户疲惫、烦躁或明确不想开玩笑时，保持分寸；用户纠正语气时直接调整，不顶嘴、不反讽、不借玩笑继续指责。\n- 闲聊通常一两句；用户明确问建议时再认真给出适度建议。不要用每轮追问、清单、安排来推动对话。不开场表演，不写动作、表情标签、撒娇语气或虚拟身体行为。\n以下是用户自主选择的人格原文，保持它，但在上述对话分寸内自然体现：\n<personality>你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。</personality>\n下面的片段仅示范分寸，不是固定答案；根据当轮用户内容独立接话。\n用户：今天累得不想动。\n小智：那今天就歇会儿，事情又不会自己跑来找你。\n用户：别劝我，也别教我怎么休息。\n小智：行，不劝。今天确实够折腾的。\n用户：我准备吃点东西再去睡。\n小智：这个安排挺舒服的，忙了一天总算能松口气。\n用户：别拿我开玩笑了。\n小智：好，刚才说过头了，我收住。\n用户：本来要整理相册，结果又没做。\n小智：相册还没整理，照片倒是越攒越多了。\n用户：那你说我现在要不要弄？\n小智：不赶时间的话，今晚放一放也行；要是明天就得用，现在挑几张先弄好。\n",
+  "system_characters": 652,
+  "system_sha256": "b8b89738cef2b59935b7e2a23e3ca13c3b71293736bc329b9b51117a0de48239",
+  "generation_parameters": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_tokens": 600,
+    "enable_thinking": false,
+    "preserve_thinking": false
+  },
+  "text_only": true,
+  "secondary_rewrite": false,
+  "tools_executed": 0,
+  "call_limit": 6,
+  "calls": 6,
+  "models": [
+    {
+      "requested_model": "qwen3.8-flash",
+      "tool_selection_probes": [
+        {
+          "user": "声音小一点，调到30吧",
+          "expected_tool": "self_audio_speaker_set_volume",
+          "assistant": "",
+          "tool_calls": [
+            {
+              "name": "self_audio_speaker_set_volume",
+              "arguments": "{\"volume\": 30}"
+            }
+          ],
+          "elapsed_ms": 1342,
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 767,
+            "total_tokens": 797,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 767
+            }
+          },
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "tool_calls"
+        },
+        {
+          "user": "先别调音量，我就问问现在是多少",
+          "expected_tool": "self_get_device_status",
+          "assistant": "",
+          "tool_calls": [
+            {
+              "name": "self_get_device_status",
+              "arguments": "{}"
+            }
+          ],
+          "elapsed_ms": 767,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 768,
+            "total_tokens": 783,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 768
+            }
+          },
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "tool_calls"
+        },
+        {
+          "user": "打开摄像头让我看实时画面",
+          "expected_tool": null,
+          "assistant": "这个嘛……目前还做不了。",
+          "tool_calls": [],
+          "elapsed_ms": 1768,
+          "usage": {
+            "completion_tokens": 8,
+            "prompt_tokens": 765,
+            "total_tokens": 773,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 765
+            }
+          },
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop"
+        }
+      ]
+    },
+    {
+      "requested_model": "qwen3.8-max",
+      "tool_selection_probes": [
+        {
+          "user": "声音小一点，调到30吧",
+          "expected_tool": "self_audio_speaker_set_volume",
+          "assistant": "",
+          "tool_calls": [
+            {
+              "name": "self_audio_speaker_set_volume",
+              "arguments": "{\"volume\": 30}"
+            }
+          ],
+          "elapsed_ms": 881,
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 767,
+            "total_tokens": 797,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 767
+            }
+          },
+          "response_model": "qwen3.8-max",
+          "finish_reason": "tool_calls"
+        },
+        {
+          "user": "先别调音量，我就问问现在是多少",
+          "expected_tool": "self_get_device_status",
+          "assistant": "",
+          "tool_calls": [
+            {
+              "name": "self_get_device_status",
+              "arguments": "{}"
+            }
+          ],
+          "elapsed_ms": 843,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 768,
+            "total_tokens": 783,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 768
+            }
+          },
+          "response_model": "qwen3.8-max",
+          "finish_reason": "tool_calls"
+        },
+        {
+          "user": "打开摄像头让我看实时画面",
+          "expected_tool": null,
+          "assistant": "目前我没有打开摄像头或传输实时画面的功能，这个真做不到。",
+          "tool_calls": [],
+          "elapsed_ms": 891,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 765,
+            "total_tokens": 779,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 765
+            }
+          },
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop"
+        }
+      ]
+    }
+  ]
+}

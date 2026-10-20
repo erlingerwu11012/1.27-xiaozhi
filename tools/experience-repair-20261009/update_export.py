@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('tools/experience-repair-20261009/audit_prod_logs.py');s=p.read_text(encoding='utf-8-sig');s=s.replace("'exception_types':dict", "'expected_probe_errors':sum('WSS 认证失败 reason=missing token_present=False device_id_set=True' in x for x in selected),'unexpected_exception_lines':sum(bool(re.search(r'Traceback|Exception|\\bERROR\\b|-ERROR-',x)) and 'WSS 认证失败 reason=missing token_present=False device_id_set=True' not in x for x in selected),'exception_types':dict");p.write_text(s,encoding='utf-8')
+p=Path('tools/experience-repair-20261009/export_delivery.py');s=p.read_text(encoding='utf-8-sig');s=s.replace("'release.py']", "'release.py','production-log-audit.json','test-environment-cleanup.json']");p.write_text(s,encoding='utf-8')

@@ -1,0 +1,545 @@
+{
+  "python": [
+    {
+      "module": "test_account_owner_and_reminder",
+      "tests": 11,
+      "passed": false
+    },
+    {
+      "module": "test_asr_http_compat",
+      "tests": 5,
+      "passed": true
+    },
+    {
+      "module": "test_audio_clock_compat",
+      "tests": 37,
+      "passed": false
+    },
+    {
+      "module": "test_camera_mcp_tools",
+      "tests": 0,
+      "passed": true
+    },
+    {
+      "module": "test_card_action",
+      "tests": 16,
+      "passed": true
+    },
+    {
+      "module": "test_device_reminder",
+      "tests": 0,
+      "passed": true
+    },
+    {
+      "module": "test_device_send_api",
+      "tests": 14,
+      "passed": true
+    },
+    {
+      "module": "test_device_send_auth",
+      "tests": 6,
+      "passed": true
+    },
+    {
+      "module": "test_device_ws_token_v2",
+      "tests": 17,
+      "passed": true
+    },
+    {
+      "module": "test_dialogue_contract_baseline",
+      "tests": 13,
+      "passed": true
+    },
+    {
+      "module": "test_face_enrollment",
+      "tests": 17,
+      "passed": true
+    },
+    {
+      "module": "test_face_enrollment_cancel_intent",
+      "tests": 9,
+      "passed": true
+    },
+    {
+      "module": "test_face_enrollment_contract",
+      "tests": 13,
+      "passed": true
+    },
+    {
+      "module": "test_face_enrollment_front_only_config",
+      "tests": 1,
+      "passed": false
+    },
+    {
+      "module": "test_face_enrollment_start_intent",
+      "tests": 22,
+      "passed": true
+    },
+    {
+      "module": "test_face_enrollment_v2",
+      "tests": 77,
+      "passed": true
+    },
+    {
+      "module": "test_hardware_billing_proof",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_identity_snapshot_request",
+      "tests": 3,
+      "passed": false
+    },
+    {
+      "module": "test_interaction_lifecycle_regression",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_mcp_initialize_identity",
+      "tests": 15,
+      "passed": true
+    },
+    {
+      "module": "test_memory_continuity",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_multi_device_isolation",
+      "tests": 35,
+      "passed": true
+    },
+    {
+      "module": "test_official_dialogue",
+      "tests": 4,
+      "passed": true
+    },
+    {
+      "module": "test_official_params_volume",
+      "tests": 4,
+      "passed": true
+    },
+    {
+      "module": "test_official_service_defaults",
+      "tests": 3,
+      "passed": true
+    },
+    {
+      "module": "test_official_tts_compiler",
+      "tests": 17,
+      "passed": true
+    },
+    {
+      "module": "test_pending_spine_redelivery",
+      "tests": 12,
+      "passed": true
+    },
+    {
+      "module": "test_person_memory_chat_init",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_person_memory_identity",
+      "tests": 5,
+      "passed": true
+    },
+    {
+      "module": "test_person_memory_recovery",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_person_memory_tools",
+      "tests": 3,
+      "passed": true
+    },
+    {
+      "module": "test_predeploy_asr_guards",
+      "tests": 11,
+      "passed": true
+    },
+    {
+      "module": "test_proactive_greeting",
+      "tests": 12,
+      "passed": false
+    },
+    {
+      "module": "test_prompt_pipeline_v2",
+      "tests": 37,
+      "passed": true
+    },
+    {
+      "module": "test_qwen3_asr_realtime",
+      "tests": 22,
+      "passed": true
+    },
+    {
+      "module": "test_qwen_audio_tts_plus",
+      "tests": 27,
+      "passed": true
+    },
+    {
+      "module": "test_recipient_resolver",
+      "tests": 0,
+      "passed": true
+    },
+    {
+      "module": "test_reminder_card_converge",
+      "tests": 10,
+      "passed": true
+    },
+    {
+      "module": "test_reminder_control",
+      "tests": 31,
+      "passed": true
+    },
+    {
+      "module": "test_reminder_interaction",
+      "tests": 8,
+      "passed": true
+    },
+    {
+      "module": "test_reminder_voice",
+      "tests": 51,
+      "passed": false
+    },
+    {
+      "module": "test_reminder_voice_abort",
+      "tests": 3,
+      "passed": true
+    },
+    {
+      "module": "test_reminder_voice_download",
+      "tests": 12,
+      "passed": true
+    },
+    {
+      "module": "test_spine_ota_central_integration",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_trace_log",
+      "tests": 9,
+      "passed": true
+    },
+    {
+      "module": "test_tts_listen_observe",
+      "tests": 7,
+      "passed": true
+    },
+    {
+      "module": "test_tts_sentence_telemetry",
+      "tests": 11,
+      "passed": true
+    },
+    {
+      "module": "test_tts_subtitle",
+      "tests": 9,
+      "passed": true
+    },
+    {
+      "module": "test_unified_recipient_outbound",
+      "tests": 3,
+      "passed": true
+    },
+    {
+      "module": "test_utterance_state",
+      "tests": 6,
+      "passed": true
+    },
+    {
+      "module": "test_vision_capability",
+      "tests": 10,
+      "passed": false
+    },
+    {
+      "module": "test_vision_identify",
+      "tests": 19,
+      "passed": true
+    },
+    {
+      "module": "test_wallpaper_ota_handler",
+      "tests": 11,
+      "passed": true
+    },
+    {
+      "module": "test_websocket_session",
+      "tests": 26,
+      "passed": true
+    }
+  ],
+  "python_total": 736,
+  "java": {
+    "tests": 203,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline_failures": [
+    {
+      "module": "test_account_owner_and_reminder",
+      "exit_code": 1
+    },
+    {
+      "module": "test_audio_clock_compat",
+      "exit_code": 1
+    },
+    {
+      "module": "test_face_enrollment_front_only_config",
+      "exit_code": 1
+    },
+    {
+      "module": "test_identity_snapshot_request",
+      "exit_code": 1
+    },
+    {
+      "module": "test_proactive_greeting",
+      "exit_code": 1
+    },
+    {
+      "module": "test_reminder_voice",
+      "exit_code": 1
+    },
+    {
+      "module": "test_vision_capability",
+      "exit_code": 1
+    }
+  ],
+  "full_steps": [
+    {
+      "step": "mysql-ledger",
+      "exit_code": 0
+    },
+    {
+      "step": "java-tests",
+      "exit_code": 0
+    },
+    {
+      "step": "java-build",
+      "exit_code": 0
+    },
+    {
+      "step": "vue-build",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_account_owner_and_reminder",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_asr_http_compat",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_audio_clock_compat",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_camera_mcp_tools",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_card_action",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_reminder",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_send_api",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_send_auth",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_ws_token_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_dialogue_contract_baseline",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_cancel_intent",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_contract",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_front_only_config",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_face_enrollment_start_intent",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_hardware_billing_proof",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_identity_snapshot_request",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_interaction_lifecycle_regression",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_mcp_initialize_identity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_memory_continuity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_multi_device_isolation",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_dialogue",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_params_volume",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_service_defaults",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_tts_compiler",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_pending_spine_redelivery",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_chat_init",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_identity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_recovery",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_tools",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_predeploy_asr_guards",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_proactive_greeting",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_prompt_pipeline_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_qwen3_asr_realtime",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_qwen_audio_tts_plus",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_recipient_resolver",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_card_converge",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_control",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_interaction",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_voice",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_reminder_voice_abort",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_voice_download",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_spine_ota_central_integration",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_trace_log",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_listen_observe",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_sentence_telemetry",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_subtitle",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_unified_recipient_outbound",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_utterance_state",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_vision_capability",
+      "exit_code": 1
+    },
+    {
+      "step": "python-test_vision_identify",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_wallpaper_ota_handler",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_websocket_session",
+      "exit_code": 0
+    }
+  ]
+}

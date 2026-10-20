@@ -1,0 +1,37 @@
+{
+  "accepted": true,
+  "physical_tool_calls": 0,
+  "regression": {
+    "tests": 116,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "model_replays": {
+    "memory": "candidate03.jsonl",
+    "reminders_settings": "candidate02.jsonl",
+    "chat": "candidate04.jsonl",
+    "final_feedback": "candidate06.jsonl"
+  },
+  "verified": [
+    "fresh TTS ownership on superseding replies and stale stop exclusion",
+    "mandatory family-name memory search",
+    "explicit spelling corrected before write and verified by readback",
+    "reminder delete with current list and real-shaped receipt",
+    "colloquial max brightness",
+    "no name reproach or guessed network cause"
+  ],
+  "limitations": [
+    "No new firmware flashed",
+    "real device playback and AFE acceptance pending",
+    "transient touch I2C not reproduced",
+    "no guaranteed first-audio latency reduction; memory correction still may require multiple model decisions"
+  ],
+  "sha256": {
+    "core/handle/sendAudioHandle.py": "569a7eef5f6f30efa6a8dc6a0e4d47da4c1a8ad9a067d1afae8e06a7f3f994d1",
+    "core/utils/tool_harness/runtime.py": "b3d789bc068b49d3098a13c779dc0cf454fc4415e1feaf86db9beb476e6d9797",
+    "core/utils/tool_harness/retrieval.py": "f1092c5f99b7cbcbaf6c6f5e2ed895ef4ee2009f389f569f2f0beb072599357a",
+    "core/utils/tool_harness/request_authority.py": "c91bd8b9c02d3477fb5c88a1830b8b8b39ca2fcbf80de31299e061b0abb933e6",
+    "core/utils/tool_harness/prompt_policy.py": "92e080598ee471117cfb1146a717be2a0c7f1e5cb957f3dab4bc1c92838d5f68"
+  }
+}

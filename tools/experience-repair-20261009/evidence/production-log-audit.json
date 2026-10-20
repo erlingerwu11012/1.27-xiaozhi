@@ -1,0 +1,91 @@
+{
+  "at": 1791536054.7461798,
+  "since": 1791534215.1906164,
+  "aggregates": {
+    "manager-api": {
+      "status": "online",
+      "restarts": 0,
+      "logs": {
+        "pm_out_log_path": {
+          "path": "/root/.pm2/logs/manager-api-out.log",
+          "bytes": 3162975,
+          "lines_since_cutover": 13158,
+          "category_counts": {
+            "exception": 0,
+            "unauthenticated_health": 0,
+            "unauthorized": 0,
+            "timeout": 0,
+            "event_loop_blocking": 0,
+            "false_success_guard": 0,
+            "connection_close": 0,
+            "harness_failure": 0
+          },
+          "expected_probe_errors": 0,
+          "unexpected_exception_lines": 0,
+          "exception_types": {}
+        },
+        "pm_err_log_path": {
+          "path": "/root/.pm2/logs/manager-api-error.log",
+          "bytes": 2045,
+          "lines_since_cutover": 0,
+          "category_counts": {
+            "exception": 0,
+            "unauthenticated_health": 0,
+            "unauthorized": 0,
+            "timeout": 0,
+            "event_loop_blocking": 0,
+            "false_success_guard": 0,
+            "connection_close": 0,
+            "harness_failure": 0
+          },
+          "expected_probe_errors": 0,
+          "unexpected_exception_lines": 0,
+          "exception_types": {}
+        }
+      }
+    },
+    "xiaozhi-server": {
+      "status": "online",
+      "restarts": 0,
+      "logs": {
+        "pm_out_log_path": {
+          "path": "/root/.pm2/logs/xiaozhi-server-out.log",
+          "bytes": 1314066,
+          "lines_since_cutover": 210,
+          "category_counts": {
+            "exception": 90,
+            "unauthenticated_health": 0,
+            "unauthorized": 60,
+            "timeout": 0,
+            "event_loop_blocking": 0,
+            "false_success_guard": 0,
+            "connection_close": 0,
+            "harness_failure": 0
+          },
+          "expected_probe_errors": 90,
+          "unexpected_exception_lines": 0,
+          "exception_types": {}
+        },
+        "pm_err_log_path": {
+          "path": "/root/.pm2/logs/xiaozhi-server-error.log",
+          "bytes": 7695,
+          "lines_since_cutover": 0,
+          "category_counts": {
+            "exception": 0,
+            "unauthenticated_health": 0,
+            "unauthorized": 0,
+            "timeout": 0,
+            "event_loop_blocking": 0,
+            "false_success_guard": 0,
+            "connection_close": 0,
+            "harness_failure": 0
+          },
+          "expected_probe_errors": 0,
+          "unexpected_exception_lines": 0,
+          "exception_types": {}
+        }
+      }
+    }
+  },
+  "limitations": "Read-only log aggregate; no live authenticated hardware traffic generated. Health probes intentionally use invalid credentials; no dialogue or credentials exported."
+}

@@ -1,0 +1,14 @@
+{
+  "port": "COM11",
+  "mac": "ac:a7:04:fd:20:5c",
+  "backup": "E:\\github\\github_code\\all\\4.30\\tools\\wake-hi-niannian-20261017\\baseline\\device-aca704fd205c-20261017-020640",
+  "app_sha256": "773a11951f8d08d45bfec9627224bbc864116a8ac31c3976812356c8d0eab683",
+  "assets_sha256": "6b2d948646fbfd34fd99533416ad7d9cf22120c2da2bcfeeeb749f4d17f8a6c0",
+  "written": false,
+  "migration_backup_complete": true,
+  "resource_tail_sha256": "1c977f19d03f6764aa6fb99012ab900e1ea6a814e1cca24df7c5ec7c57a0400d",
+  "protected_sha256": {
+    "nvs": "e67d02ff78c840f02f45d4f5eead52076d2ec81eef5234751353405338bbb259",
+    "userdata": "bd802bad89cbdcf3f2038120491b0080ac4f26a839641e011cf950267977742f"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "deployed_at_china": "2026-10-13T09:40:58.288039+08:00",
+  "business_evidence_origins": {
+    "final08": 30,
+    "final06": 23,
+    "final04": 10,
+    "final07": 26,
+    "final09": 92
+  },
+  "budget": {
+    "case": {
+      "used": 800,
+      "limit": 800
+    },
+    "model": {
+      "used": 652,
+      "limit": 700
+    },
+    "tts": {
+      "used": 10,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "unfinished_charge_metadata": {
+    "model": 4,
+    "case": 19
+  },
+  "release": "/root/prjs/releases/harness-followup-20261013",
+  "firmware": "compiled_not_flashed",
+  "hardware_accepted": false,
+  "historical_data_restored": false
+}

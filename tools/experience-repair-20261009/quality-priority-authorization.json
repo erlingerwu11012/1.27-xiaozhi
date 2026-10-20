@@ -1,0 +1,9 @@
+{
+  "case_limit": 2600,
+  "model_limit": 1100,
+  "previous_case_limit": 2000,
+  "previous_model_limit": 850,
+  "reason": "User latest instruction explicitly prioritizes repairing all bugs and good experience over budget; necessary full revalidation, no blind reruns",
+  "time": 1791521831.9159877,
+  "statistics_reset": false
+}

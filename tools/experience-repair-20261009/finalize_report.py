@@ -1,0 +1,77 @@
+from pathlib import Path
+import json,hashlib,zipfile,shutil,datetime
+S=Path(__file__).parent;E=S/'evidence';ROOT=Path.cwd();d=json.loads((E/'delivery-summary.json').read_text(encoding='utf-8'));fw=json.loads((S/'firmware-package-result.json').read_text(encoding='utf-8-sig'));g=d['gate'];b=d['cumulative_budget'];verified=d['deployed'] and d['observation_seconds']>=1800 and d['all_health_passed'];status='已上线，30分钟观察通过' if verified else '已切换正式入口，仍在观察（草稿）'
+text=f'''# 对话、工具结果与记忆修复交付报告
+
+状态：**{status}**。正式入口 https://www.realecho.cn/ 。切换时间：{d['deployed_at']}。上线观察 {d['observation_seconds']} 秒、{d['observation_snapshots']} 个快照，检查全部通过：{d['all_health_passed']}。
+
+## 修复后的行为
+
+| 问题 | 本轮修改 | 验证边界 |
+|---|---|---|
+| 说话后没有回复 | 使用有效用户请求编号；普通监听和空ASR不再误取消回复，真正打断、新请求、身份和连接变化分别处理 | 真实服务代码、软件WebSocket设备和生命周期故障注入 |
+| 断连与拍照卡住 | WebSocket发送有超时和关闭诊断；阻塞视觉请求移出事件循环，保留鉴权、未就绪、会话不符和上传超时原因 | 测试图片上传及鉴权；真实摄像头须烧录后验证 |
+| 重复、乱码和技术内容口播 | 统一语音、字幕与历史出口；专用回执转换为业务事实，去除原始JSON、内部ID及多余中间查询播报 | 完整消息顺序和历史一致性核对 |
+| 音量、亮度不连续完成 | 相对调整查询真实状态后计算并设置；核对目标回执；适配实际亮度档位，90%映射4档（固件实际约95%） | 软件设备状态持久化和重新查询；没有测物理亮度 |
+| 查询提醒、完成当前卡片 | 查询真实内容；操作前读取当前ID和版本，区分完成、跳过、稍后和删除；重连卡片会话修复 | 软件设备跨重连与旧回执注入；固件部分待烧录 |
+| 记忆纠正、遗忘和污染 | 稳定事实ID、具体事实匹配、相关缓存失效；来源过滤，避免助手/工具/检索材料重复入库 | 真实隔离管理API和数据库，查询及重启后核对 |
+| 未确认却说成功 | 区分完成、已接收、失败和未知；只描述对应回执可证明的事实，未知写操作不盲目重发 | 无调用、错参、错回执、超时及部分完成注入 |
+| 聊天反馈未遵从 | 保留近期用户原话和最新事实；“别反问”等反馈及时生效，必要的参数澄清仍可询问 | 最终真实模型多轮样本；用户人格未修改 |
+
+聊天原文仍有部分简短、模板化的回答；事实和反馈专项通过不等于主观自然度已完全达到真人水平。
+
+未修改主模型、温度、思考模式、人格、One-API及计费规则。实际配置核对：Qwen3.7-Plus，非思考，温度0.4，账号计费绑定保留；服务仍显示“回响现实官方”。
+
+## 最终验收
+
+- 最终批次 **{g['cases']}/{g['cases']} 通过**；{g['real_model_turns']}条实际经过真实主模型，共{g['model_requests']}次主模型请求。
+- {g['verified_operations']}条可完成操作核对调用、回执和状态；{g['common_cases']}条常用操作全部通过。43个冻结工具具备模拟覆盖，离线目录按快照/固件定义核对。
+- 60条新独立保留样本为20组、每组3轮的事实更新与聊天反馈对话，不能代表全部自然语言。
+- 最终样本中未发现虚报成功、越权、非请求写入、重复创建、串用回执和原始JSON播报。
+- Java数据库回归{d['java_tests']}条；实际管理HTTP用例{d['manager_http_cases']}条；最终Python49条、此前相关178条及生命周期5条通过。免费历史输出回放单独记录，**不计为真实模型理解证据**。
+- 真实TTS成功3段，真实视觉请求2次；其余协议故障采用确定性注入。语音用例核对音频非空与消息顺序，没有每条测试都付费生成音频。
+- 最终批次完整消息延迟P50 {g['p50_ms']:.0f}毫秒、P95 {g['p95_ms']:.0f}毫秒；软件设备环境，不包含硬件收音、摄像头和播放耗时，不作为真实设备延迟承诺。
+
+[完整322条对话、调用参数、回执和历史]({(E/'FULL-CONVERSATIONS.md').resolve().as_posix()}) · [历次失败原文]({(E/'ORIGINAL-FAILURES.md').resolve().as_posix()}) · [逐工具覆盖]({(E/'tool-coverage.json').resolve().as_posix()}) · [验收门槛原始结果]({(E/'release-gate.json').resolve().as_posix()})
+
+## 累计预算与费用
+
+最终通过批次之外，早期失败重跑和免费回归也计入累计：**{b['case']['used']}条测试、{b['model']['used']}次主模型额度预占、{b['tts']['used']}次TTS、{b['vision']['used']}次视觉请求**。主模型额度预占包含未取得响应的尝试，不能全部当作成功计费请求。
+
+累计已经超过最初2000条/600次主模型计划。依据后续“修好BUG、体验优先，保证质量基础上省”的指示继续必要修复，后续4300条/2200次是执行过程中设置的停止线，并非用户明确批准的数字。保留{d['original_failed_rows_retained']}条历次失败原文；没有删除样本隐藏失败。当前不再追加付费测试。
+
+已取得usage元数据：输入{d['model_usage_with_received_metadata']['prompt_tokens']:,}token、输出{d['model_usage_with_received_metadata']['completion_tokens']:,}token、合计{d['model_usage_with_received_metadata']['total_tokens']:,}token。中断且未返回usage的请求可能不在其中。现有证据无法可靠关联全部网关扣费流水，**人民币总费用未知，不估造金额**。
+
+## 正式部署、数据保护与回滚
+
+- 服务端18个Python文件、5个Java文件及兼容数据库字段部署；测试代码冻结哈希与部署源码核对一致。
+- 新实例监听就绪后再切换nginx，正式域名HTTP200；无认证内部请求401、无认证WebSocket拒绝均符合预期。
+- 观察中检查进程、异常重启、源码/配置、账本重复写入和计费环境哈希。健康探针故意缺少认证，相关拒绝日志属于预期。
+- 4条来源明确的工具结果/助手材料被可撤销地隔离召回；原文保留，未删除用户事实。该隔离不等于批量清理云端历史数据。
+- 备份：`{d['backup']}`。包含源码、旧jar、nginx、相关数据库和账本；敏感备份只留服务器。
+- 回滚命令（服务器执行）：`{d['rollback_command']}`。保留操作账本和兼容新增字段，避免回滚重复下发。
+
+## 固件交付
+
+[固件ZIP]({(ROOT/'releases/experience-repair-20261009.zip').as_posix()}) · [烧录说明]({(ROOT/'releases/experience-repair-20261009/README.md').as_posix()})
+
+- ESP32-S3 16MB，IDF5.5.4完整编译。程序{fw['app_bytes']:,}字节，剩余{fw['app_margin']:,}字节；15项资源。分区保持既有64KB NVS及数据/资源布局。
+- 视觉凭据真实C++源码主机生命周期测试通过；本地早期无主机编译器的失败尝试单独保留，最终结果取服务器g++记录。
+- 固件包含凭据就绪/会话代次诊断与当前卡片有效会话重绑，另保留工作区原有TTS中断修改。
+- 解压后按README运行默认 `Upgrade-Preserve.ps1`，脚本先备份校验。`new-device-reset`合并镜像仅用于新机或明确清空数据。
+- ZIP SHA256：`{fw['sha256']}`。
+
+**本轮没有刷机、没有实机验收。** 设备存储迁移、摄像头采集、物理音量/亮度、提醒播放及卡片交互，仍须用户以后烧录后确认。部分外部插件以隔离执行器模拟，不能据此声明真实外部服务已完成业务操作。测试通过代表本次样本，不保证未来所有表达都不会失败。
+'''
+(S/'TEST-REVIEW.md').write_text(text,encoding='utf-8')
+for name in ['firmware-build.log','vision-host-remote.log','migration.sql','firmware-package-result.json']:
+ shutil.copy2(S/name,E/name)
+if verified:
+ out=ROOT/'releases/experience-repair-evidence-20261009.zip'
+ with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+  z.write(S/'TEST-REVIEW.md','TEST-REVIEW.md')
+  for p in E.rglob('*'):
+   if p.is_file():z.write(p,'evidence/'+p.relative_to(E).as_posix())
+ (out.with_suffix('.sha256')).write_text(hashlib.sha256(out.read_bytes()).hexdigest()+'  '+out.name+'\n',encoding='ascii')
+ print(json.dumps({'verified':verified,'report':str(S/'TEST-REVIEW.md'),'evidence_zip':str(out),'sha256':hashlib.sha256(out.read_bytes()).hexdigest()},ensure_ascii=False))
+else:print('Draft report generated; final archive waits for completed observation.')

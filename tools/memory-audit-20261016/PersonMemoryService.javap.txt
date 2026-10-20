@@ -1,0 +1,2084 @@
+Compiled from "PersonMemoryService.java"
+public class xiaozhi.modules.personmemory.PersonMemoryService {
+  private final org.springframework.jdbc.core.JdbcTemplate jdbc;
+
+  private final xiaozhi.modules.useridentity.service.AccountIdentityStateService identities;
+
+  private final xiaozhi.modules.personmemory.MemoryGatewayClient gateway;
+
+  private final com.fasterxml.jackson.databind.ObjectMapper json;
+
+  private boolean enabled;
+
+  private boolean portraits;
+
+  private java.lang.String portraitSchema;
+
+  private int maxChars;
+
+  private int topK;
+
+  private int factChars;
+
+  private int searchTimeout;
+
+  public boolean enabled();
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field enabled:Z
+       4: ireturn
+
+  public boolean portraitsEnabled();
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field enabled:Z
+       4: ifeq          28
+       7: aload_0
+       8: getfield      #7                  // Field portraits:Z
+      11: ifeq          28
+      14: aload_0
+      15: getfield      #10                 // Field portraitSchema:Ljava/lang/String;
+      18: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+      21: ifne          28
+      24: iconst_1
+      25: goto          29
+      28: iconst_0
+      29: ireturn
+
+  public void validateActor(xiaozhi.modules.personmemory.PersonTurnDTO, boolean);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: iconst_0
+       4: invokevirtual #20                 // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;ZZ)V
+       7: return
+
+  public void validateArchiveActor(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_0
+       3: iconst_1
+       4: invokevirtual #20                 // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;ZZ)V
+       7: return
+
+  void validateActor(xiaozhi.modules.personmemory.PersonTurnDTO, boolean, boolean);
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc           #28                 // String SELECT COUNT(*) FROM ai_identity_cleanup WHERE account_id=? AND user_id=? AND generation=?
+       6: ldc           #30                 // class java/lang/Integer
+       8: iconst_3
+       9: anewarray     #32                 // class java/lang/Object
+      12: dup
+      13: iconst_0
+      14: aload_1
+      15: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      18: aastore
+      19: dup
+      20: iconst_1
+      21: aload_1
+      22: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      25: aastore
+      26: dup
+      27: iconst_2
+      28: aload_1
+      29: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      32: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      35: aastore
+      36: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+      39: checkcast     #30                 // class java/lang/Integer
+      42: astore        4
+      44: aload         4
+      46: ifnull        67
+      49: aload         4
+      51: invokevirtual #60                 // Method java/lang/Integer.intValue:()I
+      54: ifle          67
+      57: new           #64                 // class xiaozhi/common/exception/RenException
+      60: dup
+      61: ldc           #66                 // String 人物身份已退役
+      63: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      66: athrow
+      67: aload_0
+      68: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      71: ldc           #72                 // String SELECT d.user_id,d.agent_id,a.mem_model_id FROM ai_device d JOIN ai_agent a ON a.id=d.agent_id WHERE d.mac_address=? AND d.user_id=? AND d.agent_id=?
+      73: iconst_3
+      74: anewarray     #32                 // class java/lang/Object
+      77: dup
+      78: iconst_0
+      79: aload_1
+      80: invokevirtual #74                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDeviceId:()Ljava/lang/String;
+      83: aastore
+      84: dup
+      85: iconst_1
+      86: aload_1
+      87: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      90: aastore
+      91: dup
+      92: iconst_2
+      93: aload_1
+      94: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+      97: aastore
+      98: invokevirtual #80                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     101: astore        5
+     103: aload         5
+     105: invokeinterface #84,  1           // InterfaceMethod java/util/List.size:()I
+     110: iconst_1
+     111: if_icmpeq     124
+     114: new           #64                 // class xiaozhi/common/exception/RenException
+     117: dup
+     118: ldc           #89                 // String 设备归属已变更
+     120: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     123: athrow
+     124: iload_2
+     125: ifeq          150
+     128: ldc           #91                 // String matched
+     130: aload_1
+     131: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+     134: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     137: ifne          150
+     140: new           #64                 // class xiaozhi/common/exception/RenException
+     143: dup
+     144: ldc           #100                // String 默认身份不使用云端记忆
+     146: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     149: athrow
+     150: iload_2
+     151: ifeq          197
+     154: aload_0
+     155: getfield      #1                  // Field enabled:Z
+     158: ifeq          187
+     161: ldc           #102                // String Memory_bailian
+     163: aload         5
+     165: iconst_0
+     166: invokeinterface #104,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     171: checkcast     #108                // class java/util/Map
+     174: ldc           #110                // String mem_model_id
+     176: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     181: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     184: ifne          197
+     187: new           #64                 // class xiaozhi/common/exception/RenException
+     190: dup
+     191: ldc           #115                // String 当前智能体未开启长期记忆
+     193: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     196: athrow
+     197: aload_0
+     198: getfield      #117                // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+     201: aload_1
+     202: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     205: invokevirtual #121                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.snapshot:(Ljava/lang/Long;)Ljava/util/Map;
+     208: astore        6
+     210: aload         6
+     212: ldc           #127                // String directory_version
+     214: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     219: checkcast     #129                // class java/lang/Number
+     222: invokevirtual #131                // Method java/lang/Number.longValue:()J
+     225: lstore        7
+     227: iload_3
+     228: ifeq          244
+     231: aload_1
+     232: invokevirtual #134                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDirectoryVersion:()J
+     235: lload         7
+     237: lcmp
+     238: ifle          264
+     241: goto          254
+     244: lload         7
+     246: aload_1
+     247: invokevirtual #134                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDirectoryVersion:()J
+     250: lcmp
+     251: ifeq          264
+     254: new           #64                 // class xiaozhi/common/exception/RenException
+     257: dup
+     258: ldc           #137                // String 人物目录已变更
+     260: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     263: athrow
+     264: ldc           #139                // String default
+     266: aload         6
+     268: ldc           #141                // String mode
+     270: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     275: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     278: ifeq          345
+     281: ldc           #139                // String default
+     283: aload_1
+     284: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+     287: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     290: ifeq          335
+     293: aload_1
+     294: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     297: aload         6
+     299: ldc           #143                // String default_user_id
+     301: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     306: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     309: ifeq          335
+     312: aload_1
+     313: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     316: aload         6
+     318: ldc           #145                // String default_generation
+     320: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     325: checkcast     #129                // class java/lang/Number
+     328: invokevirtual #131                // Method java/lang/Number.longValue:()J
+     331: lcmp
+     332: ifeq          524
+     335: new           #64                 // class xiaozhi/common/exception/RenException
+     338: dup
+     339: ldc           #147                // String 默认身份已失效
+     341: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     344: athrow
+     345: ldc           #149                // String personal
+     347: aload         6
+     349: ldc           #141                // String mode
+     351: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     356: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     359: ifne          372
+     362: new           #64                 // class xiaozhi/common/exception/RenException
+     365: dup
+     366: ldc           #151                // String 本轮身份未确认
+     368: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     371: athrow
+     372: ldc           #91                 // String matched
+     374: aload_1
+     375: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+     378: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     381: ifeq          400
+     384: aload_1
+     385: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     388: lconst_0
+     389: lcmp
+     390: ifne          400
+     393: aload_1
+     394: invokevirtual #153                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getVoiceprintId:()Ljava/lang/String;
+     397: ifnonnull     410
+     400: new           #64                 // class xiaozhi/common/exception/RenException
+     403: dup
+     404: ldc           #151                // String 本轮身份未确认
+     406: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     409: athrow
+     410: iload_3
+     411: ifeq          449
+     414: aload_0
+     415: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     418: ldc           #156                // String SELECT COUNT(*) FROM ai_user_identity WHERE account_id=? AND user_id=? AND status=\'active\' AND kind=\'member\'
+     420: ldc           #30                 // class java/lang/Integer
+     422: iconst_2
+     423: anewarray     #32                 // class java/lang/Object
+     426: dup
+     427: iconst_0
+     428: aload_1
+     429: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     432: aastore
+     433: dup
+     434: iconst_1
+     435: aload_1
+     436: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     439: aastore
+     440: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     443: checkcast     #30                 // class java/lang/Integer
+     446: goto          498
+     449: aload_0
+     450: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     453: ldc           #158                // String SELECT COUNT(*) FROM ai_agent_voice_print v JOIN ai_user_identity u ON u.account_id=v.creator AND u.user_id=v.user_id WHERE v.creator=? AND v.user_id=? AND v.id=? AND v.template_version=? AND v.binding_state=\'ready\' AND u.status=\'active\' AND u.kind=\'member\'
+     455: ldc           #30                 // class java/lang/Integer
+     457: iconst_4
+     458: anewarray     #32                 // class java/lang/Object
+     461: dup
+     462: iconst_0
+     463: aload_1
+     464: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     467: aastore
+     468: dup
+     469: iconst_1
+     470: aload_1
+     471: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     474: aastore
+     475: dup
+     476: iconst_2
+     477: aload_1
+     478: invokevirtual #153                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getVoiceprintId:()Ljava/lang/String;
+     481: aastore
+     482: dup
+     483: iconst_3
+     484: aload_1
+     485: invokevirtual #160                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTemplateVersion:()J
+     488: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     491: aastore
+     492: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     495: checkcast     #30                 // class java/lang/Integer
+     498: astore        9
+     500: aload         9
+     502: ifnull        514
+     505: aload         9
+     507: invokevirtual #60                 // Method java/lang/Integer.intValue:()I
+     510: iconst_1
+     511: if_icmpeq     524
+     514: new           #64                 // class xiaozhi/common/exception/RenException
+     517: dup
+     518: ldc           #163                // String 声纹绑定已失效
+     520: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     523: athrow
+     524: return
+
+  public void material(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #117                // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #165                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: aload_1
+      14: ldc           #168                // String dialogue
+      16: ldc           #170                // String dialogue_assistant
+      18: ldc           #172                // String dialogue_end
+      20: ldc           #174                // String tool_result
+      22: invokestatic  #176                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+      25: aload_3
+      26: invokeinterface #182,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      31: ifeq          50
+      34: ldc           #139                // String default
+      36: aload_1
+      37: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+      40: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      43: ifne          50
+      46: iconst_1
+      47: goto          51
+      50: iconst_0
+      51: iconst_1
+      52: invokevirtual #20                 // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;ZZ)V
+      55: ldc           #139                // String default
+      57: aload_1
+      58: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+      61: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      64: ifeq          90
+      67: ldc           #168                // String dialogue
+      69: ldc           #170                // String dialogue_assistant
+      71: ldc           #172                // String dialogue_end
+      73: ldc           #174                // String tool_result
+      75: ldc           #185                // String habit_analysis
+      77: invokestatic  #187                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+      80: aload_3
+      81: invokeinterface #182,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      86: ifeq          90
+      89: return
+      90: ldc           #185                // String habit_analysis
+      92: aload_3
+      93: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      96: ifeq          144
+      99: aload_0
+     100: getfield      #1                  // Field enabled:Z
+     103: ifeq          143
+     106: ldc           #102                // String Memory_bailian
+     108: aload_0
+     109: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     112: ldc           #190                // String SELECT mem_model_id FROM ai_agent WHERE id=? AND user_id=?
+     114: ldc           #15                 // class java/lang/String
+     116: iconst_2
+     117: anewarray     #32                 // class java/lang/Object
+     120: dup
+     121: iconst_0
+     122: aload_1
+     123: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     126: aastore
+     127: dup
+     128: iconst_1
+     129: aload_1
+     130: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     133: aastore
+     134: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     137: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     140: ifne          144
+     143: return
+     144: ldc           #168                // String dialogue
+     146: ldc           #170                // String dialogue_assistant
+     148: ldc           #172                // String dialogue_end
+     150: ldc           #192                // String behavior
+     152: ldc           #185                // String habit_analysis
+     154: ldc           #174                // String tool_result
+     156: invokestatic  #194                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+     159: aload_3
+     160: invokeinterface #182,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     165: ifeq          197
+     168: aload_2
+     169: ifnull        197
+     172: aload_2
+     173: invokevirtual #197                // Method java/lang/String.length:()I
+     176: sipush        128
+     179: if_icmpgt     197
+     182: aload         4
+     184: ifnull        197
+     187: aload         4
+     189: invokevirtual #197                // Method java/lang/String.length:()I
+     192: ldc           #200                // int 65536
+     194: if_icmple     207
+     197: new           #64                 // class xiaozhi/common/exception/RenException
+     200: dup
+     201: ldc           #201                // String 材料格式无效
+     203: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     206: athrow
+     207: ldc           #168                // String dialogue
+     209: ldc           #170                // String dialogue_assistant
+     211: ldc           #172                // String dialogue_end
+     213: ldc           #174                // String tool_result
+     215: invokestatic  #176                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+     218: aload_3
+     219: invokeinterface #182,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     224: ifeq          232
+     227: aload_0
+     228: aload_1
+     229: invokevirtual #203                // Method ensureEntity:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)V
+     232: aload_0
+     233: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     236: ldc           #207                // String SELECT MAX(UNIX_TIMESTAMP(created_at)*1000) FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND match_text=\'*\'
+     238: ldc           #49                 // class java/lang/Long
+     240: iconst_3
+     241: anewarray     #32                 // class java/lang/Object
+     244: dup
+     245: iconst_0
+     246: aload_1
+     247: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     250: aastore
+     251: dup
+     252: iconst_1
+     253: aload_1
+     254: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     257: aastore
+     258: dup
+     259: iconst_2
+     260: aload_1
+     261: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     264: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     267: aastore
+     268: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     271: checkcast     #49                 // class java/lang/Long
+     274: astore        5
+     276: aload         5
+     278: ifnull        309
+     281: aload_1
+     282: invokevirtual #209                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+     285: ifnull        308
+     288: aload_1
+     289: invokevirtual #209                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+     292: invokevirtual #212                // Method java/lang/Long.longValue:()J
+     295: aload         5
+     297: invokevirtual #212                // Method java/lang/Long.longValue:()J
+     300: ldc2_w        #213                // long 1000l
+     303: ladd
+     304: lcmp
+     305: ifgt          309
+     308: return
+     309: aload_0
+     310: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     313: ldc           #215                // String SELECT match_text,UNIX_TIMESTAMP(created_at)*1000 AS changed_at FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND match_text<>\'*\'
+     315: iconst_3
+     316: anewarray     #32                 // class java/lang/Object
+     319: dup
+     320: iconst_0
+     321: aload_1
+     322: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     325: aastore
+     326: dup
+     327: iconst_1
+     328: aload_1
+     329: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     332: aastore
+     333: dup
+     334: iconst_2
+     335: aload_1
+     336: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     339: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     342: aastore
+     343: invokevirtual #80                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     346: astore        6
+     348: aload         6
+     350: invokeinterface #217,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     355: aload         4
+     357: aload_1
+     358: invokedynamic #221,  0            // InvokeDynamic #0:test:(Ljava/lang/String;Lxiaozhi/modules/personmemory/PersonTurnDTO;)Ljava/util/function/Predicate;
+     363: invokeinterface #225,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+     368: ifeq          372
+     371: return
+     372: iconst_0
+     373: istore        7
+     375: iconst_0
+     376: istore        8
+     378: ldc           #168                // String dialogue
+     380: aload_3
+     381: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     384: ifeq          395
+     387: aload         4
+     389: invokestatic  #231                // Method xiaozhi/modules/personmemory/MemoryMaterialPolicy.userTokens:(Ljava/lang/String;)I
+     392: goto          396
+     395: iconst_0
+     396: istore        9
+     398: aload         4
+     400: invokevirtual #197                // Method java/lang/String.length:()I
+     403: iload         7
+     405: aload_0
+     406: getfield      #237                // Field maxChars:I
+     409: i2l
+     410: iconst_2
+     411: sipush        16000
+     414: invokestatic  #241                // Method java/lang/Math.clamp:(JII)I
+     417: iadd
+     418: invokestatic  #247                // Method java/lang/Math.min:(II)I
+     421: istore        10
+     423: iload         10
+     425: aload         4
+     427: invokevirtual #197                // Method java/lang/String.length:()I
+     430: if_icmpge     451
+     433: aload         4
+     435: iload         10
+     437: iconst_1
+     438: isub
+     439: invokevirtual #251                // Method java/lang/String.charAt:(I)C
+     442: invokestatic  #255                // Method java/lang/Character.isHighSurrogate:(C)Z
+     445: ifeq          451
+     448: iinc          10, -1
+     451: aload         4
+     453: iload         7
+     455: iload         10
+     457: invokevirtual #261                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     460: astore        11
+     462: aload_2
+     463: iload         8
+     465: iinc          8, 1
+     468: invokedynamic #265,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     473: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     476: astore        12
+     478: aload_0
+     479: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     482: ldc_w         #275                // String INSERT IGNORE INTO ai_person_material(account_id,user_id,generation,agent_id,device_id,event_id,turn_id,kind,content,user_tokens,token_version) VALUES(?,?,?,?,?,?,?,?,?,?,1)
+     485: bipush        10
+     487: anewarray     #32                 // class java/lang/Object
+     490: dup
+     491: iconst_0
+     492: aload_1
+     493: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     496: aastore
+     497: dup
+     498: iconst_1
+     499: aload_1
+     500: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     503: aastore
+     504: dup
+     505: iconst_2
+     506: aload_1
+     507: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     510: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     513: aastore
+     514: dup
+     515: iconst_3
+     516: aload_1
+     517: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     520: aastore
+     521: dup
+     522: iconst_4
+     523: aload_1
+     524: invokevirtual #74                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDeviceId:()Ljava/lang/String;
+     527: aastore
+     528: dup
+     529: iconst_5
+     530: aload         12
+     532: aastore
+     533: dup
+     534: bipush        6
+     536: aload_1
+     537: invokevirtual #277                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     540: aastore
+     541: dup
+     542: bipush        7
+     544: aload_3
+     545: aastore
+     546: dup
+     547: bipush        8
+     549: aload         11
+     551: aastore
+     552: dup
+     553: bipush        9
+     555: iload         10
+     557: aload         4
+     559: invokevirtual #197                // Method java/lang/String.length:()I
+     562: if_icmpne     570
+     565: iload         9
+     567: goto          571
+     570: iconst_0
+     571: invokestatic  #280                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     574: aastore
+     575: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     578: pop
+     579: iload         10
+     581: istore        7
+     583: iload         7
+     585: aload         4
+     587: invokevirtual #197                // Method java/lang/String.length:()I
+     590: if_icmplt     398
+     593: return
+
+  public java.util.Map<java.lang.String, java.lang.Object> add(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #117                // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #165                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: aload_1
+      14: iconst_0
+      15: invokevirtual #287                // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+      18: aload_2
+      19: ifnull        61
+      22: aload_2
+      23: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+      26: ifne          61
+      29: aload_2
+      30: invokevirtual #197                // Method java/lang/String.length:()I
+      33: sipush        1024
+      36: if_icmpgt     61
+      39: aload_2
+      40: iconst_1
+      41: invokestatic  #290                // Method xiaozhi/modules/personmemory/RecentArchiveService.factualUser:(Ljava/lang/String;I)Z
+      44: ifeq          61
+      47: aload_2
+      48: invokevirtual #296                // Method java/lang/String.strip:()Ljava/lang/String;
+      51: aload_2
+      52: invokestatic  #299                // Method xiaozhi/modules/personmemory/RecentArchiveService.normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+      55: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      58: ifne          72
+      61: new           #64                 // class xiaozhi/common/exception/RenException
+      64: dup
+      65: ldc_w         #302                // String 只能保存明确的单条事实
+      68: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      71: athrow
+      72: aload_2
+      73: invokevirtual #296                // Method java/lang/String.strip:()Ljava/lang/String;
+      76: astore_3
+      77: ldc           #91                 // String matched
+      79: aload_1
+      80: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+      83: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      86: ifeq          137
+      89: aload_0
+      90: getfield      #1                  // Field enabled:Z
+      93: ifeq          137
+      96: ldc           #102                // String Memory_bailian
+      98: aload_0
+      99: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     102: ldc           #190                // String SELECT mem_model_id FROM ai_agent WHERE id=? AND user_id=?
+     104: ldc           #15                 // class java/lang/String
+     106: iconst_2
+     107: anewarray     #32                 // class java/lang/Object
+     110: dup
+     111: iconst_0
+     112: aload_1
+     113: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     116: aastore
+     117: dup
+     118: iconst_1
+     119: aload_1
+     120: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     123: aastore
+     124: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     127: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     130: ifeq          137
+     133: iconst_1
+     134: goto          138
+     137: iconst_0
+     138: istore        4
+     140: iload         4
+     142: ifeq          150
+     145: aload_0
+     146: aload_1
+     147: invokevirtual #203                // Method ensureEntity:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)V
+     150: aload_1
+     151: invokevirtual #277                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     154: invokedynamic #304,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     159: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     162: astore        5
+     164: aload_0
+     165: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     168: ldc_w         #306                // String INSERT IGNORE INTO ai_person_material(account_id,user_id,generation,agent_id,device_id,event_id,turn_id,kind,content,user_tokens,token_version) VALUES(?,?,?,?,?,?,?,\'explicit_fact\',?,?,1)
+     171: bipush        9
+     173: anewarray     #32                 // class java/lang/Object
+     176: dup
+     177: iconst_0
+     178: aload_1
+     179: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     182: aastore
+     183: dup
+     184: iconst_1
+     185: aload_1
+     186: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     189: aastore
+     190: dup
+     191: iconst_2
+     192: aload_1
+     193: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     196: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     199: aastore
+     200: dup
+     201: iconst_3
+     202: aload_1
+     203: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     206: aastore
+     207: dup
+     208: iconst_4
+     209: aload_1
+     210: invokevirtual #74                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDeviceId:()Ljava/lang/String;
+     213: aastore
+     214: dup
+     215: iconst_5
+     216: aload         5
+     218: aastore
+     219: dup
+     220: bipush        6
+     222: aload_1
+     223: invokevirtual #277                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     226: aastore
+     227: dup
+     228: bipush        7
+     230: aload_3
+     231: aastore
+     232: dup
+     233: bipush        8
+     235: aload_3
+     236: invokestatic  #231                // Method xiaozhi/modules/personmemory/MemoryMaterialPolicy.userTokens:(Ljava/lang/String;)I
+     239: invokestatic  #280                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     242: aastore
+     243: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     246: pop
+     247: aload_0
+     248: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     251: ldc_w         #308                // String SELECT id,content,recall_allowed FROM ai_person_material WHERE account_id=? AND user_id=? AND generation=? AND event_id=? AND agent_id=?
+     254: iconst_5
+     255: anewarray     #32                 // class java/lang/Object
+     258: dup
+     259: iconst_0
+     260: aload_1
+     261: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     264: aastore
+     265: dup
+     266: iconst_1
+     267: aload_1
+     268: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     271: aastore
+     272: dup
+     273: iconst_2
+     274: aload_1
+     275: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     278: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     281: aastore
+     282: dup
+     283: iconst_3
+     284: aload         5
+     286: aastore
+     287: dup
+     288: iconst_4
+     289: aload_1
+     290: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     293: aastore
+     294: invokevirtual #80                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     297: astore        6
+     299: aload         6
+     301: invokeinterface #84,  1           // InterfaceMethod java/util/List.size:()I
+     306: iconst_1
+     307: if_icmpne     364
+     310: aload_3
+     311: aload         6
+     313: iconst_0
+     314: invokeinterface #104,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     319: checkcast     #108                // class java/util/Map
+     322: ldc_w         #310                // String content
+     325: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     330: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     333: ifeq          364
+     336: getstatic     #312                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+     339: aload         6
+     341: iconst_0
+     342: invokeinterface #104,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     347: checkcast     #108                // class java/util/Map
+     350: ldc_w         #318                // String recall_allowed
+     353: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     358: invokevirtual #320                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+     361: ifne          375
+     364: new           #64                 // class xiaozhi/common/exception/RenException
+     367: dup
+     368: ldc_w         #321                // String 该请求已变化或保存状态未确认
+     371: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     374: athrow
+     375: ldc_w         #323                // String local_applied
+     378: iconst_1
+     379: invokestatic  #325                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     382: ldc_w         #328                // String operation
+     385: ldc_w         #330                // String add
+     388: ldc_w         #332                // String status
+     391: ldc_w         #334                // String completed
+     394: ldc_w         #336                // String record_id
+     397: aload         6
+     399: iconst_0
+     400: invokeinterface #104,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     405: checkcast     #108                // class java/util/Map
+     408: ldc_w         #338                // String id
+     411: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     416: invokestatic  #340                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     419: invokedynamic #343,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     424: ldc_w         #344                // String version
+     427: aload_3
+     428: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     431: ldc_w         #346                // String fact
+     434: aload_3
+     435: ldc_w         #348                // String cloud_sync
+     438: iload         4
+     440: ifeq          449
+     443: ldc_w         #350                // String pending
+     446: goto          452
+     449: ldc_w         #352                // String disabled
+     452: invokestatic  #354                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     455: areturn
+
+  private void ensureEntity(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: getfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+       4: aload_1
+       5: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: aload_1
+       9: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      12: aload_1
+      13: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      16: invokevirtual #361                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.cloudUserId:(Ljava/lang/Long;Ljava/lang/String;J)Ljava/lang/String;
+      19: astore_2
+      20: aload_0
+      21: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      24: ldc_w         #365                // String INSERT IGNORE INTO ai_person_memory_entity(account_id,user_id,generation,cloud_user_id,daily_started_at) VALUES(?,?,?,?,NULL)
+      27: iconst_4
+      28: anewarray     #32                 // class java/lang/Object
+      31: dup
+      32: iconst_0
+      33: aload_1
+      34: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      37: aastore
+      38: dup
+      39: iconst_1
+      40: aload_1
+      41: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      44: aastore
+      45: dup
+      46: iconst_2
+      47: aload_1
+      48: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      51: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      54: aastore
+      55: dup
+      56: iconst_3
+      57: aload_2
+      58: aastore
+      59: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+      62: pop
+      63: aload_0
+      64: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      67: ldc_w         #367                // String SELECT state,cloud_user_id FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=?
+      70: iconst_3
+      71: anewarray     #32                 // class java/lang/Object
+      74: dup
+      75: iconst_0
+      76: aload_1
+      77: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      80: aastore
+      81: dup
+      82: iconst_1
+      83: aload_1
+      84: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      87: aastore
+      88: dup
+      89: iconst_2
+      90: aload_1
+      91: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      94: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      97: aastore
+      98: invokevirtual #369                // Method org/springframework/jdbc/core/JdbcTemplate.queryForMap:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/Map;
+     101: astore_3
+     102: ldc_w         #373                // String active
+     105: aload_3
+     106: ldc_w         #375                // String state
+     109: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     114: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     117: ifeq          136
+     120: aload_2
+     121: aload_3
+     122: ldc_w         #377                // String cloud_user_id
+     125: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     130: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     133: ifne          147
+     136: new           #64                 // class xiaozhi/common/exception/RenException
+     139: dup
+     140: ldc_w         #379                // String 记忆实体已失效
+     143: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     146: athrow
+     147: return
+
+  public java.util.Map<java.lang.String, java.lang.Object> search(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_1
+       3: invokevirtual #287                // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+       6: aload_0
+       7: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      10: ldc_w         #381                // String SELECT id FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND state=\'local_only\'
+      13: iconst_3
+      14: anewarray     #32                 // class java/lang/Object
+      17: dup
+      18: iconst_0
+      19: aload_1
+      20: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      23: aastore
+      24: dup
+      25: iconst_1
+      26: aload_1
+      27: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      30: aastore
+      31: dup
+      32: iconst_2
+      33: aload_1
+      34: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      37: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      40: aastore
+      41: invokevirtual #80                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #383,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      51: ifne          98
+      54: aload_0
+      55: aload_1
+      56: invokevirtual #203                // Method ensureEntity:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)V
+      59: aload_0
+      60: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      63: ldc_w         #386                // String UPDATE ai_memory_override SET state=\'pending\' WHERE account_id=? AND user_id=? AND generation=? AND state=\'local_only\'
+      66: iconst_3
+      67: anewarray     #32                 // class java/lang/Object
+      70: dup
+      71: iconst_0
+      72: aload_1
+      73: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      76: aastore
+      77: dup
+      78: iconst_1
+      79: aload_1
+      80: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      83: aastore
+      84: dup
+      85: iconst_2
+      86: aload_1
+      87: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      90: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      93: aastore
+      94: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+      97: pop
+      98: aload_2
+      99: ifnull        119
+     102: aload_2
+     103: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+     106: ifne          119
+     109: aload_2
+     110: invokevirtual #197                // Method java/lang/String.length:()I
+     113: sipush        2048
+     116: if_icmple     130
+     119: new           #64                 // class xiaozhi/common/exception/RenException
+     122: dup
+     123: ldc_w         #388                // String 检索内容无效
+     126: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     129: athrow
+     130: aload_0
+     131: aload_1
+     132: invokevirtual #390                // Method overrides:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)Ljava/util/List;
+     135: astore        4
+     137: aload         4
+     139: invokeinterface #217,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     144: invokedynamic #394,  0            // InvokeDynamic #4:test:()Ljava/util/function/Predicate;
+     149: invokeinterface #225,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+     154: istore        5
+     156: iload         5
+     158: ifeq          167
+     161: invokestatic  #397                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+     164: goto          263
+     167: aload_0
+     168: getfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     171: aload_1
+     172: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     175: aload_1
+     176: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     179: aload_1
+     180: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     183: ldc_w         #400                // String POST
+     186: ldc_w         #402                // String memory_nodes/search
+     189: ldc_w         #404                // String messages
+     192: ldc_w         #406                // String role
+     195: ldc_w         #408                // String user
+     198: ldc_w         #310                // String content
+     201: aload_2
+     202: invokestatic  #410                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     205: invokestatic  #413                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+     208: ldc_w         #416                // String top_k
+     211: aload_0
+     212: getfield      #418                // Field topK:I
+     215: i2l
+     216: iconst_1
+     217: bipush        20
+     219: invokestatic  #241                // Method java/lang/Math.clamp:(JII)I
+     222: invokestatic  #280                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     225: ldc_w         #421                // String plan_version
+     228: ldc_w         #423                // String lite
+     231: invokestatic  #425                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     234: aload_1
+     235: invokevirtual #277                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     238: invokedynamic #428,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     243: aload_0
+     244: getfield      #429                // Field searchTimeout:I
+     247: i2l
+     248: bipush        100
+     250: sipush        3000
+     253: invokestatic  #241                // Method java/lang/Math.clamp:(JII)I
+     256: i2l
+     257: invokestatic  #432                // Method java/time/Duration.ofMillis:(J)Ljava/time/Duration;
+     260: invokevirtual #438                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     263: astore        6
+     265: aload         6
+     267: ldc_w         #442                // String memory_nodes
+     270: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     275: astore        7
+     277: new           #444                // class java/util/ArrayList
+     280: dup
+     281: invokespecial #446                // Method java/util/ArrayList."<init>":()V
+     284: astore        8
+     286: new           #449                // class java/util/HashSet
+     289: dup
+     290: invokespecial #451                // Method java/util/HashSet."<init>":()V
+     293: astore        9
+     295: iconst_0
+     296: istore        10
+     298: aload         7
+     300: instanceof    #85                 // class java/util/List
+     303: ifeq          607
+     306: aload         7
+     308: checkcast     #85                 // class java/util/List
+     311: astore        11
+     313: aload         11
+     315: invokeinterface #452,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     320: astore        12
+     322: aload         12
+     324: invokeinterface #456,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     329: ifeq          607
+     332: aload         12
+     334: invokeinterface #461,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     339: astore        13
+     341: aload         13
+     343: instanceof    #108                // class java/util/Map
+     346: ifeq          322
+     349: aload         13
+     351: checkcast     #108                // class java/util/Map
+     354: astore        14
+     356: aload         14
+     358: ldc_w         #310                // String content
+     361: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     366: aload         14
+     368: ldc_w         #465                // String custom_content
+     371: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     376: ldc_w         #467                // String
+     379: invokestatic  #469                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     382: invokestatic  #469                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     385: invokestatic  #299                // Method xiaozhi/modules/personmemory/RecentArchiveService.normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+     388: astore        15
+     390: aload         15
+     392: invokestatic  #475                // Method xiaozhi/modules/personmemory/RecentArchiveService.factualUser:(Ljava/lang/String;)Z
+     395: ifne          401
+     398: goto          322
+     401: aload         15
+     403: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+     406: ifne          322
+     409: aload         15
+     411: invokevirtual #197                // Method java/lang/String.length:()I
+     414: sipush        1024
+     417: if_icmpgt     322
+     420: aload         15
+     422: ldc_w         #478                // String [来源:
+     425: invokevirtual #480                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     428: ifne          322
+     431: aload         15
+     433: ldc_w         #483                // String [来源：
+     436: invokevirtual #480                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     439: ifne          322
+     442: aload         15
+     444: ldc_w         #485                // String [本轮可信
+     447: invokevirtual #480                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     450: ifne          322
+     453: aload         15
+     455: ldc_w         #487                // String \"tool_calls\"
+     458: invokevirtual #480                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     461: ifne          322
+     464: aload         9
+     466: aload         15
+     468: invokeinterface #489,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     473: ifne          479
+     476: goto          322
+     479: iload         10
+     481: aload         15
+     483: invokevirtual #197                // Method java/lang/String.length:()I
+     486: iadd
+     487: aload_0
+     488: getfield      #491                // Field factChars:I
+     491: i2l
+     492: sipush        128
+     495: sipush        8000
+     498: invokestatic  #241                // Method java/lang/Math.clamp:(JII)I
+     501: if_icmple     507
+     504: goto          322
+     507: aload         14
+     509: ldc_w         #338                // String id
+     512: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     517: astore        16
+     519: aload         16
+     521: ifnonnull     536
+     524: aload         14
+     526: ldc_w         #494                // String memory_node_id
+     529: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     534: astore        16
+     536: aload         16
+     538: ifnonnull     544
+     541: goto          322
+     544: aload         8
+     546: ldc_w         #336                // String record_id
+     549: aload         16
+     551: invokestatic  #340                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     554: invokedynamic #496,  0            // InvokeDynamic #6:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     559: ldc_w         #497                // String text
+     562: aload         15
+     564: ldc_w         #499                // String source
+     567: ldc_w         #501                // String cloud_user_fact
+     570: ldc_w         #344                // String version
+     573: aload         15
+     575: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     578: ldc_w         #503                // String owner
+     581: aload_1
+     582: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     585: invokestatic  #505                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     588: invokeinterface #508,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     593: pop
+     594: iload         10
+     596: aload         15
+     598: invokevirtual #197                // Method java/lang/String.length:()I
+     601: iadd
+     602: istore        10
+     604: goto          322
+     607: aload         4
+     609: invokeinterface #452,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     614: astore        11
+     616: aload         11
+     618: invokeinterface #456,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     623: ifeq          788
+     626: aload         11
+     628: invokeinterface #461,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     633: checkcast     #108                // class java/util/Map
+     636: astore        12
+     638: ldc_w         #509                // String correct
+     641: aload         12
+     643: ldc_w         #511                // String action
+     646: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     651: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     654: ifeq          785
+     657: ldc_w         #513                // String superseded
+     660: aload         12
+     662: ldc_w         #375                // String state
+     665: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     670: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     673: ifne          785
+     676: aload         12
+     678: ldc_w         #515                // String replacement
+     681: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     686: ifnull        785
+     689: aload         12
+     691: ldc_w         #515                // String replacement
+     694: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     699: invokevirtual #517                // Method java/lang/Object.toString:()Ljava/lang/String;
+     702: astore        13
+     704: aload         13
+     706: invokevirtual #197                // Method java/lang/String.length:()I
+     709: sipush        1024
+     712: if_icmpgt     785
+     715: aload         9
+     717: aload         13
+     719: invokeinterface #489,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     724: ifeq          785
+     727: aload         8
+     729: ldc_w         #336                // String record_id
+     732: aload         12
+     734: ldc_w         #338                // String id
+     737: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     742: invokestatic  #340                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     745: invokedynamic #519,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     750: ldc_w         #497                // String text
+     753: aload         13
+     755: ldc_w         #499                // String source
+     758: ldc_w         #520                // String local_override
+     761: ldc_w         #344                // String version
+     764: aload         13
+     766: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     769: ldc_w         #503                // String owner
+     772: aload_1
+     773: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     776: invokestatic  #505                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     779: invokeinterface #508,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     784: pop
+     785: goto          616
+     788: aload         8
+     790: invokeinterface #217,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     795: invokedynamic #522,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+     800: invokeinterface #526,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     805: ldc_w         #530                // String \n
+     808: invokestatic  #532                // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+     811: invokeinterface #538,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     816: checkcast     #15                 // class java/lang/String
+     819: astore        11
+     821: ldc_w         #497                // String text
+     824: aload         11
+     826: ldc_w         #542                // String items
+     829: aload         8
+     831: ldc_w         #332                // String status
+     834: aload         8
+     836: invokeinterface #383,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     841: ifeq          861
+     844: iload         5
+     846: ifeq          855
+     849: ldc_w         #544                // String suppressed
+     852: goto          864
+     855: ldc_w         #546                // String not_found
+     858: goto          864
+     861: ldc_w         #548                // String found
+     864: ldc_w         #550                // String request_id
+     867: aload         6
+     869: ldc_w         #550                // String request_id
+     872: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     877: ldc_w         #467                // String
+     880: invokestatic  #469                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     883: invokestatic  #552                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     886: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> override(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #117                // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #165                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: aload_1
+      14: iconst_0
+      15: invokevirtual #287                // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+      18: ldc_w         #509                // String correct
+      21: aload_2
+      22: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      25: ifeq          52
+      28: aload         4
+      30: ifnull        41
+      33: aload         4
+      35: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+      38: ifeq          52
+      41: new           #64                 // class xiaozhi/common/exception/RenException
+      44: dup
+      45: ldc_w         #555                // String 新的记忆内容不能为空
+      48: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      51: athrow
+      52: ldc_w         #557                // String forget
+      55: ldc_w         #509                // String correct
+      58: invokestatic  #559                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+      61: aload_2
+      62: invokeinterface #182,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      67: ifeq          107
+      70: aload_3
+      71: ifnull        107
+      74: aload_3
+      75: invokevirtual #14                 // Method java/lang/String.isBlank:()Z
+      78: ifne          107
+      81: aload_3
+      82: invokevirtual #197                // Method java/lang/String.length:()I
+      85: sipush        1024
+      88: if_icmpgt     107
+      91: aload         4
+      93: ifnull        118
+      96: aload         4
+      98: invokevirtual #197                // Method java/lang/String.length:()I
+     101: sipush        2048
+     104: if_icmple     118
+     107: new           #64                 // class xiaozhi/common/exception/RenException
+     110: dup
+     111: ldc_w         #562                // String 更正内容无效
+     114: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     117: athrow
+     118: ldc           #91                 // String matched
+     120: aload_1
+     121: invokevirtual #93                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+     124: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     127: ifeq          178
+     130: aload_0
+     131: getfield      #1                  // Field enabled:Z
+     134: ifeq          178
+     137: ldc           #102                // String Memory_bailian
+     139: aload_0
+     140: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     143: ldc           #190                // String SELECT mem_model_id FROM ai_agent WHERE id=? AND user_id=?
+     145: ldc           #15                 // class java/lang/String
+     147: iconst_2
+     148: anewarray     #32                 // class java/lang/Object
+     151: dup
+     152: iconst_0
+     153: aload_1
+     154: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     157: aastore
+     158: dup
+     159: iconst_1
+     160: aload_1
+     161: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     164: aastore
+     165: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     168: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     171: ifeq          178
+     174: iconst_1
+     175: goto          179
+     178: iconst_0
+     179: istore        5
+     181: iload         5
+     183: ifeq          191
+     186: aload_0
+     187: aload_1
+     188: invokevirtual #203                // Method ensureEntity:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)V
+     191: ldc_w         #564                // String *
+     194: aload_3
+     195: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     198: ifeq          250
+     201: aload_0
+     202: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     205: ldc_w         #566                // String UPDATE ai_agent_chat_history SET recall_allowed=FALSE WHERE account_id=? AND person_id=? AND default_generation=? AND agent_id=?
+     208: iconst_4
+     209: anewarray     #32                 // class java/lang/Object
+     212: dup
+     213: iconst_0
+     214: aload_1
+     215: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     218: aastore
+     219: dup
+     220: iconst_1
+     221: aload_1
+     222: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     225: aastore
+     226: dup
+     227: iconst_2
+     228: aload_1
+     229: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     232: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     235: aastore
+     236: dup
+     237: iconst_3
+     238: aload_1
+     239: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     242: aastore
+     243: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     246: pop
+     247: goto          300
+     250: aload_0
+     251: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     254: ldc_w         #568                // String UPDATE ai_agent_chat_history SET recall_allowed=FALSE WHERE account_id=? AND person_id=? AND default_generation=? AND agent_id=? AND content=?
+     257: iconst_5
+     258: anewarray     #32                 // class java/lang/Object
+     261: dup
+     262: iconst_0
+     263: aload_1
+     264: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     267: aastore
+     268: dup
+     269: iconst_1
+     270: aload_1
+     271: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     274: aastore
+     275: dup
+     276: iconst_2
+     277: aload_1
+     278: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     281: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     284: aastore
+     285: dup
+     286: iconst_3
+     287: aload_1
+     288: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     291: aastore
+     292: dup
+     293: iconst_4
+     294: aload_3
+     295: aastore
+     296: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     299: pop
+     300: ldc_w         #564                // String *
+     303: aload_3
+     304: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     307: ifeq          352
+     310: aload_0
+     311: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     314: ldc_w         #570                // String DELETE FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=?
+     317: iconst_3
+     318: anewarray     #32                 // class java/lang/Object
+     321: dup
+     322: iconst_0
+     323: aload_1
+     324: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     327: aastore
+     328: dup
+     329: iconst_1
+     330: aload_1
+     331: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     334: aastore
+     335: dup
+     336: iconst_2
+     337: aload_1
+     338: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     341: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     344: aastore
+     345: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     348: pop
+     349: goto          395
+     352: aload_0
+     353: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     356: ldc_w         #572                // String DELETE FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND match_text=?
+     359: iconst_4
+     360: anewarray     #32                 // class java/lang/Object
+     363: dup
+     364: iconst_0
+     365: aload_1
+     366: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     369: aastore
+     370: dup
+     371: iconst_1
+     372: aload_1
+     373: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     376: aastore
+     377: dup
+     378: iconst_2
+     379: aload_1
+     380: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     383: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     386: aastore
+     387: dup
+     388: iconst_3
+     389: aload_3
+     390: aastore
+     391: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     394: pop
+     395: aload_0
+     396: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     399: ldc_w         #574                // String UPDATE ai_memory_override SET state=\'superseded\' WHERE account_id=? AND user_id=? AND generation=? AND replacement IS NOT NULL AND replacement=?
+     402: iconst_4
+     403: anewarray     #32                 // class java/lang/Object
+     406: dup
+     407: iconst_0
+     408: aload_1
+     409: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     412: aastore
+     413: dup
+     414: iconst_1
+     415: aload_1
+     416: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     419: aastore
+     420: dup
+     421: iconst_2
+     422: aload_1
+     423: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     426: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     429: aastore
+     430: dup
+     431: iconst_3
+     432: aload_3
+     433: aastore
+     434: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     437: pop
+     438: invokestatic  #576                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.newId:()Ljava/lang/String;
+     441: astore        6
+     443: aload_0
+     444: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     447: ldc_w         #579                // String SELECT COALESCE(MAX(id),0) FROM ai_person_material WHERE account_id=? AND user_id=? AND generation=?
+     450: ldc           #49                 // class java/lang/Long
+     452: iconst_3
+     453: anewarray     #32                 // class java/lang/Object
+     456: dup
+     457: iconst_0
+     458: aload_1
+     459: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     462: aastore
+     463: dup
+     464: iconst_1
+     465: aload_1
+     466: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     469: aastore
+     470: dup
+     471: iconst_2
+     472: aload_1
+     473: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     476: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     479: aastore
+     480: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     483: checkcast     #49                 // class java/lang/Long
+     486: astore        7
+     488: aload_0
+     489: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     492: ldc_w         #581                // String SELECT COALESCE(MAX(id),0) FROM ai_agent_chat_history WHERE account_id=? AND person_id=? AND default_generation=?
+     495: ldc           #49                 // class java/lang/Long
+     497: iconst_3
+     498: anewarray     #32                 // class java/lang/Object
+     501: dup
+     502: iconst_0
+     503: aload_1
+     504: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     507: aastore
+     508: dup
+     509: iconst_1
+     510: aload_1
+     511: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     514: aastore
+     515: dup
+     516: iconst_2
+     517: aload_1
+     518: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     521: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     524: aastore
+     525: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     528: checkcast     #49                 // class java/lang/Long
+     531: astore        8
+     533: aload_0
+     534: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     537: ldc_w         #583                // String INSERT INTO ai_memory_override(id,account_id,user_id,generation,action,match_text,replacement,material_cutoff_id,archive_cutoff_id) VALUES(?,?,?,?,?,?,?,?,?)
+     540: bipush        9
+     542: anewarray     #32                 // class java/lang/Object
+     545: dup
+     546: iconst_0
+     547: aload         6
+     549: aastore
+     550: dup
+     551: iconst_1
+     552: aload_1
+     553: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     556: aastore
+     557: dup
+     558: iconst_2
+     559: aload_1
+     560: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     563: aastore
+     564: dup
+     565: iconst_3
+     566: aload_1
+     567: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     570: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     573: aastore
+     574: dup
+     575: iconst_4
+     576: aload_2
+     577: aastore
+     578: dup
+     579: iconst_5
+     580: aload_3
+     581: aastore
+     582: dup
+     583: bipush        6
+     585: aload         4
+     587: aastore
+     588: dup
+     589: bipush        7
+     591: aload         7
+     593: aastore
+     594: dup
+     595: bipush        8
+     597: aload         8
+     599: aastore
+     600: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     603: pop
+     604: iload         5
+     606: ifne          629
+     609: aload_0
+     610: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     613: ldc_w         #585                // String UPDATE ai_memory_override SET state=\'local_only\' WHERE id=?
+     616: iconst_1
+     617: anewarray     #32                 // class java/lang/Object
+     620: dup
+     621: iconst_0
+     622: aload         6
+     624: aastore
+     625: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     628: pop
+     629: aload_0
+     630: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     633: ldc_w         #587                // String DELETE FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND match_text=? AND state=\'complete\'
+     636: iconst_4
+     637: anewarray     #32                 // class java/lang/Object
+     640: dup
+     641: iconst_0
+     642: aload_1
+     643: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     646: aastore
+     647: dup
+     648: iconst_1
+     649: aload_1
+     650: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     653: aastore
+     654: dup
+     655: iconst_2
+     656: aload_1
+     657: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     660: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     663: aastore
+     664: dup
+     665: iconst_3
+     666: aload_3
+     667: aastore
+     668: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     671: pop
+     672: ldc_w         #564                // String *
+     675: aload_3
+     676: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     679: ifeq          731
+     682: aload_0
+     683: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     686: ldc_w         #589                // String UPDATE ai_person_material SET recall_allowed=FALSE WHERE account_id=? AND user_id=? AND generation=? AND agent_id=?
+     689: iconst_4
+     690: anewarray     #32                 // class java/lang/Object
+     693: dup
+     694: iconst_0
+     695: aload_1
+     696: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     699: aastore
+     700: dup
+     701: iconst_1
+     702: aload_1
+     703: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     706: aastore
+     707: dup
+     708: iconst_2
+     709: aload_1
+     710: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     713: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     716: aastore
+     717: dup
+     718: iconst_3
+     719: aload_1
+     720: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     723: aastore
+     724: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     727: pop
+     728: goto          781
+     731: aload_0
+     732: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     735: ldc_w         #591                // String UPDATE ai_person_material SET recall_allowed=FALSE WHERE account_id=? AND user_id=? AND generation=? AND agent_id=? AND content=?
+     738: iconst_5
+     739: anewarray     #32                 // class java/lang/Object
+     742: dup
+     743: iconst_0
+     744: aload_1
+     745: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     748: aastore
+     749: dup
+     750: iconst_1
+     751: aload_1
+     752: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     755: aastore
+     756: dup
+     757: iconst_2
+     758: aload_1
+     759: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     762: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     765: aastore
+     766: dup
+     767: iconst_3
+     768: aload_1
+     769: invokevirtual #77                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     772: aastore
+     773: dup
+     774: iconst_4
+     775: aload_3
+     776: aastore
+     777: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     780: pop
+     781: aload_0
+     782: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     785: ldc_w         #593                // String UPDATE ai_memory_task SET state=\'cancelled\',payload=NULL WHERE account_id=? AND user_id=? AND generation=? AND state IN(\'pending\',\'retry\')
+     788: iconst_3
+     789: anewarray     #32                 // class java/lang/Object
+     792: dup
+     793: iconst_0
+     794: aload_1
+     795: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     798: aastore
+     799: dup
+     800: iconst_1
+     801: aload_1
+     802: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     805: aastore
+     806: dup
+     807: iconst_2
+     808: aload_1
+     809: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     812: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     815: aastore
+     816: invokevirtual #283                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     819: pop
+     820: aload_0
+     821: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     824: ldc_w         #595                // String SELECT COUNT(*) FROM ai_memory_override WHERE id=? AND account_id=? AND user_id=? AND action=? AND match_text=?
+     827: ldc           #30                 // class java/lang/Integer
+     829: iconst_5
+     830: anewarray     #32                 // class java/lang/Object
+     833: dup
+     834: iconst_0
+     835: aload         6
+     837: aastore
+     838: dup
+     839: iconst_1
+     840: aload_1
+     841: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     844: aastore
+     845: dup
+     846: iconst_2
+     847: aload_1
+     848: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     851: aastore
+     852: dup
+     853: iconst_3
+     854: aload_2
+     855: aastore
+     856: dup
+     857: iconst_4
+     858: aload_3
+     859: aastore
+     860: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     863: checkcast     #30                 // class java/lang/Integer
+     866: astore        9
+     868: aload         9
+     870: ifnull        882
+     873: aload         9
+     875: invokevirtual #60                 // Method java/lang/Integer.intValue:()I
+     878: iconst_1
+     879: if_icmpeq     893
+     882: new           #64                 // class xiaozhi/common/exception/RenException
+     885: dup
+     886: ldc_w         #597                // String 记忆修改保存未确认
+     889: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     892: athrow
+     893: ldc_w         #323                // String local_applied
+     896: iconst_1
+     897: invokestatic  #325                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     900: ldc_w         #328                // String operation
+     903: aload_2
+     904: ldc_w         #599                // String operation_id
+     907: aload         6
+     909: ldc_w         #348                // String cloud_sync
+     912: iload         5
+     914: ifeq          923
+     917: ldc_w         #350                // String pending
+     920: goto          926
+     923: ldc_w         #352                // String disabled
+     926: ldc_w         #332                // String status
+     929: ldc_w         #334                // String completed
+     932: ldc_w         #336                // String record_id
+     935: aload         6
+     937: invokedynamic #519,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     942: ldc_w         #344                // String version
+     945: aload         4
+     947: ifnonnull     956
+     950: ldc_w         #467                // String
+     953: goto          958
+     956: aload         4
+     958: invokestatic  #269                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     961: invokestatic  #354                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     964: areturn
+
+  public java.util.List<java.util.Map<java.lang.String, java.lang.Object>> overrides(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc_w         #601                // String SELECT action,match_text,replacement,state FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=?
+       7: iconst_3
+       8: anewarray     #32                 // class java/lang/Object
+      11: dup
+      12: iconst_0
+      13: aload_1
+      14: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      17: aastore
+      18: dup
+      19: iconst_1
+      20: aload_1
+      21: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      24: aastore
+      25: dup
+      26: iconst_2
+      27: aload_1
+      28: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      31: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      34: aastore
+      35: invokevirtual #80                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      38: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> background(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_1
+       3: invokevirtual #287                // Method validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+       6: aload_0
+       7: invokevirtual #603                // Method portraitsEnabled:()Z
+      10: ifeq          26
+      13: aload_0
+      14: aload_1
+      15: invokevirtual #390                // Method overrides:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)Ljava/util/List;
+      18: invokeinterface #383,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      23: ifne          36
+      26: ldc_w         #497                // String text
+      29: ldc_w         #467                // String
+      32: invokestatic  #606                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+      35: areturn
+      36: aload_0
+      37: getfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+      40: aload_1
+      41: invokevirtual #34                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      44: aload_1
+      45: invokevirtual #40                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      48: aload_1
+      49: invokevirtual #44                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      52: ldc_w         #609                // String GET
+      55: aload_0
+      56: getfield      #10                 // Field portraitSchema:Ljava/lang/String;
+      59: invokedynamic #611,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      64: aconst_null
+      65: aconst_null
+      66: ldc2_w        #612                // long 3l
+      69: invokestatic  #614                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+      72: invokevirtual #438                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+      75: astore_2
+      76: aload_0
+      77: getfield      #617                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      80: aload_2
+      81: ldc_w         #621                // String user_profile
+      84: invokestatic  #397                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+      87: invokeinterface #623,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      92: invokevirtual #627                // Method com/fasterxml/jackson/databind/ObjectMapper.writeValueAsString:(Ljava/lang/Object;)Ljava/lang/String;
+      95: astore_3
+      96: ldc_w         #497                // String text
+      99: aload_3
+     100: iconst_0
+     101: sipush        1500
+     104: aload_3
+     105: invokevirtual #197                // Method java/lang/String.length:()I
+     108: invokestatic  #247                // Method java/lang/Math.min:(II)I
+     111: invokevirtual #261                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     114: invokestatic  #606                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     117: areturn
+     118: astore_3
+     119: ldc_w         #497                // String text
+     122: ldc_w         #467                // String
+     125: invokestatic  #606                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     128: areturn
+    Exception table:
+       from    to  target type
+          76   117   118   Class java/lang/Exception
+
+  public java.util.Map<java.lang.String, java.lang.Object> adminRead(java.lang.Long, java.lang.String, long, int);
+    Code:
+       0: iload         5
+       2: iconst_1
+       3: if_icmpge     17
+       6: new           #64                 // class xiaozhi/common/exception/RenException
+       9: dup
+      10: ldc_w         #634                // String 页码无效
+      13: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      21: ldc_w         #636                // String SELECT COUNT(*) FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=?
+      24: ldc           #30                 // class java/lang/Integer
+      26: iconst_3
+      27: anewarray     #32                 // class java/lang/Object
+      30: dup
+      31: iconst_0
+      32: aload_1
+      33: aastore
+      34: dup
+      35: iconst_1
+      36: aload_2
+      37: aastore
+      38: dup
+      39: iconst_2
+      40: lload_3
+      41: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      44: aastore
+      45: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+      48: checkcast     #30                 // class java/lang/Integer
+      51: astore        6
+      53: aload         6
+      55: ifnull        67
+      58: aload         6
+      60: invokevirtual #60                 // Method java/lang/Integer.intValue:()I
+      63: iconst_1
+      64: if_icmpeq     78
+      67: new           #64                 // class xiaozhi/common/exception/RenException
+      70: dup
+      71: ldc_w         #638                // String 记忆实体不存在
+      74: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      77: athrow
+      78: aload_0
+      79: getfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+      82: aload_1
+      83: aload_2
+      84: lload_3
+      85: ldc_w         #609                // String GET
+      88: iload         5
+      90: invokedynamic #640,  0            // InvokeDynamic #10:makeConcatWithConstants:(I)Ljava/lang/String;
+      95: aconst_null
+      96: aconst_null
+      97: ldc2_w        #612                // long 3l
+     100: invokestatic  #614                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     103: invokevirtual #438                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     106: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> adminPortrait(java.lang.Long, java.lang.String, long);
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc_w         #636                // String SELECT COUNT(*) FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=?
+       7: ldc           #30                 // class java/lang/Integer
+       9: iconst_3
+      10: anewarray     #32                 // class java/lang/Object
+      13: dup
+      14: iconst_0
+      15: aload_1
+      16: aastore
+      17: dup
+      18: iconst_1
+      19: aload_2
+      20: aastore
+      21: dup
+      22: iconst_2
+      23: lload_3
+      24: invokestatic  #48                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      27: aastore
+      28: invokevirtual #54                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+      31: checkcast     #30                 // class java/lang/Integer
+      34: astore        5
+      36: aload         5
+      38: ifnull        50
+      41: aload         5
+      43: invokevirtual #60                 // Method java/lang/Integer.intValue:()I
+      46: iconst_1
+      47: if_icmpeq     61
+      50: new           #64                 // class xiaozhi/common/exception/RenException
+      53: dup
+      54: ldc_w         #638                // String 记忆实体不存在
+      57: invokespecial #68                 // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      60: athrow
+      61: aload_0
+      62: invokevirtual #603                // Method portraitsEnabled:()Z
+      65: ifne          85
+      68: ldc_w         #643                // String enabled
+      71: iconst_0
+      72: invokestatic  #325                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      75: ldc_w         #644                // String reason
+      78: ldc_w         #646                // String individual_delete_and_storage_count_not_verified
+      81: invokestatic  #410                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+      84: areturn
+      85: aload_0
+      86: getfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+      89: aload_1
+      90: aload_2
+      91: lload_3
+      92: ldc_w         #609                // String GET
+      95: aload_0
+      96: getfield      #10                 // Field portraitSchema:Ljava/lang/String;
+      99: invokedynamic #611,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     104: aconst_null
+     105: aconst_null
+     106: ldc2_w        #612                // long 3l
+     109: invokestatic  #614                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     112: invokevirtual #438                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     115: areturn
+
+  public xiaozhi.modules.personmemory.PersonMemoryService(org.springframework.jdbc.core.JdbcTemplate, xiaozhi.modules.useridentity.service.AccountIdentityStateService, xiaozhi.modules.personmemory.MemoryGatewayClient, com.fasterxml.jackson.databind.ObjectMapper);
+    Code:
+       0: aload_0
+       1: invokespecial #648                // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_5
+       6: putfield      #418                // Field topK:I
+       9: aload_0
+      10: sipush        1500
+      13: putfield      #491                // Field factChars:I
+      16: aload_0
+      17: sipush        850
+      20: putfield      #429                // Field searchTimeout:I
+      23: aload_0
+      24: aload_1
+      25: putfield      #24                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      28: aload_0
+      29: aload_2
+      30: putfield      #117                // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+      33: aload_0
+      34: aload_3
+      35: putfield      #357                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+      38: aload_0
+      39: aload         4
+      41: putfield      #617                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      44: return
+
+  private static java.lang.String lambda$search$2(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc_w         #497                // String text
+       4: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: invokevirtual #517                // Method java/lang/Object.toString:()Ljava/lang/String;
+      12: areturn
+
+  private static boolean lambda$search$1(java.util.Map);
+    Code:
+       0: ldc_w         #649                // String complete
+       3: aload_0
+       4: ldc_w         #375                // String state
+       7: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokevirtual #96                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      15: ifne          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  private static boolean lambda$material$0(java.lang.String, xiaozhi.modules.personmemory.PersonTurnDTO, java.util.Map);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: ldc_w         #651                // String match_text
+       5: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: ldc_w         #467                // String
+      13: invokestatic  #469                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      16: invokevirtual #480                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      19: ifeq          63
+      22: aload_1
+      23: invokevirtual #209                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+      26: ifnull        59
+      29: aload_1
+      30: invokevirtual #209                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+      33: invokevirtual #212                // Method java/lang/Long.longValue:()J
+      36: aload_2
+      37: ldc_w         #653                // String changed_at
+      40: invokeinterface #112,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      45: checkcast     #129                // class java/lang/Number
+      48: invokevirtual #131                // Method java/lang/Number.longValue:()J
+      51: ldc2_w        #213                // long 1000l
+      54: ladd
+      55: lcmp
+      56: ifgt          63
+      59: iconst_1
+      60: goto          64
+      63: iconst_0
+      64: ireturn
+}

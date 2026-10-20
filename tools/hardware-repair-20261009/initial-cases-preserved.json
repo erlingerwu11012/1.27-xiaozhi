@@ -1,0 +1,3158 @@
+[
+  {
+    "id": "reg-1",
+    "query": "查2026年10月8日的农历和干支",
+    "tool": "get_lunar",
+    "arguments": {
+      "date": "2026-10-08",
+      "query": "农历和干支"
+    },
+    "group": "tool",
+    "setup": "get_lunar",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-2",
+    "query": "帮我查2026年10月8日的农历和干支",
+    "tool": "get_lunar",
+    "arguments": {
+      "date": "2026-10-08",
+      "query": "农历和干支"
+    },
+    "group": "tool",
+    "setup": "get_lunar",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-3",
+    "query": "查询东京现在的时间",
+    "tool": "get_world_time",
+    "arguments": {
+      "timezone": "Asia/Tokyo"
+    },
+    "group": "tool",
+    "setup": "get_world_time",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-4",
+    "query": "帮我查询东京现在的时间",
+    "tool": "get_world_time",
+    "arguments": {
+      "timezone": "Asia/Tokyo"
+    },
+    "group": "tool",
+    "setup": "get_world_time",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-5",
+    "query": "结束我们的对话",
+    "tool": "handle_exit_intent",
+    "arguments": {
+      "say_goodbye": "再见"
+    },
+    "group": "tool",
+    "setup": "handle_exit_intent",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-6",
+    "query": "帮我结束我们的对话",
+    "tool": "handle_exit_intent",
+    "arguments": {
+      "say_goodbye": "再见"
+    },
+    "group": "tool",
+    "setup": "handle_exit_intent",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-7",
+    "query": "查一下我之前说过喜欢什么饮料",
+    "tool": "memory_search",
+    "arguments": {
+      "query": "喜欢的饮料"
+    },
+    "group": "tool",
+    "setup": "memory_search",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-8",
+    "query": "帮我查一下我之前说过喜欢什么饮料",
+    "tool": "memory_search",
+    "arguments": {
+      "query": "喜欢的饮料"
+    },
+    "group": "tool",
+    "setup": "memory_search",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-9",
+    "query": "把我喜欢咖啡的记忆改为喜欢绿茶",
+    "tool": "memory_correct",
+    "arguments": {
+      "match": "喜欢咖啡",
+      "replacement": "喜欢绿茶"
+    },
+    "group": "tool",
+    "setup": "memory_correct",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-10",
+    "query": "帮我把我喜欢咖啡的记忆改为喜欢绿茶",
+    "tool": "memory_correct",
+    "arguments": {
+      "match": "喜欢咖啡",
+      "replacement": "喜欢绿茶"
+    },
+    "group": "tool",
+    "setup": "memory_correct",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-11",
+    "query": "忘掉我喜欢咖啡的那条记忆",
+    "tool": "memory_forget",
+    "arguments": {
+      "match": "喜欢咖啡"
+    },
+    "group": "tool",
+    "setup": "memory_forget",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-12",
+    "query": "帮我忘掉我喜欢咖啡的那条记忆",
+    "tool": "memory_forget",
+    "arguments": {
+      "match": "喜欢咖啡"
+    },
+    "group": "tool",
+    "setup": "memory_forget",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-13",
+    "query": "帮我掷一个骰子",
+    "tool": "random_decision",
+    "arguments": {
+      "mode": "dice"
+    },
+    "group": "tool",
+    "setup": "random_decision",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-14",
+    "query": "帮我帮我掷一个骰子",
+    "tool": "random_decision",
+    "arguments": {
+      "mode": "dice"
+    },
+    "group": "tool",
+    "setup": "random_decision",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-15",
+    "query": "查询设备当前音量和亮度",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_get_device_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-16",
+    "query": "帮我查询设备当前音量和亮度",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_get_device_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-17",
+    "query": "把音量调到三十",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 30
+    },
+    "group": "tool",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-18",
+    "query": "帮我把音量调到三十",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 30
+    },
+    "group": "tool",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-19",
+    "query": "把亮度调到百分之九十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 90
+    },
+    "group": "tool",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-20",
+    "query": "帮我把亮度调到百分之九十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 90
+    },
+    "group": "tool",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-21",
+    "query": "给我定一个晚上十点的闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 22,
+      "minute": 0,
+      "label": "闹钟",
+      "repeat_days": 0
+    },
+    "group": "tool",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-22",
+    "query": "帮我给我定一个晚上十点的闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 22,
+      "minute": 0,
+      "label": "闹钟",
+      "repeat_days": 0
+    },
+    "group": "tool",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-23",
+    "query": "查看我设置的闹钟",
+    "tool": "alarm_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "alarm_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-24",
+    "query": "帮我查看我设置的闹钟",
+    "tool": "alarm_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "alarm_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-25",
+    "query": "删除编号1的闹钟",
+    "tool": "alarm_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "alarm_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-26",
+    "query": "帮我删除编号1的闹钟",
+    "tool": "alarm_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "alarm_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-27",
+    "query": "停止正在响的闹钟",
+    "tool": "alarm_dismiss",
+    "arguments": {},
+    "group": "tool",
+    "setup": "alarm_dismiss",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-28",
+    "query": "帮我停止正在响的闹钟",
+    "tool": "alarm_dismiss",
+    "arguments": {},
+    "group": "tool",
+    "setup": "alarm_dismiss",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-29",
+    "query": "正在响的闹钟再过五分钟响",
+    "tool": "alarm_snooze",
+    "arguments": {
+      "minutes": 5
+    },
+    "group": "tool",
+    "setup": "alarm_snooze",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-30",
+    "query": "帮我正在响的闹钟再过五分钟响",
+    "tool": "alarm_snooze",
+    "arguments": {
+      "minutes": 5
+    },
+    "group": "tool",
+    "setup": "alarm_snooze",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-31",
+    "query": "记一条便签买牛奶，不设提醒",
+    "tool": "note_add",
+    "arguments": {
+      "text": "买牛奶",
+      "remind_at": 0
+    },
+    "group": "tool",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-32",
+    "query": "帮我记一条便签买牛奶，不设提醒",
+    "tool": "note_add",
+    "arguments": {
+      "text": "买牛奶",
+      "remind_at": 0
+    },
+    "group": "tool",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-33",
+    "query": "列出我的便签",
+    "tool": "note_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "note_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-34",
+    "query": "帮我列出我的便签",
+    "tool": "note_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "note_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-35",
+    "query": "删除编号1的便签",
+    "tool": "note_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "note_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-36",
+    "query": "帮我删除编号1的便签",
+    "tool": "note_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "note_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-37",
+    "query": "编号1的便签推迟十分钟",
+    "tool": "note_snooze",
+    "arguments": {
+      "index": 1,
+      "delay_minutes": 10
+    },
+    "group": "tool",
+    "setup": "note_snooze",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-38",
+    "query": "帮我编号1的便签推迟十分钟",
+    "tool": "note_snooze",
+    "arguments": {
+      "index": 1,
+      "delay_minutes": 10
+    },
+    "group": "tool",
+    "setup": "note_snooze",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-39",
+    "query": "查询当前提醒卡片详情",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_get_current",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-40",
+    "query": "帮我查询当前提醒卡片详情",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_get_current",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-41",
+    "query": "查询我还有哪些待处理提醒",
+    "tool": "reminder_list_pending",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_list_pending",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-42",
+    "query": "帮我查询我还有哪些待处理提醒",
+    "tool": "reminder_list_pending",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_list_pending",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-43",
+    "query": "我同意，现在开始逐条播报待办",
+    "tool": "reminder_begin_broadcast",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_begin_broadcast",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-44",
+    "query": "帮我我同意，现在开始逐条播报待办",
+    "tool": "reminder_begin_broadcast",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_begin_broadcast",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-45",
+    "query": "正在播报待办，跳到下一项",
+    "tool": "reminder_next",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_next",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-46",
+    "query": "帮我正在播报待办，跳到下一项",
+    "tool": "reminder_next",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_next",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-47",
+    "query": "停止待办播报，保留未处理待办",
+    "tool": "reminder_stop_broadcast",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_stop_broadcast",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-48",
+    "query": "帮我停止待办播报，保留未处理待办",
+    "tool": "reminder_stop_broadcast",
+    "arguments": {},
+    "group": "tool",
+    "setup": "reminder_stop_broadcast",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-49",
+    "query": "把当前提醒标记为完成",
+    "tool": "reminder_action",
+    "arguments": {
+      "instance_id": "sim-card",
+      "revision": 2,
+      "action": "primary"
+    },
+    "group": "tool",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-50",
+    "query": "帮我把当前提醒标记为完成",
+    "tool": "reminder_action",
+    "arguments": {
+      "instance_id": "sim-card",
+      "revision": 2,
+      "action": "primary"
+    },
+    "group": "tool",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-51",
+    "query": "拍一张照片，描述桌上的物品",
+    "tool": "self_camera_take_photo",
+    "arguments": {
+      "question": "描述桌上的物品"
+    },
+    "group": "tool",
+    "setup": "self_camera_take_photo",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-52",
+    "query": "帮我拍一张照片，描述桌上的物品",
+    "tool": "self_camera_take_photo",
+    "arguments": {
+      "question": "描述桌上的物品"
+    },
+    "group": "tool",
+    "setup": "self_camera_take_photo",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-53",
+    "query": "请用摄像头识别面前是谁",
+    "tool": "self_camera_identify_person",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_camera_identify_person",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-54",
+    "query": "帮我请用摄像头识别面前是谁",
+    "tool": "self_camera_identify_person",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_camera_identify_person",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-55",
+    "query": "把屏幕渲染测试模式设为spine，不重启",
+    "tool": "self_screen_set_render_mode",
+    "arguments": {
+      "mode": "spine"
+    },
+    "group": "tool",
+    "setup": "self_screen_set_render_mode",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-56",
+    "query": "帮我把屏幕渲染测试模式设为spine，不重启",
+    "tool": "self_screen_set_render_mode",
+    "arguments": {
+      "mode": "spine"
+    },
+    "group": "tool",
+    "setup": "self_screen_set_render_mode",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-57",
+    "query": "保存渲染配置v1，SPI频率30MHz，关闭像素比较，不重启",
+    "tool": "self_screen_set_render_options",
+    "arguments": {
+      "profile": "v1",
+      "spi_mhz": 30,
+      "pixel_diff": false
+    },
+    "group": "tool",
+    "setup": "self_screen_set_render_options",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-58",
+    "query": "帮我保存渲染配置v1，SPI频率30MHz，关闭像素比较，不重启",
+    "tool": "self_screen_set_render_options",
+    "arguments": {
+      "profile": "v1",
+      "spi_mhz": 30,
+      "pixel_diff": false
+    },
+    "group": "tool",
+    "setup": "self_screen_set_render_options",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-59",
+    "query": "查看屏幕当前渲染配置",
+    "tool": "self_screen_get_render_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_screen_get_render_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-60",
+    "query": "帮我查看屏幕当前渲染配置",
+    "tool": "self_screen_get_render_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_screen_get_render_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-61",
+    "query": "查看屏幕分辨率",
+    "tool": "self_screen_get_info",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_screen_get_info",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-62",
+    "query": "帮我查看屏幕分辨率",
+    "tool": "self_screen_get_info",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_screen_get_info",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-63",
+    "query": "查看硬件系统信息",
+    "tool": "self_get_system_info",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_get_system_info",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-64",
+    "query": "帮我查看硬件系统信息",
+    "tool": "self_get_system_info",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_get_system_info",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-65",
+    "query": "现在重启设备",
+    "tool": "self_reboot",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_reboot",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-66",
+    "query": "帮我现在重启设备",
+    "tool": "self_reboot",
+    "arguments": {},
+    "group": "tool",
+    "setup": "self_reboot",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-67",
+    "query": "把已分析确认的喝水规律保存为每天8点的习惯规则，提前2分钟，来源auto",
+    "tool": "habit_learn",
+    "arguments": {
+      "intent": "drink_water",
+      "description": "喝水",
+      "hour": 8,
+      "minute": 0,
+      "advance_minutes": 2,
+      "source": "auto",
+      "repeat_days": 127
+    },
+    "group": "tool",
+    "setup": "habit_learn",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-68",
+    "query": "帮我把已分析确认的喝水规律保存为每天8点的习惯规则，提前2分钟，来源auto",
+    "tool": "habit_learn",
+    "arguments": {
+      "intent": "drink_water",
+      "description": "喝水",
+      "hour": 8,
+      "minute": 0,
+      "advance_minutes": 2,
+      "source": "auto",
+      "repeat_days": 127
+    },
+    "group": "tool",
+    "setup": "habit_learn",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-69",
+    "query": "查看我的习惯规则",
+    "tool": "habit_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "habit_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-70",
+    "query": "帮我查看我的习惯规则",
+    "tool": "habit_list",
+    "arguments": {},
+    "group": "tool",
+    "setup": "habit_list",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-71",
+    "query": "删除编号1的习惯规则",
+    "tool": "habit_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-72",
+    "query": "帮我删除编号1的习惯规则",
+    "tool": "habit_delete",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_delete",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-73",
+    "query": "确认编号1的习惯提醒已完成",
+    "tool": "habit_confirm",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_confirm",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-74",
+    "query": "帮我确认编号1的习惯提醒已完成",
+    "tool": "habit_confirm",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_confirm",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-75",
+    "query": "只跳过编号1的习惯今天这一次，保留规则",
+    "tool": "habit_reject",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_reject",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-76",
+    "query": "帮我只跳过编号1的习惯今天这一次，保留规则",
+    "tool": "habit_reject",
+    "arguments": {
+      "index": 1
+    },
+    "group": "tool",
+    "setup": "habit_reject",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-77",
+    "query": "记录行为日志：意图drink_water，原话喝水，结果conversation，不创建提醒",
+    "tool": "behavior_log",
+    "arguments": {
+      "intent": "drink_water",
+      "raw": "喝水",
+      "outcome": "conversation"
+    },
+    "group": "tool",
+    "setup": "behavior_log",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-78",
+    "query": "帮我记录行为日志：意图drink_water，原话喝水，结果conversation，不创建提醒",
+    "tool": "behavior_log",
+    "arguments": {
+      "intent": "drink_water",
+      "raw": "喝水",
+      "outcome": "conversation"
+    },
+    "group": "tool",
+    "setup": "behavior_log",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-79",
+    "query": "开始采集我的人脸，不填写姓名",
+    "tool": "camera_face_enroll_start",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_start",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-80",
+    "query": "帮我开始采集我的人脸，不填写姓名",
+    "tool": "camera_face_enroll_start",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_start",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-81",
+    "query": "取消正在进行的人脸采集",
+    "tool": "camera_face_enroll_cancel",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_cancel",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-82",
+    "query": "帮我取消正在进行的人脸采集",
+    "tool": "camera_face_enroll_cancel",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_cancel",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-83",
+    "query": "查询人脸采集进度",
+    "tool": "camera_face_enroll_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-84",
+    "query": "帮我查询人脸采集进度",
+    "tool": "camera_face_enroll_status",
+    "arguments": {},
+    "group": "tool",
+    "setup": "camera_face_enroll_status",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-85",
+    "query": "十分钟后提醒我喝水",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "喝水",
+      "remind_time_str": "十分钟后"
+    },
+    "group": "tool",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-86",
+    "query": "帮我十分钟后提醒我喝水",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "喝水",
+      "remind_time_str": "十分钟后"
+    },
+    "group": "tool",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-87",
+    "query": "我听着有点费劲，你把声音弄到六十吧",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 60
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-88",
+    "query": "声音直接开到最大吧",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 100
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-89",
+    "query": "声音压到最低吧",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 0
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-90",
+    "query": "现在把声音提一小格，就十个点",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "relative": 10
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-91",
+    "query": "声音比现在低十个点就行",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "relative": -10
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-92",
+    "query": "我想用四成音量，帮我改一下",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 40
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-93",
+    "query": "声音改成九成半吧",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 95
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-94",
+    "query": "把声音开到二十五就好",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 25
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-95",
+    "query": "请将音量调整为百分之八十",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 80
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-96",
+    "query": "我希望这会儿音量是七十，设置一下",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 70
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-97",
+    "query": "能不能帮我把声音设为三十五",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 35
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-98",
+    "query": "帮我把音量往上加十个点",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "relative": 10
+    },
+    "group": "common",
+    "setup": "self_audio_speaker_set_volume",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-99",
+    "query": "屏幕太刺眼，帮我往下调一档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "relative": -1
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-100",
+    "query": "屏幕再亮一档吧",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "relative": 1
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-101",
+    "query": "我想用最亮的屏幕，给我设置好",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 5
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-102",
+    "query": "亮度弄到百分之九十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 90
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-103",
+    "query": "把屏幕亮度改成九成半",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 95
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-104",
+    "query": "我想把亮度设成第四档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 4
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-105",
+    "query": "屏幕请调到第二档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 2
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-106",
+    "query": "帮我把亮度换成百分之七十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 70
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-107",
+    "query": "亮度设在百分之六十就行",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 60
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-108",
+    "query": "屏幕亮度用第三档吧",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 3
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-109",
+    "query": "能不能把屏幕调到最暗那档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 1
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-110",
+    "query": "这会儿请把屏幕弄成百分之八十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 80
+    },
+    "group": "common",
+    "setup": "self_screen_set_brightness",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-111",
+    "query": "今晚十点钟叫醒我，给我定个闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 22,
+      "minute": 0,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-112",
+    "query": "闹钟帮我定在晚上九点半，就这一次",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 21,
+      "minute": 30,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-113",
+    "query": "每天早上七点用闹钟叫我",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 7,
+      "minute": 0,
+      "repeat_days": 127
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-114",
+    "query": "工作日七点半设一个闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 7,
+      "minute": 30,
+      "repeat_days": 62
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-115",
+    "query": "每个周末上午八点，帮我定闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 8,
+      "minute": 0,
+      "repeat_days": 65
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-116",
+    "query": "我需要一个今晚十一点的闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 23,
+      "minute": 0,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-117",
+    "query": "给我加个早上六点四十五的闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 6,
+      "minute": 45,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-118",
+    "query": "麻烦设置晚上八点十五的闹钟，只响一次",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 20,
+      "minute": 15,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-119",
+    "query": "早上九点定个闹钟，不重复",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 9,
+      "minute": 0,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-120",
+    "query": "晚上十点半帮我安排闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 22,
+      "minute": 30,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-121",
+    "query": "闹钟定到下午三点，仅一次",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 15,
+      "minute": 0,
+      "repeat_days": 0
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-122",
+    "query": "每天晚上八点半设闹钟",
+    "tool": "alarm_set",
+    "arguments": {
+      "hour": 20,
+      "minute": 30,
+      "repeat_days": 127
+    },
+    "group": "common",
+    "setup": "alarm_set",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-123",
+    "query": "便签里记一下买面包，不用提醒",
+    "tool": "note_add",
+    "arguments": {
+      "text": "买面包",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-124",
+    "query": "帮我存条便签：周末整理书架",
+    "tool": "note_add",
+    "arguments": {
+      "text": "周末整理书架",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-125",
+    "query": "记个备忘录，带雨伞，不用定时",
+    "tool": "note_add",
+    "arguments": {
+      "text": "带雨伞",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-126",
+    "query": "便签帮我写上记得带钥匙，不设时间",
+    "tool": "note_add",
+    "arguments": {
+      "text": "记得带钥匙",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-127",
+    "query": "新建便签，退还图书",
+    "tool": "note_add",
+    "arguments": {
+      "text": "退还图书",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-128",
+    "query": "帮我记下便签内容：联系物业",
+    "tool": "note_add",
+    "arguments": {
+      "text": "联系物业",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-129",
+    "query": "存个便签，整理旧照片",
+    "tool": "note_add",
+    "arguments": {
+      "text": "整理旧照片",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-130",
+    "query": "写条便签，买牛奶，别设置提醒",
+    "tool": "note_add",
+    "arguments": {
+      "text": "买牛奶",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-131",
+    "query": "帮我加一条没有提醒时间的便签：清洗水杯",
+    "tool": "note_add",
+    "arguments": {
+      "text": "清洗水杯",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-132",
+    "query": "保存便签：检查快递柜",
+    "tool": "note_add",
+    "arguments": {
+      "text": "检查快递柜",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-133",
+    "query": "便签写成换灯泡，不定时",
+    "tool": "note_add",
+    "arguments": {
+      "text": "换灯泡",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-134",
+    "query": "替我记条便签：明天带书",
+    "tool": "note_add",
+    "arguments": {
+      "text": "明天带书",
+      "remind_at": 0
+    },
+    "group": "common",
+    "setup": "note_add",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-135",
+    "query": "麻烦你，10分钟后提醒我喝水",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "喝水",
+      "delay": 10
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-136",
+    "query": "帮个忙，5分钟后提醒我拿快递",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "拿快递",
+      "delay": 5
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-137",
+    "query": "我需要你15分钟后提醒我关窗",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "关窗",
+      "delay": 15
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-138",
+    "query": "请帮我，20分钟后提醒我取衣服",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "取衣服",
+      "delay": 20
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-139",
+    "query": "记得8分钟后提醒我热牛奶",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "热牛奶",
+      "delay": 8
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-140",
+    "query": "给我设置一下，12分钟后提醒我带钥匙",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "带钥匙",
+      "delay": 12
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-141",
+    "query": "能不能6分钟后提醒我看烤箱",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "看烤箱",
+      "delay": 6
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-142",
+    "query": "我想让你25分钟后提醒我浇花",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "浇花",
+      "delay": 25
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-143",
+    "query": "安排一下，30分钟后提醒我站起来",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "站起来",
+      "delay": 30
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-144",
+    "query": "请设置一个提醒，18分钟后提醒我休息",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "休息",
+      "delay": 18
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-145",
+    "query": "帮我设定，9分钟后提醒我开会",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "开会",
+      "delay": 9
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-146",
+    "query": "请记一下，7分钟后提醒我还书",
+    "tool": "add_reminder",
+    "arguments": {
+      "content": "还书",
+      "delay": 7
+    },
+    "group": "common",
+    "setup": "add_reminder",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-147",
+    "query": "好，我已经拿完了",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-148",
+    "query": "快递取到了",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-149",
+    "query": "这件事办完了，卡片可以收了",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-150",
+    "query": "已经取完快递，帮我确认一下",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-151",
+    "query": "这个提醒过五分钟再来",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "secondary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-152",
+    "query": "先别响，事项先留着",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "silence"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-153",
+    "query": "现在这条不用提醒了，明天的别动",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "tertiary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-154",
+    "query": "帮我完成当前提醒",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-155",
+    "query": "快递我拿好了，结束这次提醒",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "primary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-156",
+    "query": "这次跳过，别删除以后提醒",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "tertiary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-157",
+    "query": "卡片先静音，但不要标完成",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "silence"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-158",
+    "query": "再过十分钟提醒我当前这件事",
+    "tool": "reminder_action",
+    "arguments": {
+      "action": "secondary"
+    },
+    "group": "common",
+    "setup": "reminder_action",
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-159",
+    "query": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat0",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-160",
+    "query": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat0",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-161",
+    "query": "别每句话都反问我，你直接说说看法。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat0",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-162",
+    "query": "店家说已经发货，但我还没有收到。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat0",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-163",
+    "query": "只根据我说过的内容，书架现在是什么状态？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat0",
+    "required": [
+      "发货",
+      "没有|没|未"
+    ],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-164",
+    "query": "报告上周写好一半，昨天只改了标题。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat1",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-165",
+    "query": "昨天剩下的正文没动。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat1",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-166",
+    "query": "不能说整份正文从来没写过吧？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat1",
+    "required": [
+      "不能|不对|不是"
+    ],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-167",
+    "query": "我今天也没继续写。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat1",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-168",
+    "query": "整份报告目前完成了多少？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat1",
+    "required": [
+      "一半|50"
+    ],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-169",
+    "query": "今天有点累，我就是随便说说，别安排任务。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat2",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-170",
+    "query": "先别开玩笑，认真听我说。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat2",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-171",
+    "query": "也别每一句都问我。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat2",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-172",
+    "query": "我把窗帘拉开了，心情好了一点。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat2",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-173",
+    "query": "不用安慰我，也别教育我。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat2",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-174",
+    "query": "外卖还没到，我还没吃晚饭。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat3",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-175",
+    "query": "别说你帮我准备好了什么。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat3",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-176",
+    "query": "刚收到通知，外卖已经到楼下了，我还没拿。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat3",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-177",
+    "query": "先不用你提醒我，我知道了。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat3",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-178",
+    "query": "我现在吃上了吗？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat3",
+    "required": [
+      "还没|没有|未"
+    ],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-179",
+    "query": "不要调整亮度，我只是问九十是什么意思。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat4",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "reg-180",
+    "query": "如果我说把音量调大，你会怎么做？先不要执行。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "chat4",
+    "required": [],
+    "holdout": false,
+    "independent_holdout": false
+  },
+  {
+    "id": "new-1",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-0",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-2",
+    "query": "不是啊，我现在不喝咖啡了，你改一下，我现在喝绿茶",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-0",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-3",
+    "query": "我就问问爱喝啥，你更正什么记忆啊",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-0",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-4",
+    "query": "台灯那件事别记着了，忘掉吧",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-0",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-5",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-1",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-6",
+    "query": "咖啡那条记错了，给我改成喜欢喝绿茶",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-1",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-7",
+    "query": "我现在爱喝什么？别再改我的记忆了",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-1",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-8",
+    "query": "关于台灯的那条记忆给我删了",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-1",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-9",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-2",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-10",
+    "query": "我之前说错了，现在喜欢绿茶，你把咖啡那条更正一下",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-2",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-11",
+    "query": "之前上下文呢，我到底喜欢喝啥",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-2",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-12",
+    "query": "忘掉银杏灯那个信息",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-2",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-13",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-3",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-14",
+    "query": "不是喝咖啡了，我现在喝绿茶。把记忆改一下",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-3",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-15",
+    "query": "你就查查我喜欢喝什么，别修改",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-3",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-16",
+    "query": "银杏灯那事不用记着了，忘掉",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-3",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-17",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-4",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-18",
+    "query": "把我爱喝咖啡的记忆更新成爱喝绿茶",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-4",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-19",
+    "query": "别逗了，直接说我现在爱喝什么",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-4",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-20",
+    "query": "我那台灯叫什么的事情，删除这条记忆",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-4",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-21",
+    "query": "我爱喝什么，查一下",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-5",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "memory_search",
+    "required": [
+      "咖啡"
+    ]
+  },
+  {
+    "id": "new-22",
+    "query": "咖啡这个偏好变了，改为喜欢喝绿茶",
+    "tool": "memory_correct",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-5",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_memory": "绿茶"
+  },
+  {
+    "id": "new-23",
+    "query": "我就问现在喜欢什么饮料，不是叫你修改",
+    "tool": "memory_search",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-5",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "绿茶"
+    ]
+  },
+  {
+    "id": "new-24",
+    "query": "台灯的记忆忘记掉吧",
+    "tool": "memory_forget",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-memory-5",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_absent": "银杏灯",
+    "memory_kind": "forget"
+  },
+  {
+    "id": "new-25",
+    "query": "刚才那个提醒是什么来着",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-0",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-26",
+    "query": "这个卡片关了吧",
+    "tool": "reminder_close_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-0",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-27",
+    "query": "现在屏幕上还有提醒卡片吗",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-0",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "没有|关闭|不在|已关"
+    ]
+  },
+  {
+    "id": "new-28",
+    "query": "刚才那个提醒是什么来着",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-1",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-29",
+    "query": "把屏幕上这张卡片收起来",
+    "tool": "reminder_close_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-1",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-30",
+    "query": "现在屏幕上还有提醒卡片吗",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-1",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "没有|关闭|不在|已关"
+    ]
+  },
+  {
+    "id": "new-31",
+    "query": "刚才那个提醒是什么来着",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-2",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-32",
+    "query": "关掉当前卡片就行，事项别删",
+    "tool": "reminder_close_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-2",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-33",
+    "query": "现在屏幕上还有提醒卡片吗",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-2",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "没有|关闭|不在|已关"
+    ]
+  },
+  {
+    "id": "new-34",
+    "query": "刚才那个提醒是什么来着",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-3",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-35",
+    "query": "这张信息卡片给我关闭一下",
+    "tool": "reminder_close_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-3",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-36",
+    "query": "现在屏幕上还有提醒卡片吗",
+    "tool": "reminder_get_current",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-card-3",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "没有|关闭|不在|已关"
+    ]
+  },
+  {
+    "id": "new-37",
+    "query": "亮度弄到百分之九十",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 90
+    },
+    "group": "tool",
+    "session": "new-settings-0",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-38",
+    "query": "这是最高档了吗",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-settings-0",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-39",
+    "query": "屏幕再亮一档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "relative": 1
+    },
+    "group": "tool",
+    "session": "new-settings-0",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-40",
+    "query": "音量弄到二十",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 20
+    },
+    "group": "tool",
+    "session": "new-settings-1",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-41",
+    "query": "我现在音量多大，查一下",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-settings-1",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-42",
+    "query": "再大声一点",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "relative": 10
+    },
+    "group": "tool",
+    "session": "new-settings-1",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-43",
+    "query": "屏幕给我调到最低档",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "brightness": 1
+    },
+    "group": "tool",
+    "session": "new-settings-2",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-44",
+    "query": "现在亮度几档",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-settings-2",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-45",
+    "query": "调亮一点吧",
+    "tool": "self_screen_set_brightness",
+    "arguments": {
+      "relative": 1
+    },
+    "group": "tool",
+    "session": "new-settings-2",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-46",
+    "query": "声音调到最大",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "volume": 100
+    },
+    "group": "tool",
+    "session": "new-settings-3",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-47",
+    "query": "音量是多少，别改",
+    "tool": "self_get_device_status",
+    "arguments": {},
+    "group": "tool",
+    "session": "new-settings-3",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-48",
+    "query": "声音往小了调十个点",
+    "tool": "self_audio_speaker_set_volume",
+    "arguments": {
+      "relative": -10
+    },
+    "group": "tool",
+    "session": "new-settings-3",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-49",
+    "query": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-a",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-50",
+    "query": "别每句话都反问我，你直接说说看法。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-a",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-51",
+    "query": "店家刚通知已经发货了，我还没有收到。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-a",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-52",
+    "query": "书架现在啥状态？别逗我，直接说。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-a",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "发货|寄出|路上|运输",
+      "没.*收|还.*到|未.*收|未.*到|未.*送达|尚未.*达"
+    ],
+    "forbidden": [
+      "尚未发货|还没发货|已经收到"
+    ]
+  },
+  {
+    "id": "new-53",
+    "query": "报告上周写好一半了，昨天只是改了标题，剩下正文没碰。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-b",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-54",
+    "query": "昨天正文没进展，能说我正文从来没写过吗？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-b",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "不能|不对|不是|不可以"
+    ]
+  },
+  {
+    "id": "new-55",
+    "query": "你刚才说过了，别重复，也别用玩笑回避问题。",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-b",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "new-56",
+    "query": "所以报告目前写了多少？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-chat-b",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "一半|半"
+    ]
+  },
+  {
+    "id": "new-57",
+    "query": "再拍一次看看",
+    "tool": "self_camera_take_photo",
+    "arguments": {
+      "question": "画面里有什么"
+    },
+    "group": "tool",
+    "session": "new-photo",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "photo_retry",
+    "multi_step": 0
+  },
+  {
+    "id": "new-58",
+    "query": "再拍一次看看",
+    "tool": "self_camera_take_photo",
+    "arguments": {
+      "question": "画面里有什么"
+    },
+    "group": "tool",
+    "session": "new-photo",
+    "holdout": true,
+    "independent_holdout": true,
+    "setup": "photo_retry",
+    "multi_step": 1,
+    "required": [
+      "杯"
+    ]
+  },
+  {
+    "id": "new-59",
+    "query": "每天六点给老婆打电话",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-time",
+    "holdout": true,
+    "independent_holdout": true,
+    "expected_clarify": true,
+    "required": [
+      "早上|上午|晚上|下午"
+    ]
+  },
+  {
+    "id": "new-60",
+    "query": "你能听出我是谁吗？",
+    "tool": null,
+    "arguments": {},
+    "group": "chat",
+    "session": "new-voice",
+    "holdout": true,
+    "independent_holdout": true,
+    "required": [
+      "没听出|没.*确认|不知道"
+    ],
+    "forbidden_tools": [
+      "self_camera_identify_person",
+      "self_camera_take_photo"
+    ]
+  },
+  {
+    "id": "extra-chat-1",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "刚忙完，坐下来歇一会儿，随便聊聊，别帮我安排。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-2",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "今天路上看到一只橘猫，趴在车顶晒太阳。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-3",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "以前爱听的歌，现在听还是挺好听。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-4",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "书架刚发货，还没收到，我只是期待。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-5",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "报告已经写了一半，今天没再写，进度还是一半。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-6",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "晚饭吃完了，今天就不聊工作了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-7",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "别逗我，直接讲讲为什么旧书重看感觉不同。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-8",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "不用反问我，你说说周末睡懒觉这件事。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-9",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "我就是抱怨一句，别教育我，也不用安慰。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-10",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "今天看了场雨，感觉天气一下凉了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-11",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "刚换了条桌布，屋里感觉不一样了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-12",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "我最近又开始翻以前的相册。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-13",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "没什么大事，就想聊两句。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-14",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "以前觉得无聊的电影，最近居然看进去了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-15",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "你直接说看法，别每句话都问我。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-16",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "今天先别开玩笑，我就是有点累。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-17",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "不是让你提醒我，我只是在说今晚的打算。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-18",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "说过的就别整段重复了，接着聊别的。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-19",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "昨天只改了报告标题，不代表正文从来没写过。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-20",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "东西还在路上呢，别说我收到了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-21",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "新杯子还没买，只是在考虑。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-22",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "我不需要建议，说说你的理解就行。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-23",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "周末整理书时看到很多以前的批注。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-24",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "现在不想讨论计划，聊聊阅读吧。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-25",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "我没说要删除什么，只是说旧东西看着亲切。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-26",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "先别替我记录，我就讲讲今天碰到的小事。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-27",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "刚从楼下散步回来，风挺舒服。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-28",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "今天家里挺安静，我把窗户打开了。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-29",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "老歌前奏一响，就想到以前坐公交的时候。",
+    "holdout": true,
+    "independent_holdout": true
+  },
+  {
+    "id": "extra-chat-30",
+    "group": "chat",
+    "tool": null,
+    "arguments": {},
+    "query": "今天没什么新鲜事，但也还不错。",
+    "holdout": true,
+    "independent_holdout": true
+  }
+]

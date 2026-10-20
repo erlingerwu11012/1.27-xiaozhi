@@ -1,0 +1,155 @@
+[
+  {
+    "module": "test_qwen3_asr_realtime",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_utterance_state",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_device_reminder",
+    "exit_code": 1,
+    "success": false,
+    "failure_lines": [
+      "  [FAIL] route:self_uses_default_owner_usr "
+    ]
+  },
+  {
+    "module": "test_camera_mcp_tools",
+    "exit_code": 1,
+    "success": false,
+    "failure_lines": [
+      "  [FAIL] 'camera_open' \u4e0b\u53d1 params.name == 'camera.open' err=\u8fde\u63a5\u5df2\u7ed3\u675f\uff0c\u672c\u6b21\u64cd\u4f5c\u7ed3\u679c\u672a\u786e\u8ba4\u3002 names=[]",
+      "  [FAIL] 'camera.open' \u4e0b\u53d1 params.name == 'camera.open' err=\u8fde\u63a5\u5df2\u7ed3\u675f\uff0c\u672c\u6b21\u64cd\u4f5c\u7ed3\u679c\u672a\u786e\u8ba4\u3002 names=[]",
+      "  [FAIL] 'self_camera_take_photo' \u4e0b\u53d1 params.name == 'self.camera.take_photo' err=\u8fde\u63a5\u5df2\u7ed3\u675f\uff0c\u672c\u6b21\u64cd\u4f5c\u7ed3\u679c\u672a\u786e\u8ba4\u3002 names=[]",
+      "  [FAIL] 'self.camera.take_photo' \u4e0b\u53d1 params.name == 'self.camera.take_photo' err=\u8fde\u63a5\u5df2\u7ed3\u675f\uff0c\u672c\u6b21\u64cd\u4f5c\u7ed3\u679c\u672a\u786e\u8ba4\u3002 names=[]",
+      "  [FAIL] 'camera_close' \u4e0b\u53d1 params.name == 'camera.close' err=\u8fde\u63a5\u5df2\u7ed3\u675f\uff0c\u672c\u6b21\u64cd\u4f5c\u7ed3\u679c\u672a\u786e\u8ba4\u3002 names=[]",
+      "  [FAIL] \u7b49\u5f85\u7ed3\u675f\u540e\u8fde\u63a5\u624d\u88ab\u6e05\u7406\u5173\u95ed ",
+      "  [FAIL] \u63d0\u793a\u8bcd\u5305\u542b \u6253\u5f00\u6444\u50cf\u5934 -> camera_open \u89c4\u5219 ",
+      "  [FAIL] \u63d0\u793a\u8bcd\u5305\u542b \u5173\u95ed\u6444\u50cf\u5934 -> camera_close \u89c4\u5219 ",
+      "  [FAIL] \u63d0\u793a\u8bcd\u5305\u542b \u62cd\u7167 -> self_camera_take_photo \u89c4\u5219 ",
+      "  [FAIL] \u63d0\u793a\u8bcd\u7981\u6b62 \u6253\u5f00\u6444\u50cf\u5934 \u8c03\u7528 take_photo ",
+      "  [FAIL] \u63d0\u793a\u8bcd\u7981\u6b62\u53d1\u660e selfcameratake_photo ",
+      "  [FAIL] \u5305\u88c5\u683c\u5f0f\u7684 tools/list \u88ab\u89e3\u5305\uff0ccamera.open \u6ce8\u518c\u6210\u529f raw_names=[]",
+      "  [FAIL] \u89e3\u5305\u540e MCP \u5ba2\u6237\u7aef\u5c31\u7eea ",
+      "  [FAIL] \u5305\u88c5\u683c\u5f0f\u7684 tools/call result \u88ab\u89e3\u5305\u5e76 resolve done=False",
+      "  [FAIL] \u6807\u51c6\uff08\u672a\u5305\u88c5\uff09tools/list \u4ecd\u6b63\u5e38\u89e3\u6790 raw_names=[]"
+    ]
+  },
+  {
+    "module": "test_account_owner_and_reminder",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_identity_snapshot_request",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_recipient_resolver",
+    "exit_code": 1,
+    "success": false,
+    "failure_lines": [
+      "  [FAIL] route:ambiguous_ask ",
+      "  [FAIL] route:named_success "
+    ]
+  },
+  {
+    "module": "test_unified_recipient_outbound",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_person_memory_identity",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_person_memory_tools",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_person_memory_recovery",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_person_memory_chat_init",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_memory_continuity",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_multi_device_isolation",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_reminder_card_converge",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_reminder_control",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_reminder_interaction",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_websocket_session",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_interaction_lifecycle_regression",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_device_send_auth",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_device_send_api",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  },
+  {
+    "module": "test_card_action",
+    "exit_code": 0,
+    "success": true,
+    "failure_lines": []
+  }
+]

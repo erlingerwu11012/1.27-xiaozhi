@@ -1,0 +1,209 @@
+--- a/main/xiaozhi-server/core/connection.py
++++ b/main/xiaozhi-server/core/connection.py
+@@ -2459,7 +2459,7 @@
+         # 存储对话内容
+         if len(response_message) > 0:
+             text_buff = "".join(response_message)
+-            from core.utils.prompt_pipeline import finalization_mode, is_pipeline_v2
++            from core.utils.prompt_pipeline import is_pipeline_v2
+ 
+             is_v2 = is_pipeline_v2(self)
+             if self._official_tts_enabled():
+@@ -2479,30 +2479,20 @@
+                 history_text = caption
+             self.tts_MessageText = caption
+ 
+-            # 二次表达改写仅作为 legacy_two_pass 回退路径；integrated 模式单次请求直接定稿。
+-            extra_expressive = (
+-                functions is not None
+-                and not tool_call_flag
+-                and self._official_tts_enabled()
+-                and finalization_mode(self) == "legacy_two_pass"
+-            )
+-            if extra_expressive:
+-                # Extra un-tooled expressive pass; do not store the decision draft.
+-                self._run_expressive_final(turn_sid, turn_epoch, draft_text=text_buff)
+-            else:
+-                self.dialogue.put(
+-                    Message(role="assistant", content=history_text, caption_text=caption)
+-                )
+-                if functions is not None and not tool_call_flag:
+-                    self.enqueue_tts(
+-                        TTSMessageDTO(
+-                            sentence_id=turn_sid,
+-                            sentence_type=SentenceType.MIDDLE,
+-                            content_type=ContentType.TEXT,
+-                            content_detail=text_buff,
+-                            abort_epoch=turn_epoch,
+-                        )
++            # 主模型定稿直接进入 TTS，不再调用第二次模型改写。
++            self.dialogue.put(
++                Message(role="assistant", content=history_text, caption_text=caption)
++            )
++            if functions is not None and not tool_call_flag:
++                self.enqueue_tts(
++                    TTSMessageDTO(
++                        sentence_id=turn_sid,
++                        sentence_type=SentenceType.MIDDLE,
++                        content_type=ContentType.TEXT,
++                        content_detail=text_buff,
++                        abort_epoch=turn_epoch,
+                     )
++                )
+         if depth == 0:
+             self.enqueue_tts(
+                 TTSMessageDTO(
+@@ -2914,76 +2904,6 @@
+             return bool(checker())
+         return bool(getattr(tts, "official_enhanced", False))
+ 
+-    def _run_expressive_final(self, turn_sid, turn_epoch, draft_text=None):
+-        """One extra tool-free LLM call for official expressive speech. Must be reported."""
+-        from core.providers.tts.official.compiler import caption_from
+-        from core.providers.tts.official.prompt import EXPRESSIVE_STAGE_NOTICE
+-
+-        started = time.perf_counter()
+-        self.official_expressive_calls = getattr(self, "official_expressive_calls", 0) + 1
+-        from core.utils.prompt_pipeline import is_pipeline_v2
+-
+-        # 与主请求读取同一份冻结快照（v2）或同一动态注入（v1），保证最终表达看到 ASR 情绪
+-        messages = list(
+-            self.dialogue.get_llm_dialogue_with_memory(static_system=is_pipeline_v2(self))
+-        )
+-        messages.append({"role": "system", "content": EXPRESSIVE_STAGE_NOTICE})
+-        if draft_text:
+-            messages.append(
+-                {
+-                    "role": "user",
+-                    "content": "请把下面内容改写成可播报的口语，可加官方情感/动作标签，不要解释：\n"
+-                    + caption_from(draft_text),
+-                }
+-            )
+-        chunks = []
+-        try:
+-            for piece in self.llm.response(self.session_id, messages):
+-                if self.client_abort:
+-                    break
+-                if piece:
+-                    chunks.append(piece)
+-                    self.enqueue_tts(
+-                        TTSMessageDTO(
+-                            sentence_id=turn_sid,
+-                            sentence_type=SentenceType.MIDDLE,
+-                            content_type=ContentType.TEXT,
+-                            content_detail=piece,
+-                            abort_epoch=turn_epoch,
+-                        )
+-                    )
+-        except Exception as exc:
+-            self.logger.bind(tag=TAG).error(f"官方最终表达调用失败: {exc}")
+-            fallback = caption_from(draft_text or "") or "好的。"
+-            self.enqueue_tts(
+-                TTSMessageDTO(
+-                    sentence_id=turn_sid,
+-                    sentence_type=SentenceType.MIDDLE,
+-                    content_type=ContentType.TEXT,
+-                    content_detail=fallback,
+-                    abort_epoch=turn_epoch,
+-                )
+-            )
+-            chunks = [fallback]
+-        spoken = "".join(chunks)
+-        history = caption_from(spoken) or caption_from(draft_text or "")
+-        self.dialogue.put(Message(role="assistant", content=history))
+-        elapsed_ms = round((time.perf_counter() - started) * 1000.0, 3)
+-        self.official_expressive_last_ms = elapsed_ms
+-        self.logger.bind(tag=TAG).info(
+-            f"官方最终表达调用 extra_llm=1 elapsed_ms={elapsed_ms} chars={len(spoken)}"
+-        )
+-        trace.emit(
+-            "llm.official_expressive",
+-            self,
+-            {
+-                "extra_llm_calls": 1,
+-                "elapsed_ms": elapsed_ms,
+-                "chars": len(spoken),
+-                "request_kind": "legacy_expressive",
+-                "note": "tool-free final expression; billed as extra LLM",
+-            },
+-        )
+ 
+     def _send_fallback_voice(self, text: str, _tts_turn=None):
+         """发送兜底语音，确保对话有结束反馈"""
+--- a/main/xiaozhi-server/core/utils/prompt_pipeline.py
++++ b/main/xiaozhi-server/core/utils/prompt_pipeline.py
+@@ -5,7 +5,7 @@
+ 
+ 配置来源（API 模式经 LOCAL_ONLY_TOP_LEVEL_KEYS 下发）：
+ - prompt_pipeline: { version }  # version=v2 即全量生效，不再按设备白名单灰度
+-- speech_expression: { mode, finalization }
++- speech_expression: { mode }  # 旧 finalization 字段忽略，不再有二次润色
+ - llm_observability: { include_stream_usage }
+ """
+ from __future__ import annotations
+@@ -66,11 +66,6 @@
+     return bool(result)
+ 
+ 
+-def finalization_mode(conn) -> str:
+-    mode = speech_expression_config(conn).get("finalization")
+-    if mode:
+-        return str(mode)
+-    return "legacy_two_pass"
+ 
+ 
+ def expression_mode(conn) -> str:
+--- a/main/xiaozhi-server/test/test_prompt_pipeline_v2.py
++++ b/main/xiaozhi-server/test/test_prompt_pipeline_v2.py
+@@ -52,14 +52,9 @@
+             )
+         )
+ 
+-    def test_finalization_default_legacy(self):
+-        self.assertEqual(prompt_pipeline.finalization_mode(_conn()), "legacy_two_pass")
+-        self.assertEqual(
+-            prompt_pipeline.finalization_mode(
+-                _conn(config={"speech_expression": {"finalization": "integrated"}})
+-            ),
+-            "integrated",
+-        )
++
++    def test_two_pass_finalization_switch_removed(self):
++        self.assertFalse(hasattr(prompt_pipeline, 'finalization_mode'))
+ 
+     def test_include_stream_usage_default_false(self):
+         self.assertFalse(prompt_pipeline.include_stream_usage(_conn()))
+--- a/main/xiaozhi-server/test/test_official_dialogue.py
++++ b/main/xiaozhi-server/test/test_official_dialogue.py
+@@ -1,14 +1,13 @@
+-"""Official dialogue extras: tool-free final expression and no ASR emotion inject."""
++"""Official dialogue: primary answer tags and captions remain supported."""
+ from __future__ import annotations
+ 
+ import sys
+ import unittest
+-from unittest.mock import MagicMock
+ 
+ sys.path.insert(0, __import__("os").path.join(__import__("os").path.dirname(__file__), ".."))
+ 
+ from core.providers.tts.official.compiler import caption_from
+-from core.providers.tts.official.prompt import EXPRESSIVE_STAGE_NOTICE, OFFICIAL_EXPRESSION_CONSTRAINT
++from core.providers.tts.official.prompt import OFFICIAL_EXPRESSION_CONSTRAINT
+ 
+ 
+ class OfficialDialogueContractTests(unittest.TestCase):
+@@ -22,14 +21,7 @@
+         spoken = "[excited]太好了[laughing]呀"
+         self.assertEqual(caption_from(spoken), "太好了呀")
+ 
+-    def test_expressive_stage_forbids_tools(self):
+-        self.assertIn("禁止再调用任何工具", EXPRESSIVE_STAGE_NOTICE)
+ 
+-    def test_expressive_call_counter(self):
+-        conn = MagicMock()
+-        conn.official_expressive_calls = 0
+-        conn.official_expressive_calls += 1
+-        self.assertEqual(conn.official_expressive_calls, 1)
+ 
+ 
+ if __name__ == "__main__":

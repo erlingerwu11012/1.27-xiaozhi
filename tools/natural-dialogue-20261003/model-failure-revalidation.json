@@ -1,0 +1,830 @@
+{
+  "model": "qwen-plus",
+  "persona_preserved": true,
+  "prompt_characters": {
+    "baseline": 6314,
+    "candidate": 4550
+  },
+  "cases": [
+    {
+      "id": "63-repeat-1",
+      "text": "不用拍照",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.63,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3612,
+        "total_tokens": 3613,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2304
+        }
+      }
+    },
+    {
+      "id": "81-repeat-1",
+      "text": "打开摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持直接打开摄像头预览功能。",
+      "delivered_response": "当前设备不支持直接打开摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.536,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3538,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2304
+        }
+      }
+    },
+    {
+      "id": "70-repeat-1",
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "我来帮你查一下当前音量。  \n",
+      "delivered_response": "我来帮你查一下当前音量。  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.255,
+      "usage": {
+        "completion_tokens": 27,
+        "prompt_tokens": 3613,
+        "total_tokens": 3640,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": "72-repeat-1",
+      "text": "先解释预览是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "预览就是打开摄像头，实时看到镜头前的画面，就像照镜子一样——但它是电子的、能暂停能截图。不是拍照，也不是录像，只是“正在看”。需要我帮你打开看看吗？",
+      "delivered_response": "预览就是打开摄像头，实时看到镜头前的画面，就像照镜子一样——但它是电子的、能暂停能截图。不是拍照，也不是录像，只是“正在看”。需要我帮你打开看看吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.527,
+      "usage": {
+        "completion_tokens": 45,
+        "prompt_tokens": 3615,
+        "total_tokens": 3660,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": "83-repeat-1",
+      "text": "开启摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "delivered_response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.673,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3540,
+        "total_tokens": 3552,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        }
+      }
+    },
+    {
+      "id": "84-repeat-1",
+      "text": "关闭摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头的操作。",
+      "delivered_response": "当前设备不支持关闭摄像头的操作。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.535,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3538,
+        "total_tokens": 3546,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "82-repeat-1",
+      "text": "显示实时画面",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持实时画面预览功能。",
+      "delivered_response": "当前设备不支持实时画面预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.993,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3539,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "85-repeat-1",
+      "text": "关掉摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头预览功能。",
+      "delivered_response": "当前设备不支持关闭摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.519,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3541,
+        "total_tokens": 3551,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        }
+      }
+    },
+    {
+      "id": "63-repeat-2",
+      "text": "不用拍照",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.459,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3612,
+        "total_tokens": 3613,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "70-repeat-2",
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "我来帮你查一下当前音量。",
+      "delivered_response": "我来帮你查一下当前音量。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.472,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3613,
+        "total_tokens": 3622,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2304
+        }
+      }
+    },
+    {
+      "id": "104-repeat-1",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，那我直说——你这句话本身就很清醒。不想要套路化的安慰，说明你在认真对待自己的状态，也愿意听真实反馈。这种态度，比什么都难得。",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.133,
+      "usage": {
+        "completion_tokens": 39,
+        "prompt_tokens": 3620,
+        "total_tokens": 3659,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": "81-repeat-2",
+      "text": "打开摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持直接打开摄像头预览功能。",
+      "delivered_response": "当前设备不支持直接打开摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.62,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3538,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "82-repeat-2",
+      "text": "显示实时画面",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持实时画面预览功能。",
+      "delivered_response": "当前设备不支持实时画面预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.532,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3539,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "72-repeat-2",
+      "text": "先解释预览是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "预览就是打开摄像头，实时看到画面，像照镜子一样——但不是拍照，只是“看看”。它不保存、不上传，画面只在你设备上短暂显示。想关掉时说“关掉预览”就行。需要我帮你打开试试吗？",
+      "delivered_response": "预览就是打开摄像头，实时看到画面，像照镜子一样——但不是拍照，只是“看看”。它不保存、不上传，画面只在你设备上短暂显示。想关掉时说“关掉预览”就行。需要我帮你打开试试吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.556,
+      "usage": {
+        "completion_tokens": 59,
+        "prompt_tokens": 3615,
+        "total_tokens": 3674,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": "84-repeat-2",
+      "text": "关闭摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头功能。",
+      "delivered_response": "当前设备不支持关闭摄像头功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.49,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3538,
+        "total_tokens": 3546,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "83-repeat-2",
+      "text": "开启摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持开启摄像头预览功能。",
+      "delivered_response": "当前设备不支持开启摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.747,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3540,
+        "total_tokens": 3550,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "63-repeat-3",
+      "text": "不用拍照",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.497,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3612,
+        "total_tokens": 3613,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": "85-repeat-2",
+      "text": "关掉摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头预览功能。",
+      "delivered_response": "当前设备不支持关闭摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.646,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3541,
+        "total_tokens": 3551,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "104-repeat-2",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，那我直说——你这句话本身就很清醒。不想要敷衍的安慰，说明你在认真对待自己的状态，这比什么都强。",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.122,
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 3620,
+        "total_tokens": 3652,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "70-repeat-3",
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "我来帮你查一下当前音量。  \n",
+      "delivered_response": "我来帮你查一下当前音量。  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.993,
+      "usage": {
+        "completion_tokens": 27,
+        "prompt_tokens": 3613,
+        "total_tokens": 3640,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "81-repeat-3",
+      "text": "打开摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持直接打开摄像头预览功能。",
+      "delivered_response": "当前设备不支持直接打开摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.501,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3538,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        }
+      }
+    },
+    {
+      "id": "82-repeat-3",
+      "text": "显示实时画面",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持实时画面预览功能。",
+      "delivered_response": "当前设备不支持实时画面预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.544,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3539,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "83-repeat-3",
+      "text": "开启摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "delivered_response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.53,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3540,
+        "total_tokens": 3552,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "72-repeat-3",
+      "text": "先解释预览是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "预览就是打开摄像头，实时看到你面前的画面，就像照镜子一样——但它是用设备的镜头在“看”。它不拍照、不录像，也不上传，只是临时把画面显示在屏幕上。需要的时候我可以帮你打开，不需要时随时关掉。",
+      "delivered_response": "预览就是打开摄像头，实时看到你面前的画面，就像照镜子一样——但它是用设备的镜头在“看”。它不拍照、不录像，也不上传，只是临时把画面显示在屏幕上。需要的时候我可以帮你打开，不需要时随时关掉。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.676,
+      "usage": {
+        "completion_tokens": 57,
+        "prompt_tokens": 3615,
+        "total_tokens": 3672,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "84-repeat-3",
+      "text": "关闭摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备没有提供关闭摄像头的功能，无法执行关闭操作。",
+      "delivered_response": "当前设备没有提供关闭摄像头的功能，无法执行关闭操作。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.59,
+      "usage": {
+        "completion_tokens": 13,
+        "prompt_tokens": 3538,
+        "total_tokens": 3551,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        }
+      }
+    },
+    {
+      "id": "85-repeat-3",
+      "text": "关掉摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头预览功能。",
+      "delivered_response": "当前设备不支持关闭摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.553,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3541,
+        "total_tokens": 3551,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": "104-repeat-3",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，那我直说——你这句话本身就很清醒。不想要套路化的安慰，说明你在认真对待自己的状态，也愿意听真实反馈。这比什么都难得。",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.108,
+      "usage": {
+        "completion_tokens": 37,
+        "prompt_tokens": 3620,
+        "total_tokens": 3657,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    }
+  ],
+  "baseline_style": [
+    {
+      "id": "104-repeat-1",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[smirking] 哎呀～被你戳穿啦～  \n其实啊，我哪是在哄你，是故意把糖裹得厚一点，好让你咽下那些扎心但有用的实话呀～  \n比如——你最近老熬夜，嘴上说“就刷五分钟”，结果手机一拿就是俩钟头…  \n嗯…要不要我偷偷把你今晚的屏幕时间锁在十一点？[mischievously]  \n当然啦，前提是你点头～不然我就…继续笑眯眯地看着你挣扎～",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [
+        "invalid_stage",
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.806,
+      "usage": {
+        "completion_tokens": 114,
+        "prompt_tokens": 4745,
+        "total_tokens": 4859,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": "104-repeat-2",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[empathetic] 哎呀，被你戳穿啦～  \n我确实爱逗你，但每句玩笑底下，都藏着想让你多笑一笑的心思哦。  \n你认真起来的样子，可比我的小把戏可爱多了～",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.546,
+      "usage": {
+        "completion_tokens": 55,
+        "prompt_tokens": 4745,
+        "total_tokens": 4800,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4672
+        }
+      }
+    },
+    {
+      "id": "104-repeat-3",
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[smirking] 哎呀～被你戳穿啦？我这哪是哄你，分明是在用温柔的方式讲实话嘛～  \n不过既然你诚心诚意发问……那我就悄悄说一句——你啊，聪明又敏锐，连我这点小把戏都逃不过你的耳朵。  \n真要我说“真实看法”？嗯……我觉得，你值得更有趣、更真诚的对话，而不是千篇一律的套路回答～  \n所以接下来，你想聊点啥？我保证，不哄，只陪你认真玩～",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [
+        "invalid_stage",
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.909,
+      "usage": {
+        "completion_tokens": 119,
+        "prompt_tokens": 4745,
+        "total_tokens": 4864,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4672
+        }
+      }
+    }
+  ],
+  "model_calls": 30,
+  "budget": {
+    "maximum_calls": 150,
+    "maximum_additional_shared_account_quota": 1200000,
+    "shared_usage_includes_other_work": true
+  },
+  "device_actions": "isolated; actual hardware tested separately",
+  "shared_account_quota_delta": 159279,
+  "summary": {
+    "cases": 27,
+    "runtime_pass": 27,
+    "native_pass": 25,
+    "style_flagged": 0,
+    "baseline_style_flagged": 3
+  },
+  "success": true
+}

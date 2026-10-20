@@ -1,0 +1,5 @@
+{
+  "before_sha256": "ab9bc9d710460bd9ed68af7da2baa9f6c22d27191e934427b958d0106603a0f0",
+  "after_sha256": "cde419d389f66d29e69eccea21a3992b6863f695815a29736a0d548a4c5aa34c",
+  "path": "main/manager-web/src/views/login.vue"
+}

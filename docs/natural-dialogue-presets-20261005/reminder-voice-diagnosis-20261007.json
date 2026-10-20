@@ -1,0 +1,15 @@
+{
+  "device": "ac:a7:04:fd:20:2c",
+  "configured_tts_provider": "qwen_audio_tts_plus",
+  "interface": "DUAL_STREAM",
+  "isolated_wav_method_present": false,
+  "reproduced_error": {
+    "type": "RuntimeError",
+    "reason": "tts_stream_unsupported"
+  },
+  "network_audio_requests": 0,
+  "hardware_writes": 0,
+  "service_secret_configured": true,
+  "service_secret_status": "configured",
+  "production_modified": false
+}

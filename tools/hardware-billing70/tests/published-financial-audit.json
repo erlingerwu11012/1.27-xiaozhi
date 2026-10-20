@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "checked_settled_or_refunded_bills": 26,
+  "states": "settled\t26",
+  "legacy_pending_bound_aggregate": "manual_review\t10\t6777\t0",
+  "packages_verified": true,
+  "health": {
+    "native": "200",
+    "gateway": "200",
+    "frontend": "200",
+    "manager": "200"
+  },
+  "deployed_frontend_matches_build": true,
+  "artifacts": {
+    "candidate/one-api-hardware70": "71ce83af54e8f20b8829221e3ddc842acaee2c00413c04f74290114c163c9a8c",
+    "candidate/one-api-bailian-hardware70": "a43b9488fd47e7a905de2ca17c2053350e9e539bc14b98df1148ef1947fe81a8",
+    "candidate/server/main/manager-api/target/xiaozhi-esp32-api.jar": "8bba44fca718123d6e03b9f883cab9426757d54ecf357f9a21f4b63a0c4543e7",
+    "candidate/server/main/manager-web/dist/index.html": "c4c1b31b32b927d7ecebe9e1ebacde7df7bdaf2a61f07d62776df49766d3fb49"
+  },
+  "portrait_enabled": false,
+  "firmware_ota": false,
+  "time": 1790854939,
+  "free_gb": 0.603
+}

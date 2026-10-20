@@ -1,0 +1,6 @@
+{
+  "actual_manual_failure": "holdout-43 only ordered but reply claimed book in transit",
+  "automatic_checks_passed_but_manual_review_rejected": true,
+  "original_outputs_retained": true,
+  "independent_holdout": 63
+}

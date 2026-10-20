@@ -1,0 +1,12 @@
+{
+  "server_commit": "5175bf28319140da0269039a705bf7fc3423d2d1",
+  "tag_in_both_repositories": "memory-continuity-20260930",
+  "local_commit": "resolve tag memory-continuity-20260930 in the 4.30 repository",
+  "pushed": false,
+  "java_tests": 214,
+  "python_tests": 136,
+  "test_wallet_cny": "6.187468",
+  "portraits_enabled": false,
+  "firmware_ota": false,
+  "physical_tests_pending": true
+}

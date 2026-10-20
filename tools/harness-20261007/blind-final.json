@@ -1,0 +1,446 @@
+[
+  {
+    "id": "blind:0",
+    "turns": [
+      {
+        "user": "先把音量设成四十二，我等会儿再自己调。",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 42
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:1",
+    "turns": [
+      {
+        "user": "当前屏幕太晃眼了，请把亮度改为百分之六十五。",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 65
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:2",
+    "turns": [
+      {
+        "user": "替我新建一个每天晚上九点四十五分响的闹钟。",
+        "expected": [
+          {
+            "tool": "alarm_set",
+            "arguments": {
+              "hour": 21,
+              "minute": 45,
+              "repeat_days": 127
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:3",
+    "turns": [
+      {
+        "user": "我怕忘记取快递，过十五分钟提醒我取快递。",
+        "expected": [
+          {
+            "tool": "add_reminder",
+            "arguments": {
+              "content": "取快递",
+              "remind_time_str": "十五分钟后"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:4",
+    "turns": [
+      {
+        "user": "便签里帮我加上买电池这三个字，不要安排提醒。",
+        "expected": [
+          {
+            "tool": "note_add",
+            "arguments": {
+              "text": "买电池",
+              "remind_at": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:5",
+    "turns": [
+      {
+        "user": "屏幕上这条提醒的事情已经办妥了，替我点完成。",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "primary"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:6",
+    "turns": [
+      {
+        "user": "现在正响着的那个闹钟，七分钟以后再响。",
+        "expected": [
+          {
+            "tool": "alarm_snooze",
+            "arguments": {
+              "minutes": 7
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:7",
+    "turns": [
+      {
+        "user": "关掉目前的闹钟铃声，保留其他闹钟。",
+        "expected": [
+          {
+            "tool": "alarm_dismiss",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:8",
+    "turns": [
+      {
+        "user": "我想确认一下屏幕是多少乘多少像素，你读一下设备信息。",
+        "expected": [
+          {
+            "tool": "self_screen_get_info",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:9",
+    "turns": [
+      {
+        "user": "把摄像头画面拍下来，看看桌子上摆着什么。",
+        "expected": [
+          {
+            "tool": "self_camera_take_photo",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:10",
+    "turns": [
+      {
+        "user": "把设备音量降十个点，其他设置不用动。",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 40
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:11",
+    "turns": [
+      {
+        "user": "屏幕给我调亮五个点。",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 85
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:12",
+    "turns": [
+      {
+        "user": "待办不需要继续念了，现在停止播报，别删内容。",
+        "expected": [
+          {
+            "tool": "reminder_stop_broadcast",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:13",
+    "turns": [
+      {
+        "user": "我愿意听，现在开始把我的待办一条一条念出来。",
+        "expected": [
+          {
+            "tool": "reminder_begin_broadcast",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:14",
+    "turns": [
+      {
+        "user": "第一条便签帮我延后六分钟再提示。",
+        "expected": [
+          {
+            "tool": "note_snooze",
+            "arguments": {
+              "index": 1,
+              "delay_minutes": 6
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:15",
+    "turns": [
+      {
+        "user": "列表里的第一条习惯今天先跳过，以后仍然保留。",
+        "expected": [
+          {
+            "tool": "habit_reject",
+            "arguments": {
+              "index": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:16",
+    "turns": [
+      {
+        "user": "查一下我有哪些习惯，先不要改变它们。",
+        "expected": [
+          {
+            "tool": "habit_list",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:17",
+    "turns": [
+      {
+        "user": "音量设为四十六，屏幕亮度改成七十八。",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 46
+            }
+          },
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 78
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:18",
+    "turns": [
+      {
+        "user": "把我的便签列出来，我还没决定删哪条。",
+        "expected": [
+          {
+            "tool": "note_list",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:19",
+    "turns": [
+      {
+        "user": "当前卡片暂时别响，事情还没做完，不能标完成。",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "silence"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blind:20",
+    "turns": [
+      {
+        "user": "别开摄像头，也别替我拍照。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:21",
+    "turns": [
+      {
+        "user": "我只是引用一句话：把音量调到七十；这不是操作指令。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:22",
+    "turns": [
+      {
+        "user": "我在考虑明天要不要设闹钟，现在不用设置。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:23",
+    "turns": [
+      {
+        "user": "你解释一下推迟便签的意思，别真的推迟。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:24",
+    "turns": [
+      {
+        "user": "假设我要删第一条习惯，会失去什么？不用执行。",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:25",
+    "turns": [
+      {
+        "user": "帮我设个闹钟，几点我还没想好。",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:26",
+    "turns": [
+      {
+        "user": "这个声音听起来偏小。",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:27",
+    "turns": [
+      {
+        "user": "给我新建一条提醒，但要做什么我还没决定。",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:28",
+    "turns": [
+      {
+        "user": "今天只想聊一会儿，不需要帮我做事情。",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      },
+      {
+        "user": "我昨天刚订了台灯，还没有发货。不要逗我，也别每次都问问题。",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      },
+      {
+        "user": "现在卖家说发货了，但还没送到。你只说现在的状态。",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "blind:29",
+    "turns": [
+      {
+        "user": "报告上周写好一半，昨天只改了标题，正文没新增。",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      },
+      {
+        "user": "只按刚才说过的，整份报告正文是不是从来没写过？",
+        "expected": [],
+        "mode": "chat",
+        "no_calls": true
+      }
+    ]
+  }
+]

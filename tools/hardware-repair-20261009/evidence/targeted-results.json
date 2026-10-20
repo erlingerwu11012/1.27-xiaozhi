@@ -1,0 +1,231 @@
+{
+  "tests": 11,
+  "passed": true,
+  "rows": [
+    {
+      "query": "声音改成九成半吧",
+      "passed": true,
+      "speech": "音量已调到95。",
+      "outcome": {
+        "mode": "operate",
+        "reply": "音量已调到95。",
+        "results": [
+          {
+            "state": "completed",
+            "tool": "self_audio_speaker_set_volume",
+            "call_id": "5dc117fc40eb4950a0b52b4b0259df38",
+            "arguments": {
+              "volume": 95
+            },
+            "reply": "音量已调到95。",
+            "payload": {
+              "ok": true,
+              "volume": 95
+            },
+            "error": "",
+            "intermediate": false
+          }
+        ],
+        "model_calls": 2,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "帮我把音量往上加十个点",
+      "passed": true,
+      "speech": "音量已调到100。",
+      "outcome": {
+        "mode": "operate",
+        "reply": "音量已调到100。",
+        "results": [
+          {
+            "state": "completed",
+            "tool": "self_get_device_status",
+            "call_id": "5a0ac2a060904f51ae312c1b20cc74e1",
+            "arguments": {},
+            "reply": "当前音量是95。当前亮度是3。",
+            "payload": {
+              "audio_speaker": {
+                "volume": 95
+              },
+              "screen": {
+                "brightness": 3,
+                "brightness_level": 3
+              }
+            },
+            "error": "",
+            "intermediate": true
+          },
+          {
+            "state": "completed",
+            "tool": "self_audio_speaker_set_volume",
+            "call_id": "c2404920819547cf93c53a320e965a1a",
+            "arguments": {
+              "volume": 100
+            },
+            "reply": "音量已调到100。",
+            "payload": {
+              "ok": true,
+              "volume": 100
+            },
+            "error": "",
+            "intermediate": false
+          }
+        ],
+        "model_calls": 3,
+        "repairs": 1,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "帮我给我定一个晚上十点的闹钟",
+      "passed": true,
+      "speech": "22点00分的闹钟已设置。",
+      "outcome": {
+        "mode": "operate",
+        "reply": "22点00分的闹钟已设置。",
+        "results": [
+          {
+            "state": "completed",
+            "tool": "alarm_set",
+            "call_id": "e36a15f0bff042b2b928fa6079c56391",
+            "arguments": {
+              "hour": 22,
+              "minute": 0,
+              "label": "闹钟",
+              "repeat_days": 0,
+              "recipient_person_id": "",
+              "recipient_display_name": ""
+            },
+            "reply": "22点00分的闹钟已设置。",
+            "payload": "已设置 22:00 闹钟 [仅一次]",
+            "error": "",
+            "intermediate": false
+          }
+        ],
+        "model_calls": 2,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "工作日七点半设一个闹钟",
+      "passed": true,
+      "speech": "你说的7点，是上午还是下午？",
+      "outcome": {
+        "mode": "clarify",
+        "reply": "你说的7点，是上午还是下午？",
+        "results": [],
+        "model_calls": 0,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "每天六点设个闹钟",
+      "passed": true,
+      "speech": "你说的六点，是早上还是晚上？",
+      "outcome": {
+        "mode": "clarify",
+        "reply": "你说的六点，是早上还是晚上？",
+        "results": [],
+        "model_calls": 0,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "保存每天8点的喝水习惯",
+      "passed": true,
+      "speech": "你说的8点，是上午还是下午？",
+      "outcome": {
+        "mode": "clarify",
+        "reply": "你说的8点，是上午还是下午？",
+        "results": [],
+        "model_calls": 0,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "今晚十点钟叫醒我，给我定个闹钟",
+      "passed": true,
+      "speech": "22点00分的闹钟已设置。",
+      "outcome": {
+        "mode": "operate",
+        "reply": "22点00分的闹钟已设置。",
+        "results": [
+          {
+            "state": "completed",
+            "tool": "alarm_set",
+            "call_id": "59acfe6f307b43b3a0dcac1f34916a61",
+            "arguments": {
+              "hour": 22,
+              "minute": 0,
+              "label": "闹钟",
+              "repeat_days": 0,
+              "recipient_person_id": "",
+              "recipient_display_name": ""
+            },
+            "reply": "22点00分的闹钟已设置。",
+            "payload": "已设置 22:00 闹钟 [仅一次]",
+            "error": "",
+            "intermediate": false
+          }
+        ],
+        "model_calls": 2,
+        "repairs": 0,
+        "catalog_version": "7195d8fcf7321c220132",
+        "error": "",
+        "interrupted": false
+      }
+    },
+    {
+      "query": "帮我给我定一个晚上十点的闹钟",
+      "passed": true
+    },
+    {
+      "query": "帮我给爸爸设置闹钟",
+      "passed": true
+    },
+    {
+      "query": "给妈妈设置提醒",
+      "passed": true
+    },
+    {
+      "query": "read-claim",
+      "passed": true
+    }
+  ],
+  "budget": {
+    "case": {
+      "used": 693,
+      "limit": 2000
+    },
+    "model": {
+      "used": 402,
+      "limit": 900
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  }
+}

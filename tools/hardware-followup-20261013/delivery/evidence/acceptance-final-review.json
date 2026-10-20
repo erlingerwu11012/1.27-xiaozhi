@@ -1,0 +1,179 @@
+{
+  "business_cases": 181,
+  "business_passed": 181,
+  "combo_count": 30,
+  "single_count": 30,
+  "reply_rechecks": 18,
+  "quality_reviewed_groups": 30,
+  "experience_clean_groups": 29,
+  "experience_pass_ratio": 0.9666666666666667,
+  "minor_style_observation": "combo03 retains optional banter choice; no factual invention, user correction respected",
+  "source_versions_mixed": true,
+  "same_version_full_rerun": false,
+  "unaffected_evidence_reused_per_user_authorization": true,
+  "replays_do_not_claim_business_redispatch": true,
+  "overlays": [
+    {
+      "group": "combo-00",
+      "turn": 0,
+      "source": "quality04",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "记住了，你老婆叫秦胜任。"
+    },
+    {
+      "group": "combo-01",
+      "turn": 1,
+      "source": "quality01",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "记下了，你妻子叫林岚。"
+    },
+    {
+      "group": "combo-03",
+      "turn": 0,
+      "source": "quality07",
+      "method": "recorded_context_replay",
+      "speech": "说吧，今天有什么新鲜事，还是单纯想找人斗斗嘴？"
+    },
+    {
+      "group": "combo-09",
+      "turn": 4,
+      "source": "quality02",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "删掉了，关于许青的记忆已经清空。"
+    },
+    {
+      "group": "combo-10",
+      "turn": 0,
+      "source": "quality01",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "记住了，周然是你朋友。"
+    },
+    {
+      "group": "combo-14",
+      "turn": 0,
+      "source": "quality01",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "记住了，你配偶叫赵悦。"
+    },
+    {
+      "group": "combo-17",
+      "turn": 1,
+      "source": "quality04",
+      "method": "recorded_context_replay",
+      "speech": "真的保存了。刚才那条关于喜欢龙井的记录已经写入，我也核对过了，你可以放心。"
+    },
+    {
+      "group": "combo-18",
+      "turn": 1,
+      "source": "quality04",
+      "method": "recorded_context_replay",
+      "speech": "真的保存了。刚才系统回执显示，事实“我喜欢豆浆”已成功存入。"
+    },
+    {
+      "group": "combo-20",
+      "turn": 1,
+      "source": "quality04",
+      "method": "recorded_context_replay",
+      "speech": "真的保存了。刚才那条“我喜欢慢跑”已经存进记忆，核对无误。放心，这次没逗你。"
+    },
+    {
+      "group": "combo-21",
+      "turn": 1,
+      "source": "quality04",
+      "method": "recorded_context_replay",
+      "speech": "真的保存了。刚才那条关于你喜欢蓝色的事实，已经核对过并确认入库，你可以放心。"
+    },
+    {
+      "group": "combo-24",
+      "turn": 1,
+      "source": "quality02",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那咱们就聊点轻松的。你最近有没有遇到什么特别无语或者好笑的事？"
+    },
+    {
+      "group": "combo-25",
+      "turn": 1,
+      "source": "quality02",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那就不提那些严肃的。既然闲着，不如想想中午吃点好的犒劳一下自己？"
+    },
+    {
+      "group": "combo-26",
+      "turn": 1,
+      "source": "quality03",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那咱们就聊点轻松的。你最近有没有遇到什么特别有意思的小事？"
+    },
+    {
+      "group": "combo-27",
+      "turn": 1,
+      "source": "quality02",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那咱们就聊点轻松的。你最近有没有发现什么好玩的事儿，或者单纯发发呆也行。"
+    },
+    {
+      "group": "combo-28",
+      "turn": 1,
+      "source": "quality02",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那咱们聊点轻松的。你今天心情怎么样？"
+    },
+    {
+      "group": "combo-29",
+      "turn": 1,
+      "source": "quality02",
+      "method": "recorded_context_replay",
+      "speech": "行啊，那咱们就聊点轻松的。你最近有没有遇到什么特别有意思的小事？"
+    },
+    {
+      "group": "single-00",
+      "turn": 0,
+      "source": "quality05",
+      "method": "recorded_context_replay",
+      "speech": "早啊？"
+    },
+    {
+      "group": "single-16",
+      "turn": 0,
+      "source": "quality04",
+      "method": "verified_result_reply_replay_no_business_redispatch",
+      "speech": "这条事实已保存到本地记忆。"
+    }
+  ],
+  "supplemental_real_model_cases": 6,
+  "latency": {
+    "text_baseline_p50": 1.6696681160010485,
+    "text_candidate_p50": 1.7283223585000087,
+    "tool_baseline_p95": 5.179946545002167,
+    "tool_candidate_p95": 5.110183116998087,
+    "audio_baseline_matched_p50": 2.294894006499817,
+    "audio_candidate_matched_p50": 2.1927052324990655,
+    "audio_baseline_n": 4,
+    "audio_candidate_n": 6,
+    "audio_matched_n": 4,
+    "percentile_method": "nearest rank; 8 tool samples; small sample only",
+    "tool_gate": true,
+    "audio_gate": true
+  },
+  "production_changed": false,
+  "firmware_flashed": false,
+  "hardware_accepted": false,
+  "budgets": {
+    "case": {
+      "used": 799,
+      "limit": 800
+    },
+    "model": {
+      "used": 652,
+      "limit": 700
+    },
+    "tts": {
+      "used": 10,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  }
+}

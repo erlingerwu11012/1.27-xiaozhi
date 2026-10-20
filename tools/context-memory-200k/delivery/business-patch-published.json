@@ -1,0 +1,11 @@
+{
+  "published": true,
+  "at": "2026-09-29 22:12:48 +0800",
+  "source": "main/manager-api/src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java",
+  "source_sha256": "81b75220c82ea6d747353ac28b426eaa5e2c51a305b1b8c48cb7c5ca0d3233ae",
+  "jar_sha256": "940e2cd1075c5e8e31bf28ba9dab03415fd10f4e948c784ecc25a62751638fa8",
+  "business_recall": true,
+  "schema_changed": false,
+  "config_changed": false,
+  "firmware_ota": false
+}

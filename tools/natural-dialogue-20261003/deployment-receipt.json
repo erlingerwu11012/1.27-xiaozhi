@@ -1,0 +1,96 @@
+{
+  "deployed_at_utc": "2026-10-03T07:20:26.274556+00:00",
+  "baseline_commit": "79e4ed56a6ddd418452bdcd88fecb7d0b296c544",
+  "backup": "/root/prjs/tmp/natural-dialogue-20261003/production-backup-20261003-072017-utc",
+  "files": {
+    "core/utils/operation_control.py": {
+      "before_sha256": null,
+      "after_sha256": "bdaa94c0922aec027dc4934cffb5ce0096dead6bdf265d29c8fd67ad8f24ba08"
+    },
+    "core/providers/tools/unified_tool_manager.py": {
+      "before_sha256": "e7d656a2ddaf7661d58e82228f2e0c7422ab545bab6703e34e33cabeaaf27f11",
+      "after_sha256": "9357f00758eb568ff687a829df8c482a21237a850d2aed847c5a53ef045c8697"
+    },
+    "core/utils/tool_result.py": {
+      "before_sha256": "34cd9cf272303f63379d8000a470724d46f653770b9a476c87b0aeb6246fa8b2",
+      "after_sha256": "638d5318f30bd2d86268c16dbcd6a5066be824ee29960ba38ad8df5c45366808"
+    },
+    "core/utils/device_reminder.py": {
+      "before_sha256": "38e5b094343ccaf1d0a21d42d17b0664ebe2a5237dc3bdba9dca6805dfaeeecb",
+      "after_sha256": "3891c8f9066d4c16ddd3e432dfddd736e1f4229a1c24e4355ae374a9e6d47774"
+    },
+    "config/config_loader.py": {
+      "before_sha256": "f4dc5d8a7e6a8a1c00017f218636c587afad468bd393720e15fe3d2c61537c4e",
+      "after_sha256": "fb465cbadd29016e07000e5d85b820cf7593edf48b063b5e0627e7f6e3f50836"
+    },
+    "config.yaml": {
+      "before_sha256": "00549be8ef93af885539f7d0a0c8b8ee3f39b5296b5b70b2ba8f4ee2927944f5",
+      "after_sha256": "8460f01682a348dbcb626ff3906f45dcef70febd0d88ed077b9d6abc7d7c6d29"
+    },
+    "requirements.txt": {
+      "before_sha256": "c86b01791b39dd501d52a2a3da25397c8a365d79af66bae4709e8fd2220a7d88",
+      "after_sha256": "323862f983f5517240fbc4be537f1e4380a4a93b81c9e800ed841eff11048738"
+    },
+    "core/connection.py": {
+      "before_sha256": "5f5e26f8939a8bd7dc823155c3dfc4277b3595ba34ddfa1f8f8e540480ceec4a",
+      "after_sha256": "6123671f4610d562719cfba3f9d08c2f6cbf01b6ceecbcb0ad1b07cfc65cd6e9"
+    },
+    "core/providers/tools/native_fc_guard.py": {
+      "before_sha256": null,
+      "after_sha256": "812d919eb64b2e0398cc7ed7e7c7dae6b8d4f7e55ebc3c2b0394f359d32cceae"
+    },
+    "core/utils/prompt_manager.py": {
+      "before_sha256": "d7a6f79f5ca2985ab785d1907bbacb14055dd546735e5f5c6d11f9a99eba9dfb",
+      "after_sha256": "a9a025a189ab3c3ad3a0de3afeb688682e97fa5c0d5927b3c0a0472eb87f31fa"
+    },
+    "core/providers/tts/official/prompt.py": {
+      "before_sha256": "2a39f5159a01b132a565b9ce3a1286b77acf2c09e22579acf3e604699654fe06",
+      "after_sha256": "45fd8c39c5b4c89d0ef48c2495b33ceed1667ae53adbac332d4dfce7ba106eb3"
+    },
+    "agent-base-prompt-v2.txt": {
+      "before_sha256": "f9b93c9ee725a0c90dfff85bdbdb4e8134dafd35706fa8f11ae51e58c24a5d6b",
+      "after_sha256": "53dc0165d218f93047475b3ecae8272028ce0de2be59b4c58ea215d3ce6f5d7f"
+    },
+    "test/test_operation_control.py": {
+      "before_sha256": null,
+      "after_sha256": "db94186489241ab0755118b054885923f2b62af290ca886e19087c60b1b1691d"
+    },
+    "test/test_operation_pipeline.py": {
+      "before_sha256": null,
+      "after_sha256": "afb9f27f2e9b29c6408eb399cfcfd2b9327a939f9786435d1d529cfec4860bbc"
+    },
+    "core/utils/turn_context.py": {
+      "before_sha256": "cf85c597a1b77d034a96d0b99f591328884eada9cbb3e59739802d825d9cb022",
+      "after_sha256": "359829e946ce0eb5057cf9746a4594680462e18e1ef7edae244bf15f9ebaf38f"
+    },
+    "core/providers/llm/openai/openai.py": {
+      "before_sha256": "95805f0ca910d275079ff83ea49294610efa265935a560d589ef2668cecb09fb",
+      "after_sha256": "87cf1d3a8713bc44351ccdae5a48e0d5f27d44963acf13125ed78811cba22029"
+    },
+    "core/utils/context_window.py": {
+      "before_sha256": "dd5ef1a071e8f8d82bdb460ccf217235b3a5f7c2c6d84448a6152804b5667614",
+      "after_sha256": "3532380d163a9cfa8707febf93d62758fee346fcb7d214f5b73e17cffc7d1b78"
+    },
+    "core/utils/dialogue.py": {
+      "before_sha256": "691254b4800a60820cb67644d6b364119ac834dff4811166868c18b6bd5bc7ed",
+      "after_sha256": "ce49f06ec232655f88f33b41f4ab2065836ec391aa114f67e8d578787abcc76d"
+    }
+  },
+  "health": {
+    "pid": 121574,
+    "status": "online",
+    "ws_port": 8000,
+    "vision_http_status": 200
+  },
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  },
+  "personality_changed": false,
+  "secondary_rewrite_model": false,
+  "new_version_ui": false,
+  "operation_control_enabled": true,
+  "canary_routes_cleanup_pending": false,
+  "test_process_removed": true
+}

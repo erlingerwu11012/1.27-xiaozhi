@@ -1,0 +1,79 @@
+{
+  "cases": 36,
+  "passed": 30,
+  "failed": [
+    {
+      "group": "combo-02",
+      "turn": 1,
+      "errors": [
+        "harness_error:write_authorization_evidence_not_in_user_request",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:note_add",
+        "wrong_persisted_notes",
+        "public_recipient_lost"
+      ]
+    },
+    {
+      "group": "combo-05",
+      "turn": 4,
+      "errors": [
+        "harness_error:operation_claim_requires_dispatch",
+        "missing_answer:完成|处理"
+      ]
+    },
+    {
+      "group": "combo-00",
+      "turn": 3,
+      "errors": [
+        "requested_operation_not_completed:memory_search"
+      ]
+    },
+    {
+      "group": "combo-01",
+      "turn": 5,
+      "errors": [
+        "missing_answer:林岚",
+        "requested_operation_not_completed:memory_search"
+      ]
+    },
+    {
+      "group": "combo-06",
+      "turn": 4,
+      "errors": [
+        "requested_operation_not_completed:memory_search"
+      ]
+    },
+    {
+      "group": "combo-07",
+      "turn": 3,
+      "errors": [
+        "requested_operation_not_completed:memory_search"
+      ]
+    }
+  ],
+  "real_model_turns": 35,
+  "model_calls": 51,
+  "reused_cases": 0,
+  "new_cases": 36,
+  "reuse_source": null,
+  "all_same_version": true,
+  "budget": {
+    "case": {
+      "used": 208,
+      "limit": 800
+    },
+    "model": {
+      "used": 93,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

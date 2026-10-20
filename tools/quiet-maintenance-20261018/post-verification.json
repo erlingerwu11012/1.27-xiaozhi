@@ -1,0 +1,22 @@
+{
+  "memory_search": {
+    "status": "found",
+    "items": 3,
+    "sources": [
+      "local_override",
+      "cloud_user_fact"
+    ]
+  },
+  "processes": [
+    {
+      "id": 21,
+      "status": "online",
+      "restarts": 0
+    },
+    {
+      "id": 22,
+      "status": "online",
+      "restarts": 0
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "viewport": 800,
+      "scene": "prompt",
+      "width": 768,
+      "height": 1151,
+      "outside": [],
+      "selected": "prompt",
+      "overflow": false
+    },
+    {
+      "viewport": 800,
+      "scene": "search",
+      "width": 768,
+      "height": 910,
+      "outside": [],
+      "selected": "search",
+      "overflow": false
+    },
+    {
+      "viewport": 800,
+      "scene": "compact",
+      "width": 768,
+      "height": 895,
+      "outside": [],
+      "selected": "compact",
+      "overflow": false
+    },
+    {
+      "viewport": 800,
+      "scene": "habit",
+      "width": 768,
+      "height": 817,
+      "outside": [],
+      "selected": "habit",
+      "overflow": false
+    },
+    {
+      "viewport": 400,
+      "scene": "prompt",
+      "width": 368,
+      "height": 1224,
+      "outside": [],
+      "selected": "prompt",
+      "overflow": false
+    },
+    {
+      "viewport": 400,
+      "scene": "search",
+      "width": 368,
+      "height": 947,
+      "outside": [],
+      "selected": "search",
+      "overflow": false
+    },
+    {
+      "viewport": 400,
+      "scene": "compact",
+      "width": 368,
+      "height": 952,
+      "outside": [],
+      "selected": "compact",
+      "overflow": false
+    },
+    {
+      "viewport": 400,
+      "scene": "habit",
+      "width": 368,
+      "height": 951,
+      "outside": [],
+      "selected": "habit",
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "scene": "prompt",
+      "width": 328,
+      "height": 1296,
+      "outside": [],
+      "selected": "prompt",
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "scene": "search",
+      "width": 328,
+      "height": 1015,
+      "outside": [],
+      "selected": "search",
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "scene": "compact",
+      "width": 328,
+      "height": 1101,
+      "outside": [],
+      "selected": "compact",
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "scene": "habit",
+      "width": 328,
+      "height": 1039,
+      "outside": [],
+      "selected": "habit",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

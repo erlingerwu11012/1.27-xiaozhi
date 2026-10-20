@@ -1,0 +1,17 @@
+--- a/core/providers/tools/unified_tool_manager.py
++++ b/core/providers/tools/unified_tool_manager.py
+@@ -66,6 +66,14 @@
+             except Exception as e:
+                 self.logger.error(f"获取{tool_type.value}工具时出错: {e}")
+ 
++        # The timed-note adapter already performs time/recipient/receipt checks.
++        # Make it discoverable even when the optional server MCP is disconnected.
++        if 'add_reminder' not in all_tools and 'note_add' not in ambiguous:
++            from .device_reminder_adapter import timed_note_definition
++            reminder = timed_note_definition(self.conn, all_tools)
++            if reminder is not None:
++                all_tools['add_reminder'] = reminder
++                sources['add_reminder'] = [ToolType.DEVICE_MCP.value]
+         self._ambiguous_tool_names = ambiguous
+         self._tool_name_sources = sources
+         self._cached_tools = all_tools

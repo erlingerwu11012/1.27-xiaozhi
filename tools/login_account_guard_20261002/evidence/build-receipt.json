@@ -1,0 +1,9 @@
+{
+  "built": true,
+  "source_before": "ab9bc9d710460bd9ed68af7da2baa9f6c22d27191e934427b958d0106603a0f0",
+  "source_after": "cde419d389f66d29e69eccea21a3992b6863f695815a29736a0d548a4c5aa34c",
+  "app": "/js/app.65f45345.js",
+  "login_chunk": "244.1b7766ad.js",
+  "index_sha256": "d26e8564abe521851e9fb7d10879cc2a0393d07aacb6dd0b64f90dd9c21baaee",
+  "dist_archive_sha256": "de9e17ea8e9a731698393cbef35c7b5138d1471a55b2c657300d4f5e33c1c77e"
+}

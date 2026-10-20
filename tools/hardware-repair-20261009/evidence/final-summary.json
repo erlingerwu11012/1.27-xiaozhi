@@ -1,0 +1,50 @@
+{
+  "cases": 268,
+  "passed": 247,
+  "failed_ids": [
+    "reg-10",
+    "reg-11",
+    "reg-12",
+    "new-2",
+    "new-3",
+    "new-4",
+    "holdout-2",
+    "holdout-3",
+    "holdout-4",
+    "holdout-5",
+    "holdout-6",
+    "holdout-7",
+    "holdout-8",
+    "holdout-9",
+    "holdout-10",
+    "holdout-11",
+    "holdout-12",
+    "holdout-13",
+    "holdout-14",
+    "holdout-15",
+    "holdout-16"
+  ],
+  "real_model_turns": 264,
+  "model_requests": 408,
+  "holdout": 87,
+  "independent_holdout": 66,
+  "budget": {
+    "case": {
+      "used": 1027,
+      "limit": 2000
+    },
+    "model": {
+      "used": 900,
+      "limit": 900
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "production_modified": false
+}

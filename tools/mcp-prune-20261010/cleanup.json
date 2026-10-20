@@ -1,0 +1,397 @@
+{
+  "before_free": 2402877440,
+  "after_free": 3145596928,
+  "reclaimed_bytes": 742719488,
+  "actions": [
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/xiaozhi-esp32-api.jar",
+      "bytes": 129877276,
+      "sha256": "c82e83123d090c89924977e8014b464150122729465562110dbd49e5067b6a50",
+      "matching_backup_retained": "/root/prjs/releases/experience-repair-20261009/deploy-backup/old-api.jar",
+      "kind": "duplicate_build_jar"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-08_23-21-54.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-08_23-21-54.log.gz",
+      "bytes_reclaimed": 9870856,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-02.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-02.0.log.gz",
+      "bytes_reclaimed": 3592660,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-15_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-15_00-00-00.log.gz",
+      "bytes_reclaimed": 2911389,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-01.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-01.0.log.gz",
+      "bytes_reclaimed": 1659655,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-03.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-03.0.log.gz",
+      "bytes_reclaimed": 2113129,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-19.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-19.0.log.gz",
+      "bytes_reclaimed": 3101211,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-02_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-02_00-00-00.log.gz",
+      "bytes_reclaimed": 1990670,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-18.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-18.0.log.gz",
+      "bytes_reclaimed": 1362440,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-23.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-23.0.log.gz",
+      "bytes_reclaimed": 1160968,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-30.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-30.0.log.gz",
+      "bytes_reclaimed": 1569251,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-09.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-09.0.log.gz",
+      "bytes_reclaimed": 6623962,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-20_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-20_00-00-00.log.gz",
+      "bytes_reclaimed": 6691377,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-01_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-01_00-00-00.log.gz",
+      "bytes_reclaimed": 4797705,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/error.2026-10-09.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/error.2026-10-09.0.log.gz",
+      "bytes_reclaimed": 2133507,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-20_18-31-29.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-20_18-31-29.log.gz",
+      "bytes_reclaimed": 9979487,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-24.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-24.0.log.gz",
+      "bytes_reclaimed": 2536532,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-07.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-07.0.log.gz",
+      "bytes_reclaimed": 7187418,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-28_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-28_00-00-00.log.gz",
+      "bytes_reclaimed": 9674371,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out.log.gz",
+      "bytes_reclaimed": 1700494,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-15.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-15.0.log.gz",
+      "bytes_reclaimed": 1556208,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-29_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-29_00-00-00.log.gz",
+      "bytes_reclaimed": 1616894,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-28.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-28.0.log.gz",
+      "bytes_reclaimed": 1369312,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.1.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.1.log.gz",
+      "bytes_reclaimed": 1628791,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.0.log.gz",
+      "bytes_reclaimed": 9953018,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-14.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-14.0.log.gz",
+      "bytes_reclaimed": 1035470,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-17_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-09-17_00-00-00.log.gz",
+      "bytes_reclaimed": 2335061,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-06_00-00-00.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/pm2-out__2026-10-06_00-00-00.log.gz",
+      "bytes_reclaimed": 7313013,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-29.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-29.0.log.gz",
+      "bytes_reclaimed": 2489438,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-27.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-27.0.log.gz",
+      "bytes_reclaimed": 1064372,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-17.0.log",
+      "archive": "/root/prjs/tmp/hardware-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-17.0.log.gz",
+      "bytes_reclaimed": 1368522,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/target/xiaozhi-esp32-api.jar",
+      "bytes": 129878440,
+      "sha256": "c4c71b525f108d50b0c7c801684dd650eefb026fd0a5f405aea603b7501afa33",
+      "matching_backup_retained": "/root/prjs/releases/hardware-repair-20261009/deploy-backup/old-api.jar",
+      "kind": "duplicate_build_jar"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/xiaozhi-esp32-api.jar",
+      "bytes": 129877276,
+      "sha256": "c82e83123d090c89924977e8014b464150122729465562110dbd49e5067b6a50",
+      "matching_backup_retained": "/root/prjs/releases/experience-repair-20261009/deploy-backup/old-api.jar",
+      "kind": "duplicate_build_jar"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-08_23-21-54.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-08_23-21-54.log.gz",
+      "bytes_reclaimed": 9870856,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-02.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-02.0.log.gz",
+      "bytes_reclaimed": 3592660,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-15_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-15_00-00-00.log.gz",
+      "bytes_reclaimed": 2911389,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-01.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-01.0.log.gz",
+      "bytes_reclaimed": 1659655,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-03.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-03.0.log.gz",
+      "bytes_reclaimed": 2113129,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-19.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-19.0.log.gz",
+      "bytes_reclaimed": 3101211,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-02_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-02_00-00-00.log.gz",
+      "bytes_reclaimed": 1990670,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-18.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-18.0.log.gz",
+      "bytes_reclaimed": 1362440,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-23.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-23.0.log.gz",
+      "bytes_reclaimed": 1160968,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-30.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-30.0.log.gz",
+      "bytes_reclaimed": 1569251,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-20_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-20_00-00-00.log.gz",
+      "bytes_reclaimed": 6691377,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-01_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-01_00-00-00.log.gz",
+      "bytes_reclaimed": 4797705,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.log.gz",
+      "bytes_reclaimed": 5221590,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/error.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/error.log.gz",
+      "bytes_reclaimed": 1886614,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-20_18-31-29.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-20_18-31-29.log.gz",
+      "bytes_reclaimed": 9979487,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-24.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-24.0.log.gz",
+      "bytes_reclaimed": 2536532,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-07.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-10-07.0.log.gz",
+      "bytes_reclaimed": 7187418,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-28_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-28_00-00-00.log.gz",
+      "bytes_reclaimed": 9674371,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out.log.gz",
+      "bytes_reclaimed": 1700494,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-15.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-15.0.log.gz",
+      "bytes_reclaimed": 1556208,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-29_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-29_00-00-00.log.gz",
+      "bytes_reclaimed": 1616894,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-28.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-28.0.log.gz",
+      "bytes_reclaimed": 1369312,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.1.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.1.log.gz",
+      "bytes_reclaimed": 1628791,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-20.0.log.gz",
+      "bytes_reclaimed": 9953018,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-14.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-14.0.log.gz",
+      "bytes_reclaimed": 1035470,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-17_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-09-17_00-00-00.log.gz",
+      "bytes_reclaimed": 2335061,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-06_00-00-00.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/pm2-out__2026-10-06_00-00-00.log.gz",
+      "bytes_reclaimed": 7313013,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-29.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-29.0.log.gz",
+      "bytes_reclaimed": 2489438,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-27.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-27.0.log.gz",
+      "bytes_reclaimed": 1064372,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-17.0.log",
+      "archive": "/root/prjs/tmp/experience-repair-20261009/manager-api/logs/xiaozhi-esp32-api.2026-09-17.0.log.gz",
+      "bytes_reclaimed": 1368522,
+      "kind": "compress_closed_test_log"
+    },
+    {
+      "path": "/root/prjs/tmp/nvs-habit-renewal-20261007/work/manager-api/target/xiaozhi-esp32-api.jar",
+      "bytes": 129877276,
+      "sha256": "c82e83123d090c89924977e8014b464150122729465562110dbd49e5067b6a50",
+      "matching_backup_retained": "/root/prjs/releases/experience-repair-20261009/deploy-backup/old-api.jar",
+      "kind": "duplicate_build_jar"
+    }
+  ],
+  "production_and_backups_retained": true,
+  "at": 1791568197.7845392
+}

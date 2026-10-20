@@ -1,0 +1,19 @@
+{
+  "removed_only_stopped_test_jars": [
+    {
+      "file": "/root/prjs/tmp/hardware-followup-20261013/candidate-api-03.jar",
+      "sha256": "1e45e1c7a7ce908b65bd0c31bc830b3dab7eef4c88f00eb063b792ece49c17e6",
+      "bytes": 129883782,
+      "local_verified_copy": "E:/github/github_code/all/4.30/tools/hardware-followup-20261013/private-rebuildable-archives/candidate-api-03.jar"
+    },
+    {
+      "file": "/root/prjs/tmp/hardware-followup-20261013/candidate-api-04.jar",
+      "sha256": "d4510e1fc89f65fa5dbcc20fe3fe886c361f2721c24e59010a58f43962083910",
+      "bytes": 129884191,
+      "local_verified_copy": "E:/github/github_code/all/4.30/tools/hardware-followup-20261013/private-rebuildable-archives/candidate-api-04.jar"
+    }
+  ],
+  "available_bytes": 296808448,
+  "time": 1791851527.1881785,
+  "formal_rollback_unchanged": true
+}

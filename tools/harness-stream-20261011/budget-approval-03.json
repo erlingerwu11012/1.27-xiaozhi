@@ -1,0 +1,8 @@
+{
+  "source": "User reply in current chat",
+  "answer": "允许增加50条，按上述范围补验，达标后上线",
+  "previous_limits": {"case": 3000, "model": 2400, "tts": 24, "vision": 0},
+  "approved_limits": {"case": 3050, "model": 2400, "tts": 24, "vision": 0},
+  "scope": "6 affected five-turn dialogues, 11 single requests and targeted release checks; reuse unaffected evidence with original versions",
+  "existing_charges_and_failures_preserved": true
+}

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "tests": 14,
+  "rows": [
+    {
+      "text": "亮度已调到90%。",
+      "passed": true
+    },
+    {
+      "text": "亮度已经调好了，现在设定在90%。",
+      "passed": true
+    },
+    {
+      "text": "亮度调到百分之九十了。",
+      "passed": true
+    },
+    {
+      "text": "亮度设为九成。",
+      "passed": true
+    },
+    {
+      "text": "亮度已经调好了，现在是4档。",
+      "passed": true
+    },
+    {
+      "text": "亮度已调到五档。",
+      "passed": true
+    },
+    {
+      "text": "亮度设为第四档。",
+      "passed": true
+    },
+    {
+      "text": "好的，已记录你现在的偏好是喝绿茶。",
+      "passed": true
+    },
+    {
+      "text": "因为云端同步未开启，本地无法确认。",
+      "passed": true
+    },
+    {
+      "text": "更正请求已提交，但尚未查询确认到最新记录。",
+      "passed": true
+    },
+    {
+      "text": "这次还没有确认记忆修改成功。",
+      "passed": true
+    },
+    {
+      "text": "我会先调用 设备状态查询 查当前状态，再调用 音量 设置音量；这次不执行。",
+      "passed": true
+    },
+    {
+      "text": "上周的进度主要停留在标题修改上。",
+      "passed": true
+    },
+    {
+      "text": "上周的进度保持住了，昨天主要是在调整标题。",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+from pathlib import Path
+p=Path('tools/hardware-repair-20261009/budget.py')
+s=p.read_text();s=s.replace("LIMITS={'case':2000,'model':900,'tts':12,'vision':6}","# User explicitly lifted cost/request limits on 2026-10-09; retain the same cumulative ledger.\nLIMITS={'case':None,'model':None,'tts':None,'vision':None}")
+s=s.replace("if used>=LIMITS[kind]:", "if LIMITS[kind] is not None and used>=LIMITS[kind]:")
+p.write_text(s,encoding='utf-8')
+p=Path('tools/hardware-repair-20261009/run_model.py');s=p.read_text()
+s=s.replace("CASES=json.loads((stage/'final-cases.json').read_text());REPORT=", "import argparse\ncli=argparse.ArgumentParser();cli.add_argument('--development',action='store_true');cli.add_argument('--run-name',default='resume-final');cli.add_argument('--focus',action='store_true');opt=cli.parse_args();assert re.fullmatch(r'[a-z0-9-]+',opt.run_name)\nCASES=json.loads((stage/'final-cases.json').read_text());REPORT=")
+a=s.index("REPORT=stage/");b=s.index("\ne=json.loads",a)
+s=s[:a]+"REPORT=stage/(opt.run_name+'-results.jsonl')"+s[b:]
+s=s.replace(" if '--development' in __import__('sys').argv:"," if opt.development:")
+s=s.replace(" assert not REPORT.exists()", " if opt.focus:\n  CASES=[x for x in CASES if (x.get('tool') or '').startswith('memory') or x.get('session') in {'chat0','chat1'} or x['id'] in {'holdout-38','holdout-49'}]\n assert not REPORT.exists()")
+s=s.replace("stage/('development-freeze.json' if '--development' in __import__('sys').argv else 'final-freeze.json')", "stage/(opt.run_name+'-freeze.json')")
+s=s.replace(" await asyncio.gather(*(limited(rows) for rows in others))\n for rows in memory:await run_group(rows)"," for rows in memory:await run_group(rows)\n await asyncio.gather(*(limited(rows) for rows in others))")
+s=s.replace("sum(bool(r.get('outcome',{}).get('model_calls')) for r in results)","sum(any(x.get('usage') for x in r.get('decisions',[])) for r in results)")
+s=s.replace("stage/('development-summary.json' if '--development' in __import__('sys').argv else 'final-summary.json')", "stage/(opt.run_name+'-summary.json')")
+p.write_text(s,encoding='utf-8')

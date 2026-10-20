@@ -1,0 +1,24 @@
+{
+  "tests": 199,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "budget": {
+    "case": {
+      "used": 5636,
+      "limit": null
+    },
+    "model": {
+      "used": 3849,
+      "limit": null
+    },
+    "tts": {
+      "used": 3,
+      "limit": null
+    },
+    "vision": {
+      "used": 2,
+      "limit": null
+    }
+  }
+}

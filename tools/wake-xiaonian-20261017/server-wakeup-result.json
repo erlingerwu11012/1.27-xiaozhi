@@ -1,0 +1,8 @@
+{
+  "wakeup_words": [
+    "你好小念"
+  ],
+  "api_verified": true,
+  "python_pm2_restarted": 13,
+  "old_words_removed": true
+}

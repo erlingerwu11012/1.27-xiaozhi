@@ -1,0 +1,140 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "random_decision",
+      "description": "随机决策助手。支持抛硬币、掷骰子、生成随机数、从多个选项中随机选择。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "coin",
+              "dice",
+              "number",
+              "pick"
+            ],
+            "description": "模式：'coin'(抛硬币), 'dice'(掷骰子), 'number'(随机数), 'pick'(做选择)"
+          },
+          "options": {
+            "type": "string",
+            "description": "当模式为 'pick' 时必填。选项列表，用逗号分隔。例如：'肯德基, 麦当劳, 沙县小吃'"
+          },
+          "min_val": {
+            "type": "integer",
+            "description": "当模式为 'number' 时可选。最小值，默认1。"
+          },
+          "max_val": {
+            "type": "integer",
+            "description": "当模式为 'number' 时可选。最大值，默认100。"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "habit_create",
+      "description": "创建一条手动习惯提醒。用户可指定习惯名称（description）、每天触发时间（hour/minute）和提前提醒分钟数（advance_minutes）。创建后服务端会自动同步到设备端。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "习惯中文描述，如：喝水、冥想、运动"
+          },
+          "hour": {
+            "type": "integer",
+            "description": "每天触发小时，0-23"
+          },
+          "minute": {
+            "type": "integer",
+            "description": "每天触发分钟，0-59，默认0"
+          },
+          "advance_minutes": {
+            "type": "integer",
+            "description": "提前提醒分钟数，默认2"
+          },
+          "intent": {
+            "type": "string",
+            "description": "英文意图标签（可选，如 drink_water），不填则自动生成"
+          },
+          "device_id": {
+            "type": "string",
+            "description": "目标设备ID（可选，不填则广播到所有设备）"
+          }
+        },
+        "required": [
+          "description",
+          "hour"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "habit_list_manual",
+      "description": "查询用户手动创建的习惯列表，返回所有启用中的手动习惯。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "enabled_only": {
+            "type": "boolean",
+            "description": "是否只返回启用的习惯，默认 true"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "add_reminder",
+      "description": "添加定时提醒。只传提醒内容与自然语言时间（如「两分钟后」），不要自己算 Unix 时间戳。若当前语音设备支持备忘录卡片，主控会优先改走设备 note.add；本工具为无卡片设备的兼容路径。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "用户原话，例如：十分钟后提醒我开会。若与 content/remind_time_str 同时提供，以后者为准。"
+          },
+          "content": {
+            "type": "string",
+            "description": "提醒内容（事项），可与 remind_time_str 一起由 LLM 提取后传入。"
+          },
+          "remind_time_str": {
+            "type": "string",
+            "description": "提醒时间，自然语言，如：两分钟后、半小时后、明天上午9点、今晚8点。不要传 Unix 时间戳。"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_world_time",
+      "description": "查询世界各地城市的当前时间。请大模型根据用户提到的城市，自动转换为 IANA Timezone 格式字符串。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "timezone": {
+            "type": "string",
+            "description": "IANA时区字符串，例如 'Asia/Shanghai', 'America/New_York', 'Europe/Paris', 'Asia/Tokyo'。"
+          }
+        },
+        "required": [
+          "timezone"
+        ]
+      }
+    }
+  }
+]

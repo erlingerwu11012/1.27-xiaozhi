@@ -1,0 +1,207 @@
+{
+  "passed": true,
+  "formal_domain": "https://api.realecho.cn",
+  "synthetic_only": true,
+  "cases": [
+    {
+      "case": "llm",
+      "state": "settled",
+      "cost_cny_exact": "39/2500000",
+      "sale_cny_exact": "13/250000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "13/2500",
+          "sale_cny": "13/250000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-fca36c0a-13b5-9ba5-afd9-52e75f05744d",
+        "input_tokens": 17,
+        "output_tokens": 1,
+        "cached_tokens": 0
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "summary",
+      "state": "settled",
+      "cost_cny_exact": "19/500000",
+      "sale_cny_exact": "19/150000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "19/1500",
+          "sale_cny": "19/150000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-8a5ff42b-7531-9656-a445-2e00c575fe46",
+        "input_tokens": 25,
+        "output_tokens": 9,
+        "cached_tokens": 0
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "habit",
+      "state": "settled",
+      "cost_cny_exact": "3/50000",
+      "sale_cny_exact": "1/5000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "1/50",
+          "sale_cny": "1/5000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-7010c97e-3e4e-9894-a6b6-eb1dbe59287b",
+        "input_tokens": 30,
+        "output_tokens": 18,
+        "cached_tokens": 0
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "vision",
+      "state": "settled",
+      "cost_cny_exact": "1563/20000000",
+      "sale_cny_exact": "521/2000000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "521/20000",
+          "sale_cny": "521/2000000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-b752ef33-789c-99ee-b024-c6d47d0de676",
+        "input_tokens": 81,
+        "output_tokens": 44,
+        "cached_tokens": 0
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "tool",
+      "state": "settled",
+      "cost_cny_exact": "1903/12500000",
+      "sale_cny_exact": "1903/3750000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "1903/37500",
+          "sale_cny": "1903/3750000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-7895b015-79b8-9a3a-bd29-881edbf4180c",
+        "input_tokens": 179,
+        "output_tokens": 25,
+        "cached_tokens": 64
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "tool-result",
+      "state": "settled",
+      "cost_cny_exact": "129/2500000",
+      "sale_cny_exact": "43/250000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "43/2500",
+          "sale_cny": "43/250000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "chatcmpl-800fc52e-883b-9ae3-a0da-a48a6469bc89",
+        "input_tokens": 62,
+        "output_tokens": 1,
+        "cached_tokens": 0
+      },
+      "duplicate_rejected": true
+    },
+    {
+      "case": "tts",
+      "state": "settled",
+      "cost_cny_exact": "14/3125",
+      "sale_cny_exact": "28/1875",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "112/75",
+          "sale_cny": "28/1875"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "d5bcbd6b-112e-43f0-be62-8dc76c3cad78",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_tokens": null,
+        "units": "32"
+      },
+      "synthetic_audio_not_saved": true
+    },
+    {
+      "case": "asr",
+      "state": "settled",
+      "cost_cny_exact": "99/100000",
+      "sale_cny_exact": "33/10000",
+      "margin": "0.70",
+      "allocations": [
+        {
+          "lot_id": "synthetic-publish:f5c75a3fc959",
+          "kind": "paid",
+          "points": "33/100",
+          "sale_cny": "33/10000"
+        }
+      ],
+      "usage": {
+        "confirmed": true,
+        "source": "upstream",
+        "upstream_request_id": "sess_ZzKbPwOc2Fw1d5dYORu8i",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_tokens": null,
+        "units": "3"
+      },
+      "synthetic_audio_not_saved": true
+    }
+  ],
+  "balance_matches_allocations": true,
+  "customer_balance_changed_by_test": false,
+  "missing_proof_rejected": true,
+  "foreign_account_rejected": true,
+  "upstream_cost_cny_exact": "586559/100000000",
+  "wallet_sale_cny_exact": "586559/30000000"
+}

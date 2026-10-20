@@ -1,0 +1,7 @@
+管道元素中的“.”后面的表达式生成无效的对象。该表达式必须生成命令名称、脚本块或 CommandInfo 对象。
+所在位置 E:\Espressif\frameworks\esp-idf-v5.5.4\export.ps1:27 字符: 3
++ . $idf_exports
++   ~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) []，ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : BadExpression
+ 

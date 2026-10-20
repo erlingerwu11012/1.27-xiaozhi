@@ -1,0 +1,96 @@
+{
+  "hardware_actions": 0,
+  "recording_source": "synthetic official TTS; real ASR provider; no physical microphone",
+  "voice": [],
+  "native_mcp": [
+    {
+      "question": "请查询东京现在的时间",
+      "route": "actual operation_control + unified ToolManager + ServerMCPExecutor",
+      "tool_call": {
+        "id": "operation_0",
+        "name": "get_world_time",
+        "arguments": "{\"timezone\": \"Asia/Tokyo\"}"
+      },
+      "actual_tool_result": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 18:50:51 (Monday)\n时区：UTC+9",
+      "raw_primary_reply": "东京现在是2026年10月5日，星期一，晚上六点五十分。",
+      "reply": "东京现在是2026年10月5日，星期一，晚上六点五十分。",
+      "success": true
+    },
+    {
+      "question": "请查询伦敦现在的时间",
+      "route": "actual operation_control + unified ToolManager + ServerMCPExecutor",
+      "tool_call": {
+        "id": "operation_0",
+        "name": "get_world_time",
+        "arguments": "{\"timezone\": \"Europe/London\"}"
+      },
+      "actual_tool_result": "🌍 Europe/London 当前时间：\n2026年10月05日 10:50:53 (Monday)\n时区：UTC+1",
+      "raw_primary_reply": "伦敦现在是周一上午十点五十分。",
+      "reply": "伦敦现在是周一上午十点五十分。",
+      "success": true
+    },
+    {
+      "question": "请查询上海现在的时间",
+      "route": "actual operation_control + unified ToolManager + ServerMCPExecutor",
+      "tool_call": {
+        "id": "operation_0",
+        "name": "get_world_time",
+        "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+      },
+      "actual_tool_result": "🌍 Asia/Shanghai 当前时间：\n2026年10月05日 17:50:55 (Monday)\n时区：UTC+8",
+      "raw_primary_reply": "上海现在是2026年10月5日，星期一，下午五点五十分。",
+      "reply": "上海现在是2026年10月5日，星期一，下午五点五十分。",
+      "success": true
+    }
+  ],
+  "model_calls": 9,
+  "maximum_model_calls": 12,
+  "maximum_tts_calls": 20,
+  "maximum_asr_sessions": 20,
+  "maximum_shared_quota": 1200000,
+  "production_gateway": true,
+  "candidate_runtime": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "dialogues": [
+    {
+      "persona": "natural",
+      "user": "今天累了一天，别讲道理，也别替我安排事情，陪我正常聊两句。",
+      "assistant": "累了一天确实不想动脑子。那就随便聊聊，不用管什么安排。现在感觉怎么样？",
+      "invalid_style_flag": false
+    },
+    {
+      "persona": "natural",
+      "user": "我点了晚饭，还没送到，准备吃完再去洗澡。",
+      "assistant": "好，那就等饭到了先填饱肚子。洗完澡往床上一躺，那感觉肯定特舒服。",
+      "invalid_style_flag": false
+    },
+    {
+      "persona": "natural",
+      "user": "明天再弄那份方案吧，我就是这么打算，还没写完。",
+      "assistant": "行，方案先搁着，明天再说。今晚就专心等外卖和洗澡吧。",
+      "invalid_style_flag": false
+    },
+    {
+      "persona": "existing-playful",
+      "user": "今天累了一天，别讲道理，也别替我安排事情，陪我正常聊两句。",
+      "assistant": "行，今天不逗你了。累了一天就歇着吧，不用想别的。",
+      "invalid_style_flag": false
+    },
+    {
+      "persona": "existing-playful",
+      "user": "我点了晚饭，还没送到，准备吃完再去洗澡。",
+      "assistant": "嗯，等饭到了先填饱肚子，洗完澡往床上一躺，那才叫舒服。",
+      "invalid_style_flag": false
+    },
+    {
+      "persona": "existing-playful",
+      "user": "明天再弄那份方案吧，我就是这么打算，还没写完。",
+      "assistant": "行，方案先放着，今晚就只管吃饭洗澡。",
+      "invalid_style_flag": false
+    }
+  ],
+  "model": "qwen3.8-flash",
+  "temperature": 0.4,
+  "actual_mcp_executions": 3
+}

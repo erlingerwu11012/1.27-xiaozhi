@@ -1,0 +1,10 @@
+{
+  "actual_failures": [
+    "holdout-6 short authoritative replacement 喝绿茶 excluded by minimum 4 codepoint filter",
+    "holdout-7 lost latest fact after failed correction readback"
+  ],
+  "additional_speech_fix": "Never claim stored memory without a completed write; correct once rather than replacing ordinary explanation",
+  "original_outputs_retained": true,
+  "independent_holdout": 64,
+  "at": 1791563254.4654706
+}

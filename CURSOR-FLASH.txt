@@ -1,0 +1,23 @@
+把本文件夹用 Cursor 打开后，可以直接让 Cursor 烧录。不要重新编译，不要换用其他固件包。
+
+当前固件：
+releases\standby-clock-level8-20261007\xiaozhi.bin
+ESP32-S3 / esp-box-3 / 16MB。背光 PWM 为 1kHz。
+空闲约 1 分钟进入待机时钟，时钟背光为第 8 档对应的 85%，退出后恢复原来的亮度。
+
+在 Cursor 里对助手说：
+
+请烧录本文件夹里的待机时钟固件。先确认串口没有被监视器占用。
+串口换成设备管理器里的实际端口，然后在 PowerShell 执行：
+
+& '.\flash.ps1' -Port COM10
+
+只更新应用，保留设备配置、Wi-Fi、Spine 人物、资源和壁纸。
+不要执行 erase_flash，不要烧录 merged-binary.bin。
+脚本会先核对固件哈希和设备分区表。分区不一致就停止，不要强制覆盖。
+如果只是传输失败，用 -Baud 115200 再执行一次。
+烧录完成后不要再打开 USB 下载口监视器，否则芯片会停在下载模式。
+
+朋友电脑上的串口不一定是 COM10。助手应先查看实际串口，再把命令里的端口换掉。
+需要本机已有 ESP-IDF 的 Python，或者已执行 python -m pip install esptool。
+flash.ps1 会自行查找可用的 Python，不依赖原来电脑上的 E:\Espressif 路径。

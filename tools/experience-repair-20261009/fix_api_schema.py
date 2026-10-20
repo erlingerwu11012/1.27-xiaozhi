@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path(__file__).parent/'start_api.py';s=p.read_text(encoding='utf-8-sig');s=s.replace("subprocess.run(['docker','run'", "if subprocess.run(['docker','inspect','experience-repair-redis'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:\n subprocess.run(['docker','run'");s=s.replace("'--spring.quartz.auto-startup=false'", "'--spring.quartz.auto-startup=false','--spring.liquibase.enabled=false'");p.write_text(s,encoding='utf-8')

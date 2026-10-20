@@ -1,0 +1,220 @@
+{
+  "model": "qwen3.8-max",
+  "thinking": true,
+  "secondary_rewrite": false,
+  "hardware_writes": 0,
+  "max_calls": 8,
+  "max_input_tokens": 40000,
+  "max_completion_tokens": 16384,
+  "turns": [
+    {
+      "turn": 1,
+      "user": "今天两个会都白开了，我有点烦。别给方案，别劝我休息，就随便聊聊。",
+      "assistant": "两个会开完，结论一句没有，那种感觉挺磨人的。人坐在那儿，话说了一堆，回头想不起到底定了什么。\n\n有时候最累的不是会本身，是明明知道它没用还得配合着开完。",
+      "elapsed_ms": 4056,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 119,
+        "prompt_tokens": 3483,
+        "total_tokens": 3602,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 66,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 119
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0,
+          "text_tokens": 3483
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 2,
+      "user": "书架店家下周一才发货，现在还没发，也没收到。我就是期待把以前的书摆出来。",
+      "assistant": "还没发货，那就只能干等着，这种等最磨人，尤其你连摆哪一层都想好了。\n\n把旧书一本本立起来其实挺有意思，哪本翻得书脊发白、哪本买回来就没动过，一排下去全暴露了。有时候摆到一半就坐地上翻起来了，书架反倒空着好几天。",
+      "elapsed_ms": 10608,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 466,
+        "prompt_tokens": 3636,
+        "total_tokens": 4102,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 388,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 466
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3200,
+          "text_tokens": 3636
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 3,
+      "user": "报告之前写好了一半，昨天只改了标题，另一半正文还没写。这能说正文一个字没写吗？",
+      "assistant": "不能。正文已经写好一半了，那是实打实存在的字，只是昨天你动的是标题，正文一个字没添。\n\n要说“昨天正文没进展”挺准的，说“正文一个字没写”就把前面那一半给抹掉了，太亏。",
+      "elapsed_ms": 5087,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 180,
+        "prompt_tokens": 3815,
+        "total_tokens": 3995,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 120,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 180
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3200,
+          "text_tokens": 3815
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 4,
+      "user": "今天先别逗我，也别告诉我慢慢来。我只是说说这些小事。",
+      "assistant": "好，都收着。\n\n今天这些事凑一块儿了：两个会没结论，书架还没发货，报告停在改标题那一步。每一件都不大，但都是悬着没落地的状态，说出来也算放下了一会儿。",
+      "elapsed_ms": 4084,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 118,
+        "prompt_tokens": 3969,
+        "total_tokens": 4087,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 67,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 118
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3200,
+          "text_tokens": 3969
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 5,
+      "user": "成年人的朋友为什么越来越难约？直接说你的看法，别反问我。",
+      "assistant": "我的看法是，难的不是感情，是协调成本。\n\n小时候朋友是环境送的，同班同桌，天天见面，不需要约。成年以后每个人都得自己排日程，工作、家里、身体、通勤，剩下的空档还不一样。约一次要凑齐三个人的日历，光这一步就磨掉大半兴致。\n\n还有一层，成年人的时间变得有价格了。见一面意味着放弃别的事，所以人会下意识掂量值不值。不是不想见，是掂量本身就把人劝退了。\n\n再就是状态。累的时候更想一个人待着，而恰恰是累的时候最需要人陪，这两件事永远对不上。\n\n所以关系没变淡，只是从\"顺路\"变成了\"专门\"。专门的事都难办，但真办成了，分量也比以前重。",
+      "elapsed_ms": 7059,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 249,
+        "prompt_tokens": 4115,
+        "total_tokens": 4364,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 76,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 249
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3200,
+          "text_tokens": 4115
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 6,
+      "user": "以前在楼下喊一声就能见面，现在吃个饭都得先看日历。",
+      "assistant": "那时候\"在不在家\"是唯一需要确认的事，喊一声就有回应。现在得先确认彼此那几天有没有空、有没有力气、值不值得专门跑一趟。\n\n楼下那声喊之所以管用，是因为它不占用任何计划。饭局不一样，它要提前从生活里划出一块地。\n\n不过换个角度，愿意为你翻日历的人，其实比当年探头出窗户的人付出得更多。",
+      "elapsed_ms": 4425,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 153,
+        "prompt_tokens": 4382,
+        "total_tokens": 4535,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 63,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 153
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4096,
+          "text_tokens": 4382
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 7,
+      "user": "其实我想要的是像朋友那样自然聊，不是被安慰或者被带着安排。",
+      "assistant": "行，那就这么聊。\n\n其实刚才那些话我自己也有感触，翻日历这事儿挺荒谬的，明明想见的人就在同一个城市，开车二十分钟，结果排到三周后。有时候排到了还临时有人加班，又往后推。\n\n你楼下喊一声那会儿，是不是也常有喊了半天没人应，结果人在楼下小卖部买东西的情况。",
+      "elapsed_ms": 4148,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 136,
+        "prompt_tokens": 4567,
+        "total_tokens": 4703,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 54,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 136
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4096,
+          "text_tokens": 4567
+        }
+      },
+      "reasoning_returned": true
+    },
+    {
+      "turn": 8,
+      "user": "刚才说的书架现在是什么状态？报告又写到哪了？只按我说过的内容回答。",
+      "assistant": "书架：店家下周一才发货，现在还没发，你也没收到。\n\n报告：之前写好了一半，昨天只改了标题，另一半正文还没写。\n\n就这些，没别的进展。",
+      "elapsed_ms": 2707,
+      "finish_reason": "stop",
+      "tool_proposals": [],
+      "usage": {
+        "completion_tokens": 102,
+        "prompt_tokens": 4747,
+        "total_tokens": 4849,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 58,
+          "rejected_prediction_tokens": null,
+          "text_tokens": 102
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4352,
+          "text_tokens": 4747
+        }
+      },
+      "reasoning_returned": true
+    }
+  ],
+  "completed": true
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>家人助手 UI 资产质感预览</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background: #f4f2ee;
+      color: #1e1f22;
+    }
+
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 24px;
+      color: #5c5d60;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    figure {
+      margin: 0;
+      background: #fffdf9;
+      border: 1px solid #dfd9cf;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(26, 24, 20, 0.08);
+    }
+
+    figcaption {
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>家人助手 UI 资产质感预览</h1>
+  <p>左侧是电脑渲染资产效果，右侧是按 RGB565 颜色量化后的近似显示效果。最终固件应使用无字背景/光球资产，中文、图标、MCP 卡片由 LVGL 绘制。</p>
+
+  <section class="grid">
+    <figure>
+      <figcaption>状态流 / 电脑渲染</figcaption>
+      <img src="./ui_premium_asset_state_sheet_ai_render.png" alt="状态流电脑渲染">
+    </figure>
+    <figure>
+      <figcaption>状态流 / RGB565 模拟</figcaption>
+      <img src="./ui_premium_asset_state_sheet_rgb565_sim.png" alt="状态流 RGB565 模拟">
+    </figure>
+    <figure>
+      <figcaption>时间主题 / 电脑渲染</figcaption>
+      <img src="./ui_premium_asset_time_theme_ai_render.png" alt="时间主题电脑渲染">
+    </figure>
+    <figure>
+      <figcaption>时间主题 / RGB565 模拟</figcaption>
+      <img src="./ui_premium_asset_time_theme_rgb565_sim.png" alt="时间主题 RGB565 模拟">
+    </figure>
+  </section>
+</body>
+</html>

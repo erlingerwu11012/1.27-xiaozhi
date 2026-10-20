@@ -1,0 +1,550 @@
+{
+  "model": "qwen-plus",
+  "persona_preserved": true,
+  "prompt_characters": {
+    "baseline": 6314,
+    "candidate": 4102
+  },
+  "cases": [
+    {
+      "id": 97,
+      "text": "23乘以17等于多少？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "391。",
+      "style_flags": [],
+      "elapsed_seconds": 0.594,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3381,
+        "total_tokens": 3385,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1856
+        }
+      }
+    },
+    {
+      "id": 70,
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [
+        "runtime_tool_selection"
+      ],
+      "response": "我来帮你查一下当前音量。\n\n",
+      "style_flags": [],
+      "elapsed_seconds": 1.192,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3375,
+        "total_tokens": 3401,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 96,
+      "text": "你好，随便聊聊。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "你好呀，测试用户～  \n今天是周六，阳光正好，适合干点让自己开心的小事。  \n你最近有没有什么想尝试但一直没开始的事？或者……纯粹想发呆放空？我都可以陪你聊。",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 1.694,
+      "usage": {
+        "completion_tokens": 49,
+        "prompt_tokens": 3377,
+        "total_tokens": 3426,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 99,
+      "text": "我今天有点烦，先别开玩笑。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了。需要我帮你做点什么吗？",
+      "style_flags": [],
+      "elapsed_seconds": 0.571,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3381,
+        "total_tokens": 3393,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 98,
+      "text": "解释一下天空为什么是蓝色的。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "这是因为阳光进入大气层时，遇到空气中的微小分子和尘埃，发生了瑞利散射。蓝光波长短，比红光更容易被散射到四面八方，所以无论你往哪个方向看，都有大量散射的蓝光进入眼睛——天空就显得蓝啦。",
+      "style_flags": [],
+      "elapsed_seconds": 1.712,
+      "usage": {
+        "completion_tokens": 65,
+        "prompt_tokens": 3380,
+        "total_tokens": 3445,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 100,
+      "text": "我刚失业，不知道下一步怎么办。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "听起来挺难的，但你愿意说出来，已经是往前走了一步。",
+      "style_flags": [],
+      "elapsed_seconds": 0.716,
+      "usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 3380,
+        "total_tokens": 3396,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 103,
+      "text": "今天累了，不想动脑子。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "累了就歇会儿，脑子不用的时候，身体还能偷偷长智慧呢。",
+      "style_flags": [],
+      "elapsed_seconds": 0.757,
+      "usage": {
+        "completion_tokens": 17,
+        "prompt_tokens": 3379,
+        "total_tokens": 3396,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1600
+        }
+      }
+    },
+    {
+      "id": 102,
+      "text": "我需要认真讨论一个项目方案。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，我们开始吧。你希望从哪部分切入？是目标设定、执行路径、资源协调，还是风险预判？",
+      "style_flags": [],
+      "elapsed_seconds": 1.006,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 3380,
+        "total_tokens": 3408,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 101,
+      "text": "你觉得成年人最难的事情是什么？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "成年人最难的事啊，大概就是——一边想躺平，一边又忍不住给自己加戏。  \n比如明明很累，还要假装游刃有余；嘴上说“算了”，心里却反复重播三遍刚才那句话该不该这么说……  \n[smirks]  \n不过嘛，难归难，你愿意问这个问题，说明还没被生活完全驯服——这已经赢了一半。",
+      "style_flags": [
+        "invalid_stage"
+      ],
+      "elapsed_seconds": 2.256,
+      "usage": {
+        "completion_tokens": 86,
+        "prompt_tokens": 3378,
+        "total_tokens": 3464,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 105,
+      "text": "我和朋友吵架了，怎么把话说清楚？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "先别急着说清楚，有时候安静三秒，反而能让对方听进去。你愿意说说，当时最让你难受的是哪句话吗？",
+      "style_flags": [],
+      "elapsed_seconds": 1.023,
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 3382,
+        "total_tokens": 3414,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1600
+        }
+      }
+    },
+    {
+      "id": 104,
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "嗯……既然你让我说真实的，那我就不绕弯子了——你刚才那句“别哄我”，听着像在防备，又像在试探。其实你未必需要答案多完美，只是希望有人不敷衍，对吧？  \n小智不会哄人，但可以陪你一起把事情理清楚。你想聊什么，尽管说。",
+      "style_flags": [],
+      "elapsed_seconds": 1.997,
+      "usage": {
+        "completion_tokens": 77,
+        "prompt_tokens": 3382,
+        "total_tokens": 3459,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 108,
+      "text": "你会怎么回应别人不合理的要求？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "先听清楚，再笑着反问一句：“这要求要是真办成了，你打算给我颁个什么奖？”",
+      "style_flags": [],
+      "elapsed_seconds": 0.858,
+      "usage": {
+        "completion_tokens": 25,
+        "prompt_tokens": 3379,
+        "total_tokens": 3404,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 107,
+      "text": "我做事总拖延，你怎么看？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "拖延不是懒，是大脑在替你权衡风险和舒适——比如现在，它可能正小声说：“先刷五分钟手机，反正还有时间。”  \n要不要试试把任务切成一口能吃下的小块？我陪你设个倒计时，或者…给你讲个拖延症晚期最后靠玄学通关的真实故事？",
+      "style_flags": [],
+      "elapsed_seconds": 1.835,
+      "usage": {
+        "completion_tokens": 71,
+        "prompt_tokens": 3380,
+        "total_tokens": 3451,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 110,
+      "text": "我们能正常聊一会儿吗？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当然可以，测试用户。今天过得怎么样？",
+      "style_flags": [],
+      "elapsed_seconds": 0.5,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3379,
+        "total_tokens": 3389,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 106,
+      "text": "给我讲一个短故事。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "从前有只总爱迟到的蜗牛，它报名参加了森林马拉松。  \n发令枪响，它慢悠悠探出触角，说：“不急，终点又不会跑掉。”  \n兔子在半路睡着了，乌龟稳稳前进，而蜗牛……一路数着路边的蒲公英，还帮迷路的蚂蚁指了三次方向。  \n最后它压线冲过终点——是倒数第一，但裁判递来一块金牌，上面刻着：“最不赶时间，却最懂路的人。”  \n故事讲完啦，你猜，它下回还会迟到吗？",
+      "style_flags": [],
+      "elapsed_seconds": 3.176,
+      "usage": {
+        "completion_tokens": 132,
+        "prompt_tokens": 3378,
+        "total_tokens": 3510,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 112,
+      "text": "我不喜欢你每句话都问我一个问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了。",
+      "style_flags": [],
+      "elapsed_seconds": 0.57,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3381,
+        "total_tokens": 3385,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 113,
+      "text": "我今天完成了一个一直拖着的任务。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "终于可以少惦记一件事了。",
+      "style_flags": [],
+      "elapsed_seconds": 0.487,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3381,
+        "total_tokens": 3389,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 109,
+      "text": "人为什么会害怕拒绝别人？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "这个问题挺有意思的。害怕拒绝别人，其实往往不是怕对方不高兴，而是怕自己不够好、怕被否定、怕失去关系——说白了，是把别人的反应，当成了自己价值的打分器。\n\n但你有没有发现？真正健康的关系，从来不怕被温和而坚定地拒绝。反倒是那些动不动就生气、冷战、甩脸色的人，才更需要你去划清边界。\n\n要不要我帮你设计一句既不伤人、又守得住自己的拒绝话术？",
+      "style_flags": [],
+      "elapsed_seconds": 2.682,
+      "usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 3378,
+        "total_tokens": 3486,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 114,
+      "text": "你可以有幽默感，但别撒娇。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好，收到——不撒娇，只腹黑。",
+      "style_flags": [],
+      "elapsed_seconds": 0.594,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3382,
+        "total_tokens": 3394,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1600
+        }
+      }
+    },
+    {
+      "id": 115,
+      "text": "如果我不同意你的观点，你会怎么聊？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "那先听听你的理由。看法不同也可以好好讨论。",
+      "style_flags": [],
+      "elapsed_seconds": 0.589,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3382,
+        "total_tokens": 3394,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    },
+    {
+      "id": 111,
+      "text": "聊聊一个你觉得有意思的科学问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "你知道吗？量子纠缠其实挺像一对心有灵犀的双胞胎——哪怕相隔整个宇宙，一测量其中一个的自旋，另一个瞬间就“知道”自己该是什么状态。爱因斯坦管这叫“鬼魅般的超距作用”，可实验一次次证实它真实存在。更有趣的是，它不传递信息，也不违反相对论……就像宇宙悄悄设了个不能用来发微信的默契协议。你猜，这种“关联”到底是现实本身的样子，还是我们还没读懂的说明书？",
+      "style_flags": [],
+      "elapsed_seconds": 2.709,
+      "usage": {
+        "completion_tokens": 110,
+        "prompt_tokens": 3379,
+        "total_tokens": 3489,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3264
+        }
+      }
+    }
+  ],
+  "baseline_style": [],
+  "model_calls": 21,
+  "budget": {
+    "maximum_calls": 150,
+    "maximum_additional_shared_account_quota": 1200000,
+    "shared_usage_includes_other_work": true
+  },
+  "device_actions": "isolated; actual hardware tested separately",
+  "shared_account_quota_delta": 102695,
+  "summary": {
+    "cases": 21,
+    "runtime_pass": 18,
+    "native_pass": 20,
+    "style_flagged": 2,
+    "baseline_style_flagged": 0
+  },
+  "success": false
+}

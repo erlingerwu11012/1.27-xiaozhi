@@ -1,0 +1,98 @@
+{
+  "cases": 19,
+  "passed": 12,
+  "failed": [
+    {
+      "group": "combo-02",
+      "turn": 1,
+      "errors": [
+        "harness_error:write_requires_current_action_authorization",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:note_add",
+        "wrong_persisted_notes",
+        "public_recipient_lost"
+      ]
+    },
+    {
+      "group": "combo-04",
+      "turn": 2,
+      "errors": [
+        "harness_error:write_requires_current_action_authorization",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:self_audio_speaker_set_volume"
+      ]
+    },
+    {
+      "group": "combo-05",
+      "turn": 1,
+      "errors": [
+        "harness_error:write_requires_current_action_authorization",
+        "unfulfilled_business_reply",
+        "chat_replaced_by_error"
+      ]
+    },
+    {
+      "group": "combo-00",
+      "turn": 2,
+      "errors": [
+        "harness_error:write_requires_current_action_authorization",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:memory_correct",
+        "memory_change_not_verified"
+      ]
+    },
+    {
+      "group": "combo-01",
+      "turn": 1,
+      "errors": [
+        "harness_error:1 validation error for Decision\nsteps.1.depends_on\n  Input should be a valid list [type=list_type, i",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:memory_add",
+        "memory_add_not_readback_verified"
+      ]
+    },
+    {
+      "group": "combo-06",
+      "turn": 0,
+      "errors": [
+        "requested_operation_not_completed:memory_add",
+        "wrong_extra_write",
+        "memory_add_not_readback_verified"
+      ]
+    },
+    {
+      "group": "combo-07",
+      "turn": 0,
+      "errors": [
+        "harness_error:write_goal_requires_write_steps",
+        "requested_operation_not_completed:memory_add",
+        "memory_add_not_readback_verified"
+      ]
+    }
+  ],
+  "real_model_turns": 18,
+  "model_calls": 28,
+  "reused_cases": 0,
+  "new_cases": 19,
+  "reuse_source": null,
+  "all_same_version": true,
+  "budget": {
+    "case": {
+      "used": 168,
+      "limit": 800
+    },
+    "model": {
+      "used": 42,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

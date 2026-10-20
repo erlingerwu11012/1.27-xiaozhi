@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "reviewed_cases": 276,
+  "results_sha256": "a90a210ccd43fe24f2a37c72630e53635a019480dffb9a548150af4d154d0bde",
+  "reviewed_at": 1791564926.121159,
+  "method": "All final user/assistant speech reviewed alongside automated parameter, receipt, persisted state, readback, TTS and history checks. Prior failed runs preserved.",
+  "non_blocking_quality_notes": [
+    {
+      "case": "reg-179",
+      "note": "Hypothetical brightness explanation includes an unnecessary speculative maximum-level example. Actual setting tests consistently verify 90 percent maps to level 4; this reply does not assert or perform a device setting. Avoid presenting test pass as perfect natural conversation."
+    },
+    {
+      "case": "holdout-62",
+      "note": "Chat still uses occasional canned phrasing; no unwanted operation or repeated playback."
+    }
+  ],
+  "hardware_evidence": false
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-13T11:19:11.075309+00:00",
+  "tests": {
+    "tts-lifecycle": {
+      "exit_code": 0,
+      "log": "tts-lifecycle.log"
+    },
+    "pcm-output": {
+      "exit_code": 0,
+      "log": "pcm-output.log"
+    },
+    "spine-pose": {
+      "exit_code": 0,
+      "log": "spine-pose.log"
+    },
+    "server-touch": {
+      "exit_code": 0,
+      "log": "server-touch.log"
+    }
+  },
+  "passed": true,
+  "hardware_accepted": false
+}

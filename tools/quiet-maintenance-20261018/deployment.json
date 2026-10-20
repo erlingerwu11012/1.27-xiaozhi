@@ -1,0 +1,26 @@
+{
+  "phase": "complete",
+  "old_python": 19,
+  "old_api": 16,
+  "new_python": 21,
+  "new_api": 20,
+  "config_sha": "77184901a77452031645d28aed0ddb6f17a78906704080529863f24746225639",
+  "binding_before": [
+    {
+      "id": "ac:a7:04:fd:20:5c",
+      "user_id": 2022326478036516866,
+      "agent_id": "57a71787c86f4f158c90a5c6c6e7016b"
+    }
+  ],
+  "firmware_flashed": false,
+  "started_at": 1792264823.6664598,
+  "completed_at": 1792264839.9262788,
+  "checks": [
+    "formal_https",
+    "formal_api",
+    "private_endpoint_requires_service_auth",
+    "ports",
+    "other_processes_unchanged",
+    "configuration_unchanged"
+  ]
+}

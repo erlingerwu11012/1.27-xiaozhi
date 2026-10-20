@@ -1,0 +1,18 @@
+{
+  "status": "candidate_not_deployed",
+  "api_auth_source_files_preserved": 56,
+  "api_sources": [
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java",
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java",
+    "src/main/java/xiaozhi/modules/personmemory/MemoryDailyWorker.java",
+    "src/test/java/xiaozhi/modules/personmemory/MemoryContinuityDatabaseTest.java",
+    "src/test/java/xiaozhi/modules/personmemory/PersonMemoryContractHttpTest.java"
+  ],
+  "api_jar": "/root/prjs/tmp/harness-repair-20261017/manager-api/target/xiaozhi-esp32-api.jar",
+  "api_jar_sha256": "0e87839cf44cb36350690b1b54a1f849a6c4673b864681df02ae5fd961dcb476",
+  "python_stage": "/root/prjs/tmp/harness-repair-20261017/python",
+  "database": "bailian_memory_test_harnessrepair20261017",
+  "no_production_restart": true,
+  "no_production_data_write": true
+}

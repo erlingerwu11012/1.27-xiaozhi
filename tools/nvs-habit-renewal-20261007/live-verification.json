@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "checks": [
+    "Python internal entry rejects missing Bearer",
+    "Java internal entry rejects missing Bearer",
+    "offline never marks saved",
+    "legacy firmware classified without RPC",
+    "connection account mismatch refused",
+    "storage failure persists a truthful failure state",
+    "mismatched persisted receipt refused",
+    "real HTTP and SQL acknowledge only matched software MCP receipt",
+    "duplicate source ID retains the same device rule",
+    "late acknowledgement cannot overwrite a changed configuration",
+    "changed schedule updates the existing rule",
+    "delete synchronizes disabled state through matching save receipt",
+    "production Python requires Bearer",
+    "production routes synthetic offline device without success claims",
+    "production domain https://www.realecho.cn/",
+    "production domain https://realecho.cn/"
+  ],
+  "software_device": true,
+  "hardware_writes": 0,
+  "test_records_removed": true
+}

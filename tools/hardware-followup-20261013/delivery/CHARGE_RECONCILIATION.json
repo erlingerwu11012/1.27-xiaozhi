@@ -1,0 +1,243 @@
+{
+  "original_export_preserved": true,
+  "original_budget_not_modified": true,
+  "all_reserved_attempts_counted": true,
+  "entries": [
+    {
+      "id": 134,
+      "kind": "model",
+      "label": "qwen3.7-plus",
+      "phase": "development",
+      "created": 1791832396.6628206,
+      "state": "response_completion_unknown",
+      "counted": true,
+      "evidence": "Original reserved model attempt retained; no completed HTTP metadata. Do not assume zero cost or successful response."
+    },
+    {
+      "id": 135,
+      "kind": "model",
+      "label": "qwen3.7-plus",
+      "phase": "development",
+      "created": 1791832396.6659617,
+      "state": "response_completion_unknown",
+      "counted": true,
+      "evidence": "Original reserved model attempt retained; no completed HTTP metadata. Do not assume zero cost or successful response."
+    },
+    {
+      "id": 137,
+      "kind": "model",
+      "label": "qwen3.7-plus",
+      "phase": "development",
+      "created": 1791832441.8880537,
+      "state": "response_completion_unknown",
+      "counted": true,
+      "evidence": "Original reserved model attempt retained; no completed HTTP metadata. Do not assume zero cost or successful response."
+    },
+    {
+      "id": 139,
+      "kind": "model",
+      "label": "qwen3.7-plus",
+      "phase": "development",
+      "created": 1791832487.1265337,
+      "state": "response_completion_unknown",
+      "counted": true,
+      "evidence": "Original reserved model attempt retained; no completed HTTP metadata. Do not assume zero cost or successful response."
+    },
+    {
+      "id": 566,
+      "kind": "case",
+      "label": "final:combo-03:2",
+      "phase": "final",
+      "created": 1791851127.6755507,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 569,
+      "kind": "case",
+      "label": "final:combo-02:3",
+      "phase": "final",
+      "created": 1791851128.4156666,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 603,
+      "kind": "case",
+      "label": "final:combo-04:2",
+      "phase": "final",
+      "created": 1791851364.42293,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 614,
+      "kind": "case",
+      "label": "final:combo-03:4",
+      "phase": "final",
+      "created": 1791851368.3966606,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 657,
+      "kind": "case",
+      "label": "final:combo-22:2",
+      "phase": "final",
+      "created": 1791851488.2711368,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 659,
+      "kind": "case",
+      "label": "final:combo-05:2",
+      "phase": "final",
+      "created": 1791851488.6150155,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 696,
+      "kind": "case",
+      "label": "final:combo-23:0",
+      "phase": "final",
+      "created": 1791851829.982616,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 697,
+      "kind": "case",
+      "label": "final:combo-22:1",
+      "phase": "final",
+      "created": 1791851829.9932034,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 768,
+      "kind": "case",
+      "label": "final:combo-05:3",
+      "phase": "final",
+      "created": 1791852232.1087666,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 769,
+      "kind": "case",
+      "label": "final:combo-23:0",
+      "phase": "final",
+      "created": 1791852232.11984,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 858,
+      "kind": "case",
+      "label": "final:single-06:0",
+      "phase": "final",
+      "created": 1791852434.6298518,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 859,
+      "kind": "case",
+      "label": "final:single-07:0",
+      "phase": "final",
+      "created": 1791852434.6406252,
+      "state": "interrupted_not_counted_as_pass",
+      "counted": true,
+      "evidence": "Earlier final batch stopped after another case failed; no complete output/finish metadata. Later completed evidence is separately versioned."
+    },
+    {
+      "id": 936,
+      "kind": "case",
+      "label": "production-readonly-backup-isolated-restore-01",
+      "phase": "development",
+      "created": 1791852687.2863567,
+      "state": "failed_before_completion",
+      "counted": true,
+      "evidence": "Original backup_restore_remote.py expected absent record_id/expected_version columns; subsequent backup_restore02_remote.py passed with actual schema. Original backup preserved."
+    },
+    {
+      "id": 1178,
+      "kind": "case",
+      "label": "vision-http:unauthenticated",
+      "phase": "development",
+      "created": 1791853502.212907,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    },
+    {
+      "id": 1179,
+      "kind": "case",
+      "label": "vision-http:wrong_session",
+      "phase": "development",
+      "created": 1791853502.2179482,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    },
+    {
+      "id": 1180,
+      "kind": "case",
+      "label": "vision-http:slow_model_keeps_loop_responsive",
+      "phase": "development",
+      "created": 1791853502.2228234,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    },
+    {
+      "id": 1181,
+      "kind": "case",
+      "label": "vision-http:same_session_followup",
+      "phase": "development",
+      "created": 1791853502.428204,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    },
+    {
+      "id": 1182,
+      "kind": "case",
+      "label": "vision-http:old_token_new_session_rejected",
+      "phase": "development",
+      "created": 1791853502.6014683,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    },
+    {
+      "id": 1183,
+      "kind": "case",
+      "label": "vision-http:new_connection_upload",
+      "phase": "development",
+      "created": 1791853502.6050146,
+      "state": "passed_evidence_preserved",
+      "counted": true,
+      "evidence": "evidence/vision-http-followup-results.json and vision-http-03.log; six real HTTP cases; no paid vision request."
+    }
+  ],
+  "counts": {
+    "passed_evidence_preserved": 6,
+    "failed_before_completion": 1,
+    "response_completion_unknown": 4,
+    "interrupted_not_counted_as_pass": 12
+  }
+}

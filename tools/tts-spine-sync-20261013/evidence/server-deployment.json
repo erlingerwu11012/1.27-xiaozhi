@@ -1,0 +1,25 @@
+{
+  "old_release": "/root/prjs/releases/harness-followup-20261013",
+  "new_release": "/root/prjs/releases/tts-spine-sync-20261013",
+  "old_pm2_id": 12,
+  "old_pid": 1402,
+  "phase": "deployed",
+  "changed_files": [
+    "core/connection.py",
+    "core/providers/tools/device_mcp/mcp_handler.py"
+  ],
+  "before_hashes": {
+    "core/connection.py": "5d15c1f48205161f35e73fb3ff1d1f39a2f30ca3a7abc9c44a7808a0ecce745f",
+    "core/providers/tools/device_mcp/mcp_handler.py": "aeada8a7d72777a4848e5e0822e1d9ae95872dc34bb9a626964029374c0212fb"
+  },
+  "after_hashes": {
+    "core/connection.py": "5011d446267af1215f90c9ff666d32420721d4cdc35c8e88930e71addcd78a2d",
+    "core/providers/tools/device_mcp/mcp_handler.py": "f86c98941c52944ccfce8190719b3eeb0f697aae87ecf77d46f27364955662df"
+  },
+  "database_changed": false,
+  "nginx_changed": false,
+  "new_pm2_id": 13,
+  "new_pid": 29506,
+  "deployed_at": 1791887337.7022877,
+  "hardware_accepted": false
+}

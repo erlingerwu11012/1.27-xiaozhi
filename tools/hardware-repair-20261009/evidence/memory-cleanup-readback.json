@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scoped_deleted_records": 57,
+  "remaining_target_records": 0,
+  "journal_committed": true,
+  "full_backup_columns": 15,
+  "raw_chat_deleted": 0,
+  "at": 1791565467.4822838
+}

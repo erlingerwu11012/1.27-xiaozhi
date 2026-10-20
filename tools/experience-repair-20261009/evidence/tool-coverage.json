@@ -1,0 +1,347 @@
+{
+  "get_lunar": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "get_world_time": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "handle_exit_intent": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "memory_search": {
+    "expected": 14,
+    "passed": 14,
+    "calls": 0,
+    "receipt_states": {
+      "completed": 24
+    }
+  },
+  "memory_correct": {
+    "expected": 5,
+    "passed": 5,
+    "calls": 0,
+    "receipt_states": {
+      "completed": 5
+    }
+  },
+  "memory_forget": {
+    "expected": 5,
+    "passed": 5,
+    "calls": 0,
+    "receipt_states": {
+      "completed": 5
+    }
+  },
+  "random_decision": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_get_device_status": {
+    "expected": 6,
+    "passed": 6,
+    "calls": 11,
+    "receipt_states": {
+      "completed": 11
+    }
+  },
+  "self_audio_speaker_set_volume": {
+    "expected": 16,
+    "passed": 16,
+    "calls": 16,
+    "receipt_states": {
+      "completed": 16
+    }
+  },
+  "self_screen_set_brightness": {
+    "expected": 14,
+    "passed": 14,
+    "calls": 14,
+    "receipt_states": {
+      "completed": 14
+    }
+  },
+  "alarm_set": {
+    "expected": 15,
+    "passed": 15,
+    "calls": 15,
+    "receipt_states": {
+      "completed": 15
+    }
+  },
+  "alarm_list": {
+    "expected": 5,
+    "passed": 5,
+    "calls": 8,
+    "receipt_states": {
+      "completed": 8
+    }
+  },
+  "alarm_delete": {
+    "expected": 3,
+    "passed": 3,
+    "calls": 3,
+    "receipt_states": {
+      "completed": 3
+    }
+  },
+  "alarm_dismiss": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "alarm_snooze": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "note_add": {
+    "expected": 16,
+    "passed": 16,
+    "calls": 31,
+    "receipt_states": {
+      "completed": 16
+    }
+  },
+  "note_list": {
+    "expected": 5,
+    "passed": 5,
+    "calls": 10,
+    "receipt_states": {
+      "completed": 10
+    }
+  },
+  "note_delete": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "note_snooze": {
+    "expected": 3,
+    "passed": 3,
+    "calls": 3,
+    "receipt_states": {
+      "completed": 3
+    }
+  },
+  "reminder_get_current": {
+    "expected": 6,
+    "passed": 6,
+    "calls": 226,
+    "receipt_states": {
+      "completed": 25
+    }
+  },
+  "reminder_list_pending": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "reminder_begin_broadcast": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "reminder_next": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "reminder_stop_broadcast": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "reminder_action": {
+    "expected": 19,
+    "passed": 19,
+    "calls": 19,
+    "receipt_states": {
+      "completed": 19
+    }
+  },
+  "self_camera_take_photo": {
+    "expected": 4,
+    "passed": 4,
+    "calls": 4,
+    "receipt_states": {
+      "completed": 3,
+      "failed": 1
+    }
+  },
+  "self_camera_identify_person": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_screen_set_render_mode": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_screen_set_render_options": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_screen_get_render_status": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_screen_get_info": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_get_system_info": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "self_reboot": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "accepted": 2
+    }
+  },
+  "habit_learn": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "habit_list": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 8,
+    "receipt_states": {
+      "completed": 8
+    }
+  },
+  "habit_delete": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "habit_confirm": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "habit_reject": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "behavior_log": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "camera_face_enroll_start": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "accepted": 2
+    }
+  },
+  "camera_face_enroll_cancel": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "camera_face_enroll_status": {
+    "expected": 2,
+    "passed": 2,
+    "calls": 2,
+    "receipt_states": {
+      "completed": 2
+    }
+  },
+  "add_reminder": {
+    "expected": 15,
+    "passed": 15,
+    "calls": 0,
+    "receipt_states": {
+      "completed": 15
+    }
+  }
+}

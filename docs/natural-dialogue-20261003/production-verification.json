@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "source_files_verified": 18,
+  "pid": 121574,
+  "operation_control_enabled": true,
+  "temporary_processes_removed": true,
+  "temporary_routes_removed": true,
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  },
+  "personality_storage_modified": false,
+  "private_configs_committed": false
+}

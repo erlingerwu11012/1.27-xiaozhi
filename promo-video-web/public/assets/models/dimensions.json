@@ -1,0 +1,253 @@
+{
+  "unit": "mm",
+  "source_format": "STEP AP214",
+  "assembly_placement": "original common coordinates; no translation, rotation, scaling or deformation applied to any CAD part",
+  "min": [
+    -60.0,
+    -67.0,
+    -30.000000000000004
+  ],
+  "max": [
+    60.0,
+    52.000000000000014,
+    36.0
+  ],
+  "size": [
+    120.0,
+    119.00000000000001,
+    66.0
+  ],
+  "parts": [
+    {
+      "name": "base",
+      "unit": "mm",
+      "min": [
+        -60.0,
+        -67.0,
+        -30.000000000000004
+      ],
+      "max": [
+        60.0,
+        -55.0,
+        36.0
+      ],
+      "size": [
+        120.0,
+        12.0,
+        66.0
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 2752,
+      "triangles": 2916
+    },
+    {
+      "name": "buttons",
+      "unit": "mm",
+      "min": [
+        42.79999999999999,
+        4.043359985784077,
+        1.8899999999999932
+      ],
+      "max": [
+        48.49999999999999,
+        24.743359985784075,
+        12.850000000000001
+      ],
+      "size": [
+        5.700000000000003,
+        20.699999999999996,
+        10.960000000000008
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 1588,
+      "triangles": 1596
+    },
+    {
+      "name": "front",
+      "unit": "mm",
+      "min": [
+        -52.000000000000014,
+        -52.00000000000002,
+        -1e-07
+      ],
+      "max": [
+        52.00000000000002,
+        52.000000000000014,
+        15.000000000000004
+      ],
+      "size": [
+        104.00000000000003,
+        104.00000000000003,
+        15.000000100000003
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 20382,
+      "triangles": 19534
+    },
+    {
+      "name": "left_knob",
+      "unit": "mm",
+      "min": [
+        -56.10000000000002,
+        -38.5000001,
+        -4.000000100000003
+      ],
+      "max": [
+        -43.09999989999997,
+        -19.49999989999999,
+        15.0000001
+      ],
+      "size": [
+        13.000000100000051,
+        19.00000020000001,
+        19.000000200000002
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 4608,
+      "triangles": 4428
+    },
+    {
+      "name": "left_support",
+      "unit": "mm",
+      "min": [
+        -53.10000010000002,
+        -58.0,
+        -12.994870791805303
+      ],
+      "max": [
+        -47.09999990000001,
+        -19.99999989999999,
+        14.5000001
+      ],
+      "size": [
+        6.000000200000009,
+        38.00000010000001,
+        27.494870891805302
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 1180,
+      "triangles": 1140
+    },
+    {
+      "name": "rear",
+      "unit": "mm",
+      "min": [
+        -52.0,
+        -52.0,
+        -7.000000000000002
+      ],
+      "max": [
+        52.0,
+        52.0,
+        4.6
+      ],
+      "size": [
+        104.0,
+        104.0,
+        11.600000000000001
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 8392,
+      "triangles": 8334
+    },
+    {
+      "name": "right_knob",
+      "unit": "mm",
+      "min": [
+        43.099999899999986,
+        -38.5000001,
+        -4.000000100000003
+      ],
+      "max": [
+        56.10000000000002,
+        -19.49999989999999,
+        15.0000001
+      ],
+      "size": [
+        13.000000100000037,
+        19.00000020000001,
+        19.000000200000002
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 4608,
+      "triangles": 4428
+    },
+    {
+      "name": "right_support",
+      "unit": "mm",
+      "min": [
+        47.09999990000001,
+        -58.0,
+        -12.994870791805303
+      ],
+      "max": [
+        53.10000010000002,
+        -19.99999989999999,
+        14.5000001
+      ],
+      "size": [
+        6.000000200000009,
+        38.00000010000001,
+        27.494870891805302
+      ],
+      "solids": 1,
+      "valid_brep": true,
+      "vertices": 1180,
+      "triangles": 1140
+    }
+  ],
+  "screen_insert": {
+    "cover_glass_mm": [
+      84,
+      84
+    ],
+    "module_thickness_mm": 3.3,
+    "lcd_active_area_mm": [
+      71.14,
+      69.82
+    ],
+    "cover_window_cg_va_mm": [
+      71.64,
+      70.32
+    ],
+    "lcd_offset_from_cover_center_mm": [
+      0,
+      1.0
+    ],
+    "lcd_black_margins_mm": {
+      "left": 6.43,
+      "right": 6.43,
+      "top": 6.09,
+      "bottom": 8.09
+    },
+    "cover_window_margins_mm": {
+      "left": 6.18,
+      "right": 6.18,
+      "top": 5.84,
+      "bottom": 7.84
+    },
+    "source_pdf": "D:/360MoveData/Users/Administrator/xwechat_files/wxid_dl167k9pg9mv22_cb84/msg/file/2026-05/YX40018ACT specs(4).pdf",
+    "pages": [
+      4,
+      5
+    ],
+    "orientation": "drawing upright with FPC exiting downward; assembly rotation remains to be confirmed",
+    "mounting_depth": "display face z=14.11 mm selected to fit CAD ledge; not an assembly tolerance validation"
+  },
+  "mesh_linear_deflection_mm": 0.035,
+  "mesh_angular_deflection_rad": 0.18,
+  "render_camera": "orthographic seed; yaw 21.772 degrees, elevation 6.875 degrees",
+  "notes": [
+    "Eight STEP enclosure parts retained without geometric changes",
+    "LCD active-area and CG-VA sizes are different and are not interchanged",
+    "Display artwork is mapped from the original square image onto the specified active area",
+    "Final photographic AI edit is an appearance concept and not a CAD measurement image"
+  ]
+}

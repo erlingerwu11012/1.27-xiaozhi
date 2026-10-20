@@ -1,0 +1,37 @@
+[
+  {
+    "case": "llm-native",
+    "passed": true,
+    "model": "qwen-plus",
+    "usage": {
+      "total_tokens": 78,
+      "completion_tokens": 64,
+      "prompt_tokens": 14,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "upstream_request_id": "chatcmpl-3666d088-526b-9e1c-9800-e0ddb0448a77",
+    "gateway_end_to_end": false
+  },
+  {
+    "case": "vision-native",
+    "passed": true,
+    "model": "qwen3-vl-flash",
+    "usage": {
+      "prompt_tokens": 84,
+      "completion_tokens": 2,
+      "total_tokens": 86,
+      "completion_tokens_details": {
+        "text_tokens": 2
+      },
+      "prompt_tokens_details": {
+        "image_tokens": 66,
+        "text_tokens": 18,
+        "cached_tokens": 0
+      }
+    },
+    "upstream_request_id": "chatcmpl-2945ef93-04a5-93c1-a72f-0ad6e67d62f8",
+    "gateway_end_to_end": false
+  }
+]

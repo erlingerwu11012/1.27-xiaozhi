@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>家庭助手 UI 灵感板</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      color: #20242a;
+      background: #efede8;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    }
+    main { max-width: 1280px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    .intro { max-width: 760px; margin: 0 0 28px; color: #5b626d; line-height: 1.7; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    figure { margin: 0; min-width: 0; }
+    .visual {
+      overflow: hidden;
+      min-height: 310px;
+      border: 1px solid rgba(32, 36, 42, .11);
+      border-radius: 8px;
+      background: #171a1e;
+      box-shadow: 0 16px 40px rgba(24, 28, 36, .13);
+    }
+    img { display: block; width: 100%; height: 100%; min-height: 310px; object-fit: cover; }
+    figcaption { padding: 14px 2px 2px; }
+    h2 { margin: 0 0 6px; font-size: 17px; }
+    p { margin: 0; color: #5b626d; font-size: 14px; line-height: 1.65; }
+    .takeaway {
+      margin-top: 30px;
+      padding: 20px 22px;
+      border-left: 4px solid #bb7d34;
+      background: #fffdf9;
+      line-height: 1.75;
+    }
+    @media (max-width: 800px) { body { padding: 20px; } .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>家庭助手 UI 灵感板</h1>
+    <p class="intro">这里混合了真实量产产品的界面和一张更激进的环境式概念界面。不要照搬它们的卡片数量，重点看它们如何让“待机”“家庭信息”“控制”在同一块屏幕上共存。</p>
+    <section class="grid">
+      <figure>
+        <div class="visual"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google_Nest_Hub.jpg?width=1182" alt="Google Nest Hub"></div>
+        <figcaption><h2>Google Nest Hub：把屏幕做成家居物件</h2><p>它的价值在于待机时不显得像一块控制面板。我们的背景图、低频信息和光环都应该服务于这种“放在家里也安静”的感觉。</p></figcaption>
+      </figure>
+      <figure>
+        <div class="visual"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Echo_Show_5.jpg?width=1280" alt="Amazon Echo Show 5"></div>
+        <figcaption><h2>Amazon Echo Show：屏幕 + 语音助手的实体感</h2><p>它是任务和提醒型家庭屏幕的典型。可以借鉴“任务信息要足够直白”，但不适合照搬成密集卡片墙。</p></figcaption>
+      </figure>
+      <figure>
+        <div class="visual"><img src="https://img1.mydrivers.com/img/20240908/Sdac45852-0877-4686-82ca-77b39418c16e.png" alt="Xiaomi smart home dashboard" referrerpolicy="no-referrer"></div>
+        <figcaption><h2>小米家庭控制：场景先行、状态清楚</h2><p>它把“回家、离家、观影”等场景放在最先的位置，再进入设备详情。我们的 MCP 卡片可以借鉴这种“先结论、后细节”。</p></figcaption>
+      </figure>
+      <figure>
+        <div class="visual"><img src="https://cdn.dribbble.com/userupload/41808550/file/original-1e0efa4c24e296db4dbfd8aeb98d123a.gif" alt="Digital wall ambient interface" referrerpolicy="no-referrer"></div>
+        <figcaption><h2>环境式界面概念：让内容悬在空间里</h2><p>这张不是量产产品，但“主视觉对象 + 极少量浮层信息”的方向，与我们现在的光环方案更接近。</p></figcaption>
+      </figure>
+    </section>
+    <div class="takeaway"><strong>我建议你重点看两件事：</strong>Google 的“待机像家居照片”，以及环境式界面的“一个主角，少量信息浮层”。我们的产品不该走 Echo 或小米那种满屏控制台路线；它更应该保持安静，只有在对话、提醒或 MCP 生成时，才让信息从光环附近浮出来。</div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "run": 178,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "budget": {
+    "case": {
+      "used": 1067,
+      "limit": 2000
+    },
+    "model": {
+      "used": 174,
+      "limit": 600
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 6
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[
+  "main/manager-api/src/main/java/xiaozhi/modules/agent/service/biz/impl/AgentChatHistoryBizServiceImpl.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/ArchiveRetentionWorker.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/MemoryDailyWorker.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/MemoryMaterialPolicy.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java",
+  "main/manager-api/src/main/resources/db/changelog/202609301900_memory_continuity.sql",
+  "main/manager-api/src/main/resources/db/changelog/db.changelog-master.yaml",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/MemoryContinuityDatabaseTest.java",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/MemoryMaterialPolicyTest.java",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/PersonMemoryDatabaseTest.java",
+  "main/xiaozhi-server/core/connection.py",
+  "main/xiaozhi-server/core/handle/reportHandle.py",
+  "main/xiaozhi-server/core/providers/memory/bailian/bailian.py",
+  "main/xiaozhi-server/core/utils/person_identity.py",
+  "main/xiaozhi-server/core/utils/person_short_memory.py",
+  "main/xiaozhi-server/core/utils/recent_memory.py",
+  "main/xiaozhi-server/test/test_memory_continuity.py",
+  "main/xiaozhi-server/test/test_person_memory_chat_init.py",
+  "main/xiaozhi-server/test/test_prompt_pipeline_v2.py"
+]

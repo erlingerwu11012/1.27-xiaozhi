@@ -1,0 +1,335 @@
+{
+  "tokens": {
+    "scope": "Only the accepted 360-case mixed-version corpus, not every historical attempt",
+    "requests_with_recorded_usage": 483,
+    "input_tokens": 2106478,
+    "output_tokens": 25270,
+    "cache_hit_tokens": 1542500,
+    "cache_creation_tokens": 43550,
+    "full_run_cost_cny": null,
+    "cost_note": "Gateway request IDs were not consistently captured; shared-account charges cannot be attributed exactly to this test run."
+  },
+  "cache_examples": [
+    {
+      "source": "baseline01-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": null,
+      "cache_hit_tokens": 1152
+    },
+    {
+      "source": "baseline01-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": null,
+      "cache_hit_tokens": 2304
+    },
+    {
+      "source": "baseline01-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": null,
+      "cache_hit_tokens": 2304
+    },
+    {
+      "source": "baseline01-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": null,
+      "cache_hit_tokens": 2304
+    },
+    {
+      "source": "baseline01-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": null,
+      "cache_hit_tokens": 2304
+    },
+    {
+      "source": "candidate02-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": 3598,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "candidate02-latency.jsonl",
+      "group": null,
+      "turn": null,
+      "decision_index": 0,
+      "cache_creation_tokens": 2948,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "card-debug01-results.jsonl",
+      "group": "combo-09",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "card-debug01-results.jsonl",
+      "group": "combo-09",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev01-results.jsonl",
+      "group": "combo-00",
+      "turn": 1,
+      "decision_index": 0,
+      "cache_creation_tokens": 3485,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev01-results.jsonl",
+      "group": "combo-00",
+      "turn": 1,
+      "decision_index": 1,
+      "cache_creation_tokens": 2940,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev02-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3557,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev02-results.jsonl",
+      "group": "combo-00",
+      "turn": 1,
+      "decision_index": 0,
+      "cache_creation_tokens": 3557,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev02-results.jsonl",
+      "group": "combo-03",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3557,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3617,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2962,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-00",
+      "turn": 1,
+      "decision_index": 0,
+      "cache_creation_tokens": 3617,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-00",
+      "turn": 1,
+      "decision_index": 1,
+      "cache_creation_tokens": 2962,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-03",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3617,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev03-results.jsonl",
+      "group": "combo-03",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2962,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-07",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-07",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-06",
+      "turn": 1,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-06",
+      "turn": 1,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-05",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "dev08-results.jsonl",
+      "group": "combo-05",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final17-results.jsonl",
+      "group": "combo-40",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final17-results.jsonl",
+      "group": "combo-43",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final17-results.jsonl",
+      "group": "combo-43",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final17-results.jsonl",
+      "group": "combo-42",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final17-results.jsonl",
+      "group": "combo-42",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-40",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-42",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-42",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-43",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-43",
+      "turn": 0,
+      "decision_index": 1,
+      "cache_creation_tokens": 2950,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final18-results.jsonl",
+      "group": "combo-58",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    },
+    {
+      "source": "final20-results.jsonl",
+      "group": "combo-04",
+      "turn": 0,
+      "decision_index": 0,
+      "cache_creation_tokens": 3600,
+      "cache_hit_tokens": 0
+    }
+  ],
+  "missing_fields": "unknown, not zero; per-layer hits are not asserted"
+}

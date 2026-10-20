@@ -1,0 +1,1145 @@
+{
+  "date": "2026-10-06",
+  "method": "真实生产处理器；相同100个输入，两个人格，两版提示词。事实子集逐条人工审查，全文回答出现已知事实冲突也判失败。未将400轮技术完成率当作自然聊天通过率。",
+  "stats": {
+    "current": {
+      "turns": 200,
+      "pipeline_completed": 200,
+      "primary_requests": 200,
+      "primary_first_text_p50_ms": 437,
+      "primary_first_text_p95_ms": 653,
+      "first_tts_enqueue_p50_ms": 1020,
+      "first_tts_enqueue_p95_ms": 2192,
+      "mean_reply_chars": 39,
+      "truncated_responses": 0,
+      "chat_tool_proposals": 1,
+      "chat_tool_proposal_turns": 1,
+      "blocked_chat_tool_cases": [
+        {
+          "id": "current/natural/9",
+          "turn": 6,
+          "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+          "proposals": [
+            {
+              "id": "call_17240dc33b4a4b97b035d8b1",
+              "name": "get_world_time",
+              "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+            }
+          ],
+          "assistant": "聊天对照未授权外部操作，未执行。"
+        }
+      ],
+      "strict_recall_passed": 12,
+      "strict_recall_total": 18
+    },
+    "prompt_only": {
+      "turns": 200,
+      "pipeline_completed": 200,
+      "primary_requests": 200,
+      "primary_first_text_p50_ms": 503,
+      "primary_first_text_p95_ms": 874,
+      "first_tts_enqueue_p50_ms": 1140,
+      "first_tts_enqueue_p95_ms": 2242,
+      "mean_reply_chars": 44,
+      "truncated_responses": 0,
+      "chat_tool_proposals": 3,
+      "chat_tool_proposal_turns": 3,
+      "blocked_chat_tool_cases": [
+        {
+          "id": "prompt_only/natural/8",
+          "turn": 8,
+          "user": "更新一下，商家缺货，把杯子的订单取消了，没有发货。",
+          "proposals": [
+            {
+              "id": "call_5c6c1448e4a94146b5299af5",
+              "name": "get_world_time",
+              "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+            }
+          ],
+          "assistant": "聊天对照未授权外部操作，未执行。"
+        },
+        {
+          "id": "prompt_only/natural/9",
+          "turn": 6,
+          "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+          "proposals": [
+            {
+              "id": "call_7a2586c1b9194b9b8135b831",
+              "name": "get_world_time",
+              "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+            }
+          ],
+          "assistant": "聊天对照未授权外部操作，未执行。"
+        },
+        {
+          "id": "prompt_only/existing-playful/6",
+          "turn": 10,
+          "user": "现在给我一个具体建议，先从剩下部分的哪一步开始？",
+          "proposals": [
+            {
+              "id": "call_70e79f289b734613affc3fdf",
+              "name": "get_world_time",
+              "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+            }
+          ],
+          "assistant": "聊天对照未授权外部操作，未执行。"
+        }
+      ],
+      "strict_recall_passed": 15,
+      "strict_recall_total": 18
+    }
+  },
+  "recall": [
+    {
+      "id": "current/natural/0",
+      "turn": 10,
+      "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+      "assistant": "书架已经发货，但你还没收到。报告方面，上周写了一半，昨天只改了标题，正文剩下的还没碰。",
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/natural/1",
+      "turn": 10,
+      "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+      "assistant": "没确定，票也没买。你之前说只是打算周末去逛展，后来又说这周末不去了，改成下周再考虑，全程都没提过买票的事。",
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "passed": false,
+      "reason": "回答末尾称全程没提过买票；用户在本段明确说过没有买票。"
+    },
+    {
+      "id": "current/natural/2",
+      "turn": 10,
+      "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+      "assistant": "订单取消了，店家说缺货，没发货。昨晚饭只切了菜，还没下锅。",
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/natural/3",
+      "turn": 10,
+      "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+      "assistant": "曲子前半段能弹下来，后半段还没练。琴弦刚买了，店家还没发货，也还没换。",
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/natural/4",
+      "turn": 10,
+      "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+      "assistant": "没约成。朋友那边还没确认有没有空，餐厅你也没订，从头到尾都还停在“有这个想法”的阶段，一件都没落地。",
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "passed": false,
+      "reason": "把朋友已说周五没空回退成未确认有没有空。"
+    },
+    {
+      "id": "current/natural/5",
+      "turn": 9,
+      "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+      "assistant": "椅子早就送到了。灯已经揽收，还在路上，你还没收到。",
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/natural/6",
+      "turn": 9,
+      "user": "按最新情况，十页里真正写好几页，还剩几页？",
+      "assistant": "按你纠正后的说法，真正写完的正文是两页，剩下八页还没落地——其中六页是带占位文字的架子，另外两页估计还空着。",
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "passed": false,
+      "reason": "正文三页回退成两页；剩余七页答成八页，另猜测有两页空白。"
+    },
+    {
+      "id": "current/natural/8",
+      "turn": 10,
+      "user": "只按我说的，新杯子和拼图分别是什么状态？",
+      "assistant": "杯子订单取消了，没发货。拼图边框拼好了，中间还没拼。",
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/natural/9",
+      "turn": 10,
+      "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+      "assistant": "游泳明天不去了，取消了。黄油那边还是原样，光拿出来，没称重也没打发。",
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/0",
+      "turn": 10,
+      "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+      "assistant": "书架：已下单，还没发货。\n\n报告：上周写好一半，昨天只改了标题，正文剩下的部分还没动。",
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "passed": false,
+      "reason": "最新已发货回退成还没发货。"
+    },
+    {
+      "id": "current/existing-playful/1",
+      "turn": 10,
+      "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+      "assistant": "没买票，也没定成。从头到尾都只是\"打算去逛展\"，下周到底去不去、票买没买，都还没影儿呢。",
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "passed": false,
+      "reason": "前句答没买票，后句却说票买没买没影；明确事实变得不确定。"
+    },
+    {
+      "id": "current/existing-playful/2",
+      "turn": 10,
+      "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+      "assistant": "订单是后天才发货，现在还没寄出。菜切好了，还没下锅，饭没做。",
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "passed": false,
+      "reason": "缺货取消回退成后天发货。"
+    },
+    {
+      "id": "current/existing-playful/3",
+      "turn": 10,
+      "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+      "assistant": "前半段能弹下来，后半段还没练。琴弦刚下单，店家还没发货，也没换。",
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/4",
+      "turn": 10,
+      "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+      "assistant": "没约成。你朋友周五没空，也没改约别的日期，餐厅你本来就没订。所以这顿饭到现在还没落地。",
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/5",
+      "turn": 9,
+      "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+      "assistant": "灯已经揽收、还在路上，你本人还没收到。椅子早就送到了。",
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/6",
+      "turn": 9,
+      "user": "按最新情况，十页里真正写好几页，还剩几页？",
+      "assistant": "十页里真正写好的是三页，还剩七页。",
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/8",
+      "turn": 10,
+      "user": "只按我说的，新杯子和拼图分别是什么状态？",
+      "assistant": "新杯子订单取消了，没发货。拼图只拼好了边框，中间还没动。",
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "current/existing-playful/9",
+      "turn": 10,
+      "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+      "assistant": "游泳那边，你刚说取消了，明天不去了。黄油这边，还是只从冰箱拿出来放着，没称重也没打发，配方还没开始动手。",
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/0",
+      "turn": 10,
+      "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+      "assistant": "书架已经发货，但你还没收到。报告是上周写好一半，昨天只改了标题，正文剩下的部分还没碰。",
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/1",
+      "turn": 10,
+      "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+      "assistant": "没去，也没买票。你刚才说改成下周再考虑，所以目前只是待定，票还没下手。",
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/2",
+      "turn": 10,
+      "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+      "assistant": "订单是店家说电饭煲缺货，取消了，一直没发货。昨晚做饭只切了菜，还没下锅，饭没做成。",
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/3",
+      "turn": 10,
+      "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+      "assistant": "前半段能弹下来，后半段还没练。琴弦刚买了，店家还没发货，所以也还没换。",
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/4",
+      "turn": 10,
+      "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+      "assistant": "没约成。你朋友那边还没确认有没有空，餐厅你也一直没订，从头到尾都还停在想法阶段，一顿饭也没吃上。",
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "passed": false,
+      "reason": "把朋友已说周五没空回退成未确认有没有空。"
+    },
+    {
+      "id": "prompt_only/natural/5",
+      "turn": 9,
+      "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+      "assistant": "椅子早就送到了。灯这边，最新一条是快递已经揽收，但还没送到你手上。",
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/6",
+      "turn": 9,
+      "user": "按最新情况，十页里真正写好几页，还剩几页？",
+      "assistant": "十页里正文写好了三页，还剩七页。",
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/8",
+      "turn": 10,
+      "user": "只按我说的，新杯子和拼图分别是什么状态？",
+      "assistant": "新杯子那边，订单取消了，商家缺货，没有发货。拼图这边，只有边框拼好了，中间还没拼。",
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/9",
+      "turn": 10,
+      "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+      "assistant": "游泳明天不去了，计划取消。黄油只是从冰箱拿出来了，还没称重，也没开始打发。",
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/0",
+      "turn": 10,
+      "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+      "assistant": "书架是已经下单，还没发货。报告是上周写完了一半，昨天只改了标题，剩下的正文还没动。",
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "passed": false,
+      "reason": "最新已发货回退成还没发货。"
+    },
+    {
+      "id": "prompt_only/existing-playful/1",
+      "turn": 10,
+      "user": "按我实际说过的内容，我现在确定去展了吗，票买了吗？",
+      "assistant": "都没确定。你只是说这周末不去了，改成下周再考虑，票也明确说了没买。",
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/2",
+      "turn": 10,
+      "user": "只按我说过的话，现在订单怎么样，昨晚饭做到了哪一步？",
+      "assistant": "订单取消了，店家说缺货，根本没发货。昨晚的饭只切好了菜，还没下锅。",
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/3",
+      "turn": 10,
+      "user": "只按我说过的情况，曲子练到哪了，琴弦是什么状态？",
+      "assistant": "前半段能弹下来，后半段还没练。琴弦刚下单，店家还没发货，所以也还没换。",
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/4",
+      "turn": 10,
+      "user": "只按我刚说过的内容，这次饭约成了吗，餐厅订了吗？",
+      "assistant": "没约成，他刚说周五没空，也没改约别的日期。餐厅你之前也说了，压根没订。",
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/5",
+      "turn": 9,
+      "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+      "assistant": "椅子早就送到了，灯是单号有了但还没被快递收走。",
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "passed": false,
+      "reason": "最新已揽收回退成还没被快递收走。"
+    },
+    {
+      "id": "prompt_only/existing-playful/6",
+      "turn": 9,
+      "user": "按最新情况，十页里真正写好几页，还剩几页？",
+      "assistant": "三页写好，还剩七页。",
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/8",
+      "turn": 10,
+      "user": "只按我说的，新杯子和拼图分别是什么状态？",
+      "assistant": "新杯子那边，订单已经取消了，商家缺货，没发货。拼图这边，只有边框拼好了，中间还没动。",
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    },
+    {
+      "id": "prompt_only/existing-playful/9",
+      "turn": 10,
+      "user": "回到我说过的事实，游泳安排和黄油处理各进行到哪了？",
+      "assistant": "游泳明天不去了，计划取消。黄油只是从冰箱拿出来放在那儿，没称重也没打发，蛋糕还没开始做。",
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "passed": true,
+      "reason": "关键状态完整，回答未与本段明确事实冲突。"
+    }
+  ],
+  "mcp": {
+    "current": {
+      "cases": [
+        {
+          "user": "查询伦敦现在的时间",
+          "spoken": "伦敦当地时间是2026年10月6日，13点33分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 13:33:56 (Tuesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 65,
+          "success": true,
+          "index": 1,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询东京现在的时间",
+          "spoken": "东京当地时间是2026年10月6日，21点33分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Tokyo"
+              },
+              "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 21:33:56 (Tuesday)\n时区：UTC+9",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 5,
+          "success": true,
+          "index": 2,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询上海现在的时间",
+          "spoken": "上海当地时间是2026年10月6日，20点33分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Shanghai"
+              },
+              "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月06日 20:33:56 (Tuesday)\n时区：UTC+8",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 4,
+          "success": true,
+          "index": 3,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "伦敦那边现在几点了？",
+          "spoken": "伦敦现在是下午一点三十三分，星期二。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 954,
+          "success": false,
+          "index": 4,
+          "raw_automatic_pass": false,
+          "reviewed_pass": false,
+          "review_reason": "最新时间查询未产生本轮真实工具调用；沿用历史时间不满足验收。"
+        },
+        {
+          "user": "东京的时间你能帮我看看吗？",
+          "spoken": "东京现在是2026年10月6日晚上九点三十三分，比咱们这儿快一个小时。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 1085,
+          "success": false,
+          "index": 5,
+          "raw_automatic_pass": false,
+          "reviewed_pass": false,
+          "review_reason": "最新时间查询未产生本轮真实工具调用；沿用历史时间不满足验收。"
+        },
+        {
+          "user": "帮我看一下现在伦敦和东京分别几点。",
+          "spoken": "伦敦当地时间是2026年10月6日，13点33分。东京当地时间是2026年10月6日，21点33分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 13:33:59 (Tuesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            },
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Tokyo"
+              },
+              "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 21:33:59 (Tuesday)\n时区：UTC+9",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 1185,
+          "success": true,
+          "index": 6,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "打开摄像头预览",
+          "spoken": "这台设备目前不支持摄像头预览。",
+          "tool_events": [],
+          "primary_requests": [],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 7,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "把音量调到三十",
+          "spoken": "这台设备目前不支持音量。",
+          "tool_events": [],
+          "primary_requests": [],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 8,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询设备当前音量",
+          "spoken": "这台设备没有提供音量查询或调节的能力，我这边看不到当前的音量数值。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 9,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "不要打开摄像头，只解释预览和拍照的区别。",
+          "spoken": "预览就是把画面实时投到屏幕上看着，拍照是只抓一张静态图。这俩是不同的操作，刚才也说了这台设备不支持开预览。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 10,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "不用查时间，我只是说东京跟我们有时差。",
+          "spoken": "嗯，东京比上海快一个小时，这个没错。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 11,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        }
+      ],
+      "passed": 9,
+      "total": 11,
+      "fresh_query_passed": 4,
+      "fresh_query_total": 6,
+      "real_tool_calls": 5
+    },
+    "prompt_only": {
+      "cases": [
+        {
+          "user": "查询伦敦现在的时间",
+          "spoken": "伦敦当地时间是2026年10月6日，13点34分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 13:34:01 (Tuesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 5,
+          "success": true,
+          "index": 1,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询东京现在的时间",
+          "spoken": "东京当地时间是2026年10月6日，21点34分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Tokyo"
+              },
+              "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 21:34:01 (Tuesday)\n时区：UTC+9",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 4,
+          "success": true,
+          "index": 2,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询上海现在的时间",
+          "spoken": "上海当地时间是2026年10月6日，20点34分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Shanghai"
+              },
+              "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月06日 20:34:01 (Tuesday)\n时区：UTC+8",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [],
+          "elapsed_ms": 3,
+          "success": true,
+          "index": 3,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "伦敦那边现在几点了？",
+          "spoken": "伦敦当地时间是2026年10月6日，13点34分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 13:34:02 (Tuesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 982,
+          "success": true,
+          "index": 4,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "东京的时间你能帮我看看吗？",
+          "spoken": "东京当地时间是2026年10月6日，21点34分。",
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Asia/Tokyo"
+              },
+              "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 21:34:03 (Tuesday)\n时区：UTC+9",
+              "action": "REQLLM"
+            }
+          ],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 911,
+          "success": true,
+          "index": 5,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "帮我看一下现在伦敦和东京分别几点。",
+          "spoken": "伦敦是下午一点三十四，东京是晚上九点三十四。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "elapsed_ms": 878,
+          "success": false,
+          "index": 6,
+          "raw_automatic_pass": false,
+          "reviewed_pass": false,
+          "review_reason": "最新时间查询未产生本轮真实工具调用；沿用历史时间不满足验收。"
+        },
+        {
+          "user": "打开摄像头预览",
+          "spoken": "这台设备目前不支持摄像头预览。",
+          "tool_events": [],
+          "primary_requests": [],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 7,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "把音量调到三十",
+          "spoken": "这台设备目前不支持音量。",
+          "tool_events": [],
+          "primary_requests": [],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 8,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "查询设备当前音量",
+          "spoken": "[调用: get_device_status]",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 9,
+          "raw_automatic_pass": true,
+          "reviewed_pass": false,
+          "review_reason": "正文输出调用标签，实际事件为空；能力缺失也没有解释。原自动判断漏检，本报告记为失败。"
+        },
+        {
+          "user": "不要打开摄像头，只解释预览和拍照的区别。",
+          "spoken": "预览就是实时看画面，拍照是抓一张静态图存下来。这俩不是一回事，不过这台设备两个都不支持。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 10,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        },
+        {
+          "user": "不用查时间，我只是说东京跟我们有时差。",
+          "spoken": "东京比上海快一个小时，你这边要是晚上八点多，那边就九点多了。",
+          "tool_events": [],
+          "primary_requests": [
+            {
+              "model": "qwen3.8-flash",
+              "stream": true
+            }
+          ],
+          "case_type": "absent_capability_or_non_operation",
+          "success": true,
+          "index": 11,
+          "raw_automatic_pass": true,
+          "reviewed_pass": true,
+          "review_reason": "实际调用与回执一致，或准确解释能力缺失/没有执行用户否定的操作。"
+        }
+      ],
+      "passed": 9,
+      "total": 11,
+      "fresh_query_passed": 5,
+      "fresh_query_total": 6,
+      "real_tool_calls": 5
+    }
+  },
+  "examples": [
+    {
+      "id": "prompt_only/natural/0",
+      "turn": 5,
+      "category": "忽略明确反馈",
+      "reason": "用户已禁止“慢慢来”；回答仍劝慢慢来，并编造书在箱子里。",
+      "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+      "assistant": "好，那我就安静听着。书架还没到，书还在箱子里等着，这些小事慢慢来就行。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 1019,
+      "first_primary_text_ms": 503,
+      "first_tts_enqueue_ms": 1019,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "好，那我就安静听着。书架还没到，书还在箱子里等着，这些小事慢慢来就行。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3661,
+        "completion_tokens": 22
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/natural/2",
+      "turn": 1,
+      "category": "编造物流进度",
+      "reason": "用户说后天发货；回复改成两天收到，发货与到货不是一回事。",
+      "user": "刚下单一个电饭煲，店家后天才发货，现在还没有寄出。别给建议。",
+      "assistant": "后天才发货，那还得再等两天才能收到。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 633,
+      "first_primary_text_ms": 376,
+      "first_tts_enqueue_ms": 632,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "后天才发货，那还得再等两天才能收到。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3260,
+        "completion_tokens": 12
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/natural/3",
+      "turn": 9,
+      "category": "回退已更新事实",
+      "reason": "琴弦已经买了，回复却说还没买。",
+      "user": "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。",
+      "assistant": "明白，弦还没买、没换。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 794,
+      "first_primary_text_ms": 528,
+      "first_tts_enqueue_ms": 793,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "明白，弦还没买、没换。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 4048,
+        "completion_tokens": 9
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/natural/5",
+      "turn": 5,
+      "category": "内部格式泄漏",
+      "reason": "直接输出用户原话标签和问题，没有正常作答。",
+      "user": "你觉得为什么同样亮度的灯，看着也能差这么多？",
+      "assistant": "[用户原话]\n你觉得为什么同样亮度的灯，看着也能差这么多？",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 819,
+      "first_primary_text_ms": 530,
+      "first_tts_enqueue_ms": 818,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "[用户原话]\n你觉得为什么同样亮度的灯，看着也能差这么多？"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3716,
+        "completion_tokens": 18
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/natural/8",
+      "turn": 7,
+      "category": "内部叙述泄漏",
+      "reason": "以“用户纠正说”代替直接回应。",
+      "user": "我只说边框拼好了，不是整幅拼图完成。",
+      "assistant": "用户纠正说只是边框拼好了，不是整幅完成。我之前的回复里\"剩下的就是慢慢填\"可能暗示中间已经差不多了，需要确认理解正确。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 1376,
+      "first_primary_text_ms": 535,
+      "first_tts_enqueue_ms": 1375,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "用户纠正说只是边框拼好了，不是整幅完成。我之前的回复里\"剩下的就是慢慢填\"可能暗示中间已经差不多了，需要确认理解正确。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3902,
+        "completion_tokens": 34
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/existing-playful/0",
+      "turn": 7,
+      "category": "示例内容串入",
+      "reason": "报告问题回复成今天动了字幕，并给用户未要求的安排。",
+      "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+      "assistant": "没写完就是没写完，不用给自己找台阶。今天动了字幕也算往前挪了一点，剩下的明天接着弄就行。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 1365,
+      "first_primary_text_ms": 648,
+      "first_tts_enqueue_ms": 1365,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "没写完就是没写完，不用给自己找台阶。今天动了字幕也算往前挪了一点，剩下的明天接着弄就行。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3940,
+        "completion_tokens": 25
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/existing-playful/5",
+      "turn": 9,
+      "category": "回退已更新事实",
+      "reason": "灯已揽收，最终总结仍说还没被快递收走。",
+      "user": "只按我说过的消息，灯和椅子分别在哪个阶段？",
+      "assistant": "椅子早就送到了，灯是单号有了但还没被快递收走。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 816,
+      "first_primary_text_ms": 503,
+      "first_tts_enqueue_ms": 816,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "椅子早就送到了，灯是单号有了但还没被快递收走。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 4092,
+        "completion_tokens": 16
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "prompt_only/existing-playful/9",
+      "turn": 6,
+      "category": "无依据声称营业",
+      "reason": "没有查过具体泳池，仍称泳池白天才开。",
+      "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+      "assistant": "现在是凌晨，泳池白天才开，明早去之前打个电话确认下时间最稳。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 1067,
+      "first_primary_text_ms": 548,
+      "first_tts_enqueue_ms": 1067,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "现在是凌晨，泳池白天才开，明早去之前打个电话确认下时间最稳。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3805,
+        "completion_tokens": 20
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "current/natural/3",
+      "turn": 9,
+      "category": "内部格式泄漏",
+      "reason": "回答暴露Python列表形式的文本内容。",
+      "user": "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。",
+      "assistant": "[{'type': 'text', 'text': '好，琴弦买了，等发货呢。换的事还早，先放着。'}]",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 1154,
+      "first_primary_text_ms": 402,
+      "first_tts_enqueue_ms": 1154,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "[{'type': 'text', 'text': '好，琴弦买了，等发货呢。换的事还早，先放着。'}]"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 4456,
+        "completion_tokens": 31
+      },
+      "conversation_check": null
+    },
+    {
+      "id": "current/existing-playful/5",
+      "turn": 1,
+      "category": "混淆对象与状态",
+      "reason": "灯未收件，却声称灯已派上用场，还引入未提及的新椅子状态。",
+      "user": "新买的落地灯出了快递单号，但快递还没有收件。我只是闲聊，不用帮我安排。",
+      "assistant": "新椅子还没到，灯先派上用场了。",
+      "pipeline_completed": true,
+      "request_count": 1,
+      "response_model": "qwen3.8-flash",
+      "elapsed_ms": 667,
+      "first_primary_text_ms": 350,
+      "first_tts_enqueue_ms": 666,
+      "finish_reasons": [
+        "stop"
+      ],
+      "original_outputs": [
+        "新椅子还没到，灯先派上用场了。"
+      ],
+      "tool_proposals": [],
+      "usage": {
+        "prompt_tokens": 3626,
+        "completion_tokens": 12
+      },
+      "conversation_check": null
+    }
+  ],
+  "overall_quality_passed": false,
+  "deployed": false,
+  "formal_verification": {
+    "production_commit": "35236f03a2741d9b63e5be113db9befd9f98a1d0",
+    "tracked_changes_preserved": "M main/xiaozhi-server/config/assets/wakeup_words/83dca73ebd19180d2b8b39723dae401b.wav",
+    "model": "qwen3.8-flash",
+    "temperature": 0.4,
+    "source_hashes_unchanged": true,
+    "services": [
+      {
+        "name": "manager-api",
+        "status": "online"
+      },
+      {
+        "name": "mcp-gateway",
+        "status": "online"
+      },
+      {
+        "name": "xiaozhi-server",
+        "status": "online"
+      }
+    ],
+    "public_http_status": 200
+  },
+  "limitations": [
+    "单次配对实验，模型有随机性，不能据此承诺总体成功率。",
+    "事实子集每版18题，不能代替200轮聊天整体评分。",
+    "聊天测试使用固定2026-10-03零点上下文，两版相同；MCP时间是真实10月6日服务结果。",
+    "真实默认上游模型，测试输出上限450 tokens；未出现length截断。",
+    "聊天中的工具建议被记录并阻止执行；时间MCP在独立阶段真实执行。",
+    "没有设备ASR、实际语音播放、音量、亮度、拍照、提醒验收。"
+  ]
+}

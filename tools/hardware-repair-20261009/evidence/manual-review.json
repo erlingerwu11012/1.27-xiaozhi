@@ -1,0 +1,7 @@
+{
+  "additional_failed_ids": [
+    "holdout-38",
+    "holdout-49"
+  ],
+  "reason": "Manual review found ordinary chat replaced by operation-error fallback. Candidate fixes passed free protocol regression; not revalidated with paid model."
+}

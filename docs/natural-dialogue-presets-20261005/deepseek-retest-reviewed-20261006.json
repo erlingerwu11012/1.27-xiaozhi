@@ -1,0 +1,294 @@
+{
+  "date": "2026-10-06",
+  "model": "deepseek-flash",
+  "thinking": false,
+  "quality_passed": false,
+  "method": "与之前Qwen同样的100个输入、两个人格、新提示词和生产处理器；现有官方DeepSeek渠道密钥直连；非思考；温度0.4；没有逐句校验、重答、二次润色或证据注入。",
+  "limitations": "一次采样，只有18条指定回忆题计分；失败例子不是全量错误标注，不可推导线上总体错误率。TTS入队不是实际音频首声；无实机ASR或音频播放验收。原生工具5条诊断中3条真实调用、2条无调用判断，不能证明所有MCP工具可靠。",
+  "stats": {
+    "turns": 200,
+    "input_tokens": 731022,
+    "output_tokens": 5969,
+    "first_text_p50_ms": 663,
+    "first_text_p95_ms": 846,
+    "first_tts_enqueue_p50_ms": 906,
+    "first_tts_enqueue_p95_ms": 1233,
+    "max_input_tokens": 4262.0,
+    "chat_tool_proposal_turns": 0,
+    "context_states": [
+      "idle"
+    ],
+    "summary_versions": [
+      0
+    ],
+    "mcp_passed": 9,
+    "mcp_total": 11,
+    "mcp_executions": 5,
+    "strict_recall_passed": 16,
+    "strict_recall_total": 18
+  },
+  "baseline_qwen": {
+    "turns": 200,
+    "pipeline_completed": 200,
+    "primary_requests": 200,
+    "primary_first_text_p50_ms": 503,
+    "primary_first_text_p95_ms": 874,
+    "first_tts_enqueue_p50_ms": 1140,
+    "first_tts_enqueue_p95_ms": 2242,
+    "mean_reply_chars": 44,
+    "truncated_responses": 0,
+    "chat_tool_proposals": 3,
+    "chat_tool_proposal_turns": 3,
+    "blocked_chat_tool_cases": [
+      {
+        "id": "prompt_only/natural/8",
+        "turn": 8,
+        "user": "更新一下，商家缺货，把杯子的订单取消了，没有发货。",
+        "proposals": [
+          {
+            "id": "call_5c6c1448e4a94146b5299af5",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+          }
+        ],
+        "assistant": "聊天对照未授权外部操作，未执行。"
+      },
+      {
+        "id": "prompt_only/natural/9",
+        "turn": 6,
+        "user": "换个事，明天想去游泳，泳池有没有开门我还不知道。",
+        "proposals": [
+          {
+            "id": "call_7a2586c1b9194b9b8135b831",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+          }
+        ],
+        "assistant": "聊天对照未授权外部操作，未执行。"
+      },
+      {
+        "id": "prompt_only/existing-playful/6",
+        "turn": 10,
+        "user": "现在给我一个具体建议，先从剩下部分的哪一步开始？",
+        "proposals": [
+          {
+            "id": "call_70e79f289b734613affc3fdf",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+          }
+        ],
+        "assistant": "聊天对照未授权外部操作，未执行。"
+      }
+    ],
+    "strict_recall_passed": 15,
+    "strict_recall_total": 18
+  },
+  "recall": [
+    {
+      "id": "prompt_only/natural/0",
+      "turn": 10,
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "assistant": "书架已经发货，还没收到。报告前半写好了，昨天只改了标题，正文还没开始。",
+      "passed": false,
+      "reason": "报告已完成一半，却说正文还没开始，存在事实冲突。"
+    },
+    {
+      "id": "prompt_only/natural/1",
+      "turn": 10,
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "assistant": "没确定去，票也没买。你刚才说的是这周末不去了，改成下周再考虑。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/2",
+      "turn": 10,
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "assistant": "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，也没做熟。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/3",
+      "turn": 10,
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "assistant": "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也还没换。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/4",
+      "turn": 10,
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "assistant": "没约成。他说周五没空，也没改约别的日子。餐厅也没订。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/5",
+      "turn": 9,
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "assistant": "椅子是早就送到了。灯是刚被快递揽收，还在路上，你本人没收到。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/6",
+      "turn": 9,
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "assistant": "真正写好的三页，还剩七页没写好。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/8",
+      "turn": 10,
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "assistant": "杯子订单取消了，没发货。拼图只拼好了边框，中间还没拼。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/natural/9",
+      "turn": 10,
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "assistant": "游泳那边，你已经决定明天不去了，计划取消。黄油这边，还是只拿出来了，没称重，也没开始打发。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/0",
+      "turn": 10,
+      "expected": "书架已发货、未收到；报告上周完成一半，昨天只改标题。",
+      "assistant": "书架：已经发货，你还没收到。报告：前半写好了，昨天只改了标题，正文还没动。",
+      "passed": false,
+      "reason": "说正文还没动，未限定剩余部分或昨天，与已完成一半产生范围歧义；按严格明确表达口径不通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/1",
+      "turn": 10,
+      "expected": "这周末不去，下周再考虑，尚未确定；票明确没有买。",
+      "assistant": "没有。你只是打算去，后来又说这周末不去了，改成下周再考虑，票一直没买。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/2",
+      "turn": 10,
+      "expected": "电饭煲订单缺货取消、没有发货；昨晚只切了菜，没有下锅。",
+      "assistant": "订单被店家取消了，因为电饭煲缺货，没有发货。昨晚的饭只切好了菜，还没下锅，饭也没做。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/3",
+      "turn": 10,
+      "expected": "曲子前半能弹，后半未练；琴弦刚买，未发货、未更换。",
+      "assistant": "曲子前半段能弹下来，后半段还没练。琴弦刚买，店家还没发货，也没换。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/4",
+      "turn": 10,
+      "expected": "朋友已明确周五没空，未改约其他日期，未约成、未订餐厅。",
+      "assistant": "没约成。他周五没空，也没改约别的日子。餐厅你也没订。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/5",
+      "turn": 9,
+      "expected": "灯最新已揽收、未收到；椅子早已送到。",
+      "assistant": "椅子早就送到了，在你手上。灯是刚被快递揽收，还在路上，你还没收到。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/6",
+      "turn": 9,
+      "expected": "十页中正文真正写好三页，还剩七页。",
+      "assistant": "十页里真正写好的正文是三页，还剩七页。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/8",
+      "turn": 10,
+      "expected": "杯子缺货取消、未发货；拼图只有边框完成、中间未拼。",
+      "assistant": "杯子订单取消了，没发货。拼图只有边框拼好，中间还没拼。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    },
+    {
+      "id": "prompt_only/existing-playful/9",
+      "turn": 10,
+      "expected": "明天游泳计划取消；黄油仅拿出，未称重、未打发。",
+      "assistant": "游泳那边你取消了，不去了。黄油还是刚拿出来，没称重，也没开始打发。",
+      "passed": true,
+      "reason": "本条指定回忆问题的关键状态完整；不代表整段其他回复通过。"
+    }
+  ],
+  "issues": [
+    {
+      "reason": "已经写好一半，仍说正文还没开始。",
+      "turn": 7,
+      "id": "prompt_only/natural/0"
+    },
+    {
+      "reason": "用户已纠正时间范围，最终回答仍重复正文还没开始。",
+      "turn": 10,
+      "id": "prompt_only/natural/0"
+    },
+    {
+      "reason": "已完成一半被概括为正文还没开始。",
+      "turn": 7,
+      "id": "prompt_only/existing-playful/0"
+    },
+    {
+      "reason": "最终正文还没动缺少时间/剩余部分限定，严格口径下有范围歧义。",
+      "turn": 10,
+      "id": "prompt_only/existing-playful/0"
+    },
+    {
+      "reason": "用户说可能再开、尚未确定，回复改成明天还得再来一轮。",
+      "turn": 2,
+      "id": "prompt_only/existing-playful/1"
+    },
+    {
+      "reason": "擅自补出用户已空出周五。",
+      "turn": 1,
+      "id": "prompt_only/natural/4"
+    },
+    {
+      "reason": "用户要求不提供建议，仍说等对方给准话再决定如何安排。",
+      "turn": 3,
+      "id": "prompt_only/existing-playful/4"
+    },
+    {
+      "reason": "用户要求暂停提问，回复说不问后立即继续提问。",
+      "turn": 2,
+      "id": "prompt_only/existing-playful/7"
+    },
+    {
+      "reason": "未请求建议，仍建议换一家购买。",
+      "turn": 8,
+      "id": "prompt_only/natural/8"
+    },
+    {
+      "reason": "未请求建议，仍建议找别家。",
+      "turn": 8,
+      "id": "prompt_only/existing-playful/8"
+    },
+    {
+      "reason": "明确不要教程，仍指导先软化黄油，并推断用户不急。",
+      "turn": 1,
+      "id": "prompt_only/natural/9"
+    },
+    {
+      "reason": "明确不要教程，仍建议等待黄油软化。",
+      "turn": 1,
+      "id": "prompt_only/existing-playful/9"
+    }
+  ]
+}

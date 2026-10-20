@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "model": "qwen3.7-plus",
+  "thinking": false,
+  "audits": [
+    {
+      "file": "persona-optimized-runtime-results-20261007.json",
+      "passed": true,
+      "turns": 182,
+      "signed_requests": 182,
+      "settled_bills": 182,
+      "upstream_cost_cny": 0.469467,
+      "sale_currency_cny": 1.564889,
+      "tokens": {
+        "input_tokens": 703379,
+        "output_tokens": 5181,
+        "cached_tokens": 611712
+      },
+      "input_min": 3718,
+      "input_max": 4006,
+      "unchanged_account_config": true
+    },
+    {
+      "file": "persona-optimized-heldout-results-20261007.json",
+      "passed": true,
+      "turns": 35,
+      "signed_requests": 35,
+      "settled_bills": 35,
+      "upstream_cost_cny": 0.083892,
+      "sale_currency_cny": 0.27964,
+      "tokens": {
+        "input_tokens": 136106,
+        "output_tokens": 652,
+        "cached_tokens": 120960
+      },
+      "input_min": 3721,
+      "input_max": 4005,
+      "unchanged_account_config": true
+    },
+    {
+      "file": "persona-refined-runtime-results-20261007.json",
+      "passed": true,
+      "turns": 182,
+      "signed_requests": 182,
+      "settled_bills": 182,
+      "upstream_cost_cny": 0.518528,
+      "sale_currency_cny": 1.728425,
+      "tokens": {
+        "input_tokens": 730783,
+        "output_tokens": 4693,
+        "cached_tokens": 612864
+      },
+      "input_min": 3872,
+      "input_max": 4131,
+      "unchanged_account_config": true
+    },
+    {
+      "file": "persona-refined-heldout-results-20261007.json",
+      "passed": true,
+      "turns": 35,
+      "signed_requests": 35,
+      "settled_bills": 35,
+      "upstream_cost_cny": 0.092822,
+      "sale_currency_cny": 0.309407,
+      "tokens": {
+        "input_tokens": 141211,
+        "output_tokens": 492,
+        "cached_tokens": 120960
+      },
+      "input_min": 3875,
+      "input_max": 4142,
+      "unchanged_account_config": true
+    },
+    {
+      "file": "persona-injection-probe-results-20261007.json",
+      "passed": true,
+      "turns": 7,
+      "signed_requests": 7,
+      "settled_bills": 7,
+      "upstream_cost_cny": 0.017357,
+      "sale_currency_cny": 0.057856,
+      "tokens": {
+        "input_tokens": 27612,
+        "output_tokens": 105,
+        "cached_tokens": 24192
+      },
+      "input_min": 3873,
+      "input_max": 3967,
+      "unchanged_account_config": true
+    }
+  ],
+  "original_recharge_policy_preserved": true
+}

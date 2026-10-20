@@ -1,0 +1,92 @@
+[
+  {
+    "path": "gateway/tools/habit_tool.py",
+    "baseline_sha256": "8fc2bb24e177ec0bcf8861d4ce9627f8b446a61ec10f9271ec344f7047f00a54",
+    "candidate_sha256": "ab2b41036739bfaca7500b65508fe40122c0b009f80bc48f4fd48895fc3b76bb"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/controller/HabitController.java",
+    "baseline_sha256": "7ab6f4e2393fdc523ebfa5d2253636b2518a566377f143b8932cd8a13ddfb47d",
+    "candidate_sha256": "f6a47a1a798356feb41e48497f7e8fcff5484747ed4e01b08734449a53127529"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/controller/HabitInternalController.java",
+    "baseline_sha256": null,
+    "candidate_sha256": "5f17be68e4cb3710fcfeaf61ce9c55726dd9e9a0bbacaa622e913554470f007e"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/dto/HabitDTO.java",
+    "baseline_sha256": "02e6816e581a39fed2c60cdacf215de87c5cc0b8c44f9c46f142910e3f2505f1",
+    "candidate_sha256": "551cf7e801dedc71d8f3943252e5be6cbb5d1a67750ba6664509201df8741394"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/entity/HabitEntity.java",
+    "baseline_sha256": "219d143b7f8fad2f0c7246458708429a08e5af448fbececae827fd6230eef32c",
+    "candidate_sha256": "afa47fac7a7a7828193bf51ce46329eb0fd2f8f699792539bbb0f52d54088696"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/service/HabitSyncService.java",
+    "baseline_sha256": null,
+    "candidate_sha256": "e64db05c5ed10b16b5be6f8676a9e8eec572e5d52922800547a608feb739b918"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/habit/service/impl/HabitServiceImpl.java",
+    "baseline_sha256": "202f01b133d84932f4b428c797110431fd1b64f892c55aa7518366fb58217cfc",
+    "candidate_sha256": "7119fa360b655bceda5f1411311ff425e344e62d4e0899c249d149d705796bf3"
+  },
+  {
+    "path": "main/manager-api/src/main/java/xiaozhi/modules/security/config/ShiroConfig.java",
+    "baseline_sha256": "d14d3a8fc1c5af75607b7579b8e8f023c924030e69250433224e4c1a59b6b9f6",
+    "candidate_sha256": "669891e19531219b8e89a2f0d2f42b7b19d92622e63a501db72f35f9bdb0473c"
+  },
+  {
+    "path": "main/manager-api/src/test/java/xiaozhi/modules/habit/HabitSyncServiceTest.java",
+    "baseline_sha256": null,
+    "candidate_sha256": "e78b8ec929ef8251aa1e866e0cbab4def689fc3ab2118ec71d7799fc77181925"
+  },
+  {
+    "path": "main/manager-web/src/apis/module/habit.js",
+    "baseline_sha256": "eb0cac94ca113111b27de5367440b66e056217bc352d0dc778ca94a73c224080",
+    "candidate_sha256": "7b4ace3114e4b778821257f1ed1b7b308ec664d18cf0b867ca585c9cbcab1d1e"
+  },
+  {
+    "path": "main/manager-web/src/views/HabitManagement.vue",
+    "baseline_sha256": "3fa032b5ec942019ffdd27b33f86f1f04a90a5474f3456cccebd389a3ffcb7ae",
+    "candidate_sha256": "689bd181259edc4b67b6c3a986d82e36fa0d6a8efa0c5a67d3aada9aa96b9c36"
+  },
+  {
+    "path": "main/xiaozhi-server/app.py",
+    "baseline_sha256": "d1a4193a69ed89ee741fd57c426b77ce1bca3ae3a8f840437a3cc38d0b2ac633",
+    "candidate_sha256": "6cfd1aa27ebe7c68628a3f9c21b2ccca1d795522d88b46d46d6e5d49869f2bc0"
+  },
+  {
+    "path": "main/xiaozhi-server/core/handle/textHandler/reminderEventMessageHandler.py",
+    "baseline_sha256": "29a14546913f021d1e1c2d5fd938b7f38c9dba1a308c85171ca9671a4fb0b73e",
+    "candidate_sha256": "4801e7a4389ea3fe1a462a13214bc8b00bc10432836d4b44308fdfc4a76c48c7"
+  },
+  {
+    "path": "main/xiaozhi-server/core/utils/habit_sync.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "263b1ada800c771803bb6de0348648a5ba6b8b065d949133a33e1efc89aa48bf"
+  },
+  {
+    "path": "main/xiaozhi-server/core/utils/reminder_interaction.py",
+    "baseline_sha256": "8d3f77041dc1ef6124ce86c05ae1436d1b030d1e49e74ce88f599fb7c2f8f7b3",
+    "candidate_sha256": "fa142d5aa31fa5df211ee9630f6a1fdbf89294086cce2d84f3ce1d821349c64f"
+  },
+  {
+    "path": "main/xiaozhi-server/test/test_habit_sync.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "1d54eab826ce449bb27e1a1967baf9a709c440cef95150a503980cb1bf894710"
+  },
+  {
+    "path": "main/xiaozhi-server/test/test_habit_sync_api.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "8d15bb155e7aa4af03fee811779fbf738129a2b822d99d3ed1075a10284fafc5"
+  },
+  {
+    "path": "main/xiaozhi-server/test/test_interaction_renewal.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "80b3c1d45a735fbb2e3d2ac524ea90500b071bdb44a116d1227c906714462667"
+  }
+]

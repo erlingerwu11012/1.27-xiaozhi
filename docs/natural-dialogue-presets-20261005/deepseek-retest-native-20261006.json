@@ -1,0 +1,257 @@
+{
+  "model": "deepseek-flash",
+  "thinking": false,
+  "hardware_writes": 0,
+  "cases": [
+    {
+      "user": "伦敦那边现在几点了？",
+      "first": {
+        "text": "",
+        "calls": [
+          {
+            "id": "call_00_A3HsXaiFZLEHOdo88FW44557",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Europe/London\"}"
+          }
+        ],
+        "elapsed_ms": 384
+      },
+      "expected_timezone": "Europe/London",
+      "executed": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": {
+            "meta": null,
+            "content": [
+              {
+                "type": "text",
+                "text": "🌍 Europe/London 当前时间：\n2026年10月06日 14:47:55 (Tuesday)\n时区：UTC+1",
+                "annotations": null,
+                "meta": null
+              }
+            ],
+            "structuredContent": null,
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "text": "伦敦现在是10月6号星期二下午两点四十七分，比你这边慢七个小时。",
+        "calls": [],
+        "elapsed_ms": 961
+      },
+      "usage": [
+        {
+          "completion_tokens": 42,
+          "prompt_tokens": 3193,
+          "total_tokens": 3235,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 2176
+          },
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 1017
+        },
+        {
+          "completion_tokens": 19,
+          "prompt_tokens": 3324,
+          "total_tokens": 3343,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 3072
+          },
+          "prompt_cache_hit_tokens": 3072,
+          "prompt_cache_miss_tokens": 252
+        }
+      ]
+    },
+    {
+      "user": "东京的时间你能帮我看看吗？",
+      "first": {
+        "text": "",
+        "calls": [
+          {
+            "id": "call_00_nxnFLcHWv6udRRPCwTJZ5772",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Tokyo\"}"
+          }
+        ],
+        "elapsed_ms": 778
+      },
+      "expected_timezone": "Asia/Tokyo",
+      "executed": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": {
+            "meta": null,
+            "content": [
+              {
+                "type": "text",
+                "text": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 22:47:57 (Tuesday)\n时区：UTC+9",
+                "annotations": null,
+                "meta": null
+              }
+            ],
+            "structuredContent": null,
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "text": "东京现在是十月六号晚上十点四十七分，星期二。比咱们这儿早一个小时，你要是想找人聊天，人家可能已经准备睡了。",
+        "calls": [],
+        "elapsed_ms": 1130
+      },
+      "usage": [
+        {
+          "completion_tokens": 43,
+          "prompt_tokens": 3194,
+          "total_tokens": 3237,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 2944
+          },
+          "prompt_cache_hit_tokens": 2944,
+          "prompt_cache_miss_tokens": 250
+        },
+        {
+          "completion_tokens": 31,
+          "prompt_tokens": 3327,
+          "total_tokens": 3358,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 3072
+          },
+          "prompt_cache_hit_tokens": 3072,
+          "prompt_cache_miss_tokens": 255
+        }
+      ]
+    },
+    {
+      "user": "纽约那边现在几点了？",
+      "first": {
+        "text": "",
+        "calls": [
+          {
+            "id": "call_00_2Kw3Wm5iDgMZl9PxqBGb2914",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"America/New_York\"}"
+          }
+        ],
+        "elapsed_ms": 987
+      },
+      "expected_timezone": "America/New_York",
+      "executed": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "America/New_York"
+          },
+          "receipt": {
+            "meta": null,
+            "content": [
+              {
+                "type": "text",
+                "text": "🌍 America/New_York 当前时间：\n2026年10月06日 09:47:59 (Tuesday)\n时区：UTC-4",
+                "annotations": null,
+                "meta": null
+              }
+            ],
+            "structuredContent": null,
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "text": "纽约现在是10月6日星期二，早上9点47分。你那边都晚上了吧，人家才刚上班呢。",
+        "calls": [],
+        "elapsed_ms": 674
+      },
+      "usage": [
+        {
+          "completion_tokens": 44,
+          "prompt_tokens": 3193,
+          "total_tokens": 3237,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 2944
+          },
+          "prompt_cache_hit_tokens": 2944,
+          "prompt_cache_miss_tokens": 249
+        },
+        {
+          "completion_tokens": 27,
+          "prompt_tokens": 3328,
+          "total_tokens": 3355,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 3072
+          },
+          "prompt_cache_hit_tokens": 3072,
+          "prompt_cache_miss_tokens": 256
+        }
+      ]
+    },
+    {
+      "user": "查询设备当前音量",
+      "first": {
+        "text": "我这边没有查询音量的能力，所以现在没法告诉你设备当前音量是多少。",
+        "calls": [],
+        "elapsed_ms": 968
+      },
+      "expected_timezone": null,
+      "executed": [],
+      "usage": [
+        {
+          "completion_tokens": 17,
+          "prompt_tokens": 3191,
+          "total_tokens": 3208,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 2944
+          },
+          "prompt_cache_hit_tokens": 2944,
+          "prompt_cache_miss_tokens": 247
+        }
+      ]
+    },
+    {
+      "user": "不用查时间，我只是说东京跟我们有时差。",
+      "first": {
+        "text": "嗯，东京比咱们快一个小时，所以那边的人总是先一步到明天。",
+        "calls": [],
+        "elapsed_ms": 694
+      },
+      "expected_timezone": null,
+      "executed": [],
+      "usage": [
+        {
+          "completion_tokens": 17,
+          "prompt_tokens": 3198,
+          "total_tokens": 3215,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 2944
+          },
+          "prompt_cache_hit_tokens": 2944,
+          "prompt_cache_miss_tokens": 254
+        }
+      ]
+    }
+  ],
+  "tool_catalog_count": 5
+}

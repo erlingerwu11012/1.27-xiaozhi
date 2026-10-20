@@ -1,0 +1,21 @@
+{
+  "production_commit": "35236f03a2741d9b63e5be113db9befd9f98a1d0",
+  "tracked_changes": "",
+  "model": "qwen3.8-flash",
+  "temperature": 0.4,
+  "services": [
+    {
+      "name": "manager-api",
+      "status": "online"
+    },
+    {
+      "name": "mcp-gateway",
+      "status": "online"
+    },
+    {
+      "name": "xiaozhi-server",
+      "status": "online"
+    }
+  ],
+  "public_http_status": 200
+}

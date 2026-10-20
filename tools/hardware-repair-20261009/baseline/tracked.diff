@@ -1,0 +1,201 @@
+diff --git a/main/application.cc b/main/application.cc
+index 3424e89f..80309d2f 100644
+--- a/main/application.cc
++++ b/main/application.cc
+@@ -857,10 +857,9 @@ void Application::Start() {
+         } else if (strcmp(type->valuestring, "stt") == 0) {
+             auto text = cJSON_GetObjectItem(root, "text");
+             if (cJSON_IsString(text)) {
++                // Keep recognition available for diagnostics; conversation
++                // subtitles are reserved for assistant replies.
+                 ESP_LOGI(TAG, ">> %s", text->valuestring);
+-                Schedule([this, display, message = std::string(text->valuestring)]() {
+-                    display->SetChatMessage("user", message.c_str());
+-                });
+             }
+         } else if (strcmp(type->valuestring, "llm") == 0) {
+             awaiting_server_reply_ = false;
+diff --git a/main/mcp_tools/mcp_tools_camera.cc b/main/mcp_tools/mcp_tools_camera.cc
+index 7ffa9536..b2049e0a 100644
+--- a/main/mcp_tools/mcp_tools_camera.cc
++++ b/main/mcp_tools/mcp_tools_camera.cc
+@@ -163,6 +163,8 @@ void RegisterCameraCommonTools(McpServer& server) {
+             ESP_LOGI("CameraTools", "[CAMERA] Explicit user request: capturing a frame for VLM upload");
+ 
+             if (!VisionCredentialStore::GetInstance().IsExplainReady()) {
++                ESP_LOGW("CameraMCP", "event=explain_rejected reason=%s",
++                         VisionCredentialStore::GetInstance().ExplainNotReadyReason().c_str());
+                 return McpError{"视觉服务尚未就绪，请稍后再试", "vision_not_ready"};
+             }
+ 
+diff --git a/main/reminder_coordinator.cc b/main/reminder_coordinator.cc
+index 357b4f8d..18b80c71 100644
+--- a/main/reminder_coordinator.cc
++++ b/main/reminder_coordinator.cc
+@@ -2458,6 +2458,20 @@ std::string ReminderCoordinator::GetCurrentJson() const {
+         const std::string actor =
+             UserContext::GetInstance().GetEffectiveUserId();
+         const bool can_read = CanReadDetails(instance, actor);
++        // An authorized fresh read grants this exact visible version to the
++        // current connection. Keep Act's session, actor and revision guards.
++        const std::string session = Application::GetInstance().GetAudioSessionId();
++        if (can_read && !session.empty()) {
++            auto* self = const_cast<ReminderCoordinator*>(this);
++            std::lock_guard<std::mutex> lock(self->mutex_);
++            auto* live = self->FindLocked(instance.instance_id);
++            if (live && live->revision == instance.revision &&
++                self->current_instance_id_ == instance.instance_id &&
++                IsActive(*live) && live->bound_session_id != session) {
++                live->bound_session_id = session;
++                ESP_LOGI(kTag, "[REMINDER_CARD] event=session_rebound reason=authorized_current_read revision=%u", static_cast<unsigned>(instance.revision));
++            }
++        }
+         cJSON_AddBoolToObject(root, "active", true);
+         AddString(root, "instance_id", instance.instance_id);
+         cJSON_AddNumberToObject(root, "revision", instance.revision);
+diff --git a/main/vision_credentials.cc b/main/vision_credentials.cc
+index 10cea903..b19c5587 100644
+--- a/main/vision_credentials.cc
++++ b/main/vision_credentials.cc
+@@ -218,6 +218,16 @@ bool VisionCredentialStore::IsExplainReady() const {
+     return published_.explain_ready && !IsExpiredLocked(published_.expires_at);
+ }
+ 
++std::string VisionCredentialStore::ExplainNotReadyReason() const {
++    std::lock_guard<std::mutex> lock(mutex_);
++    if (!generation_accepting_) return "connection_closed";
++    if (!last_reject_reason_.empty()) return last_reject_reason_;
++    if (!pending_hello_seen_) return "awaiting_hello";
++    if (!pending_initialize_seen_) return "awaiting_initialize";
++    if (IsExpiredLocked(published_.expires_at)) return "expired";
++    return published_.explain_ready ? "ready" : "incomplete_pending";
++}
++
+ bool VisionCredentialStore::IsIdentityReady() const {
+     std::lock_guard<std::mutex> lock(mutex_);
+     return published_.identity_ready && !IsExpiredLocked(published_.expires_at);
+diff --git a/main/vision_credentials.h b/main/vision_credentials.h
+index 0948b6e4..ed8fd487 100644
+--- a/main/vision_credentials.h
++++ b/main/vision_credentials.h
+@@ -59,6 +59,7 @@ public:
+     bool TryAcquireIdentitySnapshot(VisionCredentialSnapshot* out) const;
+ 
+     bool IsExplainReady() const;
++    std::string ExplainNotReadyReason() const;
+     bool IsIdentityReady() const;
+ 
+     VisionCredentialSnapshot DebugCopy() const;
+diff --git a/tools/run_tts_interrupt_host_test.py b/tools/run_tts_interrupt_host_test.py
+index 0edd53dc..9a6a7bba 100644
+--- a/tools/run_tts_interrupt_host_test.py
++++ b/tools/run_tts_interrupt_host_test.py
+@@ -27,6 +27,10 @@ def main():
+     end = text.index('        } else if (strcmp(type->valuestring, "stt")', start)
+     source = source.replace("// @AUDIO_CALLBACK", audio)
+     source = source.replace("// @TTS_CALLBACK", text[start:end])
++    start = text.index('        } else if (strcmp(type->valuestring, "stt")')
++    start = text.index('{', start) + 1
++    end = text.index('        } else if (strcmp(type->valuestring, "llm")', start)
++    source = source.replace("// @STT_CALLBACK", text[start:end])
+     out = ROOT / "build/tts_interrupt_host"
+     out.mkdir(parents=True, exist_ok=True)
+     generated = out / "test.cpp"
+diff --git a/tools/test_tts_interrupt_host.cpp b/tools/test_tts_interrupt_host.cpp
+index 4676b704..f30d6c1c 100644
+--- a/tools/test_tts_interrupt_host.cpp
++++ b/tools/test_tts_interrupt_host.cpp
+@@ -123,7 +123,13 @@ struct AudioService {
+     void RecordIncomingAudioFrame() { ++rx_frames; }
+     void PushPacketToDecodeQueue(std::unique_ptr<AudioStreamPacket>) { ++accepted; drained=false; }
+ };
+-struct Display { void SetChatMessage(const char*, const char*) {} };
++struct Display {
++    unsigned messages=0;
++    std::string role, text;
++    void SetChatMessage(const char* r, const char* t) {
++        ++messages; role=r ? r : ""; text=t ? t : "";
++    }
++};
+ struct Board {
+     static Board& GetInstance() { static Board board; return board; }
+     Display* GetDisplay() { static Display display; return &display; }
+@@ -173,10 +179,15 @@ struct Application {
+     void Run() { while(!tasks.empty()) { auto f=std::move(tasks.front()); tasks.pop_front(); f(); } }
+     void RegisterAudio() { // @AUDIO_CALLBACK
+     }
+-    void ReceiveTts(const char* event) {
+-        cJSON state_value{event}, message{"subtitle"}; const cJSON* state=&state_value; const cJSON* root=&message;
++    void ReceiveTts(const char* event, const char* text="subtitle") {
++        cJSON state_value{event}, message{text}; const cJSON* state=&state_value; const cJSON* root=&message;
+         // @TTS_CALLBACK
+     }
++    void ReceiveStt(const char* recognized_text) {
++        cJSON message{recognized_text}; const cJSON* root=&message;
++        auto* display=Board::GetInstance().GetDisplay();
++        // @STT_CALLBACK
++    }
+     void BeginTtsStream(unsigned); void HandleIncomingTtsAudio(unsigned, std::unique_ptr<AudioStreamPacket>);
+     void HandleTtsStop(unsigned); void QueueTtsSubtitle(unsigned, uint64_t, const std::string&);
+     void UpdateTtsPlayback(); void FinishTtsPlayback(const char*, bool);
+@@ -405,5 +416,39 @@ int main() {
+         app.UpdateTtsPlayback();
+         assert(app.device_state_==kDeviceStateListening);
+     }
+-    std::cout << "PASS: 17 production TTS/capture fault-injection scenarios (ASan/UBSan)\n";
++    // Recognition echoes never replace an existing assistant subtitle.
++    {
++        Application app;
++        auto* display=Board::GetInstance().GetDisplay();
++        display->SetChatMessage("assistant", "previous reply");
++        const auto before=display->messages;
++        app.ReceiveStt("recognized user speech"); app.Run();
++        assert(display->messages==before);
++        assert(display->role=="assistant" && display->text=="previous reply");
++        assert(app.pending_subtitle_markers_.empty());
++    }
++    // Empty/malformed STT cannot clear subtitles or enqueue UI work either.
++    {
++        Application app;
++        auto* display=Board::GetInstance().GetDisplay();
++        const auto before=display->messages;
++        app.ReceiveStt(""); app.ReceiveStt(nullptr); app.Run();
++        assert(display->messages==before && app.tasks.empty());
++    }
++    // Multiple assistant captions still follow playback, even with interleaved STT.
++    {
++        Application app;
++        auto* display=Board::GetInstance().GetDisplay();
++        app.ReceiveTts("start");
++        app.ReceiveTts("sentence_start", "first reply"); app.Audio(); app.Run();
++        app.UpdateTtsPlayback();
++        assert(display->role=="assistant" && display->text=="first reply");
++        const auto before=display->messages;
++        app.ReceiveStt("do not show this"); app.Run();
++        assert(display->messages==before && display->text=="first reply");
++        app.ReceiveTts("sentence_start", "second reply"); app.Audio(); app.Run();
++        app.UpdateTtsPlayback();
++        assert(display->role=="assistant" && display->text=="second reply");
++    }
++    std::cout << "PASS: 20 production TTS/STT/capture scenarios (ASan/UBSan)\n";
+ }
+diff --git a/tools/test_vision_credentials_host.cpp b/tools/test_vision_credentials_host.cpp
+index 0feada67..e2827f88 100644
+--- a/tools/test_vision_credentials_host.cpp
++++ b/tools/test_vision_credentials_host.cpp
+@@ -373,6 +373,15 @@ void TestBoundedErrorBodyDoesNotBufferAll() {
+ }  // namespace
+ 
+ int main() {
++    {
++        auto& store = VisionCredentialStore::GetInstance();
++        auto gen = store.BeginConnection();
++        CHECK(store.ExplainNotReadyReason() == "awaiting_hello");
++        store.ApplyHelloSession(gen, "experience-repair-session");
++        CHECK(store.ExplainNotReadyReason() == "awaiting_initialize");
++        store.EndConnection(gen);
++        CHECK(store.ExplainNotReadyReason() == "connection_closed");
++    }
+     TestInitialConnectReady();
+     TestReconnectInvalidatesUntilNewReady();
+     TestHelloWithoutInitialize();

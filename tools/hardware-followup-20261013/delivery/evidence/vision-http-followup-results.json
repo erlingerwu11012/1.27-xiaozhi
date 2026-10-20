@@ -1,0 +1,66 @@
+[
+  {
+    "name": "unauthenticated",
+    "status": 401,
+    "body": {
+      "status": "error",
+      "confidence": 0.0,
+      "reason": "authentication_failed",
+      "message": "设备授权已失效，请重新连接。",
+      "success": false,
+      "errorCode": "authentication_failed"
+    }
+  },
+  {
+    "name": "wrong_session",
+    "status": 403,
+    "body": {
+      "status": "error",
+      "confidence": 0.0,
+      "reason": "permission_denied",
+      "message": "当前没有执行这项操作的权限。",
+      "success": false,
+      "errorCode": "permission_denied"
+    }
+  },
+  {
+    "name": "slow_model_keeps_loop_responsive",
+    "status": 200,
+    "body": {
+      "success": true,
+      "action": "RESPONSE",
+      "response": "蓝色。"
+    },
+    "heartbeat_ticks_during_request": 15
+  },
+  {
+    "name": "same_session_followup",
+    "status": 200,
+    "body": {
+      "success": true,
+      "action": "RESPONSE",
+      "response": "蓝色。"
+    }
+  },
+  {
+    "name": "old_token_new_session_rejected",
+    "status": 403,
+    "body": {
+      "status": "error",
+      "confidence": 0.0,
+      "reason": "permission_denied",
+      "message": "当前没有执行这项操作的权限。",
+      "success": false,
+      "errorCode": "permission_denied"
+    }
+  },
+  {
+    "name": "new_connection_upload",
+    "status": 200,
+    "body": {
+      "success": true,
+      "action": "RESPONSE",
+      "response": "蓝色。"
+    }
+  }
+]

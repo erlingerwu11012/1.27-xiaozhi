@@ -1,0 +1,16 @@
+{
+  "published": true,
+  "at": "2026-09-29 21:40:42 +0800",
+  "source_files": 28,
+  "jar_sha256": "c73ed6d13d4bd1ec75bb108667631087234241ed7155d91dba737a30f32f5702",
+  "config_sha256": "00549be8ef93af885539f7d0a0c8b8ee3f39b5296b5b70b2ba8f4ee2927944f5",
+  "input_limit": 200000,
+  "prepare": 160000,
+  "trigger": 180000,
+  "target": 50000,
+  "portraits_enabled": false,
+  "firmware_ota": false,
+  "gateway_changed": false,
+  "frontend_changed": false,
+  "automation_recreated": false
+}

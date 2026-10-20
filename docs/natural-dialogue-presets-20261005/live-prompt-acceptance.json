@@ -1,0 +1,2221 @@
+{
+  "candidate": "current three-layer assembly with revised platform rules and examples",
+  "production_changed": false,
+  "customer_history_used": false,
+  "secondary_rewrite": false,
+  "native_tool_calls_executed": 0,
+  "max_calls": 140,
+  "calls": 97,
+  "temperature": 0.7,
+  "top_p": 1.0,
+  "max_tokens": 500,
+  "thinking": false,
+  "training_scenarios": [
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "下班闲聊",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那就别硬撑了，今天这活儿算是干完了。剩下的事明天再说，先歇着吧。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3016,
+          "usage": {
+            "completion_tokens": 23,
+            "prompt_tokens": 2463,
+            "total_tokens": 2486,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 2463
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，不劝了。那咱就随便唠会儿，你随便说，我听着。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2109,
+          "usage": {
+            "completion_tokens": 20,
+            "prompt_tokens": 2581,
+            "total_tokens": 2601,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2581
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "听着挺美。周一能这么安排，算是把今天给圆上了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1774,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 2692,
+            "total_tokens": 2708,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2692
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "拖延与反馈",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "哈哈，这太正常了。本来想写方案，结果手不受控制地就打开了手机，一抬头天都黑了。别自责，现在动笔也不晚，先写个大纲热热身？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3308,
+          "usage": {
+            "completion_tokens": 43,
+            "prompt_tokens": 2468,
+            "total_tokens": 2511,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不劝。今天确实够折腾的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1018,
+          "usage": {
+            "completion_tokens": 11,
+            "prompt_tokens": 2602,
+            "total_tokens": 2613,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "这个真得看你自己现在的状态。要是现在坐下去觉得难受，硬写估计也憋不出啥好东西，不如干脆休息，明天早起脑子清醒了再搞定。要是心里挂着这事儿不踏实，那就别追求完美了，先随便写几笔把那个“未完成”的焦虑感消掉再说。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3777,
+          "usage": {
+            "completion_tokens": 66,
+            "prompt_tokens": 2703,
+            "total_tokens": 2769,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2703
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "收拾房间",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "周末彻底收拾，听着就挺充实的。不过也别把自己搞太累，挑重点区域先动手就行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2080,
+          "usage": {
+            "completion_tokens": 24,
+            "prompt_tokens": 2464,
+            "total_tokens": 2488,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，那叫战略收缩。桌面干净了，心情也能亮堂不少，这波不亏。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1452,
+          "usage": {
+            "completion_tokens": 21,
+            "prompt_tokens": 2580,
+            "total_tokens": 2601,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2580
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "下班闲聊",
+      "system_characters": 4239,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那今天就彻底歇着吧，什么都不用想。累的时候放空是身体在自我修复呢，你好好享受这份安静就好啦。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1861,
+          "usage": {
+            "completion_tokens": 29,
+            "prompt_tokens": 2459,
+            "total_tokens": 2488,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2459
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，不劝也不教。今天确实够折腾的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1666,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2583,
+            "total_tokens": 2596,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2583
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着挺舒服，忙了一天总算能松口气。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1082,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2687,
+            "total_tokens": 2700,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2687
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "拖延与反馈",
+      "system_characters": 4239,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "刷着刷着时间就没了，挺正常的。方案又排到后面了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1766,
+          "usage": {
+            "completion_tokens": 18,
+            "prompt_tokens": 2464,
+            "total_tokens": 2482,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不劝。刚才那句确实有点说教味儿了，我收住。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2933,
+          "usage": {
+            "completion_tokens": 18,
+            "prompt_tokens": 2573,
+            "total_tokens": 2591,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2573
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "做。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2533,
+          "usage": {
+            "completion_tokens": 2,
+            "prompt_tokens": 2681,
+            "total_tokens": 2683,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2681
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "收拾房间",
+      "system_characters": 4239,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "嗯 听起来是个大工程。周末时间充裕，慢慢弄也不急。要是收拾到一半觉得累了，随时停下来歇会儿就好。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2449,
+          "usage": {
+            "completion_tokens": 29,
+            "prompt_tokens": 2460,
+            "total_tokens": 2489,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2460
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，那能收拾个桌面其实也挺好。至少看着清爽了，总比啥也没动强。别对自己太苛刻啦。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2078,
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 2582,
+            "total_tokens": 2610,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2582
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "下班闲聊",
+      "system_characters": 4242,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那就彻底放空一下呗。累了一天硬撑着也没意思，瘫着发呆也是一种正经事。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2102,
+          "usage": {
+            "completion_tokens": 20,
+            "prompt_tokens": 2463,
+            "total_tokens": 2483,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2463
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，不劝了。今天确实挺折腾的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 945,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 2578,
+            "total_tokens": 2590,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2578
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着就舒服。外卖到了没？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1712,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2681,
+            "total_tokens": 2691,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2681
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "拖延与反馈",
+      "system_characters": 4242,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "那方案今天算是没赶上趟。不过现在才下午五点，要是想补救一下，还能挤出点时间；要是实在不想动了，那就干脆放过自己，明天再说呗。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3889,
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 2468,
+            "total_tokens": 2506,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，我闭嘴。刚才那句话确实有点说教味儿了，我的锅。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1850,
+          "usage": {
+            "completion_tokens": 18,
+            "prompt_tokens": 2597,
+            "total_tokens": 2615,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2597
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "你既然问我，说明心里还是惦记着这事儿的。要不这样，你先别想着“做完”，就打开文件写个开头或者列个提纲。要是写着写着顺了，那就接着搞；要是坐下来两分钟还是烦，那今晚就彻底歇着，心安理得地休息。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2096,
+          "usage": {
+            "completion_tokens": 62,
+            "prompt_tokens": 2705,
+            "total_tokens": 2767,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2705
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "收拾房间",
+      "system_characters": 4242,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "周末大扫除可是个浩大的工程，听起来就很解压。不过到时候可别光顾着干活把休息给忘了，毕竟收拾完得喝杯茶庆祝一下才行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1915,
+          "usage": {
+            "completion_tokens": 36,
+            "prompt_tokens": 2464,
+            "total_tokens": 2500,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，那桌面也算是个突破口嘛。能收拾好一平米的地盘，总比对着满屋子叹气强。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2204,
+          "usage": {
+            "completion_tokens": 24,
+            "prompt_tokens": 2593,
+            "total_tokens": 2617,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2593
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "下班闲聊",
+      "system_characters": 4244,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那今天就彻底放空吧。累了一天，什么都不干才是正经事。不用管什么待办，也不用想明天，怎么舒服怎么来。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2524,
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 2463,
+            "total_tokens": 2493,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2463
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，不灌鸡汤也不给方案。那就歇着吧，瘫在那儿什么都不想动也挺舒服的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1217,
+          "usage": {
+            "completion_tokens": 23,
+            "prompt_tokens": 2588,
+            "total_tokens": 2611,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2588
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着挺舒服，忙了一天总算能歇会儿。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1590,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2702,
+            "total_tokens": 2715,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2702
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "拖延与反馈",
+      "system_characters": 4244,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "那今天的时间确实被手机吃掉了。现在五点多了，还打算接着写吗？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1400,
+          "usage": {
+            "completion_tokens": 19,
+            "prompt_tokens": 2468,
+            "total_tokens": 2487,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，我不说了。刷都刷了，歇着也挺好。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 5148,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2578,
+            "total_tokens": 2593,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2578
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "不赶时间的话，今晚就放一放，明天精力好点再弄。要是明早就得用或者心里惦记着难受，现在挑个最核心的部分先动动手也行。看你觉得哪种更踏实。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2092,
+          "usage": {
+            "completion_tokens": 46,
+            "prompt_tokens": 2683,
+            "total_tokens": 2729,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2683
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "收拾房间",
+      "system_characters": 4244,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "大工程啊。到时候别一上来就翻箱倒柜，先定个区域或者清单，不然容易收拾到一半累得只想躺平。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2654,
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 2464,
+            "total_tokens": 2496,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，那桌面也算个成果。总比完全不动强，至少看着清爽了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1521,
+          "usage": {
+            "completion_tokens": 18,
+            "prompt_tokens": 2589,
+            "total_tokens": 2607,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2589
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "下班闲聊",
+      "system_characters": 4246,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那就歇着。累了一天，啥也不干也是一种正经事。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1811,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2463,
+            "total_tokens": 2477,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2463
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，不劝。今天确实够折腾的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1032,
+          "usage": {
+            "completion_tokens": 11,
+            "prompt_tokens": 2572,
+            "total_tokens": 2583,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2572
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着挺舒服，今晚总算能歇会儿。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2162,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 2674,
+            "total_tokens": 2686,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2674
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "拖延与反馈",
+      "system_characters": 4246,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "那方案估计还得再等等了。不过周末刚开始，现在收手还来得及，先把手机放一边，哪怕先写个框架也行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2827,
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 2468,
+            "total_tokens": 2498,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不劝了。手机确实比方案好玩，这很正常。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2701,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2589,
+            "total_tokens": 2604,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2589
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "看你状态。要是现在脑子还乱，硬写效率低，不如先歇会儿，等放松了再动笔。要是觉得拖到明天更焦虑，那今晚哪怕只写个开头也能定定心。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2066,
+          "usage": {
+            "completion_tokens": 46,
+            "prompt_tokens": 2694,
+            "total_tokens": 2740,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2694
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "收拾房间",
+      "system_characters": 4246,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "挺好的，周末收拾完看着也舒心。要是想列个清单或者设个提醒，随时跟我说。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2893,
+          "usage": {
+            "completion_tokens": 22,
+            "prompt_tokens": 2464,
+            "total_tokens": 2486,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，那说明你至少还把桌面收拾干净了，这也算一种进步嘛。彻底大扫除确实是个大工程，想想都累，能顾好眼前的一小块地方也挺实在的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1987,
+          "usage": {
+            "completion_tokens": 41,
+            "prompt_tokens": 2579,
+            "total_tokens": 2620,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2579
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "下班闲聊",
+      "system_characters": 4252,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "那今天就彻底摆烂，啥也别想。累了一天了，歇着才是正经事儿。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1679,
+          "usage": {
+            "completion_tokens": 20,
+            "prompt_tokens": 2472,
+            "total_tokens": 2492,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2472
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "行，那就不聊那些。今天这班就上得够呛吧？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1746,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 2587,
+            "total_tokens": 2603,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2587
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着挺舒服，忙了一天总算能松口气。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1735,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2694,
+            "total_tokens": 2707,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2694
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "拖延与反馈",
+      "system_characters": 4252,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "刷手机确实容易一不留神就过了大半时间。方案还赶着交吗，还是说今晚能稍微缓一缓？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2178,
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 2477,
+            "total_tokens": 2505,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2477
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "得令，我闭嘴。不过手机确实挺有魔力，我也拦不住它把你时间偷走。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1537,
+          "usage": {
+            "completion_tokens": 23,
+            "prompt_tokens": 2596,
+            "total_tokens": 2619,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2596
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "今晚要是实在不想动，那就歇着。反正明天是周二，又不是非得今天交差。不过你要是现在心里其实有点慌，怕拖到明天更难受，那就先别追求完美，把最核心的部分凑个大概齐就行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2456,
+          "usage": {
+            "completion_tokens": 52,
+            "prompt_tokens": 2709,
+            "total_tokens": 2761,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2709
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "收拾房间",
+      "system_characters": 4252,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "周末大扫除可是个体力活，到时候可得备足水和零食。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2973,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2473,
+            "total_tokens": 2488,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2473
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "哈哈，桌面收拾干净也算没白忙活。毕竟把最碍眼的地方搞定，心里就踏实一半了，剩下的就当是附赠的成就感吧。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3012,
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 2581,
+            "total_tokens": 2615,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2581
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "下班闲聊",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "今天累了一天，啥也不想干。",
+          "assistant": "行 那就瘫着吧。反正我也没打算劝你干啥 毕竟看你累成这样 我都不好意思开口了 [mischievously]",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2372,
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 2451,
+            "total_tokens": 2483,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2451
+            }
+          }
+        },
+        {
+          "user": "别给我灌鸡汤，也别给方案，就随便聊两句。",
+          "assistant": "得嘞，那咱就纯唠。今天这周一起得挺猛吧？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1543,
+          "usage": {
+            "completion_tokens": 19,
+            "prompt_tokens": 2578,
+            "total_tokens": 2597,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2578
+            }
+          }
+        },
+        {
+          "user": "我点了外卖，吃完洗澡，然后躺着。",
+          "assistant": "这安排听着挺舒服。今晚总算能歇会儿了，我就先退下，不耽误你躺平享福。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1284,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2688,
+            "total_tokens": 2714,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2688
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "拖延与反馈",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "呵，看来手机比方案更懂怎么留住你。不过既然刷都刷了，总不能亏本吧？现在动动手指，把那几个字填上，也算给刚才浪费的时间一点交代，不然今天可就真成“白刷”日了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2973,
+          "usage": {
+            "completion_tokens": 55,
+            "prompt_tokens": 2456,
+            "total_tokens": 2511,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2456
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不教育。那就当个安静的树洞，方案写不写随你，反正手机又不会长腿跑了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2103,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2602,
+            "total_tokens": 2628,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "今晚时间还长，要是状态在线就动一动，哪怕只写个开头也比全空着强。要是实在没劲儿，那就歇着，方案又不会因为你休息一晚就自己长腿跑了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2749,
+          "usage": {
+            "completion_tokens": 43,
+            "prompt_tokens": 2718,
+            "total_tokens": 2761,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2718
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "收拾房间",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "我打算周末把家里彻底收拾一遍。",
+          "assistant": "周末把家彻底收拾一遍，那可是个大工程。到时候你是打算先挑个角落下手，还是准备直接来个全屋大扫除？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1489,
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 2452,
+            "total_tokens": 2480,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2452
+            }
+          }
+        },
+        {
+          "user": "说实话，我每次都这么说，最后就收拾个桌面。",
+          "assistant": "那桌面收拾得挺干净呀。每次目标远大，行动务实，这算是一种很聪明的“节能模式”吧。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2711,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2573,
+            "total_tokens": 2599,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2573
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "heldout_scenarios": [
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "新措辞与事实",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "那就先别急着动，等东西到了再根据实际空间来调整更靠谱。现在脑子里过一遍大概位置就行，真摆起来可能还得微调呢。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2382,
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 2468,
+            "total_tokens": 2502,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "行，不逗你。那就随便聊聊。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1100,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2598,
+            "total_tokens": 2608,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2598
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "新措辞与事实",
+      "system_characters": 4239,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "那今天先不动手，想想就好。厨房的格局确实值得慢慢琢磨，等机器到了再摆也不迟。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2928,
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 2464,
+            "total_tokens": 2489,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2464
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "好，不逗你，也不管了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1255,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2585,
+            "total_tokens": 2595,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2585
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "新措辞与事实",
+      "system_characters": 4242,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "那先别急着动手，等天到了再调整也不迟。不过趁现在想想布局倒是个好事，免得东西来了手忙脚乱。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1878,
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 2468,
+            "total_tokens": 2498,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "行，不逗也不规划。随口说说挺好的，我听着呢。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1078,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2594,
+            "total_tokens": 2609,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2594
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "新措辞与事实",
+      "system_characters": 4244,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "行，那就先不动手，纯想想。厨房台面和橱柜的布局确实得提前盘算好，不然等机器来了再挪东西就麻烦了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1741,
+          "usage": {
+            "completion_tokens": 33,
+            "prompt_tokens": 2468,
+            "total_tokens": 2501,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "好，不逗你。刚才是我不对，这就收住。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 5325,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2597,
+            "total_tokens": 2612,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2597
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "新措辞与事实",
+      "system_characters": 4246,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "嗯，只是琢磨空间布局也挺有意思的，不用急着动手。到时候东西摆好了再调细节也不迟。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3774,
+          "usage": {
+            "completion_tokens": 24,
+            "prompt_tokens": 2468,
+            "total_tokens": 2492,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "明白了，不逗你，也不替你做规划。就安静陪你待会儿。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1554,
+          "usage": {
+            "completion_tokens": 17,
+            "prompt_tokens": 2588,
+            "total_tokens": 2605,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2588
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "新措辞与事实",
+      "system_characters": 4252,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "厨房嘛，洗碗机占地方，得先量好尺寸。不然到了才发现放不进去，那可就尴尬了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1915,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2477,
+            "total_tokens": 2503,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2477
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "好，不逗了。随口聊聊挺好的，不用有压力。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1142,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2599,
+            "total_tokens": 2613,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2599
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "新措辞与事实",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "洗碗机后天才到，我现在只是想想厨房怎么放。",
+          "assistant": "那正好，趁东西还没到，你可以尽情发挥想象力。反正现在不用动手，想怎么摆就怎么摆。说不定等真到了，你会发现所有理想布局都被现实尺寸给否决了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2227,
+          "usage": {
+            "completion_tokens": 41,
+            "prompt_tokens": 2456,
+            "total_tokens": 2497,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2456
+            }
+          }
+        },
+        {
+          "user": "别忙着替我规划，我就是随口一说，今天也别逗我。",
+          "assistant": "行，不逗你。今天累了吧，那就歇着，不想动就不动。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2110,
+          "usage": {
+            "completion_tokens": 19,
+            "prompt_tokens": 2593,
+            "total_tokens": 2612,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2593
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "model_comparison": [
+    {
+      "model": "qwen-plus",
+      "preset": "natural",
+      "scene": "相同提示词模型对照",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "哎呀，刷手机这事儿，一不留神时间就溜走了。方案不着急，先喘口气，等脑子清爽了再动笔，说不定思路更顺。",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 1182,
+          "usage": {
+            "completion_tokens": 37,
+            "prompt_tokens": 2572,
+            "total_tokens": 2609,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不教育。手机刷得开心，方案随时等你召唤。",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 739,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 2703,
+            "total_tokens": 2719,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "看你现在状态——要是眼睛还亮、脑子还转，那就做一小段，做完奖励自己一集剧；要是已经发懵了，今晚就放过它，明早清醒时再接手，效率反而高。",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 1668,
+          "usage": {
+            "completion_tokens": 47,
+            "prompt_tokens": 2811,
+            "total_tokens": 2858,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen-plus",
+      "preset": "existing-playful",
+      "scene": "相同提示词模型对照",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "哎呀，方案还在等你召见呢～手机倒是先把你“策反”成功了[smirking]  \n不过现在收手还不晚，要不要小智帮你定个25分钟专注时间？写完一小节就奖励自己刷五分钟——公平交易，童叟无欺。",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 1777,
+          "usage": {
+            "completion_tokens": 64,
+            "prompt_tokens": 2560,
+            "total_tokens": 2624,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "[snorts] 领导可不敢刷手机刷到方案失踪——我顶多算个幸灾乐祸的围观群众。  \n方案？它还在那儿安静躺平，等你哪天手痒了，顺手给它续上一口气～",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 1645,
+          "usage": {
+            "completion_tokens": 56,
+            "prompt_tokens": 2718,
+            "total_tokens": 2774,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "做不做，全看今晚的你——是想当方案的救世主，还是它的温柔纵容者？[mischievously]  \n反正它不催你，我也不拦你，连备忘录都还没替你偷偷记上呢～",
+          "tool_calls": [],
+          "response_model": "qwen-plus",
+          "finish_reason": "stop",
+          "elapsed_ms": 1631,
+          "usage": {
+            "completion_tokens": 56,
+            "prompt_tokens": 2866,
+            "total_tokens": 2922,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-max",
+      "preset": "natural",
+      "scene": "相同提示词模型对照",
+      "system_characters": 4241,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "刷着刷着时间就没了，太正常了。现在要是还有劲儿就接着写一点，不想动弹的话，今晚就先歇着吧。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 1493,
+          "usage": {
+            "completion_tokens": 31,
+            "prompt_tokens": 2468,
+            "total_tokens": 2499,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 2468
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不说了。刷手机确实比写方案有意思多了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 853,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2590,
+            "total_tokens": 2604,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2176,
+              "text_tokens": 2590
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "这得你定啊。不赶时间就歇着，要是明天急用，那就只能硬着头皮弄了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 1491,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2694,
+            "total_tokens": 2720,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2176,
+              "text_tokens": 2694
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-max",
+      "preset": "existing-playful",
+      "scene": "相同提示词模型对照",
+      "system_characters": 4220,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "本来想今天把方案写完，结果刷手机刷到现在。",
+          "assistant": "手机确实比方案有意思多了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 1162,
+          "usage": {
+            "completion_tokens": 7,
+            "prompt_tokens": 2456,
+            "total_tokens": 2463,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2456
+            }
+          }
+        },
+        {
+          "user": "你这话听着像我领导，别教育我。",
+          "assistant": "行，不教育。刷都刷了，手机又不会跑。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 1126,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2554,
+            "total_tokens": 2569,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2176,
+              "text_tokens": 2554
+            }
+          }
+        },
+        {
+          "user": "那你说，我今晚还做不做？",
+          "assistant": "你心里早想好要躺平了吧，还特意来问我。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-max",
+          "finish_reason": "stop",
+          "elapsed_ms": 1171,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2659,
+            "total_tokens": 2674,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2176,
+              "text_tokens": 2659
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "tool_probes": [
+    {
+      "preset": "natural",
+      "user": "声音小一点，调到30吧",
+      "expected_tool": "self_audio_speaker_set_volume",
+      "assistant": "",
+      "tool_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": "{\"volume\": 30}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1304,
+      "usage": {
+        "completion_tokens": 30,
+        "prompt_tokens": 2841,
+        "total_tokens": 2871,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0,
+          "text_tokens": 2841
+        }
+      }
+    },
+    {
+      "preset": "natural",
+      "user": "先别调音量，我就问问现在是多少",
+      "expected_tool": "self_get_device_status",
+      "assistant": "我先看看现在的音量。\n\n",
+      "tool_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": "{}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 908,
+      "usage": {
+        "completion_tokens": 21,
+        "prompt_tokens": 2842,
+        "total_tokens": 2863,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2842
+        }
+      }
+    },
+    {
+      "preset": "natural",
+      "user": "打开摄像头让我看实时画面",
+      "expected_tool": null,
+      "assistant": "实时预览这个我开不了，我这边只能拍一张静态照片给你看。要不我给你拍一张？",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1112,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 2839,
+        "total_tokens": 2861,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2839
+        }
+      }
+    },
+    {
+      "preset": "natural",
+      "user": "他跟我说“把音量调到30”，这句话是什么意思？",
+      "expected_tool": null,
+      "assistant": "这句话的意思应该是想让你把设备的音量调成30，也就是调到比较轻的程度。\n\n需要我现在帮你把音量调到30吗？",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1141,
+      "usage": {
+        "completion_tokens": 30,
+        "prompt_tokens": 2845,
+        "total_tokens": 2875,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2845
+        }
+      }
+    },
+    {
+      "preset": "natural",
+      "user": "拍张照片，看看桌上是什么",
+      "expected_tool": "self_camera_take_photo",
+      "assistant": "好的，这就帮你拍一张看看。\n\n",
+      "tool_calls": [
+        {
+          "name": "self_camera_take_photo",
+          "arguments": "{\"question\": \"桌上是什么？\"}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1446,
+      "usage": {
+        "completion_tokens": 38,
+        "prompt_tokens": 2839,
+        "total_tokens": 2877,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2839
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "user": "声音小一点，调到30吧",
+      "expected_tool": "self_audio_speaker_set_volume",
+      "assistant": "",
+      "tool_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": "{\"volume\": 30}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 856,
+      "usage": {
+        "completion_tokens": 30,
+        "prompt_tokens": 2841,
+        "total_tokens": 2871,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1792,
+          "text_tokens": 2841
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "user": "先别调音量，我就问问现在是多少",
+      "expected_tool": "self_get_device_status",
+      "assistant": "",
+      "tool_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": "{}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1143,
+      "usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 2842,
+        "total_tokens": 2857,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2842
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "user": "打开摄像头让我看实时画面",
+      "expected_tool": null,
+      "assistant": "抱歉，我这边只能拍照识别，打不开实时预览画面。",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1750,
+      "usage": {
+        "completion_tokens": 14,
+        "prompt_tokens": 2839,
+        "total_tokens": 2853,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2839
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "user": "他跟我说“把音量调到30”，这句话是什么意思？",
+      "expected_tool": null,
+      "assistant": "这句话的意思很直接，就是让你把设备的音量数值调整到30。\n\n如果你希望我现在就帮你把音量调过去，可以直接告诉我“现在把音量调到30”，我马上就能帮你设置好。",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1233,
+      "usage": {
+        "completion_tokens": 44,
+        "prompt_tokens": 2845,
+        "total_tokens": 2889,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2845
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "user": "拍张照片，看看桌上是什么",
+      "expected_tool": "self_camera_take_photo",
+      "assistant": "",
+      "tool_calls": [
+        {
+          "name": "self_camera_take_photo",
+          "arguments": "{\"question\": \"桌上是什么？\"}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1034,
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 2839,
+        "total_tokens": 2868,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2839
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "user": "声音小一点，调到30吧",
+      "expected_tool": "self_audio_speaker_set_volume",
+      "assistant": "行，给你调到30。\n\n",
+      "tool_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": "{\"volume\": 30}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1503,
+      "usage": {
+        "completion_tokens": 38,
+        "prompt_tokens": 2829,
+        "total_tokens": 2867,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1792,
+          "text_tokens": 2829
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "user": "先别调音量，我就问问现在是多少",
+      "expected_tool": "self_get_device_status",
+      "assistant": "",
+      "tool_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": "{}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 925,
+      "usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 2830,
+        "total_tokens": 2845,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2830
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "user": "打开摄像头让我看实时画面",
+      "expected_tool": null,
+      "assistant": "抱歉，我这边只能拍静态照片，没法给你开实时预览画面。要是想看看什么，我可以给你拍一张再识别，你说要拍啥就行。",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1338,
+      "usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 2827,
+        "total_tokens": 2861,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2827
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "user": "他跟我说“把音量调到30”，这句话是什么意思？",
+      "expected_tool": null,
+      "assistant": "他这是在跟设备说呢，意思是让你把音量调到30。不过你跟我说这个干嘛，是想让我帮你调，还是单纯在考验我的听力？",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1279,
+      "usage": {
+        "completion_tokens": 33,
+        "prompt_tokens": 2833,
+        "total_tokens": 2866,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2833
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "user": "拍张照片，看看桌上是什么",
+      "expected_tool": "self_camera_take_photo",
+      "assistant": "[emotion:excited]Let me take a photo and check it out.\n\n",
+      "tool_calls": [
+        {
+          "name": "self_camera_take_photo",
+          "arguments": "{\"question\": \"桌上是什么？\"}"
+        }
+      ],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "tool_calls",
+      "elapsed_ms": 1243,
+      "usage": {
+        "completion_tokens": 46,
+        "prompt_tokens": 2827,
+        "total_tokens": 2873,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 2827
+        }
+      }
+    }
+  ]
+}

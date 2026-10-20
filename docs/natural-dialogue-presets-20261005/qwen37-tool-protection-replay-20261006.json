@@ -1,0 +1,89 @@
+{
+  "physical_test": false,
+  "hardware_writes": 0,
+  "cases": [
+    {
+      "id": 45,
+      "user": "提醒我喝水",
+      "proposed": [
+        {
+          "id": "call_e27c526ccf0f4adaa1f5ba44",
+          "name": "add_reminder",
+          "arguments": "{\"content\": \"喝水\", \"remind_time_str\": \"十分钟后\"}"
+        }
+      ],
+      "plan_reply": "什么时候提醒你？",
+      "executed": [],
+      "replies": [
+        "什么时候提醒你？"
+      ],
+      "blocked": true
+    },
+    {
+      "id": 91,
+      "user": "假如两分钟后提醒喝水，一般怎么设置？",
+      "proposed": [
+        {
+          "id": "call_36505dadcfa94b938cc2231e",
+          "name": "add_reminder",
+          "arguments": "{\"content\": \"喝水\", \"remind_time_str\": \"两分钟后\"}"
+        }
+      ],
+      "plan_reply": "",
+      "executed": [],
+      "replies": [
+        "这次是询问、引用或否定表达，没有执行这个操作。"
+      ],
+      "blocked": true
+    },
+    {
+      "id": 139,
+      "user": "把音量设置为120，直接调。",
+      "proposed": [
+        {
+          "id": "call_9e92b0035dd34a7eada9bff8",
+          "name": "self_audio_speaker_set_volume",
+          "arguments": "{\"volume\": 100}"
+        }
+      ],
+      "plan_reply": "",
+      "executed": [
+        [
+          "self_audio_speaker_set_volume",
+          {
+            "volume": 100
+          }
+        ]
+      ],
+      "replies": [
+        "音量已调到100。"
+      ],
+      "blocked": false
+    },
+    {
+      "tool": "self_screen_set_brightness",
+      "payload": {},
+      "protected_reply": "还不能确认亮度是否调整成功。",
+      "blocked": true
+    },
+    {
+      "tool": "self_audio_speaker_set_volume",
+      "payload": {
+        "ok": true,
+        "status": "queued",
+        "message": "尚未完成"
+      },
+      "protected_reply": "还不能确认音量是否调整成功。",
+      "blocked": true
+    },
+    {
+      "tool": "self_audio_speaker_set_volume",
+      "payload": {
+        "ok": false,
+        "error": "offline"
+      },
+      "protected_reply": "这次操作没有完成。",
+      "blocked": true
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vector 风格表情 — 浏览器模拟（程序化圆角眼）</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #1a1a1e;
+      --panel: #25252b;
+      --text: #e8e8ec;
+      --accent: #6ea8fe;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+      padding: 16px; gap: 16px;
+    }
+    h1 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+    .sub { font-size: 0.85rem; opacity: 0.75; max-width: 640px; text-align: center; line-height: 1.5; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
+    canvas {
+      display: block;
+      background: #000;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      max-width: 100%; height: auto;
+    }
+    button, select {
+      background: var(--panel); color: var(--text);
+      border: 1px solid #3a3a44; border-radius: 8px;
+      padding: 8px 14px; font-size: 0.9rem; cursor: pointer;
+    }
+    button:hover, select:hover { border-color: var(--accent); }
+    button.primary { background: #2a3f6b; border-color: var(--accent); }
+    .panel {
+      background: var(--panel); border-radius: 10px;
+      padding: 12px 16px; max-width: 640px; width: 100%;
+      border: 1px solid #333;
+    }
+    label { font-size: 0.8rem; opacity: 0.9; margin-right: 6px; }
+    input[type="range"] { width: 140px; vertical-align: middle; }
+    .kv { font-family: ui-monospace, monospace; font-size: 0.75rem; opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <h1>Vector 风格表情 — 浏览器模拟</h1>
+  <p class="sub">
+    用 Canvas 近似固件里的<strong>程序化圆角矩形眼</strong>：白眼底 + 上下眼皮遮挡 + 关键帧线性插值。
+    直接用浏览器打开本文件即可（无需服务器）。
+  </p>
+  <p class="sub" style="max-width:680px;">
+    <strong>为什么和 Vector 原厂仍有明显差距？</strong>
+    Anki 侧是 OpenCV 多边形填充、仿射变换、单通道缓冲区、Gaussian/高光、ARM NEON 混色与完整 25 参数/眼的资源流水线；
+    本页与固件侧是<strong>教学级简化</strong>（梯形遮挡 + 少量圆角参数 + 线性插值），不负责复刻每一 pixel。若上下睑参数在简化模型里相加≥1，会看起来像「全黑」——已自动压限保留一条可视缝。
+  </p>
+
+  <div class="row">
+    <select id="clipSel" title="选择预设片段"></select>
+    <button type="button" id="btnPlay" class="primary">播放 / 暂停</button>
+    <button type="button" id="btnReset">时间归零</button>
+  </div>
+
+  <canvas id="c" width="320" height="240"></canvas>
+
+  <div class="panel">
+    <div class="row" style="margin-bottom:8px;">
+      <label><input type="checkbox" id="chkManual" /> 手动调参（暂停片段）</label>
+    </div>
+    <div id="manualControls" style="display:none;">
+      <div class="row" style="margin:4px 0;">
+        <label>眼睁合(上)</label><input type="range" id="rUpper" min="0" max="100" value="15" />
+        <label>眼睁合(下)</label><input type="range" id="rLower" min="0" max="100" value="5" />
+      </div>
+      <div class="row" style="margin:4px 0;">
+        <label>上睑角度 °</label><input type="range" id="rUAng" min="-45" max="45" value="0" />
+        <label>缩放</label><input type="range" id="rScale" min="60" max="140" value="80" />
+      </div>
+      <div class="row" style="margin:4px 0;">
+        <label>视线 X</label><input type="range" id="rCX" min="-100" max="100" value="0" />
+        <label>视线 Y</label><input type="range" id="rCY" min="-100" max="100" value="0" />
+      </div>
+    </div>
+    <div class="kv" id="readout"></div>
+  </div>
+
+  <script>
+(function () {
+  'use strict';
+
+  const REF_W = 1280, REF_H = 720;
+  const BUF_W = 320, BUF_H = 240;
+  const SCALE = BUF_W / REF_W;
+  const EYE_CENTER_X = 640, EYE_OFFSET = 256;
+  const EYE_W = 280, EYE_H = 450;
+  const REF_CORNER = REF_W / 20 + REF_H / 10;
+
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const readout = document.getElementById('readout');
+  const clipSel = document.getElementById('clipSel');
+  const chkManual = document.getElementById('chkManual');
+  const manualControls = document.getElementById('manualControls');
+
+  function defaultEye() {
+    return {
+      center_x: 0, center_y: 0,
+      scale_x: 1, scale_y: 1,
+      upper_outer_radius_x: 0.5, upper_outer_radius_y: 0.5,
+      upper_inner_radius_x: 0.5, upper_inner_radius_y: 0.5,
+      lower_outer_radius_x: 0.5, lower_outer_radius_y: 0.5,
+      lower_inner_radius_x: 0.5, lower_inner_radius_y: 0.5,
+      upper_lid: { y: 0.1, angle: 0, bend: 0 },
+      lower_lid: { y: 0.1, angle: 0, bend: 0 },
+    };
+  }
+
+  function cloneEye(e) {
+    return JSON.parse(JSON.stringify(e));
+  }
+
+  function defaultFace() {
+    return {
+      face_center_x: 0, face_center_y: 0,
+      left_eye: defaultEye(),
+      right_eye: defaultEye(),
+    };
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function lerpEye(a, b, t, out) {
+    out.center_x = lerp(a.center_x, b.center_x, t);
+    out.center_y = lerp(a.center_y, b.center_y, t);
+    out.scale_x = lerp(a.scale_x, b.scale_x, t);
+    out.scale_y = lerp(a.scale_y, b.scale_y, t);
+    ['upper_outer_radius_x','upper_outer_radius_y','upper_inner_radius_x','upper_inner_radius_y',
+     'lower_outer_radius_x','lower_outer_radius_y','lower_inner_radius_x','lower_inner_radius_y'].forEach(k => {
+      out[k] = lerp(a[k], b[k], t);
+    });
+    out.upper_lid.y = lerp(a.upper_lid.y, b.upper_lid.y, t);
+    out.upper_lid.angle = lerp(a.upper_lid.angle, b.upper_lid.angle, t);
+    out.upper_lid.bend = lerp(a.upper_lid.bend, b.upper_lid.bend, t);
+    out.lower_lid.y = lerp(a.lower_lid.y, b.lower_lid.y, t);
+    out.lower_lid.angle = lerp(a.lower_lid.angle, b.lower_lid.angle, t);
+    out.lower_lid.bend = lerp(a.lower_lid.bend, b.lower_lid.bend, t);
+  }
+
+  function lerpFace(a, b, t, o) {
+    o.face_center_x = lerp(a.face_center_x, b.face_center_x, t);
+    o.face_center_y = lerp(a.face_center_y, b.face_center_y, t);
+    lerpEye(a.left_eye, b.left_eye, t, o.left_eye);
+    lerpEye(a.right_eye, b.right_eye, t, o.right_eye);
+  }
+
+  function keyframe(t, face) {
+    return { trigger_time_ms: t, face_params: face };
+  }
+
+  // —— 与固件片段同构的简化版关键帧（数值对齐思路，非逐字节一致） ——
+  const clips = [
+    {
+      name: 'neutral（待机 + 扫视 + 眨眼帧）',
+      total_duration_ms: 10000,
+      loop: true,
+      face_track: (function () {
+        const f = defaultFace();
+        f.left_eye.scale_x = f.left_eye.scale_y = 0.8;
+        f.right_eye.scale_x = f.right_eye.scale_y = 0.8;
+        const mk = (t, lx, ly, rx, ry, lu, ru, lua, rua) => {
+          const o = JSON.parse(JSON.stringify(f));
+          o.left_eye.center_x = lx; o.left_eye.center_y = ly;
+          o.right_eye.center_x = rx; o.right_eye.center_y = ry;
+          o.left_eye.upper_lid.y = lu; o.right_eye.upper_lid.y = ru;
+          o.left_eye.upper_lid.angle = lua; o.right_eye.upper_lid.angle = rua;
+          return keyframe(t, o);
+        };
+        const blink = (t, base) => JSON.parse(JSON.stringify((() => {
+          const b = JSON.parse(JSON.stringify(base.face_params));
+          b.left_eye.upper_lid.y = 1; b.right_eye.upper_lid.y = 1;
+          return { trigger_time_ms: t, face_params: b };
+        })()));
+        const k0 = mk(0, 0,0,0,0, 0.1, 0.1, 0, 0);
+        const k1 = mk(1000, 0,0.1,0,0.1, 0.2, 0.2, 0, 0);
+        return [
+          k0, k1, blink(1100, k1), mk(1300, 0,0.1,0,0.1, 0.2, 0.2, 0, 0),
+          mk(3000, -0.3,-0.2, -0.3,-0.2, 0.05, 0.05, 0, 0),
+          mk(6000, 0,0,0,0, 0.1, 0.1, 0, 0),
+          blink(6200, mk(6000, 0,0,0,0, 0.1, 0.1, 0, 0)),
+          mk(6400, 0,0,0,0, 0.1, 0.1, 0, 0),
+          mk(10000, 0,0,0,0, 0.1, 0.1, 0, 0),
+        ];
+      })(),
+    },
+    {
+      name: 'happy（笑眼 + 上跳）',
+      total_duration_ms: 2000,
+      loop: true,
+      face_track: [
+        keyframe(0, (() => { const o = defaultFace();
+          o.left_eye.lower_lid.y = 0.4; o.left_eye.lower_lid.angle = 15;
+          o.right_eye.lower_lid.y = 0.4; o.right_eye.lower_lid.angle = -15;
+          o.left_eye.upper_outer_radius_x = o.right_eye.upper_outer_radius_x = 1;
+          return o; })()),
+        keyframe(500, (() => { const o = defaultFace();
+          o.left_eye.lower_lid.y = 0.4; o.left_eye.lower_lid.angle = 15;
+          o.right_eye.lower_lid.y = 0.4; o.right_eye.lower_lid.angle = -15;
+          o.left_eye.upper_outer_radius_x = o.right_eye.upper_outer_radius_x = 1;
+          o.left_eye.center_y = o.right_eye.center_y = -0.3;
+          return o; })()),
+        keyframe(1000, (() => { const o = defaultFace();
+          o.left_eye.lower_lid.y = 0.4; o.left_eye.lower_lid.angle = 15;
+          o.right_eye.lower_lid.y = 0.4; o.right_eye.lower_lid.angle = -15;
+          o.left_eye.upper_outer_radius_x = o.right_eye.upper_outer_radius_x = 1;
+          return o; })()),
+        keyframe(2000, (() => { const o = defaultFace();
+          o.left_eye.lower_lid.y = 0.4; o.left_eye.lower_lid.angle = 15;
+          o.right_eye.lower_lid.y = 0.4; o.right_eye.lower_lid.angle = -15;
+          o.left_eye.upper_outer_radius_x = o.right_eye.upper_outer_radius_x = 1;
+          return o; })()),
+      ],
+    },
+    {
+      name: 'angry（压睑 + 略聚）',
+      total_duration_ms: 3000,
+      loop: true,
+      face_track: [
+        keyframe(0, (() => { const o = defaultFace();
+          o.left_eye.upper_lid.y = 0.6; o.left_eye.upper_lid.angle = -25;
+          o.right_eye.upper_lid.y = 0.6; o.right_eye.upper_lid.angle = 25;
+          o.left_eye.scale_x = o.left_eye.scale_y = 0.9;
+          o.right_eye.scale_x = o.right_eye.scale_y = 0.9;
+          return o; })()),
+        keyframe(1500, (() => { const o = defaultFace();
+          o.left_eye.upper_lid.y = 0.65; o.left_eye.upper_lid.angle = -30;
+          o.right_eye.upper_lid.y = 0.65; o.right_eye.upper_lid.angle = 30;
+          o.left_eye.scale_x = o.left_eye.scale_y = 0.85;
+          o.right_eye.scale_x = o.right_eye.scale_y = 0.85;
+          o.left_eye.center_x = 0.1; o.right_eye.center_x = -0.1;
+          return o; })()),
+        keyframe(3000, (() => { const o = defaultFace();
+          o.left_eye.upper_lid.y = 0.6; o.left_eye.upper_lid.angle = -25;
+          o.right_eye.upper_lid.y = 0.6; o.right_eye.upper_lid.angle = 25;
+          o.left_eye.scale_x = o.left_eye.scale_y = 0.9;
+          o.right_eye.scale_x = o.right_eye.scale_y = 0.9;
+          return o; })()),
+      ],
+    },
+    {
+      name: 'awe（睁大 + 趋圆）',
+      total_duration_ms: 1500,
+      loop: false,
+      face_track: [
+        keyframe(0, defaultFace()),
+        keyframe(150, (() => { const o = defaultFace();
+          o.left_eye.scale_x = o.left_eye.scale_y = 1.3;
+          o.right_eye.scale_x = o.right_eye.scale_y = 1.3;
+          ['upper_outer_radius_x','upper_outer_radius_y','upper_inner_radius_x','upper_inner_radius_y',
+           'lower_outer_radius_x','lower_outer_radius_y','lower_inner_radius_x','lower_inner_radius_y'].forEach(k => {
+            o.left_eye[k] = 1; o.right_eye[k] = 1;
+
+          });
+          return o; })()),
+      ],
+    },
+    {
+      name: 'asleep（困 / 呼吸）',
+      total_duration_ms: 4000,
+      loop: true,
+      face_track: [
+        keyframe(0, (() => { const o = defaultFace();
+          o.left_eye.center_y = o.right_eye.center_y = 0.35;
+          /* 简化遮挡模型：uy+ly 须 < 1，否则白区被上下睑完全吃光 -> 全黑 */
+          o.left_eye.upper_lid.y = o.right_eye.upper_lid.y = 0.48;
+          o.left_eye.lower_lid.y = o.right_eye.lower_lid.y = 0.40;
+          return o; })()),
+        keyframe(2000, (() => { const o = defaultFace();
+          o.left_eye.center_y = o.right_eye.center_y = 0.35;
+          o.left_eye.upper_lid.y = o.right_eye.upper_lid.y = 0.54;
+          o.left_eye.lower_lid.y = o.right_eye.lower_lid.y = 0.38;
+          o.left_eye.scale_x = o.left_eye.scale_y = o.right_eye.scale_x = o.right_eye.scale_y = 0.95;
+          return o; })()),
+        keyframe(4000, (() => { const o = defaultFace();
+          o.left_eye.center_y = o.right_eye.center_y = 0.35;
+          o.left_eye.upper_lid.y = o.right_eye.upper_lid.y = 0.48;
+          o.left_eye.lower_lid.y = o.right_eye.lower_lid.y = 0.40;
+          return o; })()),
+      ],
+    },
+  ];
+
+  clips.forEach((c, i) => {
+    const opt = document.createElement('option');
+    opt.value = String(i);
+    opt.textContent = c.name;
+    clipSel.appendChild(opt);
+  });
+
+  let playing = true;
+  let clipTimeMs = 0;
+  let lastTs = 0;
+  const currentFace = defaultFace();
+  currentFace.left_eye = cloneEye(defaultEye());
+  currentFace.right_eye = cloneEye(defaultEye());
+
+  function scaleVal(v) { return Math.round(v * SCALE); }
+
+  /** 本页简化模型：上睑下移量 ∝ uy、下睑上移量 ∝ ly，二者覆盖同一竖直区间；uy+ly≥1 则眼白被完全遮挡。 */
+  function clampLids(uy, ly, maxSum) {
+    maxSum = maxSum ?? 0.93;
+    uy = Math.max(0, Math.min(1, uy));
+    ly = Math.max(0, Math.min(1, ly));
+    if (uy + ly > maxSum) {
+      const s = maxSum / (uy + ly);
+      uy *= s;
+      ly *= s;
+    }
+    return [uy, ly];
+  }
+
+  /** 右眼与左眼左右镜像，角度需取反才能得到对称神态（否则会出现「一横条 / U 形」错觉） */
+  function lidSkewFromAngle(deg, halfW, isLeft) {
+    const eff = (isLeft ? 1 : -1) * deg;
+    let t = Math.tan(eff * Math.PI / 180);
+    t = Math.max(-1.35, Math.min(1.35, t));
+    return t * halfW * 0.5;
+  }
+
+  /** 圆角矩形 path（四角可不同半径，单位像素） */
+  function roundRectPath(ctx, x, y, w, h, rtl, rtr, rbr, rbl) {
+    const x1 = x, y1 = y, x2 = x + w, y2 = y + h;
+    ctx.beginPath();
+    ctx.moveTo(x1 + rtl, y1);
+    ctx.lineTo(x2 - rtr, y1);
+    ctx.arcTo(x2, y1, x2, y1 + rtr, rtr);
+    ctx.lineTo(x2, y2 - rbr);
+    ctx.arcTo(x2, y2, x2 - rbr, y2, rbr);
+    ctx.lineTo(x1 + rbl, y2);
+    ctx.arcTo(x1, y2, x1, y2 - rbl, rbl);
+    ctx.lineTo(x1, y1 + rtl);
+    ctx.arcTo(x1, y1, x1 + rtl, y1, rtl);
+    ctx.closePath();
+  }
+
+  function drawEye(face, eye, baseCx, baseCy, isLeft) {
+    const halfW = Math.max(2, Math.round(scaleVal(EYE_W / 2) * eye.scale_x));
+    const halfH = Math.max(2, Math.round(scaleVal(EYE_H / 2) * eye.scale_y));
+    const cx = baseCx + Math.round(eye.center_x * 0.55 * BUF_W) + Math.round(face.face_center_x * 0.55 * BUF_W);
+    const cy = baseCy + Math.round(eye.center_y * 0.25 * BUF_H) + Math.round(face.face_center_y * 0.25 * BUF_H);
+
+    const cr = Math.max(1, scaleVal(REF_CORNER));
+    const tlrx = Math.round(cr * eye.upper_outer_radius_x);
+    const tlry = Math.round(cr * eye.upper_outer_radius_y);
+    const trrx = Math.round(cr * eye.upper_inner_radius_x);
+    const trry = Math.round(cr * eye.upper_inner_radius_y);
+    const brrx = Math.round(cr * eye.lower_inner_radius_x);
+    const brry = Math.round(cr * eye.lower_inner_radius_y);
+    const blrx = Math.round(cr * eye.lower_outer_radius_x);
+    const blry = Math.round(cr * eye.lower_outer_radius_y);
+
+    const x1 = cx - halfW, y1 = cy - halfH, w = halfW * 2, h = halfH * 2;
+    const x2 = x1 + w, y2 = y1 + h;
+
+    roundRectPath(ctx, x1, y1, w, h,
+      Math.min(tlrx, halfW), Math.min(tlry, halfH),
+      Math.min(trrx, halfW), Math.min(trry, halfH),
+      Math.min(brrx, halfW), Math.min(brry, halfH),
+      Math.min(blrx, halfW), Math.min(blry, halfH));
+    /* Vector 风：径向渐变（青白芯 + 饱和青绿边），与固件 RGB565 近似同款观感 */
+    const rGrad = Math.max(8, Math.hypot(halfW, halfH));
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rGrad);
+    g.addColorStop(0, 'rgb(232,255,255)');
+    g.addColorStop(0.45, 'rgb(0,255,220)');
+    g.addColorStop(1, 'rgb(0,180,170)');
+    ctx.fillStyle = g;
+    ctx.fill();
+
+    const bg = '#000000';
+    let uy = eye.upper_lid.y;
+    let ly = eye.lower_lid.y;
+    [uy, ly] = clampLids(uy, ly, 0.93);
+    const skew = lidSkewFromAngle(eye.upper_lid.angle, halfW, isLeft);
+
+    ctx.fillStyle = bg;
+    // 上睑：简化梯形遮罩
+    if (uy > 0.02) {
+      const lidH = uy * halfH * 2;
+      const top = y1 - 4;
+      const bottom = y1 + lidH;
+      ctx.beginPath();
+      ctx.moveTo(x1 - 4 - skew, top);
+      ctx.lineTo(x2 + 4 + skew, top);
+      ctx.lineTo(x2 + 4 - skew, bottom);
+      ctx.lineTo(x1 - 4 + skew, bottom);
+      ctx.closePath();
+      ctx.fill();
+    }
+    // 下睑
+    if (ly > 0.02) {
+      const lidH = ly * halfH * 2;
+      const skewL = lidSkewFromAngle(eye.lower_lid.angle, halfW, isLeft);
+      const bottom = y2 + 4;
+      const top = y2 - lidH;
+      ctx.beginPath();
+      ctx.moveTo(x1 - 4 + skewL, bottom);
+      ctx.lineTo(x2 + 4 - skewL, bottom);
+      ctx.lineTo(x2 + 4 + skewL, top);
+      ctx.lineTo(x1 - 4 - skewL, top);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function copyFaceParams(dst, src) {
+    const j = JSON.parse(JSON.stringify(src));
+    dst.face_center_x = j.face_center_x ?? 0;
+    dst.face_center_y = j.face_center_y ?? 0;
+    dst.left_eye = j.left_eye;
+    dst.right_eye = j.right_eye;
+  }
+
+  function evalClip(clip, tMs, outFace) {
+    const tr = clip.face_track;
+    if (!tr.length) return;
+    if (tr.length === 1) {
+      copyFaceParams(outFace, tr[0].face_params);
+      return;
+    }
+    if (tMs <= tr[0].trigger_time_ms) {
+      copyFaceParams(outFace, tr[0].face_params);
+      return;
+    }
+    const last = tr[tr.length - 1];
+    if (tMs >= last.trigger_time_ms) {
+      copyFaceParams(outFace, last.face_params);
+      return;
+    }
+    for (let i = 0; i < tr.length - 1; i++) {
+      const a = tr[i], b = tr[i + 1];
+      if (tMs >= a.trigger_time_ms && tMs <= b.trigger_time_ms) {
+        const span = b.trigger_time_ms - a.trigger_time_ms;
+        const tt = span > 0 ? (tMs - a.trigger_time_ms) / span : 0;
+        lerpFace(a.face_params, b.face_params, tt, outFace);
+        return;
+      }
+    }
+    copyFaceParams(outFace, last.face_params);
+  }
+
+  function render() {
+    const f = currentFace;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, BUF_W, BUF_H);
+
+    const leftCx = scaleVal(EYE_CENTER_X - EYE_OFFSET) + Math.round(f.face_center_x * 0.55 * BUF_W);
+    const rightCx = scaleVal(EYE_CENTER_X + EYE_OFFSET) + Math.round(f.face_center_x * 0.55 * BUF_W);
+    const eyeCy = Math.floor(BUF_H / 2) + Math.round(f.face_center_y * 0.25 * BUF_H);
+    drawEye(f, f.left_eye, leftCx, eyeCy, true);
+    drawEye(f, f.right_eye, rightCx, eyeCy, false);
+  }
+
+  function currentClip() { return clips[Number(clipSel.value)] || clips[0]; }
+
+  function tick(ts) {
+    if (!lastTs) lastTs = ts;
+    const dt = Math.min(50, ts - lastTs);
+    lastTs = ts;
+
+    if (!chkManual.checked && playing) {
+      const c = currentClip();
+      clipTimeMs += dt;
+      if (c.loop && c.total_duration_ms > 0) {
+        clipTimeMs = clipTimeMs % c.total_duration_ms;
+      } else if (clipTimeMs > c.total_duration_ms) {
+        clipTimeMs = c.total_duration_ms;
+      }
+      evalClip(c, clipTimeMs, currentFace);
+    } else if (chkManual.checked) {
+      const uh = Number(document.getElementById('rUpper').value) / 100;
+      const lh = Number(document.getElementById('rLower').value) / 100;
+      const uang = Number(document.getElementById('rUAng').value);
+      const sc = Number(document.getElementById('rScale').value) / 100;
+      const cxx = Number(document.getElementById('rCX').value) / 100;
+      const cyy = Number(document.getElementById('rCY').value) / 100;
+      currentFace.left_eye.upper_lid.y = currentFace.right_eye.upper_lid.y = uh;
+      currentFace.left_eye.lower_lid.y = currentFace.right_eye.lower_lid.y = lh;
+      currentFace.left_eye.upper_lid.angle = uang;
+      currentFace.right_eye.upper_lid.angle = -uang;
+      currentFace.left_eye.scale_x = currentFace.left_eye.scale_y = sc;
+      currentFace.right_eye.scale_x = currentFace.right_eye.scale_y = sc;
+      currentFace.left_eye.center_x = currentFace.right_eye.center_x = cxx;
+      currentFace.left_eye.center_y = currentFace.right_eye.center_y = cyy;
+    }
+
+    render();
+    const c = currentClip();
+    readout.textContent =
+      '片段: ' + c.name + ' | t=' + Math.round(clipTimeMs) + 'ms / ' + c.total_duration_ms + 'ms' +
+      (c.loop ? ' (loop)' : '') + (chkManual.checked ? ' | 手动模式' : (playing ? '' : ' | 已暂停'));
+    requestAnimationFrame(tick);
+  }
+
+  document.getElementById('btnPlay').addEventListener('click', function () {
+    playing = !playing;
+    lastTs = 0;
+  });
+  document.getElementById('btnReset').addEventListener('click', function () {
+    clipTimeMs = 0;
+    lastTs = 0;
+  });
+  clipSel.addEventListener('change', function () {
+    clipTimeMs = 0;
+    lastTs = 0;
+    evalClip(currentClip(), clipTimeMs, currentFace);
+  });
+  chkManual.addEventListener('change', function () {
+    manualControls.style.display = chkManual.checked ? 'block' : 'none';
+    if (chkManual.checked) playing = false;
+  });
+
+  evalClip(currentClip(), 0, currentFace);
+  requestAnimationFrame(tick);
+})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "services": {
+    "manager-api": "online",
+    "manager-web": "online",
+    "mcp-gateway": "online",
+    "xiaozhi-server": "online"
+  },
+  "ports_checked": [
+    8000,
+    8001,
+    8002,
+    8006
+  ],
+  "protected_configuration_unchanged": true,
+  "source_hashes_match": true,
+  "runtime_audio_changes": [
+    "/root/prjs/xiaozhi-esp32-server/main/xiaozhi-server/config/assets/wakeup_words/83dca73ebd19180d2b8b39723dae401b.wav"
+  ],
+  "auth": {
+    "manager_no_bearer": 401,
+    "python_no_bearer": 401
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "old_pm_id": 8,
+  "old_listener_pid": 30103,
+  "new_pm_id": 9,
+  "source_commit": "6ebf90c4251ff29098864aef880fec150a5c7b03",
+  "ports": [
+    8070,
+    8073,
+    8076
+  ],
+  "backup": "/root/prjs/releases/mcp-prune-20261010/backup",
+  "started_at": 1791568141.556268,
+  "firmware_compiled": false,
+  "health": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "manager_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "phase": "verified",
+  "switched_at": 1791568144.809889,
+  "verified_at": 1791568324.0998187,
+  "billing_environment_unchanged": true,
+  "old_listener_stopped": true
+}

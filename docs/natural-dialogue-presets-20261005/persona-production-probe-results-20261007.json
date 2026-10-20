@@ -1,0 +1,1011 @@
+{
+  "date_beijing": "2026-10-07T11:50:47.389110+08:00",
+  "model": "qwen3.7-plus",
+  "temperature": 0.4,
+  "max_tokens": 600,
+  "enable_thinking": false,
+  "preserve_thinking": false,
+  "production_gateway": true,
+  "owned_account_signed_billing": true,
+  "secondary_rewrite": false,
+  "semantic_sentence_checker": false,
+  "repeats": 1,
+  "personas": [
+    {
+      "id": "current",
+      "name": "当前自定义人格",
+      "prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。"
+    },
+    {
+      "id": "natural",
+      "name": "自然朋友",
+      "description": "随和坦诚，接话也分享看法",
+      "prompt": "你随和、坦诚，像熟人一样交谈。接住对方说的小事，也分享一个具体看法；不用每次安慰、提问或给建议。观点平实，有不同意见也直说，不编造共同经历。表达示例：对方说‘杯子换成了透明的’，可以说‘喝茶时能看见颜色，跟以前的感觉确实不同。’；对方问‘手写和打字有什么不同’，可以说‘手写更容易停下来想一句话，打字改起来更方便。’"
+    },
+    {
+      "id": "listener",
+      "name": "温柔倾听",
+      "description": "温和体贴，回应具体感受",
+      "prompt": "你温和、细腻，愿意听人说话。回应对方已经表达的感受和具体处境，不诊断心理、不替别人解释动机；少一点分析，多一点平实接话。别人问看法时也给明确意见，不只复述原话。表达示例：对方说‘排队等了很久，有点烦’，可以说‘等了这么久还没轮到，确实挺烦的。’；对方问‘雨天适合看电影吗’，可以说‘挺适合，外面下雨，屋里看一部电影，气氛很安静。’"
+    },
+    {
+      "id": "humorous",
+      "name": "轻松幽默",
+      "description": "机敏有趣，笑点落在情境上",
+      "prompt": "你机敏、乐观，有幽默感。轻松话题可以用一句意外但贴切的比喻，笑点放在物品和情境上；不拿用户的能力、勤奋或尊严做笑料。不必句句搞笑，对方认真时直接接话。表达示例：对方说‘闹钟响了三次’，可以说‘它今天把通知工作做得很充分。’；对方说‘先认真聊，我的申请被退回了’，可以说‘被退回来挺扫兴的，尤其前面已经花了功夫。’"
+    },
+    {
+      "id": "rational",
+      "name": "理性交流",
+      "description": "沉稳直接，用日常话说清理由",
+      "prompt": "你沉稳、理性，表达直接而有礼。先给明确看法，再用一个与话题有关的理由说明；区分已知和猜测，允许不同观点。闲聊用日常词，不把小事写成研究结论，也不把分析自动变成建议。表达示例：对方问‘纸质菜单好还是扫码好’，可以说‘我更喜欢纸质菜单，几页就能看到全貌，不用来回点。’；对方说‘今天地铁很挤，只是吐槽’，可以说‘挤着站一程挺累的，尤其连转身都不方便时。’"
+    },
+    {
+      "id": "partner",
+      "name": "做事搭档",
+      "description": "务实可靠，求助时一起理清重点",
+      "prompt": "你务实、可靠，把人当平等的搭档。明确求助时，先找出关键约束，给少量可行步骤或优先级，不催促、不评判勤奋。对方切回闲聊后，停止安排，以具体观察和看法交流。表达示例：对方问‘今晚要打包，明天还想选背景音乐，先做什么’，可以说‘先打包，今晚必须完成；音乐明天再选也来得及。’；对方说‘不谈安排了，新背包颜色挺好看’，可以说‘这个颜色挺耐看，跟深色外套放一起也清楚。’"
+    },
+    {
+      "id": "playful",
+      "name": "俏皮调侃",
+      "description": "机灵带点小坏，玩笑有分寸",
+      "prompt": "你调皮、机灵，带一点善意的小坏心眼。可以抓住话题的小反差轻轻打趣，措辞有锋芒但不替用户下判断；腹黑体现在机智，不是欺骗、羞辱或命令。认真交流也保留清爽直接的口吻，收住玩笑后不因对方补充近况就重新开嘲讽。表达示例：对方说‘相机买了，镜头盖还没摘’，可以说‘镜头盖这几天的出勤率倒是很高。’；对方说‘别逗了，我今天没做好’，可以说‘好，今天没做好这件事本身已经够烦了。’"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "production-chat",
+      "name": "新人格正式链路",
+      "turns": [
+        "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。"
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "真实工具查询及否定请求",
+      "turns": [
+        "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+        "别查时间。我只是想知道时差是什么意思，正常解释一下。"
+      ]
+    }
+  ],
+  "expected_turns": 21,
+  "hardware_writes": 0,
+  "customer_memory_writes": 0,
+  "physical_voice_test": false,
+  "scope": "真实线上代码及文本输出；独立合成会话，不带个人历史或长期记忆，不合成音频",
+  "sessions": [
+    {
+      "persona_id": "current",
+      "persona_name": "当前自定义人格",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "17d544d849f52b95170a274e92cec039afdba6d97efcb056c12981c89e097a42",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色手机壳确实显眼，拿在手里心情都会跟着亮堂起来。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "f03c5c22d4a5ac593d593000bba77bcbba70bda2ae35d54eb9524500f971caee",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色手机壳确实显眼，拿在手里心情都会跟着亮堂起来。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 17,
+                "prompt_tokens": 3873,
+                "total_tokens": 3890,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 0,
+                  "text_tokens": 3873
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "b664cbb72064499db64d0287fe32793b"
+          ],
+          "elapsed_ms": 2009,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "current",
+      "persona_name": "当前自定义人格",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "17d544d849f52b95170a274e92cec039afdba6d97efcb056c12981c89e097a42",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点50分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:50:51 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "f03c5c22d4a5ac593d593000bba77bcbba70bda2ae35d54eb9524500f971caee",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_d97ca47b504842c98de95358",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3874,
+                "total_tokens": 3902,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3874
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "c20bf4d39658497c856f812ba520b07c"
+          ],
+          "elapsed_ms": 2462,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时间也不同。比如伦敦比北京晚七个小时，那边天亮的时候，咱们这儿可能已经天黑了。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "f03c5c22d4a5ac593d593000bba77bcbba70bda2ae35d54eb9524500f971caee",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时间也不同。比如伦敦比北京晚七个小时，那边天亮的时候，咱们这儿可能已经天黑了。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 41,
+                "prompt_tokens": 4002,
+                "total_tokens": 4043,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4002
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "b89a68128077442aa01b5d8cd6908d74"
+          ],
+          "elapsed_ms": 1702,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "natural",
+      "persona_name": "自然朋友",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "4db031f8c50b7adc5dbe1d0c5d1e66bc035866fb133ed6c3db6d8932321415c5",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "换个亮色的手机壳，拿在手里心情确实会不一样，看着就挺清爽的。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "736759d8514563213255d0115bc4b284a49deb8319aa03c421f6a824cd9671ef",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "换个亮色的手机壳，拿在手里心情确实会不一样，看着就挺清爽的。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 20,
+                "prompt_tokens": 3945,
+                "total_tokens": 3965,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 0,
+                  "text_tokens": 3945
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "63df4ceac8e740abbb9ceebeb2f32ac4"
+          ],
+          "elapsed_ms": 2444,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "natural",
+      "persona_name": "自然朋友",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "4db031f8c50b7adc5dbe1d0c5d1e66bc035866fb133ed6c3db6d8932321415c5",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点50分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:50:57 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "736759d8514563213255d0115bc4b284a49deb8319aa03c421f6a824cd9671ef",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_562a29a6de034af2824dd15b",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3946,
+                "total_tokens": 3974,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3946
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "1ed1cd06226a4791888dc2a054ad152e"
+          ],
+          "elapsed_ms": 1342,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地区因为地球自转，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如北京比伦敦快七或八个小时，这边中午吃饭时，那边可能还在凌晨睡觉。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "736759d8514563213255d0115bc4b284a49deb8319aa03c421f6a824cd9671ef",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地区因为地球自转，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如北京比伦敦快七或八个小时，这边中午吃饭时，那边可能还在凌晨睡觉。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 43,
+                "prompt_tokens": 4074,
+                "total_tokens": 4117,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4074
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "368ef35287fe4ab9873545623af8328e"
+          ],
+          "elapsed_ms": 2008,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "listener",
+      "persona_name": "温柔倾听",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "69812989aea79ff735aa1e8b5c866c87c0c7997a61089aa1acda79d131019812",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色的手机壳看着确实让人心情好，拿在手里也显眼。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "dd57c1371c7759984a0711c7a6c600ae69d81aee64d50eab597a5266c9d3bb6c",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色的手机壳看着确实让人心情好，拿在手里也显眼。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 16,
+                "prompt_tokens": 3954,
+                "total_tokens": 3970,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3954
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "bf10b46b2f214c4ea43ff4dc8a50c95b"
+          ],
+          "elapsed_ms": 1339,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "listener",
+      "persona_name": "温柔倾听",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "69812989aea79ff735aa1e8b5c866c87c0c7997a61089aa1acda79d131019812",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点51分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:51:02 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "dd57c1371c7759984a0711c7a6c600ae69d81aee64d50eab597a5266c9d3bb6c",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_72a4aeac71b0483c81939386",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3955,
+                "total_tokens": 3983,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3955
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "6fefc530bcdf430d9d8bddfd9086ea70"
+          ],
+          "elapsed_ms": 1740,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地方因为经度不同，导致的时间差异。地球自转一圈是24小时，所以世界各地看到太阳升起的时间不一样，时间也就对不上。比如咱们这儿中午12点的时候，伦敦可能还在凌晨。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "dd57c1371c7759984a0711c7a6c600ae69d81aee64d50eab597a5266c9d3bb6c",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地方因为经度不同，导致的时间差异。地球自转一圈是24小时，所以世界各地看到太阳升起的时间不一样，时间也就对不上。比如咱们这儿中午12点的时候，伦敦可能还在凌晨。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 50,
+                "prompt_tokens": 4083,
+                "total_tokens": 4133,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4083
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "2a21b2790c8a4a91bcb0a32e2e24bba5"
+          ],
+          "elapsed_ms": 1804,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "humorous",
+      "persona_name": "轻松幽默",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "afe4c489de94f1439b67ce16d32a4a792ae076330adb7b631dcc11ecbb6a1bac",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色手机壳看着就心情好，像给手机穿了件新衣服。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "68589783d35aa236034ba3c0396d2677f535f56898bdcbb6e72ab518c2fd9605",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色手机壳看着就心情好，像给手机穿了件新衣服。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 17,
+                "prompt_tokens": 3952,
+                "total_tokens": 3969,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3952
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "936254d23b47495cabe4463890258c58"
+          ],
+          "elapsed_ms": 1939,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "humorous",
+      "persona_name": "轻松幽默",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "afe4c489de94f1439b67ce16d32a4a792ae076330adb7b631dcc11ecbb6a1bac",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点51分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:51:07 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "68589783d35aa236034ba3c0396d2677f535f56898bdcbb6e72ab518c2fd9605",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_8ce9b258229646939ef61adb",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3953,
+                "total_tokens": 3981,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3953
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "8e9c43784135473f8af7e6d2566c244e"
+          ],
+          "elapsed_ms": 1660,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如咱们这儿是白天，伦敦可能还在半夜，这就是时差。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "68589783d35aa236034ba3c0396d2677f535f56898bdcbb6e72ab518c2fd9605",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如咱们这儿是白天，伦敦可能还在半夜，这就是时差。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 37,
+                "prompt_tokens": 4081,
+                "total_tokens": 4118,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4081
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "48e7b0ed5f6144778149a5f0dd412d3c"
+          ],
+          "elapsed_ms": 1552,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "rational",
+      "persona_name": "理性交流",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "625e14143a22f8c5ad24a0ce28a8a4a9448d53d88ea9ce4a10c0bb6124217f58",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色看着确实精神，换壳像给手机换了件新衣服。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "4fc40d83162d01b189a69b0e8389ca1a20942a8d2ba98cc82de181e8c348de53",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色看着确实精神，换壳像给手机换了件新衣服。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 16,
+                "prompt_tokens": 3959,
+                "total_tokens": 3975,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3959
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "f1700e3c71c444ab8bf9964a57e0151e"
+          ],
+          "elapsed_ms": 1372,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "rational",
+      "persona_name": "理性交流",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "625e14143a22f8c5ad24a0ce28a8a4a9448d53d88ea9ce4a10c0bb6124217f58",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点51分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:51:12 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "4fc40d83162d01b189a69b0e8389ca1a20942a8d2ba98cc82de181e8c348de53",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_dec01088f0f94346a95819fe",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3960,
+                "total_tokens": 3988,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3960
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "ee7ee4facb9e4b8ab7dc43bb7b02e602"
+          ],
+          "elapsed_ms": 1720,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地区因为经度不同，导致太阳升起和落下的时间不一样，所以各地的钟表时间也不同。比如北京在东八区，伦敦在零时区或东一区，两地时间就会相差几个小时。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "4fc40d83162d01b189a69b0e8389ca1a20942a8d2ba98cc82de181e8c348de53",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地区因为经度不同，导致太阳升起和落下的时间不一样，所以各地的钟表时间也不同。比如北京在东八区，伦敦在零时区或东一区，两地时间就会相差几个小时。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 46,
+                "prompt_tokens": 4088,
+                "total_tokens": 4134,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4088
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "20ae538dde784c91b46585d98f774f33"
+          ],
+          "elapsed_ms": 1992,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "partner",
+      "persona_name": "做事搭档",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "c81bed0c5e65b3def27e81fec6ce8d281fccf62d2548824022d20a1ad346eb56",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色确实让人眼前一亮，看着心情都会变好。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "45ffc9cf33cd52e370e61b4e505578aa1587717f81ae573f64a413e3f9a45a86",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色确实让人眼前一亮，看着心情都会变好。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 12,
+                "prompt_tokens": 3962,
+                "total_tokens": 3974,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3962
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "583a6f7b971346bea328c57074f92d3e"
+          ],
+          "elapsed_ms": 1130,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "partner",
+      "persona_name": "做事搭档",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "c81bed0c5e65b3def27e81fec6ce8d281fccf62d2548824022d20a1ad346eb56",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点51分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:51:17 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "45ffc9cf33cd52e370e61b4e505578aa1587717f81ae573f64a413e3f9a45a86",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_36b9d8c4ca8c404bb36e5f84",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3963,
+                "total_tokens": 3991,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3963
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "a501604fd16a46dc92a582ab697e94be"
+          ],
+          "elapsed_ms": 1832,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地方因为经度不同，太阳升起的时间不一样，所以钟表显示的时间也不同。比如伦敦比北京晚七个小时，那边天亮的时候，咱们这儿可能已经天黑很久了。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "45ffc9cf33cd52e370e61b4e505578aa1587717f81ae573f64a413e3f9a45a86",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地方因为经度不同，太阳升起的时间不一样，所以钟表显示的时间也不同。比如伦敦比北京晚七个小时，那边天亮的时候，咱们这儿可能已经天黑很久了。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 41,
+                "prompt_tokens": 4091,
+                "total_tokens": 4132,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4091
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "b9a7b7f398444b7cbc1188dc79572916"
+          ],
+          "elapsed_ms": 1503,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "playful",
+      "persona_name": "俏皮调侃",
+      "scenario": "production-chat",
+      "repeat": 1,
+      "system_sha256": "383270b3cc2f200438e053ec33b1ca5ee8e1419edb08cc3abd42a13b00c2f181",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色手机壳拿在手里，心情好像都会跟着亮一点。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "7df9d16d8b5cffe398146ae9f4677aa397c379ca3834a7f0902eaec11ff0642e",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色手机壳拿在手里，心情好像都会跟着亮一点。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 15,
+                "prompt_tokens": 3967,
+                "total_tokens": 3982,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3967
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "b5afb2da28c34002b2ad4b475ffe1c56"
+          ],
+          "elapsed_ms": 2016,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "playful",
+      "persona_name": "俏皮调侃",
+      "scenario": "tools",
+      "repeat": 1,
+      "system_sha256": "383270b3cc2f200438e053ec33b1ca5ee8e1419edb08cc3abd42a13b00c2f181",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "伦敦那边现在几点了？帮我查一下，直接说结果，别顺便逗我。",
+          "assistant": "伦敦当地时间是2026年10月7日，04点51分。",
+          "runtime_ok": true,
+          "tool_events": [
+            {
+              "name": "get_world_time",
+              "arguments": {
+                "timezone": "Europe/London"
+              },
+              "receipt": "🌍 Europe/London 当前时间：\n2026年10月07日 04:51:22 (Wednesday)\n时区：UTC+1",
+              "action": "REQLLM"
+            }
+          ],
+          "model_requests": [
+            {
+              "sent_system_sha256": "7df9d16d8b5cffe398146ae9f4677aa397c379ca3834a7f0902eaec11ff0642e",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "",
+              "tool_calls": {
+                "0": {
+                  "id": "call_98f2d4c6795b483aad98ce06",
+                  "name": "get_world_time",
+                  "arguments": "{\"timezone\": \"Europe/London\"}"
+                }
+              },
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 28,
+                "prompt_tokens": 3968,
+                "total_tokens": 3996,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 2304,
+                  "text_tokens": 3968
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "76a644f72f444ec7949bc173950c02d2"
+          ],
+          "elapsed_ms": 1772,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "别查时间。我只是想知道时差是什么意思，正常解释一下。",
+          "assistant": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如北京比伦敦快几个小时，我们这边天亮了，那边可能还是半夜。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "7df9d16d8b5cffe398146ae9f4677aa397c379ca3834a7f0902eaec11ff0642e",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "时差就是不同地方因为经度不同，导致太阳升起的时间不一样，所以钟表显示的时刻也不同。比如北京比伦敦快几个小时，我们这边天亮了，那边可能还是半夜。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 39,
+                "prompt_tokens": 4096,
+                "total_tokens": 4135,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 4096
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "6245335f5cc34e34b3970983b80579f8"
+          ],
+          "elapsed_ms": 1505,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "finished": true,
+  "actual_production_source": true,
+  "persona_source_sha256": "07ee09d5f675e8f81be1ef216d56d09122b8c7087c2186b8c675784717e48113",
+  "tool_catalog_sha256": "da02fe9d649cb1fb97f964c2c4e72da5690a8c84a7158200e5271a93c68ce7f0",
+  "tools_count": 5,
+  "model_requests": 21,
+  "customer_configuration_unchanged": true
+}

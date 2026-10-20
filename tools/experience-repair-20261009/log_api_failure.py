@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path(__file__).parent/'test_http_api.py';s=p.read_text(encoding='utf-8-sig').replace("records.append({'name':name,'status':r.status_code,'result':data});return r,data", "records.append({'name':name,'status':r.status_code,'result':data});(S/'http-api-partial.json').write_text(json.dumps(records,ensure_ascii=False,indent=2));return r,data");s=s.replace("assert d['code']==0\nstate=", "assert d['code']==0,d\nstate=");p.write_text(s,encoding='utf-8')

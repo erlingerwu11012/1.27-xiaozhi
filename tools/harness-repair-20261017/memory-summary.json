@@ -1,0 +1,13 @@
+{
+  "device": "ac:a7:04:fd:20:5c",
+  "person": "爸爸",
+  "memory_mode": "Memory_mem_local_short",
+  "explicit_fact_count": 0,
+  "override_count": 0,
+  "active_short_summary_count": 0,
+  "user_history_count": 50,
+  "assistant_history_count": 61,
+  "known_history_fact": "我最爱喝咖啡",
+  "fact_save_previously_failed": true,
+  "source": "read-only MySQL and SQLite queries"
+}

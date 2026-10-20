@@ -1,0 +1,30 @@
+{
+  "created": 1791852831.63525,
+  "restore_passed": true,
+  "restore_database": "bailian_memory_test_restore_followup20261013_02",
+  "table_count": 72,
+  "no_migration_required": true,
+  "existing_columns": [
+    "id",
+    "account_id",
+    "user_id",
+    "generation",
+    "action",
+    "match_text",
+    "replacement",
+    "state",
+    "matched_count",
+    "scan_page",
+    "last_error",
+    "created_at",
+    "material_cutoff_id",
+    "archive_cutoff_id"
+  ],
+  "sqlite_snapshots": [
+    "sqlite-person-material-outbox.sqlite3",
+    "sqlite-harness-operations.sqlite3"
+  ],
+  "rollback_jar_sha256": "a2c5e9de561fe943565595c03831048f11b2af1d26d16a5a0251d1333dabef9a",
+  "production_business_writes": 0,
+  "model_calls": 0
+}

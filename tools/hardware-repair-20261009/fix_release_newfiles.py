@@ -1,0 +1,9 @@
+from pathlib import Path
+p=Path('tools/hardware-repair-20261009/release.py');s=p.read_text(encoding='utf-8')
+s=s.replace("  for n in evidence['source']:\n   original=t.extractfile('./'+n).read();assert (base/n).read_bytes()==original,'live runtime drift:'+n", "  for n in evidence['source']:\n   member=next((x for x in t.getmembers() if x.name=='./'+n),None)\n   if member is None:assert not (base/n).exists() and not (ROOT/n).exists(),'new source collision:'+n\n   else:\n    original=t.extractfile(member).read();assert (base/n).read_bytes()==original and (ROOT/n).read_bytes()==original,'live source drift:'+n")
+s=s.replace(" for n in evidence['source']:atomic(B/'python'/n,(ROOT/n).read_bytes())", " baseline={n:sha(ROOT/n) if (ROOT/n).exists() else None for n in evidence['source']}\n for n in evidence['source']:\n  if (ROOT/n).exists():atomic(B/'python'/n,(ROOT/n).read_bytes())")
+s=s.replace("'old_threshold':threshold,'billing_hashes'", "'old_threshold':threshold,'baseline':baseline,'billing_hashes'")
+s=s.replace(" for n in s['source']:atomic(ROOT/n,(B/'python'/n).read_bytes(),0o644)"," for n,h in s['baseline'].items():\n  if h is None:\n   if (ROOT/n).exists():\n    assert sha(ROOT/n)==s['source'][n],'rollback source drift:'+n;(ROOT/n).unlink()\n  else:atomic(ROOT/n,(B/'python'/n).read_bytes(),0o644)")
+p.write_text(s,encoding='utf-8')
+p=Path('tools/hardware-repair-20261009/preflight_release.py');s=p.read_text(encoding='utf-8');s=s.replace("  if t.extractfile('./'+n).read()!=(Path('/root/prjs/releases/experience-repair-20261009/runtime')/n).read_bytes():result['baseline_source_matches']=False", "  member=next((x for x in t.getmembers() if x.name=='./'+n),None);actual=Path('/root/prjs/releases/experience-repair-20261009/runtime')/n\n  if member is None:\n   if actual.exists():result['baseline_source_matches']=False\n  elif t.extractfile(member).read()!=actual.read_bytes():result['baseline_source_matches']=False")
+p.write_text(s,encoding='utf-8')

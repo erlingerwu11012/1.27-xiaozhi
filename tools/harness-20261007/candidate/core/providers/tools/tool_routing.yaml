@@ -1,0 +1,157 @@
+# 工具路由治理策略 v1
+# 审核后生效：优先暴露主入口，保留底层实现；不批量删工具。
+policy_version: v1
+
+# 常驻：几乎每轮都应出现在候选中（软预算内）
+always_include:
+  - handle_exit_intent
+
+# 状态关联：仅当会话状态匹配时加入
+contextual_include:
+  face_enrollment_active:
+    - camera_face_enroll_cancel
+    - camera_face_enroll_status
+  card_active:
+    - card_get_current
+    - card_action
+  reminder_broadcast_active:
+    - reminder_get_current
+    - reminder_list_pending
+    - reminder_action
+    - reminder_next
+    - reminder_stop_broadcast
+    - reminder_begin_broadcast
+
+# 重叠入口：名称相近但需核实后选主入口；secondary 仍可被低置信回退或显式别名召回
+primary_entry:
+  weather:
+    primary: get_weather
+    secondary: [amap_weather]
+    reason: "插件 get_weather 为既有主入口；amap_weather 为 MCP 等价源，第一版保留回退"
+  lunar:
+    primary: get_lunar
+    secondary: [get_lunar_info]
+    reason: "get_lunar 为 necessary_functions；get_lunar_info 为 MCP 扩展，参数/返回需保留差异"
+  news:
+    primary: get_news_from_newsnow
+    secondary: [get_latest_news, get_hot_search, get_news_from_chinanews]
+    reason: "newsnow 为 Intent 默认启用；latest/hot 语义不同，不合并为单一工具"
+
+# 场景标签 → 工具稳定 public_name（多标签并集，非互斥分类）
+scenes:
+  exit_chat:
+    aliases: ["退出", "不聊了", "待着吧", "休息吧", "再见", "闭嘴", "结束对话", "关掉"]
+    tools: [handle_exit_intent]
+  weather:
+    aliases: ["天气", "气温", "下雨", "下雪", "温度", "湿度", "预报", "冷不冷", "热不热"]
+    tools: [get_weather, amap_weather]
+  lunar_time:
+    aliases: ["农历", "阴历", "黄历", "节气", "几点", "现在时间", "日期", "星期", "世界时", "时区"]
+    tools: [get_lunar, get_lunar_info, get_world_time]
+  news:
+    aliases: ["新闻", "头条", "热点", "热搜", "资讯"]
+    tools: [get_news_from_newsnow, get_latest_news, get_hot_search, get_news_from_chinanews]
+  music:
+    aliases: ["放歌", "播放音乐", "唱歌", "听歌", "音乐", "暂停歌", "下一首"]
+    tools: [play_music]
+  volume:
+    aliases: ["音量", "大声", "小声", "调低", "调高", "静音"]
+    tools: [self_audio_speaker_set_volume]
+  brightness:
+    aliases: ["亮度", "亮一点", "暗一点", "屏幕亮", "屏幕暗", "背光", "刺眼", "调亮", "调暗", "显示屏"]
+    tools: [self_screen_set_brightness, self_screen_get_info]
+  vision:
+    aliases: ["看看", "这是什么", "拍照", "看一下", "识别", "拍一张", "认一下", "摄像头"]
+    tools: [self_camera_take_photo]
+  face_identify:
+    aliases: ["你认识我吗", "我是谁", "认出我", "人脸识别", "看看我是谁", "认得出"]
+    tools: [self_camera_identify_person, self_camera_take_photo]
+  face_enroll:
+    aliases: ["录入人脸", "开始录入", "取消录入", "人脸建档"]
+    tools: [camera_face_enroll_start, camera_face_enroll_cancel, camera_face_enroll_status]
+  reminder:
+    aliases: ["提醒", "叫我", "闹钟", "定时", "到点", "稍后提醒", "记一下", "便签"]
+    tools: [add_reminder, note_add, alarm_set, alarm_list, alarm_delete, alarm_dismiss, alarm_snooze, note_list, note_delete, note_snooze, reminder_list_pending, reminder_get_current]
+  habit:
+    aliases: ["习惯", "打卡", "养成"]
+    tools: [habit_create, habit_list, habit_list_manual, habit_learn, habit_delete, habit_confirm, habit_reject, habit_analyze]
+  browser:
+    aliases: ["打开网页", "浏览器", "上网", "搜索网页", "点一下", "滚动页面", "截图网页", "标签页", "网站"]
+    tools: [browser_open, browser_snapshot, browser_click, browser_fill, browser_type, browser_screenshot, browser_execute, browser_wait, browser_tabs, browser_tab, browser_close, browser_scroll, browser_select, browser_hover, browser_drag, web_fetch]
+  encyclopedia:
+    aliases: ["百科", "是什么意思", "解释一下", "查一下", "知识库", "记忆", "回忆", "查资料"]
+    tools: [search_baike, search_from_ragflow, query_memory]
+  device_status:
+    aliases: ["电量", "设备状态", "系统信息", "服务器状态", "重启", "系统版本", "运行正常", "服务器还好"]
+    tools: [self_get_device_status, self_get_system_info, get_server_status, self_reboot]
+  card:
+    aliases: ["卡片", "这张卡", "卡片操作"]
+    tools: [card_get_current, card_action]
+  calc:
+    aliases: ["算一下", "计算", "等于多少"]
+    tools: [calculator, random_decision]
+  market:
+    aliases: ["股价", "行情", "股市"]
+    tools: [get_market_data]
+  pc_mode:
+    aliases: ["电脑模式", "绑定电脑", "退出电脑"]
+    tools: [pc_bind_device, pc_enter_mode, pc_exit_mode]
+  cancel_recent:
+    aliases: ["取消刚才", "取消那个", "不要了刚才", "撤消"]
+    tools: [alarm_delete, note_delete, reminder_action, alarm_dismiss]
+  role:
+    aliases: ["换角色", "切换人设"]
+    tools: [change_role]
+
+# 关联后续工具：命中前置工具时并入候选（本地扩展，无额外 LLM）
+related_followups:
+  browser_open: [browser_snapshot, browser_click, browser_fill, browser_type, browser_close, browser_wait, browser_tabs]
+  alarm_list: [alarm_delete, alarm_dismiss, alarm_snooze]
+  note_list: [note_delete, note_snooze]
+  habit_list: [habit_delete, habit_confirm, habit_reject]
+  reminder_list_pending: [reminder_action, reminder_get_current, reminder_next, reminder_stop_broadcast]
+
+# 工具补充检索文本 / 口语例子（不改变 schema）
+tool_metadata_overrides:
+  handle_exit_intent:
+    domains: [session]
+    visibility: always
+    utterance_examples: ["不聊了", "待着吧", "休息吧", "退出"]
+    search_text: "结束对话 退出 再见 休息"
+  get_weather:
+    domains: [weather]
+    visibility: always
+    utterance_examples: ["今天天气怎么样", "会下雨吗"]
+  amap_weather:
+    domains: [weather]
+    visibility: on_demand
+  get_lunar:
+    domains: [time, lunar]
+    visibility: always
+  get_lunar_info:
+    domains: [time, lunar]
+    visibility: on_demand
+  add_reminder:
+    domains: [reminder]
+    visibility: contextual
+    utterance_examples: ["十分钟后提醒喝水", "提醒我开会"]
+  note_add:
+    domains: [reminder, note]
+    visibility: contextual
+    utterance_examples: ["记一下买菜", "便签"]
+  alarm_set:
+    domains: [alarm]
+    visibility: contextual
+    utterance_examples: ["明早七点叫我", "定个闹钟"]
+  self_camera_take_photo:
+    domains: [vision]
+    utterance_examples: ["看看这是什么", "拍一张"]
+  self_camera_identify_person:
+    domains: [vision, face]
+    utterance_examples: ["你认识我吗", "我是谁"]
+  self_audio_speaker_set_volume:
+    domains: [device]
+    utterance_examples: ["音量调低", "大声一点"]
+  self_screen_set_brightness:
+    domains: [device]
+    utterance_examples: ["再亮一点", "暗一点"]

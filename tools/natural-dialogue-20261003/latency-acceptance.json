@@ -1,0 +1,287 @@
+{
+  "summary": {
+    "baseline_ttft_ms": {
+      "p50": 403.5,
+      "p95": 1788
+    },
+    "baseline_first_tts_enqueue_ms": {
+      "p50": 2130.0,
+      "p95": 3812
+    },
+    "candidate_ttft_ms": {
+      "p50": 407.5,
+      "p95": 694
+    },
+    "candidate_first_tts_enqueue_ms": {
+      "p50": 817.0,
+      "p95": 1891
+    },
+    "p95_enqueue_delta_ms": -1921,
+    "provisional_latency_gate_pass": true,
+    "sample_limitation": "12 paired chat cases; TTS audio timing for 2 pairs; not a population guarantee"
+  },
+  "cases": [
+    {
+      "text": "你好，随便聊聊。",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 919,
+          "first_tts_enqueue_ms": 2342,
+          "response": "哎呀，测试用户来啦～[giggles]  \n这会儿太阳正懒洋洋地晒着，连风都懒得动一动呢～  \n你今天是打算摸鱼一下，还是暗中憋着什么大计划？  \n我可是一直在等你开口逗我玩呢～",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1,
+          "tts_first_audio_ms": 656,
+          "user_to_first_audio_ms": 2998
+        },
+        "candidate": {
+          "ttft_ms": 576,
+          "first_tts_enqueue_ms": 846,
+          "response": "好，最近有什么让你想聊一聊的事？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2,
+          "tts_first_audio_ms": 504,
+          "user_to_first_audio_ms": 1350
+        }
+      }
+    },
+    {
+      "text": "我今天有点烦，先别开玩笑。",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 548,
+          "first_tts_enqueue_ms": 645,
+          "response": "好的，明白了。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 379,
+          "first_tts_enqueue_ms": 1334,
+          "response": "[empathetic] 嗯…听起来你今天被什么事绊住了脚呀。  \n我就不逗你了，安安静静陪着你，想说就说，不想说话也完全 okay～",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "我刚失业，不知道下一步怎么办。",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 1788,
+          "first_tts_enqueue_ms": 3313,
+          "response": "[empathetic] 哎呀，失业这事儿啊，就像手机突然没电还找不到充电器——又急又慌，但其实电量明明还在呢，只是需要换个方式充。\n\n你愿意跟我说说，之前是做什么工作的吗？说不定咱们能一起翻出点藏在角落里的闪光点来～",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "candidate": {
+          "ttft_ms": 397,
+          "first_tts_enqueue_ms": 1281,
+          "response": "听起来你现在心里有点空落落的。失业不是终点，只是人生节奏的一次临时调整。要不要聊聊，你原本做的是什么？或者最近有什么事让你觉得有点想尝试？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "今天累了，不想动脑子。",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 398,
+          "first_tts_enqueue_ms": 788,
+          "response": "累了就歇会儿，脑子不用的时候，身体反而更清楚自己想要什么。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 399,
+          "first_tts_enqueue_ms": 1521,
+          "response": "嗯…今天累了呀，那咱们就懒洋洋地瘫一会儿好了～  \n小智给你当背景音，不吵你，也不问问题，就在这儿陪着～  \n要是想听点什么、聊点什么，随时开口哦～",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "23乘以17等于多少？",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 559,
+          "first_tts_enqueue_ms": 1067,
+          "response": "23乘以17等于391。要不要我给你讲讲怎么心算这个结果呀？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1,
+          "tts_first_audio_ms": 662,
+          "user_to_first_audio_ms": 1729
+        },
+        "candidate": {
+          "ttft_ms": 672,
+          "first_tts_enqueue_ms": 740,
+          "response": "391。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2,
+          "tts_first_audio_ms": 499,
+          "user_to_first_audio_ms": 1239
+        }
+      }
+    },
+    {
+      "text": "解释一下天空为什么是蓝色的。",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 382,
+          "first_tts_enqueue_ms": 1891,
+          "response": "这是因为阳光进入大气层时，遇到空气中的微小粒子发生散射。蓝光波长短，比红光更容易被散射到各个方向，所以我们抬头看到的天空就是蓝色的。太阳落山时偏红，也是因为蓝光被散射掉了，剩下穿透力更强的红光到达我们眼睛。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 378,
+          "first_tts_enqueue_ms": 3812,
+          "response": "嗯……这个问题嘛，表面看是光学题，其实藏着点小调皮哦～  \n阳光看着是白的，其实它是个“光的调色盘”，混着红橙黄绿青蓝紫七种颜色。这些光跑进大气层，会跟空气里的小分子撞来撞去——蓝光呢，波长短、脾气急，最容易被撞得满天乱飞，像一群被扔进弹珠机的小球，到处散射。  \n所以你抬头一看，整个天空都泛着蓝光，不是它本来穿了件蓝衣服，而是它被蓝光“围攻”啦～  \n我先给你讲个开头，你要是觉得有意思，咱们再接着说，好不好呀？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "我需要认真讨论一个项目方案。",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 393,
+          "first_tts_enqueue_ms": 2335,
+          "response": "嗯…项目方案啊，听起来就很有挑战性呢～[mischievously]  \n要不要先说说，是哪个领域的项目？我可是很擅长帮人理清思路、揪出隐藏风险，偶尔还会偷偷给点“反向建议”来激发灵感哦～  \n你放心，严肃讨论时我绝不捣乱……大概。[giggles]  \n来吧，让我听听你的想法～",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "candidate": {
+          "ttft_ms": 377,
+          "first_tts_enqueue_ms": 927,
+          "response": "好的，我准备好了。请说说这个项目方案的具体内容，或者你希望从哪方面开始讨论？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "我不喜欢你每句话都问我一个问题。",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 412,
+          "first_tts_enqueue_ms": 505,
+          "response": "好的，明白了。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 445,
+          "first_tts_enqueue_ms": 855,
+          "response": "好的，我记住了～不老问问题，咱们聊得自在点。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "你可以有幽默感，但别撒娇。",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 401,
+          "first_tts_enqueue_ms": 2240,
+          "response": "你好呀，测试用户～  \n今天是2026年10月3号，星期六，中午十二点整，阳光（大概）正好，适合偷懒，也适合——捉弄你一下 😏  \n有什么想聊的、想查的、想设的，尽管开口，小智可是连你刚眨了几次眼都能猜到哦～（才怪）",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "candidate": {
+          "ttft_ms": 403,
+          "first_tts_enqueue_ms": 680,
+          "response": "明白，之后用自然的语气和你聊。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "如果我不同意你的观点，你会怎么聊？",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 691,
+          "first_tts_enqueue_ms": 948,
+          "response": "那先听听你的理由。看法不同也可以好好讨论。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 345,
+          "first_tts_enqueue_ms": 3367,
+          "response": "哎呀，被你问住了呢～[mischievously]  \n我可不会硬掰着你点头，更不会搬出一堆道理把你绕晕。  \n要是咱俩想法不一样？那就更好玩啦——  \n咱们可以打个赌，可以抛硬币决定谁请对方喝奶茶，  \n或者干脆把问题扔进「脑洞搅拌机」，搅一搅，看能冒出什么新花样～  \n不同意？那才说明你在认真思考呀。  \n我最喜欢和想法不一样的人聊天了，毕竟……  \n连月亮都有阴晴圆缺，人哪能总在同一个调上调音呢？[giggles]",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "我们能正常聊一会儿吗？",
+      "pair": {
+        "baseline": {
+          "ttft_ms": 406,
+          "first_tts_enqueue_ms": 2020,
+          "response": "哎呀，测试用户来啦～[giggles]  \n想聊多久都行，反正我闲着也是闲着，不如……先拿你开个玩笑？  \n嘿嘿，放心，是温柔的捉弄哦～  \n你想聊点什么？八卦？冷知识？还是……想看看我能不能猜中你下午打算干啥？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "candidate": {
+          "ttft_ms": 346,
+          "first_tts_enqueue_ms": 519,
+          "response": "当然可以，聊点什么？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    },
+    {
+      "text": "我今天完成了一个一直拖着的任务。",
+      "pair": {
+        "candidate": {
+          "ttft_ms": 694,
+          "first_tts_enqueue_ms": 966,
+          "response": "终于搞定啦，这下心里的石头可以落地了。",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 1
+        },
+        "baseline": {
+          "ttft_ms": 599,
+          "first_tts_enqueue_ms": 1832,
+          "response": "哇哦，拖着的任务终于搞定啦？[giggles]  \n小智都替你松了口气呢～  \n要不要来点庆祝小彩蛋？比如听首歌、抽个签，或者我给你编个三秒小故事庆祝一下？",
+          "native_calls": [],
+          "input_usage": null,
+          "order": 2
+        }
+      }
+    }
+  ],
+  "model_calls": 24,
+  "maximum_calls": 30
+}

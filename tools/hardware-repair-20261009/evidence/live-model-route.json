@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "model_name": "qwen3.7-plus",
+  "hardware_billing": true,
+  "account_bound": true,
+  "client_base_url": "http://127.0.0.1:3000/v1/",
+  "local_one_api_port_3000": true,
+  "paid_test_reported_model": "qwen3.7-plus",
+  "new_paid_calls": 0
+}

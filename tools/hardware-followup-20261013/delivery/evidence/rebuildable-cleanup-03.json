@@ -1,0 +1,11 @@
+{
+  "removed_verified_duplicate_models": [
+    {
+      "path": "/root/prjs/tmp/hardware-followup-20261013/baseline-work/models/SenseVoiceSmall/model.pt",
+      "restore_source": "/root/prjs/releases/harness-stream-20261012/runtime/models/SenseVoiceSmall/model.pt",
+      "bytes": 936291369,
+      "sha256": "833ca2dcfdf8ec91bd4f31cfac36d6124e0c459074d5e909aec9cabe6204a3ea"
+    }
+  ],
+  "copied_manager_jar_kept": "hash differs from formal; cleanup aborted before deleting it"
+}

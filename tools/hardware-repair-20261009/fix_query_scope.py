@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('tools/hardware-repair-20261009/work/core/utils/tool_harness/runtime.py');s=p.read_text(encoding='utf-8');a=s.index('def memory_read_request(query):');b=s.index('\ndef reply_preferences',a);x=s[a:b];x=x.replace("if quoted_note_request(query) or Harness.non_request(q):return None", "if quoted_note_request(query) or re.search(r'如果|假设|这句话|(?:别|不要|不用|没让你|没有要求你).{0,8}(?:查|搜|检索|回忆)',q):return None");s=s[:a]+x+s[b:];p.write_text(s,encoding='utf-8')

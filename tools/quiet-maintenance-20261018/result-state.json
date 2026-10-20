@@ -1,0 +1,63 @@
+{
+  "behavior_state": [
+    {
+      "account_id": 2022326478036516866,
+      "user_id": "1",
+      "generation": 0,
+      "processed_watermark": 56,
+      "job_id": "usr_25a5b524171349bb8bf6a929fde072e4",
+      "job_watermark": 56,
+      "lease_until": null,
+      "last_completed_at": "2026-10-18 03:21:26"
+    }
+  ],
+  "behavior_counts": [
+    {
+      "user_id": "1",
+      "n": 56,
+      "first_at": "2026-10-17 21:34:06",
+      "last_at": "2026-10-17 22:34:20"
+    }
+  ],
+  "memory_entity": [
+    {
+      "processed_watermark": 1041,
+      "daily_watermark": 1041,
+      "daily_started_at": "2026-10-18 03:00:00",
+      "state": "active"
+    }
+  ],
+  "overrides": [
+    {
+      "id": "usr_cc86c040a9cb42e5b4b48eb3917b2be2",
+      "action": "correct",
+      "state": "complete",
+      "created_at": "2026-10-17 21:45:54"
+    },
+    {
+      "id": "usr_d84f8cdcbc2446d583ed4d78b0661d5e",
+      "action": "correct",
+      "state": "superseded",
+      "created_at": "2026-10-17 21:45:36"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "usr_6f9a8c4699244ec8b2dc2d9204c08ebc",
+      "state": "complete",
+      "watermark": 1041,
+      "attempts": 1,
+      "last_error": null,
+      "next_attempt_at": "2026-10-18 03:27:05"
+    }
+  ],
+  "open_turns": [],
+  "source_counts": [
+    {
+      "first_id": null,
+      "last_id": null,
+      "rows_n": 0,
+      "tokens": null
+    }
+  ]
+}

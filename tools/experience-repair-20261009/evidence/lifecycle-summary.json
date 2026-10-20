@@ -1,0 +1,1 @@
+{"tests": 5, "failures": [], "errors": [], "budget": {"case": {"used": 1502, "limit": 2000}, "model": {"used": 504, "limit": 600}, "tts": {"used": 6, "limit": 12}, "vision": {"used": 2, "limit": 6}}}

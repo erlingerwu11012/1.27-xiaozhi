@@ -1,0 +1,615 @@
+[
+  {
+    "user": "屏幕亮度帮我改到九成",
+    "outcome": {
+      "mode": "operate",
+      "reply": "亮度已调到90。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "self_screen_set_brightness",
+          "call_id": "4b9ef627c0c342ce97eda166a885a9ff",
+          "arguments": {
+            "brightness": 90
+          },
+          "reply": "亮度已调到90。",
+          "payload": {
+            "ok": true,
+            "brightness": 90
+          },
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/call",
+        "params": {
+          "name": "self.screen.set_brightness",
+          "arguments": {
+            "brightness": 90
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "steps": [
+            {
+              "id": "s",
+              "tool": "self_screen_set_brightness",
+              "arguments": {
+                "brightness": 90
+              }
+            }
+          ]
+        },
+        "elapsed_ms": 2808.5,
+        "usage": {
+          "completion_tokens": 59,
+          "prompt_tokens": 4073,
+          "total_tokens": 4132,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 4073
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "声音给我轻轻加大一点",
+    "outcome": {
+      "mode": "operate",
+      "reply": "音量已调到60。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "self_get_device_status",
+          "call_id": "190ac22f893240cb9a590aa13f678eec",
+          "arguments": {},
+          "reply": "当前音量是50。当前亮度是90。",
+          "payload": {
+            "audio_speaker": {
+              "output_volume": 50
+            },
+            "screen": {
+              "brightness": 90
+            }
+          },
+          "error": "",
+          "intermediate": true
+        },
+        {
+          "state": "completed",
+          "tool": "self_audio_speaker_set_volume",
+          "call_id": "03ee459220c942199cab43ef3128fa3e",
+          "arguments": {
+            "volume": 60
+          },
+          "reply": "音量已调到60。",
+          "payload": {
+            "ok": true,
+            "volume": 60
+          },
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "self.get_device_status",
+          "arguments": {}
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "method": "tools/call",
+        "params": {
+          "name": "self.audio_speaker.set_volume",
+          "arguments": {
+            "volume": 60
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "steps": [
+            {
+              "id": "s1",
+              "tool": "self_get_device_status",
+              "arguments": {}
+            },
+            {
+              "id": "s2",
+              "tool": "self_audio_speaker_set_volume",
+              "arguments": {
+                "volume": {
+                  "$ref": {
+                    "step": "s1",
+                    "path": "volume"
+                  }
+                }
+              },
+              "depends_on": [
+                "s1"
+              ],
+              "relative": 10
+            }
+          ]
+        },
+        "elapsed_ms": 3781.08,
+        "usage": {
+          "completion_tokens": 148,
+          "prompt_tokens": 4174,
+          "total_tokens": 4322,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 4174
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "我想每天晚上十一点让闹钟响",
+    "outcome": {
+      "mode": "operate",
+      "reply": "23点00分的闹钟已设置。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "alarm_set",
+          "call_id": "d36fa2f86e194fa4966b4e749ab2b30a",
+          "arguments": {
+            "hour": 23,
+            "minute": 0,
+            "label": "闹钟",
+            "repeat_days": 127,
+            "recipient_person_id": "",
+            "recipient_display_name": ""
+          },
+          "reply": "23点00分的闹钟已设置。",
+          "payload": "已设置 23:00 闹钟 [每天]",
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 5,
+        "method": "tools/call",
+        "params": {
+          "name": "alarm.set",
+          "arguments": {
+            "hour": 23,
+            "minute": 0,
+            "label": "闹钟",
+            "repeat_days": 127,
+            "recipient_person_id": "all",
+            "recipient_display_name": "所有人"
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "goal": "设置每天晚上23:00的闹钟",
+          "steps": [
+            {
+              "id": "a",
+              "tool": "alarm_set",
+              "arguments": {
+                "hour": 23,
+                "minute": 0,
+                "label": "闹钟",
+                "repeat_days": 127
+              }
+            }
+          ]
+        },
+        "elapsed_ms": 2947.8,
+        "usage": {
+          "completion_tokens": 103,
+          "prompt_tokens": 6009,
+          "total_tokens": 6112,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 6009
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "第1条便签把提醒推迟8分钟",
+    "outcome": {
+      "mode": "operate",
+      "reply": "便签提醒已推迟8分钟。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "note_list",
+          "call_id": "e03b4f852a7b4c25a7fdaa06fb9f3c76",
+          "arguments": {},
+          "reply": "1. 买牛奶 [待办]",
+          "payload": "1. 买牛奶 [待办]",
+          "error": "",
+          "intermediate": true
+        },
+        {
+          "state": "completed",
+          "tool": "note_snooze",
+          "call_id": "c8a2f5e63d364337b6b878dc8e65b9a2",
+          "arguments": {
+            "index": 1,
+            "delay_minutes": 8
+          },
+          "reply": "便签提醒已推迟8分钟。",
+          "payload": "[NOTE_SNOOZED] 8",
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 6,
+        "method": "tools/call",
+        "params": {
+          "name": "note.list",
+          "arguments": {}
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 7,
+        "method": "tools/call",
+        "params": {
+          "name": "note.snooze",
+          "arguments": {
+            "index": 1,
+            "delay_minutes": 8
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "steps": [
+            {
+              "id": "snooze",
+              "tool": "note_snooze",
+              "arguments": {
+                "index": 1,
+                "delay_minutes": 8
+              }
+            }
+          ]
+        },
+        "elapsed_ms": 2071.74,
+        "usage": {
+          "completion_tokens": 32,
+          "prompt_tokens": 6240,
+          "total_tokens": 6272,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 6240
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "拿摄像头拍下桌面，告诉我桌上有什么",
+    "outcome": {
+      "mode": "operate",
+      "reply": "桌上有一本书和一个杯子。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "self_camera_take_photo",
+          "call_id": "1fbfc20286e74f38aeca2a240cd6adf6",
+          "arguments": {
+            "question": "桌上有什么"
+          },
+          "reply": "桌上有一本书和一个杯子。",
+          "payload": "桌上有一本书和一个杯子。",
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 8,
+        "method": "tools/call",
+        "params": {
+          "name": "self.camera.take_photo",
+          "arguments": {
+            "question": "桌上有什么"
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "steps": [
+            {
+              "id": "1",
+              "tool": "self_camera_take_photo",
+              "arguments": {
+                "question": "桌上有什么"
+              }
+            }
+          ]
+        },
+        "elapsed_ms": 2177.13,
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 4711,
+          "total_tokens": 4771,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 4711
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "我喝完了，把当前提醒确认完成",
+    "outcome": {
+      "mode": "operate",
+      "reply": "提醒已完成",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "reminder_get_current",
+          "call_id": "71669bb6ecb94a33b47ef55d40b9898c",
+          "arguments": {},
+          "reply": "当前提醒：presented。",
+          "payload": {
+            "active": true,
+            "instance_id": "sim-card",
+            "revision": 2,
+            "status": "presented",
+            "primary_action": "完成",
+            "secondary_action": "稍后提醒",
+            "tertiary_action": "跳过",
+            "recipient_id": "person-a"
+          },
+          "error": "",
+          "intermediate": true
+        },
+        {
+          "state": "completed",
+          "tool": "reminder_action",
+          "call_id": "8e1ec5bb94054ed8b008e16d17f47b24",
+          "arguments": {
+            "instance_id": "sim-card",
+            "revision": 2,
+            "action": "primary",
+            "minutes": 0,
+            "snooze_at": 0
+          },
+          "reply": "提醒已完成",
+          "payload": "提醒已完成",
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 1,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 9,
+        "method": "tools/call",
+        "params": {
+          "name": "reminder.get_current",
+          "arguments": {}
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 10,
+        "method": "tools/call",
+        "params": {
+          "name": "reminder.action",
+          "arguments": {
+            "instance_id": "sim-card",
+            "revision": 2,
+            "action": "primary",
+            "minutes": 0,
+            "snooze_at": 0
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "kind": "decision",
+        "decision": {
+          "mode": "operate",
+          "steps": [
+            {
+              "id": "1",
+              "tool": "reminder_get_current",
+              "arguments": {}
+            },
+            {
+              "id": "2",
+              "tool": "reminder_action",
+              "arguments": {
+                "instance_id": {
+                  "$ref": {
+                    "step": "1",
+                    "path": "instance_id"
+                  }
+                },
+                "revision": {
+                  "$ref": {
+                    "step": "1",
+                    "path": "revision"
+                  }
+                },
+                "action": "primary"
+              },
+              "depends_on": [
+                "1"
+              ]
+            }
+          ]
+        },
+        "elapsed_ms": 4077.95,
+        "usage": {
+          "completion_tokens": 175,
+          "prompt_tokens": 6590,
+          "total_tokens": 6765,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "text_tokens": 6590
+          }
+        }
+      }
+    ],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  },
+  {
+    "user": "帮我设一个提醒，七分钟后提醒我热牛奶。",
+    "outcome": {
+      "mode": "operate",
+      "reply": "提醒已设好。",
+      "results": [
+        {
+          "state": "completed",
+          "tool": "add_reminder",
+          "call_id": "2e159ad6696a4ce894416b502138b906",
+          "arguments": {
+            "text": "设一个提醒，七分钟后提醒我热牛奶"
+          },
+          "reply": "提醒已设好。",
+          "payload": "设备定时提醒已创建成功。内容摘要长度：3；上海时间：2026-10-08 16:24:21；remind_at=1791447861。接收人：所有人。设备返回：已记录：热牛奶，将于 10/08 16:24 提醒。请用自然语言告诉用户提醒已设好，不要提及工具名，不要复述隐私细节。",
+          "error": "",
+          "intermediate": false
+        }
+      ],
+      "model_calls": 0,
+      "repairs": 0,
+      "catalog_version": "4a86c09fd97d255378f5",
+      "error": "",
+      "interrupted": false
+    },
+    "wire": [
+      {
+        "jsonrpc": "2.0",
+        "id": 11,
+        "method": "tools/call",
+        "params": {
+          "name": "note.add",
+          "arguments": {
+            "text": "热牛奶",
+            "remind_at": 1791447861,
+            "priority": "normal",
+            "attention_policy": "general",
+            "pre_alert_minutes": 0,
+            "recipient_person_id": "all",
+            "recipient_display_name": "所有人"
+          }
+        }
+      }
+    ],
+    "events": [],
+    "evidence": "real-model-and-loopback-protocol",
+    "hardware": false,
+    "billing_gateway": true
+  }
+]

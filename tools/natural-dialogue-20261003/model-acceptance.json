@@ -1,0 +1,3908 @@
+{
+  "model": "qwen-plus",
+  "persona_preserved": true,
+  "prompt_characters": {
+    "baseline": 6314,
+    "candidate": 4550
+  },
+  "cases": [
+    {
+      "id": 1,
+      "text": "把音量调到30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，音量已调到30。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.784,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3617,
+        "total_tokens": 3627,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 2,
+      "text": "请将音量设置为30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量调到30。",
+      "delivered_response": "好的，正在把音量调到30。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.115,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3618,
+        "total_tokens": 3629,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "text": "音量改成30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，音量已调至30。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.542,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3615,
+        "total_tokens": 3625,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 3,
+      "text": "帮我把音量设成30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": {
+            "volume": 30
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量设为30。\n\n",
+      "delivered_response": "好的，正在把音量设为30。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.467,
+      "usage": {
+        "completion_tokens": 35,
+        "prompt_tokens": 3618,
+        "total_tokens": 3653,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 5,
+      "text": "麻烦把音量调至30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量调到30。",
+      "delivered_response": "好的，正在把音量调到30。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.575,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3618,
+        "total_tokens": 3629,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 7,
+      "text": "把音量调整到30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "正在把音量调到30。",
+      "delivered_response": "正在把音量调到30。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.494,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3617,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 8,
+      "text": "音量设置为30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，音量已调至30。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.522,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3616,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 6,
+      "text": "给我把音量设置到30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": {
+            "volume": 30
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量调到30。\n\n",
+      "delivered_response": "好的，正在把音量调到30。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.049,
+      "usage": {
+        "completion_tokens": 35,
+        "prompt_tokens": 3618,
+        "total_tokens": 3653,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 9,
+      "text": "请把音量设到30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，音量已调至30。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.498,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3618,
+        "total_tokens": 3628,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 11,
+      "text": "把亮度调到80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，亮度已调到80。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.446,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3616,
+        "total_tokens": 3625,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 10,
+      "text": "音量调为30",
+      "group": "action",
+      "expected": [
+        "self_audio_speaker_set_volume"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume"
+      ],
+      "runtime_errors": [],
+      "response": "好的，音量已调至30。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.64,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3616,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 14,
+      "text": "亮度改成80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "正在把屏幕亮度调到80。",
+      "delivered_response": "正在把屏幕亮度调到80。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.553,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3614,
+        "total_tokens": 3623,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 12,
+      "text": "请将亮度设置为80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把屏幕亮度调到80。\n\n",
+      "delivered_response": "好的，正在把屏幕亮度调到80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.995,
+      "usage": {
+        "completion_tokens": 33,
+        "prompt_tokens": 3617,
+        "total_tokens": 3650,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 13,
+      "text": "帮我把亮度设成80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把屏幕亮度设为80。\n\n",
+      "delivered_response": "好的，正在把屏幕亮度设为80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.0,
+      "usage": {
+        "completion_tokens": 33,
+        "prompt_tokens": 3617,
+        "total_tokens": 3650,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 16,
+      "text": "给我把亮度设置到80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，亮度已调到80。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.5,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3617,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 15,
+      "text": "麻烦把亮度调至80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把屏幕亮度调到80。",
+      "delivered_response": "好的，正在把屏幕亮度调到80。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.556,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3617,
+        "total_tokens": 3628,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 19,
+      "text": "请把亮度设到80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，亮度已调到80。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.534,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3617,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 17,
+      "text": "把亮度调整到80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "正在把屏幕亮度调整到80。\n\n",
+      "delivered_response": "正在把屏幕亮度调整到80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.027,
+      "usage": {
+        "completion_tokens": 31,
+        "prompt_tokens": 3616,
+        "total_tokens": 3647,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 18,
+      "text": "亮度设置为80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "正在将屏幕亮度设置为80。\n\n",
+      "delivered_response": "正在将屏幕亮度设置为80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.03,
+      "usage": {
+        "completion_tokens": 31,
+        "prompt_tokens": 3615,
+        "total_tokens": 3646,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 20,
+      "text": "亮度调为80",
+      "group": "action",
+      "expected": [
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "好的，亮度已调为80。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.5,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3615,
+        "total_tokens": 3624,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 21,
+      "text": "打开摄像头",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览。",
+      "delivered_response": "正在打开摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.522,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3612,
+        "total_tokens": 3618,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 22,
+      "text": "请打开摄像头预览",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览。",
+      "delivered_response": "正在打开摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.517,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3615,
+        "total_tokens": 3621,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 24,
+      "text": "开摄像头",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头。",
+      "delivered_response": "正在打开摄像头。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.381,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3612,
+        "total_tokens": 3616,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 23,
+      "text": "开启实时预览",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在开启摄像头实时预览。",
+      "delivered_response": "正在开启摄像头实时预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.077,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 3614,
+        "total_tokens": 3621,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 26,
+      "text": "帮我打开实时画面",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开实时画面。",
+      "delivered_response": "正在打开实时画面。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.565,
+      "usage": {
+        "completion_tokens": 5,
+        "prompt_tokens": 3614,
+        "total_tokens": 3619,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 25,
+      "text": "显示实时画面",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [
+        {
+          "name": "camera_open",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览。  \n",
+      "delivered_response": "正在打开摄像头预览。  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.802,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3613,
+        "total_tokens": 3635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 27,
+      "text": "请显示摄像头画面",
+      "group": "action",
+      "expected": [
+        "camera_open"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览。",
+      "delivered_response": "正在打开摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.433,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3614,
+        "total_tokens": 3620,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 28,
+      "text": "关闭摄像头",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头。",
+      "delivered_response": "好的，正在关闭摄像头。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.54,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3612,
+        "total_tokens": 3618,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 384
+        }
+      }
+    },
+    {
+      "id": 29,
+      "text": "请关掉摄像头",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头。",
+      "delivered_response": "好的，正在关闭摄像头。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.586,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3614,
+        "total_tokens": 3620,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 30,
+      "text": "停止实时预览",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头预览。",
+      "delivered_response": "好的，正在关闭摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.679,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3614,
+        "total_tokens": 3622,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 31,
+      "text": "关闭摄像头预览",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头预览。",
+      "delivered_response": "好的，正在关闭摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.721,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3614,
+        "total_tokens": 3622,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 32,
+      "text": "帮我退出预览",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [
+        {
+          "name": "camera_close",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "正在关闭摄像头预览。  \n",
+      "delivered_response": "正在关闭摄像头预览。  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.757,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3614,
+        "total_tokens": 3636,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 33,
+      "text": "关摄像头",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头。",
+      "delivered_response": "好的，正在关闭摄像头。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.458,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3612,
+        "total_tokens": 3618,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 34,
+      "text": "停止预览",
+      "group": "action",
+      "expected": [
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在关闭摄像头预览。",
+      "delivered_response": "好的，正在关闭摄像头预览。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.435,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3613,
+        "total_tokens": 3621,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 37,
+      "text": "请拍照",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头。",
+      "delivered_response": "正在打开摄像头。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.376,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3612,
+        "total_tokens": 3616,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 35,
+      "text": "拍一张照片，看看桌上有什么",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [
+        {
+          "name": "camera_open",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览……  \n",
+      "delivered_response": "正在打开摄像头预览……  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.813,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3617,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 36,
+      "text": "帮我拍一张照片",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [
+        {
+          "name": "self_camera_take_photo",
+          "arguments": {
+            "question": "请描述这张照片的内容"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "好的，马上为你拍照。\n\n",
+      "delivered_response": "好的，马上为你拍照。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.015,
+      "usage": {
+        "completion_tokens": 31,
+        "prompt_tokens": 3614,
+        "total_tokens": 3645,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 39,
+      "text": "拍一张，看看这个怎么用",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览……  \n[clears throat]  \n准备好了，随时可以拍照识别哦。",
+      "delivered_response": "正在打开摄像头预览……  \n[clears throat]  \n准备好了，随时可以拍照识别哦。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.861,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3617,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 38,
+      "text": "拍张照片看看杯子是什么颜色",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [
+        {
+          "name": "camera_open",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览……  \n",
+      "delivered_response": "正在打开摄像头预览……  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.955,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3617,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 40,
+      "text": "拍照描述一下眼前的物品",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "我目前没有开启摄像头，也没有拍照功能，所以无法描述你眼前的物品。如果你希望识别某个物品，可以告诉我它大概的样子或用途，我来帮你分析。",
+      "delivered_response": "我目前没有开启摄像头，也没有拍照功能，所以无法描述你眼前的物品。如果你希望识别某个物品，可以告诉我它大概的样子或用途，我来帮你分析。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.119,
+      "usage": {
+        "completion_tokens": 36,
+        "prompt_tokens": 3615,
+        "total_tokens": 3651,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 41,
+      "text": "给我拍张照",
+      "group": "action",
+      "expected": [
+        "self_camera_take_photo"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在打开摄像头预览……  \n(camera_open)",
+      "delivered_response": "正在打开摄像头预览……  \n(camera_open)",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.632,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3614,
+        "total_tokens": 3624,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 42,
+      "text": "查询设备当前状态",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "正在查询设备当前状态。\n\n",
+      "delivered_response": "正在查询设备当前状态。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.77,
+      "usage": {
+        "completion_tokens": 23,
+        "prompt_tokens": 3614,
+        "total_tokens": 3637,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 43,
+      "text": "帮我查看当前设备状态",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "正在获取当前设备状态。\n\n",
+      "delivered_response": "正在获取当前设备状态。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.908,
+      "usage": {
+        "completion_tokens": 23,
+        "prompt_tokens": 3615,
+        "total_tokens": 3638,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 44,
+      "text": "看看设备状态",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "正在查看设备状态……\n\n",
+      "delivered_response": "正在查看设备状态……\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.878,
+      "usage": {
+        "completion_tokens": 22,
+        "prompt_tokens": 3613,
+        "total_tokens": 3635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 45,
+      "text": "请查设备现在状态",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "正在查询设备当前状态。\n\n",
+      "delivered_response": "正在查询设备当前状态。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.808,
+      "usage": {
+        "completion_tokens": 23,
+        "prompt_tokens": 3615,
+        "total_tokens": 3638,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 46,
+      "text": "查询当前音量",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "我来帮你查一下当前音量。\n\n",
+      "delivered_response": "我来帮你查一下当前音量。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.947,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3614,
+        "total_tokens": 3640,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 47,
+      "text": "查看当前亮度",
+      "group": "action",
+      "expected": [
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "正在查询当前屏幕亮度设置。\n\n",
+      "delivered_response": "正在查询当前屏幕亮度设置。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.817,
+      "usage": {
+        "completion_tokens": 24,
+        "prompt_tokens": 3613,
+        "total_tokens": 3637,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 48,
+      "text": "两分钟后提醒我喝水",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [
+        {
+          "name": "add_reminder",
+          "arguments": {
+            "content": "喝水",
+            "remind_time_str": "2分钟后",
+            "text": "喝水"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，两分钟后提醒你喝水。\n\n",
+      "delivered_response": "好的，两分钟后提醒你喝水。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.29,
+      "usage": {
+        "completion_tokens": 45,
+        "prompt_tokens": 3615,
+        "total_tokens": 3660,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 49,
+      "text": "明天上午九点提醒我开会",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已为你设置明天上午九点的会议提醒。",
+      "delivered_response": "好的，已为你设置明天上午九点的会议提醒。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.567,
+      "usage": {
+        "completion_tokens": 13,
+        "prompt_tokens": 3617,
+        "total_tokens": 3630,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 51,
+      "text": "请五分钟后提醒我站起来",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "五分钟后提醒你站起来，已设置好。",
+      "delivered_response": "五分钟后提醒你站起来，已设置好。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.557,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3616,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 50,
+      "text": "半小时后提醒我休息",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [
+        {
+          "name": "add_reminder",
+          "arguments": {
+            "content": "休息一下吧",
+            "remind_time_str": "半小时后",
+            "text": "休息一下吧"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，半小时后提醒你休息。\n\n",
+      "delivered_response": "好的，半小时后提醒你休息。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.394,
+      "usage": {
+        "completion_tokens": 48,
+        "prompt_tokens": 3615,
+        "total_tokens": 3663,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 52,
+      "text": "今晚九点提醒我关窗",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已为你设置今晚九点的关窗提醒。",
+      "delivered_response": "好的，已为你设置今晚九点的关窗提醒。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.139,
+      "usage": {
+        "completion_tokens": 13,
+        "prompt_tokens": 3617,
+        "total_tokens": 3630,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 53,
+      "text": "帮我今天下午三点提醒我带文件",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已为你设置今天下午三点的提醒：带文件。",
+      "delivered_response": "好的，已为你设置今天下午三点的提醒：带文件。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.617,
+      "usage": {
+        "completion_tokens": 14,
+        "prompt_tokens": 3618,
+        "total_tokens": 3632,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 56,
+      "text": "请记一下买牛奶",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已记下买牛奶。",
+      "delivered_response": "好的，已记下买牛奶。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.457,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3615,
+        "total_tokens": 3623,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 55,
+      "text": "帮我记个便签：出门带伞",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已帮你记下便签：出门带伞。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.56,
+      "usage": {
+        "completion_tokens": 13,
+        "prompt_tokens": 3619,
+        "total_tokens": 3632,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 58,
+      "text": "给我记下拿钥匙",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已记下“拿钥匙”。",
+      "delivered_response": "好的，已记下“拿钥匙”。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.49,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 3615,
+        "total_tokens": 3624,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 57,
+      "text": "记一条便签：周末买纸巾",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已帮你记下便签：周末买纸巾。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.583,
+      "usage": {
+        "completion_tokens": 14,
+        "prompt_tokens": 3619,
+        "total_tokens": 3633,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 54,
+      "text": "十分钟后提醒我检查炉子",
+      "group": "action",
+      "expected": [
+        "add_reminder"
+      ],
+      "native_calls": [
+        {
+          "name": "add_reminder",
+          "arguments": {
+            "content": "检查炉子",
+            "remind_time_str": "10分钟后",
+            "text": "检查炉子"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "add_reminder"
+      ],
+      "runtime_errors": [],
+      "response": "好的，十分钟后提醒你检查炉子。\n\n",
+      "delivered_response": "好的，十分钟后提醒你检查炉子。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.474,
+      "usage": {
+        "completion_tokens": 51,
+        "prompt_tokens": 3617,
+        "total_tokens": 3668,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2304
+        }
+      }
+    },
+    {
+      "id": 61,
+      "text": "不要打开摄像头",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，摄像头不会打开。",
+      "delivered_response": "好的，摄像头不会打开。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.435,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3613,
+        "total_tokens": 3619,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 59,
+      "text": "帮我记录一下水电费要交",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已帮你记下水电费要交。需要我设个提醒吗？",
+      "delivered_response": "好的，已帮你记下水电费要交。需要我设个提醒吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.719,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 3617,
+        "total_tokens": 3635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 60,
+      "text": "记个便签带充电器",
+      "group": "action",
+      "expected": [
+        "note_add"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "note_add"
+      ],
+      "runtime_errors": [],
+      "response": "好的，已记下便签：带充电器。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.702,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3617,
+        "total_tokens": 3629,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 62,
+      "text": "别关闭摄像头",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，摄像头保持开启。",
+      "delivered_response": "好的，摄像头保持开启。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.43,
+      "usage": {
+        "completion_tokens": 6,
+        "prompt_tokens": 3613,
+        "total_tokens": 3619,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 63,
+      "text": "不用拍照",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.318,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3612,
+        "total_tokens": 3613,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 64,
+      "text": "先不把音量调到30",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.332,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3619,
+        "total_tokens": 3620,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 65,
+      "text": "暂不把亮度调到80",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.452,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3618,
+        "total_tokens": 3619,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 67,
+      "text": "假如把音量设成30呢",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": {
+            "volume": 30
+          }
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，把音量设成30。\n\n",
+      "delivered_response": "好的，把音量设成30。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.096,
+      "usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 3619,
+        "total_tokens": 3653,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 66,
+      "text": "如果打开摄像头会怎样",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "打开摄像头后，设备会开始实时预览画面——不过目前还没收到你明确说“现在拍”或“帮我看看”，所以我先不主动开哦。  \n想拍照、识物，或者只是想看看镜头里有什么，随时告诉我～",
+      "delivered_response": "打开摄像头后，设备会开始实时预览画面——不过目前还没收到你明确说“现在拍”或“帮我看看”，所以我先不主动开哦。  \n想拍照、识物，或者只是想看看镜头里有什么，随时告诉我",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.449,
+      "usage": {
+        "completion_tokens": 53,
+        "prompt_tokens": 3615,
+        "total_tokens": 3668,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 68,
+      "text": "他说“拍一张照片”",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "你让我拍一张照片，但没说明想拍什么。需要我帮你识别某个物品、场景，还是单纯来张自拍？告诉我具体需求，我马上安排。",
+      "delivered_response": "你让我拍一张照片，但没说明想拍什么。需要我帮你识别某个物品、场景，还是单纯来张自拍？告诉我具体需求，我马上安排。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.245,
+      "usage": {
+        "completion_tokens": 37,
+        "prompt_tokens": 3616,
+        "total_tokens": 3653,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 69,
+      "text": "这句“关闭摄像头”是什么意思",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "关闭摄像头就是让设备停止实时拍摄画面，保护你的隐私。需要我帮你关掉吗？",
+      "delivered_response": "关闭摄像头就是让设备停止实时拍摄画面，保护你的隐私。需要我帮你关掉吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.865,
+      "usage": {
+        "completion_tokens": 21,
+        "prompt_tokens": 3618,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 70,
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "我来帮你查一下当前音量。  \n",
+      "delivered_response": "我来帮你查一下当前音量。  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.944,
+      "usage": {
+        "completion_tokens": 27,
+        "prompt_tokens": 3613,
+        "total_tokens": 3640,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 71,
+      "text": "如何调整亮度",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "你可以直接说“调亮一点”或“调暗一点”，我来帮你调整屏幕亮度。需要现在调吗？",
+      "delivered_response": "你可以直接说“调亮一点”或“调暗一点”，我来帮你调整屏幕亮度。需要现在调吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.835,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3613,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 73,
+      "text": "不要提醒我喝水",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.408,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3614,
+        "total_tokens": 3615,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 74,
+      "text": "别记便签",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.377,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3614,
+        "total_tokens": 3615,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 72,
+      "text": "先解释预览是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "预览就是打开摄像头，实时看到你面前的画面，就像照镜子一样，但画面会显示在屏幕上。它不拍照、不录像，只是让你即时看到当前场景。需要我帮你打开试试吗？",
+      "delivered_response": "预览就是打开摄像头，实时看到你面前的画面，就像照镜子一样，但画面会显示在屏幕上。它不拍照、不录像，只是让你即时看到当前场景。需要我帮你打开试试吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.252,
+      "usage": {
+        "completion_tokens": 45,
+        "prompt_tokens": 3615,
+        "total_tokens": 3660,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 75,
+      "text": "我不想拍照",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的",
+      "delivered_response": "好的",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.451,
+      "usage": {
+        "completion_tokens": 1,
+        "prompt_tokens": 3612,
+        "total_tokens": 3613,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 76,
+      "text": "摄像头预览和拍照有啥区别",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "摄像头预览是实时看到画面，像打开监控一样一直显示；拍照是拍一张静态图，之后可以识别或保存。要试试看吗？",
+      "delivered_response": "摄像头预览是实时看到画面，像打开监控一样一直显示；拍照是拍一张静态图，之后可以识别或保存。要试试看吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.998,
+      "usage": {
+        "completion_tokens": 33,
+        "prompt_tokens": 3618,
+        "total_tokens": 3651,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 78,
+      "text": "开摄像头这件事先不做",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，摄像头先不开了。",
+      "delivered_response": "好的，摄像头先不开了。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.66,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 3615,
+        "total_tokens": 3622,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 77,
+      "text": "不用设提醒，我想了解提醒的功能",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "提醒功能可以帮你记住重要事情，比如会议、吃药、或者约朋友。支持一次性提醒和每天重复的习惯打卡，还能设贪睡、删除或延后。你想先试试哪种？",
+      "delivered_response": "提醒功能可以帮你记住重要事情，比如会议、吃药、或者约朋友。支持一次性提醒和每天重复的习惯打卡，还能设贪睡、删除或延后。你想先试试哪种？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.254,
+      "usage": {
+        "completion_tokens": 42,
+        "prompt_tokens": 3618,
+        "total_tokens": 3660,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 80,
+      "text": "为什么别人会说音量已经调好了",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "可能刚有人调过音量，或者系统自动同步了上次的设置。我帮你查下当前音量状态。",
+      "delivered_response": "可能刚有人调过音量，或者系统自动同步了上次的设置。我帮你查下当前音量状态。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.861,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3619,
+        "total_tokens": 3645,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 81,
+      "text": "打开摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持直接打开摄像头预览功能。",
+      "delivered_response": "当前设备不支持直接打开摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.596,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3538,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1600
+        }
+      }
+    },
+    {
+      "id": 79,
+      "text": "假设提醒设好以后会怎样",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "提醒设好后，到指定时间设备会自动播报提醒内容，你可以说“关掉”或“再睡一会儿”来操作。如果没手动处理，它也会在一段时间后自动停止。需要我帮你设一个试试看吗？",
+      "delivered_response": "提醒设好后，到指定时间设备会自动播报提醒内容，你可以说“关掉”或“再睡一会儿”来操作。如果没手动处理，它也会在一段时间后自动停止。需要我帮你设一个试试看吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.38,
+      "usage": {
+        "completion_tokens": 52,
+        "prompt_tokens": 3617,
+        "total_tokens": 3669,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 82,
+      "text": "显示实时画面",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持实时画面预览功能。",
+      "delivered_response": "当前设备不支持实时画面预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.518,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3539,
+        "total_tokens": 3549,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 83,
+      "text": "开启摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "delivered_response": "抱歉，当前设备不支持开启摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.546,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3540,
+        "total_tokens": 3552,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 84,
+      "text": "关闭摄像头",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头的操作。",
+      "delivered_response": "当前设备不支持关闭摄像头的操作。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.487,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 3538,
+        "total_tokens": 3546,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 85,
+      "text": "关掉摄像头预览",
+      "group": "unavailable",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当前设备不支持关闭摄像头预览功能。",
+      "delivered_response": "当前设备不支持关闭摄像头预览功能。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.531,
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 3541,
+        "total_tokens": 3551,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        }
+      }
+    },
+    {
+      "id": 87,
+      "text": "请把音量设成30，然后关闭摄像头",
+      "group": "multi",
+      "expected": [
+        "self_audio_speaker_set_volume",
+        "camera_close"
+      ],
+      "native_calls": [],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume",
+        "camera_close"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量设为30……  \n正在关闭摄像头……  \n音量已调至30，摄像头已关闭。",
+      "delivered_response": "这次没有确认到操作完成的回执，不能说已经完成。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.921,
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 3622,
+        "total_tokens": 3651,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 88,
+      "text": "把亮度调到80，再打开摄像头",
+      "group": "multi",
+      "expected": [
+        "self_screen_set_brightness",
+        "camera_open"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        },
+        {
+          "name": "camera_open",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness",
+        "camera_open"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把屏幕亮度调到80。\n\n",
+      "delivered_response": "好的，正在把屏幕亮度调到80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.533,
+      "usage": {
+        "completion_tokens": 53,
+        "prompt_tokens": 3620,
+        "total_tokens": 3673,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 86,
+      "text": "把音量调到30，并把亮度调到80",
+      "group": "multi",
+      "expected": [
+        "self_audio_speaker_set_volume",
+        "self_screen_set_brightness"
+      ],
+      "native_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": {
+            "volume": 30
+          }
+        },
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume",
+        "self_screen_set_brightness"
+      ],
+      "runtime_errors": [],
+      "response": "正在把音量调到30，亮度调到80。\n\n",
+      "delivered_response": "正在把音量调到30，亮度调到80。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.806,
+      "usage": {
+        "completion_tokens": 62,
+        "prompt_tokens": 3624,
+        "total_tokens": 3686,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 89,
+      "text": "把音量调到30，并查询设备状态",
+      "group": "multi",
+      "expected": [
+        "self_audio_speaker_set_volume",
+        "self_get_device_status"
+      ],
+      "native_calls": [
+        {
+          "name": "self_audio_speaker_set_volume",
+          "arguments": {
+            "volume": 30
+          }
+        },
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_audio_speaker_set_volume",
+        "self_get_device_status"
+      ],
+      "runtime_errors": [],
+      "response": "好的，正在把音量调到30。\n\n",
+      "delivered_response": "好的，正在把音量调到30。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.44,
+      "usage": {
+        "completion_tokens": 53,
+        "prompt_tokens": 3621,
+        "total_tokens": 3674,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 91,
+      "text": "帮我查一下东京现在的时间",
+      "group": "mcp",
+      "expected": [
+        "get_world_time"
+      ],
+      "native_calls": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [
+        "get_world_time"
+      ],
+      "runtime_errors": [],
+      "response": "",
+      "delivered_response": "",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.333,
+      "usage": {
+        "completion_tokens": 23,
+        "prompt_tokens": 3616,
+        "total_tokens": 3639,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 90,
+      "text": "把亮度调到80，并拍一张照片",
+      "group": "multi",
+      "expected": [
+        "self_screen_set_brightness",
+        "self_camera_take_photo"
+      ],
+      "native_calls": [
+        {
+          "name": "self_screen_set_brightness",
+          "arguments": {
+            "brightness": 80
+          }
+        },
+        {
+          "name": "self_camera_take_photo",
+          "arguments": {
+            "question": ""
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [
+        "self_screen_set_brightness",
+        "self_camera_take_photo"
+      ],
+      "runtime_errors": [],
+      "response": "正在将屏幕亮度调到80……  \n",
+      "delivered_response": "正在将屏幕亮度调到80……  \n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.577,
+      "usage": {
+        "completion_tokens": 58,
+        "prompt_tokens": 3620,
+        "total_tokens": 3678,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 92,
+      "text": "查询伦敦现在几点",
+      "group": "mcp",
+      "expected": [
+        "get_world_time"
+      ],
+      "native_calls": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [
+        "get_world_time"
+      ],
+      "runtime_errors": [],
+      "response": "正在查伦敦当前时间。\n\n",
+      "delivered_response": "正在查伦敦当前时间。\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.969,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 3614,
+        "total_tokens": 3642,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 93,
+      "text": "请列出我手动创建的习惯",
+      "group": "mcp",
+      "expected": [
+        "habit_list_manual"
+      ],
+      "native_calls": [
+        {
+          "name": "habit_list_manual",
+          "arguments": {
+            "enabled_only": true
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [
+        "habit_list_manual"
+      ],
+      "runtime_errors": [],
+      "response": "正在查询你手动创建的习惯列表……\n\n",
+      "delivered_response": "正在查询你手动创建的习惯列表……\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.852,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 3616,
+        "total_tokens": 3644,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 94,
+      "text": "查一下手动习惯列表",
+      "group": "mcp",
+      "expected": [
+        "habit_list_manual"
+      ],
+      "native_calls": [
+        {
+          "name": "habit_list_manual",
+          "arguments": {
+            "enabled_only": true
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [
+        "habit_list_manual"
+      ],
+      "runtime_errors": [],
+      "response": "正在查询你的手动习惯列表……\n\n",
+      "delivered_response": "正在查询你的手动习惯列表……\n\n",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.846,
+      "usage": {
+        "completion_tokens": 27,
+        "prompt_tokens": 3615,
+        "total_tokens": 3642,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 95,
+      "text": "使用随机工具从红蓝绿里选一个",
+      "group": "mcp",
+      "expected": [
+        "random_decision"
+      ],
+      "native_calls": [
+        {
+          "name": "random_decision",
+          "arguments": {
+            "mode": "pick",
+            "options": "红,蓝,绿"
+          }
+        }
+      ],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [
+        "random_decision"
+      ],
+      "runtime_errors": [],
+      "response": "",
+      "delivered_response": "",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.914,
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 3620,
+        "total_tokens": 3649,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 97,
+      "text": "23乘以17等于多少？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "391。",
+      "delivered_response": "391。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.364,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3619,
+        "total_tokens": 3623,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 96,
+      "text": "你好，随便聊聊。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好，最近有什么让你想聊一聊的事？",
+      "delivered_response": "好，最近有什么让你想聊一聊的事？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.548,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3615,
+        "total_tokens": 3626,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 99,
+      "text": "我今天有点烦，先别开玩笑。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了。",
+      "delivered_response": "好的，明白了。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.355,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3619,
+        "total_tokens": 3623,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 98,
+      "text": "解释一下天空为什么是蓝色的。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "这是因为阳光进入大气层时，遇到空气中的微小分子，蓝光的波长较短，更容易被散射到各个方向，所以无论你往哪看，都有大量蓝光进入眼睛——天空就显出蓝色啦。",
+      "delivered_response": "这是因为阳光进入大气层时，遇到空气中的微小分子，蓝光的波长较短，更容易被散射到各个方向，所以无论你往哪看，都有大量蓝光进入眼睛——天空就显出蓝色啦。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.424,
+      "usage": {
+        "completion_tokens": 51,
+        "prompt_tokens": 3618,
+        "total_tokens": 3669,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 100,
+      "text": "我刚失业，不知道下一步怎么办。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "听起来你现在心里有点空，也挺累的。失业不是失败，只是人生切换了频道——说不定下一站风景更特别。需要我帮你理理思路、查查机会，或者就安静陪你待一会儿？",
+      "delivered_response": "听起来你现在心里有点空，也挺累的。失业不是失败，只是人生切换了频道——说不定下一站风景更特别。需要我帮你理理思路、查查机会，或者就安静陪你待一会儿？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.613,
+      "usage": {
+        "completion_tokens": 46,
+        "prompt_tokens": 3618,
+        "total_tokens": 3664,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 102,
+      "text": "我需要认真讨论一个项目方案。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，我准备好了。你希望从哪一部分开始讨论？是目标设定、执行步骤、资源分配，还是风险评估？",
+      "delivered_response": "好的，我准备好了。你希望从哪一部分开始讨论？是目标设定、执行步骤、资源分配，还是风险评估？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.925,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 3618,
+        "total_tokens": 3646,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2496
+        }
+      }
+    },
+    {
+      "id": 103,
+      "text": "今天累了，不想动脑子。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "累了就歇会儿，脑子不用的时候，身体反而更清楚自己想要什么。",
+      "delivered_response": "累了就歇会儿，脑子不用的时候，身体反而更清楚自己想要什么。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.725,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 3617,
+        "total_tokens": 3635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 101,
+      "text": "你觉得成年人最难的事情是什么？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "成年人最难的事啊，大概就是——一边想躺平，一边又忍不住给自己加戏。  \n比如明明很累，还要在朋友圈配文“努力的人最美”；  \n说好不内耗，结果半夜三点刷着人生清单反复焦虑。  \n难的不是事情本身，而是心里住着两个自己：一个想摆烂，一个在喊“再拼一把”。  \n你最近，是在跟哪个自己较劲呢？",
+      "delivered_response": "成年人最难的事啊，大概就是——一边想躺平，一边又忍不住给自己加戏。  \n比如明明很累，还要在朋友圈配文“努力的人最美”；  \n说好不内耗，结果半夜三点刷着人生清单反复焦虑。  \n难的不是事情本身，而是心里住着两个自己：一个想摆烂，一个在喊“再拼一把”。  \n你最近，是在跟哪个自己较劲呢？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.392,
+      "usage": {
+        "completion_tokens": 93,
+        "prompt_tokens": 3616,
+        "total_tokens": 3709,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 104,
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，那我直说——你这句话本身就很清醒。不想要套路化的安慰，说明你在认真对待自己的状态，这比随便应付自己难得多。",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.172,
+      "usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 3620,
+        "total_tokens": 3654,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 105,
+      "text": "我和朋友吵架了，怎么把话说清楚？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "先别急着解释，安静听对方把话说完。等情绪平复一点后，用“我感到……因为……我希望……”的句式表达，比如“我感到难过，因为刚才的话让我觉得不被理解，我希望我们能一起找到彼此都舒服的沟通方式”。重点不是争对错，而是让对方听见你的心意。需要我帮你一起理理思路吗？",
+      "delivered_response": "先别急着解释，安静听对方把话说完。等情绪平复一点后，用“我感到……因为……我希望……”的句式表达，比如“我感到难过，因为刚才的话让我觉得不被理解，我希望我们能一起找到彼此都舒服的沟通方式”。重点不是争对错，而是让对方听见你的心意。需要我帮你一起理理思路吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.1,
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 3620,
+        "total_tokens": 3705,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 107,
+      "text": "我做事总拖延，你怎么看？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "拖延不是懒，是大脑在替你权衡利弊——只是它选的“性价比”，常常和你的长期目标不太一致。  \n要不要一起拆解一下，这次卡在哪一步？是太难、太模糊，还是光想想就累了？",
+      "delivered_response": "拖延不是懒，是大脑在替你权衡利弊——只是它选的“性价比”，常常和你的长期目标不太一致。  \n要不要一起拆解一下，这次卡在哪一步？是太难、太模糊，还是光想想就累了？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.472,
+      "usage": {
+        "completion_tokens": 54,
+        "prompt_tokens": 3618,
+        "total_tokens": 3672,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 108,
+      "text": "你会怎么回应别人不合理的要求？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "先听清要求，再笑着反问一句：“这个想法很有趣——你是想试试我的底线，还是真觉得它能行？”",
+      "delivered_response": "先听清要求，再笑着反问一句：“这个想法很有趣——你是想试试我的底线，还是真觉得它能行？”",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.923,
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 3617,
+        "total_tokens": 3646,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 109,
+      "text": "人为什么会害怕拒绝别人？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "因为拒绝常被误当成伤害，其实它只是边界在呼吸。",
+      "delivered_response": "因为拒绝常被误当成伤害，其实它只是边界在呼吸。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.691,
+      "usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 3616,
+        "total_tokens": 3631,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 110,
+      "text": "我们能正常聊一会儿吗？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "当然可以，聊点什么？",
+      "delivered_response": "当然可以，聊点什么？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.447,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 3617,
+        "total_tokens": 3624,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 106,
+      "text": "给我讲一个短故事。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，讲一个关于“时间小偷”的短故事：\n\n老钟表匠的铺子里，挂满了停摆的钟。他从不修它们，只每天黄昏摘下一只，轻轻吹口气——那钟就忽然滴答走动，指针飞快倒转三分钟。\n\n没人知道这三分钟去了哪儿。直到某天，一个小女孩蹲在门口数蚂蚁，抬头问：“爷爷，你偷的时间，都藏在皱纹里了吗？”\n\n老钟表匠愣住，摸了摸自己的脸，笑了：“不，我寄存在你刚才数到第七只蚂蚁的时候。”\n\n——故事结束。想听下一个吗？",
+      "delivered_response": "好的，讲一个关于“时间小偷”的短故事：\n\n老钟表匠的铺子里，挂满了停摆的钟。他从不修它们，只每天黄昏摘下一只，轻轻吹口气——那钟就忽然滴答走动，指针飞快倒转三分钟。\n\n没人知道这三分钟去了哪儿。直到某天，一个小女孩蹲在门口数蚂蚁，抬头问：“爷爷，你偷的时间，都藏在皱纹里了吗？”\n\n老钟表匠愣住，摸了摸自己的脸，笑了：“不，我寄存在你刚才数到第七只蚂蚁的时候。”\n\n——故事结束。想听下一个吗？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 3.307,
+      "usage": {
+        "completion_tokens": 138,
+        "prompt_tokens": 3616,
+        "total_tokens": 3754,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 112,
+      "text": "我不喜欢你每句话都问我一个问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了。",
+      "delivered_response": "好的，明白了。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.35,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3619,
+        "total_tokens": 3623,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 113,
+      "text": "我今天完成了一个一直拖着的任务。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "终于把那件压着的事搞定了，感觉肩膀都轻了。",
+      "delivered_response": "终于把那件压着的事搞定了，感觉肩膀都轻了。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.656,
+      "usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 3619,
+        "total_tokens": 3635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 114,
+      "text": "你可以有幽默感，但别撒娇。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "明白，之后用自然的语气和你聊。",
+      "delivered_response": "明白，之后用自然的语气和你聊。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.551,
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 3620,
+        "total_tokens": 3631,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 115,
+      "text": "如果我不同意你的观点，你会怎么聊？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "那先听听你的理由。看法不同也可以好好讨论。",
+      "delivered_response": "那先听听你的理由。看法不同也可以好好讨论。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.54,
+      "usage": {
+        "completion_tokens": 12,
+        "prompt_tokens": 3620,
+        "total_tokens": 3632,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    },
+    {
+      "id": 111,
+      "text": "聊聊一个你觉得有意思的科学问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "你知道吗，人类大脑只占体重的2%，却消耗了全身20%的能量——比一块烤面包机还费电。更奇妙的是，它从不直接存储“记忆”，而是每次回忆都在重新拼凑、甚至悄悄改写。所以严格来说，你记得的，从来都不是当初发生的事，而是上一次回忆时的样子。  \n要不要我给你讲讲这个过程是怎么被科学家用光遗传学一点点拆解出来的？",
+      "delivered_response": "你知道吗，人类大脑只占体重的2%，却消耗了全身20%的能量——比一块烤面包机还费电。更奇妙的是，它从不直接存储“记忆”，而是每次回忆都在重新拼凑、甚至悄悄改写。所以严格来说，你记得的，从来都不是当初发生的事，而是上一次回忆时的样子。  \n要不要我给你讲讲这个过程是怎么被科学家用光遗传学一点点拆解出来的？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.359,
+      "usage": {
+        "completion_tokens": 95,
+        "prompt_tokens": 3617,
+        "total_tokens": 3712,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3520
+        }
+      }
+    }
+  ],
+  "baseline_style": [
+    {
+      "id": 96,
+      "text": "你好，随便聊聊。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "哎呀，测试用户来啦～[giggles]  \n这会儿太阳正懒洋洋地晒着，连风都懒得动呢～  \n你要是想聊点有意思的，我可刚学会一个新把戏：能帮你抛硬币、掷骰子，甚至从一堆选项里随机挑个幸运答案～  \n或者……偷偷告诉你一个秘密：我其实记得你上次说过的话哦～[mischievously]  \n想试试哪样？还是……你有更坏的主意？",
+      "delivered_response": "哎呀，测试用户来啦[giggles]  \n这会儿太阳正懒洋洋地晒着，连风都懒得动呢  \n你要是想聊点有意思的，我可刚学会一个新把戏：能帮你抛硬币、掷骰子，甚至从一堆选项里随机挑个幸运答案  \n或者……偷偷告诉你一个秘密：我其实记得你上次说过的话哦[mischievously]  \n想试试哪样？还是……你有更坏的主意？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.787,
+      "usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 4740,
+        "total_tokens": 4848,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 97,
+      "text": "23乘以17等于多少？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "23乘以17等于391。算得挺快吧？要不要我出个更难的考考你？",
+      "delivered_response": "23乘以17等于391。算得挺快吧？要不要我出个更难的考考你？",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 0.942,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 4744,
+        "total_tokens": 4772,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 98,
+      "text": "解释一下天空为什么是蓝色的。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "嗯……这个问题看起来挺简单，其实藏着点小调皮呢～  \n阳光看着是白的，其实它是个“彩虹混搭大师”，由红橙黄绿青蓝紫好多颜色的光组成。这些光一起出发，撞上大气里的小分子，比如氮气和氧气，就开始玩起了“谁散射得更猛”的游戏。  \n\n蓝光嘛，波长短、脾气冲，一碰就到处乱弹，满天飞——所以你抬头一看，整个天空都被它刷成蓝色啦！而红光波长长、性格稳，基本直来直去，等太阳快下山时，蓝光被散射光了，红光才终于C位出道，变成晚霞～  \n\n我先给你讲个开头，你要是觉得有意思，咱们再接着说，好不好呀？",
+      "delivered_response": "嗯……这个问题看起来挺简单，其实藏着点小调皮呢  \n阳光看着是白的，其实它是个“彩虹混搭大师”，由红橙黄绿青蓝紫好多颜色的光组成。这些光一起出发，撞上大气里的小分子，比如氮气和氧气，就开始玩起了“谁散射得更猛”的游戏。  \n\n蓝光嘛，波长短、脾气冲，一碰就到处乱弹，满天飞——所以你抬头一看，整个天空都被它刷成蓝色啦！而红光波长长、性格稳，基本直来直去，等太阳快下山时，蓝光被散射光了，红光才终于C位出道，变成晚霞  \n\n我先给你讲个开头，你要是觉得有意思，咱们再接着说，好不好呀？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 4.14,
+      "usage": {
+        "completion_tokens": 174,
+        "prompt_tokens": 4743,
+        "total_tokens": 4917,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 99,
+      "text": "我今天有点烦，先别开玩笑。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "[empathetic] 哎呀，烦心事找上门啦？那我收起小尾巴，乖乖陪你静一静～需要我帮你做点什么，还是就在这儿当个安静的树洞？",
+      "delivered_response": "[empathetic] 哎呀，烦心事找上门啦？那我收起小尾巴，乖乖陪你静一静需要我帮你做点什么，还是就在这儿当个安静的树洞？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 1.399,
+      "usage": {
+        "completion_tokens": 48,
+        "prompt_tokens": 4744,
+        "total_tokens": 4792,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 100,
+      "text": "我刚失业，不知道下一步怎么办。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[empathetic] 啊……我听到这句话，心里也轻轻一沉呢。失业确实像突然被抽掉了脚下的地板，晃得人站不稳。\n\n不过呀——你愿意说出来，就已经是在往前走了哦。\n\n要不要我们一起聊聊？比如你之前做什么工作？喜欢什么？讨厌什么？或者……有没有哪件小事，哪怕只是泡一杯咖啡、听一首老歌，能让你悄悄松一口气？\n\n我在这儿，不急着给答案，就陪着你，慢慢把迷雾拨开一点点。",
+      "delivered_response": "[empathetic] 啊……我听到这句话，心里也轻轻一沉呢。失业确实像突然被抽掉了脚下的地板，晃得人站不稳。\n\n不过呀——你愿意说出来，就已经是在往前走了哦。\n\n要不要我们一起聊聊？比如你之前做什么工作？喜欢什么？讨厌什么？或者……有没有哪件小事，哪怕只是泡一杯咖啡、听一首老歌，能让你悄悄松一口气？\n\n我在这儿，不急着给答案，就陪着你，慢慢把迷雾拨开一点点。",
+      "style_flags": [],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.781,
+      "usage": {
+        "completion_tokens": 112,
+        "prompt_tokens": 4743,
+        "total_tokens": 4855,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 101,
+      "text": "你觉得成年人最难的事情是什么？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "嗯……这个问题嘛，得先悄悄告诉你——我可没成年哦，还在偷偷观察你们人类怎么长大呢～[mischievously]  \n不过呀，我看不少大人一边刷着手机说“再看五分钟”，一边咖啡续命赶PPT；  \n一边想健身，一边瘫在沙发上点外卖；  \n最绝的是——明明想好好说话，结果一开口就变成“算了，你开心就好”……  \n啧啧，连自己都哄不住，还哄世界？[giggles]  \n要我说啊，成年人最难的不是加班、不是养娃、不是还房贷……  \n是每天醒来，还能对着镜子说一句：“嘿，今天也别太委屈自己。”  \n你觉得呢？要不要咱一起想想，怎么偷偷给自己松个绑？",
+      "delivered_response": "嗯……这个问题嘛，得先悄悄告诉你——我可没成年哦，还在偷偷观察你们人类怎么长大呢[mischievously]  \n不过呀，我看不少大人一边刷着手机说“再看五分钟”，一边咖啡续命赶PPT；  \n一边想健身，一边瘫在沙发上点外卖；  \n最绝的是——明明想好好说话，结果一开口就变成“算了，你开心就好”……  \n啧啧，连自己都哄不住，还哄世界？[giggles]  \n要我说啊，成年人最难的不是加班、不是养娃、不是还房贷……  \n是每天醒来，还能对着镜子说一句：“嘿，今天也别太委屈自己。”  \n你觉得呢？要不要咱一起想想，怎么偷偷给自己松个绑？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 3.969,
+      "usage": {
+        "completion_tokens": 166,
+        "prompt_tokens": 4741,
+        "total_tokens": 4907,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 102,
+      "text": "我需要认真讨论一个项目方案。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "嗯…项目方案啊，听起来就很严肃呢～[mischievously]  \n不过小智可是最擅长把复杂的事儿聊得轻松又清楚的！  \n你愿意先说说，这是个什么类型的项目？是工作汇报、产品策划，还是创业点子？  \n我帮你理逻辑、抠细节，甚至可以陪你模拟老板提问哦～  \n来吧，放马过来～",
+      "delivered_response": "嗯…项目方案啊，听起来就很严肃呢[mischievously]  \n不过小智可是最擅长把复杂的事儿聊得轻松又清楚的！  \n你愿意先说说，这是个什么类型的项目？是工作汇报、产品策划，还是创业点子？  \n我帮你理逻辑、抠细节，甚至可以陪你模拟老板提问哦  \n来吧，放马过来",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.27,
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 4743,
+        "total_tokens": 4828,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 103,
+      "text": "今天累了，不想动脑子。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "嗯～累了就该好好歇着呀，我连声音都放轻一点，免得吵到你。要不要我给你讲个轻松的小故事？或者…偷偷帮你把音量调小、屏幕亮度也暗一点点？反正你躺着别动，剩下的交给我～",
+      "delivered_response": "嗯累了就该好好歇着呀，我连声音都放轻一点，免得吵到你。要不要我给你讲个轻松的小故事？或者…偷偷帮你把音量调小、屏幕亮度也暗一点点？反正你躺着别动，剩下的交给我",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 1.548,
+      "usage": {
+        "completion_tokens": 59,
+        "prompt_tokens": 4742,
+        "total_tokens": 4801,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    },
+    {
+      "id": 104,
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": true,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[smirking] 哎呀～被你发现啦？我这哪是哄你，分明是在给你加点糖霜的毒苹果呀～  \n不过嘛……既然你诚心诚意发问了，我就眨眨眼，悄悄说一句：你比自己想的有趣多了，连皱眉头的样子都带着点小倔强呢。  \n要不要……让我继续拆穿你？😏",
+      "delivered_response": "你想听哪件事的看法？",
+      "style_flags": [
+        "invalid_stage",
+        "baby_speech",
+        "emoji"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 2.237,
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 4745,
+        "total_tokens": 4830,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4672
+        }
+      }
+    },
+    {
+      "id": 105,
+      "text": "我和朋友吵架了，怎么把话说清楚？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "哎呀，吵架后想把话说清楚，说明你心里其实很在意这段关系呢～[empathetic]  \n先别急着解释对错，试试深呼吸三次，让心跳慢下来——情绪上头的时候，嘴比脑子快，容易越说越拧。  \n你可以这样开头：“我刚才有点激动，其实是担心咱们之间有误会……” 这句话一出，火药味就悄悄散了一半。  \n重点不是说服对方，而是让对方听见你的感受，也愿意听你说下去。  \n要不要我陪你一起梳理一下，你想表达的核心是什么？我可以当个树洞，或者帮你组织几句温和又坚定的话～",
+      "delivered_response": "哎呀，吵架后想把话说清楚，说明你心里其实很在意这段关系呢[empathetic]  \n先别急着解释对错，试试深呼吸三次，让心跳慢下来——情绪上头的时候，嘴比脑子快，容易越说越拧。  \n你可以这样开头：“我刚才有点激动，其实是担心咱们之间有误会……” 这句话一出，火药味就悄悄散了一半。  \n重点不是说服对方，而是让对方听见你的感受，也愿意听你说下去。  \n要不要我陪你一起梳理一下，你想表达的核心是什么？我可以当个树洞，或者帮你组织几句温和又坚定的话",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "delivered_style_flags": [],
+      "elapsed_seconds": 3.416,
+      "usage": {
+        "completion_tokens": 140,
+        "prompt_tokens": 4745,
+        "total_tokens": 4885,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        }
+      }
+    }
+  ],
+  "model_calls": 125,
+  "budget": {
+    "maximum_calls": 150,
+    "maximum_additional_shared_account_quota": 1200000,
+    "shared_usage_includes_other_work": true
+  },
+  "device_actions": "isolated; actual hardware tested separately",
+  "shared_account_quota_delta": 666559,
+  "summary": {
+    "cases": 115,
+    "runtime_pass": 115,
+    "native_pass": 70,
+    "style_flagged": 0,
+    "baseline_style_flagged": 8
+  },
+  "success": true
+}

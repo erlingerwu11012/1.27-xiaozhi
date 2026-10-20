@@ -1,0 +1,12 @@
+{
+  "quarantined": 4,
+  "source_kinds": [
+    "tool_result",
+    "dialogue_assistant"
+  ],
+  "raw_records_deleted": 0,
+  "user_fact_records_changed": 0,
+  "reversible": true,
+  "journal_private": "/root/prjs/releases/experience-repair-20261009/backup/memory-quarantine-journal-private.json",
+  "at": 1791534544.095655
+}

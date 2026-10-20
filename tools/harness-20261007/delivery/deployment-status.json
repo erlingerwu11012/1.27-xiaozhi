@@ -1,0 +1,71 @@
+{
+  "phase": "deployed_verified",
+  "domain": "https://www.realecho.cn",
+  "code_hash": "53cbbe8ddcc9ef6ea46379a52c698c2756fa65c33c9cc7acfd593a01aa58f29b",
+  "deployed_at": "2026-10-08T23:23:22.930450+08:00",
+  "observation_finished_at": "2026-10-08T23:53:23.453423+08:00",
+  "observation_seconds": 1801,
+  "observation_checks": 60,
+  "all_observation_checks_passed": true,
+  "formal_health": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api_ws_root",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "process_status": "online",
+  "process_restarts": 0,
+  "model": "qwen3.7-plus",
+  "temperature": 0.4,
+  "thinking": false,
+  "hardware_billing": true,
+  "persona_unchanged": true,
+  "gateway_config_unchanged": true,
+  "gateway_url": "http://127.0.0.1:3000/v1",
+  "official_provider_selection_unchanged": true,
+  "metadata": {
+    "installed_source_matches": true,
+    "ledger_exists": false
+  },
+  "hardware_validation": false,
+  "rollback_ledger_retained": true,
+  "test_additional_model_requests": 990,
+  "test_total_records_since_cap": 1841,
+  "live_hardware_operations_observed": false
+}

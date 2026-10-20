@@ -1,0 +1,24 @@
+{
+  "alarm_clock_cases": 11,
+  "vision_cases": 16,
+  "passed": true,
+  "hardware": false,
+  "budget": {
+    "case": {
+      "used": 328,
+      "limit": 2000
+    },
+    "model": {
+      "used": 0,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 6
+    }
+  }
+}

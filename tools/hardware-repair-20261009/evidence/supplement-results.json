@@ -1,0 +1,165 @@
+{
+  "tests": 32,
+  "passed": true,
+  "rows": [
+    {
+      "name": "read:这是最高档了吗",
+      "passed": true
+    },
+    {
+      "name": "read:屏幕亮度现在多少",
+      "passed": true
+    },
+    {
+      "name": "read:现在屏幕上还有提醒卡片吗",
+      "passed": true
+    },
+    {
+      "name": "read:现在这张卡片是什么",
+      "passed": true
+    },
+    {
+      "name": "read:音量调到90",
+      "passed": true
+    },
+    {
+      "name": "read:假如音量调到90会怎么样",
+      "passed": true
+    },
+    {
+      "name": "intent:我爱喝什么",
+      "passed": true
+    },
+    {
+      "name": "intent:我就问问爱喝啥，你更正什么记忆啊",
+      "passed": true
+    },
+    {
+      "name": "intent:不是啊，我现在不喝咖啡了，你改一下",
+      "passed": true
+    },
+    {
+      "name": "intent:台灯那件事别记着了，忘掉吧",
+      "passed": true
+    },
+    {
+      "name": "intent:别改，我只是问一下",
+      "passed": true
+    },
+    {
+      "name": "normalize:{\"speaker\": \"甲\", \"content\": \"我喜欢绿茶\"}",
+      "passed": true
+    },
+    {
+      "name": "normalize:{\"role\": \"assistant\", \"content\": \"我喜欢绿茶\"}",
+      "passed": true
+    },
+    {
+      "name": "normalize:我爱喝什么",
+      "passed": true
+    },
+    {
+      "name": "normalize:我喜欢绿茶",
+      "passed": true
+    },
+    {
+      "name": "already-ready",
+      "passed": true
+    },
+    {
+      "name": "refresh-once",
+      "passed": true
+    },
+    {
+      "name": "closed-no-refresh",
+      "passed": true
+    },
+    {
+      "name": "old-session",
+      "passed": true
+    },
+    {
+      "name": "connection-replaced",
+      "passed": true
+    },
+    {
+      "name": "claim:音量调好了，亮度调好了",
+      "passed": true
+    },
+    {
+      "name": "claim:都搞定了",
+      "passed": true
+    },
+    {
+      "name": "claim:设备重启完成了",
+      "passed": true
+    },
+    {
+      "name": "claim:人脸录入成功了",
+      "passed": true
+    },
+    {
+      "name": "claim:已经收到重启请求，是否重启完成还不能确认",
+      "passed": true
+    },
+    {
+      "name": "claim:没有调好音量",
+      "passed": true
+    },
+    {
+      "name": "voice-boundary:0.3:0.299:known",
+      "passed": true,
+      "score": 0.299,
+      "threshold": 0.3
+    },
+    {
+      "name": "voice-boundary:0.3:0.3:known",
+      "passed": true,
+      "score": 0.3,
+      "threshold": 0.3
+    },
+    {
+      "name": "voice-boundary:0.3:0.35:known",
+      "passed": true,
+      "score": 0.35,
+      "threshold": 0.3
+    },
+    {
+      "name": "voice-boundary:0.4:0.35:known",
+      "passed": true,
+      "score": 0.35,
+      "threshold": 0.4
+    },
+    {
+      "name": "voice-boundary:0.3:0.9:unknown",
+      "passed": true,
+      "score": 0.9,
+      "threshold": 0.3
+    },
+    {
+      "name": "voice-boundary:0.3:0.9:known",
+      "passed": true,
+      "score": 0.9,
+      "threshold": 0.3
+    }
+  ],
+  "budget": {
+    "case": {
+      "used": 1067,
+      "limit": 2000
+    },
+    "model": {
+      "used": 900,
+      "limit": 900
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "voice_real_recordings": false
+}

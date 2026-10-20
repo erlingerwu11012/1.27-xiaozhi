@@ -1,0 +1,50 @@
+{
+  "cases": 7,
+  "passed": 5,
+  "failed": [
+    {
+      "group": "combo-03",
+      "turn": 4,
+      "errors": [
+        "harness_error:operation_claim_requires_dispatch",
+        "unfulfilled_business_reply",
+        "chat_replaced_by_error"
+      ]
+    },
+    {
+      "group": "combo-00",
+      "turn": 1,
+      "errors": [
+        "harness_error:operation_claim_requires_dispatch",
+        "unfulfilled_business_reply",
+        "missing_answer:秦|妻|老婆|配偶",
+        "chat_replaced_by_error"
+      ]
+    }
+  ],
+  "real_model_turns": 7,
+  "model_calls": 10,
+  "reused_cases": 0,
+  "new_cases": 7,
+  "reuse_source": null,
+  "all_same_version": true,
+  "budget": {
+    "case": {
+      "used": 149,
+      "limit": 800
+    },
+    "model": {
+      "used": 14,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

@@ -1,0 +1,2 @@
+PUBLIC_WSS [{"url": "wss://www.realecho.cn/xiaozhi/v1/", "websocket_upgrade": 101, "tls_handshake": "ok", "device_authenticated": false, "purpose": "route check only; no device ID or model request"}, {"url": "wss://api.realecho.cn/xiaozhi/v1/", "websocket_upgrade": 101, "tls_handshake": "ok", "device_authenticated": false, "purpose": "route check only; no device ID or model request"}]
+FINAL_SERVICE {"status": "online", "pid": 52355, "restart_count": 1}

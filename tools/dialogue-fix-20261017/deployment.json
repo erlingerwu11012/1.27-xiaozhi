@@ -1,0 +1,27 @@
+{
+  "phase": "complete",
+  "started_at": 1792246424.4981508,
+  "release": "/root/prjs/releases/dialogue-fix-20261017",
+  "old_python_id": 18,
+  "api_id": 16,
+  "new_python_id": 19,
+  "hardware_tested": false,
+  "error_log_offset": 35400,
+  "completed_at": 1792246429.218795,
+  "checks": [
+    "public_https_200",
+    "public_api_ready",
+    "public_wss_invalid_token_1008",
+    "ports_ready",
+    "binding_unchanged",
+    "config_unchanged",
+    "api_and_other_processes_unchanged"
+  ],
+  "sha256": {
+    "core/handle/sendAudioHandle.py": "569a7eef5f6f30efa6a8dc6a0e4d47da4c1a8ad9a067d1afae8e06a7f3f994d1",
+    "core/utils/tool_harness/runtime.py": "b3d789bc068b49d3098a13c779dc0cf454fc4415e1feaf86db9beb476e6d9797",
+    "core/utils/tool_harness/retrieval.py": "f1092c5f99b7cbcbaf6c6f5e2ed895ef4ee2009f389f569f2f0beb072599357a",
+    "core/utils/tool_harness/request_authority.py": "c91bd8b9c02d3477fb5c88a1830b8b8b39ca2fcbf80de31299e061b0abb933e6",
+    "core/utils/tool_harness/prompt_policy.py": "92e080598ee471117cfb1146a717be2a0c7f1e5cb957f3dab4bc1c92838d5f68"
+  }
+}

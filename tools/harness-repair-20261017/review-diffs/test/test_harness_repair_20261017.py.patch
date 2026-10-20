@@ -1,0 +1,235 @@
+--- a/test/test_harness_repair_20261017.py
++++ b/test/test_harness_repair_20261017.py
+@@ -0,0 +1,232 @@
++"""Offline production-path regressions; no model, device, or live API writes."""
++import asyncio
++import json
++import sys
++import time
++import types
++import unittest
++from datetime import datetime
++from zoneinfo import ZoneInfo
++from types import SimpleNamespace
++from unittest.mock import AsyncMock, MagicMock, patch
++
++# Capture operational logging without loading production configuration.
++logger_module = types.ModuleType('config.logger')
++logger_module.setup_logging = lambda: MagicMock()
++sys.modules['config.logger'] = logger_module
++import config
++config.logger = logger_module
++
++from core.providers.tools.base import ToolDefinition, ToolType
++from core.providers.tools.unified_tool_manager import ToolManager
++from core.providers.tools.device_reminder_adapter import timed_note_definition
++from core.utils.tool_harness.registry import audited_source
++from core.utils.tool_harness.models import OperationOutcome, StepResult
++from core.utils.tool_harness.reply_composer import compose
++from core.utils.tool_harness.contracts import receipt
++from plugins_func.register import Action, ActionResponse
++
++
++def note_definition():
++    return ToolDefinition('note_add', {'type': 'function', 'function': {
++        'name': 'note_add', 'description': '设备便签', 'parameters': {
++            'type': 'object', 'properties': {'text': {'type': 'string'}},
++            'required': ['text']}}}, ToolType.DEVICE_MCP)
++
++
++def connection():
++    client = SimpleNamespace(ready=True, closed=False, has_tool=lambda name: name in {'note_add', 'note.add'})
++    return SimpleNamespace(mcp_client=client, config={'harness': {'enabled': True}},
++                           device_id='synthetic-device', session_id='synthetic-session')
++
++
++class CatalogTests(unittest.TestCase):
++    def manager(self, conn=None):
++        manager = ToolManager(conn or connection())
++        executor = MagicMock()
++        executor.get_tools.return_value = {'note_add': note_definition()}
++        manager.register_executor(ToolType.DEVICE_MCP, executor)
++        return manager, executor
++
++    def test_exposes_without_server_mcp(self):
++        manager, _ = self.manager()
++        definition = manager.get_all_tools()['add_reminder']
++        self.assertTrue(audited_source('add_reminder', definition))
++        self.assertEqual(definition.parameters['raw_tool'], 'note_add')
++
++    def test_absent_or_disconnected_note_is_not_advertised(self):
++        for field in ['ready', 'closed']:
++            conn = connection()
++            setattr(conn.mcp_client, field, field == 'closed')
++            manager, _ = self.manager(conn)
++            self.assertNotIn('add_reminder', manager.get_all_tools())
++        self.assertIsNone(timed_note_definition(connection(), {}))
++
++    def test_ambiguous_note_is_not_adapted(self):
++        manager, _ = self.manager()
++        executor = MagicMock()
++        executor.get_tools.return_value = {'note_add': note_definition()}
++        manager.register_executor(ToolType.SERVER_PLUGIN, executor)
++        self.assertNotIn('add_reminder', manager.get_all_tools())
++
++    def test_existing_server_capability_is_preserved(self):
++        manager, _ = self.manager()
++        original = ToolDefinition('add_reminder', {}, ToolType.SERVER_MCP)
++        executor = MagicMock()
++        executor.get_tools.return_value = {'add_reminder': original}
++        manager.register_executor(ToolType.SERVER_MCP, executor)
++        self.assertIs(manager.get_all_tools()['add_reminder'], original)
++
++    def test_adapter_tracks_target_schema_changes(self):
++        manager, executor = self.manager()
++        old = manager.get_all_tools()['add_reminder'].parameters
++        executor.get_tools.return_value['note_add'].description['function']['description'] += '新版'
++        manager.refresh_tools()
++        new = manager.get_all_tools()['add_reminder'].parameters
++        self.assertNotEqual(old, new)
++
++    def test_unmarked_device_alias_remains_unaudited(self):
++        alias = ToolDefinition('add_reminder', {}, ToolType.DEVICE_MCP)
++        self.assertFalse(audited_source('add_reminder', alias))
++
++
++class ExecutionTests(unittest.IsolatedAsyncioTestCase):
++    async def execute(self, device_ok=True, recipient_ok=True, through_harness=False):
++        import core.utils.device_reminder as reminder
++        manager, executor = CatalogTests().manager()
++        resolution = SimpleNamespace(recipient_person_id='usr_test', recipient_display_name='测试人员',
++                                     attach_to_device=True)
++        rejected = ActionResponse(Action.RESPONSE, result=json.dumps({'status': 'error', 'errorCode': 'identity_unavailable'}))
++
++        async def device_call(conn, args):
++            if not device_ok:
++                return '设备存储失败'
++            at = datetime.fromtimestamp(args['remind_at'], ZoneInfo('Asia/Shanghai')).strftime('%m/%d %H:%M')
++            return '已记录：' + args['text'] + '，将于 ' + at + ' 提醒'
++
++        call = AsyncMock(side_effect=device_call)
++        with patch.object(reminder, '_resolve_recipient_or_ask', AsyncMock(return_value=(resolution, None) if recipient_ok else (None, rejected))), \
++             patch.object(reminder, 'apply_unified_recipient_to_device_args', side_effect=lambda a, r: dict(a, recipient_person_id=r.recipient_person_id)), \
++             patch.object(reminder, 'call_device_note_add', call), \
++             patch('core.utils.operation_control.enabled', return_value=False):
++            if through_harness:
++                from core.utils.person_identity import PersonTurn, activate, deactivate
++                from core.utils.tool_harness.runtime import Harness
++                from core.utils.tool_harness.ledger import Ledger
++                conn = manager.conn
++                conn.person_turn = PersonTurn('1', 'usr_test', 0, 1, 'personal', 'matched', 'turn-reminder',
++                                             conn.device_id, 'agent-test', 1)
++                conn.func_handler = SimpleNamespace(tool_manager=manager)
++                query = '呃，你提醒我一下，两分钟后喝水。'
++                def decide(messages):
++                    if '可信业务结果' in messages[-1]['content']:
++                        return {'mode': 'chat', 'reply': '提醒已设好。'}
++                    return {'mode': 'operate', 'intent': 'action', 'intent_evidence': '你提醒我一下',
++                            'authorized_writes': ['add_reminder'], 'steps': [{'id': 'a', 'tool': 'add_reminder',
++                            'arguments': {'text': query, 'remind_time_str': '两分钟后'}}]}
++                ledger = Ledger(':memory:')
++                token = activate(conn, conn.person_turn)
++                try:
++                    result = await Harness(conn, ledger=ledger, decide=decide).run(query, [])
++                finally:
++                    deactivate(token)
++                    ledger.close()
++            else:
++                result = await manager._execute_tool('add_reminder', {'text': '两分钟后提醒我喝水', 'remind_time_str': '两分钟后'})
++        executor.execute.assert_not_called()  # Never call a nonexistent raw add_reminder.
++        return result, call
++
++    async def test_routes_to_timed_note_and_requires_receipt(self):
++        result, call = await self.execute()
++        checked = receipt('add_reminder', {}, result, 'synthetic')
++        self.assertEqual(checked.state, 'completed')
++        args = call.await_args.args[1]
++        self.assertGreater(args['remind_at'], time.time() + 100)
++        self.assertLess(args['remind_at'], time.time() + 125)
++        self.assertEqual(args['recipient_person_id'], 'usr_test')
++
++    async def test_device_failure_never_claims_success(self):
++        result, _ = await self.execute(device_ok=False)
++        self.assertNotEqual(receipt('add_reminder', {}, result, 'synthetic').state, 'completed')
++
++    async def test_identity_failure_never_dispatches(self):
++        result, call = await self.execute(recipient_ok=False)
++        call.assert_not_awaited()
++        self.assertNotEqual(receipt('add_reminder', {}, result, 'synthetic').state, 'completed')
++
++    async def test_user_reminder_request_runs_through_harness(self):
++        outcome, call = await self.execute(through_harness=True)
++        self.assertFalse(outcome.error, outcome.error)
++        self.assertTrue(any(r.tool == 'add_reminder' and r.state == 'completed' for r in outcome.results), outcome)
++        self.assertEqual(call.await_count, 1)
++
++
++class ReplyTests(unittest.IsolatedAsyncioTestCase):
++    def harness(self, decision=None):
++        harness = SimpleNamespace(conn=SimpleNamespace(config={}), _speech_output=None,
++                                  observe=MagicMock(), catalog=lambda: {},
++                                  decide=decision or MagicMock(side_effect=AssertionError('unnecessary model call')),
++                                  stream_decide=None)
++        return harness
++
++    async def test_verified_setting_skips_result_model(self):
++        for tool, payload, text in [
++            ('self_screen_set_brightness', {'brightness': 3, 'brightness_level': 3}, '亮度已调到3档。'),
++            ('self_audio_speaker_set_volume', {'volume': 20}, '音量已调到20。')]:
++            harness = self.harness()
++            result = StepResult(state='completed', tool=tool, call_id='x', arguments={}, reply=text, payload=payload)
++            outcome = OperationOutcome(mode='operate', reply=text, results=[result], model_calls=1)
++            await compose(harness, '调低一点', [], outcome, time.monotonic()+10)
++            self.assertEqual(outcome.model_calls, 1)
++            harness.decide.assert_not_called()
++
++    async def test_failure_keeps_result_model_and_checks_success_claim(self):
++        decide = MagicMock(return_value={'mode': 'chat', 'reply': '已经完成，搞定了。'})
++        harness = self.harness(decide)
++        result = StepResult(state='failed', tool='self_screen_set_brightness', call_id='x', arguments={}, reply='亮度没有完成。')
++        outcome = OperationOutcome(mode='operate', reply='亮度没有完成。', results=[result])
++        await compose(harness, '调低一点', [], outcome, time.monotonic()+10)
++        decide.assert_called_once()
++        self.assertEqual(outcome.reply, '亮度没有完成。')
++
++    async def test_interrupted_reply_has_no_model_or_completion(self):
++        harness = self.harness()
++        outcome = OperationOutcome(mode='operate', reply='', interrupted=True, results=[])
++        await compose(harness, '', [], outcome, time.monotonic()+10)
++        harness.decide.assert_not_called()
++
++
++class HarnessFlowTests(unittest.IsolatedAsyncioTestCase):
++    async def test_absolute_setting_end_to_end_without_model(self):
++        from core.utils.person_identity import PersonTurn, activate, deactivate
++        from core.utils.tool_harness.runtime import Harness
++        from core.utils.tool_harness.ledger import Ledger
++        conn = connection()
++        conn.person_turn = PersonTurn('1', 'usr_test', 0, 1, 'personal', 'matched', 'turn-setting',
++                                     conn.device_id, 'agent-test', 1)
++        manager, executor = CatalogTests().manager(conn)
++        setting = ToolDefinition('self_audio_speaker_set_volume', {'type': 'function', 'function': {
++            'name': 'self_audio_speaker_set_volume', 'description': '设置音量', 'parameters': {
++                'type': 'object', 'properties': {'volume': {'type': 'integer', 'minimum': 0, 'maximum': 100}},
++                'required': ['volume'], 'additionalProperties': False}}}, ToolType.DEVICE_MCP)
++        executor.get_tools.return_value['self_audio_speaker_set_volume'] = setting
++        executor.execute = AsyncMock(return_value=ActionResponse(Action.REQLLM, result=json.dumps({'ok': True, 'volume': 20})))
++        conn.func_handler = SimpleNamespace(tool_manager=manager)
++        decide = MagicMock(side_effect=AssertionError('simple setting must not need a model'))
++        ledger = Ledger(':memory:')
++        harness = Harness(conn, ledger=ledger, decide=decide)
++        token = activate(conn, conn.person_turn)
++        try:
++            outcome = await harness.run('把音量调到20', [])
++            self.assertFalse(outcome.error, outcome.error)
++            self.assertTrue(any(r.tool == setting.name and r.state == 'completed' for r in outcome.results), outcome)
++            self.assertEqual(outcome.model_calls, 0)
++            decide.assert_not_called()
++            self.assertEqual(executor.execute.await_count, 1)
++        finally:
++            deactivate(token)
++            ledger.close()
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)

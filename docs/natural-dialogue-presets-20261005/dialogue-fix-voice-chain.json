@@ -1,0 +1,114 @@
+{
+  "source": "real ASR and TTS with synthetic recordings; actual candidate ConnectionHandler and live read-only MCP",
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "model": "qwen3.8-max",
+  "cases": [
+    {
+      "turn": 1,
+      "input_text": "刚买了个书架，还没发货，我就是随便聊聊，别替我安排。",
+      "asr_text": "刚买了个书架，还没发货，我就是随便聊聊，别替我安排。",
+      "chat_success": true,
+      "spoken_text": "新书架还在路上，正好可以慢慢想想以后怎么摆书。等它到了再折腾也不迟。",
+      "tool_events": [],
+      "tts_events": 3,
+      "reply_audio_file": "dialogue-fix-voice-1.wav",
+      "reply_audio_ms": 7650,
+      "tts_first_audio_ms": 1132,
+      "success": true
+    },
+    {
+      "turn": 2,
+      "input_text": "成年人的朋友为什么越来越难约？别反问我，说说你的看法。",
+      "asr_text": "成年人的朋友为什么越来越难约？别反问我，说说你的看法。",
+      "chat_success": true,
+      "spoken_text": "大家的时间都被切得太碎了，能凑到一起的空档本来就少。再加上各自的生活节奏不一样，约一次得反复对齐，光协调就耗掉不少心力。有时候不是不想见，是怕麻烦别人，也怕自己临时有变动让人白等。久而久之，连开口约人都变得小心翼翼了。",
+      "tool_events": [],
+      "tts_events": 3,
+      "reply_audio_file": "dialogue-fix-voice-2.wav",
+      "reply_audio_ms": 25010,
+      "tts_first_audio_ms": 1624,
+      "success": true
+    },
+    {
+      "turn": 3,
+      "input_text": "查询伦敦现在的时间",
+      "asr_text": "查询伦敦现在的时间。",
+      "chat_success": true,
+      "spoken_text": "伦敦当地时间是2026年10月5日，12点42分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月05日 12:42:33 (Monday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "dialogue-fix-voice-3.wav",
+      "reply_audio_ms": 6050,
+      "tts_first_audio_ms": 742,
+      "success": true
+    },
+    {
+      "turn": 4,
+      "input_text": "查询东京现在的时间",
+      "asr_text": "查询东京现在的时间。",
+      "chat_success": true,
+      "spoken_text": "东京当地时间是2026年10月5日，20点42分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 20:42:41 (Monday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "dialogue-fix-voice-4.wav",
+      "reply_audio_ms": 6370,
+      "tts_first_audio_ms": 592,
+      "success": true
+    },
+    {
+      "turn": 5,
+      "input_text": "查询上海现在的时间",
+      "asr_text": "查询上海现在的时间。",
+      "chat_success": true,
+      "spoken_text": "上海当地时间是2026年10月5日，19点42分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Shanghai"
+          },
+          "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月05日 19:42:47 (Monday)\n时区：UTC+8",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "dialogue-fix-voice-5.wav",
+      "reply_audio_ms": 5730,
+      "tts_first_audio_ms": 764,
+      "success": true
+    }
+  ],
+  "limits": {
+    "tts_calls": 10,
+    "asr_sessions": 5,
+    "chat_turns": 5
+  },
+  "completed": true,
+  "providers": {
+    "asr_model": "qwen3-asr-flash-realtime",
+    "tts_model": "qwen-audio-3.0-tts-plus"
+  }
+}

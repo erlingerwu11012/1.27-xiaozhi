@@ -1,0 +1,10 @@
+{
+  "authenticated_hello": true,
+  "hello_before_mcp": true,
+  "real_server_entry": true,
+  "isolated_management_database": true,
+  "model_requests": 0,
+  "real_audio": false,
+  "vision_requests": 0,
+  "passed": true
+}

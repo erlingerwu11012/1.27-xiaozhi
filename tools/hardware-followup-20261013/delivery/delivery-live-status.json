@@ -1,0 +1,31 @@
+{
+  "captured_at": 1791855949.418341,
+  "processes": [
+    {
+      "id": 9,
+      "status": "stopped",
+      "release": "/root/prjs/releases/harness-stream-20261012/start-manager-api.sh",
+      "restarts": 0
+    },
+    {
+      "id": 10,
+      "status": "stopped",
+      "release": "/root/prjs/releases/harness-stream-20261012/serve.py",
+      "restarts": 0
+    },
+    {
+      "id": 11,
+      "status": "online",
+      "release": "/root/prjs/releases/harness-followup-20261013/start-manager-api.sh",
+      "restarts": 0
+    },
+    {
+      "id": 12,
+      "status": "online",
+      "release": "/root/prjs/releases/harness-followup-20261013/serve.py",
+      "restarts": 0
+    }
+  ],
+  "formal_domain": "https://www.realecho.cn",
+  "deployment_state": "complete"
+}

@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "mode": "candidate",
+  "real_login_attempts": 0,
+  "domains": [
+    {
+      "host": "https://realecho.cn",
+      "checks": [
+        "hidden_login_fields_absent",
+        "focus_allows_typing",
+        "delayed_config_keeps_login_mode",
+        "inactive_delayed_autofill_pair_rejected",
+        "focused_silent_fill_restored",
+        "intentional_account_edit_allowed",
+        "ime_composition_preserved",
+        "captcha_refresh_preserves_account",
+        "register_login_components_isolated",
+        "submitted_account_matches_selection",
+        "credentials_not_persisted",
+        "no_page_errors",
+        "close_removes_fields_and_stops_guard"
+      ],
+      "submitted": [
+        {
+          "username": "zcs478455026",
+          "hasPassword": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "host": "https://www.realecho.cn",
+      "checks": [
+        "hidden_login_fields_absent",
+        "focus_allows_typing",
+        "delayed_config_keeps_login_mode",
+        "inactive_delayed_autofill_pair_rejected",
+        "focused_silent_fill_restored",
+        "intentional_account_edit_allowed",
+        "ime_composition_preserved",
+        "captcha_refresh_preserves_account",
+        "register_login_components_isolated",
+        "submitted_account_matches_selection",
+        "credentials_not_persisted",
+        "no_page_errors",
+        "close_removes_fields_and_stops_guard"
+      ],
+      "submitted": [
+        {
+          "username": "zcs478455026",
+          "hasPassword": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "build_index_sha256": "d26e8564abe521851e9fb7d10879cc2a0393d07aacb6dd0b64f90dd9c21baaee"
+}

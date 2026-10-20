@@ -1,0 +1,4 @@
+from pathlib import Path
+p=Path('tools/experience-repair-20261009/start_api.py');s=p.read_text(encoding='utf-8-sig');s=s.replace("env=dict(os.environ,ISO_MANAGER", "subprocess.run(['docker','start','experience-repair-redis'],check=True,stdout=subprocess.DEVNULL)\nenv=dict(os.environ,ISO_MANAGER",1)
+s=s.replace("'--spring.quartz.auto-startup=false']","'--spring.quartz.auto-startup=false','--xiaozhi.face.base-url=http://127.0.0.1:9']")
+s+='''\nimport requests\nfor _ in range(90):\n if p.poll() is not None:raise RuntimeError('isolated_api_start_failed')\n try:\n  response=requests.get('http://127.0.0.1:18002/xiaozhi/user-identities/internal/state/99003',headers={'Authorization':'Bearer '+secret_file.read_text()},timeout=.5)\n  if response.status_code==200 and response.json().get('code')==0:print('isolated api ready');break\n except requests.RequestException:pass\n time.sleep(.5)\nelse:raise RuntimeError('isolated_api_not_ready')\n''';p.write_text(s,encoding='utf-8')

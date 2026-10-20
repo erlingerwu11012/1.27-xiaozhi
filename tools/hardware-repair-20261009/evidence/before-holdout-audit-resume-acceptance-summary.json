@@ -1,0 +1,222 @@
+{
+  "cases": 276,
+  "passed": 276,
+  "failed_ids": [],
+  "positive_cases": 213,
+  "positive_pass": 213,
+  "common_cases": 125,
+  "common_pass": 125,
+  "per_tool": {
+    "get_lunar": {
+      "cases": 2,
+      "pass": 2
+    },
+    "get_world_time": {
+      "cases": 2,
+      "pass": 2
+    },
+    "handle_exit_intent": {
+      "cases": 2,
+      "pass": 2
+    },
+    "memory_search": {
+      "cases": 12,
+      "pass": 12
+    },
+    "memory_correct": {
+      "cases": 7,
+      "pass": 7
+    },
+    "memory_forget": {
+      "cases": 7,
+      "pass": 7
+    },
+    "random_decision": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_get_device_status": {
+      "cases": 11,
+      "pass": 11
+    },
+    "self_audio_speaker_set_volume": {
+      "cases": 20,
+      "pass": 20
+    },
+    "self_screen_set_brightness": {
+      "cases": 18,
+      "pass": 18
+    },
+    "alarm_set": {
+      "cases": 13,
+      "pass": 13
+    },
+    "alarm_list": {
+      "cases": 2,
+      "pass": 2
+    },
+    "alarm_delete": {
+      "cases": 2,
+      "pass": 2
+    },
+    "alarm_dismiss": {
+      "cases": 2,
+      "pass": 2
+    },
+    "alarm_snooze": {
+      "cases": 2,
+      "pass": 2
+    },
+    "note_add": {
+      "cases": 14,
+      "pass": 14
+    },
+    "note_list": {
+      "cases": 2,
+      "pass": 2
+    },
+    "note_delete": {
+      "cases": 2,
+      "pass": 2
+    },
+    "note_snooze": {
+      "cases": 2,
+      "pass": 2
+    },
+    "reminder_get_current": {
+      "cases": 14,
+      "pass": 14
+    },
+    "reminder_list_pending": {
+      "cases": 2,
+      "pass": 2
+    },
+    "reminder_begin_broadcast": {
+      "cases": 2,
+      "pass": 2
+    },
+    "reminder_next": {
+      "cases": 2,
+      "pass": 2
+    },
+    "reminder_stop_broadcast": {
+      "cases": 2,
+      "pass": 2
+    },
+    "reminder_action": {
+      "cases": 14,
+      "pass": 14
+    },
+    "self_camera_take_photo": {
+      "cases": 4,
+      "pass": 4
+    },
+    "self_camera_identify_person": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_screen_set_render_mode": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_screen_set_render_options": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_screen_get_render_status": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_screen_get_info": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_get_system_info": {
+      "cases": 2,
+      "pass": 2
+    },
+    "self_reboot": {
+      "cases": 2,
+      "pass": 2
+    },
+    "habit_list": {
+      "cases": 2,
+      "pass": 2
+    },
+    "habit_delete": {
+      "cases": 2,
+      "pass": 2
+    },
+    "habit_confirm": {
+      "cases": 2,
+      "pass": 2
+    },
+    "habit_reject": {
+      "cases": 2,
+      "pass": 2
+    },
+    "behavior_log": {
+      "cases": 2,
+      "pass": 2
+    },
+    "camera_face_enroll_start": {
+      "cases": 2,
+      "pass": 2
+    },
+    "camera_face_enroll_cancel": {
+      "cases": 2,
+      "pass": 2
+    },
+    "camera_face_enroll_status": {
+      "cases": 2,
+      "pass": 2
+    },
+    "add_reminder": {
+      "cases": 14,
+      "pass": 14
+    },
+    "reminder_close_current": {
+      "cases": 4,
+      "pass": 4
+    },
+    "habit_learn": {
+      "cases": 1,
+      "pass": 1
+    }
+  },
+  "tools": 44,
+  "real_model_response_turns": 272,
+  "independent_holdout": 63,
+  "latency_ms": {
+    "p50": 3917.89,
+    "p95": 6786.73,
+    "max": 11560.85
+  },
+  "model_calls_per_turn": {
+    "2": 141,
+    "1": 120,
+    "3": 9,
+    "0": 4,
+    "4": 2
+  },
+  "repairs": 2,
+  "budget": {
+    "case": {
+      "used": 5912,
+      "limit": null
+    },
+    "model": {
+      "used": 4286,
+      "limit": null
+    },
+    "tts": {
+      "used": 3,
+      "limit": null
+    },
+    "vision": {
+      "used": 2,
+      "limit": null
+    }
+  },
+  "hardware": false
+}

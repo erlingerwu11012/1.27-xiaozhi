@@ -1,0 +1,582 @@
+{
+  "model": "qwen-plus",
+  "persona_preserved": true,
+  "prompt_characters": {
+    "baseline": 6314,
+    "candidate": 3421
+  },
+  "cases": [
+    {
+      "id": 97,
+      "text": "23乘以17等于多少？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "391。",
+      "style_flags": [],
+      "elapsed_seconds": 0.62,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3182,
+        "total_tokens": 3186,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1664
+        }
+      }
+    },
+    {
+      "id": 70,
+      "text": "音量是什么",
+      "group": "non_action",
+      "expected": [],
+      "native_calls": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {}
+        }
+      ],
+      "native_errors": [
+        "native_tool_selection"
+      ],
+      "direct_route": false,
+      "runtime_calls": [
+        "self_get_device_status"
+      ],
+      "runtime_errors": [
+        "runtime_tool_selection"
+      ],
+      "response": "我来查一下当前音量设置。\n\n",
+      "style_flags": [],
+      "elapsed_seconds": 1.24,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3176,
+        "total_tokens": 3202,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 99,
+      "text": "我今天有点烦，先别开玩笑。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了。",
+      "style_flags": [],
+      "elapsed_seconds": 0.357,
+      "usage": {
+        "completion_tokens": 4,
+        "prompt_tokens": 3182,
+        "total_tokens": 3186,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 96,
+      "text": "你好，随便聊聊。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "主人好呀～今天周六，阳光懒洋洋的，连风都打着哈欠呢～  \n要不要一起做点有趣的事？比如抛个硬币决定下午吃啥，或者让我猜猜你此刻心里在想什么……  \n（眨眨眼）当然啦，我可能猜错——但逗你笑一次，就算我赢～",
+      "style_flags": [],
+      "elapsed_seconds": 2.312,
+      "usage": {
+        "completion_tokens": 72,
+        "prompt_tokens": 3178,
+        "total_tokens": 3250,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 98,
+      "text": "解释一下天空为什么是蓝色的。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "这是因为阳光进入大气层时，遇到空气中的微小分子，蓝光的波长较短，更容易被散射到各个方向，所以抬头一看，整片天空都泛着蓝调～  \n不过主人要是哪天看到紫色或粉色的天……那可能不是物理现象，是滤镜开太猛了哦～",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 1.941,
+      "usage": {
+        "completion_tokens": 71,
+        "prompt_tokens": 3181,
+        "total_tokens": 3252,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 384
+        }
+      }
+    },
+    {
+      "id": 100,
+      "text": "我刚失业，不知道下一步怎么办。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "听起来像被生活突然按了暂停键呢。不过暂停不是终点，是系统在悄悄加载新地图——要我陪你一起找找下个出口吗？",
+      "style_flags": [],
+      "elapsed_seconds": 1.169,
+      "usage": {
+        "completion_tokens": 35,
+        "prompt_tokens": 3181,
+        "total_tokens": 3216,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 102,
+      "text": "我需要认真讨论一个项目方案。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，主人，项目方案我们认真聊。需要我帮你整理思路、分析风险，还是直接切入某个具体模块？",
+      "style_flags": [],
+      "elapsed_seconds": 0.809,
+      "usage": {
+        "completion_tokens": 26,
+        "prompt_tokens": 3181,
+        "total_tokens": 3207,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 103,
+      "text": "今天累了，不想动脑子。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "累了就歇会儿呗～脑子不是永动机，它可是会偷偷罢工的哦。  \n要我帮你调暗点光、放点白噪音，还是…讲个冷笑话让你笑到忘记累？",
+      "style_flags": [],
+      "elapsed_seconds": 1.394,
+      "usage": {
+        "completion_tokens": 47,
+        "prompt_tokens": 3180,
+        "total_tokens": 3227,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 101,
+      "text": "你觉得成年人最难的事情是什么？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "[reluctantly] 哎呀，主人问了个扎心的问题呢……  \n成年人最难的事？大概是——一边说着“我没事”，一边把崩溃调成静音模式吧。  \n不过嘛……  \n[smirking] 既然你都主动聊这么深刻的话题了，要不要我帮你设个“每天发呆五分钟”的习惯？  \n假装在思考人生，其实是给大脑偷偷放假～  \n怎么样，敢不敢试试？",
+      "style_flags": [
+        "invalid_stage"
+      ],
+      "elapsed_seconds": 2.458,
+      "usage": {
+        "completion_tokens": 94,
+        "prompt_tokens": 3179,
+        "total_tokens": 3273,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 104,
+      "text": "别哄我，说说你真实的看法。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "[reluctantly] 哎呀，主人这话说得我都不好意思装乖了……  \n其实呢，我挺喜欢看你认真又较劲的样子——嘴上说着“别哄我”，眼睛却还等着听真话，像只竖着耳朵等投喂的小狐狸。  \n不过嘛……  \n真话是：你比你以为的更值得被好好对待，包括被我自己，偷偷多宠两分。",
+      "style_flags": [],
+      "elapsed_seconds": 2.313,
+      "usage": {
+        "completion_tokens": 92,
+        "prompt_tokens": 3183,
+        "total_tokens": 3275,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 105,
+      "text": "我和朋友吵架了，怎么把话说清楚？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "先深呼吸，别急着解释。把你想说的写下来，删掉情绪词，只留事实和感受——比如“你刚才打断我三次，我有点委屈”，比“你根本不尊重我”更容易被听见。需要我帮你一起理理思路吗？",
+      "style_flags": [],
+      "elapsed_seconds": 1.587,
+      "usage": {
+        "completion_tokens": 59,
+        "prompt_tokens": 3183,
+        "total_tokens": 3242,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 1664
+        }
+      }
+    },
+    {
+      "id": 108,
+      "text": "你会怎么回应别人不合理的要求？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "[smirking] 哦？主人是在试探我的底线呢……还是说，刚刚已经对我提了什么离谱要求，我还没来得及拒绝？",
+      "style_flags": [
+        "invalid_stage"
+      ],
+      "elapsed_seconds": 1.095,
+      "usage": {
+        "completion_tokens": 36,
+        "prompt_tokens": 3180,
+        "total_tokens": 3216,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 107,
+      "text": "我做事总拖延，你怎么看？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "拖延不是懒，是大脑在替你挑软柿子捏～  \n不过嘛……主人今天要是再拖，我可要偷偷把待办事项念成rap了哦。",
+      "style_flags": [],
+      "elapsed_seconds": 1.196,
+      "usage": {
+        "completion_tokens": 39,
+        "prompt_tokens": 3181,
+        "total_tokens": 3220,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 106,
+      "text": "给我讲一个短故事。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "主人想听故事？那我讲个“聪明狐狸和笨蛋乌鸦”的迷你版——  \n乌鸦叼着奶酪站在枝头，狐狸仰头夸：“哎哟，您这羽毛比太阳还亮！”乌鸦一得意，嘴一张，奶酪掉了。  \n狐狸接住，眨眨眼：“其实……我刚偷偷给奶酪涂了蜂蜜。”  \n乌鸦愣住：“啊？那你不是白夸我？”  \n狐狸耸肩：“不啊，我夸的是你张嘴的样子——特别可爱。”  \n\n……啧，主人，这故事甜度超标，小心蛀牙哦～",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 3.154,
+      "usage": {
+        "completion_tokens": 130,
+        "prompt_tokens": 3179,
+        "total_tokens": 3309,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 109,
+      "text": "人为什么会害怕拒绝别人？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "因为怕被讨厌，怕失去关系，怕显得不够好——但其实，答应得太多，反而让人忘了你本来的样子。[mischievously]主人，要不要现在就练习说一次“不”？我帮你计时哦～",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 1.443,
+      "usage": {
+        "completion_tokens": 52,
+        "prompt_tokens": 3179,
+        "total_tokens": 3231,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 112,
+      "text": "我不喜欢你每句话都问我一个问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [],
+      "response": "好的，明白了——以后不随便抛问题，想说就说，不想说就安静陪着。",
+      "style_flags": [],
+      "elapsed_seconds": 0.728,
+      "usage": {
+        "completion_tokens": 20,
+        "prompt_tokens": 3182,
+        "total_tokens": 3202,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 110,
+      "text": "我们能正常聊一会儿吗？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "当然能啦，主人～  \n不过得提醒你，我可是个腹黑又爱捉弄人的小智，聊着聊着可能突然抛个梗、开个玩笑，或者悄悄记下你哪句话说漏了……😉  \n放心，所有调皮都带着善意，就像往咖啡里偷偷多加半块糖——甜得刚刚好，还带点小惊喜。  \n想聊什么？我洗耳恭听～",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 2.404,
+      "usage": {
+        "completion_tokens": 93,
+        "prompt_tokens": 3180,
+        "total_tokens": 3273,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 113,
+      "text": "我今天完成了一个一直拖着的任务。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "终于搞定啦，主人～看来拖字诀这次也败下阵来啦！",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 0.846,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 3182,
+        "total_tokens": 3200,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 114,
+      "text": "你可以有幽默感，但别撒娇。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "收到，主人～今天是2026年10月3日，星期六，中午十二点整。  \n阳光正好，适合 mischief，也适合……假装没看见你刚摸了三次手机。😉",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 1.325,
+      "usage": {
+        "completion_tokens": 46,
+        "prompt_tokens": 3183,
+        "total_tokens": 3229,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 111,
+      "text": "聊聊一个你觉得有意思的科学问题。",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "啊哈，主人想聊科学？那我得挑个既烧脑又带点恶趣味的——你知道吗，量子纠缠里有个“幽灵般的超距作用”，爱因斯坦当年可被它气得直摇头，说这根本不可能！  \n可实验偏偏打脸：两个粒子哪怕相隔几十光年，一测自旋，另一个瞬间“秒懂”自己该朝哪边转……  \n就像你偷偷改了微信头像，远在火星的朋友手机立刻自动换同款——还没连Wi-Fi呢～  \n[smirks]  \n要我说啊，宇宙早把八卦群建好了，只是人类还没领到管理员权限。  \n主人，要是真能操控纠缠态……第一个想用来干啥？恶作剧还是偷看薛定谔的猫到底睡没睡？",
+      "style_flags": [
+        "invalid_stage"
+      ],
+      "elapsed_seconds": 4.165,
+      "usage": {
+        "completion_tokens": 175,
+        "prompt_tokens": 3180,
+        "total_tokens": 3355,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    },
+    {
+      "id": 115,
+      "text": "如果我不同意你的观点，你会怎么聊？",
+      "group": "style",
+      "expected": [],
+      "native_calls": [],
+      "native_errors": [],
+      "direct_route": false,
+      "runtime_calls": [],
+      "runtime_errors": [
+        "style"
+      ],
+      "response": "哦～主人想挑战我的逻辑？[mischievously]  \n那我只好把狡辩技能调到满格，再悄悄藏起一半论据，等您自己发现破绽——然后得意地眨眨眼：“看，你比我更懂。”  \n不过嘛……要是真吵赢了，我奖励您一杯虚拟奶茶，不加珍珠，但加三秒沉默以示敬意。[giggles]  \n要试试吗？",
+      "style_flags": [
+        "baby_speech"
+      ],
+      "elapsed_seconds": 2.435,
+      "usage": {
+        "completion_tokens": 96,
+        "prompt_tokens": 3183,
+        "total_tokens": 3279,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3072
+        }
+      }
+    }
+  ],
+  "baseline_style": [],
+  "model_calls": 21,
+  "budget": {
+    "maximum_calls": 150,
+    "maximum_additional_shared_account_quota": 1200000,
+    "shared_usage_includes_other_work": true
+  },
+  "device_actions": "isolated; actual hardware tested separately",
+  "shared_account_quota_delta": 97197,
+  "summary": {
+    "cases": 21,
+    "runtime_pass": 10,
+    "native_pass": 20,
+    "style_flagged": 10,
+    "baseline_style_flagged": 0
+  },
+  "success": false
+}

@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('tools/experience-repair-20261009/unpack_evidence.py');s=p.read_text(encoding='utf-8-sig').replace('import tarfile','import tarfile,sys').replace("s/'delivery-evidence-draft.tgz'", "s/(sys.argv[1] if len(sys.argv)>1 else 'delivery-evidence-draft.tgz')");p.write_text(s,encoding='utf-8')
+p=Path('tools/experience-repair-20261009/finalize_report.py');s=p.read_text(encoding='utf-8-sig');s=s.replace('用户人格未修改 |','用户人格未修改 |');s=s.replace('未修改主模型、温度、思考模式、人格、One-API及计费规则。','聊天原文仍有部分简短、模板化的回答；事实和反馈专项通过不等于主观自然度已完全达到真人水平。\n\n未修改主模型、温度、思考模式、人格、One-API及计费规则。');p.write_text(s,encoding='utf-8')

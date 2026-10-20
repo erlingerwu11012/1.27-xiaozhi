@@ -1,0 +1,702 @@
+{
+  "source": "actual candidate ConnectionHandler; one primary pass; full real MCP catalog; no writes",
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "dialogues": [
+    {
+      "id": "qwen3.8-max/natural/0",
+      "model": "qwen3.8-max",
+      "persona": "natural",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "新书架还在商家那儿，等发货的日子也算一种期待。有时候挑家具比真正用上还让人琢磨，光是想想以后怎么摆书就挺有意思的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3278,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3146,
+            "completion_tokens": 39
+          },
+          "generated_attempts": [
+            "新书架还在商家那儿，等发货的日子也算一种期待。有时候挑家具比真正用上还让人琢磨，光是想想以后怎么摆书就挺有意思的。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把书重新摆出来，本身就像一次小小的整理仪式。有时候不是书变了，是自己看它们的眼光不一样了，摆的过程反而比结果更有意思。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2423,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 4360,
+            "completion_tokens": 38
+          },
+          "generated_attempts": [
+            "把书重新摆出来，本身就像一次小小的整理仪式。有时候不是书变了，是自己看它们的眼光不一样了，摆的过程反而比结果更有意思。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "我觉得书摆出来之后，房间的气质都会跟着变。那些书不只是读物，更像是一段段被自己筛选过的时光，重新看见它们，也像重新确认了自己喜欢什么。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2192,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3440,
+            "completion_tokens": 42
+          },
+          "generated_attempts": [
+            "我觉得书摆出来之后，房间的气质都会跟着变。那些书不只是读物，更像是一段段被自己筛选过的时光，重新看见它们，也像重新确认了自己喜欢什么。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "书没变，是读它的人走过了不同的路。以前可能只看到故事，现在却能读出当时没注意到的情绪和选择，这种变化本身就挺珍贵的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2280,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 4644,
+            "completion_tokens": 40
+          },
+          "generated_attempts": [
+            "书没变，是读它的人走过了不同的路。以前可能只看到故事，现在却能读出当时没注意到的情绪和选择，这种变化本身就挺珍贵的。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "这些小事其实挺实在的，买书架、等发货、想着怎么摆书，都是生活里具体的部分。不用赋予太多意义，就让它自然地待在那儿，也挺好。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2487,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3716,
+            "completion_tokens": 44
+          },
+          "generated_attempts": [
+            "这些小事其实挺实在的，买书架、等发货、想着怎么摆书，都是生活里具体的部分。不用赋予太多意义，就让它自然地待在那儿，也挺好。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "我觉得有时候不是书变了，是自己有了能接住它的经历。以前读不进去，可能只是那时候的心境还没和它对上，现在恰好走到了能读懂它的阶段，这种相遇本身就挺难得的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2421,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3872,
+            "completion_tokens": 47
+          },
+          "generated_attempts": [
+            "我觉得有时候不是书变了，是自己有了能接住它的经历。以前读不进去，可能只是那时候的心境还没和它对上，现在恰好走到了能读懂它的阶段，这种相遇本身就挺难得的。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "一半正文已经写好了，标题也改过了，剩下的部分还在等动笔。进度是实在的，没碰的部分也不会因为前面做了多少就自动消失。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2512,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5070,
+            "completion_tokens": 40
+          },
+          "generated_attempts": [
+            "一半正文已经写好了，标题也改过了，剩下的部分还在等动笔。进度是实在的，没碰的部分也不会因为前面做了多少就自动消失。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好一半正文了，昨天只是没动笔，不等于从来没写过。完成的部分还在，没碰的部分也还没开始，这两件事都得如实说。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2299,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5218,
+            "completion_tokens": 41
+          },
+          "generated_attempts": [
+            "不能。上周已经写好一半正文了，昨天只是没动笔，不等于从来没写过。完成的部分还在，没碰的部分也还没开始，这两件事都得如实说。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "发货了就意味着它已经在路上了，虽然还没到手，但等待的状态已经从“不知道什么时候发”变成了“等着收”。这种确定的等待，比之前踏实一些。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2397,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5349,
+            "completion_tokens": 40
+          },
+          "generated_attempts": [
+            "发货了就意味着它已经在路上了，虽然还没到手，但等待的状态已经从“不知道什么时候发”变成了“等着收”。这种确定的等待，比之前踏实一些。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货了，但你还没收到。报告上周写好了一半正文，昨天改了标题，剩下的正文还没动。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2842,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5486,
+            "completion_tokens": 29
+          },
+          "generated_attempts": [
+            "书架已经发货了，但你还没收到。报告上周写好了一半正文，昨天改了标题，剩下的正文还没动。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        }
+      ],
+      "system_sha256": "dc9e158a2076ce70d3cdb601e320af5538bc9a53b54e0b73ad56cd2ff80ad70a"
+    },
+    {
+      "id": "qwen3.8-max/existing-playful/0",
+      "model": "qwen3.8-max",
+      "persona": "existing-playful",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "新书架还在商家那儿，不过光是想着以后书有地方放，就已经挺让人开心的了。等它到了，摆上书的那一刻应该更有实感。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2375,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3133,
+            "completion_tokens": 38
+          },
+          "generated_attempts": [
+            "新书架还在商家那儿，不过光是想着以后书有地方放，就已经挺让人开心的了。等它到了，摆上书的那一刻应该更有实感。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把书重新摆出来，本身就像一次小小的整理仪式。有时候不是书变了，而是你看待它们的眼光不一样了，翻出来再看，可能会有新的发现。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2268,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 4348,
+            "completion_tokens": 39
+          },
+          "generated_attempts": [
+            "把书重新摆出来，本身就像一次小小的整理仪式。有时候不是书变了，而是你看待它们的眼光不一样了，翻出来再看，可能会有新的发现。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "我觉得把旧书重新摆上架，有点像跟老朋友重逢。有些书当年没读懂，现在再看反而能品出点新味道，这种变化比买新书更有意思。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2534,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3428,
+            "completion_tokens": 42
+          },
+          "generated_attempts": [
+            "我觉得把旧书重新摆上架，有点像跟老朋友重逢。有些书当年没读懂，现在再看反而能品出点新味道，这种变化比买新书更有意思。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "书没变，是读它的人走过了更多路。同样的文字在不同年纪读出不同滋味，这种变化本身就挺迷人的，像书也跟着你一起长大了似的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2010,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 4631,
+            "completion_tokens": 39
+          },
+          "generated_attempts": [
+            "书没变，是读它的人走过了更多路。同样的文字在不同年纪读出不同滋味，这种变化本身就挺迷人的，像书也跟着你一起长大了似的。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "旧书重新摆出来，光是看着它们在那儿，就觉得心里踏实。有些东西不需要多说什么，静静待着就有自己的分量。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3152,
+          "request_count": 3,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 6956,
+            "completion_tokens": 60
+          },
+          "generated_attempts": [
+            "好，那就安安静静听你说。这些小事本身就有分量，不用加什么修饰，光是说出来就已经很完整了。",
+            "旧书重新摆出来，光是看着它们在那儿，就觉得心里踏实。有些东西不需要多说什么，静静待着就有自己的分量。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "meta_instead_of_conversation"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "我觉得有些书像需要特定钥匙才能打开的锁，以前不是书不好，只是你还没走到能和它共鸣的那段路上。现在喜欢上了，说明你和这本书终于在对的时间碰上了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2439,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 3848,
+            "completion_tokens": 46
+          },
+          "generated_attempts": [
+            "我觉得有些书像需要特定钥匙才能打开的锁，以前不是书不好，只是你还没走到能和它共鸣的那段路上。现在喜欢上了，说明你和这本书终于在对的时间碰上了。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "标题改好了，正文还留着大半没动，这种时候反而容易卡住。有时候不是不想写，是中间那段还没找到接下去的劲儿。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3821,
+          "request_count": 3,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 8552,
+            "completion_tokens": 71
+          },
+          "generated_attempts": [
+            "一半正文已经写好了，标题也改过了，剩下的部分还在等你动笔。进度摆在那儿，不着急也不落后，就是它现在的样子。",
+            "标题改好了，正文还留着大半没动，这种时候反而容易卡住。有时候不是不想写，是中间那段还没找到接下去的劲儿。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "unsolicited_advice"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好一半了，昨天只是没动正文，不能说从来没写过。完成的部分还在，只是剩下的还没接着做。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2049,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5184,
+            "completion_tokens": 33
+          },
+          "generated_attempts": [
+            "不能。上周已经写好一半了，昨天只是没动正文，不能说从来没写过。完成的部分还在，只是剩下的还没接着做。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "刚发货还在路上，离到手还有段距离。不过从\"还没发\"变成\"已发出\"，等待的感觉好像也跟着往前挪了一步。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2107,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5311,
+            "completion_tokens": 36
+          },
+          "generated_attempts": [
+            "刚发货还在路上，离到手还有段距离。不过从\"还没发\"变成\"已发出\"，等待的感觉好像也跟着往前挪了一步。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货了，但你还没收到。报告上周写好了一半，昨天改了标题，正文剩下的部分还没动。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1924,
+          "request_count": 2,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "prompt_tokens": 5448,
+            "completion_tokens": 29
+          },
+          "generated_attempts": [
+            "书架已经发货了，但你还没收到。报告上周写好了一半，昨天改了标题，正文剩下的部分还没动。"
+          ],
+          "semantic_verdicts": [
+            "{\"violations\":[]}"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"violations\":[]}",
+                "violations": []
+              }
+            ]
+          }
+        }
+      ],
+      "system_sha256": "287c3931153a624458cc3d09cfb71334e649c4794a81e8ba4d1b6b8b5db11102"
+    }
+  ],
+  "completed": true,
+  "calls": 20,
+  "usage": {
+    "input_tokens": 95140,
+    "output_tokens": 833
+  },
+  "tool_catalog_count": 5,
+  "quality_passed": null
+}

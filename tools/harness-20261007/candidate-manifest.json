@@ -1,0 +1,16 @@
+{
+  "core/connection.py": "39d175e3931c31be7de143a58d5d06177549648da139e8f548683d94e88ad4d0",
+  "config/config_loader.py": "bc2f5f0ee202eac9ea0c4e84be36f1c5fe5f3a8e46f38d58e35987290fc4601f",
+  "core/providers/llm/openai/openai.py": "cdb94f2f051dc81851742bd139e662ac4ac60992d7b6efacb4818d26b710b968",
+  "core/handle/receiveAudioHandle.py": "aaf7723f2dea837e665edc7091133e5e271cdd8fe9a310ee2234e1218f41fc72",
+  "core/utils/tool_result.py": "9e8103deb1d464c2c0011fc0ab5908642203d1be29f6f7ed1cc80ce49324d1ec",
+  "core/utils/device_reminder.py": "eca4fc6eca557d18704ebe7e629958f41fc121219e31f9c9fbb54964405cdd7b",
+  "test/test_account_owner_and_reminder.py": "7480deee515d3509f964ce323a51d9000cadc321de5babb584097671fac9e503",
+  "test/test_official_service_defaults.py": "c0581e8d460e830d05f07897db756acc3e39d85032f1b1c47bf5f2c38a02f9ea",
+  "core/utils/tool_harness/contracts.py": "67f528fc91a0b73a8942031edc5b9d386439a7c9872959f644aef5c75b45e4cc",
+  "core/utils/tool_harness/ledger.py": "7f12776bff017644f95d68547da3098e486cc980962d125b7470e238545b80a9",
+  "core/utils/tool_harness/models.py": "4c6232f74c4922e82fea110b1497e12438dd54918df95a06558470b54a3f7af5",
+  "core/utils/tool_harness/registry.py": "80f541809c711c3b0041e76cc64affba4ab33a2557a8f67d09cd5af6ddf3bcff",
+  "core/utils/tool_harness/runtime.py": "55bb09ff980b1c95e555724c93bdc1bb97fd2e03cd14a38a7586e81d6092d924",
+  "core/utils/tool_harness/__init__.py": "8d024b4d1920138777733fb6a2c3009cd2878face22ea6695503045cefe5710a"
+}

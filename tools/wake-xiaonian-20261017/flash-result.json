@@ -1,0 +1,35 @@
+{
+  "mac": "ac:a7:04:fd:20:5c",
+  "wake_command": {
+    "command": "ni hao xiao nian",
+    "text": "你好，小念",
+    "action": "wake"
+  },
+  "threshold": 0.2,
+  "backup_sha256": "e155615b070bfee802a354185ecbcc15b09cce83646d9b1528182c567e9a5258",
+  "app_sha256": "6a479838d4308639c475efff0b3c3c82f938bf20df6e6b007182f90497f6e8e3",
+  "assets_sha256": "72ca05ba0552aa792d78f97ba117a8f4d5af2c5cd61fac04d987d3d71e35f22e",
+  "app_bytes": 4938032,
+  "assets_bytes": 5492374,
+  "preserved_resource_files": [
+    "boot.anim",
+    "skeleton.atlas",
+    "font_puhui_common_16_4.bin",
+    "font_puhui_common_20_4.bin",
+    "srmodels.bin",
+    "role.json",
+    "boot.ogg",
+    "muted.png",
+    "room.png",
+    "texture.png",
+    "wifi_config.png",
+    "wifi_connected.png",
+    "wifi_off.png",
+    "skeleton.skel"
+  ],
+  "flashed": true,
+  "protected_partitions_unchanged": true,
+  "images_hash_verified": true,
+  "acoustic_test_passed": false,
+  "runtime_verified": false
+}

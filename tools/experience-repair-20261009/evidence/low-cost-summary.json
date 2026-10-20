@@ -1,0 +1,41 @@
+{
+  "tests": 388,
+  "failures": [
+    [
+      "test_catalog_raw_binding_change_stops_execution (test_unit.TestHarness)",
+      "Traceback (most recent call last):\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 64, in _callTestMethod\n    self._callMaybeAsync(method)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 87, in _callMaybeAsync\n    return self._asyncioTestLoop.run_until_complete(fut)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/asyncio/base_events.py\", line 649, in run_until_complete\n    return future.result()\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 101, in _asyncioLoopRunner\n    ret = await awaitable\n  File \"/root/prjs/tmp/harness-20261007/test_unit.py\", line 285, in test_catalog_raw_binding_change_stops_execution\n    self.assertFalse(m.calls)\nAssertionError: [{'tool': 'alarm_set', 'arguments': {'hour': 22, 'minute': 0, 'label': '闹钟', 'repeat_days': 0, 'recipient_person_id': '', 'recipient_display_name': ''}, 'receipt': '已设置 22:00 闹钟 [仅一次]'}] is not false\n"
+    ],
+    [
+      "test_chat_after_identity_change_not_spoken (test_unit.TestHarness)",
+      "Traceback (most recent call last):\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 64, in _callTestMethod\n    self._callMaybeAsync(method)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 87, in _callMaybeAsync\n    return self._asyncioTestLoop.run_until_complete(fut)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/asyncio/base_events.py\", line 649, in run_until_complete\n    return future.result()\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 101, in _asyncioLoopRunner\n    ret = await awaitable\n  File \"/root/prjs/tmp/harness-20261007/test_unit.py\", line 239, in test_chat_after_identity_change_not_spoken\n    self.assertTrue(out.interrupted);self.assertFalse(m.calls)\nAssertionError: False is not true\n"
+    ],
+    [
+      "test_queued_operation_captures_authority_before_lock (test_unit.TestHarness)",
+      "Traceback (most recent call last):\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 64, in _callTestMethod\n    self._callMaybeAsync(method)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 87, in _callMaybeAsync\n    return self._asyncioTestLoop.run_until_complete(fut)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/asyncio/base_events.py\", line 649, in run_until_complete\n    return future.result()\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 101, in _asyncioLoopRunner\n    ret = await awaitable\n  File \"/root/prjs/tmp/harness-20261007/test_unit.py\", line 233, in test_queued_operation_captures_authority_before_lock\n    self.assertFalse(m.calls);self.assertTrue(out.interrupted)\nAssertionError: [{'tool': 'self_audio_speaker_set_volume', 'arguments': {'volume': 30}, 'receipt': '{\"ok\": true, \"volume\": 30}'}] is not false\n"
+    ],
+    [
+      "test_speaker_default_and_explicit_other_are_preserved (test_reminder_reliability.RecipientTests)",
+      "Traceback (most recent call last):\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 64, in _callTestMethod\n    self._callMaybeAsync(method)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 87, in _callMaybeAsync\n    return self._asyncioTestLoop.run_until_complete(fut)\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/asyncio/base_events.py\", line 649, in run_until_complete\n    return future.result()\n  File \"/root/miniconda3/envs/xiaozhi-esp32-server/lib/python3.10/unittest/async_case.py\", line 101, in _asyncioLoopRunner\n    ret = await awaitable\n  File \"/root/prjs/tmp/experience-repair-20261009/work/test/test_reminder_reliability.py\", line 47, in test_speaker_default_and_explicit_other_are_preserved\n    self.assertEqual(result.recipient_person_id, expected)\nAssertionError: None != 'usr_a'\n"
+    ]
+  ],
+  "errors": [],
+  "skipped": [],
+  "budget": {
+    "case": {
+      "used": 549,
+      "limit": 2000
+    },
+    "model": {
+      "used": 0,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 6
+    }
+  }
+}

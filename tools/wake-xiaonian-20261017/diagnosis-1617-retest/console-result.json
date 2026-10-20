@@ -1,0 +1,8 @@
+{
+  "port": "COM11",
+  "bytes": 3618,
+  "errors": [],
+  "usb_console_mode_seen": false,
+  "wake_initialization_seen": false,
+  "wake_levels_seen": false
+}

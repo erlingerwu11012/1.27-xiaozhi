@@ -1,0 +1,14 @@
+{
+  "reserved_requests": 652,
+  "requests_with_preserved_usage": 625,
+  "usage_missing_requests": 27,
+  "observed_input_tokens": 2894902,
+  "observed_output_tokens": 42725,
+  "observed_cache_hit_tokens": 2004164,
+  "observed_cache_creation_tokens": 79646,
+  "cache_hit_request_count": 602,
+  "fees": "unknown; no billing aggregation requested",
+  "usage_missing_fields_not_estimated": true,
+  "deduplication": "original output sentence ID and decision index; reused rows counted once",
+  "per_layer_cache_hits": "unknown; provider reports aggregate usage only"
+}

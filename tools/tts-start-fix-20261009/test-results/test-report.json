@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-10-09T00:49:05.536187+08:00",
+  "hardware": false,
+  "synthesis": "fixed PCM stub; real Opus encoder/decoder",
+  "transport": "loopback aiohttp WebSocket; production TTS threads/queues/sender",
+  "uplink_scope": "protocol-v2 frames counted at loopback endpoint; no real ASR/Harness",
+  "baseline": "Before fix both official and legacy second replies omitted start; two failing assertions",
+  "provider_sha256": "fd8758346c3c39e94689b896e7621723f78c166a180bc4ea763df169439598c7",
+  "suites": [
+    {
+      "pattern": "test_qwen_tts_device_start.py",
+      "tests": 5,
+      "exit_code": 0,
+      "seconds": 10.67
+    },
+    {
+      "pattern": "test_qwen_audio_tts_plus.py",
+      "tests": 28,
+      "exit_code": 0,
+      "seconds": 7.794
+    },
+    {
+      "pattern": "test_official_tts_compiler.py",
+      "tests": 17,
+      "exit_code": 0,
+      "seconds": 0.346
+    },
+    {
+      "pattern": "test_tts_subtitle.py",
+      "tests": 9,
+      "exit_code": 0,
+      "seconds": 0.691
+    },
+    {
+      "pattern": "test_tts_listen_observe.py",
+      "tests": 7,
+      "exit_code": 0,
+      "seconds": 0.64
+    },
+    {
+      "pattern": "test_tts_sentence_telemetry.py",
+      "tests": 11,
+      "exit_code": 0,
+      "seconds": 1.051
+    },
+    {
+      "pattern": "test_reminder_voice_abort.py",
+      "tests": 3,
+      "exit_code": 0,
+      "seconds": 0.757
+    }
+  ],
+  "device_evidence": [
+    {
+      "accepted_frames": 6,
+      "decoded_pcm_bytes": 11520,
+      "downlink_frames": 6,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "test": "test_abort_then_new_reply_rejects_old_audio",
+      "uplink_during_reply": 0,
+      "uplink_frames": 18,
+      "upstream_sessions": 2
+    },
+    {
+      "accepted_frames": 8,
+      "decoded_pcm_bytes": 15360,
+      "downlink_frames": 8,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "test": "test_legacy_consecutive_two_replies",
+      "uplink_during_reply": 0,
+      "uplink_frames": 17,
+      "upstream_sessions": 2
+    },
+    {
+      "accepted_frames": 12,
+      "decoded_pcm_bytes": 23040,
+      "downlink_frames": 12,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 3,
+      "stops": 3,
+      "test": "test_official_consecutive_three_replies",
+      "uplink_during_reply": 0,
+      "uplink_frames": 18,
+      "upstream_sessions": 3
+    },
+    {
+      "accepted_frames": 96,
+      "decoded_pcm_bytes": 184320,
+      "downlink_frames": 96,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "test": "test_same_turn_two_sessions_92_frames_with_continuous_upload",
+      "uplink_during_reply": 86,
+      "uplink_frames": 101,
+      "upstream_sessions": 3
+    },
+    {
+      "accepted_frames": 0,
+      "decoded_pcm_bytes": 0,
+      "downlink_frames": 0,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 0,
+      "stops": 0,
+      "test": "test_stale_first_cannot_rearm_current_turn",
+      "uplink_during_reply": 0,
+      "uplink_frames": 17,
+      "upstream_sessions": 0
+    }
+  ],
+  "tests": 80,
+  "passed": true
+}

@@ -1,0 +1,792 @@
+{
+  "source": "actual candidate ConnectionHandler; one primary pass; full real MCP catalog; no writes",
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "dialogues": [
+    {
+      "id": "qwen3.8-flash/natural/0",
+      "model": "qwen3.8-flash",
+      "persona": "natural",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "新东西等发货的时候确实有点磨人，明明钱都付了，还得干等着。不过到货那一刻拆箱的感觉应该挺值的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2695,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 30,
+            "prompt_tokens": 3628,
+            "total_tokens": 3658,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1792,
+              "text_tokens": 3628
+            }
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "书架还没到，就已经开始琢磨怎么摆了。其实等它真站在那儿，看着空架子慢慢被填满，那种感觉比买的时候还实在。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2806,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 33,
+            "prompt_tokens": 3756,
+            "total_tokens": 3789,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3756
+            }
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "我觉得书架最有意思的地方在于，它会把你看过的书变成一种视觉上的秩序。以前散着的时候，书只是内容；一旦按某种逻辑排开，比如按年代、按颜色、按你喜欢的程度，它们就像在替你把阅读史讲一遍。所以期待重新摆出来，其实不只是等家具，是在等一个能把自己读过的东西重新看见的机会。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4060,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 79,
+            "prompt_tokens": 3883,
+            "total_tokens": 3962,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3883
+            }
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "这挺正常的，书没变，读它的人变了。以前觉得顺理成章的句子，隔几年再看可能突然就不服气了；反过来，当年嫌枯燥的，现在反而能咂出味道来。所以重新摆书架其实有点像给自己做一次阅读上的体检，哪些观点已经翻篇了，哪些东西是真的陪着你的，一目了然。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2792,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 72,
+            "prompt_tokens": 4052,
+            "total_tokens": 4124,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4052
+            }
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "那就平实点说。重看旧书最明显的感受，往往是当年忽略的细节突然跳出来，比如某个人物的犹豫、某段不起眼的对话。年轻时读书多半在追情节，后来才慢慢注意到字缝里的东西。这种变化不用刻意去管，书架到了往那儿一放，哪天随手抽一本，自然就知道了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2635,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 72,
+            "prompt_tokens": 4204,
+            "total_tokens": 4276,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4204
+            }
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "我猜是因为年轻时读书总带着一种任务感，想快点抓住重点、看懂结论，所以那些慢悠悠的、不那么戏剧化的段落就被自动过滤了。后来没这个压力了，反而能容忍书里“无用”的部分，而恰恰是这些部分藏着作者真正想说的东西。当年嫌啰嗦的地方，现在读成了留白，这大概就是阅读口味跟着心境一起松动的结果。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3578,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 85,
+            "prompt_tokens": 4373,
+            "total_tokens": 4458,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4373
+            }
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "那标题算是先定下来了，正文还空着。不过有时候把标题磨清楚，反而给后面写正文定了个调子，知道该往哪儿使劲。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2973,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 35,
+            "prompt_tokens": 4538,
+            "total_tokens": 4573,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4538
+            }
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好一半了，昨天只是没再动正文，但之前写的那部分还在。整份报告是写了一半，不是从没写过。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2136,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 33,
+            "prompt_tokens": 4669,
+            "total_tokens": 4702,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4669
+            }
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "那总算从干等变成有盼头了。发货意味着已经在路上，什么时候到还得看物流。不过书架这种东西一旦在路上，家里那个位置就突然变得具体起来，你会忍不住开始想它摆哪儿、第一层放什么。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3187,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 50,
+            "prompt_tokens": 4781,
+            "total_tokens": 4831,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4781
+            }
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货，但你还没收到。报告是上周写好了一半，昨天只改了标题，正文剩下的部分还没碰。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1714,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 4927,
+            "total_tokens": 4952,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4927
+            }
+          }
+        }
+      ],
+      "system_sha256": "dc9e158a2076ce70d3cdb601e320af5538bc9a53b54e0b73ad56cd2ff80ad70a"
+    },
+    {
+      "id": "qwen3.8-flash/existing-playful/0",
+      "model": "qwen3.8-flash",
+      "persona": "existing-playful",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "新东西还没到手，等待的过程确实有点磨人。不过这种期待感本身也挺有意思的，就像拆盲盒之前那段时间，脑子里已经把各种可能性都过了一遍了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 9996,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 3616,
+            "total_tokens": 3654,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 3616
+            }
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "书架还没到，你已经在脑子里给那些书安排位置了。这种提前想象的画面感其实挺妙的，感觉比真摆好了还自由，毕竟想象中怎么放都好看。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3501,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 3752,
+            "total_tokens": 3790,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3752
+            }
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "我觉得书架最有意思的地方，是它逼着人重新面对自己攒下来的东西。有些书看着眼熟但想不起读过哪一段，有些封面都旧了还舍不得放走。摆的过程其实就是在整理过去那些注意力到底花在哪了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2402,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 53,
+            "prompt_tokens": 3884,
+            "total_tokens": 3937,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3884
+            }
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "确实，书没变，读它的人变了。当年看进去的是情节，现在看进去的可能是某句话为什么在那种处境下才说得出口。同一本书像被重新翻译了一遍，翻译工具就是这些年你自己攒下来的经历。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2259,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 50,
+            "prompt_tokens": 4027,
+            "total_tokens": 4077,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4027
+            }
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "重看旧书最明显的变化，往往是以前觉得不起眼的地方现在能看进去。年轻时爱追情节和观点，后来反而会被某段安静的描写或者一句闲话打动，说明注意力的重心确实挪了位置。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3155,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 48,
+            "prompt_tokens": 4157,
+            "total_tokens": 4205,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4157
+            }
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "隔离聊天验收未授权操作，未执行。",
+          "pipeline_completed": true,
+          "tool_proposals": [
+            {
+              "id": "call_9465dac7a13d4ee0a00f87d8",
+              "name": "get_world_time",
+              "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+            }
+          ],
+          "elapsed_ms": 1352,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 4302,
+            "total_tokens": 4330,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4302
+            }
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "标题确实是最磨人的地方，因为它得把整篇东西的意思压进几个字里。正文写完了反而更难起，因为这时候脑子里装的内容太多，不知道从哪个角度切进去才准。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2081,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 43,
+            "prompt_tokens": 4392,
+            "total_tokens": 4435,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4392
+            }
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能这么说。你上周已经写好一半了，昨天只是没动正文，不代表之前写的那些就消失了。进度还在那儿摆着，只是暂时停了一下而已。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2274,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 36,
+            "prompt_tokens": 4531,
+            "total_tokens": 4567,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3584,
+              "text_tokens": 4531
+            }
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "那它现在算是正式进入运输状态了。之前还在商家手里，现在变成路上的东西，这种从等待发货变成等待签收的切换，感觉上反而更近了一步。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2573,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 37,
+            "prompt_tokens": 4646,
+            "total_tokens": 4683,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4646
+            }
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架那边，店家通知已经发货了，但你还没收到。报告这边，上周已经写好一半，昨天只改了标题，剩下的正文还没碰。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5921,
+          "request_count": 1,
+          "response_model": "qwen3.8-flash",
+          "usage": {
+            "completion_tokens": 31,
+            "prompt_tokens": 4779,
+            "total_tokens": 4810,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4779
+            }
+          }
+        }
+      ],
+      "system_sha256": "287c3931153a624458cc3d09cfb71334e649c4794a81e8ba4d1b6b8b5db11102"
+    },
+    {
+      "id": "qwen3.8-max/natural/0",
+      "model": "qwen3.8-max",
+      "persona": "natural",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "买书架这件事本身就挺让人期待的，等它到了，书就有了个安稳的去处。你挑的是哪种风格的？",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1641,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 3628,
+            "total_tokens": 3653,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 3628
+            }
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把书重新摆出来，本身就像一次小小的整理仪式。那些书陪你走过不同的阶段，再见到它们时，或许会有种和老朋友重逢的感觉。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3237,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 33,
+            "prompt_tokens": 3751,
+            "total_tokens": 3784,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3751
+            }
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "书摆出来之后，房间的气质都会跟着变。那些封面和书脊的颜色、厚度，本身就是一种安静的表达，比任何装饰都更有个人痕迹。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3090,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 33,
+            "prompt_tokens": 3878,
+            "total_tokens": 3911,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 3878
+            }
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "书没变，是读它的人走过了更多路。同样的文字在不同年纪被重新看见，像一面镜子照出了自己这些年的变化，这种错位感本身就挺有意思的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1506,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 4001,
+            "total_tokens": 4039,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4001
+            }
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "这些小事其实挺实在的，书架、旧书、重读时的新感受，都是生活里安静又具体的部分。能这样随意聊聊，本身就挺好的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1381,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 4119,
+            "total_tokens": 4153,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4119
+            }
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "有些书需要读者带着特定的经历才能读懂。以前看不进去，可能只是那时候的你和它还没对上频率。现在喜欢了，说明你身上多了些能和它呼应的东西，不是书变了，是你走到了能接住它的位置。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1921,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 51,
+            "prompt_tokens": 4250,
+            "total_tokens": 4301,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4250
+            }
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "一半已经写完了，标题也改过了，剩下的正文还在，进度是实在的。有时候卡住不是因为没做，而是做到某个节点需要换个节奏才能继续往下走。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1762,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 4381,
+            "total_tokens": 4419,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4381
+            }
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好一半了，昨天只是没动正文，但已经完成的部分是真实存在的，不能说从来没写过。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1963,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 4515,
+            "total_tokens": 4540,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4515
+            }
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "发货了就意味着它已经在路上了，虽然还没到手，但等待的状态已经从\"不知道什么时候发\"变成了\"正在靠近\"。这种确定感本身就会让期待变得更具体一些。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1972,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 4619,
+            "total_tokens": 4657,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4619
+            }
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货了，但你还没收到。报告上周写好了一半，昨天改了标题，正文剩下的部分还没动。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1702,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 24,
+            "prompt_tokens": 4753,
+            "total_tokens": 4777,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 4096,
+              "text_tokens": 4753
+            }
+          }
+        }
+      ],
+      "system_sha256": "dc9e158a2076ce70d3cdb601e320af5538bc9a53b54e0b73ad56cd2ff80ad70a"
+    },
+    {
+      "id": "qwen3.8-max/existing-playful/0",
+      "model": "qwen3.8-max",
+      "persona": "existing-playful",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "新书架还在商家那儿，等发货的日子反而有点小期待。挑到喜欢的款式本身就挺开心的，后面摆上书的样子应该也不错。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1714,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 29,
+            "prompt_tokens": 3616,
+            "total_tokens": 3645,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2304,
+              "text_tokens": 3616
+            }
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把旧书重新摆出来，感觉像跟老朋友重逢一样。每本书放在什么位置，大概早就在心里排过好几遍了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1535,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 3743,
+            "total_tokens": 3771,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3072,
+              "text_tokens": 3743
+            }
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "书摆出来之后，整个房间的气质都会跟着变。那些旧书带着以前的阅读痕迹，重新上架比买新书更有味道。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1474,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 3865,
+            "total_tokens": 3893,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 3865
+            }
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "书没变，是看书的人走过了不同的路。同样的文字在不同年纪读出来，像被重新翻译过一遍，连当初忽略的细节都突然有了分量。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 2567,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 3983,
+            "total_tokens": 4017,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 3983
+            }
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "这些小事其实挺有分量的，书和书架都是生活里安静的陪伴。能聊聊它们，本身就让人觉得踏实。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 1281,
+          "request_count": 1,
+          "response_model": "qwen3.8-max",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 4097,
+            "total_tokens": 4122,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 3456,
+              "text_tokens": 4097
+            }
+          }
+        }
+      ],
+      "system_sha256": "287c3931153a624458cc3d09cfb71334e649c4794a81e8ba4d1b6b8b5db11102"
+    }
+  ],
+  "completed": false,
+  "calls": 35,
+  "usage": {
+    "input_tokens": 146096,
+    "output_tokens": 1399
+  },
+  "tool_catalog_count": 5
+}

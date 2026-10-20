@@ -1,0 +1,8 @@
+{
+  "source": "User reply in current chat after final15 failure",
+  "answer": "允许调整，继续完整验收，达标后上线",
+  "previous_limits": {"case": 2500, "model": 1800, "tts": 24, "vision": 0},
+  "approved_limits": {"case": 3000, "model": 2400, "tts": 24, "vision": 0},
+  "development_model_cap": 600,
+  "existing_charges_and_failures_preserved": true
+}

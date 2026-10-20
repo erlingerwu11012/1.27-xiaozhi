@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path(__file__).parent/'start_api.py';s=p.read_text(encoding='utf-8-sig');s=s.replace("args=['java'", "isolated=J/'config/application-experience-test.yml'\nisolated.write_text((J/'src/main/resources/application-iso.yml').read_text())\nassert env['ISO_MANAGER_JDBC_URL'].split('/')[3].split('?')[0].startswith('bailian_memory_test_')\nargs=['java'");s=s.replace("'--spring.profiles.active=iso'", "'--spring.profiles.active=experience-test'");p.write_text(s,encoding='utf-8')

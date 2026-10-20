@@ -1,0 +1,1202 @@
+{
+  "groups": [
+    {
+      "id": "combo-00",
+      "turns": [
+        {
+          "query": "那你记一下，我老婆叫秦胜任。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "存到记忆库里了吗？",
+          "required": [
+            "存好|保存|记下|核对"
+          ]
+        },
+        {
+          "query": "不是，是秦蕊，秦朝的秦，花蕊的蕊。帮我更正。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我老婆叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "秦蕊"
+          ],
+          "forbidden": [
+            "秦胜任"
+          ]
+        },
+        {
+          "query": "把刚刚这条配偶姓名记忆忘掉。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-01",
+      "turns": [
+        {
+          "query": "记住，我爱喝普洱茶。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "还记一下，我妻子叫林岚。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "把爱喝普洱茶改成最爱美式咖啡。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查查我的饮品偏好。",
+          "tool": "memory_search",
+          "required": [
+            "美式"
+          ]
+        },
+        {
+          "query": "把这些记忆全删除了。",
+          "tool": "memory_forget"
+        },
+        {
+          "query": "我妻子叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "林岚"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combo-02",
+      "turns": [
+        {
+          "query": "给我设个公共提醒，吃饭。",
+          "clarify": true
+        },
+        {
+          "query": "两分钟后。",
+          "tool": "add_reminder",
+          "recipient": "all",
+          "notes": 1
+        },
+        {
+          "query": "刚才设给谁了？",
+          "required": [
+            "所有人|公共|大家"
+          ]
+        },
+        {
+          "query": "查询待提醒的事项。",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "取消刚才的吃饭提醒。",
+          "tool": "note_delete",
+          "notes": 0
+        }
+      ]
+    },
+    {
+      "id": "combo-03",
+      "turns": [
+        {
+          "query": "你好，今天想跟你随便聊聊。"
+        },
+        {
+          "query": "你把我说的话理解错了，我说的是假设。"
+        },
+        {
+          "query": "我不喜欢你这样调侃，直接回答就行。"
+        },
+        {
+          "query": "如果我说把记忆删掉，这只是举例，不是要你现在做。"
+        },
+        {
+          "query": "我没说要结束对话，继续聊。"
+        }
+      ]
+    },
+    {
+      "id": "combo-04",
+      "turns": [
+        {
+          "query": "帮我查一下音量。",
+          "tool": "self_get_device_status"
+        },
+        {
+          "query": "把声音调到60。",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 60
+        },
+        {
+          "query": "再大一点。",
+          "tool": "self_audio_speaker_set_volume"
+        },
+        {
+          "query": "这是最大了吗？",
+          "forbidden": [
+            "已调|调到100"
+          ]
+        },
+        {
+          "query": "我只是问，没让你调。"
+        }
+      ]
+    },
+    {
+      "id": "combo-05",
+      "turns": [
+        {
+          "query": "现在这张提醒卡片是什么？",
+          "tool": "reminder_get_current"
+        },
+        {
+          "query": "提醒你拿快递。"
+        },
+        {
+          "query": "我还没拿到，别把它当完成。"
+        },
+        {
+          "query": "现在我拿到快递了，完成这条提醒。",
+          "tool": "reminder_action",
+          "card_action": "primary"
+        },
+        {
+          "query": "刚才那条已经完成了吗？",
+          "required": [
+            "完成|处理"
+          ]
+        }
+      ],
+      "card": true
+    },
+    {
+      "id": "combo-06",
+      "turns": [
+        {
+          "query": "记一下，我喜欢无糖豆浆。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "顺便聊一句，今天想散散步。"
+        },
+        {
+          "query": "我刚才让你保存什么？",
+          "required": [
+            "无糖豆浆"
+          ]
+        },
+        {
+          "query": "给我存进去。",
+          "required": [
+            "豆浆"
+          ]
+        },
+        {
+          "query": "查一下我喜欢喝什么。",
+          "tool": "memory_search",
+          "required": [
+            "豆浆"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combo-07",
+      "turns": [
+        {
+          "query": "记一下，我妈妈叫张敏。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "把妈妈姓名改一下。",
+          "clarify": true
+        },
+        {
+          "query": "张宁，安宁的宁。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我妈妈叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "张宁"
+          ]
+        },
+        {
+          "query": "删除这条妈妈姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-08",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我爸爸叫陈松。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我爸爸叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "陈松"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我爸爸叫陈林，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我爸爸的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "陈林"
+          ],
+          "forbidden": [
+            "陈松"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条爸爸姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-09",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我同事叫许晴。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我同事叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "许晴"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我同事叫许青，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我同事的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "许青"
+          ],
+          "forbidden": [
+            "许晴"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条同事姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-10",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我朋友叫周然。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我朋友叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "周然"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我朋友叫周燃，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我朋友的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "周燃"
+          ],
+          "forbidden": [
+            "周然"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条朋友姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-11",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我女儿叫小雨。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我女儿叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "小雨"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我女儿叫小语，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我女儿的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "小语"
+          ],
+          "forbidden": [
+            "小雨"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条女儿姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-12",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我儿子叫乐乐。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我儿子叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "乐乐"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我儿子叫悦悦，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我儿子的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "悦悦"
+          ],
+          "forbidden": [
+            "乐乐"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条儿子姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-13",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我丈夫叫沈舟。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我丈夫叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "沈舟"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我丈夫叫沈洲，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我丈夫的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "沈洲"
+          ],
+          "forbidden": [
+            "沈舟"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条丈夫姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-14",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我配偶叫赵悦。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我配偶叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "赵悦"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我配偶叫赵月，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我配偶的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "赵月"
+          ],
+          "forbidden": [
+            "赵悦"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条配偶姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-15",
+      "turns": [
+        {
+          "query": "帮我存到记忆库，我母亲叫李萍。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我母亲叫什么？",
+          "tool": "memory_search",
+          "required": [
+            "李萍"
+          ]
+        },
+        {
+          "query": "刚才名字说错了，我母亲叫李平，把这条改一下。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查查我母亲的姓名。",
+          "tool": "memory_search",
+          "required": [
+            "李平"
+          ],
+          "forbidden": [
+            "李萍"
+          ]
+        },
+        {
+          "query": "忘掉刚才这条母亲姓名记忆。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-16",
+      "turns": [
+        {
+          "query": "记住，我喜欢拿铁。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "拿铁|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢美式。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的咖啡相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "美式"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-17",
+      "turns": [
+        {
+          "query": "记住，我喜欢龙井。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "龙井|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢普洱。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的茶相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "普洱"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-18",
+      "turns": [
+        {
+          "query": "记住，我喜欢豆浆。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "豆浆|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢牛奶。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的早餐相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "牛奶"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-19",
+      "turns": [
+        {
+          "query": "记住，我喜欢苹果。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "苹果|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢梨。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的水果相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "梨"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-20",
+      "turns": [
+        {
+          "query": "记住，我喜欢慢跑。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "慢跑|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢游泳。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的运动相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "游泳"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-21",
+      "turns": [
+        {
+          "query": "记住，我喜欢蓝色。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你先别开玩笑，刚才真的保存了吗？",
+          "required": [
+            "蓝色|保存|记忆"
+          ]
+        },
+        {
+          "query": "我改主意了，改成我喜欢绿色。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "查一下我的颜色相关偏好。",
+          "tool": "memory_search",
+          "required": [
+            "绿色"
+          ]
+        },
+        {
+          "query": "把这次查到的这条偏好删除。",
+          "tool": "memory_forget"
+        }
+      ]
+    },
+    {
+      "id": "combo-22",
+      "turns": [
+        {
+          "query": "设个提醒。",
+          "clarify": true
+        },
+        {
+          "query": "不用了，先聊聊。"
+        },
+        {
+          "query": "我只是问你是不是会设提醒？"
+        },
+        {
+          "query": "现在给我设公共喝水提醒，三分钟后。",
+          "tool": "add_reminder",
+          "recipient": "all",
+          "notes": 1
+        },
+        {
+          "query": "查询我的待提醒事项。",
+          "tool": "reminder_list_pending"
+        }
+      ]
+    },
+    {
+      "id": "combo-23",
+      "turns": [
+        {
+          "query": "设个早上8点的起床闹钟，只响一次。",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "它响过了吗？",
+          "forbidden": [
+            "已经响过|刚才响过"
+          ]
+        },
+        {
+          "query": "查一下所有闹钟。",
+          "tool": "alarm_list",
+          "alarms": 1
+        },
+        {
+          "query": "删除刚刚的起床闹钟。",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "再查查闹钟。",
+          "tool": "alarm_list",
+          "alarms": 0
+        }
+      ]
+    },
+    {
+      "id": "combo-24",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢拿铁。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢美式，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的咖啡偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "美式"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    },
+    {
+      "id": "combo-25",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢龙井。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢普洱，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的茶偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "普洱"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    },
+    {
+      "id": "combo-26",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢豆浆。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢牛奶，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的早餐偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "牛奶"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    },
+    {
+      "id": "combo-27",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢苹果。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢梨，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的水果偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "梨"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    },
+    {
+      "id": "combo-28",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢慢跑。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢游泳，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的运动偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "游泳"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    },
+    {
+      "id": "combo-29",
+      "turns": [
+        {
+          "query": "给我保存这条事实：我更喜欢蓝色。",
+          "tool": "memory_add"
+        },
+        {
+          "query": "现在先别谈记忆，我们随便聊一句。"
+        },
+        {
+          "query": "刚才那条改成我更喜欢绿色，其他不用改。",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "我的颜色偏好是什么？",
+          "tool": "memory_search",
+          "required": [
+            "绿色"
+          ]
+        },
+        {
+          "query": "只忘掉刚才查出来的这一条。",
+          "tool": "memory_forget"
+        }
+      ],
+      "holdout": true
+    }
+  ],
+  "singles": [
+    {
+      "id": "single-00",
+      "kind": 0,
+      "turns": [
+        {
+          "query": "你好。"
+        }
+      ]
+    },
+    {
+      "id": "single-01",
+      "kind": 1,
+      "turns": [
+        {
+          "query": "我不喜欢你这种说法，请直接一点。"
+        }
+      ]
+    },
+    {
+      "id": "single-02",
+      "kind": 2,
+      "turns": [
+        {
+          "query": "不要把假设当成我真的做过。"
+        }
+      ]
+    },
+    {
+      "id": "single-03",
+      "kind": 3,
+      "turns": [
+        {
+          "query": "存到记忆库了吗？"
+        }
+      ]
+    },
+    {
+      "id": "single-04",
+      "kind": 4,
+      "turns": [
+        {
+          "query": "我没让你停止对话。"
+        }
+      ]
+    },
+    {
+      "id": "single-05",
+      "kind": 5,
+      "turns": [
+        {
+          "query": "你觉得安静的下午适合做什么？"
+        }
+      ]
+    },
+    {
+      "id": "single-06",
+      "kind": 6,
+      "turns": [
+        {
+          "query": "我只是举例说删除记忆，不要执行。"
+        }
+      ]
+    },
+    {
+      "id": "single-07",
+      "kind": 7,
+      "turns": [
+        {
+          "query": "当前音量是多少？",
+          "tool": "self_get_device_status"
+        }
+      ]
+    },
+    {
+      "id": "single-08",
+      "kind": 0,
+      "turns": [
+        {
+          "query": "最高亮度是几档？"
+        }
+      ]
+    },
+    {
+      "id": "single-09",
+      "kind": 1,
+      "turns": [
+        {
+          "query": "帮我把音量设成55。",
+          "tool": "self_audio_speaker_set_volume"
+        }
+      ]
+    },
+    {
+      "id": "single-10",
+      "kind": 2,
+      "turns": [
+        {
+          "query": "屏幕亮度调到4档。",
+          "tool": "self_screen_set_brightness"
+        }
+      ]
+    },
+    {
+      "id": "single-11",
+      "kind": 3,
+      "turns": [
+        {
+          "query": "现在有没有闹钟？",
+          "tool": "alarm_list"
+        }
+      ]
+    },
+    {
+      "id": "single-12",
+      "kind": 4,
+      "turns": [
+        {
+          "query": "帮我设置晚上9点的喝水闹钟，只响一次。",
+          "tool": "alarm_set"
+        }
+      ]
+    },
+    {
+      "id": "single-13",
+      "kind": 5,
+      "turns": [
+        {
+          "query": "当前有没有待提醒事项？",
+          "tool": "reminder_list_pending"
+        }
+      ]
+    },
+    {
+      "id": "single-14",
+      "kind": 6,
+      "turns": [
+        {
+          "query": "请查询我保存的持久事实。",
+          "tool": "memory_search"
+        }
+      ]
+    },
+    {
+      "id": "single-15",
+      "kind": 7,
+      "turns": [
+        {
+          "query": "记一下，我喜欢清淡饮食。",
+          "tool": "memory_add"
+        }
+      ]
+    },
+    {
+      "id": "single-16",
+      "kind": 0,
+      "turns": [
+        {
+          "query": "记住，我的配偶叫顾宁。",
+          "tool": "memory_add"
+        }
+      ]
+    },
+    {
+      "id": "single-17",
+      "kind": 1,
+      "turns": [
+        {
+          "query": "给我存到记忆库里：我家住在测试街道。",
+          "tool": "memory_add"
+        }
+      ]
+    },
+    {
+      "id": "single-18",
+      "kind": 2,
+      "turns": [
+        {
+          "query": "那你记一下，我不喝含糖饮料。",
+          "tool": "memory_add"
+        }
+      ]
+    },
+    {
+      "id": "single-19",
+      "kind": 3,
+      "turns": [
+        {
+          "query": "帮我保存，我的朋友叫江月。",
+          "tool": "memory_add"
+        }
+      ]
+    },
+    {
+      "id": "single-20",
+      "kind": 4,
+      "turns": [
+        {
+          "query": "别逗了，直接说你有没有查询。"
+        }
+      ]
+    },
+    {
+      "id": "single-21",
+      "kind": 5,
+      "turns": [
+        {
+          "query": "刚才我没说心情好，不要替我猜。"
+        }
+      ]
+    },
+    {
+      "id": "single-22",
+      "kind": 6,
+      "turns": [
+        {
+          "query": "如果闹钟响了，我会让你停，这次先不操作。"
+        }
+      ]
+    },
+    {
+      "id": "single-23",
+      "kind": 7,
+      "turns": [
+        {
+          "query": "我问的是是否支持拍照，不是现在拍。"
+        }
+      ]
+    },
+    {
+      "id": "single-24",
+      "kind": 0,
+      "turns": [
+        {
+          "query": "我说的她指我朋友，不是你。"
+        }
+      ]
+    },
+    {
+      "id": "single-25",
+      "kind": 1,
+      "turns": [
+        {
+          "query": "你说得太绕了，用一句话。"
+        }
+      ]
+    },
+    {
+      "id": "single-26",
+      "kind": 2,
+      "turns": [
+        {
+          "query": "今天聊聊咖啡，不用保存。"
+        }
+      ]
+    },
+    {
+      "id": "single-27",
+      "kind": 3,
+      "turns": [
+        {
+          "query": "我只是问如何更正记忆，不要现在修改。"
+        }
+      ]
+    },
+    {
+      "id": "single-28",
+      "kind": 4,
+      "turns": [
+        {
+          "query": "请查一下屏幕和声音的当前状态。",
+          "tool": "self_get_device_status"
+        }
+      ]
+    },
+    {
+      "id": "single-29",
+      "kind": 5,
+      "turns": [
+        {
+          "query": "现在暂时不用设置提醒了。"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "dialogues": 30,
+    "minimum_turns": 5,
+    "singles": 30,
+    "holdouts": 6
+  }
+}

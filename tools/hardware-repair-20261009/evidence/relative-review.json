@@ -1,0 +1,13 @@
+{
+  "actual_failures": [
+    "reg-91 explicit relative operation read only and invalid reference",
+    "holdout-52 correct explanation replaced by no operation because claim guard joined unrelated clauses"
+  ],
+  "oracle_false_positives": [
+    "reg-99/reg-100/holdout-21 pre-operation intermediate read compared with final state",
+    "reg-166 half complete and no lost prior progress correctly stated"
+  ],
+  "original_outputs_retained": true,
+  "source_revalidation_required": true,
+  "independent_holdout": 65
+}

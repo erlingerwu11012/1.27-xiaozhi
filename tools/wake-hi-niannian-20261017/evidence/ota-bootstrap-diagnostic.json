@@ -1,0 +1,14 @@
+{
+  "http_status": 200,
+  "json_keys": [
+    "server_time",
+    "websocket"
+  ],
+  "activation_present": false,
+  "websocket_present": true,
+  "mqtt_present": false,
+  "websocket_url": "wss://api.realecho.cn/xiaozhi/v1/",
+  "token_present": false,
+  "auth_key_present": false,
+  "saved_auth_key_length": 43
+}

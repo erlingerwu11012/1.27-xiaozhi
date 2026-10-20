@@ -1,0 +1,64 @@
+INSTALLED_HASHES {'core/providers/tts/official/prompt.py': True, 'core/providers/tts/official/compiler.py': True, 'core/utils/textUtils.py': True}
+REGRESSION_REPORT test_aborted_turn_does_not_emit_end (__main__.EmojiRegression) ... ok
+test_caption_and_subtitle_do_not_contain_emoji (__main__.EmojiRegression) ... ok
+test_inline_emoji_keeps_speech_and_tags (__main__.EmojiRegression) ... ok
+test_keycap_split_across_chunks (__main__.EmojiRegression) ... ok
+test_logged_wink_tail_uses_normal_last (__main__.EmojiRegression) ... ok
+test_only_emoji_finishes_without_upstream_unit (__main__.EmojiRegression) ... ok
+test_prompt_and_final_expression_explicitly_ban_emoji (__main__.EmojiRegression) ... ok
+test_ssml_and_newlines_retained (__main__.EmojiRegression) ... ok
+test_stale_end_does_not_stop_current_turn (__main__.EmojiRegression) ... ok
+test_unterminated_text_still_synthesizes_and_finishes (__main__.EmojiRegression) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK
+
+SERVICE {"name": "xiaozhi-server", "status": "online", "pid": 52355, "restart_count": 1, "uptime": 1790928831835, "cpu": 0.1}
+PUBLIC_HTTP https://www.realecho.cn/ 200 text/html 555
+PUBLIC_HTTP https://www.realecho.cn/xiaozhi/v1/ HTTPError HTTP Error 426: Upgrade Required
+PUBLIC_HTTP https://api.realecho.cn/xiaozhi/v1/ HTTPError HTTP Error 426: Upgrade Required
+core/websocket_server.py:465:             host,
+core/websocket_server.py:466:             port,
+core/websocket_server.py:467:             process_request=self._http_response,
+core/websocket_server.py:468:             ping_interval=ping_interval,
+core/websocket_server.py:469:             ping_timeout=ping_timeout,
+core/websocket_server.py:470:             close_timeout=close_timeout,
+core/websocket_server.py:471:         ):
+core/websocket_server.py:472:             await asyncio.Future()
+core/websocket_server.py:473: 
+core/websocket_server.py:474:     async def _handle_connection(self, websocket):
+core/websocket_server.py:475:         headers = dict(websocket.request.headers)
+core/websocket_server.py:476:         request_path = getattr(getattr(websocket, "request", None), "path", "") or ""
+core/websocket_server.py:477: 
+core/websocket_server.py:478:         # 独立 Reminder Control 通道：不进入主对话 ConnectionHandler
+core/websocket_server.py:479:         if is_reminder_control_path(request_path):
+core/websocket_server.py:480:             idle_sec = float(
+core/websocket_server.py:481:                 (self.config.get("server") or {}).get(
+core/websocket_server.py:482:                     "reminder_control_idle_timeout_sec", 20
+core/websocket_server.py:483:                 )
+core/websocket_server.py:484:             )
+core/websocket_server.py:485:             await handle_reminder_control_connection(
+core/websocket_server.py:486:                 websocket,
+core/websocket_server.py:487:                 config=self.config,
+core/websocket_server.py:488:                 auth_manager=self.auth,
+core/websocket_server.py:489:                 auth_enable=self.auth_enable,
+core/websocket_server.py:490:                 allowed_devices=self.allowed_devices,
+core/websocket_server.py:491:                 manager=self._reminder_control_manager,
+core/websocket_server.py:492:                 llm=self._llm,
+core/websocket_server.py:493:                 idle_timeout_sec=idle_sec,
+core/websocket_server.py:494:             )
+core/websocket_server.py:495:             return
+core/websocket_server.py:496: 
+core/websocket_server.py:497:         if headers.get("device-id", None) is None:
+core/websocket_server.py:498:             # 尝试从 URL 的查询参数中获取 device-id
+core/websocket_server.py:499:             from urllib.parse import parse_qs, urlparse
+core/websocket_server.py:500: 
+core/websocket_server.py:501:             # 从 WebSocket 请求中获取路径
+RECENT_LOG logs/pm2-out.log
+261002 16:13:32[0.8.8-00000000000000][__main__]-WARNING-[device_send] unauthorized reason=missing_bearer
+261002 16:13:54[0.8.8-00000000000000][__main__]-INFO-Websocket地址是	ws://172.30.108.124:8000/xiaozhi/v1/
+261002 16:13:54[0.8.8-00000000000000][core.websocket_server]-INFO-[ws_server] listen=127.0.0.1:8000 ping_interval=20.0 ping_timeout=20.0 close_timeout=10.0
+261002 16:14:32[0.8.8-00000000000000][__main__]-WARNING-[device_send] unauthorized reason=missing_bearer
+RECENT_LOG logs/pm2-err.log

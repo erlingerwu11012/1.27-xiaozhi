@@ -1,0 +1,56 @@
+{
+  "at": 1791521105.961777,
+  "budget": {
+    "case": {
+      "used": 1588,
+      "limit": 2000
+    },
+    "model": {
+      "used": 533,
+      "limit": 600
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "model_usage": {
+    "prompt_tokens": 2904201,
+    "completion_tokens": 39536,
+    "total_tokens": 2943737
+  },
+  "http_status_counts": {
+    "200": 522,
+    "None": 11
+  },
+  "actual_model_names": [
+    "qwen3.7-plus"
+  ],
+  "currency_cost": null,
+  "currency_cost_reason": "test request IDs were not retained with billing transaction IDs; cannot separate concurrent account usage reliably",
+  "production_deployed": false,
+  "hardware_tested": false,
+  "final_source_manifest": {
+    "core/api/vision_handler.py": "abe3e62c65d9f7f0c1a4576265e01bc36df3eaafbf53c08d6fbd39af67434366",
+    "core/utils/device_reminder.py": "76726a4d769dd74a2e524f0a3ea438553dd9bb7b8ba622fe2f0a8211b336cebe",
+    "core/websocket_server.py": "90e4e37d7e1b4265b3ea3940b65be1e62acf0f72192dc24ad33dabb17cf4c60a",
+    "core/providers/memory/bailian/bailian.py": "0d7ddcee6c711a621891046d9cc142a5b8432f8e97d98f2d06eb985aedce4d38",
+    "core/handle/helloHandle.py": "d5e7667046ba7bb058631c1fd82a7887e32a4d519ddcd4eec3b93a44dbce0fc1",
+    "core/utils/vision_capability.py": "99b7ed6a4436c6410cad1d1b1f7b49b938b2686d7f280695f5ab878e583aa4cd",
+    "core/providers/tools/device_mcp/mcp_executor.py": "779075b0830c5f4f06d68badbbf93c752b858a101a68549b049c321becfbe470",
+    "core/connection.py": "d694f4ed3bf7d814cf8e245d0aa93e7fc188d6580d7368bbb6f5a2e0fac387aa",
+    "core/handle/abortHandle.py": "4d477a6ba06a5043aeac232ae43cd38c54046ab9081dc09fb37c2f66d6bce7fc",
+    "core/handle/receiveAudioHandle.py": "85de9a1a2700514cc88d29eaa5ad1a3079f033c4b25594ebb453d9496fb0e316",
+    "core/utils/tool_harness/runtime.py": "7eab3d3a055c572601ac8530e4ae1761093c655ccc3b0c61edbbb4d7d67b032a",
+    "core/utils/tool_harness/contracts.py": "075f64d9fd3b7ba797bf436e17b8643fe763a881992bd9b1d94d7cb0ca575137",
+    "core/utils/tool_harness/presentation.py": "ee91f470c41ee3787efcc003147ace81749f95cc4e9cff512e809b8c4a426cf7",
+    "core/utils/tool_harness/domains.py": "f63aedc43fd98eadd58e345658adcad61ad4f903cbf774eeb998cfd92c939bbf",
+    "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+    "core/utils/recent_memory.py": "6a652f190ce29524bf2fe9247777fab44beb06716f7f82907ff73a35d8bdb9eb",
+    "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+  }
+}

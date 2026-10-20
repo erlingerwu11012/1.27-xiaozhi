@@ -1,0 +1,6 @@
+{
+  "scanned_files_and_archive_members": 111,
+  "credential_literal_findings": [],
+  "private_backup_exported": false,
+  "notes": "Pattern scan supplements an explicit export whitelist; it is not a proof that every possible secret format is detectable."
+}

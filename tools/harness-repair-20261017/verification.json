@@ -1,0 +1,73 @@
+{
+  "python_exit": 0,
+  "java": [
+    {
+      "name": "xiaozhi.modules.personmemory.MemoryDailyWorkerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.personmemory.PersonMemoryDatabaseTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.device.DeviceOtaBootstrapHttpTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.personmemory.PersonMemoryContractHttpTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.personmemory.MemoryMaterialPolicyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.personmemory.MemoryContinuityDatabaseTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.device.DeviceAuthRecoveryFlowTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "xiaozhi.modules.personmemory.MemoryBillingServiceTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "java_totals": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python": {
+    "tests": 69,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

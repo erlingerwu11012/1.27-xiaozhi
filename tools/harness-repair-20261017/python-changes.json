@@ -1,0 +1,8 @@
+[
+  "core/providers/tools/device_reminder_adapter.py",
+  "core/providers/tools/unified_tool_manager.py",
+  "core/utils/tool_harness/registry.py",
+  "core/utils/tool_harness/reply_composer.py",
+  "core/utils/tool_harness/runtime.py",
+  "test/test_harness_repair_20261017.py"
+]

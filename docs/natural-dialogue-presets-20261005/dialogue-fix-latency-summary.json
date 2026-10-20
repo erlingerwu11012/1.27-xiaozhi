@@ -1,0 +1,114 @@
+[
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-flash",
+    "persona": "natural",
+    "turns": 10,
+    "median_total_ms": 845
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-flash",
+    "persona": "existing-playful",
+    "turns": 10,
+    "median_total_ms": 797
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-flash",
+    "persona": "natural",
+    "turns": 10,
+    "median_total_ms": 1342
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-flash",
+    "persona": "existing-playful",
+    "turns": 10,
+    "median_total_ms": 1673
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-max",
+    "persona": "natural",
+    "turns": 10,
+    "median_total_ms": 1515
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen3.8-max",
+    "persona": "existing-playful",
+    "turns": 10,
+    "median_total_ms": 1494
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen-plus",
+    "persona": "natural",
+    "turns": 10,
+    "median_total_ms": 2032
+  },
+  {
+    "report": "dialogue-fix-model-comparison.json",
+    "model": "qwen-plus",
+    "persona": "existing-playful",
+    "turns": 10,
+    "median_total_ms": 1400
+  },
+  {
+    "report": "dialogue-fix-heldout.json",
+    "model": "qwen3.8-flash",
+    "persona": "natural",
+    "turns": 8,
+    "median_total_ms": 1238
+  },
+  {
+    "report": "dialogue-fix-heldout.json",
+    "model": "qwen3.8-flash",
+    "persona": "existing-playful",
+    "turns": 8,
+    "median_total_ms": 1628
+  },
+  {
+    "report": "dialogue-fix-heldout.json",
+    "model": "qwen3.8-max",
+    "persona": "natural",
+    "turns": 8,
+    "median_total_ms": 1388
+  },
+  {
+    "report": "dialogue-fix-heldout.json",
+    "model": "qwen3.8-max",
+    "persona": "existing-playful",
+    "turns": 8,
+    "median_total_ms": 1584
+  },
+  {
+    "report": "dialogue-fix-final.json",
+    "model": "qwen3.8-flash",
+    "persona": "natural",
+    "turns": 8,
+    "median_total_ms": 1942
+  },
+  {
+    "report": "dialogue-fix-final.json",
+    "model": "qwen3.8-flash",
+    "persona": "existing-playful",
+    "turns": 8,
+    "median_total_ms": 1892
+  },
+  {
+    "report": "dialogue-fix-final.json",
+    "model": "qwen3.8-max",
+    "persona": "natural",
+    "turns": 8,
+    "median_total_ms": 1420
+  },
+  {
+    "report": "dialogue-fix-final.json",
+    "model": "qwen3.8-max",
+    "persona": "existing-playful",
+    "turns": 8,
+    "median_total_ms": 1894
+  }
+]

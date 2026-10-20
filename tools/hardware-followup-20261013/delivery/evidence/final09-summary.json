@@ -1,0 +1,30 @@
+{
+  "cases": 181,
+  "passed": 181,
+  "failed": [],
+  "real_model_turns": 179,
+  "model_calls": 301,
+  "reused_cases": 89,
+  "new_cases": 92,
+  "reuse_source": "final08",
+  "all_same_version": false,
+  "budget": {
+    "case": {
+      "used": 732,
+      "limit": 800
+    },
+    "model": {
+      "used": 588,
+      "limit": 600
+    },
+    "tts": {
+      "used": 4,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

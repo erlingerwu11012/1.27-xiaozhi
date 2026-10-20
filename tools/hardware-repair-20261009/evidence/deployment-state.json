@@ -1,0 +1,204 @@
+{
+  "phase": "deployed_verified",
+  "started_at": 1791564947.9181688,
+  "gate": {
+    "passed": true,
+    "requirements": {
+      "complete": true,
+      "no_failed_rows": true,
+      "real_model_turns": true,
+      "independent_holdout": true,
+      "frozen_corpus": true,
+      "frozen_python": true,
+      "frozen_java": true,
+      "frozen_jar": true,
+      "frozen_fixtures": true,
+      "summary": true,
+      "python_regression": true,
+      "resume-memory-regression.json": true,
+      "http-api-results.json": true,
+      "firmware-host-results.json": true,
+      "photo-worker-host-results.json": true,
+      "supplement-results.json": true,
+      "chat-fix-results.json": true,
+      "resume-speech-regression.json": true,
+      "card-progress-regression.json": true,
+      "card-view-regression.json": true,
+      "relative-claims-regression.json": true,
+      "shipping-state-regression.json": true,
+      "java-drift-preflight.json": true,
+      "python-drift-preflight.json": true,
+      "java_tests": true,
+      "voice_backend": true,
+      "persona_equivalence": true,
+      "speech_review": true,
+      "tts": true,
+      "vision": true,
+      "memory_restore_test": true
+    },
+    "cases": 276,
+    "real_model_turns": 272,
+    "source": {
+      "core/utils/tool_harness/runtime.py": "ecbc922d9283bc72c87b71d063136908814abe5f8345d2bc787a31c477501a3f",
+      "core/utils/tool_harness/contracts.py": "0ca830b92350645e21e25a867c82e8c37978e8bce29e0d642ddc61de7d9f3424",
+      "core/utils/tool_harness/presentation.py": "ea4a819ea81fde7e390e4aeab5d1ad38cb6d4751e869f4b94e25d9100e11637e",
+      "core/utils/tool_harness/memory_policy.py": "190352d0cce7eb90b1620e1f74d8e28db687b18c5cad2be438f31ad76fd3f538",
+      "core/utils/tool_harness/reply_composer.py": "fd1e37cf6ba0188264020cbd1b290957a105da8381ab8c4f83aea7c080a16b92",
+      "core/utils/recent_memory.py": "729678d8d2f407ab269f366fff2588bda3de42470524b54c5061668a6cd79d42",
+      "core/utils/voiceprint_provider.py": "f04e01142c15247ff455b4a119678ddfd0e553bb3814788b4d6ca37130561bd5",
+      "core/utils/vision_readiness.py": "9f4b473dab519a6b0033a68cd3038afb76bb653d367f2fc9e395134a83d445de",
+      "plugins_func/functions/person_memory.py": "b1d4b7e8545ddddb17a6ea47b89c8b647e8df6cbb7dcc3f981e5a30c67c6c31f",
+      "core/utils/tool_result.py": "d2d65e71e3a6e1108c7196ce543c4bc89cb80f7e1fa14839d8e3ddd17b215dba",
+      "core/utils/recipient_resolver.py": "955d95b3e0383a050977e77b6b4b1203934992af12cabcc7d6f016373245cd9d",
+      "core/utils/unified_recipient_resolver.py": "fa6d95abc45f0a1d77c318eb2eed5948061c09eedc68d5314c324b1a60f6392f"
+    },
+    "jar_sha256": "2142df09b179ad084c93220a8d79d1426bc9abe6afe57c4a5b557e8fb3dbeed8",
+    "at": 1791564946.774585,
+    "hardware": false
+  },
+  "source": {
+    "core/utils/tool_harness/runtime.py": "ecbc922d9283bc72c87b71d063136908814abe5f8345d2bc787a31c477501a3f",
+    "core/utils/tool_harness/contracts.py": "0ca830b92350645e21e25a867c82e8c37978e8bce29e0d642ddc61de7d9f3424",
+    "core/utils/tool_harness/presentation.py": "ea4a819ea81fde7e390e4aeab5d1ad38cb6d4751e869f4b94e25d9100e11637e",
+    "core/utils/tool_harness/memory_policy.py": "190352d0cce7eb90b1620e1f74d8e28db687b18c5cad2be438f31ad76fd3f538",
+    "core/utils/tool_harness/reply_composer.py": "fd1e37cf6ba0188264020cbd1b290957a105da8381ab8c4f83aea7c080a16b92",
+    "core/utils/recent_memory.py": "729678d8d2f407ab269f366fff2588bda3de42470524b54c5061668a6cd79d42",
+    "core/utils/voiceprint_provider.py": "f04e01142c15247ff455b4a119678ddfd0e553bb3814788b4d6ca37130561bd5",
+    "core/utils/vision_readiness.py": "9f4b473dab519a6b0033a68cd3038afb76bb653d367f2fc9e395134a83d445de",
+    "plugins_func/functions/person_memory.py": "b1d4b7e8545ddddb17a6ea47b89c8b647e8df6cbb7dcc3f981e5a30c67c6c31f",
+    "core/utils/tool_result.py": "d2d65e71e3a6e1108c7196ce543c4bc89cb80f7e1fa14839d8e3ddd17b215dba",
+    "core/utils/recipient_resolver.py": "955d95b3e0383a050977e77b6b4b1203934992af12cabcc7d6f016373245cd9d",
+    "core/utils/unified_recipient_resolver.py": "fa6d95abc45f0a1d77c318eb2eed5948061c09eedc68d5314c324b1a60f6392f"
+  },
+  "old": {
+    "manager-api": 5,
+    "xiaozhi-server": 6
+  },
+  "new": {
+    "manager-api": 7,
+    "xiaozhi-server": 8
+  },
+  "java_rel": [
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java",
+    "src/main/java/xiaozhi/modules/config/service/impl/ConfigServiceImpl.java"
+  ],
+  "old_threshold": "0.4",
+  "baseline": {
+    "core/utils/tool_harness/runtime.py": "1535c988a449f1fb327001d48a0424f28e97cb2e7437a7081f1d8e87291f2231",
+    "core/utils/tool_harness/contracts.py": "075f64d9fd3b7ba797bf436e17b8643fe763a881992bd9b1d94d7cb0ca575137",
+    "core/utils/tool_harness/presentation.py": "98fe9ca411e3f13c4ec0cd4680673b613633db7d60e2f8b3835e67e9d8206201",
+    "core/utils/tool_harness/memory_policy.py": null,
+    "core/utils/tool_harness/reply_composer.py": null,
+    "core/utils/recent_memory.py": "ba681065589291ff9b0a50ff734f0a017338dadae7355306e919c4697ea379ac",
+    "core/utils/voiceprint_provider.py": "872405102dde6b9ee253cf6cc9dbcfa25398cf8b18281db038c738a02a83830e",
+    "core/utils/vision_readiness.py": null,
+    "plugins_func/functions/person_memory.py": "3ae0a449802a582cda8ac408ab4cd1a704d698fe3a2c0f8140b62748faa9b437",
+    "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+    "core/utils/recipient_resolver.py": "3b95889bb640c8e220794227cad01357d36b5f3db9e8d335e17e0c57aea45f51",
+    "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+  },
+  "billing_hashes": {
+    "HW_BILLING_SERVICE_KEY": "f720b8e0cc2f40a9e2c6a07bcfa3d6f3a52231856de048afcf05542d430d1490",
+    "HW_BILLING_GATEWAY_ORIGIN": "0398673719884a6295ed087fe9520379ddb77f6a812044908fca120b687cc4b2",
+    "HW_BILLING_AUDIO_GATEWAY_ORIGIN": "d61acd05df082727859b5f103232458a09ee055bf75a57dadcda264557dc1fe6"
+  },
+  "hardware": false,
+  "api_overlap_seconds": 0.5806460380554199,
+  "threshold_updated": true,
+  "candidate_health": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "manager_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "public_health": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "manager_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "java_hashes": {
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java": "2d3b0394aafcfe62c4474cb9a6fbe4b376b6949e41b6824b252274c44ba8a281",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java": "e1590253ca6a014100949c8dd37d7b7785c00e3dfcf433cc62198338021decbb",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java": "b235ae20b66b18990ab9396f768a70ff73906c1ade8f6a01c69881866c0c94f3",
+    "src/main/java/xiaozhi/modules/config/service/impl/ConfigServiceImpl.java": "e8cd0409dd5004b9583fb7fce1df26ad877d9734bc9bd862488fc07a7dcb80db"
+  },
+  "config_hashes": {
+    "/etc/nginx/sites-available/www.realecho.cn": "3f28985101b3b24e41349022f1572b9f4e8fac1a587bd3ac6a45b3c39a8951aa",
+    "/etc/nginx/conf.d/tool-harness-internal.conf": "c1e7a7998b93ca40a07e379165f845d608f6beed31a8b9a806e16049c2fcdca9",
+    "/etc/nginx/conf.d/experience-manager-compat.conf": "2786de6d7b75a453663656fb5e8029bd4cccc99b951a6f8c9c03e227f237505d"
+  },
+  "deployed_at": 1791564963.9543145,
+  "log_offsets": {
+    "/root/.pm2/logs/manager-api-out.log": 3439564,
+    "/root/.pm2/logs/manager-api-error.log": 2045,
+    "/root/.pm2/logs/xiaozhi-server-out.log": 2454690,
+    "/root/.pm2/logs/xiaozhi-server-error.log": 9116
+  },
+  "finished_at": 1791566764.7530744,
+  "observation_count": 31
+}

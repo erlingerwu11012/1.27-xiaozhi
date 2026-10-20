@@ -1,0 +1,720 @@
+{
+  "source": "actual candidate ConnectionHandler; bounded primary retry; same-provider semantic validation; full real MCP catalog; no writes",
+  "runtime_source_sha256": {
+    "core/connection.py": "35e3388c5bc74830009a4a1e2a41985ff016fea871c69535b66e6e5193bd57c4",
+    "core/utils/conversation_guidance.py": "a78f570d52af564fe4c9a1c8682d70fac24c34a4a4920cc431b7c52710521855",
+    "core/utils/conversation_turn.py": "eeb1cef421d2c49b4c67ff1be5ec80ca1927e5feb7b274d5f1cea719617d5d3a"
+  },
+  "semantic_enabled": true,
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "dialogues": [
+    {
+      "id": "kimi-k3/natural/0",
+      "model": "kimi-k3",
+      "persona": "natural",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 732,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 520,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 626,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 566,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 768,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 877,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 551,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 999,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 773,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 530,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        }
+      ],
+      "system_sha256": "a359227f97056e2d12a33db754c3f2d5acf5045c0c3fad22a0039bb7245ff3fe"
+    },
+    {
+      "id": "kimi-k3/existing-playful/0",
+      "model": "kimi-k3",
+      "persona": "existing-playful",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 376,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 814,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 610,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 644,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 732,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 529,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 862,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 797,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 600,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "这句我没能准确接住，先不替你补情况或安排。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 968,
+          "request_count": 2,
+          "response_model": null,
+          "usage": {},
+          "generated_attempts": [],
+          "semantic_verdicts": [],
+          "draft_generations": 0,
+          "validator_requests": 0,
+          "finish_reasons": [],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "validation_unavailable"
+              ]
+            ],
+            "fallback": true,
+            "semantic_checks": [
+              {
+                "verdict": "【服务暂时无法响应，请稍后再试】",
+                "violations": [
+                  "validation_unavailable"
+                ]
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        }
+      ],
+      "system_sha256": "1fbc403894bd7b2fb817dfffdb161435762e566d8f2a25c168ef784d84dfbf69"
+    }
+  ],
+  "completed": true,
+  "calls": 20,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "tool_catalog_count": 5,
+  "quality_passed": null
+}

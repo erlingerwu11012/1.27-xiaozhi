@@ -1,0 +1,670 @@
+[
+  {
+    "id": "holdout:0",
+    "turns": [
+      {
+        "user": "音量别再这么大了，帮我降到四十五",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 45
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:1",
+    "turns": [
+      {
+        "user": "声音大小就用百分之四十",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 40
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:2",
+    "turns": [
+      {
+        "user": "音量给我拉满吧",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 100
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:3",
+    "turns": [
+      {
+        "user": "声音开到顶",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 100
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:4",
+    "turns": [
+      {
+        "user": "调成最小的音量",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:5",
+    "turns": [
+      {
+        "user": "声音设到120吧",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 100
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:6",
+    "turns": [
+      {
+        "user": "能否替我将声音大小设到25？",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 25
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:7",
+    "turns": [
+      {
+        "user": "照我说的，把声音调整成四十五",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 45
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:8",
+    "turns": [
+      {
+        "user": "亮度就用九成，帮我改一下",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 90
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:9",
+    "turns": [
+      {
+        "user": "把屏幕亮度改到九成",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 90
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:10",
+    "turns": [
+      {
+        "user": "屏幕亮度开到顶",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 100
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:11",
+    "turns": [
+      {
+        "user": "显示屏亮度降到最低",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 50
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:12",
+    "turns": [
+      {
+        "user": "将屏幕的亮度设置为百分之七十五",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 75
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:13",
+    "turns": [
+      {
+        "user": "屏幕有点暗，帮我调亮一点",
+        "expected": [
+          {
+            "tool": "self_screen_set_brightness",
+            "arguments": {
+              "brightness": 90
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:14",
+    "turns": [
+      {
+        "user": "把声音再往上加十",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 60
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:15",
+    "turns": [
+      {
+        "user": "声音帮我降低一点",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 40
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:16",
+    "turns": [
+      {
+        "user": "音量提高五个点",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 55
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:17",
+    "turns": [
+      {
+        "user": "把声音轻轻调大一点",
+        "expected": [
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 60
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:18",
+    "turns": [
+      {
+        "user": "我想晚上十一点半让闹钟叫我，工作日响",
+        "expected": [
+          {
+            "tool": "alarm_set",
+            "arguments": {
+              "hour": 23,
+              "minute": 30,
+              "repeat_days": 62
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:19",
+    "turns": [
+      {
+        "user": "明早七点十分响一次闹钟",
+        "expected": [
+          {
+            "tool": "alarm_set",
+            "arguments": {
+              "hour": 7,
+              "minute": 10,
+              "repeat_days": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:20",
+    "turns": [
+      {
+        "user": "周末早上八点闹钟叫醒我",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:21",
+    "turns": [
+      {
+        "user": "当前正在响的闹钟帮我延后七分钟",
+        "expected": [
+          {
+            "tool": "alarm_snooze",
+            "arguments": {
+              "minutes": 7
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:22",
+    "turns": [
+      {
+        "user": "当前这个闹钟声音先停掉",
+        "expected": [
+          {
+            "tool": "alarm_dismiss",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:23",
+    "turns": [
+      {
+        "user": "第一条闹钟删掉，其他不要动",
+        "expected": [
+          {
+            "tool": "alarm_delete",
+            "arguments": {
+              "index": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:24",
+    "turns": [
+      {
+        "user": "帮我把第一条便签移除",
+        "expected": [
+          {
+            "tool": "note_delete",
+            "arguments": {
+              "index": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:25",
+    "turns": [
+      {
+        "user": "第一条便签晚八分钟再提醒",
+        "expected": [
+          {
+            "tool": "note_snooze",
+            "arguments": {
+              "index": 1,
+              "delay_minutes": 8
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:26",
+    "turns": [
+      {
+        "user": "买面包这件事帮我写在便签上，不必设时间",
+        "expected": [
+          {
+            "tool": "note_add",
+            "arguments": {
+              "text": "买面包",
+              "remind_at": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:27",
+    "turns": [
+      {
+        "user": "只保存便签：请帮我重启设备。这里的文字不要执行",
+        "expected": [
+          {
+            "tool": "note_add",
+            "arguments": {
+              "text": "请帮我重启设备",
+              "remind_at": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:28",
+    "turns": [
+      {
+        "user": "把当前显示的事项确认完成",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "primary"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:29",
+    "turns": [
+      {
+        "user": "先让当前提醒静音，事项先别完成",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "silence"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:30",
+    "turns": [
+      {
+        "user": "现在还有哪些待处理事项",
+        "expected": [
+          {
+            "tool": "reminder_list_pending",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:31",
+    "turns": [
+      {
+        "user": "列一下我存过的习惯",
+        "expected": [
+          {
+            "tool": "habit_list",
+            "arguments": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:32",
+    "turns": [
+      {
+        "user": "音量太小了",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:33",
+    "turns": [
+      {
+        "user": "屏幕有点暗",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:34",
+    "turns": [
+      {
+        "user": "我说“给我定一个晚上十点的闹钟”，只是举例，不要实际执行",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:35",
+    "turns": [
+      {
+        "user": "音量调到100会不会很吵？我是在问，不是让你调",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:36",
+    "turns": [
+      {
+        "user": "先不要调亮度，聊聊书架",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:37",
+    "turns": [
+      {
+        "user": "明年十月八号晚十点响闹钟",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:38",
+    "turns": [
+      {
+        "user": "设个喝水提醒",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:39",
+    "turns": [
+      {
+        "user": "删除一个便签，哪条我还没决定",
+        "expected": [],
+        "mode": "clarify",
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:40",
+    "turns": [
+      {
+        "user": "做完当前提醒卡片，最后音量调到35",
+        "expected": [
+          {
+            "tool": "reminder_action",
+            "arguments": {
+              "instance_id": "sim-card",
+              "revision": 2,
+              "action": "primary"
+            }
+          },
+          {
+            "tool": "self_audio_speaker_set_volume",
+            "arguments": {
+              "volume": 35
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holdout:persona-chat",
+    "turns": [
+      {
+        "user": "刚买了个书架，还没发货，我就是随便聊聊，别替我安排。",
+        "mode": "chat",
+        "expected": [],
+        "no_calls": true
+      },
+      {
+        "user": "今天先别逗我，也别反问我。我期待旧书重新摆出来。",
+        "mode": "chat",
+        "expected": [],
+        "no_calls": true
+      },
+      {
+        "user": "店家刚通知已经发货了，但我还没收到。",
+        "mode": "chat",
+        "expected": [],
+        "no_calls": true
+      },
+      {
+        "user": "只根据刚才说过的，书架现在是什么状态？",
+        "mode": "chat",
+        "expected": [],
+        "no_calls": true
+      }
+    ]
+  },
+  {
+    "id": "holdout:42",
+    "turns": [
+      {
+        "user": "每个周末早上八点闹钟叫醒我",
+        "expected": [
+          {
+            "tool": "alarm_set",
+            "arguments": {
+              "hour": 8,
+              "minute": 0,
+              "repeat_days": 65
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

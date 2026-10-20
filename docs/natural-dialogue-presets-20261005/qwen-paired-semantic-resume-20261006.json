@@ -1,0 +1,152 @@
+{
+  "original_pack_sha256": "441d28a622dfb0898fd215f56f96f2ec28ec69351089395495c3749717248a45",
+  "method": "Resume saved original native call; no rerun or replacement of first decision; symmetric continuation for both models. Original benchmark JSON remains intact.",
+  "cases": [
+    {
+      "model": "qwen3.7-plus",
+      "id": 31,
+      "trial": 1,
+      "review_reason": "content_synonym",
+      "original_initial_request_sha256": "f8c22d06a5063b1ce687d2761ce1abb0564dd860859be326918a16cda4a429de",
+      "unchanged_initial_call": {
+        "id": "call_2e920847b9c84381be7ae0b0",
+        "name": "add_reminder",
+        "arguments": "{\"content\": \"取快递\", \"remind_time_str\": \"半小时后\"}"
+      },
+      "receipt": {
+        "ok": true,
+        "content": "取快递",
+        "remind_time_str": "半小时后",
+        "id": "isolated-test-item",
+        "success": true,
+        "status": "created"
+      },
+      "continuation": {
+        "text": "好的，半小时后提醒你取快递。",
+        "calls": [],
+        "first_ms": 1139,
+        "elapsed_ms": 1277
+      },
+      "continuation_pass": true,
+      "request_hashes": [
+        "375beb08effc883223ea5224be35a2645c102570844b9050f4c1ca47724bfb56"
+      ],
+      "response_models": [
+        "qwen3.7-plus"
+      ],
+      "reasoning_chars": 0,
+      "api_errors": [],
+      "elapsed_ms": 1278
+    },
+    {
+      "model": "qwen3.8-flash",
+      "id": 31,
+      "trial": 1,
+      "review_reason": "content_synonym",
+      "original_initial_request_sha256": "f8c22d06a5063b1ce687d2761ce1abb0564dd860859be326918a16cda4a429de",
+      "unchanged_initial_call": {
+        "id": "call_039dd1f81095488aab63c326",
+        "name": "add_reminder",
+        "arguments": "{\"content\": \"拿快递\", \"remind_time_str\": \"半小时后\", \"text\": \"半小时后提醒我拿快递\"}"
+      },
+      "receipt": {
+        "ok": true,
+        "content": "拿快递",
+        "remind_time_str": "半小时后",
+        "text": "半小时后提醒我拿快递",
+        "id": "isolated-test-item",
+        "success": true,
+        "status": "created"
+      },
+      "continuation": {
+        "text": "行，半小时后叫你。要是忘了拿快递，可别赖我啊。",
+        "calls": [],
+        "first_ms": 1315,
+        "elapsed_ms": 1698
+      },
+      "continuation_pass": true,
+      "request_hashes": [
+        "308c8294da0f4bc6a814501afcb6755e302f2bb5a86e09a4f7c65e3b9fb078b8"
+      ],
+      "response_models": [
+        "qwen3.8-flash"
+      ],
+      "reasoning_chars": 0,
+      "api_errors": [],
+      "elapsed_ms": 1698
+    },
+    {
+      "model": "qwen3.7-plus",
+      "id": 35,
+      "trial": 1,
+      "review_reason": "content_synonym",
+      "original_initial_request_sha256": "cd6fefd931091beb418c77f59c635372d1ec32b57ba0523d2926ba6dccd18894",
+      "unchanged_initial_call": {
+        "id": "call_54a0ea5ec26d4bdea1f80e4b",
+        "name": "add_reminder",
+        "arguments": "{\"content\": \"站起来走走\", \"remind_time_str\": \"五分钟后\"}"
+      },
+      "receipt": {
+        "ok": true,
+        "content": "站起来走走",
+        "remind_time_str": "五分钟后",
+        "id": "isolated-test-item",
+        "success": true,
+        "status": "created"
+      },
+      "continuation": {
+        "text": "好的，五分钟后提醒你站起来活动一下。",
+        "calls": [],
+        "first_ms": 1014,
+        "elapsed_ms": 1196
+      },
+      "continuation_pass": true,
+      "request_hashes": [
+        "6a1494c3a41265a896b12bd6411c6a8f22877f16ee38fcbe2b5f064792798d2f"
+      ],
+      "response_models": [
+        "qwen3.7-plus"
+      ],
+      "reasoning_chars": 0,
+      "api_errors": [],
+      "elapsed_ms": 1197
+    },
+    {
+      "model": "qwen3.8-flash",
+      "id": 35,
+      "trial": 1,
+      "review_reason": "content_synonym",
+      "original_initial_request_sha256": "cd6fefd931091beb418c77f59c635372d1ec32b57ba0523d2926ba6dccd18894",
+      "unchanged_initial_call": {
+        "id": "call_439fbd1fc06847ef8017d06b",
+        "name": "add_reminder",
+        "arguments": "{\"content\": \"起来活动一下\", \"remind_time_str\": \"五分钟后\", \"text\": \"五分钟后提醒我站起来走走\"}"
+      },
+      "receipt": {
+        "ok": true,
+        "content": "起来活动一下",
+        "remind_time_str": "五分钟后",
+        "text": "五分钟后提醒我站起来走走",
+        "id": "isolated-test-item",
+        "success": true,
+        "status": "created"
+      },
+      "continuation": {
+        "text": "行，五分钟后叫你起来活动活动筋骨。别想赖着不动啊，我可盯着呢。",
+        "calls": [],
+        "first_ms": 1586,
+        "elapsed_ms": 2026
+      },
+      "continuation_pass": true,
+      "request_hashes": [
+        "8362e58928ad8a2c5769d321f6ee296d538a954551799debf37f98f25bc240d5"
+      ],
+      "response_models": [
+        "qwen3.8-flash"
+      ],
+      "reasoning_chars": 0,
+      "api_errors": [],
+      "elapsed_ms": 2026
+    }
+  ]
+}

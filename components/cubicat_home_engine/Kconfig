@@ -1,0 +1,10 @@
+menu "Cubicat Home renderer"
+
+config ENABLE_BILINEAR_FILTER
+    bool "Enable bilinear texture filtering"
+    default y
+    help
+        Compile bilinear texture sampling support for the Cubicat software
+        renderer. Individual materials still opt in at runtime.
+
+endmenu

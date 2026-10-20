@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="900" viewBox="0 0 1320 900">
+  <defs>
+    <style>
+      text{font-family:Inter,Segoe UI,Arial,sans-serif}
+      .title{font-size:32px;font-weight:760;fill:#182235}
+      .subtitle{font-size:15px;fill:#657187}
+      .style-title{font-size:18px;font-weight:760;fill:#1f2937}
+      .note{font-size:13px;fill:#6b7280}
+      .screen-label{font-size:11px;fill:#6b7280;text-anchor:middle}
+      .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    </style>
+    <filter id="cardShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#16233d" flood-opacity=".16"/>
+    </filter>
+    <filter id="screenShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#111827" flood-opacity=".22"/>
+    </filter>
+    <linearGradient id="softBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#e9f2ff"/>
+    </linearGradient>
+    <linearGradient id="darkBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1c"/>
+      <stop offset="1" stop-color="#151827"/>
+    </linearGradient>
+    <linearGradient id="petBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#eff6ff"/>
+    </linearGradient>
+    <linearGradient id="panelBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f4f7fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1320" height="900" fill="#edf3f9"/>
+  <text x="48" y="54" class="title">Whole-Screen UI Redesign Directions</text>
+  <text x="48" y="82" class="subtitle">Not just WiFi icons: these mockups cover top status, home context, assistant face/GIF, subtitles, notification/MCP cards, and camera/privacy states.</text>
+
+  <!-- A -->
+  <g transform="translate(48 122)">
+    <rect width="584" height="346" rx="18" fill="#f8fafc" stroke="#dbe4f0" filter="url(#cardShadow)"/>
+    <text x="24" y="34" class="style-title">A. Soft Companion Home</text>
+    <text x="24" y="56" class="note">最推荐：清爽、亲和、信息层级明确，适合“桌面 AI 助手”。</text>
+    <g transform="translate(228 20)" filter="url(#screenShadow)">
+      <rect width="320" height="320" rx="34" fill="url(#softBg)" stroke="#cbd8e8" stroke-width="2"/>
+      <rect x="0" y="0" width="320" height="34" rx="17" fill="#ffffff" opacity=".82"/>
+      <path d="M19 18c6-6 16-6 22 0M25 25c3-3 9-3 12 0" stroke="#1f9bd1" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <rect x="264" y="12" width="25" height="13" rx="4" fill="none" stroke="#273244" stroke-width="2"/>
+      <rect x="290" y="16" width="3" height="5" rx="1.5" fill="#273244"/>
+      <rect x="269" y="15" width="14" height="7" rx="2.5" fill="#37c986"/>
+      <text x="160" y="23" font-size="13" font-weight="650" fill="#273244" text-anchor="middle">ONLINE IDLE</text>
+
+      <rect x="18" y="48" width="284" height="76" rx="18" fill="#ffffff" stroke="#dfe8f5"/>
+      <text x="34" y="78" font-size="28" font-weight="760" fill="#111827">12:08</text>
+      <text x="34" y="100" font-size="12" fill="#6b7280">SUNDAY  JUN 28</text>
+      <text x="174" y="78" font-size="12" fill="#6b7280">NEXT</text>
+      <text x="174" y="101" font-size="15" font-weight="650" fill="#111827">No event</text>
+
+      <g transform="translate(87 136)">
+        <circle cx="73" cy="55" r="55" fill="#dff6ff"/>
+        <path d="M29 57c16-13 34-13 50 0M67 57c16-13 34-13 50 0" stroke="#111827" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <path d="M61 84c8 7 20 7 28 0" stroke="#111827" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="36" cy="30" r="5" fill="#80d7ff"/><circle cx="111" cy="30" r="5" fill="#80d7ff"/>
+      </g>
+
+      <rect x="18" y="236" width="284" height="28" rx="14" fill="#ffffff" stroke="#dfe8f5"/>
+      <circle cx="34" cy="250" r="5" fill="#21c786"/>
+      <text x="48" y="255" font-size="12" font-weight="650" fill="#111827">XIAOZHI</text>
+      <text x="258" y="255" font-size="12" fill="#6b7280" text-anchor="end">READY</text>
+      <rect x="18" y="274" width="284" height="34" rx="16" fill="#111827"/>
+      <text x="160" y="296" font-size="13" fill="#f9fafb" text-anchor="middle">点按说话，或唤醒“小智”</text>
+    </g>
+  </g>
+
+  <!-- B -->
+  <g transform="translate(688 122)">
+    <rect width="584" height="346" rx="18" fill="#f8fafc" stroke="#dbe4f0" filter="url(#cardShadow)"/>
+    <text x="24" y="34" class="style-title">B. Focus Voice Mode</text>
+    <text x="24" y="56" class="note">黑底、大表情、少信息。适合语音交互时让屏幕更像“活着”。</text>
+    <g transform="translate(228 20)" filter="url(#screenShadow)">
+      <rect width="320" height="320" rx="34" fill="url(#darkBg)" stroke="#20283a" stroke-width="2"/>
+      <rect x="20" y="14" width="280" height="28" rx="14" fill="#ffffff" opacity=".06"/>
+      <text x="160" y="33" font-size="12" fill="#d8e6ff" text-anchor="middle">LISTENING</text>
+      <path d="M27 29c6-6 15-6 21 0M33 35c3-3 8-3 11 0" stroke="#5ddcff" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="284" y="34" font-size="13" fill="#8ef7b4" text-anchor="end">78%</text>
+
+      <circle cx="160" cy="145" r="88" fill="#172033"/>
+      <circle cx="160" cy="145" r="76" fill="none" stroke="#4dd8ff" stroke-width="2" opacity=".28"/>
+      <circle cx="160" cy="145" r="56" fill="none" stroke="#4dd8ff" stroke-width="5" opacity=".18"/>
+      <path d="M90 138c22-20 52-20 74 0M156 138c22-20 52-20 74 0" stroke="#eaf7ff" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M137 182c13 10 33 10 46 0" stroke="#eaf7ff" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M154 78v13M154 199v13M93 145H80M240 145h-13" stroke="#4dd8ff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+
+      <rect x="20" y="258" width="280" height="44" rx="16" fill="#07111f" stroke="#24314a"/>
+      <text x="160" y="276" font-size="11" fill="#5ddcff" text-anchor="middle">USER</text>
+      <text x="160" y="294" font-size="14" fill="#ffffff" text-anchor="middle">今天天气怎么样？</text>
+    </g>
+  </g>
+
+  <!-- C -->
+  <g transform="translate(48 510)">
+    <rect width="584" height="346" rx="18" fill="#f8fafc" stroke="#dbe4f0" filter="url(#cardShadow)"/>
+    <text x="24" y="34" class="style-title">C. Kawaii Device Character</text>
+    <text x="24" y="56" class="note">更可爱，更像电子宠物。适合你希望它有陪伴感和记忆点。</text>
+    <g transform="translate(228 20)" filter="url(#screenShadow)">
+      <rect width="320" height="320" rx="34" fill="url(#petBg)" stroke="#ead7c5" stroke-width="2"/>
+      <rect x="18" y="16" width="284" height="30" rx="15" fill="#fff" opacity=".72"/>
+      <text x="34" y="36" font-size="12" fill="#7c5b45">小智在这里</text>
+      <circle cx="275" cy="31" r="5" fill="#22c55e"/>
+      <text x="289" y="36" font-size="12" fill="#7c5b45" text-anchor="end">在线</text>
+
+      <g transform="translate(71 68)">
+        <rect x="0" y="26" width="178" height="138" rx="44" fill="#ffffff" stroke="#f6c7d8" stroke-width="5"/>
+        <rect x="39" y="0" width="100" height="42" rx="21" fill="#f8bfd3"/>
+        <circle cx="57" cy="91" r="14" fill="#111827"/><circle cx="121" cy="91" r="14" fill="#111827"/>
+        <circle cx="52" cy="86" r="4" fill="#ffffff"/><circle cx="116" cy="86" r="4" fill="#ffffff"/>
+        <path d="M78 119c9 8 23 8 32 0" stroke="#111827" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="33" cy="116" r="10" fill="#ffd6df"/><circle cx="145" cy="116" r="10" fill="#ffd6df"/>
+      </g>
+
+      <rect x="24" y="224" width="272" height="36" rx="18" fill="#fff" stroke="#f1d2dd"/>
+      <text x="160" y="247" font-size="13" fill="#7c5b45" text-anchor="middle">我在听，你慢慢说</text>
+      <rect x="24" y="270" width="132" height="32" rx="16" fill="#111827"/>
+      <text x="90" y="291" font-size="12" fill="#fff" text-anchor="middle">提醒事项 2</text>
+      <rect x="164" y="270" width="132" height="32" rx="16" fill="#ffffff" stroke="#f1d2dd"/>
+      <text x="230" y="291" font-size="12" fill="#7c5b45" text-anchor="middle">电量 78%</text>
+    </g>
+  </g>
+
+  <!-- D -->
+  <g transform="translate(688 510)">
+    <rect width="584" height="346" rx="18" fill="#f8fafc" stroke="#dbe4f0" filter="url(#cardShadow)"/>
+    <text x="24" y="34" class="style-title">D. Compact Assistant Dashboard</text>
+    <text x="24" y="56" class="note">偏工具型：日程、状态、卡片更强。适合提醒、MCP 工具、摄像头场景多的版本。</text>
+    <g transform="translate(228 20)" filter="url(#screenShadow)">
+      <rect width="320" height="320" rx="34" fill="#f4f7fb" stroke="#d4dfed" stroke-width="2"/>
+      <rect x="0" y="0" width="320" height="34" rx="17" fill="#ffffff"/>
+      <text x="22" y="23" font-size="13" fill="#1f2937">WiFi</text>
+      <text x="160" y="23" font-size="13" font-weight="650" fill="#1f2937" text-anchor="middle">THINKING</text>
+      <text x="296" y="23" font-size="13" fill="#1f2937" text-anchor="end">78%</text>
+
+      <rect x="18" y="50" width="130" height="88" rx="14" fill="#ffffff" stroke="#dde7f4"/>
+      <text x="34" y="82" font-size="26" font-weight="760" fill="#111827">12:08</text>
+      <text x="34" y="107" font-size="12" fill="#6b7280">SUN  JUN 28</text>
+      <rect x="164" y="50" width="138" height="88" rx="14" fill="#111827"/>
+      <text x="178" y="78" font-size="12" fill="#8bd5ff">NEXT TASK</text>
+      <text x="178" y="105" font-size="15" font-weight="650" fill="#fff">买牛奶</text>
+
+      <rect x="18" y="154" width="284" height="78" rx="18" fill="#ffffff" stroke="#dde7f4"/>
+      <circle cx="62" cy="193" r="28" fill="#e6f7ff"/>
+      <path d="M43 190c8-7 18-7 26 0M56 190c8-7 18-7 26 0" stroke="#111827" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <text x="106" y="184" font-size="12" fill="#6b7280">ASSISTANT</text>
+      <text x="106" y="207" font-size="16" font-weight="650" fill="#111827">正在整理你的日程</text>
+
+      <rect x="18" y="246" width="284" height="58" rx="16" fill="#243044"/>
+      <text x="34" y="270" font-size="12" fill="#8bd5ff">MCP CARD</text>
+      <text x="34" y="292" font-size="15" font-weight="650" fill="#ffffff">已创建提醒：19:00 吃药</text>
+    </g>
+  </g>
+</svg>

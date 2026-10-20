@@ -1,0 +1,11 @@
+{
+  "server": "root@121.40.239.140",
+  "stop_file": "E:\\github\\github_code\\all\\4.30\\tools\\live-hardware-20261013\\capture-20261013-011104\\STOP",
+  "baud": 115200,
+  "started_at": "2026-10-13T01:11:04.2140921+08:00",
+  "output": "E:\\github\\github_code\\all\\4.30\\tools\\live-hardware-20261013\\capture-20261013-011104",
+  "read_only": true,
+  "port": "COM9",
+  "pid": 27196,
+  "heartbeat_id": "com9"
+}

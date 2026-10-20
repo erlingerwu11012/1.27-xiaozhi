@@ -1,0 +1,8 @@
+{
+  "model": "qwen3.8-flash",
+  "old_native_channel_http_status": 400,
+  "source": "captured isolated test terminal output",
+  "test": "TestQwen38RealAliRelayAndPaidLedger",
+  "operation": "native",
+  "resolved_with": "OpenAI-compatible channel; six real relay tests passed"
+}

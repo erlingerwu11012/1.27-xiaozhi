@@ -1,0 +1,15 @@
+{
+  "selected_llm": "LLM_QwenPlusOfficial",
+  "model_name": "qwen3.7-plus",
+  "temperature": 0.4,
+  "enable_thinking": false,
+  "hardware_billing": true,
+  "account_bound": true,
+  "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+  "local_config_sha256": "77184901a77452031645d28aed0ddb6f17a78906704080529863f24746225639",
+  "downlink_voiceprint_threshold": 0.3,
+  "runtime_voiceprint_threshold": 0.3,
+  "voiceprint_enabled": true,
+  "registered_speakers": 1,
+  "passed": true
+}

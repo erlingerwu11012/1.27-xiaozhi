@@ -1,0 +1,464 @@
+{
+  "stage": "candidate_only",
+  "production_changed": false,
+  "git_commit": null,
+  "remote_build_and_tests": "passed_58_steps_plus_go_and_real_cloud",
+  "real_api_test_cost_cny": "see_tests_actual_receipts",
+  "changes": [
+    {
+      "path": "gateway/bailian/auth.go",
+      "baseline_sha256": "e1aba6feda586505c30e92d68e0466d632cc8f086af78531d81876b5df60a0f6",
+      "candidate_sha256": "5df284d1909d3b913699b85ded2caa895efa6afe39ce704df6888ae5741c1957"
+    },
+    {
+      "path": "gateway/bailian/fake_upstream_test.go",
+      "baseline_sha256": "117b0bc2268fb38f56b29e77c4bfe421b12e28ee8490b1582eb823f9f0a117f1",
+      "candidate_sha256": "6f9104217bc40182dc591b538b34ae46b530fb7e0b6288a82f87f6d1f2565cc5"
+    },
+    {
+      "path": "gateway/bailian/gateway.go",
+      "baseline_sha256": "e6a8e12a70955a3c89f097e9c32b3769df8d8c58a2e33899c5d6fc9337315430",
+      "candidate_sha256": "0af3aafbde452b76e1e633a72cef621417a5d170202dab80abcbe14e673b2fed"
+    },
+    {
+      "path": "gateway/bailian/hardware_audio.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "007ce5f509cd5bd97b6ba467c83817f12fe10a6b47eed05fdc5b1ed5c36de496"
+    },
+    {
+      "path": "gateway/bailian/hardware_audio_cloud_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "e89d94a72bbdfa99985a1af6a15a36e342840d2d0718725e488cc6cbe9ec8614"
+    },
+    {
+      "path": "gateway/bailian/hardware_audio_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "42ee50b37c34767290409605c3d6f350f5a0376c807b07e46b3cb87322862179"
+    },
+    {
+      "path": "gateway/bailian/hardware_memory.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "40113dac8a9ce617d4e24370a6792aac264430b92d6a8e45480e97c882b69401"
+    },
+    {
+      "path": "gateway/bailian/hardware_memory_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "e47daaf2d868b68cccf345959eecd1a4736e070a6175a16f91b1f358c12f22ea"
+    },
+    {
+      "path": "gateway/bailian/http_ops.go",
+      "baseline_sha256": "ccc5055b73efe5b7bc0a93e32778d38f42b6ebebff53d6d4bdd4a98b5efd5e7d",
+      "candidate_sha256": "3d8f37009eccada2992b038aa31c8c48166e6776a536f44f0b3dd95497ee9804"
+    },
+    {
+      "path": "gateway/bailian/memory.go",
+      "baseline_sha256": "1fd7a9e8ca7e5a3e30d799591e78152ffaf7a0350bd23f8bc929e17a7ddecc92",
+      "candidate_sha256": "84168d5ea558622dcbf51757a9622dfa5d35aae47587a66d2c093b49c5d42983"
+    },
+    {
+      "path": "gateway/bailian/memory_cloud_test.go",
+      "baseline_sha256": "b16165e49216a39d33f2360dbf62efdabedf0d386ec6828e2dc80bc230c1fd3c",
+      "candidate_sha256": "d9ed16c8d641528a874b480c5d6e1c48de886e2f9c404cdb465770249311e613"
+    },
+    {
+      "path": "gateway/bailian/memory_ledger.go",
+      "baseline_sha256": "cc9df2b5eea96b6092733bf28fb2c7360bec09ead1722e32fc0b86b992d30394",
+      "candidate_sha256": "e72707f8de7d17330a65d868eb166158f454e656a41d21c0cc3fc4ddefad04bc"
+    },
+    {
+      "path": "gateway/bailian/memory_ledger_test.go",
+      "baseline_sha256": "b36d0c7d864ec4c263cc7559cec52399d4a6950a3ceed58b952f2dc71da72cc5",
+      "candidate_sha256": "f6cf53eb2c22d2e6b228d9dd448a3843d4aece896df0d801d0da3ca2fcf547f6"
+    },
+    {
+      "path": "gateway/bailian/memory_mysql_test.go",
+      "baseline_sha256": "5970c3042419152e659120260b98ab6a0e9e3480942eb57d20cc103d91478495",
+      "candidate_sha256": "cdbf82dbc71c7bf8692b88933aae11f9fc8383136ce870307ba597b36fae1ce4"
+    },
+    {
+      "path": "gateway/bailian/memory_product.go",
+      "baseline_sha256": "781e3e1739d7236e5c6e6a1587801f825f6aa073026d82c1259a2b85a8d91129",
+      "candidate_sha256": "bf106136f545bb6ba262ebedfde14b377bc55c88068b787d636e05f5f8a4e016"
+    },
+    {
+      "path": "gateway/bailian/memory_product_test.go",
+      "baseline_sha256": "3c63232e47c12c4a164953b154d1a2105dfab5bbbfbf328a4d5d482a713f9b60",
+      "candidate_sha256": "7ef80771be255878ab745452537ce3682fd76440038e005eb0f98adc1f16c695"
+    },
+    {
+      "path": "gateway/bailian/memory_rate.go",
+      "baseline_sha256": "5b1f6e847cc466abb4fd827b74d922f3bd585927813d2e503a91bfb8a3d7e9a1",
+      "candidate_sha256": "c54e956de10ee13166ece75376724b1de331f4edabb1d8327c0a7fb972325c25"
+    },
+    {
+      "path": "gateway/bailian/memory_review.go",
+      "baseline_sha256": "f472eb674b1e13d589daab8c24778c8db643e6fc10a6f4281613bba307aca96c",
+      "candidate_sha256": "932c3ffcb94f26e091ce872e1ab5f9d05826eeb42e481a45371ff676e9189f70"
+    },
+    {
+      "path": "gateway/bailian/memory_review_test.go",
+      "baseline_sha256": "dfbb6c3c20dc38c5183fe3f728dff43936c171b20a74716162baf0dfc602c000",
+      "candidate_sha256": "9c0c17a19bf5ce1c6622b18365a61f9069258a226ad788dd30e7d423bf0f9517"
+    },
+    {
+      "path": "gateway/bailian/memory_storage.go",
+      "baseline_sha256": "401b135a8dae11feaedafe0ff230604a1dbc129a91b99fc05357922b524d4900",
+      "candidate_sha256": "64905e5d9233b9c17c51190bbb1ff5dcf2ad2ba5d347fee2a1ef6520f8877ed6"
+    },
+    {
+      "path": "gateway/bailian/memory_storage_test.go",
+      "baseline_sha256": "6b1de21f33fe3eb197fad2ea3b7ec71e6baa31185bf8bad9150995c2ebbde7e3",
+      "candidate_sha256": "0e6e95904f53af9bd98883ac4b104aa422658720cd6574b54ccae836ab63d3b6"
+    },
+    {
+      "path": "gateway/bailian/official_hot_fix_bitrate_test.go",
+      "baseline_sha256": "5d40a897a0219d0ebb1867e9c2f89e7750f26a422f7366ec8920a660e6c5eca2",
+      "candidate_sha256": "46bc5e52fca514029df52defe3325633c78fad0aca7912c845321a5f17bf5f58"
+    },
+    {
+      "path": "gateway/bailian/protocol.go",
+      "baseline_sha256": "6c65b96ae888e84624aab083089fc39c5a604bdd063d8a3b630f36304ecc8fa3",
+      "candidate_sha256": "547789964e8557fd24e027e4d87cdac46e6adee7bdee39d1b3d5cab25d8cf59e"
+    },
+    {
+      "path": "gateway/bailian/voices.go",
+      "baseline_sha256": "ca51bc06ac3ae26007d1633b22df72dc05aa7a73df600fdde193def7b03b1e5f",
+      "candidate_sha256": "1e110bcd8f90c4c7b303e3e1d6668567a2bb9e980187c37b7f8be1cce9e9c170"
+    },
+    {
+      "path": "gateway/hardwarebilling/auth.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "0af9b0295012cee6330527d9109ca562d6392704362982e64b472101dda39835"
+    },
+    {
+      "path": "gateway/hardwarebilling/auth_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "6597163ad7dd42d1529491181dad86b1523ed45534c092613f0f866f7b892319"
+    },
+    {
+      "path": "gateway/hardwarebilling/billing_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "6011e12ff336a0e6c494a406bbf704f682ef7db1dc118745632f55de85656127"
+    },
+    {
+      "path": "gateway/hardwarebilling/bootstrap.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "7eaf0b12ad653af454887d2360c678785a5fff363ab5af66fd1214b9a3627f60"
+    },
+    {
+      "path": "gateway/hardwarebilling/bootstrap_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "f66776372a0cbc955e71498a494b3af45193401c33c62fa7105758e1c2d9a263"
+    },
+    {
+      "path": "gateway/hardwarebilling/exact.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "364e2e3fcfb166c725c22e261d30a1d9b18fbdaa2bb7bece5f48f301176e413a"
+    },
+    {
+      "path": "gateway/hardwarebilling/http.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "bac71ccf5fd466d590c2424c3ae10ff1feeccbe760f52eb391b4f00078d60f96"
+    },
+    {
+      "path": "gateway/hardwarebilling/http_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "1580eaaf0c6f07975b90161937bc09bf7d9c2fec89ccec41598d9f08ad720535"
+    },
+    {
+      "path": "gateway/hardwarebilling/ledger.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "e1159bb111564a0019c625effc5731f51f4cd6e365bd10040acc7a4348bc7019"
+    },
+    {
+      "path": "gateway/hardwarebilling/lots.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "e993d5f7a262612c6f641746543c90fa4a82684b8812ca7bac68c67ca158e078"
+    },
+    {
+      "path": "gateway/hardwarebilling/mirror.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "c34131eb1a0c38b4d8166214da45846e87c40358938ce44f749dbab770b7bfd5"
+    },
+    {
+      "path": "gateway/hardwarebilling/mysql_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "6a87511293c3b4d04e9f453d0656bb34501815321a8bb522abb007b476997725"
+    },
+    {
+      "path": "gateway/hardwarebilling/pricing.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "cf6328b1b803c4b5a04b9e84978a872b78e260815029804b75e4d200211b9545"
+    },
+    {
+      "path": "gateway/hardwarebilling/receipt_bill_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "64157de68117c8113df380f701fd8f72707daa6bcee7bd2fcb4adb77fb9a7a73"
+    },
+    {
+      "path": "gateway/hardwarebilling/recovery.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "cad6e1fcfb031979ff4dde63661c2d2737218ae1fd665769588c70474873c22c"
+    },
+    {
+      "path": "gateway/hardwarebilling/recovery_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "958c17a1fc9894d6c1c8184f2aab8c431a8b2d725cf52b23584af55b717f4581"
+    },
+    {
+      "path": "gateway/hardwarebilling/reservation.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "41a9ce3777c7cc2b361545d9244999f208a7e7a549a5013ccc3f5229e2cb4514"
+    },
+    {
+      "path": "gateway/hardwarebilling/reservation_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "5c576bff1cd0bdef20f1ef95719250ae0334780413a94a939493ef683f220884"
+    },
+    {
+      "path": "gateway/hardwarebilling/usage.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "801c24d34f82ba4423dadf35e2e38ef6435acf3c3a8051fb11834377e57891a7"
+    },
+    {
+      "path": "gateway/main.go",
+      "baseline_sha256": "8e263a97f752e29fcd737b6cbb1025b422dfcec7007f9bfdff626b3886ef8886",
+      "candidate_sha256": "9153bdd50af658410ba13021b446515484cc2a5bd02eb1350816811c69017b26"
+    },
+    {
+      "path": "gateway/middleware/distributor.go",
+      "baseline_sha256": "09fba319d007a651f0053aa527d812de5b2cc7741b6b8e142159ee9ba7d6208c",
+      "candidate_sha256": "bd043feae2e931f84444d5f31ca132e54a3991a32cdd3073737f76f15e22e0e9"
+    },
+    {
+      "path": "gateway/model/bailian_ledger.go",
+      "baseline_sha256": "23780093c1294e9e2d6b245f15291a4ace053dd91bf54d3080f58a1522dbeb54",
+      "candidate_sha256": "c670dedaa8842387bffaf102ff129c57a696a65443b8e063e2f8f7bb54c971bb"
+    },
+    {
+      "path": "gateway/model/hardware_legacy_guard.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "af031b48ae9fcaedbe69cf3af44279344814b9e8f1a0e03442c6c38871560889"
+    },
+    {
+      "path": "gateway/model/token.go",
+      "baseline_sha256": "e25116beb8b28a3c765946569e1c5cd855d6ac1902c6f4459ce61da78582afbf",
+      "candidate_sha256": "2e3922f28258b5a53461bcd16780a44227a4346cc5aed15d1e85b4be46c16739"
+    },
+    {
+      "path": "gateway/relay/adaptor/ali/hardware_meter_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "2c73895fd664a9b1f2ac4452634d3270e7fba3ef78596cd25152edc9cb4d6151"
+    },
+    {
+      "path": "gateway/relay/adaptor/ali/main.go",
+      "baseline_sha256": "b38512ab43e46e176958f461b998e9c46d9917e497af251ecea51d5f6f194665",
+      "candidate_sha256": "1ba0baca06500138265ea42d9d131796ff157c092198557b6c2deddb89d466f3"
+    },
+    {
+      "path": "gateway/relay/adaptor/ali/model.go",
+      "baseline_sha256": "7c38cbd1ad7449bcb08446c83836a1f5e37aabb43741a3a6a053c664c1638803",
+      "candidate_sha256": "f417a47264fe15a7d29fb4a7740e0d3958b21950c05072acc46e066d4cf9c58c"
+    },
+    {
+      "path": "gateway/relay/adaptor/openai/main.go",
+      "baseline_sha256": "d18888d594ce8449143a3d919f21543430b2cd200c1a1dccef9bea6a2988cc0a",
+      "candidate_sha256": "afb5ef8327ebbe2de59da020cbc212f7ea002654b277bdeb6e461fa6ea530bb7"
+    },
+    {
+      "path": "gateway/relay/controller/hardware_billing.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "ec6e8579b005a363e78f2dd2185989691cb6f8d19da5d7d0409466572bea0eb0"
+    },
+    {
+      "path": "gateway/relay/controller/hardware_cloud_test.go",
+      "baseline_sha256": null,
+      "candidate_sha256": "a1402c8ef0b819d3b418ed0b1044f7fed6b2ed70bd0716d20840669815cd2449"
+    },
+    {
+      "path": "gateway/relay/controller/text.go",
+      "baseline_sha256": "d45dfe3e7c4b37cb29544c27c6fa5e02478b0b50e62481578e1f5fa7bd8a4919",
+      "candidate_sha256": "10b57950552fb5a36da0339425219179662beb3acd9bb6f3a10f179aa0eb89e1"
+    },
+    {
+      "path": "gateway/relay/model/general.go",
+      "baseline_sha256": "c2f3012a0d97349eba07feeb304e0f37eafec63b4fd2a06525a8ab304e646b27",
+      "candidate_sha256": "fb9ec22f9ccf428a6bdbf738d2688e538a9edd30d66a51af5376583fc66e574e"
+    },
+    {
+      "path": "gateway/relay/model/misc.go",
+      "baseline_sha256": "31101654172470c4dba8919abd87c22f168157b7959fc387ee38bd19a93074d5",
+      "candidate_sha256": "eca86cb501bba63b81c1c4bcdfe2a882c4db34b37fb74daa7bd3efe4e1ed6b7f"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/config/service/impl/ConfigServiceImpl.java",
+      "baseline_sha256": "1b6d6c7b27b85ce34edf573e61a14b96bab96057585c8749f7712afbefcc709a",
+      "candidate_sha256": "83740f49b8d54de308a04b1c4c38e49be9d304e2fab65da9496422ca45eee3cc"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/controller/HardwareBillingController.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "f5d1a7db30db57688816100d8516ad9caf28d13e75bf6824e30b8f22a6df7d3c"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/dao/OneApiProvisioningDao.java",
+      "baseline_sha256": "79fe9daed161784a533a25353156283b264e51b21ae2104268907bb6889f7032",
+      "candidate_sha256": "95e3cab0d47448fba69bfd612e5561983127ccac35ea2caf5faf2b683df6b76e"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/HardwareBillingPolicy.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "c6baacc88b215df59e420df21ab5cf56fc8583188b39c15bb5f9533a43c68015"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/HardwareBillingReadService.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "7271fd56354e672a75703a63e9a048e3451687b4b7c902ef0efdf2dfb7c6c3bf"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/HardwareWalletRechargeService.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "ec1d019721101a6ac12986df1402b85668b60a6966b79fc2112422c129dfa0f1"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/impl/OneApiBindingServiceImpl.java",
+      "baseline_sha256": "975f1d585077df696e587e079ea3cf2fbac33b0d062675cf2ce8406c2099700a",
+      "candidate_sha256": "44357b34bd816e5aa7c4fcd6e31f9d21e58ffe1852b918b777ac57a73fc0d707"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/impl/PaymentDeliveryServiceImpl.java",
+      "baseline_sha256": "c617f9afa63e36042e87115d15c987942c9f07431cb37ce45142dcfb71cae51e",
+      "candidate_sha256": "5846f5f3fd470e0639e2d28cdbed805cb653a64fe0b9ae67c559e381364faa50"
+    },
+    {
+      "path": "server/main/manager-api/src/main/java/xiaozhi/modules/pay/service/impl/UserQuotaServiceImpl.java",
+      "baseline_sha256": "ec2cb03cc2c957c06334ba07eda25c9e63446966578a9444fb79ffeb03727ae0",
+      "candidate_sha256": "774a3a255545adb647fe67c9b7b58b26b37abf5ea81d790fda778897e0889e12"
+    },
+    {
+      "path": "server/main/manager-api/src/main/resources/db/changelog/202610011600_hardware_billing70.sql",
+      "baseline_sha256": null,
+      "candidate_sha256": "2b801d91df82b614930076c659a31c734903e38c639d1617358fcf9fc75329d6"
+    },
+    {
+      "path": "server/main/manager-api/src/main/resources/db/changelog/db.changelog-master.yaml",
+      "baseline_sha256": "6e0c336ce5240e8818fe6607e86b884b7e74ae8eda938f43659e54cc1a37ffa7",
+      "candidate_sha256": "26628035cf5c84ad9535b09a732e497c928046d201e3c26b879fd6b64571c921"
+    },
+    {
+      "path": "server/main/manager-api/src/test/java/xiaozhi/modules/pay/service/HardwareBillingPolicyTest.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "2d3493578306ab1d3483144993981ee47ae7d38f32d8cc17766c5764d16f62e2"
+    },
+    {
+      "path": "server/main/manager-api/src/test/java/xiaozhi/modules/pay/service/HardwareBillingReadDatabaseTest.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "bc3f625334f634ba733de3c8692e804ca44496964e5dd693cca74e5d5f85d4cd"
+    },
+    {
+      "path": "server/main/manager-api/src/test/java/xiaozhi/modules/pay/service/HardwareModelPermissionDatabaseTest.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "36b396b81374a83a304bdda02a69ecdf72c0b4bf68b65e6a1b6c78285678b69f"
+    },
+    {
+      "path": "server/main/manager-api/src/test/java/xiaozhi/modules/pay/service/HardwareWalletDatabaseTest.java",
+      "baseline_sha256": null,
+      "candidate_sha256": "fe8723e260e10ef333a70e8927b383ee6df5eba04bcf536438ad92f62c22e447"
+    },
+    {
+      "path": "server/main/manager-api/src/test/java/xiaozhi/modules/pay/service/impl/PaymentDeliveryServiceImplTest.java",
+      "baseline_sha256": "b037b5e3cd12009326840957e0bd84c226d781900cd18998a9380e479dbe9554",
+      "candidate_sha256": "b8001d902f19873df53ec6753de5f8b36cf93aa726115ac2d2c7f8c412685b3d"
+    },
+    {
+      "path": "server/main/manager-web/src/apis/module/pay.js",
+      "baseline_sha256": "9f5454143ff8a5898bd766d8c2e84220dbdedfbc620065e906cdc5164fac1646",
+      "candidate_sha256": "2dd0cc4f15dd8e282100c35362cf5a29c439532bbbe19c5ae6c7d4ace8c4012b"
+    },
+    {
+      "path": "server/main/manager-web/src/components/HardwareCallBills.vue",
+      "baseline_sha256": null,
+      "candidate_sha256": "f08e6f75bf7f075a1d4fd51f66b8b3922632f1b520b4903e9ed57e2656996369"
+    },
+    {
+      "path": "server/main/manager-web/src/views/BillingPackages.vue",
+      "baseline_sha256": "f77fe60702916273edead0bf7edb11f3e765e2476c919b76e328a81643be3e63",
+      "candidate_sha256": "43707318cbd411cc9a88e1927a163bc03b3799e1df0e883e652dd7162c169635"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/providers/asr/qwen3_asr_realtime.py",
+      "baseline_sha256": "11148ff852234588c9da6b6ba912731f6ba5462a571957b52d92943249037771",
+      "candidate_sha256": "53b672d41204e358bc04bd62985c93e73950a3c103a9f9a7ce56fa8535e27325"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/providers/llm/openai/openai.py",
+      "baseline_sha256": "eb3029020a6042e83083db60437317cccb08754e98a6b9e471eb05788d706663",
+      "candidate_sha256": "95805f0ca910d275079ff83ea49294610efa265935a560d589ef2668cecb09fb"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/providers/tts/qwen_audio_tts_plus.py",
+      "baseline_sha256": "5063e5a2c6c8430df5595efc7bf79a5177d9a7ed39e26c6e2ec10dc81d3f6a34",
+      "candidate_sha256": "8b2a4ce7bd937498451ce5d601937673eb7e7ba63d846f0d037dd76aee521554"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/providers/vllm/openai.py",
+      "baseline_sha256": "2ba92882de7d99c4d87f3e4373b6ed62bb03c0dc79d3b16fa59e10cdd9fd4a1c",
+      "candidate_sha256": "7edf69f1c9444571779698420805fdf12fc4959200cbd253c4bee7992d89d272"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/utils/habit_router.py",
+      "baseline_sha256": "f06c4c3cf0f2c70bd7e1bfa3cc7bc992709d44997b22ac8208855eb5eb8880cb",
+      "candidate_sha256": "d5e1c9a729ec23604a699e0686587f1f65673abcf163e3f2313419d1bc0ed735"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/utils/hardware_billing.py",
+      "baseline_sha256": null,
+      "candidate_sha256": "08ad86cdc84ef02cc5ee231c99195bebb9dc2f8dcb884b34686b4a0940917619"
+    },
+    {
+      "path": "server/main/xiaozhi-server/core/utils/unified_recipient_resolver.py",
+      "baseline_sha256": "064ceabc4f3990624c0c9a668f917f6e1d7f3e78ccd8cceec2c5ec9802543771",
+      "candidate_sha256": "ed69d3f601367895bd8e616f3207eb338be89f9ca269c5664eb3751c32efa804"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_account_owner_and_reminder.py",
+      "baseline_sha256": "7ef782a526382d1c7e88d08a2c5b0ad7e6cc5c6c02cef27934c6fd24e632fade",
+      "candidate_sha256": "d5051dbd74f168dc639a1a65a87dd238ad2e679708003d03453ea16cde17674b"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_audio_clock_compat.py",
+      "baseline_sha256": "c20845dd9f274900678bae5feb457e11a346dbe2211d89547efa8a0376ae28ba",
+      "candidate_sha256": "c647d70ca019b2aea054478a929748ccf590b5e5c61118f04cfb15f7341dc741"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_face_enrollment_front_only_config.py",
+      "baseline_sha256": "1905f2e3e6a0ac830de5b093117ee545e6de32e3c155e2bca89c6c8567530c65",
+      "candidate_sha256": "7a6124ebaf82276b0b66842b80f5a52a822cbc37ce041858ae8ebc362a829e62"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_hardware_billing_proof.py",
+      "baseline_sha256": null,
+      "candidate_sha256": "d9898eb4058238a486fc9b071d9b8135ddbc01eb34df2e4f690cb4951e55b0c0"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_identity_snapshot_request.py",
+      "baseline_sha256": "a5c32587b50bc7d0d9787499a3d98491cc1e5236f55acc5b169fd3486d1c7488",
+      "candidate_sha256": "bc57e55cb1a6fd7563f323377ad3e70d6268d842c3cccc5565951552278fd612"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_proactive_greeting.py",
+      "baseline_sha256": "0976895cccae3f83be0406801f8908530db5f1bf1b3a7f83e47732dce992b13a",
+      "candidate_sha256": "2b829b7e1f6d8f4354af742af9542f755423317cdd55b72d1c7d679ecb389058"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_reminder_voice.py",
+      "baseline_sha256": "31c8aec47f9633745282112e62c9108a21aa6875315b7a2322e850900933d757",
+      "candidate_sha256": "cf177109ec50ab0d5dd95e63636a0f42c6cfacb90a6f675eec7d730039878824"
+    },
+    {
+      "path": "server/main/xiaozhi-server/test/test_vision_capability.py",
+      "baseline_sha256": "584f81962457e994445b8177ba34bd9b878bf84dae96d389ad200bee861ce716",
+      "candidate_sha256": "dd99ee760d921efbed2ce8b9519ff80fdb15ca06b5b9ae5d8106afdfb4ce1df5"
+    }
+  ]
+}

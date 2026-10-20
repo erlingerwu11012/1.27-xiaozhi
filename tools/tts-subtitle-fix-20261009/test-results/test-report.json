@@ -1,0 +1,250 @@
+{
+  "timestamp": "2026-10-09T01:05:46.424621+08:00",
+  "hardware": false,
+  "synthesis": "fixed PCM stub; real Opus encoder/decoder",
+  "transport": "loopback aiohttp WebSocket; production TTS threads/queues/sender",
+  "uplink_scope": "protocol-v2 frames counted at loopback endpoint; no real ASR/Harness",
+  "baseline": "Before subtitle fix 3 of 7 wire tests failed: later unit captions missing; audio still complete",
+  "provider_sha256": "e4aa182ca5000c2cc0ee08b67e47f724b46d7037f7b9e65d7fcdb1d6ba26a873",
+  "suites": [
+    {
+      "pattern": "test_qwen_tts_device_start.py",
+      "tests": 7,
+      "exit_code": 0,
+      "seconds": 12.732
+    },
+    {
+      "pattern": "test_qwen_audio_tts_plus.py",
+      "tests": 28,
+      "exit_code": 0,
+      "seconds": 7.826
+    },
+    {
+      "pattern": "test_official_tts_compiler.py",
+      "tests": 17,
+      "exit_code": 0,
+      "seconds": 0.359
+    },
+    {
+      "pattern": "test_tts_subtitle.py",
+      "tests": 9,
+      "exit_code": 0,
+      "seconds": 0.692
+    },
+    {
+      "pattern": "test_tts_listen_observe.py",
+      "tests": 7,
+      "exit_code": 0,
+      "seconds": 0.647
+    },
+    {
+      "pattern": "test_tts_sentence_telemetry.py",
+      "tests": 11,
+      "exit_code": 0,
+      "seconds": 1.033
+    },
+    {
+      "pattern": "test_reminder_voice_abort.py",
+      "tests": 3,
+      "exit_code": 0,
+      "seconds": 0.803
+    }
+  ],
+  "device_evidence": [
+    {
+      "accepted_frames": 6,
+      "decoded_pcm_bytes": 11520,
+      "downlink_frames": 6,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "Interrupt this reply\u3002"
+        },
+        {
+          "audio_before": 2,
+          "generation": 2,
+          "text": "Fresh reply."
+        }
+      ],
+      "test": "test_abort_then_new_reply_rejects_old_audio",
+      "uplink_during_reply": 0,
+      "uplink_frames": 18,
+      "upstream_sessions": 2
+    },
+    {
+      "accepted_frames": 12,
+      "decoded_pcm_bytes": 23040,
+      "downlink_frames": 12,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 1,
+      "stops": 1,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "\u597d\u597d\u597d\uff0c\u6211\u8fd9\u4e0d\u662f\u6015\u4f60\u5acc\u70e6\u561b\u3002"
+        },
+        {
+          "audio_before": 4,
+          "generation": 1,
+          "text": "\u90a3\u4f60\u60f3\u804a\u70b9\u4ec0\u4e48\uff1f"
+        },
+        {
+          "audio_before": 8,
+          "generation": 1,
+          "text": "\u6211\u966a\u7740\u4f60"
+        }
+      ],
+      "test": "test_every_unit_caption_precedes_audio_including_final_flush",
+      "uplink_during_reply": 6,
+      "uplink_frames": 17,
+      "upstream_sessions": 3
+    },
+    {
+      "accepted_frames": 8,
+      "decoded_pcm_bytes": 15360,
+      "downlink_frames": 8,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 1,
+      "stops": 1,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "\u7b2c\u4e00\u53e5\u3002"
+        },
+        {
+          "audio_before": 4,
+          "generation": 1,
+          "text": "\u7b2c\u4e8c\u53e5\uff1f"
+        }
+      ],
+      "test": "test_fragmented_text_emits_caption_once_per_compiled_unit",
+      "uplink_during_reply": 2,
+      "uplink_frames": 17,
+      "upstream_sessions": 2
+    },
+    {
+      "accepted_frames": 8,
+      "decoded_pcm_bytes": 15360,
+      "downlink_frames": 8,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "First reply."
+        },
+        {
+          "audio_before": 4,
+          "generation": 2,
+          "text": "Second reply."
+        }
+      ],
+      "test": "test_legacy_consecutive_two_replies",
+      "uplink_during_reply": 0,
+      "uplink_frames": 17,
+      "upstream_sessions": 2
+    },
+    {
+      "accepted_frames": 12,
+      "decoded_pcm_bytes": 23040,
+      "downlink_frames": 12,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 3,
+      "stops": 3,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "Hello."
+        },
+        {
+          "audio_before": 4,
+          "generation": 2,
+          "text": "What time is it."
+        },
+        {
+          "audio_before": 8,
+          "generation": 3,
+          "text": "Another reply."
+        }
+      ],
+      "test": "test_official_consecutive_three_replies",
+      "uplink_during_reply": 0,
+      "uplink_frames": 18,
+      "upstream_sessions": 3
+    },
+    {
+      "accepted_frames": 96,
+      "decoded_pcm_bytes": 184320,
+      "downlink_frames": 96,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 2,
+      "stops": 2,
+      "subtitles": [
+        {
+          "audio_before": 0,
+          "generation": 1,
+          "text": "Greeting."
+        },
+        {
+          "audio_before": 4,
+          "generation": 2,
+          "text": "The time is midnight\u3002"
+        },
+        {
+          "audio_before": 50,
+          "generation": 2,
+          "text": "Still awake\u3002"
+        }
+      ],
+      "test": "test_same_turn_two_sessions_92_frames_with_continuous_upload",
+      "uplink_during_reply": 86,
+      "uplink_frames": 101,
+      "upstream_sessions": 3
+    },
+    {
+      "accepted_frames": 0,
+      "decoded_pcm_bytes": 0,
+      "downlink_frames": 0,
+      "dropped_frames": 0,
+      "errors": [],
+      "paid_model_calls": 0,
+      "physical_device": false,
+      "starts": 0,
+      "stops": 0,
+      "subtitles": [],
+      "test": "test_stale_first_cannot_rearm_current_turn",
+      "uplink_during_reply": 0,
+      "uplink_frames": 17,
+      "upstream_sessions": 0
+    }
+  ],
+  "tests": 82,
+  "passed": true
+}

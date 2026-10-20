@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-16T18:31:59.246292+00:00",
+  "port": "COM11",
+  "mac": "ac:a7:04:fd:20:5c",
+  "images": {
+    "xiaozhi.bin": {
+      "offset": 131072,
+      "capacity": 5177344,
+      "size": 4908816,
+      "sha256": "f2ba41c9339e8b250f0f3e5f97292690c4adf7171324d05b130cb22b584ab3e2"
+    },
+    "assets.bin": {
+      "offset": 5439488,
+      "capacity": 7143424,
+      "size": 5492514,
+      "sha256": "3cf8f1931f72da12f75dc1971118acd3d1b06ee68109e32108f8ceccad6a8342"
+    },
+    "spine.bin": {
+      "offset": 12582912,
+      "capacity": 3145728,
+      "size": 3145728,
+      "sha256": "4c0fccc9f3461a3f1f20743556821b48457c8224a0ddf0db93fe9e11fb57ecf9"
+    },
+    "wallpaper.bin": {
+      "offset": 15728640,
+      "capacity": 1048576,
+      "size": 1048576,
+      "sha256": "f5fb04aa5b882706b9309e885f19477261336ef76a150c3b4d3489dfac3953ec"
+    },
+    "partition-table.bin": {
+      "offset": 32768,
+      "capacity": 4096,
+      "size": 3072,
+      "sha256": "ee12303c27a57b65016061abe4258908456c9f8cbe4a69aeb4bfd80f73ac4277"
+    }
+  },
+  "backup": "E:\\github\\github_code\\all\\4.30\\tools\\wake-hi-niannian-20261017\\baseline\\device-aca704fd205c-20261017-020640",
+  "esptool_hash_verified": true,
+  "partition_table_readback_verified": true,
+  "protected_data_unchanged": true,
+  "hardware_accepted": false
+}

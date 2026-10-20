@@ -1,0 +1,15 @@
+{
+  "status": "online",
+  "restarts": 0,
+  "uptime_seconds": 147,
+  "new_exception_types": [
+    "EOFError"
+  ],
+  "probe_errors_are_incomplete_websocket_handshakes": true,
+  "source_hashes_match": true,
+  "free_bytes": 1304309760,
+  "at": 1792246521.6415577,
+  "observation_seconds": 51,
+  "additional_error_log_bytes": 0,
+  "additional_tracebacks": 0
+}

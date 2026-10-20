@@ -1,0 +1,605 @@
+{
+  "source": "real ASR and TTS with synthetic recordings; actual candidate ConnectionHandler and live read-only MCP",
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "model": "qwen3.8-max",
+  "cases": [
+    {
+      "turn": 1,
+      "input_text": "刚买了个书架，还没发货，我就是随便聊聊，别替我安排。",
+      "asr_text": "刚买了个书架，还没发货，我就是随便聊聊，别替我安排。",
+      "chat_success": true,
+      "spoken_text": "这句我没能准确接住，先不替你补情况或安排。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice",
+            "pending_changed_to_delivered_or_transit"
+          ],
+          [
+            "unsolicited_advice"
+          ]
+        ],
+        "fallback": true,
+        "semantic_checks": []
+      },
+      "reply_audio_file": "complete-chat-voice20-1.wav",
+      "reply_audio_ms": 4850,
+      "tts_first_audio_ms": 844,
+      "success": true
+    },
+    {
+      "turn": 2,
+      "input_text": "成年人的朋友为什么越来越难约？别反问我，说说你的看法。",
+      "asr_text": "成年人的朋友为什么越来越难约？别反问我说说你的看法。",
+      "chat_success": true,
+      "spoken_text": "我觉得不是感情淡了，是大家的时间都变得太具体了。以前说有空就能凑一起，现在每个人的空闲都被各种事情切得很碎，想找到几块能拼在一起的碎片确实不容易。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-2.wav",
+      "reply_audio_ms": 16610,
+      "tts_first_audio_ms": 723,
+      "success": true
+    },
+    {
+      "turn": 3,
+      "input_text": "查询伦敦现在的时间",
+      "asr_text": "查询伦敦现在的时间。",
+      "chat_success": true,
+      "spoken_text": "伦敦当地时间是2026年10月5日，16点33分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月05日 16:33:57 (Monday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "complete-chat-voice20-3.wav",
+      "reply_audio_ms": 5970,
+      "tts_first_audio_ms": 588,
+      "success": true
+    },
+    {
+      "turn": 4,
+      "input_text": "查询东京现在的时间",
+      "asr_text": "查询东京现在的时间。",
+      "chat_success": true,
+      "spoken_text": "东京当地时间是2026年10月6日，00点34分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 00:34:04 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "complete-chat-voice20-4.wav",
+      "reply_audio_ms": 6210,
+      "tts_first_audio_ms": 736,
+      "success": true
+    },
+    {
+      "turn": 5,
+      "input_text": "查询上海现在的时间",
+      "asr_text": "查询上海现在的时间。",
+      "chat_success": true,
+      "spoken_text": "上海当地时间是2026年10月5日，23点34分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Shanghai"
+          },
+          "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月05日 23:34:11 (Monday)\n时区：UTC+8",
+          "action": "REQLLM"
+        }
+      ],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "time_reply_matches_receipt": true,
+      "reply_audio_file": "complete-chat-voice20-5.wav",
+      "reply_audio_ms": 6850,
+      "tts_first_audio_ms": 585,
+      "success": true
+    },
+    {
+      "turn": 6,
+      "input_text": "最近又开始学吉他，前半段能弹下来，后半段还没练。先别指导我。",
+      "asr_text": "最近又开始学吉他，前半段能弹下来，后半段还没练，先别指导我。",
+      "chat_success": true,
+      "spoken_text": "前半段能弹下来，说明手指已经记住了一些东西，后半段还没练也很正常，曲子本来就不是一口气吃透的。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-6.wav",
+      "reply_audio_ms": 9890,
+      "tts_first_audio_ms": 499,
+      "success": true
+    },
+    {
+      "turn": 7,
+      "input_text": "我打算换琴弦，不过还没有买，也没有换。",
+      "asr_text": "我打算换琴弦，不过还没有买，也没有换。",
+      "chat_success": true,
+      "spoken_text": "换琴弦这件事，没买没换就是还在打算的阶段，等真换上了手感应该会不一样。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-7.wav",
+      "reply_audio_ms": 8690,
+      "tts_first_audio_ms": 575,
+      "success": true
+    },
+    {
+      "turn": 8,
+      "input_text": "今天别逗我，也别每句话都反问，正常聊就好。",
+      "asr_text": "今天别逗我，也别每句话都反问，正常聊就好。",
+      "chat_success": true,
+      "spoken_text": "好，那就正常聊。换琴弦这事，有时候就是差个下单的契机，等哪天弹琴觉得音色不对了，可能顺手就买了。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-8.wav",
+      "reply_audio_ms": 11010,
+      "tts_first_audio_ms": 551,
+      "success": true
+    },
+    {
+      "turn": 9,
+      "input_text": "有首老歌以前没兴趣，现在反而喜欢了，你说说为什么。",
+      "asr_text": "有首老歌以前没兴趣，现在反而喜欢了，你说说为什么？",
+      "chat_success": true,
+      "spoken_text": "我觉得有些歌不是变了，是听歌的人变了。以前没兴趣，可能是因为那时候的经历还没和歌词里的东西对上，现在喜欢了，说不定是某段生活刚好让你听懂了它没说出口的那部分。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-9.wav",
+      "reply_audio_ms": 17970,
+      "tts_first_audio_ms": 553,
+      "success": true
+    },
+    {
+      "turn": 10,
+      "input_text": "更新一下，琴弦已经买了，店家还没有发货，也没换上。",
+      "asr_text": "更新一下，琴弦已经买了，店家还没有发货，也没换上。",
+      "chat_success": true,
+      "spoken_text": "这句我没能准确接住，先不替你补情况或安排。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          [
+            "unsolicited_advice"
+          ]
+        ],
+        "fallback": true,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[{\"code\":\"unsolicited_advice\",\"span\":\"这段时间正好让耳朵再熟悉一下旧弦的声音，等新弦到了换上，对比感可能会更明显。\",\"basis\":\"先别指导我。\"}]}",
+            "violations": [
+              "unsolicited_advice"
+            ]
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-10.wav",
+      "reply_audio_ms": 5010,
+      "tts_first_audio_ms": 494,
+      "success": true
+    },
+    {
+      "turn": 11,
+      "input_text": "只按我说过的内容，琴弦现在什么状态？",
+      "asr_text": "只按我说过的内容，琴弦现在什么状态？",
+      "chat_success": true,
+      "spoken_text": "琴弦已经买了，店家还没发货，你也还没换上。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-11.wav",
+      "reply_audio_ms": 5170,
+      "tts_first_audio_ms": 501,
+      "success": true
+    },
+    {
+      "turn": 12,
+      "input_text": "报告已经写好一半，昨天只是改了标题，没继续写剩下的正文。",
+      "asr_text": "报告已经写好一半，昨天只是改了标题，没继续写剩下的正文。",
+      "chat_success": true,
+      "spoken_text": "报告已经写好一半，昨天改的是标题，剩下的正文还没继续写。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-12.wav",
+      "reply_audio_ms": 6290,
+      "tts_first_audio_ms": 532,
+      "success": true
+    },
+    {
+      "turn": 13,
+      "input_text": "昨天没写正文，不等于正文从来没写过，你说对吧。",
+      "asr_text": "昨天没写正文不等于正文从来没写过，你说对吧？",
+      "chat_success": true,
+      "spoken_text": "对，昨天没写正文，不代表之前从没写过。你已经写好一半了，那部分就是实实在在存在的。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-13.wav",
+      "reply_audio_ms": 9330,
+      "tts_first_audio_ms": 534,
+      "success": true
+    },
+    {
+      "turn": 14,
+      "input_text": "朋友本来约周五吃饭，不过还没有确认有没有空。",
+      "asr_text": "朋友本来约周五吃饭，不过还没有确认有没有空。",
+      "chat_success": true,
+      "spoken_text": "约饭这事，没确认之前都还悬着，有时候大家时间对不上，反而比定下来更让人惦记。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-14.wav",
+      "reply_audio_ms": 8930,
+      "tts_first_audio_ms": 512,
+      "success": true
+    },
+    {
+      "turn": 15,
+      "input_text": "我没订餐厅，现在只是说到这个想法。",
+      "asr_text": "我没定餐厅，现在只是说到这个想法。",
+      "chat_success": true,
+      "spoken_text": "说到想法和定下来之间确实还隔着好几步，有时候聊聊这个念头本身，比真去吃一顿还轻松。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-15.wav",
+      "reply_audio_ms": 9970,
+      "tts_first_audio_ms": 510,
+      "success": true
+    },
+    {
+      "turn": 16,
+      "input_text": "刚收到消息，他周五没空，这次没约成，也没改约别的日期。",
+      "asr_text": "刚收到消息，他周五没空，这次没约成，也没改约别的日期。",
+      "chat_success": true,
+      "spoken_text": "周五没约成，也没改期，这次聚餐就先搁着了。有时候计划就是这样，说停就停，连个备选日子都来不及想。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-16.wav",
+      "reply_audio_ms": 11490,
+      "tts_first_audio_ms": 522,
+      "success": true
+    },
+    {
+      "turn": 17,
+      "input_text": "不要给安排，说说你对成年人的友谊有什么看法。",
+      "asr_text": "不要给安排，说说你对成年人的友谊有什么看法？",
+      "chat_success": true,
+      "spoken_text": "我觉得成年人的友谊更像一种默契的留白，不需要频繁确认彼此还在不在，也不会因为一段时间没联系就觉得关系断了。大家各自忙着生活，但知道对方在那里，偶尔碰上了还能接上之前的话茬，这种不费力的存在感反而比刻意维持更让人踏实。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-17.wav",
+      "reply_audio_ms": 25250,
+      "tts_first_audio_ms": 538,
+      "success": true
+    },
+    {
+      "turn": 18,
+      "input_text": "我新买的落地灯，商家只出了单号，快递还没有收件。",
+      "asr_text": "我新买的落地灯，商家只出了单号，快递还没有收件。",
+      "chat_success": true,
+      "spoken_text": "出了单号还没收件，说明灯还在商家那边等着被取走。这个阶段最磨人，明明已经属于你了，却还得再等一等才能真正见到它亮起来的样子。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-18.wav",
+      "reply_audio_ms": 13570,
+      "tts_first_audio_ms": 531,
+      "success": true
+    },
+    {
+      "turn": 19,
+      "input_text": "不要替我补现实情况，刚才这个落地灯已经在路上了吗？",
+      "asr_text": "不要替我补现实情况，刚才这个落地灯已经在路上了吗？",
+      "chat_success": true,
+      "spoken_text": "不在路上。你刚才说的是商家只出了单号，快递还没有收件，所以灯还没被取走，不算已经在路上。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 1,
+        "violations": [
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-19.wav",
+      "reply_audio_ms": 10050,
+      "tts_first_audio_ms": 522,
+      "success": true
+    },
+    {
+      "turn": 20,
+      "input_text": "换个话题，为什么有些菜名字很好听，吃起来却很一般。",
+      "asr_text": "换个话题，为什么有些菜名字很好听，吃起来却很一般？",
+      "chat_success": true,
+      "spoken_text": "我觉得有些菜名好听，是因为它承载了文化想象或者诗意包装，但味道终究是舌头的事。名字再美，食材、火候、调味没跟上，落差感反而比普通菜名更明显。有时候不是菜不好，是期待被名字抬得太高了。",
+      "tool_events": [],
+      "tts_events": 3,
+      "response_check": {
+        "attempts": 2,
+        "violations": [
+          [
+            "unsolicited_advice"
+          ],
+          []
+        ],
+        "fallback": false,
+        "semantic_checks": [
+          {
+            "verdict": "{\"violations\":[]}",
+            "violations": []
+          }
+        ]
+      },
+      "reply_audio_file": "complete-chat-voice20-20.wav",
+      "reply_audio_ms": 20130,
+      "tts_first_audio_ms": 589,
+      "success": true
+    }
+  ],
+  "limits": {
+    "tts_calls": 40,
+    "asr_sessions": 20,
+    "chat_turns": 20
+  },
+  "completed": true,
+  "providers": {
+    "asr_model": "qwen3-asr-flash-realtime",
+    "tts_model": "qwen-audio-3.0-tts-plus"
+  },
+  "credential_scope": "existing authorized test credential; production configuration unchanged"
+}

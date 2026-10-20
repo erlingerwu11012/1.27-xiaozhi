@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": 63,
+  "retired_public_names": [
+    "self_get_system_info",
+    "self_reboot",
+    "self_screen_get_info",
+    "self_screen_get_render_status",
+    "self_screen_set_render_mode",
+    "self_screen_set_render_options"
+  ],
+  "kept_samples": [
+    "self_get_device_status",
+    "self_audio_speaker_set_volume",
+    "self_screen_set_brightness",
+    "alarm_set",
+    "memory_search"
+  ],
+  "tested_root": "/root/prjs/releases/mcp-prune-20261010/runtime",
+  "paid_model_requests": 0,
+  "firmware_compiled": false
+}

@@ -1,0 +1,168 @@
+[
+  {
+    "suite": "xiaozhi.modules.personmemory.MemoryDailyWorkerTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "failureIsDetectedAmongSeveralResources",
+        "time": "0.002"
+      },
+      {
+        "name": "completionAcceptsSingleEventShape",
+        "time": "0.006"
+      },
+      {
+        "name": "pendingAndRunningAreNotCompletion",
+        "time": "0.001"
+      },
+      {
+        "name": "emptyEventDoesNotMeanDone",
+        "time": "0.001"
+      }
+    ]
+  },
+  {
+    "suite": "xiaozhi.modules.personmemory.PersonMemoryDatabaseTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "firstBindWaitsForCapabilitiesThenRetiresDefaultAndNeverResurrects",
+        "time": "1.687"
+      },
+      {
+        "name": "foreignDeviceAndUnknownActorCannotStoreBehavior",
+        "time": "0.09"
+      },
+      {
+        "name": "behaviorAnalysisPreservesPeopleNewRowsAndOfflineWatermarks",
+        "time": "0.525"
+      },
+      {
+        "name": "defaultCorrectionStaysLocalAndNeverCreatesCloudMaterial",
+        "time": "0.094"
+      }
+    ]
+  },
+  {
+    "suite": "xiaozhi.modules.personmemory.PersonBehaviorServiceTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "singleDayBurstDoesNotBecomeHabit",
+        "time": "0.002"
+      },
+      {
+        "name": "crossDeviceRowsUseBeijingCalendarAndRealOutcomes",
+        "time": "0.002"
+      }
+    ]
+  },
+  {
+    "suite": "xiaozhi.modules.personmemory.MemoryMaterialPolicyTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "unansweredQuestionAndAssistantGuessAreNotReliableUserFacts",
+        "time": "0.002"
+      },
+      {
+        "name": "tokenBoundaryUserOnlyAndFullTranscript",
+        "time": "0.029"
+      }
+    ]
+  },
+  {
+    "suite": "xiaozhi.modules.personmemory.MemoryContinuityDatabaseTest",
+    "tests": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "firstBindWaitsForCapabilitiesThenRetiresDefaultAndNeverResurrects",
+        "time": "0.104"
+      },
+      {
+        "name": "foreignDeviceAndUnknownActorCannotStoreBehavior",
+        "time": "0.056"
+      },
+      {
+        "name": "behaviorAnalysisPreservesPeopleNewRowsAndOfflineWatermarks",
+        "time": "0.28"
+      },
+      {
+        "name": "defaultCorrectionStaysLocalAndNeverCreatesCloudMaterial",
+        "time": "0.063"
+      },
+      {
+        "name": "correctionKeepsOldTopicAliasWithoutReturningOldFact",
+        "time": "0.088"
+      },
+      {
+        "name": "boundaryIncludesOnlyMaterialsBeforeLatestBeijing0300",
+        "time": "0.116"
+      },
+      {
+        "name": "thresholdCarriesAcrossDaysAndSuccessOnlyDeletesProcessedQueue",
+        "time": "0.137"
+      },
+      {
+        "name": "crossDayPendingIsLocallySearchableAndScoped",
+        "time": "0.097"
+      },
+      {
+        "name": "retentionKeeps50TurnsAnd72hAudioWithoutDeletingPending",
+        "time": "0.161"
+      },
+      {
+        "name": "delayedOldUploadCannotUndoForget",
+        "time": "0.089"
+      },
+      {
+        "name": "targetedCorrectionPreservesOtherFactsAndRawEvidence",
+        "time": "0.095"
+      },
+      {
+        "name": "forgettingCorrectedFactDoesNotResurrectEarlierCorrection",
+        "time": "0.082"
+      },
+      {
+        "name": "unfinishedTurnNeverAdvancesWatermark",
+        "time": "0.073"
+      },
+      {
+        "name": "currentQueryAndAssistantRetrievalAreNeverPersonalFacts",
+        "time": "0.066"
+      }
+    ]
+  },
+  {
+    "suite": "xiaozhi.modules.personmemory.MemoryBillingServiceTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "unboundAccountCannotReadOtherWallet",
+        "time": "0.243"
+      },
+      {
+        "name": "smallSearchPreservesExactAmount",
+        "time": "0.002"
+      }
+    ]
+  }
+]

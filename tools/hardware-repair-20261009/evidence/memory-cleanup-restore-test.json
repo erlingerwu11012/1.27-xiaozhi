@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "records": 57,
+  "full_columns": 15,
+  "full_row_restore_verified": true,
+  "production_written": false,
+  "raw_chat_deleted": 0,
+  "counts": {
+    "delete_derived": 57,
+    "normalize": 0
+  }
+}

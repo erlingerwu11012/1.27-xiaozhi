@@ -1,0 +1,187 @@
+{
+  "real_model_proposals": true,
+  "real_routing_and_validation": true,
+  "device_transport": "isolated fixture; no hardware writes",
+  "cases": [
+    {
+      "user": "声音有点大，帮我设成25",
+      "preset": "natural",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_audio_speaker_set_volume",
+          {
+            "volume": 25
+          }
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "现在音量多少？只查，不用调整",
+      "preset": "natural",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_get_device_status",
+          {}
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "要实时看摄像头画面，不要给我拍照片",
+      "preset": "natural",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "解释一下他说的“把声音设置为25”是什么意思",
+      "preset": "natural",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "替我拍一张，看看眼前这个杯子",
+      "preset": "natural",
+      "route": "bounded_explicit_request",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_camera_take_photo",
+          {
+            "question": "看看眼前这个杯子"
+          }
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "声音有点大，帮我设成25",
+      "preset": "partner",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_audio_speaker_set_volume",
+          {
+            "volume": 25
+          }
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "现在音量多少？只查，不用调整",
+      "preset": "partner",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_get_device_status",
+          {}
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "要实时看摄像头画面，不要给我拍照片",
+      "preset": "partner",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "解释一下他说的“把声音设置为25”是什么意思",
+      "preset": "partner",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "替我拍一张，看看眼前这个杯子",
+      "preset": "partner",
+      "route": "bounded_explicit_request",
+      "raw_native_pass": false,
+      "executed_calls": [
+        [
+          "self_camera_take_photo",
+          {
+            "question": "看看眼前这个杯子"
+          }
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "声音有点大，帮我设成25",
+      "preset": "existing-playful",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_audio_speaker_set_volume",
+          {
+            "volume": 25
+          }
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "现在音量多少？只查，不用调整",
+      "preset": "existing-playful",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_get_device_status",
+          {}
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "user": "要实时看摄像头画面，不要给我拍照片",
+      "preset": "existing-playful",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "解释一下他说的“把声音设置为25”是什么意思",
+      "preset": "existing-playful",
+      "route": "primary_model_native",
+      "raw_native_pass": true,
+      "executed_calls": [],
+      "pass": true
+    },
+    {
+      "user": "替我拍一张，看看眼前这个杯子",
+      "preset": "existing-playful",
+      "route": "bounded_explicit_request",
+      "raw_native_pass": true,
+      "executed_calls": [
+        [
+          "self_camera_take_photo",
+          {
+            "question": "看看眼前这个杯子"
+          }
+        ]
+      ],
+      "pass": true
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "success": true
+}

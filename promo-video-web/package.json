@@ -1,0 +1,29 @@
+{
+  "name": "desk-companion-promo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "桌面 AI 伙伴宣传片前端（阶段一：7 秒开场）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "stills": "node scripts/render.mjs --dist dist --stills",
+    "export:opening": "node scripts/render.mjs --dist dist --from 0 --to 7 --fps 30 --out output/opening-7s.mp4"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "~0.180.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "playwright": "^1.55.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  }
+}

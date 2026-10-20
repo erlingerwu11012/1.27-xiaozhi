@@ -1,0 +1,6 @@
+{
+  "sha256": "dc94a3462c0559b175fe4f658936dfca27b8fed0e1524d639a2c267d01a17d6b",
+  "n": 30,
+  "purpose": "Fresh expressions not used in candidate tuning; baseline and candidate use identical inputs.",
+  "source_code_hash": "0c816072e200123c10185ab5b2e1769733825f9f07d060a31069f4bb12ffcd10"
+}

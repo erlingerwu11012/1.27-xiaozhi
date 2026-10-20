@@ -1,0 +1,14 @@
+{"run_id": "a4b2c7e9c6cf", "case": "main-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 17, "completion_tokens": 6, "total_tokens": 23}, "upstream_request_id": "3e0e8ebc-26fd-9045-b8ba-0051c1613e58"}
+{"run_id": "a4b2c7e9c6cf", "case": "summary-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 38, "completion_tokens": 43, "total_tokens": 81}, "upstream_request_id": "3a7dda35-802d-9fd0-ab1a-e252c766a7a5"}
+{"run_id": "a4b2c7e9c6cf", "case": "habit-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 38, "completion_tokens": 24, "total_tokens": 62}, "upstream_request_id": "97d4e9e4-aa6e-99dc-aa89-1a9ca02cf3c9"}
+{"run_id": "a4b2c7e9c6cf", "case": "vision-real", "passed": false, "status": 503}
+{"run_id": "a4b2c7e9c6cf", "case": "tts-real", "passed": true, "model": "qwen-audio-3.0-tts-plus", "audio_bytes": 104000, "usage": {"characters": 32}, "upstream_request_id": "92bcae22-a56c-4642-911d-459c6cba66e1"}
+{"run_id": "a4b2c7e9c6cf", "case": "asr-real", "passed": false, "error_type": "RuntimeError"}
+{"run_id": "21885daac346", "case": "tts-real", "passed": true, "model": "qwen-audio-3.0-tts-plus", "audio_bytes": 96320, "usage": {"characters": 32}, "upstream_request_id": "91c60b7f-d15b-41fd-a655-8d3d0c3c8fa6"}
+{"run_id": "21885daac346", "case": "asr-error-code", "passed": false, "code": "audio_rate_limit"}
+{"run_id": "e5d97596231f", "case": "main-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 17, "completion_tokens": 6, "total_tokens": 23}, "upstream_request_id": "d6c55d50-0c0a-97ce-96e9-ec03fdd288ba"}
+{"run_id": "e5d97596231f", "case": "summary-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 38, "completion_tokens": 43, "total_tokens": 81}, "upstream_request_id": "b2fd9607-40da-9dd6-b139-1f01d1ff5998"}
+{"run_id": "e5d97596231f", "case": "habit-real", "passed": true, "model": "qwen-plus", "usage": {"prompt_tokens": 38, "completion_tokens": 24, "total_tokens": 62}, "upstream_request_id": "0bd7170d-be40-9ace-b47a-3750a7074411"}
+{"run_id": "e5d97596231f", "case": "vision-real", "passed": false, "status": 503}
+{"run_id": "e5d97596231f", "case": "tts-real", "passed": true, "model": "qwen-audio-3.0-tts-plus", "audio_bytes": 106560, "usage": {"characters": 32}, "upstream_request_id": "b5ac9ea5-5512-47b4-a766-843e4b440624"}
+{"run_id": "e5d97596231f", "case": "asr-real", "passed": true, "model": "qwen3-asr-flash-realtime", "recognized_chars": 17, "usage": {"duration": 3, "total_tokens": 79, "input_tokens": 57, "output_tokens": 22, "input_tokens_details": {"text_tokens": 3, "audio_tokens": 54}, "output_tokens_details": {"text_tokens": 22}}, "upstream_request_id": "sess_VqHwUSU7jY13eBPuGky4n"}

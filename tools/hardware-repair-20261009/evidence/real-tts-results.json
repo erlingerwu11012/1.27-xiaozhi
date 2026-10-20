@@ -1,0 +1,29 @@
+[
+  {
+    "text": "当前音量是50，亮度是3档。",
+    "path": "audio-2170.wav",
+    "frames": 57120,
+    "sample_rate": 16000,
+    "duration": 3.57,
+    "channels": 1,
+    "sha256": "eae6849b319d28792fa89ee05bce7d5a6ac4143bde6fc091ba94c4fd17d205cb"
+  },
+  {
+    "text": "好的，已跳到下一项。",
+    "path": "audio-2172.wav",
+    "frames": 32800,
+    "sample_rate": 16000,
+    "duration": 2.05,
+    "channels": 1,
+    "sha256": "3d32106849f44fc2bfbe506dda8764a6744a4183d9bd2e1408f90cb6ff2fcd46"
+  },
+  {
+    "text": "卡片已经关掉了。",
+    "path": "audio-2174.wav",
+    "frames": 32800,
+    "sample_rate": 16000,
+    "duration": 2.05,
+    "channels": 1,
+    "sha256": "7e5e6833719093a5f2f4e7b29943b56321e2278b7be2191c7f1484eb5fd35602"
+  }
+]

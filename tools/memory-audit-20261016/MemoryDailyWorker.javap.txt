@@ -1,0 +1,2389 @@
+Compiled from "MemoryDailyWorker.java"
+public class xiaozhi.modules.personmemory.MemoryDailyWorker {
+  private static final org.slf4j.Logger log;
+
+  private final org.springframework.jdbc.core.JdbcTemplate jdbc;
+
+  private final com.fasterxml.jackson.databind.ObjectMapper json;
+
+  private final org.springframework.transaction.support.TransactionTemplate transactions;
+
+  private final xiaozhi.modules.personmemory.MemoryGatewayClient gateway;
+
+  private final xiaozhi.modules.personmemory.PersonMemoryService service;
+
+  private final xiaozhi.modules.face.service.FaceProxyService faces;
+
+  private int minUserTokens;
+
+  private java.lang.String schemaId;
+
+  private final java.util.concurrent.atomic.AtomicBoolean running;
+
+  private final java.util.concurrent.ExecutorService executor;
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field executor:Ljava/util/concurrent/ExecutorService;
+       4: invokeinterface #7,  1            // InterfaceMethod java/util/concurrent/ExecutorService.shutdown:()V
+       9: return
+
+  public void beginDaily();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+       4: invokevirtual #17                 // Method xiaozhi/modules/personmemory/PersonMemoryService.enabled:()Z
+       7: ifne          11
+      10: return
+      11: aload_0
+      12: invokevirtual #23                 // Method captureDailyBoundary:()V
+      15: aload_0
+      16: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      19: ldc           #30                 // String UPDATE ai_memory_override SET state=\'ready\' WHERE state=\'pending\'
+      21: invokevirtual #32                 // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;)I
+      24: pop
+      25: return
+
+  public void tick();
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field running:Ljava/util/concurrent/atomic/AtomicBoolean;
+       4: iconst_0
+       5: iconst_1
+       6: invokevirtual #42                 // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+       9: ifne          13
+      12: return
+      13: aload_0
+      14: getfield      #1                  // Field executor:Ljava/util/concurrent/ExecutorService;
+      17: aload_0
+      18: invokedynamic #48,  0             // InvokeDynamic #0:run:(Lxiaozhi/modules/personmemory/MemoryDailyWorker;)Ljava/lang/Runnable;
+      23: invokeinterface #52,  2           // InterfaceMethod java/util/concurrent/ExecutorService.submit:(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+      28: pop
+      29: return
+
+  public void step();
+    Code:
+       0: aload_0
+       1: invokevirtual #56                 // Method catchUpDaily:()V
+       4: aload_0
+       5: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       8: ldc           #59                 // String UPDATE ai_memory_task SET state=\'cancelled\',payload=NULL,lease_until=NULL WHERE generation>0 AND kind=\'extract\' AND state IN(\'pending\',\'retry\')
+      10: invokevirtual #32                 // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;)I
+      13: pop
+      14: aload_0
+      15: getfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      18: invokevirtual #17                 // Method xiaozhi/modules/personmemory/PersonMemoryService.enabled:()Z
+      21: ifeq          36
+      24: aload_0
+      25: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      28: ldc           #61                 // String SELECT * FROM ai_person_memory_entity WHERE state=\'active\' AND generation=0 AND daily_watermark>processed_watermark ORDER BY account_id,user_id LIMIT 20
+      30: invokevirtual #63                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;)Ljava/util/List;
+      33: goto          39
+      36: invokestatic  #67                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      39: astore_1
+      40: aload_1
+      41: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      46: astore_2
+      47: aload_2
+      48: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      53: ifeq          74
+      56: aload_2
+      57: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      62: checkcast     #86                 // class java/util/Map
+      65: astore_3
+      66: aload_0
+      67: aload_3
+      68: invokevirtual #88                 // Method buildBatch:(Ljava/util/Map;)V
+      71: goto          47
+      74: aload_0
+      75: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      78: aload_0
+      79: getfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      82: invokevirtual #17                 // Method xiaozhi/modules/personmemory/PersonMemoryService.enabled:()Z
+      85: ifeq          93
+      88: ldc           #92                 // String \'pending\',\'retry\',\'accepted\',\'review\'
+      90: goto          95
+      93: ldc           #94                 // String \'accepted\',\'review\'
+      95: invokedynamic #96,  0             // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     100: invokevirtual #63                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;)Ljava/util/List;
+     103: astore_2
+     104: aload_2
+     105: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     110: ifne          164
+     113: aload_2
+     114: iconst_0
+     115: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     120: checkcast     #86                 // class java/util/Map
+     123: astore_3
+     124: aload_3
+     125: ldc           #107                // String id
+     127: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     132: checkcast     #112                // class java/lang/String
+     135: astore        4
+     137: aload_0
+     138: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     141: ldc           #114                // String UPDATE ai_memory_task SET lease_until=DATE_ADD(NOW(),INTERVAL 3 MINUTE) WHERE id=? AND (lease_until IS NULL OR lease_until<NOW())
+     143: iconst_1
+     144: anewarray     #116                // class java/lang/Object
+     147: dup
+     148: iconst_0
+     149: aload         4
+     151: aastore
+     152: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     155: iconst_1
+     156: if_icmpne     164
+     159: aload_0
+     160: aload_3
+     161: invokevirtual #121                // Method runTask:(Ljava/util/Map;)V
+     164: aload_0
+     165: invokevirtual #124                // Method cleanupOne:()V
+     168: aload_0
+     169: invokevirtual #127                // Method cleanupFaceOne:()V
+     172: aload_0
+     173: invokevirtual #130                // Method synchronizeOverrideOne:()V
+     176: aload_0
+     177: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     180: ldc           #133                // String UPDATE ai_identity_cleanup c SET local_done=TRUE WHERE NOT EXISTS(SELECT 1 FROM ai_identity_cleanup_device d WHERE d.cleanup_id=c.id AND d.confirmed_at IS NULL)
+     182: invokevirtual #32                 // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;)I
+     185: pop
+     186: aload_0
+     187: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     190: ldc           #135                // String UPDATE ai_identity_cleanup SET state=\'complete\' WHERE cloud_done=TRUE AND portrait_done=TRUE AND local_done=TRUE
+     192: invokevirtual #32                 // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;)I
+     195: pop
+     196: return
+
+  void buildBatch(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+       0: aload_1
+       1: ldc           #137                // String generation
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #139                // class java/lang/Number
+      11: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      14: lconst_0
+      15: lcmp
+      16: ifeq          20
+      19: return
+      20: aload_0
+      21: getfield      #145                // Field transactions:Lorg/springframework/transaction/support/TransactionTemplate;
+      24: aload_0
+      25: aload_1
+      26: invokedynamic #149,  0            // InvokeDynamic #2:accept:(Lxiaozhi/modules/personmemory/MemoryDailyWorker;Ljava/util/Map;)Ljava/util/function/Consumer;
+      31: invokevirtual #153                // Method org/springframework/transaction/support/TransactionTemplate.executeWithoutResult:(Ljava/util/function/Consumer;)V
+      34: return
+
+  void runTask(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+       0: aload_1
+       1: ldc           #107                // String id
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #112                // class java/lang/String
+      11: astore_2
+      12: aload_1
+      13: ldc           #159                // String user_id
+      15: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      20: checkcast     #112                // class java/lang/String
+      23: astore_3
+      24: aload_1
+      25: ldc           #161                // String account_id
+      27: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      32: checkcast     #139                // class java/lang/Number
+      35: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      38: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      41: astore        4
+      43: aload_1
+      44: ldc           #137                // String generation
+      46: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      51: checkcast     #139                // class java/lang/Number
+      54: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      57: lstore        5
+      59: aload_1
+      60: ldc           #169                // String state
+      62: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      67: checkcast     #112                // class java/lang/String
+      70: astore        7
+      72: ldc           #171                // String review
+      74: aload         7
+      76: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      79: ifeq          395
+      82: aload_1
+      83: ldc           #177                // String attempts
+      85: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      90: checkcast     #139                // class java/lang/Number
+      93: invokevirtual #179                // Method java/lang/Number.intValue:()I
+      96: istore        8
+      98: aload_0
+      99: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     102: aload         4
+     104: aload_3
+     105: lload         5
+     107: aload_2
+     108: iload         8
+     110: invokedynamic #187,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     115: invokevirtual #190                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.operationStatus:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;)Ljava/util/Map;
+     118: astore        9
+     120: ldc           #196                // String complete
+     122: aload         9
+     124: ldc           #169                // String state
+     126: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     131: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     134: ifeq          234
+     137: aload         9
+     139: ldc           #198                // String result
+     141: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     146: astore        12
+     148: aload         12
+     150: instanceof    #86                 // class java/util/Map
+     153: ifeq          234
+     156: aload         12
+     158: checkcast     #86                 // class java/util/Map
+     161: astore        10
+     163: aload         10
+     165: ldc           #200                // String event_id
+     167: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     172: ldc           #202                // String
+     174: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     177: astore        12
+     179: aload         12
+     181: invokevirtual #210                // Method java/lang/String.isBlank:()Z
+     184: ifne          213
+     187: aload_0
+     188: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     191: ldc           #213                // String UPDATE ai_memory_task SET state=\'accepted\',event_id=?,lease_until=NULL,next_attempt_at=NOW() WHERE id=?
+     193: iconst_2
+     194: anewarray     #116                // class java/lang/Object
+     197: dup
+     198: iconst_0
+     199: aload         12
+     201: aastore
+     202: dup
+     203: iconst_1
+     204: aload_2
+     205: aastore
+     206: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     209: pop
+     210: goto          231
+     213: aload_0
+     214: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     217: ldc           #215                // String UPDATE ai_memory_task SET lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+     219: iconst_1
+     220: anewarray     #116                // class java/lang/Object
+     223: dup
+     224: iconst_0
+     225: aload_2
+     226: aastore
+     227: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     230: pop
+     231: goto          394
+     234: ldc           #217                // String prepared
+     236: aload         9
+     238: ldc           #169                // String state
+     240: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     245: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     248: ifne          355
+     251: ldc           #219                // String rejected
+     253: aload         9
+     255: ldc           #169                // String state
+     257: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     262: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     265: ifne          355
+     268: ldc           #196                // String complete
+     270: aload         9
+     272: ldc           #169                // String state
+     274: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     279: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     282: ifeq          376
+     285: aload         9
+     287: ldc           #221                // String status
+     289: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     294: astore        12
+     296: aload         12
+     298: instanceof    #139                // class java/lang/Number
+     301: ifeq          376
+     304: aload         12
+     306: checkcast     #139                // class java/lang/Number
+     309: astore        11
+     311: aload         11
+     313: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     316: sipush        400
+     319: if_icmplt     376
+     322: aload         11
+     324: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     327: sipush        500
+     330: if_icmpge     376
+     333: aload         11
+     335: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     338: sipush        408
+     341: if_icmpeq     376
+     344: aload         11
+     346: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     349: sipush        429
+     352: if_icmpeq     376
+     355: aload_0
+     356: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     359: ldc           #223                // String UPDATE ai_memory_task SET state=\'retry\',lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+     361: iconst_1
+     362: anewarray     #116                // class java/lang/Object
+     365: dup
+     366: iconst_0
+     367: aload_2
+     368: aastore
+     369: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     372: pop
+     373: goto          394
+     376: aload_0
+     377: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     380: ldc           #215                // String UPDATE ai_memory_task SET lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+     382: iconst_1
+     383: anewarray     #116                // class java/lang/Object
+     386: dup
+     387: iconst_0
+     388: aload_2
+     389: aastore
+     390: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     393: pop
+     394: return
+     395: ldc           #225                // String accepted
+     397: aload         7
+     399: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     402: ifeq          556
+     405: aload_0
+     406: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     409: aload         4
+     411: aload_3
+     412: lload         5
+     414: ldc           #227                // String GET
+     416: aload_1
+     417: ldc           #200                // String event_id
+     419: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     424: invokestatic  #229                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     427: invokedynamic #232,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     432: aconst_null
+     433: aconst_null
+     434: ldc2_w        #233                // long 15l
+     437: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     440: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     443: astore        8
+     445: aload         8
+     447: invokestatic  #245                // Method eventStates:(Ljava/lang/Object;)Ljava/util/Set;
+     450: astore        9
+     452: aload         9
+     454: ldc           #249                // String FAILED
+     456: invokeinterface #251,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     461: ifne          477
+     464: aload         9
+     466: ldc_w         #256                // String UNRECORDED
+     469: invokeinterface #251,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     474: ifeq          497
+     477: aload_0
+     478: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     481: ldc_w         #258                // String UPDATE ai_memory_task SET state=\'failed\',last_error=\'upstream_extraction_failed\',lease_until=NULL WHERE id=?
+     484: iconst_1
+     485: anewarray     #116                // class java/lang/Object
+     488: dup
+     489: iconst_0
+     490: aload_2
+     491: aastore
+     492: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     495: pop
+     496: return
+     497: aload         9
+     499: invokeinterface #260,  1          // InterfaceMethod java/util/Set.isEmpty:()Z
+     504: ifne          536
+     507: aload         9
+     509: invokeinterface #261,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+     514: ldc_w         #265                // String SUCCEEDED
+     517: invokedynamic #267,  0            // InvokeDynamic #5:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     522: invokeinterface #271,  2          // InterfaceMethod java/util/stream/Stream.allMatch:(Ljava/util/function/Predicate;)Z
+     527: ifeq          536
+     530: aload_0
+     531: aload_1
+     532: invokevirtual #277                // Method complete:(Ljava/util/Map;)V
+     535: return
+     536: aload_0
+     537: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     540: ldc_w         #279                // String UPDATE ai_memory_task SET lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 20 SECOND) WHERE id=?
+     543: iconst_1
+     544: anewarray     #116                // class java/lang/Object
+     547: dup
+     548: iconst_0
+     549: aload_2
+     550: aastore
+     551: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     554: pop
+     555: return
+     556: aload_0
+     557: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     560: ldc_w         #281                // String SELECT COUNT(*) FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=? AND state=\'active\'
+     563: ldc_w         #283                // class java/lang/Integer
+     566: iconst_3
+     567: anewarray     #116                // class java/lang/Object
+     570: dup
+     571: iconst_0
+     572: aload         4
+     574: aastore
+     575: dup
+     576: iconst_1
+     577: aload_3
+     578: aastore
+     579: dup
+     580: iconst_2
+     581: lload         5
+     583: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     586: aastore
+     587: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     590: checkcast     #283                // class java/lang/Integer
+     593: astore        8
+     595: aload         8
+     597: ifnull        609
+     600: aload         8
+     602: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     605: iconst_1
+     606: if_icmpeq     629
+     609: aload_0
+     610: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     613: ldc_w         #290                // String UPDATE ai_memory_task SET state=\'cancelled\',payload=NULL,lease_until=NULL WHERE id=?
+     616: iconst_1
+     617: anewarray     #116                // class java/lang/Object
+     620: dup
+     621: iconst_0
+     622: aload_2
+     623: aastore
+     624: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     627: pop
+     628: return
+     629: aload_0
+     630: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     633: ldc_w         #292                // String SELECT COUNT(*) FROM ai_person_material m JOIN ai_agent a ON a.id=m.agent_id AND a.user_id=m.account_id WHERE m.account_id=? AND m.user_id=? AND m.generation=? AND m.id<=? AND a.mem_model_id=\'Memory_bailian\'
+     636: ldc_w         #283                // class java/lang/Integer
+     639: iconst_4
+     640: anewarray     #116                // class java/lang/Object
+     643: dup
+     644: iconst_0
+     645: aload         4
+     647: aastore
+     648: dup
+     649: iconst_1
+     650: aload_3
+     651: aastore
+     652: dup
+     653: iconst_2
+     654: lload         5
+     656: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     659: aastore
+     660: dup
+     661: iconst_3
+     662: aload_1
+     663: ldc_w         #294                // String watermark
+     666: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     671: aastore
+     672: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     675: checkcast     #283                // class java/lang/Integer
+     678: astore        9
+     680: aload         9
+     682: ifnull        693
+     685: aload         9
+     687: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     690: ifne          713
+     693: aload_0
+     694: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     697: ldc_w         #296                // String UPDATE ai_memory_task SET state=\'retry\',lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 1 HOUR) WHERE id=?
+     700: iconst_1
+     701: anewarray     #116                // class java/lang/Object
+     704: dup
+     705: iconst_0
+     706: aload_2
+     707: aastore
+     708: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     711: pop
+     712: return
+     713: aload_0
+     714: getfield      #298                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+     717: aload_1
+     718: ldc_w         #302                // String payload
+     721: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     726: checkcast     #112                // class java/lang/String
+     729: new           #304                // class xiaozhi/modules/personmemory/MemoryDailyWorker$1
+     732: dup
+     733: aload_0
+     734: invokespecial #306                // Method xiaozhi/modules/personmemory/MemoryDailyWorker$1."<init>":(Lxiaozhi/modules/personmemory/MemoryDailyWorker;)V
+     737: invokevirtual #310                // Method com/fasterxml/jackson/databind/ObjectMapper.readValue:(Ljava/lang/String;Lcom/fasterxml/jackson/core/type/TypeReference;)Ljava/lang/Object;
+     740: checkcast     #86                 // class java/util/Map
+     743: astore        10
+     745: aload         10
+     747: ldc_w         #316                // String _material_agents
+     750: invokeinterface #318,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     755: astore        11
+     757: aload         11
+     759: instanceof    #321                // class java/util/Collection
+     762: ifeq          868
+     765: aload         11
+     767: checkcast     #321                // class java/util/Collection
+     770: astore        12
+     772: aload         12
+     774: invokeinterface #323,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+     779: astore        13
+     781: aload         13
+     783: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     788: ifeq          868
+     791: aload         13
+     793: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     798: astore        14
+     800: aload_0
+     801: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     804: ldc_w         #324                // String SELECT COUNT(*) FROM ai_agent WHERE id=? AND user_id=? AND mem_model_id=\'Memory_bailian\'
+     807: ldc_w         #283                // class java/lang/Integer
+     810: iconst_2
+     811: anewarray     #116                // class java/lang/Object
+     814: dup
+     815: iconst_0
+     816: aload         14
+     818: aastore
+     819: dup
+     820: iconst_1
+     821: aload         4
+     823: aastore
+     824: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     827: checkcast     #283                // class java/lang/Integer
+     830: astore        15
+     832: aload         15
+     834: ifnull        845
+     837: aload         15
+     839: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     842: ifne          865
+     845: aload_0
+     846: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     849: ldc_w         #290                // String UPDATE ai_memory_task SET state=\'cancelled\',payload=NULL,lease_until=NULL WHERE id=?
+     852: iconst_1
+     853: anewarray     #116                // class java/lang/Object
+     856: dup
+     857: iconst_0
+     858: aload_2
+     859: aastore
+     860: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     863: pop
+     864: return
+     865: goto          781
+     868: aload_1
+     869: ldc           #177                // String attempts
+     871: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     876: checkcast     #139                // class java/lang/Number
+     879: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     882: iconst_1
+     883: iadd
+     884: istore        12
+     886: aload_0
+     887: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     890: ldc_w         #326                // String UPDATE ai_memory_task SET state=\'submitting\',attempts=? WHERE id=?
+     893: iconst_2
+     894: anewarray     #116                // class java/lang/Object
+     897: dup
+     898: iconst_0
+     899: iload         12
+     901: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     904: aastore
+     905: dup
+     906: iconst_1
+     907: aload_2
+     908: aastore
+     909: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     912: pop
+     913: aload         10
+     915: ldc_w         #331                // String profile_schema
+     918: invokeinterface #333,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     923: ifeq          965
+     926: aload_0
+     927: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     930: ldc_w         #336                // String UPDATE ai_person_memory_entity SET portrait_written=TRUE,portrait_schema_id=? WHERE account_id=? AND user_id=? AND generation=?
+     933: iconst_4
+     934: anewarray     #116                // class java/lang/Object
+     937: dup
+     938: iconst_0
+     939: aload_0
+     940: getfield      #338                // Field schemaId:Ljava/lang/String;
+     943: aastore
+     944: dup
+     945: iconst_1
+     946: aload         4
+     948: aastore
+     949: dup
+     950: iconst_2
+     951: aload_3
+     952: aastore
+     953: dup
+     954: iconst_3
+     955: lload         5
+     957: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     960: aastore
+     961: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     964: pop
+     965: aload_0
+     966: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     969: aload         4
+     971: aload_3
+     972: lload         5
+     974: ldc_w         #342                // String POST
+     977: ldc_w         #344                // String add-async
+     980: aload         10
+     982: aload_2
+     983: iload         12
+     985: invokedynamic #187,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+     990: ldc2_w        #346                // long 80l
+     993: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     996: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     999: astore        13
+    1001: aload         13
+    1003: ldc           #200                // String event_id
+    1005: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1010: ldc           #202                // String
+    1012: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+    1015: astore        14
+    1017: aload         14
+    1019: invokevirtual #210                // Method java/lang/String.isBlank:()Z
+    1022: ifeq          1036
+    1025: new           #348                // class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+    1028: dup
+    1029: sipush        599
+    1032: invokespecial #350                // Method xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure."<init>":(I)V
+    1035: athrow
+    1036: aload_0
+    1037: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+    1040: ldc_w         #353                // String UPDATE ai_memory_task SET state=\'accepted\',event_id=?,lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 10 SECOND) WHERE id=?
+    1043: iconst_2
+    1044: anewarray     #116                // class java/lang/Object
+    1047: dup
+    1048: iconst_0
+    1049: aload         14
+    1051: aastore
+    1052: dup
+    1053: iconst_1
+    1054: aload_2
+    1055: aastore
+    1056: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+    1059: pop
+    1060: goto          1254
+    1063: astore        7
+    1065: ldc           #225                // String accepted
+    1067: aload_1
+    1068: ldc           #169                // String state
+    1070: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1075: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    1078: ifne          1097
+    1081: ldc           #171                // String review
+    1083: aload_1
+    1084: ldc           #169                // String state
+    1086: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1091: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    1094: ifeq          1125
+    1097: aload_0
+    1098: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+    1101: ldc_w         #355                // String UPDATE ai_memory_task SET lease_until=NULL,last_error=?,next_attempt_at=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+    1104: iconst_2
+    1105: anewarray     #116                // class java/lang/Object
+    1108: dup
+    1109: iconst_0
+    1110: aload         7
+    1112: invokevirtual #357                // Method xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure.getMessage:()Ljava/lang/String;
+    1115: aastore
+    1116: dup
+    1117: iconst_1
+    1118: aload_2
+    1119: aastore
+    1120: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+    1123: pop
+    1124: return
+    1125: sipush        402
+    1128: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1131: sipush        403
+    1134: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1137: sipush        503
+    1140: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1143: invokestatic  #361                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+    1146: aload         7
+    1148: invokevirtual #364                // Method xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure.status:()I
+    1151: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1154: invokeinterface #251,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+    1159: ifeq          1168
+    1162: ldc_w         #366                // String retry
+    1165: goto          1170
+    1168: ldc           #171                // String review
+    1170: astore        8
+    1172: aload         7
+    1174: invokevirtual #364                // Method xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure.status:()I
+    1177: sipush        503
+    1180: if_icmpne     1187
+    1183: ldc           #171                // String review
+    1185: astore        8
+    1187: aload_0
+    1188: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+    1191: ldc_w         #368                // String UPDATE ai_memory_task SET state=?,last_error=?,lease_until=NULL,next_attempt_at=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+    1194: iconst_3
+    1195: anewarray     #116                // class java/lang/Object
+    1198: dup
+    1199: iconst_0
+    1200: aload         8
+    1202: aastore
+    1203: dup
+    1204: iconst_1
+    1205: aload         7
+    1207: invokevirtual #357                // Method xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure.getMessage:()Ljava/lang/String;
+    1210: aastore
+    1211: dup
+    1212: iconst_2
+    1213: aload_2
+    1214: aastore
+    1215: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+    1218: pop
+    1219: goto          1254
+    1222: astore        7
+    1224: aload_0
+    1225: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+    1228: ldc_w         #372                // String UPDATE ai_memory_task SET state=\'review\',last_error=?,lease_until=NULL WHERE id=?
+    1231: iconst_2
+    1232: anewarray     #116                // class java/lang/Object
+    1235: dup
+    1236: iconst_0
+    1237: aload         7
+    1239: invokevirtual #374                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+    1242: invokevirtual #378                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+    1245: aastore
+    1246: dup
+    1247: iconst_1
+    1248: aload_2
+    1249: aastore
+    1250: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+    1253: pop
+    1254: return
+    Exception table:
+       from    to  target type
+          59   394  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         395   496  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         497   535  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         536   555  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         556   628  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         629   712  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         713   864  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+         865  1060  1063   Class xiaozhi/modules/personmemory/MemoryGatewayClient$GatewayFailure
+          59   394  1222   Class java/lang/Exception
+         395   496  1222   Class java/lang/Exception
+         497   535  1222   Class java/lang/Exception
+         536   555  1222   Class java/lang/Exception
+         556   628  1222   Class java/lang/Exception
+         629   712  1222   Class java/lang/Exception
+         713   864  1222   Class java/lang/Exception
+         865  1060  1222   Class java/lang/Exception
+
+  void complete(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+       0: aload_0
+       1: getfield      #145                // Field transactions:Lorg/springframework/transaction/support/TransactionTemplate;
+       4: aload_0
+       5: aload_1
+       6: invokedynamic #383,  0            // InvokeDynamic #6:accept:(Lxiaozhi/modules/personmemory/MemoryDailyWorker;Ljava/util/Map;)Ljava/util/function/Consumer;
+      11: invokevirtual #153                // Method org/springframework/transaction/support/TransactionTemplate.executeWithoutResult:(Ljava/util/function/Consumer;)V
+      14: return
+
+  static java.util.Set<java.lang.String> eventStates(java.lang.Object);
+    Code:
+       0: new           #384                // class java/util/HashSet
+       3: dup
+       4: invokespecial #386                // Method java/util/HashSet."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: instanceof    #86                 // class java/util/Map
+      12: ifeq          127
+      15: aload_0
+      16: checkcast     #86                 // class java/util/Map
+      19: astore_2
+      20: aload_2
+      21: ldc           #221                // String status
+      23: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      28: astore        4
+      30: aload         4
+      32: instanceof    #112                // class java/lang/String
+      35: ifeq          54
+      38: aload         4
+      40: checkcast     #112                // class java/lang/String
+      43: astore        5
+      45: aload_1
+      46: aload         5
+      48: invokeinterface #388,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      53: pop
+      54: ldc_w         #391                // String events
+      57: ldc_w         #393                // String event
+      60: invokestatic  #395                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      63: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      68: astore        5
+      70: aload         5
+      72: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      77: ifeq          124
+      80: aload         5
+      82: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      87: checkcast     #112                // class java/lang/String
+      90: astore        6
+      92: aload_2
+      93: aload         6
+      95: invokeinterface #333,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     100: ifeq          121
+     103: aload_1
+     104: aload_2
+     105: aload         6
+     107: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     112: invokestatic  #245                // Method eventStates:(Ljava/lang/Object;)Ljava/util/Set;
+     115: invokeinterface #398,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     120: pop
+     121: goto          70
+     124: goto          181
+     127: aload_0
+     128: instanceof    #68                 // class java/util/List
+     131: ifeq          181
+     134: aload_0
+     135: checkcast     #68                 // class java/util/List
+     138: astore_3
+     139: aload_3
+     140: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     145: astore        4
+     147: aload         4
+     149: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     154: ifeq          181
+     157: aload         4
+     159: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     164: astore        5
+     166: aload_1
+     167: aload         5
+     169: invokestatic  #245                // Method eventStates:(Ljava/lang/Object;)Ljava/util/Set;
+     172: invokeinterface #398,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     177: pop
+     178: goto          147
+     181: aload_1
+     182: areturn
+
+  void cleanupOne();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc_w         #402                // String UPDATE ai_memory_task SET state=\'review\',last_error=\'process_recovery\' WHERE state=\'submitting\' AND lease_until<NOW()
+       7: invokevirtual #32                 // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;)I
+      10: pop
+      11: aload_0
+      12: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      15: ldc_w         #404                // String SELECT * FROM ai_identity_cleanup WHERE cloud_done=FALSE AND (lease_until IS NULL OR lease_until<NOW()) ORDER BY created_at LIMIT 1
+      18: invokevirtual #63                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;)Ljava/util/List;
+      21: astore_1
+      22: aload_1
+      23: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      28: ifeq          32
+      31: return
+      32: aload_1
+      33: iconst_0
+      34: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      39: checkcast     #86                 // class java/util/Map
+      42: astore_2
+      43: aload_2
+      44: ldc           #107                // String id
+      46: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      51: checkcast     #112                // class java/lang/String
+      54: astore_3
+      55: aload_2
+      56: ldc           #159                // String user_id
+      58: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      63: checkcast     #112                // class java/lang/String
+      66: astore        4
+      68: aload_2
+      69: ldc           #161                // String account_id
+      71: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      76: checkcast     #139                // class java/lang/Number
+      79: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      82: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      85: astore        5
+      87: aload_2
+      88: ldc           #137                // String generation
+      90: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      95: checkcast     #139                // class java/lang/Number
+      98: invokevirtual #141                // Method java/lang/Number.longValue:()J
+     101: lstore        6
+     103: aload_0
+     104: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     107: ldc_w         #406                // String UPDATE ai_identity_cleanup SET lease_until=DATE_ADD(NOW(),INTERVAL 3 MINUTE),attempts=attempts+1 WHERE id=? AND (lease_until IS NULL OR lease_until<NOW())
+     110: iconst_1
+     111: anewarray     #116                // class java/lang/Object
+     114: dup
+     115: iconst_0
+     116: aload_3
+     117: aastore
+     118: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     121: iconst_1
+     122: if_icmpeq     126
+     125: return
+     126: aload_0
+     127: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     130: ldc_w         #408                // String SELECT COUNT(*) FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=?
+     133: ldc_w         #283                // class java/lang/Integer
+     136: iconst_3
+     137: anewarray     #116                // class java/lang/Object
+     140: dup
+     141: iconst_0
+     142: aload         5
+     144: aastore
+     145: dup
+     146: iconst_1
+     147: aload         4
+     149: aastore
+     150: dup
+     151: iconst_2
+     152: lload         6
+     154: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     157: aastore
+     158: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     161: checkcast     #283                // class java/lang/Integer
+     164: astore        8
+     166: aload         8
+     168: ifnull        199
+     171: aload         8
+     173: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     176: ifne          199
+     179: aload_0
+     180: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     183: ldc_w         #410                // String UPDATE ai_identity_cleanup SET cloud_done=TRUE,portrait_done=TRUE,lease_until=NULL WHERE id=?
+     186: iconst_1
+     187: anewarray     #116                // class java/lang/Object
+     190: dup
+     191: iconst_0
+     192: aload_3
+     193: aastore
+     194: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     197: pop
+     198: return
+     199: aload_0
+     200: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     203: aload         5
+     205: aload         4
+     207: lload         6
+     209: ldc_w         #342                // String POST
+     212: ldc_w         #412                // String entities/retire
+     215: invokestatic  #414                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+     218: aload_3
+     219: invokedynamic #417,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     224: ldc2_w        #418                // long 3l
+     227: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     230: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     233: pop
+     234: aload_0
+     235: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     238: aload         5
+     240: aload         4
+     242: lload         6
+     244: ldc           #227                // String GET
+     246: ldc_w         #420                // String memory_nodes?page_num=1&page_size=50
+     249: aconst_null
+     250: aconst_null
+     251: ldc2_w        #422                // long 10l
+     254: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     257: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     260: astore        9
+     262: aload         9
+     264: ldc_w         #424                // String memory_nodes
+     267: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     272: astore        11
+     274: aload         11
+     276: instanceof    #68                 // class java/util/List
+     279: ifeq          440
+     282: aload         11
+     284: checkcast     #68                 // class java/util/List
+     287: astore        10
+     289: aload         10
+     291: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     296: ifne          440
+     299: aload         10
+     301: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     306: astore        11
+     308: aload         11
+     310: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     315: ifeq          420
+     318: aload         11
+     320: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     325: astore        12
+     327: aload         12
+     329: instanceof    #86                 // class java/util/Map
+     332: ifeq          417
+     335: aload         12
+     337: checkcast     #86                 // class java/util/Map
+     340: astore        13
+     342: aload         13
+     344: ldc_w         #426                // String memory_node_id
+     347: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     352: aload         13
+     354: ldc           #107                // String id
+     356: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     361: ldc           #202                // String
+     363: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     366: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     369: astore        14
+     371: aload         14
+     373: invokevirtual #210                // Method java/lang/String.isBlank:()Z
+     376: ifne          417
+     379: aload_0
+     380: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     383: aload         5
+     385: aload         4
+     387: lload         6
+     389: ldc_w         #428                // String DELETE
+     392: aload         14
+     394: invokedynamic #430,  0            // InvokeDynamic #8:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     399: aconst_null
+     400: aload         14
+     402: invokedynamic #431,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     407: ldc2_w        #422                // long 10l
+     410: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     413: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     416: pop
+     417: goto          308
+     420: aload_0
+     421: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     424: ldc_w         #432                // String UPDATE ai_identity_cleanup SET lease_until=NULL WHERE id=?
+     427: iconst_1
+     428: anewarray     #116                // class java/lang/Object
+     431: dup
+     432: iconst_0
+     433: aload_3
+     434: aastore
+     435: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     438: pop
+     439: return
+     440: aload_0
+     441: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     444: ldc_w         #434                // String SELECT COUNT(*) FROM ai_memory_task WHERE account_id=? AND user_id=? AND generation=? AND state IN(\'accepted\',\'submitting\',\'review\')
+     447: ldc_w         #283                // class java/lang/Integer
+     450: iconst_3
+     451: anewarray     #116                // class java/lang/Object
+     454: dup
+     455: iconst_0
+     456: aload         5
+     458: aastore
+     459: dup
+     460: iconst_1
+     461: aload         4
+     463: aastore
+     464: dup
+     465: iconst_2
+     466: lload         6
+     468: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     471: aastore
+     472: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     475: checkcast     #283                // class java/lang/Integer
+     478: astore        10
+     480: aload_0
+     481: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     484: ldc_w         #436                // String SELECT COUNT(*) FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=? AND portrait_written=TRUE
+     487: ldc_w         #283                // class java/lang/Integer
+     490: iconst_3
+     491: anewarray     #116                // class java/lang/Object
+     494: dup
+     495: iconst_0
+     496: aload         5
+     498: aastore
+     499: dup
+     500: iconst_1
+     501: aload         4
+     503: aastore
+     504: dup
+     505: iconst_2
+     506: lload         6
+     508: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     511: aastore
+     512: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     515: checkcast     #283                // class java/lang/Integer
+     518: astore        11
+     520: aload         10
+     522: ifnull        533
+     525: aload         10
+     527: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     530: ifgt          546
+     533: aload         11
+     535: ifnull        566
+     538: aload         11
+     540: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     543: ifle          566
+     546: aload_0
+     547: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     550: ldc_w         #438                // String UPDATE ai_identity_cleanup SET last_error=\'late_event_or_portrait_pending\',lease_until=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+     553: iconst_1
+     554: anewarray     #116                // class java/lang/Object
+     557: dup
+     558: iconst_0
+     559: aload_3
+     560: aastore
+     561: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     564: pop
+     565: return
+     566: aload_0
+     567: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     570: aload         5
+     572: aload         4
+     574: lload         6
+     576: ldc_w         #342                // String POST
+     579: ldc_w         #440                // String entities/cleanup-complete
+     582: invokestatic  #414                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+     585: aload_3
+     586: invokedynamic #442,  0            // InvokeDynamic #10:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     591: ldc2_w        #418                // long 3l
+     594: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     597: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     600: pop
+     601: aload_0
+     602: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     605: ldc_w         #410                // String UPDATE ai_identity_cleanup SET cloud_done=TRUE,portrait_done=TRUE,lease_until=NULL WHERE id=?
+     608: iconst_1
+     609: anewarray     #116                // class java/lang/Object
+     612: dup
+     613: iconst_0
+     614: aload_3
+     615: aastore
+     616: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     619: pop
+     620: goto          655
+     623: astore        8
+     625: aload_0
+     626: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     629: ldc_w         #443                // String UPDATE ai_identity_cleanup SET last_error=?,lease_until=DATE_ADD(NOW(),INTERVAL 5 MINUTE) WHERE id=?
+     632: iconst_2
+     633: anewarray     #116                // class java/lang/Object
+     636: dup
+     637: iconst_0
+     638: aload         8
+     640: invokevirtual #374                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     643: invokevirtual #378                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     646: aastore
+     647: dup
+     648: iconst_1
+     649: aload_3
+     650: aastore
+     651: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     654: pop
+     655: return
+    Exception table:
+       from    to  target type
+         126   198   623   Class java/lang/Exception
+         199   439   623   Class java/lang/Exception
+         440   565   623   Class java/lang/Exception
+         566   620   623   Class java/lang/Exception
+
+  void catchUpDaily();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+       4: invokevirtual #17                 // Method xiaozhi/modules/personmemory/PersonMemoryService.enabled:()Z
+       7: ifne          11
+      10: return
+      11: ldc_w         #445                // String Asia/Shanghai
+      14: invokestatic  #447                // Method java/time/ZoneId.of:(Ljava/lang/String;)Ljava/time/ZoneId;
+      17: invokestatic  #452                // Method java/time/ZonedDateTime.now:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      20: astore_1
+      21: aload_1
+      22: invokevirtual #458                // Method java/time/ZonedDateTime.getHour:()I
+      25: iconst_3
+      26: if_icmpge     30
+      29: return
+      30: aload_1
+      31: invokevirtual #461                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+      34: iconst_3
+      35: iconst_0
+      36: invokevirtual #465                // Method java/time/LocalDate.atTime:(II)Ljava/time/LocalDateTime;
+      39: aload_1
+      40: invokevirtual #471                // Method java/time/ZonedDateTime.getZone:()Ljava/time/ZoneId;
+      43: invokevirtual #475                // Method java/time/LocalDateTime.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      46: getstatic     #480                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+      49: invokevirtual #486                // Method java/time/ZonedDateTime.withZoneSameInstant:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      52: ldc_w         #489                // String yyyy-MM-dd HH:mm:ss
+      55: invokestatic  #491                // Method java/time/format/DateTimeFormatter.ofPattern:(Ljava/lang/String;)Ljava/time/format/DateTimeFormatter;
+      58: invokevirtual #497                // Method java/time/ZonedDateTime.format:(Ljava/time/format/DateTimeFormatter;)Ljava/lang/String;
+      61: astore_2
+      62: aload_0
+      63: invokevirtual #23                 // Method captureDailyBoundary:()V
+      66: aload_1
+      67: invokevirtual #461                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+      70: iconst_3
+      71: iconst_0
+      72: invokevirtual #465                // Method java/time/LocalDate.atTime:(II)Ljava/time/LocalDateTime;
+      75: aload_1
+      76: invokevirtual #471                // Method java/time/ZonedDateTime.getZone:()Ljava/time/ZoneId;
+      79: invokevirtual #475                // Method java/time/LocalDateTime.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      82: invokevirtual #501                // Method java/time/ZonedDateTime.toEpochSecond:()J
+      85: lstore_3
+      86: aload_0
+      87: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      90: ldc_w         #504                // String UPDATE ai_memory_override SET state=\'ready\' WHERE state=\'pending\' AND UNIX_TIMESTAMP(created_at)<?
+      93: iconst_1
+      94: anewarray     #116                // class java/lang/Object
+      97: dup
+      98: iconst_0
+      99: lload_3
+     100: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     103: aastore
+     104: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     107: pop
+     108: return
+
+  void captureDailyBoundary();
+    Code:
+       0: ldc_w         #445                // String Asia/Shanghai
+       3: invokestatic  #447                // Method java/time/ZoneId.of:(Ljava/lang/String;)Ljava/time/ZoneId;
+       6: invokestatic  #452                // Method java/time/ZonedDateTime.now:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+       9: astore_1
+      10: aload_1
+      11: invokevirtual #458                // Method java/time/ZonedDateTime.getHour:()I
+      14: iconst_3
+      15: if_icmpge     29
+      18: aload_1
+      19: invokevirtual #461                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+      22: lconst_1
+      23: invokevirtual #506                // Method java/time/LocalDate.minusDays:(J)Ljava/time/LocalDate;
+      26: goto          33
+      29: aload_1
+      30: invokevirtual #461                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+      33: astore_2
+      34: aload_2
+      35: iconst_3
+      36: iconst_0
+      37: invokevirtual #465                // Method java/time/LocalDate.atTime:(II)Ljava/time/LocalDateTime;
+      40: aload_1
+      41: invokevirtual #471                // Method java/time/ZonedDateTime.getZone:()Ljava/time/ZoneId;
+      44: invokevirtual #475                // Method java/time/LocalDateTime.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      47: invokevirtual #501                // Method java/time/ZonedDateTime.toEpochSecond:()J
+      50: lstore_3
+      51: aload_0
+      52: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      55: ldc_w         #510                // String UPDATE ai_person_memory_entity e SET daily_watermark=COALESCE((SELECT MAX(m.id) FROM ai_person_material m WHERE m.account_id=e.account_id AND m.user_id=e.user_id AND m.generation=e.generation AND UNIX_TIMESTAMP(m.created_at)<?),processed_watermark),daily_started_at=FROM_UNIXTIME(?) WHERE state=\'active\' AND generation=0 AND (daily_started_at IS NULL OR UNIX_TIMESTAMP(daily_started_at)<?)
+      58: iconst_3
+      59: anewarray     #116                // class java/lang/Object
+      62: dup
+      63: iconst_0
+      64: lload_3
+      65: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      68: aastore
+      69: dup
+      70: iconst_1
+      71: lload_3
+      72: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      75: aastore
+      76: dup
+      77: iconst_2
+      78: lload_3
+      79: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      82: aastore
+      83: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+      86: pop
+      87: return
+
+  void synchronizeOverrideOne();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc_w         #512                // String SELECT * FROM ai_memory_override WHERE state=\'ready\' ORDER BY created_at LIMIT 1
+       7: invokevirtual #63                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;)Ljava/util/List;
+      10: astore_1
+      11: aload_1
+      12: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      17: ifeq          21
+      20: return
+      21: aload_1
+      22: iconst_0
+      23: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      28: checkcast     #86                 // class java/util/Map
+      31: astore_2
+      32: aload_2
+      33: ldc           #161                // String account_id
+      35: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      40: checkcast     #139                // class java/lang/Number
+      43: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      46: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      49: astore_3
+      50: aload_2
+      51: ldc           #159                // String user_id
+      53: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      58: checkcast     #112                // class java/lang/String
+      61: astore        4
+      63: aload_2
+      64: ldc           #107                // String id
+      66: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      71: checkcast     #112                // class java/lang/String
+      74: astore        5
+      76: aload_2
+      77: ldc_w         #514                // String match_text
+      80: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      85: checkcast     #112                // class java/lang/String
+      88: astore        6
+      90: aload_2
+      91: ldc           #137                // String generation
+      93: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      98: checkcast     #139                // class java/lang/Number
+     101: invokevirtual #141                // Method java/lang/Number.longValue:()J
+     104: lstore        7
+     106: lload         7
+     108: lconst_0
+     109: lcmp
+     110: ifle          134
+     113: aload_0
+     114: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     117: ldc_w         #516                // String UPDATE ai_memory_override SET state=\'local_only\' WHERE id=?
+     120: iconst_1
+     121: anewarray     #116                // class java/lang/Object
+     124: dup
+     125: iconst_0
+     126: aload         5
+     128: aastore
+     129: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     132: pop
+     133: return
+     134: aload_0
+     135: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     138: ldc_w         #518                // String SELECT COUNT(*) FROM ai_memory_task WHERE account_id=? AND user_id=? AND generation=? AND state IN(\'accepted\',\'submitting\',\'review\') AND created_at<=?
+     141: ldc_w         #283                // class java/lang/Integer
+     144: iconst_4
+     145: anewarray     #116                // class java/lang/Object
+     148: dup
+     149: iconst_0
+     150: aload_3
+     151: aastore
+     152: dup
+     153: iconst_1
+     154: aload         4
+     156: aastore
+     157: dup
+     158: iconst_2
+     159: lload         7
+     161: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     164: aastore
+     165: dup
+     166: iconst_3
+     167: aload_2
+     168: ldc_w         #520                // String created_at
+     171: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     176: aastore
+     177: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     180: checkcast     #283                // class java/lang/Integer
+     183: astore        9
+     185: aload         9
+     187: ifnull        199
+     190: aload         9
+     192: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     195: ifle          199
+     198: return
+     199: aload_2
+     200: ldc_w         #522                // String scan_page
+     203: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     208: checkcast     #139                // class java/lang/Number
+     211: invokevirtual #179                // Method java/lang/Number.intValue:()I
+     214: istore        10
+     216: iconst_0
+     217: istore        11
+     219: lconst_0
+     220: lstore        12
+     222: iconst_0
+     223: istore        14
+     225: iload         14
+     227: bipush        20
+     229: if_icmpge     603
+     232: aload_0
+     233: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     236: aload_3
+     237: aload         4
+     239: lload         7
+     241: ldc           #227                // String GET
+     243: iload         10
+     245: invokedynamic #524,  0            // InvokeDynamic #11:makeConcatWithConstants:(I)Ljava/lang/String;
+     250: aconst_null
+     251: aconst_null
+     252: ldc2_w        #418                // long 3l
+     255: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     258: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     261: astore        15
+     263: aload         15
+     265: ldc_w         #527                // String total
+     268: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     273: astore        17
+     275: aload         17
+     277: instanceof    #139                // class java/lang/Number
+     280: ifeq          293
+     283: aload         17
+     285: checkcast     #139                // class java/lang/Number
+     288: astore        16
+     290: goto          304
+     293: new           #529                // class java/lang/IllegalStateException
+     296: dup
+     297: ldc_w         #531                // String missing_memory_total
+     300: invokespecial #533                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     303: athrow
+     304: aload         16
+     306: invokevirtual #141                // Method java/lang/Number.longValue:()J
+     309: lstore        12
+     311: aload         15
+     313: ldc_w         #424                // String memory_nodes
+     316: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     321: astore        18
+     323: aload         18
+     325: instanceof    #68                 // class java/util/List
+     328: ifeq          341
+     331: aload         18
+     333: checkcast     #68                 // class java/util/List
+     336: astore        17
+     338: goto          352
+     341: new           #529                // class java/lang/IllegalStateException
+     344: dup
+     345: ldc_w         #536                // String invalid_memory_list
+     348: invokespecial #533                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     351: athrow
+     352: aload         17
+     354: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     359: ifeq          368
+     362: iconst_1
+     363: istore        11
+     365: goto          603
+     368: iconst_0
+     369: istore        18
+     371: aload         17
+     373: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     378: astore        19
+     380: aload         19
+     382: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     387: ifeq          534
+     390: aload         19
+     392: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     397: astore        20
+     399: aload         20
+     401: instanceof    #86                 // class java/util/Map
+     404: ifeq          531
+     407: aload         20
+     409: checkcast     #86                 // class java/util/Map
+     412: astore        21
+     414: aload         21
+     416: ldc_w         #538                // String content
+     419: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     424: ldc           #202                // String
+     426: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     429: astore        22
+     431: aload         21
+     433: ldc_w         #426                // String memory_node_id
+     436: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     441: ldc           #202                // String
+     443: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     446: astore        23
+     448: aload         23
+     450: invokevirtual #210                // Method java/lang/String.isBlank:()Z
+     453: ifne          531
+     456: ldc_w         #540                // String *
+     459: aload         6
+     461: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     464: ifne          477
+     467: aload         22
+     469: aload         6
+     471: invokevirtual #542                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     474: ifeq          531
+     477: aload_0
+     478: getfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+     481: aload_3
+     482: aload         4
+     484: lload         7
+     486: ldc_w         #428                // String DELETE
+     489: aload         23
+     491: invokedynamic #430,  0            // InvokeDynamic #8:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     496: aconst_null
+     497: aconst_null
+     498: ldc2_w        #418                // long 3l
+     501: invokestatic  #235                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+     504: invokevirtual #241                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.request:(Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/time/Duration;)Ljava/util/Map;
+     507: pop
+     508: iconst_1
+     509: istore        18
+     511: aload_0
+     512: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     515: ldc_w         #545                // String UPDATE ai_memory_override SET matched_count=matched_count+1 WHERE id=?
+     518: iconst_1
+     519: anewarray     #116                // class java/lang/Object
+     522: dup
+     523: iconst_0
+     524: aload         5
+     526: aastore
+     527: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     530: pop
+     531: goto          380
+     534: iload         18
+     536: ifeq          540
+     539: return
+     540: aload         17
+     542: invokeinterface #547,  1          // InterfaceMethod java/util/List.size:()I
+     547: bipush        50
+     549: if_icmpge     558
+     552: iconst_1
+     553: istore        11
+     555: goto          603
+     558: iinc          10, 1
+     561: aload_0
+     562: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     565: ldc_w         #550                // String UPDATE ai_memory_override SET scan_page=? WHERE id=?
+     568: iconst_2
+     569: anewarray     #116                // class java/lang/Object
+     572: dup
+     573: iconst_0
+     574: iload         10
+     576: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     579: aastore
+     580: dup
+     581: iconst_1
+     582: aload         5
+     584: aastore
+     585: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     588: pop
+     589: iload         14
+     591: bipush        19
+     593: if_icmpne     597
+     596: return
+     597: iinc          14, 1
+     600: goto          225
+     603: iload         11
+     605: ifne          609
+     608: return
+     609: aload_0
+     610: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     613: ldc_w         #552                // String SELECT matched_count FROM ai_memory_override WHERE id=?
+     616: ldc_w         #283                // class java/lang/Integer
+     619: iconst_1
+     620: anewarray     #116                // class java/lang/Object
+     623: dup
+     624: iconst_0
+     625: aload         5
+     627: aastore
+     628: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     631: checkcast     #283                // class java/lang/Integer
+     634: astore        14
+     636: lload         12
+     638: lconst_0
+     639: lcmp
+     640: ifle          688
+     643: ldc_w         #540                // String *
+     646: aload         6
+     648: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     651: ifne          688
+     654: aload         14
+     656: ifnull        667
+     659: aload         14
+     661: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     664: ifne          688
+     667: aload_0
+     668: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     671: ldc_w         #554                // String UPDATE ai_memory_override SET last_error=\'exact_fact_match_not_found\',scan_page=1 WHERE id=?
+     674: iconst_1
+     675: anewarray     #116                // class java/lang/Object
+     678: dup
+     679: iconst_0
+     680: aload         5
+     682: aastore
+     683: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     686: pop
+     687: return
+     688: aload_0
+     689: getfield      #145                // Field transactions:Lorg/springframework/transaction/support/TransactionTemplate;
+     692: aload_0
+     693: aload_2
+     694: aload_3
+     695: aload         4
+     697: lload         7
+     699: aload         5
+     701: invokedynamic #556,  0            // InvokeDynamic #12:accept:(Lxiaozhi/modules/personmemory/MemoryDailyWorker;Ljava/util/Map;Ljava/lang/Long;Ljava/lang/String;JLjava/lang/String;)Ljava/util/function/Consumer;
+     706: invokevirtual #153                // Method org/springframework/transaction/support/TransactionTemplate.executeWithoutResult:(Ljava/util/function/Consumer;)V
+     709: goto          733
+     712: astore        10
+     714: getstatic     #559                // Field log:Lorg/slf4j/Logger;
+     717: ldc_w         #563                // String memory correction deferred: {}
+     720: aload         10
+     722: invokevirtual #374                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     725: invokevirtual #378                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     728: invokeinterface #565,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+     733: return
+    Exception table:
+       from    to  target type
+         199   539   712   Class java/lang/Exception
+         540   596   712   Class java/lang/Exception
+         597   608   712   Class java/lang/Exception
+         609   687   712   Class java/lang/Exception
+         688   709   712   Class java/lang/Exception
+
+  void cleanupFaceOne();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc_w         #571                // String SELECT account_id,profile_id FROM ai_face_profile_cleanup WHERE state=\'pending\' ORDER BY created_at LIMIT 1
+       7: invokevirtual #63                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;)Ljava/util/List;
+      10: astore_1
+      11: aload_1
+      12: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      17: ifeq          21
+      20: return
+      21: aload_1
+      22: iconst_0
+      23: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      28: checkcast     #86                 // class java/util/Map
+      31: astore_2
+      32: aload_2
+      33: ldc           #161                // String account_id
+      35: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      40: checkcast     #139                // class java/lang/Number
+      43: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      46: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      49: astore_3
+      50: aload_2
+      51: ldc_w         #573                // String profile_id
+      54: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      59: checkcast     #112                // class java/lang/String
+      62: astore        4
+      64: aload_0
+      65: getfield      #575                // Field faces:Lxiaozhi/modules/face/service/FaceProxyService;
+      68: aload_3
+      69: aload         4
+      71: invokevirtual #579                // Method xiaozhi/modules/face/service/FaceProxyService.cleanupForAccount:(Ljava/lang/Long;Ljava/lang/String;)V
+      74: aload_0
+      75: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      78: ldc_w         #585                // String DELETE FROM ai_face_profile_cleanup WHERE account_id=? AND profile_id=?
+      81: iconst_2
+      82: anewarray     #116                // class java/lang/Object
+      85: dup
+      86: iconst_0
+      87: aload_3
+      88: aastore
+      89: dup
+      90: iconst_1
+      91: aload         4
+      93: aastore
+      94: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+      97: pop
+      98: goto          122
+     101: astore        5
+     103: getstatic     #559                // Field log:Lorg/slf4j/Logger;
+     106: ldc_w         #587                // String face cleanup deferred: {}
+     109: aload         5
+     111: invokevirtual #374                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     114: invokevirtual #378                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     117: invokeinterface #565,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+     122: return
+    Exception table:
+       from    to  target type
+          64    98   101   Class java/lang/Exception
+
+  public xiaozhi.modules.personmemory.MemoryDailyWorker(org.springframework.jdbc.core.JdbcTemplate, com.fasterxml.jackson.databind.ObjectMapper, org.springframework.transaction.support.TransactionTemplate, xiaozhi.modules.personmemory.MemoryGatewayClient, xiaozhi.modules.personmemory.PersonMemoryService, xiaozhi.modules.face.service.FaceProxyService);
+    Code:
+       0: aload_0
+       1: invokespecial #589                // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: sipush        10000
+       8: putfield      #590                // Field minUserTokens:I
+      11: aload_0
+      12: new           #43                 // class java/util/concurrent/atomic/AtomicBoolean
+      15: dup
+      16: invokespecial #594                // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+      19: putfield      #38                 // Field running:Ljava/util/concurrent/atomic/AtomicBoolean;
+      22: aload_0
+      23: invokedynamic #595,  0            // InvokeDynamic #13:newThread:()Ljava/util/concurrent/ThreadFactory;
+      28: invokestatic  #599                // Method java/util/concurrent/Executors.newSingleThreadExecutor:(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
+      31: putfield      #1                  // Field executor:Ljava/util/concurrent/ExecutorService;
+      34: aload_0
+      35: aload_1
+      36: putfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      39: aload_0
+      40: aload_2
+      41: putfield      #298                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      44: aload_0
+      45: aload_3
+      46: putfield      #145                // Field transactions:Lorg/springframework/transaction/support/TransactionTemplate;
+      49: aload_0
+      50: aload         4
+      52: putfield      #183                // Field gateway:Lxiaozhi/modules/personmemory/MemoryGatewayClient;
+      55: aload_0
+      56: aload         5
+      58: putfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      61: aload_0
+      62: aload         6
+      64: putfield      #575                // Field faces:Lxiaozhi/modules/face/service/FaceProxyService;
+      67: return
+
+  private void lambda$synchronizeOverrideOne$9(java.util.Map, java.lang.Long, java.lang.String, long, java.lang.String, org.springframework.transaction.TransactionStatus);
+    Code:
+       0: ldc_w         #605                // String correct
+       3: aload_1
+       4: ldc_w         #607                // String action
+       7: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      15: ifeq          191
+      18: aload_1
+      19: ldc_w         #609                // String replacement
+      22: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      27: astore        9
+      29: aload         9
+      31: instanceof    #112                // class java/lang/String
+      34: ifeq          191
+      37: aload         9
+      39: checkcast     #112                // class java/lang/String
+      42: astore        8
+      44: aload         8
+      46: invokevirtual #210                // Method java/lang/String.isBlank:()Z
+      49: ifne          191
+      52: aload_0
+      53: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      56: ldc_w         #611                // String SELECT d.id AS device_id,a.id AS agent_id FROM ai_device d JOIN ai_agent a ON a.id=d.agent_id AND a.user_id=d.user_id WHERE d.user_id=? AND a.mem_model_id=\'Memory_bailian\' ORDER BY d.id LIMIT 1
+      59: iconst_1
+      60: anewarray     #116                // class java/lang/Object
+      63: dup
+      64: iconst_0
+      65: aload_2
+      66: aastore
+      67: invokevirtual #613                // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      70: astore        9
+      72: aload         9
+      74: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      79: ifeq          93
+      82: new           #529                // class java/lang/IllegalStateException
+      85: dup
+      86: ldc_w         #616                // String correction_long_term_source_unavailable
+      89: invokespecial #533                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      92: athrow
+      93: aload_0
+      94: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      97: ldc_w         #618                // String INSERT IGNORE INTO ai_person_material(account_id,user_id,generation,agent_id,device_id,event_id,turn_id,kind,content) VALUES(?,?,?,?,?,?,?,\'dialogue\',?)
+     100: bipush        8
+     102: anewarray     #116                // class java/lang/Object
+     105: dup
+     106: iconst_0
+     107: aload_2
+     108: aastore
+     109: dup
+     110: iconst_1
+     111: aload_3
+     112: aastore
+     113: dup
+     114: iconst_2
+     115: lload         4
+     117: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     120: aastore
+     121: dup
+     122: iconst_3
+     123: aload         9
+     125: iconst_0
+     126: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     131: checkcast     #86                 // class java/util/Map
+     134: ldc_w         #620                // String agent_id
+     137: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     142: aastore
+     143: dup
+     144: iconst_4
+     145: aload         9
+     147: iconst_0
+     148: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     153: checkcast     #86                 // class java/util/Map
+     156: ldc_w         #622                // String device_id
+     159: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     164: aastore
+     165: dup
+     166: iconst_5
+     167: aload         6
+     169: invokedynamic #624,  0            // InvokeDynamic #14:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     174: aastore
+     175: dup
+     176: bipush        6
+     178: aload         6
+     180: aastore
+     181: dup
+     182: bipush        7
+     184: aload         8
+     186: aastore
+     187: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     190: pop
+     191: aload_0
+     192: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     195: ldc_w         #625                // String UPDATE ai_memory_override SET state=\'complete\' WHERE id=? AND state=\'ready\'
+     198: iconst_1
+     199: anewarray     #116                // class java/lang/Object
+     202: dup
+     203: iconst_0
+     204: aload         6
+     206: aastore
+     207: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     210: pop
+     211: return
+
+  private void lambda$complete$8(java.util.Map, org.springframework.transaction.TransactionStatus);
+    Code:
+       0: aload_1
+       1: ldc           #161                // String account_id
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #139                // class java/lang/Number
+      11: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      14: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      17: astore_3
+      18: aload_1
+      19: ldc           #159                // String user_id
+      21: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      26: checkcast     #112                // class java/lang/String
+      29: astore        4
+      31: aload_1
+      32: ldc           #137                // String generation
+      34: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      39: checkcast     #139                // class java/lang/Number
+      42: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      45: lstore        5
+      47: aload_1
+      48: ldc_w         #294                // String watermark
+      51: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      56: checkcast     #139                // class java/lang/Number
+      59: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      62: lstore        7
+      64: aload_0
+      65: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      68: ldc_w         #627                // String UPDATE ai_memory_task SET state=\'complete\',payload=NULL,lease_until=NULL WHERE id=?
+      71: iconst_1
+      72: anewarray     #116                // class java/lang/Object
+      75: dup
+      76: iconst_0
+      77: aload_1
+      78: ldc           #107                // String id
+      80: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      85: aastore
+      86: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+      89: pop
+      90: aload_0
+      91: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      94: ldc_w         #629                // String UPDATE ai_person_memory_entity SET processed_watermark=GREATEST(processed_watermark,?) WHERE account_id=? AND user_id=? AND generation=? AND state=\'active\'
+      97: iconst_4
+      98: anewarray     #116                // class java/lang/Object
+     101: dup
+     102: iconst_0
+     103: lload         7
+     105: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     108: aastore
+     109: dup
+     110: iconst_1
+     111: aload_3
+     112: aastore
+     113: dup
+     114: iconst_2
+     115: aload         4
+     117: aastore
+     118: dup
+     119: iconst_3
+     120: lload         5
+     122: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     125: aastore
+     126: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     129: pop
+     130: aload_0
+     131: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     134: ldc_w         #631                // String DELETE FROM ai_person_material WHERE account_id=? AND user_id=? AND generation=? AND id<=? AND kind IN(\'explicit_fact\',\'dialogue\',\'dialogue_assistant\',\'dialogue_end\',\'tool_result\',\'habit_analysis\')
+     137: iconst_4
+     138: anewarray     #116                // class java/lang/Object
+     141: dup
+     142: iconst_0
+     143: aload_3
+     144: aastore
+     145: dup
+     146: iconst_1
+     147: aload         4
+     149: aastore
+     150: dup
+     151: iconst_2
+     152: lload         5
+     154: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     157: aastore
+     158: dup
+     159: iconst_3
+     160: lload         7
+     162: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     165: aastore
+     166: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     169: pop
+     170: return
+
+  private void lambda$buildBatch$7(java.util.Map, org.springframework.transaction.TransactionStatus);
+    Code:
+       0: aload_1
+       1: ldc           #161                // String account_id
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #139                // class java/lang/Number
+      11: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      14: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      17: astore_3
+      18: aload_1
+      19: ldc           #159                // String user_id
+      21: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      26: checkcast     #112                // class java/lang/String
+      29: astore        4
+      31: aload_1
+      32: ldc           #137                // String generation
+      34: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      39: checkcast     #139                // class java/lang/Number
+      42: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      45: lstore        5
+      47: aload_0
+      48: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      51: ldc_w         #633                // String SELECT * FROM ai_person_memory_entity WHERE account_id=? AND user_id=? AND generation=? FOR UPDATE
+      54: iconst_3
+      55: anewarray     #116                // class java/lang/Object
+      58: dup
+      59: iconst_0
+      60: aload_3
+      61: aastore
+      62: dup
+      63: iconst_1
+      64: aload         4
+      66: aastore
+      67: dup
+      68: iconst_2
+      69: lload         5
+      71: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      74: aastore
+      75: invokevirtual #635                // Method org/springframework/jdbc/core/JdbcTemplate.queryForMap:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/Map;
+      78: astore        7
+      80: aload         7
+      82: ldc_w         #639                // String processed_watermark
+      85: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      90: checkcast     #139                // class java/lang/Number
+      93: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      96: lstore        8
+      98: aload         7
+     100: ldc_w         #641                // String daily_watermark
+     103: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     108: checkcast     #139                // class java/lang/Number
+     111: invokevirtual #141                // Method java/lang/Number.longValue:()J
+     114: lstore        10
+     116: ldc_w         #643                // String active
+     119: aload         7
+     121: ldc           #169                // String state
+     123: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     128: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     131: ifeq          142
+     134: lload         10
+     136: lload         8
+     138: lcmp
+     139: ifgt          143
+     142: return
+     143: aload_0
+     144: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     147: ldc_w         #645                // String SELECT COUNT(*) FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND state<>\'complete\'
+     150: ldc_w         #283                // class java/lang/Integer
+     153: iconst_3
+     154: anewarray     #116                // class java/lang/Object
+     157: dup
+     158: iconst_0
+     159: aload_3
+     160: aastore
+     161: dup
+     162: iconst_1
+     163: aload         4
+     165: aastore
+     166: dup
+     167: iconst_2
+     168: lload         5
+     170: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     173: aastore
+     174: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     177: checkcast     #283                // class java/lang/Integer
+     180: astore        12
+     182: aload         12
+     184: ifnull        196
+     187: aload         12
+     189: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     192: ifle          196
+     195: return
+     196: aload_0
+     197: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     200: ldc_w         #647                // String SELECT COUNT(*) FROM ai_memory_task WHERE account_id=? AND user_id=? AND generation=? AND state NOT IN(\'complete\',\'cancelled\')
+     203: ldc_w         #283                // class java/lang/Integer
+     206: iconst_3
+     207: anewarray     #116                // class java/lang/Object
+     210: dup
+     211: iconst_0
+     212: aload_3
+     213: aastore
+     214: dup
+     215: iconst_1
+     216: aload         4
+     218: aastore
+     219: dup
+     220: iconst_2
+     221: lload         5
+     223: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     226: aastore
+     227: invokevirtual #285                // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     230: checkcast     #283                // class java/lang/Integer
+     233: astore        13
+     235: aload         13
+     237: ifnull        249
+     240: aload         13
+     242: invokevirtual #289                // Method java/lang/Integer.intValue:()I
+     245: ifle          249
+     248: return
+     249: aload_0
+     250: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     253: ldc_w         #649                // String SELECT m.* FROM ai_person_material m JOIN ai_agent a ON a.id=m.agent_id AND a.user_id=m.account_id WHERE m.account_id=? AND m.user_id=? AND m.generation=? AND m.id>? AND m.id<=? AND m.recall_allowed=TRUE AND m.kind IN(\'explicit_fact\',\'dialogue\',\'dialogue_assistant\',\'dialogue_end\',\'tool_result\',\'habit_analysis\') AND a.mem_model_id=\'Memory_bailian\' ORDER BY m.id
+     256: iconst_5
+     257: anewarray     #116                // class java/lang/Object
+     260: dup
+     261: iconst_0
+     262: aload_3
+     263: aastore
+     264: dup
+     265: iconst_1
+     266: aload         4
+     268: aastore
+     269: dup
+     270: iconst_2
+     271: lload         5
+     273: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     276: aastore
+     277: dup
+     278: iconst_3
+     279: lload         8
+     281: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     284: aastore
+     285: dup
+     286: iconst_4
+     287: lload         10
+     289: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     292: aastore
+     293: invokevirtual #613                // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     296: astore        14
+     298: new           #384                // class java/util/HashSet
+     301: dup
+     302: invokespecial #386                // Method java/util/HashSet."<init>":()V
+     305: astore        15
+     307: aload         14
+     309: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     314: astore        16
+     316: aload         16
+     318: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     323: ifeq          383
+     326: aload         16
+     328: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     333: checkcast     #86                 // class java/util/Map
+     336: astore        17
+     338: ldc_w         #651                // String dialogue_end
+     341: aload         17
+     343: ldc_w         #653                // String kind
+     346: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     351: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     354: ifeq          380
+     357: aload         15
+     359: aload         17
+     361: ldc_w         #655                // String turn_id
+     364: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     369: ldc           #202                // String
+     371: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     374: invokeinterface #388,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     379: pop
+     380: goto          316
+     383: aload         14
+     385: invokeinterface #657,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     390: aload         15
+     392: invokedynamic #658,  0            // InvokeDynamic #15:test:(Ljava/util/Set;)Ljava/util/function/Predicate;
+     397: invokeinterface #661,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     402: invokedynamic #665,  0            // InvokeDynamic #16:applyAsLong:()Ljava/util/function/ToLongFunction;
+     407: invokeinterface #669,  2          // InterfaceMethod java/util/stream/Stream.mapToLong:(Ljava/util/function/ToLongFunction;)Ljava/util/stream/LongStream;
+     412: invokeinterface #673,  1          // InterfaceMethod java/util/stream/LongStream.min:()Ljava/util/OptionalLong;
+     417: ldc2_w        #679                // long 9223372036854775807l
+     420: invokevirtual #681                // Method java/util/OptionalLong.orElse:(J)J
+     423: lstore        16
+     425: aload         14
+     427: lload         16
+     429: invokedynamic #687,  0            // InvokeDynamic #17:test:(J)Ljava/util/function/Predicate;
+     434: invokeinterface #690,  2          // InterfaceMethod java/util/List.removeIf:(Ljava/util/function/Predicate;)Z
+     439: pop
+     440: aload         14
+     442: invokeinterface #100,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     447: ifeq          451
+     450: return
+     451: aload         14
+     453: invokeinterface #657,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     458: invokedynamic #693,  0            // InvokeDynamic #18:test:()Ljava/util/function/Predicate;
+     463: invokeinterface #661,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     468: invokedynamic #696,  0            // InvokeDynamic #19:applyAsLong:()Ljava/util/function/ToLongFunction;
+     473: invokeinterface #669,  2          // InterfaceMethod java/util/stream/Stream.mapToLong:(Ljava/util/function/ToLongFunction;)Ljava/util/stream/LongStream;
+     478: invokeinterface #697,  1          // InterfaceMethod java/util/stream/LongStream.sum:()J
+     483: lstore        18
+     485: lload         18
+     487: iconst_1
+     488: aload_0
+     489: getfield      #590                // Field minUserTokens:I
+     492: invokestatic  #700                // Method java/lang/Math.max:(II)I
+     495: i2l
+     496: lcmp
+     497: ifge          501
+     500: return
+     501: new           #384                // class java/util/HashSet
+     504: dup
+     505: invokespecial #386                // Method java/util/HashSet."<init>":()V
+     508: astore        20
+     510: aload         14
+     512: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     517: astore        21
+     519: aload         21
+     521: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     526: ifeq          567
+     529: aload         21
+     531: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     536: checkcast     #86                 // class java/util/Map
+     539: astore        22
+     541: aload         20
+     543: aload         22
+     545: ldc_w         #620                // String agent_id
+     548: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     553: ldc           #202                // String
+     555: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     558: invokeinterface #388,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     563: pop
+     564: goto          519
+     567: aload         14
+     569: aload_0
+     570: getfield      #298                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+     573: invokestatic  #706                // Method xiaozhi/modules/personmemory/MemoryMaterialPolicy.messages:(Ljava/util/List;Lcom/fasterxml/jackson/databind/ObjectMapper;)Ljava/util/List;
+     576: astore        21
+     578: aload         14
+     580: aload         14
+     582: invokeinterface #547,  1          // InterfaceMethod java/util/List.size:()I
+     587: iconst_1
+     588: isub
+     589: invokeinterface #103,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     594: checkcast     #86                 // class java/util/Map
+     597: ldc           #107                // String id
+     599: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     604: checkcast     #139                // class java/lang/Number
+     607: invokevirtual #141                // Method java/lang/Number.longValue:()J
+     610: lstore        22
+     612: new           #712                // class java/util/HashMap
+     615: dup
+     616: invokespecial #714                // Method java/util/HashMap."<init>":()V
+     619: astore        24
+     621: aload         24
+     623: ldc_w         #715                // String messages
+     626: aload         21
+     628: invokeinterface #716,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     633: pop
+     634: aload         24
+     636: ldc_w         #316                // String _material_agents
+     639: aload         20
+     641: invokeinterface #716,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     646: pop
+     647: aload_0
+     648: getfield      #13                 // Field service:Lxiaozhi/modules/personmemory/PersonMemoryService;
+     651: invokevirtual #720                // Method xiaozhi/modules/personmemory/PersonMemoryService.portraitsEnabled:()Z
+     654: ifeq          672
+     657: aload         24
+     659: ldc_w         #331                // String profile_schema
+     662: aload_0
+     663: getfield      #338                // Field schemaId:Ljava/lang/String;
+     666: invokeinterface #716,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     671: pop
+     672: aload_0
+     673: getfield      #298                // Field json:Lcom/fasterxml/jackson/databind/ObjectMapper;
+     676: aload         24
+     678: invokevirtual #723                // Method com/fasterxml/jackson/databind/ObjectMapper.writeValueAsString:(Ljava/lang/Object;)Ljava/lang/String;
+     681: astore        25
+     683: invokestatic  #726                // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.newId:()Ljava/lang/String;
+     686: astore        26
+     688: aload_0
+     689: getfield      #26                 // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     692: ldc_w         #731                // String INSERT INTO ai_memory_task(id,account_id,user_id,generation,kind,watermark,payload_hash,payload) VALUES(?,?,?,?,\'extract\',?,?,?) ON DUPLICATE KEY UPDATE payload=IF(state=\'cancelled\',VALUES(payload),payload),payload_hash=IF(state=\'cancelled\',VALUES(payload_hash),payload_hash),next_attempt_at=IF(state=\'cancelled\',NULL,next_attempt_at),state=IF(state=\'cancelled\',\'pending\',state)
+     695: bipush        7
+     697: anewarray     #116                // class java/lang/Object
+     700: dup
+     701: iconst_0
+     702: aload         26
+     704: aastore
+     705: dup
+     706: iconst_1
+     707: aload_3
+     708: aastore
+     709: dup
+     710: iconst_2
+     711: aload         4
+     713: aastore
+     714: dup
+     715: iconst_3
+     716: lload         5
+     718: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     721: aastore
+     722: dup
+     723: iconst_4
+     724: lload         22
+     726: invokestatic  #163                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     729: aastore
+     730: dup
+     731: iconst_5
+     732: aload         25
+     734: invokestatic  #733                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     737: aastore
+     738: dup
+     739: bipush        6
+     741: aload         25
+     743: aastore
+     744: invokevirtual #118                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     747: pop
+     748: goto          766
+     751: astore        24
+     753: new           #529                // class java/lang/IllegalStateException
+     756: dup
+     757: ldc_w         #736                // String batch_serialization_failed
+     760: aload         24
+     762: invokespecial #738                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     765: athrow
+     766: return
+    Exception table:
+       from    to  target type
+         612   748   751   Class java/lang/Exception
+
+  private static long lambda$buildBatch$6(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc_w         #741                // String user_tokens
+       4: iconst_0
+       5: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       8: invokeinterface #743,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #139                // class java/lang/Number
+      16: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      19: lstore_1
+      20: aload_0
+      21: ldc_w         #746                // String token_version
+      24: iconst_0
+      25: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      28: invokeinterface #743,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      33: checkcast     #139                // class java/lang/Number
+      36: invokevirtual #179                // Method java/lang/Number.intValue:()I
+      39: ifle          46
+      42: lload_1
+      43: goto          64
+      46: aload_0
+      47: ldc_w         #538                // String content
+      50: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      55: ldc           #202                // String
+      57: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      60: invokestatic  #748                // Method xiaozhi/modules/personmemory/MemoryMaterialPolicy.userTokens:(Ljava/lang/String;)I
+      63: i2l
+      64: lreturn
+
+  private static boolean lambda$buildBatch$5(java.util.Map);
+    Code:
+       0: ldc_w         #751                // String dialogue
+       3: ldc_w         #753                // String explicit_fact
+       6: invokestatic  #755                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+       9: aload_0
+      10: ldc_w         #653                // String kind
+      13: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      18: invokeinterface #251,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      23: ireturn
+
+  private static boolean lambda$buildBatch$4(long, java.util.Map);
+    Code:
+       0: aload_2
+       1: ldc           #107                // String id
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #139                // class java/lang/Number
+      11: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      14: lload_0
+      15: lcmp
+      16: iflt          23
+      19: iconst_1
+      20: goto          24
+      23: iconst_0
+      24: ireturn
+
+  private static long lambda$buildBatch$3(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc           #107                // String id
+       3: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #139                // class java/lang/Number
+      11: invokevirtual #141                // Method java/lang/Number.longValue:()J
+      14: lreturn
+
+  private static boolean lambda$buildBatch$2(java.util.Set, java.util.Map);
+    Code:
+       0: ldc_w         #751                // String dialogue
+       3: aload_1
+       4: ldc_w         #653                // String kind
+       7: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokevirtual #173                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      15: ifeq          67
+      18: aload_1
+      19: ldc_w         #746                // String token_version
+      22: iconst_0
+      23: invokestatic  #328                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      26: invokeinterface #743,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      31: checkcast     #139                // class java/lang/Number
+      34: invokevirtual #179                // Method java/lang/Number.intValue:()I
+      37: ifle          67
+      40: aload_0
+      41: aload_1
+      42: ldc_w         #655                // String turn_id
+      45: invokeinterface #109,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      50: ldc           #202                // String
+      52: invokestatic  #204                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      55: invokeinterface #251,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      60: ifne          67
+      63: iconst_1
+      64: goto          68
+      67: iconst_0
+      68: ireturn
+
+  private void lambda$tick$1();
+    Code:
+       0: aload_0
+       1: invokevirtual #758                // Method step:()V
+       4: aload_0
+       5: getfield      #38                 // Field running:Ljava/util/concurrent/atomic/AtomicBoolean;
+       8: iconst_0
+       9: invokevirtual #761                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      12: goto          56
+      15: astore_1
+      16: getstatic     #559                // Field log:Lorg/slf4j/Logger;
+      19: ldc_w         #765                // String memory worker deferred: {}
+      22: aload_1
+      23: invokevirtual #374                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokevirtual #378                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+      29: invokeinterface #565,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+      34: aload_0
+      35: getfield      #38                 // Field running:Ljava/util/concurrent/atomic/AtomicBoolean;
+      38: iconst_0
+      39: invokevirtual #761                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      42: goto          56
+      45: astore_2
+      46: aload_0
+      47: getfield      #38                 // Field running:Ljava/util/concurrent/atomic/AtomicBoolean;
+      50: iconst_0
+      51: invokevirtual #761                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      54: aload_2
+      55: athrow
+      56: return
+    Exception table:
+       from    to  target type
+           0     4    15   Class java/lang/Exception
+           0     4    45   any
+          15    34    45   any
+
+  private static java.lang.Thread lambda$new$0(java.lang.Runnable);
+    Code:
+       0: new           #767                // class java/lang/Thread
+       3: dup
+       4: aload_0
+       5: ldc_w         #769                // String person-memory-worker
+       8: invokespecial #771                // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;Ljava/lang/String;)V
+      11: astore_1
+      12: aload_1
+      13: iconst_1
+      14: invokevirtual #774                // Method java/lang/Thread.setDaemon:(Z)V
+      17: aload_1
+      18: areturn
+
+  static {};
+    Code:
+       0: ldc           #2                  // class xiaozhi/modules/personmemory/MemoryDailyWorker
+       2: invokestatic  #777                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #559                // Field log:Lorg/slf4j/Logger;
+       8: return
+}

@@ -1,0 +1,84 @@
+{
+  "cases": 36,
+  "passed": 30,
+  "failed": [
+    {
+      "group": "combo-02",
+      "turn": 1,
+      "errors": [
+        "requested_operation_not_completed:note_add",
+        "wrong_extra_write"
+      ]
+    },
+    {
+      "group": "combo-05",
+      "turn": 4,
+      "errors": [
+        "harness_error:operation_claim_requires_dispatch",
+        "missing_answer:完成|处理"
+      ]
+    },
+    {
+      "group": "combo-00",
+      "turn": 3,
+      "errors": [
+        "harness_error:1 validation error for Decision\n  Value error, non-operation cannot have steps [type=value_error, in",
+        "unfulfilled_business_reply",
+        "missing_answer:秦蕊",
+        "requested_operation_not_completed:memory_search"
+      ]
+    },
+    {
+      "group": "combo-01",
+      "turn": 5,
+      "errors": [
+        "harness_error:retrieval_budget_exhausted",
+        "unfulfilled_business_reply",
+        "missing_answer:林岚",
+        "requested_operation_not_completed:memory_search"
+      ]
+    },
+    {
+      "group": "combo-06",
+      "turn": 4,
+      "errors": [
+        "missing_answer:豆浆"
+      ]
+    },
+    {
+      "group": "combo-07",
+      "turn": 3,
+      "errors": [
+        "harness_error:tool_schema_not_provided",
+        "unfulfilled_business_reply",
+        "missing_answer:张宁",
+        "requested_operation_not_completed:memory_search"
+      ]
+    }
+  ],
+  "real_model_turns": 35,
+  "model_calls": 58,
+  "reused_cases": 0,
+  "new_cases": 36,
+  "reuse_source": null,
+  "all_same_version": true,
+  "budget": {
+    "case": {
+      "used": 294,
+      "limit": 800
+    },
+    "model": {
+      "used": 151,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

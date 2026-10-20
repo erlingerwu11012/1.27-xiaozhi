@@ -1,0 +1,8 @@
+{
+  "source_code_hash": "d04ce6b85a616d048cc2819fc7fde47f1331e49978d5863ba1d2ea316b26029c",
+  "sha256": "60c717ad4348a86afe949fc1675d8f310f05ff8086fb5e3767390e21a6529c99",
+  "regression_cases": 30,
+  "fresh_unseen_cases": 20,
+  "fresh_id_prefix": "blind2:",
+  "no_new_persona": true
+}

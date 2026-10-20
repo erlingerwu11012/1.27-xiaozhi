@@ -1,0 +1,241 @@
+{
+  "results": [
+    {
+      "step": "mysql-ledger",
+      "exit_code": 0
+    },
+    {
+      "step": "java-tests",
+      "exit_code": 0
+    },
+    {
+      "step": "java-build",
+      "exit_code": 0
+    },
+    {
+      "step": "vue-build",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_account_owner_and_reminder",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_asr_http_compat",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_audio_clock_compat",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_camera_mcp_tools",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_card_action",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_reminder",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_send_api",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_send_auth",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_device_ws_token_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_dialogue_contract_baseline",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_cancel_intent",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_contract",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_front_only_config",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_start_intent",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_face_enrollment_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_hardware_billing_proof",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_identity_snapshot_request",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_interaction_lifecycle_regression",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_mcp_initialize_identity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_memory_continuity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_multi_device_isolation",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_dialogue",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_params_volume",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_service_defaults",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_official_tts_compiler",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_pending_spine_redelivery",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_chat_init",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_identity",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_recovery",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_person_memory_tools",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_predeploy_asr_guards",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_proactive_greeting",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_prompt_pipeline_v2",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_qwen3_asr_realtime",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_qwen_audio_tts_plus",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_recipient_resolver",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_card_converge",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_control",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_interaction",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_voice",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_voice_abort",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_reminder_voice_download",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_spine_ota_central_integration",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_trace_log",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_listen_observe",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_sentence_telemetry",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_tts_subtitle",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_unified_recipient_outbound",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_utterance_state",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_vision_capability",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_vision_identify",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_wallpaper_ota_handler",
+      "exit_code": 0
+    },
+    {
+      "step": "python-test_websocket_session",
+      "exit_code": 0
+    }
+  ],
+  "schema_only_database": "bailian_memory_test_hardware70_f45f32d8",
+  "billing_database": "hardware_billing_test_295cfcea",
+  "upstream_calls": 0,
+  "cost_cny": "0",
+  "production_changed": false
+}

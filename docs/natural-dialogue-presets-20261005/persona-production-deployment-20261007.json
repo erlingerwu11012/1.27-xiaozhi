@@ -1,0 +1,58 @@
+{
+  "deployed": true,
+  "at_utc": "2026-10-07T03:51:24.988687+00:00",
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  },
+  "processes": {
+    "manager-api": "online",
+    "manager-web": "online",
+    "mcp-gateway": "online",
+    "xiaozhi-server": "online"
+  },
+  "source_files": {
+    "main/xiaozhi-server/core/utils/prompt_manager.py": {
+      "before": "242ab10e79ea8b94b5e989ad689b43933d1ddf865b61e1b2ecee172c7129f08c",
+      "after": "07ee09d5f675e8f81be1ef216d56d09122b8c7087c2186b8c675784717e48113"
+    },
+    "main/manager-web/src/constants/personaPresets.js": {
+      "before": "33b8e476a41a7da8125759a67c962a5211bc0344c63c2652139b762b9e25715a",
+      "after": "e06c4e392136790968a1432545f91e184b026636ce7f163bb2982eb1efbc1930"
+    }
+  },
+  "backup": "/root/prjs/tmp/persona-production-release-20261007/backup-20261007-035040",
+  "model": "qwen3.7-plus",
+  "thinking": false,
+  "temperature": 0.4,
+  "official_display": "回响现实官方服务",
+  "gateway": "http://127.0.0.1:3000/v1",
+  "model_config_unchanged": true,
+  "user_personas_unchanged": true,
+  "presets": 6,
+  "production_probe_turns": 21,
+  "native_mcp_time_queries": 7,
+  "no_query_controls": 7,
+  "tool_catalog_unchanged": true,
+  "physical_voice_test": false,
+  "known_limitations": [
+    "人格边界仍存在偶发偏离",
+    "上一轮测试出现中途事实偏差，不能承诺全部回复正确"
+  ],
+  "billing_policy_unchanged": true,
+  "production_billing_verification": {
+    "passed": true,
+    "signed_requests": 21,
+    "settled_bills": 21,
+    "upstream_cost_cny": 0.08571,
+    "sale_currency_cny": 0.285699,
+    "tokens": {
+      "input_tokens": 83746,
+      "output_tokens": 606,
+      "cached_tokens": 54144
+    },
+    "original_recharge_policy_preserved": true
+  },
+  "commit": "b82a2fcab77bf8e98fa4be825a84f7be09760983"
+}

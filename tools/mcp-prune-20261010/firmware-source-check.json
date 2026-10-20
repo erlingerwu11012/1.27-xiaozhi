@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "removed": [
+    "self.get_system_info",
+    "self.reboot",
+    "self.screen.get_info",
+    "self.screen.set_render_mode",
+    "self.screen.set_render_options",
+    "self.screen.get_render_status"
+  ],
+  "retained": [
+    "self.get_device_status",
+    "self.audio_speaker.set_volume",
+    "self.screen.set_brightness"
+  ],
+  "compiled": false,
+  "source_sha256": "d9e4ecde5a07d1d3992d3ffac37c07622d3b64288ae0da9f76a6577edce4db1e"
+}

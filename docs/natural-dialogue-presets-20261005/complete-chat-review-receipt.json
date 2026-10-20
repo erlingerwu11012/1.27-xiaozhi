@@ -1,0 +1,17 @@
+{
+  "production_commit": "35236f03a2741d9b63e5be113db9befd9f98a1d0",
+  "review_branch": "codex/conversation-validation-review-20261006",
+  "review_commit": "46289c8d94c16bcecd46b26f51c63953ad678928",
+  "review_root": "/root/prjs/tmp/complete-chat-review-20261006",
+  "deployed": false,
+  "sensitive_files_committed": false,
+  "source_sha256": {
+    "main/xiaozhi-server/core/connection.py": "01b15942791bf3b80f2e5bc7b9191c56d45320d905f8d5f6df2466dc9215df2c",
+    "main/xiaozhi-server/core/utils/conversation_turn.py": "1cac2d94b936e238c465d6f9fed98bc320dbaf33cec973faa1b8483384e534a7",
+    "main/xiaozhi-server/core/utils/conversation_guidance.py": "a78f570d52af564fe4c9a1c8682d70fac24c34a4a4920cc431b7c52710521855",
+    "main/xiaozhi-server/config/config_loader.py": "9c57c9c3553104bbe070a77b6fcc2042c3b1e4bc131a5e64293075c6bdb30e16",
+    "main/xiaozhi-server/test/test_conversation_turn.py": "ddcc2ac86d1ebdf54222c2c791bb7c5c70858d2d020604b4cef96cfd653a8c7f",
+    "main/xiaozhi-server/test/test_semantic_conversation_guard.py": "7dd7be55b1e5759f4a40e1f567412d1f4a4e05198fa501c3d67612dcdeda9a31",
+    "main/xiaozhi-server/test/test_conversation_config.py": "74f16dd955a5798496947c367bf493d8d863bd35213523ea9fd67d0f707c669f"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "backend_minimum_threshold": 0.2,
+  "allows_client_threshold_0_3": true,
+  "process_online": true
+}

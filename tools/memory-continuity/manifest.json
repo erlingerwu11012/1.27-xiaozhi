@@ -1,0 +1,23 @@
+{
+  "main/manager-api/src/main/java/xiaozhi/modules/agent/service/biz/impl/AgentChatHistoryBizServiceImpl.java": "fea7b3ffadb09fc7b0b2c044d0e115a06f85d5e602105d29ec14634c5be01a50",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/ArchiveRetentionWorker.java": "4d90cec846e6522ee1731bd6b736d3098e43ac9c7e9bbf77cbea41d13e28e67d",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/MemoryDailyWorker.java": "20325cc9b559f247d5edb6403af4cbd29112d450552a5a607a514484a3cc3094",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/MemoryMaterialPolicy.java": "9131a21275a8f65ee973e6c644fb25705e56f1a9d4e63466981ba529b82cbdf4",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java": "202cdfabcfe996c1cf13825a3ad9980c63f8ae4cfe686cf9f8f5bd0f58183e5e",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java": "cae91a1c10543a4a33c2b6f833644895154841142a5e366e7f75d092a7f80f77",
+  "main/manager-api/src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java": "0ade0404feeea45171a02af8711cad5592def83c68907d6af7966c2d1f17b54f",
+  "main/manager-api/src/main/resources/db/changelog/202609301900_memory_continuity.sql": "f462aac94d13d0dc591ac13e519332aaf97f2b27eda38cc13c8b4a63258e0957",
+  "main/manager-api/src/main/resources/db/changelog/db.changelog-master.yaml": "6e0c336ce5240e8818fe6607e86b884b7e74ae8eda938f43659e54cc1a37ffa7",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/MemoryContinuityDatabaseTest.java": "cb7d177e5df5811fe295716fdd2623f521c5c7758a77e808f0db3dbe6b5e087b",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/MemoryMaterialPolicyTest.java": "c5a115632cc5a6f2ca49c2a7f82772ba568039fe956057270f7131fc1682dbbb",
+  "main/manager-api/src/test/java/xiaozhi/modules/personmemory/PersonMemoryDatabaseTest.java": "fafbeb7f4895ee54bea68b9c051c4c05e8f52ad239ab4cf07d8f375fba660c61",
+  "main/xiaozhi-server/core/connection.py": "25458118fb34c4bdd1e625c926152540612b30425efdcf89c371ca8388f538a5",
+  "main/xiaozhi-server/core/handle/reportHandle.py": "2ba60e8db00923bdf48c1dd3b629cfb3ef601846c0fc36d5e493d51ae062bcba",
+  "main/xiaozhi-server/core/providers/memory/bailian/bailian.py": "8781d23915a176952fcf6d3f1c5cb4d02c56ae7a8d5b77593b48836fcbe63e95",
+  "main/xiaozhi-server/core/utils/person_identity.py": "f9044c70d827b4bb25ea1ed2dbf9d283b96eff47ec84fde49d23243628c0af03",
+  "main/xiaozhi-server/core/utils/person_short_memory.py": "0f08a8071493bf4bc9718269479d7bbb8e34f66f3b621e6abd8d8a37399ae998",
+  "main/xiaozhi-server/core/utils/recent_memory.py": "44fc3b05862b55b360fb4a0d244e466199ddfde784c6e283e04b9f70b0ae03a3",
+  "main/xiaozhi-server/test/test_memory_continuity.py": "264bc84d79fc84a925e9eb6dede96f2d83d47b4c4bb451791cc7ca88782783ba",
+  "main/xiaozhi-server/test/test_person_memory_chat_init.py": "44a17e074c7524c8b1f080e97f7763bac63dc7ba0f8bc314ed23088c79c995f4",
+  "main/xiaozhi-server/test/test_prompt_pipeline_v2.py": "76ed6ab96c22c7e4b64a843e6bddbd8f4346c6b9444c01889234001327b45b9e"
+}

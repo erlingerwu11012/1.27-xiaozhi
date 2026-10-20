@@ -1,0 +1,28 @@
+{
+  "cases": 322,
+  "passed": 322,
+  "failed_ids": [],
+  "real_model_turns": 275,
+  "model_requests": 281,
+  "holdout": 142,
+  "independent_holdout": 60,
+  "budget": {
+    "case": {
+      "used": 4207,
+      "limit": 4300
+    },
+    "model": {
+      "used": 2121,
+      "limit": 2200
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "production_modified": false
+}

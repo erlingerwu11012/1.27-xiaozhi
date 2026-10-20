@@ -1,0 +1,44 @@
+{
+  "audit_date_beijing": "2026-10-16",
+  "scope": "previously verified primary account, registered active and retired person entities only",
+  "operations": "GET memory_nodes by exact registered cloud user; GET saved task events; read-only SQL",
+  "new_model_calls": 0,
+  "new_search_calls": 0,
+  "new_extraction_calls": 0,
+  "current_cloud_lists": [
+    {"generation": 1, "entity_state": "retired", "http_status": 200, "total": 0, "returned_count": 0},
+    {"generation": 0, "entity_state": "active", "http_status": 200, "total": 0, "returned_count": 0}
+  ],
+  "historical_event_results": [
+    {
+      "task_created_at_beijing": "2026-09-30 00:44:15",
+      "generation": 1,
+      "http_status": 200,
+      "event_type": "ADD_ASYNC",
+      "status": "SUCCEEDED",
+      "results": [
+        {"event": "ADD", "content": "用户把书房里的测试小台灯取名为蓝松果"},
+        {"event": "ADD", "content": "蓝松果放在书房书桌左边"},
+        {"event": "ADD", "content": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的"},
+        {"event": "ADD", "content": "用户把测试笔记本取名为银月亮"}
+      ]
+    },
+    {
+      "task_created_at_beijing": "2026-09-30 00:49:03",
+      "generation": 1,
+      "http_status": 200,
+      "event_type": "ADD_ASYNC",
+      "status": "SUCCEEDED",
+      "results": [{"event": "ADD", "content": "用户把测试笔记本取名为“小山雀”"}]
+    },
+    {
+      "task_created_at_beijing": "2026-09-30 13:04:01",
+      "generation": 0,
+      "http_status": 200,
+      "event_type": "ADD_ASYNC",
+      "status": "SUCCEEDED",
+      "results": []
+    }
+  ],
+  "interpretation": "Real cloud execution is confirmed. Nonempty historical results here are test facts. The active-person task produced no facts. Current cloud node counts are zero; this is distinct from local memory, pending material, or conversation history."
+}

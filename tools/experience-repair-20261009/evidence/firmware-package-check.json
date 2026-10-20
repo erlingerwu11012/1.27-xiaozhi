@@ -1,0 +1,36 @@
+{
+  "package_checksums_passed": true,
+  "partition_layout": {
+    "nvs": [
+      36864,
+      65536
+    ],
+    "phy_init": [
+      102400,
+      4096
+    ],
+    "factory": [
+      131072,
+      5177344
+    ],
+    "userdata": [
+      5308416,
+      131072
+    ],
+    "assets": [
+      5439488,
+      5046272
+    ],
+    "spine": [
+      10485760,
+      4194304
+    ],
+    "wallpaper": [
+      14680064,
+      2097152
+    ]
+  },
+  "app_fits": true,
+  "source_app_identical_to_build": true,
+  "flash_performed": false
+}

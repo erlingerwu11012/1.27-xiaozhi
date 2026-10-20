@@ -1,0 +1,31 @@
+{
+  "budget": {
+    "case": {
+      "used": 1269,
+      "limit": 2000
+    },
+    "model": {
+      "used": 900,
+      "limit": 900
+    },
+    "tts": {
+      "used": 3,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "model_http_status": {
+    "200": 892,
+    "no_response_recorded": 8
+  },
+  "model_tokens": {
+    "total_tokens": 3017123,
+    "completion_tokens": 57006,
+    "prompt_tokens": 2960117
+  },
+  "cost_currency_amount": null,
+  "cost_note": "Token usage recorded. Exact billed amount not fetched from ledger; no estimated price substituted."
+}

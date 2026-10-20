@@ -1,0 +1,36 @@
+"""Expose the existing timed-note route without depending on a server MCP link."""
+import copy
+
+from .base import ToolDefinition, ToolType
+
+
+def timed_note_definition(conn, tools):
+    note = tools.get('note_add')
+    client = getattr(conn, 'mcp_client', None)
+    if (note is None or note.tool_type != ToolType.DEVICE_MCP or not client
+            or not getattr(client, 'ready', False) or getattr(client, 'closed', False)):
+        return None
+    if not (client.has_tool('note_add') or client.has_tool('note.add')):
+        return None
+    return ToolDefinition(
+        name='add_reminder', tool_type=ToolType.DEVICE_MCP,
+        description={'type': 'function', 'function': {
+            'name': 'add_reminder',
+            'description': '创建这台设备的定时事项提醒。使用用户原文和自然语言时间，由服务端计算时间并校验收件人。',
+            'parameters': {'type': 'object', 'properties': {
+                'text': {'type': 'string', 'minLength': 1, 'maxLength': 2048},
+                'content': {'type': 'string', 'maxLength': 1024},
+                'remind_time_str': {'type': 'string', 'maxLength': 128},
+            }, 'required': ['text'], 'additionalProperties': False},
+        }},
+        parameters={'adapter': 'device_timed_note', 'raw_tool': 'note_add',
+                    'target_definition': copy.deepcopy(note.description),
+                    'target_parameters': copy.deepcopy(note.parameters or {})})
+
+
+def is_timed_note_adapter(definition):
+    params = definition.parameters or {}
+    return (definition.tool_type == ToolType.DEVICE_MCP
+            and params.get('adapter') == 'device_timed_note'
+            and params.get('raw_tool') == 'note_add'
+            and bool(params.get('target_definition')))

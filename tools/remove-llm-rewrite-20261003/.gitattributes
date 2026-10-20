@@ -1,0 +1,4 @@
+# Preserve byte-identical deployment and baseline files for SHA256 guards.
+before/** -text
+delivery/** -text
+source.patch -text

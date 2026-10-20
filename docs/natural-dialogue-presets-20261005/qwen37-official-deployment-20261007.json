@@ -1,0 +1,101 @@
+{
+  "deployed": true,
+  "at_utc": "2026-10-06T17:42:50.365831+00:00",
+  "display_name": "回响现实官方服务",
+  "model": "qwen3.7-plus",
+  "temperature": 0.4,
+  "max_tokens": 600,
+  "thinking": false,
+  "gateway_base_url": "http://127.0.0.1:3000/v1",
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  },
+  "processes": {
+    "manager-api": "online",
+    "mcp-gateway": "online",
+    "xiaozhi-server": "online"
+  },
+  "personas_memory_unchanged": true,
+  "tool_retrieval_sources_unchanged": true,
+  "production_owned_bill_settled": true,
+  "usage": {
+    "confirmed": true,
+    "source": "upstream",
+    "upstream_request_id": "chatcmpl-25a28eb3-20be-9b9d-ab7f-d10ca13ae031",
+    "input_tokens": 23,
+    "output_tokens": 3,
+    "cached_tokens": 0
+  },
+  "price": {
+    "legacy_input_rate": "0.142",
+    "legacy_output_rate": "0.568",
+    "version": "aliyun-beijing-20261007-qwen37",
+    "region": "cn-beijing",
+    "model": "qwen3.7-plus",
+    "operation": "llm",
+    "mode": "non_thinking",
+    "source_url": "https://help.aliyun.com/zh/model-studio/qwen3-7-plus",
+    "unit": "tokens",
+    "tiers": [
+      {
+        "max_input": 256000,
+        "input_per_million": "2",
+        "output_per_million": "8",
+        "cached_per_million": "0.4"
+      },
+      {
+        "max_input": 991808,
+        "input_per_million": "6",
+        "output_per_million": "24",
+        "cached_per_million": "1.2"
+      }
+    ]
+  },
+  "backup": "/root/prjs/tmp/qwen37-official-release-20261007/backup-20261006-174229",
+  "image": "one-api:qwen37-official-20261007",
+  "source_files": {
+    "python:core/utils/conversation_guidance.py": {
+      "before": "b9bab6a932abf0a1c50c43ea493b24d1498b27c9315dae14a8948409cdac9dfc",
+      "after": "6b3f87e3d4d8bff7aa5700ceac36141e7918ae6f92072152bcec5d89e6d800a9"
+    },
+    "python:core/utils/prompt_manager.py": {
+      "before": "ed6735673255be75ed088dd90f2ccad1ad9121d16cc639160b9a4823a11fe62d",
+      "after": "242ab10e79ea8b94b5e989ad689b43933d1ddf865b61e1b2ecee172c7129f08c"
+    },
+    "python:core/providers/llm/openai/openai.py": {
+      "before": "386c365a872141a4aee4e03357372eac7566111c31ee38b6f0829b8b431c7290",
+      "after": "2f0cf57cffeb08bea9cfdc5924a786c4becf9c8463f6319f0bc58ec35d7a0a92"
+    },
+    "python:core/utils/operation_control.py": {
+      "before": "dc7ae30f6675ff6f9138c9c3e67d2580ae44cb9314d3996187808004018bba5a",
+      "after": "f968ccf382009e8339552386d7d3f6ae020ea4d9fcbb20afec96b01d1e637b64"
+    },
+    "python:core/providers/tools/unified_tool_manager.py": {
+      "before": "9357f00758eb568ff687a829df8c482a21237a850d2aed847c5a53ef045c8697",
+      "after": "5f87584d99903209abdfc3a79a92cc3168c07f4ca523e3a242a3b89ec6a9e2b5"
+    },
+    "manager:src/main/java/xiaozhi/modules/model/OfficialServiceDefaults.java": {
+      "before": "470e35aa55508d4fa5d860e5f53015f2252a1ec34b0f2ba11ce65e7b809d5fbe",
+      "after": "e3d86995678d844ac2bd559e090981adf9f3f03b6c850266d9a15f6081a013b2"
+    },
+    "gateway:hardwarebilling/pricing.go": {
+      "before": "6afa9cb332800c40ac1845e4790998211af82eaad498981993d5d3ed48aa41e5",
+      "after": "019f5570ee108135e2b1b4f582f9555c3c841bc5ef1baf9923c99e5069a285b5"
+    },
+    "gateway:relay/controller/hardware_billing.go": {
+      "before": "6137d2c90c9a1793067c29f694c5c3cda12237d15f5463568d9bc59b019e8e75",
+      "after": "cccc397c8c55b54838a30b4114b954595952389d215ef8f85bcec1df92a96ce4"
+    },
+    "gateway:relay/billing/ratio/model.go": {
+      "before": "4cb40db60fec4d2168f78bd66349cb3f23460908bdbc4213753322f5c73fecaa",
+      "after": "5cd18fa5a59b01eb83da6f3308663b8868420fc4bee94fb0c77ef7eeb0973c90"
+    },
+    "python:core/utils/hardware_billing.py": {
+      "before": "675b2cf575b97a0dc0f3aa466b4fd8a855fe87413faeeaef38ef2dbef8eb1e50",
+      "after": "14f8703c939d95fda8516908428140581191443b81d54f4c8b8a1b0b3338c05f"
+    }
+  },
+  "physical_hardware_test": false
+}

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "missing_resources": [],
+  "changed_classes": [],
+  "resource_files_restored": 14,
+  "unauthorized_checks": [
+    {
+      "language": "zh-CN",
+      "token": "missing",
+      "status": 200,
+      "code": 401
+    },
+    {
+      "language": "zh-CN",
+      "token": "invalid",
+      "status": 200,
+      "code": 401
+    },
+    {
+      "language": "en-US",
+      "token": "missing",
+      "status": 200,
+      "code": 401
+    },
+    {
+      "language": "en-US",
+      "token": "invalid",
+      "status": 200,
+      "code": 401
+    }
+  ],
+  "jar_sha256": "1e872e402e7d074dc24f3fd03787663eb4a7b46f7926f29cbba5c4b2f7f5a051",
+  "time": 1790857176
+}

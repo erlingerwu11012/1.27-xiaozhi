@@ -1,0 +1,29 @@
+[
+  {
+    "text": "亮度已调到4档。",
+    "path": "audio-780.wav",
+    "frames": 28960,
+    "sample_rate": 16000,
+    "duration": 1.81,
+    "channels": 1,
+    "sha256": "56ff3fb7f648647490d2b9c3245d449d29b9553ee749ace13964ed9f9c7a8513"
+  },
+  {
+    "text": "当前提醒是：拿快递。",
+    "path": "audio-782.wav",
+    "frames": 40480,
+    "sample_rate": 16000,
+    "duration": 2.53,
+    "channels": 1,
+    "sha256": "6097b335a3e1462076012b080b9c907c446deae21754f71d94b3fb37de2291ef"
+  },
+  {
+    "text": "本次提醒已确认完成。",
+    "path": "audio-784.wav",
+    "frames": 34080,
+    "sample_rate": 16000,
+    "duration": 2.13,
+    "channels": 1,
+    "sha256": "84c194687915c2c052c586cc6b589d393050271a6fac839f330e912d1ca7412c"
+  }
+]

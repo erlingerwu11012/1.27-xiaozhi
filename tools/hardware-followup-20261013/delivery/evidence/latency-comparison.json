@@ -1,0 +1,14 @@
+{
+  "text_baseline_p50": 1.6696681160010485,
+  "text_candidate_p50": 1.7283223585000087,
+  "tool_baseline_p95": 5.179946545002167,
+  "tool_candidate_p95": 5.110183116998087,
+  "audio_baseline_matched_p50": 2.294894006499817,
+  "audio_candidate_matched_p50": 2.1927052324990655,
+  "audio_baseline_n": 4,
+  "audio_candidate_n": 6,
+  "audio_matched_n": 4,
+  "percentile_method": "nearest rank; 8 tool samples; small sample only",
+  "tool_gate": true,
+  "audio_gate": true
+}

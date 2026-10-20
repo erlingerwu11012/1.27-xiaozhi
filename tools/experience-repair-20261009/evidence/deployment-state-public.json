@@ -1,0 +1,233 @@
+{
+  "billing_env_hashes": {
+    "HW_BILLING_SERVICE_KEY": "f720b8e0cc2f40a9e2c6a07bcfa3d6f3a52231856de048afcf05542d430d1490",
+    "HW_BILLING_GATEWAY_ORIGIN": "0398673719884a6295ed087fe9520379ddb77f6a812044908fca120b687cc4b2",
+    "HW_BILLING_AUDIO_GATEWAY_ORIGIN": "d61acd05df082727859b5f103232458a09ee055bf75a57dadcda264557dc1fe6"
+  },
+  "phase": "deployed_verified",
+  "started_at": 1791534196.7662554,
+  "gate": {
+    "requirements": {
+      "complete": true,
+      "no_failed_rows": true,
+      "real_final_model_turns": true,
+      "new_independent_holdout": true,
+      "cases_frozen": true,
+      "python_frozen": true,
+      "fixtures_frozen": true,
+      "java_frozen": true,
+      "jar_frozen": true,
+      "summary_complete": true,
+      "latest-regression-summary.json": true,
+      "focused-regression-summary.json": true,
+      "lifecycle-summary.json": true,
+      "http-api-results.json": true,
+      "live-query-note-results.json": true,
+      "query-lifecycle-replay-summary.json": true,
+      "relative-feedback-replay-summary.json": true,
+      "relative-feedback-final-check.json": true,
+      "read-repair-final-check.json": true,
+      "java_database_tests": true,
+      "real_audio": true,
+      "vision_http": true,
+      "budget": true
+    },
+    "passed": true,
+    "cases": 322,
+    "verified_operations": 204,
+    "common_cases": 101,
+    "real_model_turns": 275,
+    "model_requests": 281,
+    "p50_ms": 2134.56,
+    "p95_ms": 4519.18,
+    "budget": {
+      "case": {
+        "used": 4207,
+        "limit": 4300
+      },
+      "model": {
+        "used": 2121,
+        "limit": 2200
+      },
+      "tts": {
+        "used": 6,
+        "limit": 12
+      },
+      "vision": {
+        "used": 2,
+        "limit": 6
+      }
+    },
+    "at": 1791534185.9986322,
+    "hardware": false,
+    "source": {
+      "core/api/vision_handler.py": "abe3e62c65d9f7f0c1a4576265e01bc36df3eaafbf53c08d6fbd39af67434366",
+      "core/utils/device_reminder.py": "76726a4d769dd74a2e524f0a3ea438553dd9bb7b8ba622fe2f0a8211b336cebe",
+      "core/websocket_server.py": "90e4e37d7e1b4265b3ea3940b65be1e62acf0f72192dc24ad33dabb17cf4c60a",
+      "core/providers/memory/bailian/bailian.py": "0d7ddcee6c711a621891046d9cc142a5b8432f8e97d98f2d06eb985aedce4d38",
+      "core/handle/helloHandle.py": "d5e7667046ba7bb058631c1fd82a7887e32a4d519ddcd4eec3b93a44dbce0fc1",
+      "core/utils/vision_capability.py": "99b7ed6a4436c6410cad1d1b1f7b49b938b2686d7f280695f5ab878e583aa4cd",
+      "core/providers/tools/device_mcp/mcp_executor.py": "779075b0830c5f4f06d68badbbf93c752b858a101a68549b049c321becfbe470",
+      "core/connection.py": "d694f4ed3bf7d814cf8e245d0aa93e7fc188d6580d7368bbb6f5a2e0fac387aa",
+      "core/handle/abortHandle.py": "4d477a6ba06a5043aeac232ae43cd38c54046ab9081dc09fb37c2f66d6bce7fc",
+      "core/handle/receiveAudioHandle.py": "85de9a1a2700514cc88d29eaa5ad1a3079f033c4b25594ebb453d9496fb0e316",
+      "core/utils/tool_harness/models.py": "950c80b9f4b1d352fab28e907d5af3ad8b9ac65b5b0b6c8a1cad9e870a0bda04",
+      "core/utils/tool_harness/runtime.py": "1535c988a449f1fb327001d48a0424f28e97cb2e7437a7081f1d8e87291f2231",
+      "core/utils/tool_harness/contracts.py": "075f64d9fd3b7ba797bf436e17b8643fe763a881992bd9b1d94d7cb0ca575137",
+      "core/utils/tool_harness/presentation.py": "98fe9ca411e3f13c4ec0cd4680673b613633db7d60e2f8b3835e67e9d8206201",
+      "core/utils/tool_harness/domains.py": "f63aedc43fd98eadd58e345658adcad61ad4f903cbf774eeb998cfd92c939bbf",
+      "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+      "core/utils/recent_memory.py": "ba681065589291ff9b0a50ff734f0a017338dadae7355306e919c4697ea379ac",
+      "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+    },
+    "jar_sha256": "c4c71b525f108d50b0c7c801684dd650eefb026fd0a5f405aea603b7501afa33"
+  },
+  "old": {
+    "xiaozhi-server": 6,
+    "manager-api": 2
+  },
+  "new": {
+    "manager-api": 7,
+    "xiaozhi-server": 8
+  },
+  "baseline": {
+    "core/api/vision_handler.py": "24f6f16605a21bc845d04f2f0c62675eaff89e14d7edac1166c7d4b41427e585",
+    "core/utils/device_reminder.py": "eca4fc6eca557d18704ebe7e629958f41fc121219e31f9c9fbb54964405cdd7b",
+    "core/websocket_server.py": "7ee964fce6640b50d06642c8bf1ec8eeb827190c35017b86dee21010ea3b38c3",
+    "core/providers/memory/bailian/bailian.py": "8781d23915a176952fcf6d3f1c5cb4d02c56ae7a8d5b77593b48836fcbe63e95",
+    "core/handle/helloHandle.py": "fe16be27176e2e84dc899105a445f556ebe31551580f7c69a49a866796618ce0",
+    "core/utils/vision_capability.py": "fb406a69725b8ba68a198ce62ab0f466f1262fd581d6df6511d845b0b3bf12b4",
+    "core/providers/tools/device_mcp/mcp_executor.py": "83c5ffa88670fe0da1763e855aeb0fd7b23e69d7f1397e5009ecc5c676c2b4e2",
+    "core/connection.py": "39d175e3931c31be7de143a58d5d06177549648da139e8f548683d94e88ad4d0",
+    "core/handle/abortHandle.py": "fc2fa858d7d4e9dfb759a9147ae20841b92fa69ef71cd365d7606a9620d72a4f",
+    "core/handle/receiveAudioHandle.py": "aaf7723f2dea837e665edc7091133e5e271cdd8fe9a310ee2234e1218f41fc72",
+    "core/utils/tool_harness/models.py": "4c6232f74c4922e82fea110b1497e12438dd54918df95a06558470b54a3f7af5",
+    "core/utils/tool_harness/runtime.py": "55bb09ff980b1c95e555724c93bdc1bb97fd2e03cd14a38a7586e81d6092d924",
+    "core/utils/tool_harness/contracts.py": "67f528fc91a0b73a8942031edc5b9d386439a7c9872959f644aef5c75b45e4cc",
+    "core/utils/tool_harness/presentation.py": null,
+    "core/utils/tool_harness/domains.py": null,
+    "core/utils/tool_result.py": "9e8103deb1d464c2c0011fc0ab5908642203d1be29f6f7ed1cc80ce49324d1ec",
+    "core/utils/recent_memory.py": "44fc3b05862b55b360fb4a0d244e466199ddfde784c6e283e04b9f70b0ae03a3",
+    "core/utils/unified_recipient_resolver.py": "323453cb232493816b407876f936cb9f2070621bcfacfe626716a7ff38577089"
+  },
+  "source": {
+    "core/api/vision_handler.py": "abe3e62c65d9f7f0c1a4576265e01bc36df3eaafbf53c08d6fbd39af67434366",
+    "core/utils/device_reminder.py": "76726a4d769dd74a2e524f0a3ea438553dd9bb7b8ba622fe2f0a8211b336cebe",
+    "core/websocket_server.py": "90e4e37d7e1b4265b3ea3940b65be1e62acf0f72192dc24ad33dabb17cf4c60a",
+    "core/providers/memory/bailian/bailian.py": "0d7ddcee6c711a621891046d9cc142a5b8432f8e97d98f2d06eb985aedce4d38",
+    "core/handle/helloHandle.py": "d5e7667046ba7bb058631c1fd82a7887e32a4d519ddcd4eec3b93a44dbce0fc1",
+    "core/utils/vision_capability.py": "99b7ed6a4436c6410cad1d1b1f7b49b938b2686d7f280695f5ab878e583aa4cd",
+    "core/providers/tools/device_mcp/mcp_executor.py": "779075b0830c5f4f06d68badbbf93c752b858a101a68549b049c321becfbe470",
+    "core/connection.py": "d694f4ed3bf7d814cf8e245d0aa93e7fc188d6580d7368bbb6f5a2e0fac387aa",
+    "core/handle/abortHandle.py": "4d477a6ba06a5043aeac232ae43cd38c54046ab9081dc09fb37c2f66d6bce7fc",
+    "core/handle/receiveAudioHandle.py": "85de9a1a2700514cc88d29eaa5ad1a3079f033c4b25594ebb453d9496fb0e316",
+    "core/utils/tool_harness/models.py": "950c80b9f4b1d352fab28e907d5af3ad8b9ac65b5b0b6c8a1cad9e870a0bda04",
+    "core/utils/tool_harness/runtime.py": "1535c988a449f1fb327001d48a0424f28e97cb2e7437a7081f1d8e87291f2231",
+    "core/utils/tool_harness/contracts.py": "075f64d9fd3b7ba797bf436e17b8643fe763a881992bd9b1d94d7cb0ca575137",
+    "core/utils/tool_harness/presentation.py": "98fe9ca411e3f13c4ec0cd4680673b613633db7d60e2f8b3835e67e9d8206201",
+    "core/utils/tool_harness/domains.py": "f63aedc43fd98eadd58e345658adcad61ad4f903cbf774eeb998cfd92c939bbf",
+    "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+    "core/utils/recent_memory.py": "ba681065589291ff9b0a50ff734f0a017338dadae7355306e919c4697ea379ac",
+    "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+  },
+  "java_rel": [
+    "src/main/java/xiaozhi/modules/personmemory/MemoryDailyWorker.java",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java",
+    "src/main/java/xiaozhi/modules/personmemory/MemoryMaterialPolicy.java",
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java"
+  ],
+  "nginx": "/etc/nginx/sites-available/www.realecho.cn",
+  "old_nginx_sha": "5018cd0de12ee973c7328a2138a2525a98f98a6e8fe182aa46924790a812043a",
+  "old_internal_sha": "d572e8396a9e63b7a6d211c1e9342271cf052a922b7db138d226459d6cfc6157",
+  "hardware": false,
+  "ledger_retained": true,
+  "new_nginx_sha": "36af51b4a2204d2200a7524470d0affc54533215172423aea0e2be7b1b0b0ece",
+  "api_overlap_seconds": 0.5751354694366455,
+  "compat_sha": "8f35bc560fb976f68f5d8e4bc08567200de21b90e71c8e007740e32a2dd71438",
+  "candidate_readiness": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "manager_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "new_internal_sha": "3898639478c85cec8c71103bf0d28a48eeca0dab619aa8f9f41ef2ba1aa1f0f3",
+  "formal_readiness": [
+    {
+      "name": "http",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "name": "internal_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "habit_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "manager_auth",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "name": "www",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "api",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "public_ws",
+      "passed": true,
+      "code": "invalid_token"
+    },
+    {
+      "name": "api_ws",
+      "passed": true,
+      "code": "invalid_token"
+    }
+  ],
+  "installed_java": {
+    "src/main/java/xiaozhi/modules/personmemory/MemoryDailyWorker.java": "30192d2b9c7793fdba529f4f0e459205240c08a55b3e91a31dbdc1272ff9918d",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryController.java": "91cf4dcfb252d1661d28c00e84c07398dca6303e71ae84d017098585d7793b25",
+    "src/main/java/xiaozhi/modules/personmemory/PersonMemoryService.java": "93f4c7a5af2963ff521bc68e2609ced0a8eb15bd640e6a680302cb7be9cdf2ed",
+    "src/main/java/xiaozhi/modules/personmemory/MemoryMaterialPolicy.java": "d11696879816a72d3773463330881b856f39c20b5ad58b7c9e4dd3173e13ecca",
+    "src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java": "93f6e242cc391caf0e3b7b005b30aa15515a9a6e328c6845f7e8a8cde22f6114"
+  },
+  "deployed_at": 1791534215.1906164,
+  "finished_at": 1791536016.3784246,
+  "observation_count": 31
+}

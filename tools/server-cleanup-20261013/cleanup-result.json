@@ -1,0 +1,128 @@
+{
+  "started_at": 1791892723.0166385,
+  "before_free_bytes": 8569712640,
+  "services_before": [
+    {
+      "id": 0,
+      "pid": 1338,
+      "name": "pm2-logrotate",
+      "path": "/root/.pm2/modules/pm2-logrotate/node_modules/pm2-logrotate/app.js"
+    },
+    {
+      "id": 1,
+      "pid": 1351,
+      "name": "aimi-character-worker",
+      "path": "/root/aimi-character-staging-20260908/source/main/character-service/tools/manage.py"
+    },
+    {
+      "id": 2,
+      "pid": 1352,
+      "name": "manager-web",
+      "path": "/usr/bin/npm"
+    },
+    {
+      "id": 3,
+      "pid": 1360,
+      "name": "voiceprint-api",
+      "path": "/root/miniconda3/envs/voiceprint-api/bin/python"
+    },
+    {
+      "id": 4,
+      "pid": 1369,
+      "name": "mcp-gateway",
+      "path": "/root/prjs/xiaozhi_mcp_gateway/main.py"
+    },
+    {
+      "id": 11,
+      "pid": 1397,
+      "name": "manager-api",
+      "path": "/root/prjs/releases/harness-followup-20261013/start-manager-api.sh"
+    },
+    {
+      "id": 13,
+      "pid": 29506,
+      "name": "xiaozhi-server",
+      "path": "/root/prjs/releases/tts-spine-sync-20261013/serve.py"
+    }
+  ],
+  "actions": [
+    {
+      "action": "git_gc_no_pruning",
+      "before_bytes": 1454612480,
+      "after_bytes": 837054464,
+      "all_objects_preserved": true,
+      "refs_head_and_tracked_working_state_preserved": true
+    },
+    {
+      "action": "compress_old_sql_backup_losslessly",
+      "original": "/root/prjs/xiaozhi-esp32-server/docs/deployments/artifacts/official-tts-fullcap-20260918-prod/backup/db/xiaozhi_esp32_server.sql",
+      "compressed": "/root/prjs/xiaozhi-esp32-server/docs/deployments/artifacts/official-tts-fullcap-20260918-prod/backup/db/xiaozhi_esp32_server.sql.gz",
+      "before_bytes": 242749135,
+      "after_bytes": 158430925,
+      "uncompressed_sha256": "fe0848c9af841168b1a6729f339e143fd2759efc76fb1676936bad25e914fe48",
+      "restore": "gunzip -c compressed_path > restored_sql_path"
+    },
+    {
+      "action": "compress_old_sql_backup_losslessly",
+      "original": "/root/prjs/xiaozhi-esp32-server/docs/deployments/artifacts/official-tts-fullcap-20260918-prod/backup/db/one_api.sql",
+      "compressed": "/root/prjs/xiaozhi-esp32-server/docs/deployments/artifacts/official-tts-fullcap-20260918-prod/backup/db/one_api.sql.gz",
+      "before_bytes": 481674,
+      "after_bytes": 87767,
+      "uncompressed_sha256": "e3fa84f17026e099768e79194e793a670e7a323b63d183f55ed8918cc55ed0a2",
+      "restore": "gunzip -c compressed_path > restored_sql_path"
+    },
+    {
+      "action": "remove_untracked_rebuildable_production_webpack_cache",
+      "path": "/root/prjs/xiaozhi-esp32-server/main/manager-web/.webpack_cache/default-production",
+      "bytes": 100560896
+    }
+  ],
+  "after_free_bytes": 9371156480,
+  "services_after": [
+    {
+      "id": 0,
+      "pid": 1338,
+      "name": "pm2-logrotate",
+      "path": "/root/.pm2/modules/pm2-logrotate/node_modules/pm2-logrotate/app.js"
+    },
+    {
+      "id": 1,
+      "pid": 1351,
+      "name": "aimi-character-worker",
+      "path": "/root/aimi-character-staging-20260908/source/main/character-service/tools/manage.py"
+    },
+    {
+      "id": 2,
+      "pid": 1352,
+      "name": "manager-web",
+      "path": "/usr/bin/npm"
+    },
+    {
+      "id": 3,
+      "pid": 1360,
+      "name": "voiceprint-api",
+      "path": "/root/miniconda3/envs/voiceprint-api/bin/python"
+    },
+    {
+      "id": 4,
+      "pid": 1369,
+      "name": "mcp-gateway",
+      "path": "/root/prjs/xiaozhi_mcp_gateway/main.py"
+    },
+    {
+      "id": 11,
+      "pid": 1397,
+      "name": "manager-api",
+      "path": "/root/prjs/releases/harness-followup-20261013/start-manager-api.sh"
+    },
+    {
+      "id": 13,
+      "pid": 29506,
+      "name": "xiaozhi-server",
+      "path": "/root/prjs/releases/tts-spine-sync-20261013/serve.py"
+    }
+  ],
+  "completed_at": 1791892815.2919896,
+  "freed_bytes": 801443840,
+  "service_pids_unchanged": true
+}

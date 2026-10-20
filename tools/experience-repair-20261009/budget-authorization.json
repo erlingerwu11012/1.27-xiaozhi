@@ -1,0 +1,9 @@
+{
+  "model_limit": 850,
+  "case_limit": 2000,
+  "previous_model_limit": 600,
+  "reason": "User authorized continuing with quality first and cost savings second after explicit 850-request proposal",
+  "time": 1791521524.925104,
+  "prior_core_cases_retained": 240,
+  "fresh_independent_holdout": 60
+}

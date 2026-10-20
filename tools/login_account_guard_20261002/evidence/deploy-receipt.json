@@ -1,0 +1,10 @@
+{
+  "backup": "/root/prjs/tmp/login-account-guard-20261002/backup-20261002T114338Z",
+  "published_utc": "20261002T114338Z",
+  "app": "/js/app.65f45345.js",
+  "source_before": "ab9bc9d710460bd9ed68af7da2baa9f6c22d27191e934427b958d0106603a0f0",
+  "source_after": "cde419d389f66d29e69eccea21a3992b6863f695815a29736a0d548a4c5aa34c",
+  "index_before": "f1f9e16ce876e9f9b5574794c4ad7d53a2a69335a132db3b6c5f299501a40eb1",
+  "index_after": "d26e8564abe521851e9fb7d10879cc2a0393d07aacb6dd0b64f90dd9c21baaee",
+  "published": true
+}

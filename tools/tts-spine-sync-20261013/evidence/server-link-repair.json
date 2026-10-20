@@ -1,0 +1,9 @@
+{
+  "at": 1791888950.0672228,
+  "verified_duplicate_files": 19,
+  "verified_duplicate_bytes": 944081061,
+  "models_link": "/root/prjs/xiaozhi-esp32-server/main/xiaozhi-server/models",
+  "removed_only_this_release_duplicate": true,
+  "original_models_retained": true,
+  "free_bytes_after": 28061696
+}

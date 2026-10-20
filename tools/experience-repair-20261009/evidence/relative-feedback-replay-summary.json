@@ -1,0 +1,24 @@
+{
+  "cases": 268,
+  "failed": [],
+  "passed": true,
+  "paid_requests": 0,
+  "budget": {
+    "case": {
+      "used": 3510,
+      "limit": 4000
+    },
+    "model": {
+      "used": 1563,
+      "limit": 2000
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  }
+}

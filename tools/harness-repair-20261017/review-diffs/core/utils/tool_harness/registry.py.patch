@@ -1,0 +1,13 @@
+--- a/core/utils/tool_harness/registry.py
++++ b/core/utils/tool_harness/registry.py
+@@ -13,6 +13,10 @@
+     return getattr(source,'value',str(source))
+ 
+ def audited_source(name,definition):
++    if name == 'add_reminder':
++        from core.providers.tools.device_reminder_adapter import is_timed_note_adapter
++        if is_timed_note_adapter(definition):
++            return contract(name).known
+     expected=DECLARATIONS.get(name,{}).get('source')
+     return name not in RETIRED and contract(name).known and binding(definition)==expected
+ def manifest(manager):

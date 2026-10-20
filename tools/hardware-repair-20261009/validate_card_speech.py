@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('tools/hardware-repair-20261009/run_model.py');s=p.read_text(encoding='utf-8').replace('from core.utils.tool_harness.reply_composer import unsafe\n','from core.utils.tool_harness.reply_composer import unsafe,status_conflict\n');s=s.replace("if results and unsafe(speech,[StepResult.model_validate(x) for x in results]):", "if results and (unsafe(speech,[StepResult.model_validate(x) for x in results]) or status_conflict(speech,[StepResult.model_validate(x) for x in results],{})):");p.write_text(s,encoding='utf-8')

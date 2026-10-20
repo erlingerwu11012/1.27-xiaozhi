@@ -1,0 +1,42 @@
+{
+  "deployed_at_utc": "2026-10-02T17:32:36.662663+00:00",
+  "backup": "/root/prjs/tmp/remove-llm-rewrite-20261003/backup-20261002-173228-utc",
+  "regression": {
+    "run": 114,
+    "failures": 0,
+    "errors": 0,
+    "success": true,
+    "upstream_calls": 0,
+    "mode": "mock_only_outbound_connections_denied"
+  },
+  "health": {
+    "voice_status": "online",
+    "pid": 37700,
+    "ws_port": 8000,
+    "http_probe": "/mcp/vision/explain",
+    "http_status": 200
+  },
+  "files": {
+    "core/connection.py": {
+      "before_sha256": "25458118fb34c4bdd1e625c926152540612b30425efdcf89c371ca8388f538a5",
+      "after_sha256": "5f5e26f8939a8bd7dc823155c3dfc4277b3595ba34ddfa1f8f8e540480ceec4a"
+    },
+    "core/utils/prompt_pipeline.py": {
+      "before_sha256": "43be67b421c531acaec56f46a1bb9c463948bc20f1b3afbdaa06a32e305f82ca",
+      "after_sha256": "4b29ce070a58cf404381f0d5bf736f83d12b85d667101a2f2e6b443ce3aee407"
+    },
+    "test/test_prompt_pipeline_v2.py": {
+      "before_sha256": "76ed6ab96c22c7e4b64a843e6bddbd8f4346c6b9444c01889234001327b45b9e",
+      "after_sha256": "93a309028a07230c0b7e2335a0f2255a30d7d03d701722166b702fe589003b0a"
+    },
+    "test/test_official_dialogue.py": {
+      "before_sha256": "1e382b2d60a9965e9f1ea82e57c582298ddf78c9ad1ea43cf94c80229686a720",
+      "after_sha256": "293fbf86478bedc8911e7ec05ff7fdfc3398eeef5e154e390202dc4d66d770b2"
+    }
+  },
+  "new_test_sha256": "f4708eff74145ffd93f5b42bf6e4204410b3045121cfd631f306c7b10cf97c5f",
+  "pipeline": "ASR -> primary LLM / necessary tool continuation -> TTS",
+  "second_llm_rewrite": "removed",
+  "git_commit": "5426a1230d8f1af16ce89fd4c4b6750bd2284998",
+  "git_tag": "remove-llm-rewrite-published-20261003"
+}

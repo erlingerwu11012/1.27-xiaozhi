@@ -1,0 +1,87 @@
+[
+  {
+    "path": "core/utils/recipient_resolver.py",
+    "baseline_sha256": "244d062bc85aa3a87a9e9755526ccc9b53cadcf567802ddf6c8da2a276b34e55",
+    "candidate_sha256": "3b95889bb640c8e220794227cad01357d36b5f3db9e8d335e17e0c57aea45f51"
+  },
+  {
+    "path": "core/utils/unified_recipient_resolver.py",
+    "baseline_sha256": "ed69d3f601367895bd8e616f3207eb338be89f9ca269c5664eb3751c32efa804",
+    "candidate_sha256": "323453cb232493816b407876f936cb9f2070621bcfacfe626716a7ff38577089"
+  },
+  {
+    "path": "core/utils/tool_result.py",
+    "baseline_sha256": "638d5318f30bd2d86268c16dbcd6a5066be824ee29960ba38ad8df5c45366808",
+    "candidate_sha256": "0072fa352f6ef8862c6b48fbc4823ecaed163f1150876a34eddbed1d6ebaa1c4"
+  },
+  {
+    "path": "core/utils/device_reminder.py",
+    "baseline_sha256": "3891c8f9066d4c16ddd3e432dfddd736e1f4229a1c24e4355ae374a9e6d47774",
+    "candidate_sha256": "7bc0f7dd6ba12fe9caefdba03fe334d37440c5153e47cabe7674c71067090aad"
+  },
+  {
+    "path": "core/utils/reminder_voice.py",
+    "baseline_sha256": "af639957a5dbcec11f5abe6af9544ec071e6b6736fa909b5dc01f403ede732d7",
+    "candidate_sha256": "5d14e69aa63136fd3ec7e04a347a5a93870db3f50b64a3bf1893da9c540a0d21"
+  },
+  {
+    "path": "core/utils/operation_control.py",
+    "baseline_sha256": "f968ccf382009e8339552386d7d3f6ae020ea4d9fcbb20afec96b01d1e637b64",
+    "candidate_sha256": "2c2f2d509c2073cc2d28dc9bffcc70e857feab76c45a8c58c04b944637930d42"
+  },
+  {
+    "path": "core/utils/reminder_tool_contracts.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "150a6886c509000c6edb32aa14bd5077259729854ad8a223eba30bb44aeac3e1"
+  },
+  {
+    "path": "core/utils/reply_repetition.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "34869a32299fa5ed39461e5ccc2831652c775060de2c0705f7acdd60e3c12a32"
+  },
+  {
+    "path": "core/providers/tools/unified_tool_manager.py",
+    "baseline_sha256": "5f87584d99903209abdfc3a79a92cc3168c07f4ca523e3a242a3b89ec6a9e2b5",
+    "candidate_sha256": "e4fd73bf8f91cc4979288d9d586efb352a882a21c0537e18fc651e77a1d14ed0"
+  },
+  {
+    "path": "core/providers/tools/device_mcp/mcp_executor.py",
+    "baseline_sha256": "7e70fb78126d00c670ca15603a615ca435cbbab5ad68cd552170124297d523f8",
+    "candidate_sha256": "83c5ffa88670fe0da1763e855aeb0fd7b23e69d7f1397e5009ecc5c676c2b4e2"
+  },
+  {
+    "path": "core/providers/tts/qwen_audio_tts_plus.py",
+    "baseline_sha256": "8b2a4ce7bd937498451ce5d601937673eb7e7ba63d846f0d037dd76aee521554",
+    "candidate_sha256": "7cb1a359e8b4d23362ee00e3f245babd4c4ed802bc90c88bfc6687cb0b61fc56"
+  },
+  {
+    "path": "test/test_reminder_reliability.py",
+    "baseline_sha256": null,
+    "candidate_sha256": "d60a568f2b41d2b1c63f87f90abad8141b5de630dda74f18fd541626bdc5964c"
+  },
+  {
+    "path": "test/test_operation_control.py",
+    "baseline_sha256": "bb2a77affadd6d66fe1fb30e5cf345fc20759b10d737b492eefa3e5b49ab090c",
+    "candidate_sha256": "4c588364396aa51603ca4477fca476af1725d5b7d242b11ab374d07819322f29"
+  },
+  {
+    "path": "test/test_operation_pipeline.py",
+    "baseline_sha256": "afb9f27f2e9b29c6408eb399cfcfd2b9327a939f9786435d1d529cfec4860bbc",
+    "candidate_sha256": "ee9a4f55e79030823394196a197bc39902c557ef7d0bdb9600906083acfd4172"
+  },
+  {
+    "path": "test/test_recipient_resolver.py",
+    "baseline_sha256": "d035e5ab7dea2a40475967f6b8a6f4222e9b17a5f3a99ab7dc900cc7952f5e83",
+    "candidate_sha256": "4167e7c66ea7ea64893e216dc01582aa480b9c0846cb40085ae05af3cef56998"
+  },
+  {
+    "path": "test/test_device_reminder.py",
+    "baseline_sha256": "5d6437536bf54f8db51084a1d8fc27fa0802dae974fb554e205a6eb43d3729f4",
+    "candidate_sha256": "7a2cac3d612c00edf79959a6053d33291195666faaabef617c708109804a5c4f"
+  },
+  {
+    "path": "test/test_qwen_audio_tts_plus.py",
+    "baseline_sha256": "ebd15f3457b1267e9766d09d5286a2a2c74c2c96f0db5822f20b78f231ba3e67",
+    "candidate_sha256": "fe3c066a820968585e1bbfccc8c22a251e58fc114681ad306cdd83a1872b52c7"
+  }
+]

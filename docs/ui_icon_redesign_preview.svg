@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820">
+  <defs>
+    <style>
+      text{font-family:Inter,Segoe UI,Arial,sans-serif}
+      .title{font-size:30px;font-weight:700;fill:#172033}
+      .sub{font-size:15px;fill:#647084}
+      .label{font-size:18px;font-weight:700;fill:#202a3b}
+      .note{font-size:13px;fill:#707b8d}
+      .name{font-size:13px;fill:#738094;text-anchor:middle}
+      .panel{fill:#f7f9fc;stroke:#dbe2ee;stroke-width:1.5}
+      .screen{fill:#10151f;stroke:#283241;stroke-width:1.5}
+      .soft-screen{fill:#f4f7fb;stroke:#d8e1ef;stroke-width:1.5}
+      .ring{fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .solid{stroke-linecap:round;stroke-linejoin:round}
+      .pixel{shape-rendering:crispEdges}
+    </style>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#12203a" flood-opacity=".14"/>
+    </filter>
+    <linearGradient id="glassBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6ee7ff"/>
+      <stop offset="1" stop-color="#4f7cff"/>
+    </linearGradient>
+    <linearGradient id="glassRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9a8b"/>
+      <stop offset="1" stop-color="#ff4d6d"/>
+    </linearGradient>
+    <linearGradient id="glassGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ef7b4"/>
+      <stop offset="1" stop-color="#21c786"/>
+    </linearGradient>
+    <linearGradient id="glassGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="820" fill="#eef3f9"/>
+  <text x="44" y="52" class="title">Firmware UI Icon Redesign Preview</text>
+  <text x="44" y="78" class="sub">Same status set, four visual directions. Optimized for small top status icons on ESP-BOX-3 style UI.</text>
+
+  <g transform="translate(40 112)">
+    <rect class="panel" width="1200" height="150" rx="12" filter="url(#shadow)"/>
+    <text x="24" y="34" class="label">A. Soft Flat</text>
+    <text x="24" y="56" class="note">Friendly, light, rounded, easy to read on a black or pale UI.</text>
+    <g transform="translate(278 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <path class="ring" d="M26 43c12-11 32-11 44 0M34 53c8-7 20-7 28 0M45 64h6" stroke="#69d8ff" stroke-width="8"/>
+      <text x="48" y="122" class="name">wifi</text>
+    </g>
+    <g transform="translate(420 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <path class="ring" d="M26 38c12-10 32-10 44 0M35 50c7-6 19-6 26 0" stroke="#ff6b7d" stroke-width="8"/>
+      <path class="solid" d="M34 68l28-28M62 68L34 40" stroke="#ff6b7d" stroke-width="7"/>
+      <text x="48" y="122" class="name">wifi fail</text>
+    </g>
+    <g transform="translate(562 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <rect x="25" y="34" width="42" height="28" rx="8" fill="none" stroke="#7df2a9" stroke-width="7"/>
+      <rect x="68" y="43" width="6" height="10" rx="3" fill="#7df2a9"/>
+      <rect x="32" y="41" width="24" height="14" rx="5" fill="#7df2a9"/>
+      <text x="48" y="122" class="name">battery</text>
+    </g>
+    <g transform="translate(704 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <rect x="38" y="22" width="20" height="38" rx="10" fill="#ffc857"/>
+      <path class="ring" d="M28 50c0 12 9 21 20 21s20-9 20-21M48 72v12M36 84h24" stroke="#ffc857" stroke-width="7"/>
+      <text x="48" y="122" class="name">mic</text>
+    </g>
+    <g transform="translate(846 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <path class="solid" d="M25 56h12l18 14V26L37 40H25z" fill="#b9c6ff"/>
+      <path class="ring" d="M66 39c6 6 6 18 0 24M74 31c11 11 11 29 0 40" stroke="#b9c6ff" stroke-width="6"/>
+      <text x="48" y="122" class="name">speak</text>
+    </g>
+    <g transform="translate(988 18)">
+      <rect class="screen" x="0" y="0" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="24" fill="none" stroke="#69d8ff" stroke-width="7" opacity=".35"/>
+      <circle cx="48" cy="48" r="12" fill="#69d8ff"/>
+      <path d="M48 18v10M48 68v10M18 48h10M68 48h10" stroke="#69d8ff" stroke-width="6" stroke-linecap="round"/>
+      <text x="48" y="122" class="name">listen</text>
+    </g>
+  </g>
+
+  <g transform="translate(40 292)">
+    <rect class="panel" width="1200" height="150" rx="12" filter="url(#shadow)"/>
+    <text x="24" y="34" class="label">B. Neo Glass</text>
+    <text x="24" y="56" class="note">More premium, vivid color, good if the device should feel like a polished smart assistant.</text>
+    <g transform="translate(278 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="33" fill="url(#glassBlue)" opacity=".18"/>
+      <path class="ring" d="M23 41c14-14 36-14 50 0M33 53c9-8 21-8 30 0M45 66h6" stroke="url(#glassBlue)" stroke-width="8"/>
+      <text x="48" y="122" class="name">wifi</text>
+    </g>
+    <g transform="translate(420 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="33" fill="url(#glassRed)" opacity=".18"/>
+      <path class="ring" d="M23 38c14-12 36-12 50 0M34 50c8-7 20-7 28 0" stroke="url(#glassRed)" stroke-width="8"/>
+      <path class="solid" d="M34 69l29-29M63 69L34 40" stroke="#ff6b7d" stroke-width="7"/>
+      <text x="48" y="122" class="name">wifi fail</text>
+    </g>
+    <g transform="translate(562 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="33" fill="url(#glassGreen)" opacity=".16"/>
+      <rect x="24" y="34" width="42" height="28" rx="8" fill="none" stroke="url(#glassGreen)" stroke-width="7"/>
+      <rect x="68" y="43" width="7" height="10" rx="3.5" fill="#49e49b"/>
+      <rect x="32" y="42" width="26" height="12" rx="5" fill="url(#glassGreen)"/>
+      <text x="48" y="122" class="name">battery</text>
+    </g>
+    <g transform="translate(704 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="33" fill="url(#glassGold)" opacity=".17"/>
+      <rect x="38" y="21" width="20" height="39" rx="10" fill="url(#glassGold)"/>
+      <path class="ring" d="M28 50c0 12 9 21 20 21s20-9 20-21M48 72v12M36 84h24" stroke="url(#glassGold)" stroke-width="7"/>
+      <text x="48" y="122" class="name">mic</text>
+    </g>
+    <g transform="translate(846 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="33" fill="#9db0ff" opacity=".15"/>
+      <path d="M24 56h13l18 14V26L37 40H24z" fill="#b6c4ff"/>
+      <path class="ring" d="M66 39c6 6 6 18 0 24M74 31c11 11 11 29 0 40" stroke="#b6c4ff" stroke-width="6"/>
+      <text x="48" y="122" class="name">speak</text>
+    </g>
+    <g transform="translate(988 18)">
+      <rect class="screen" width="96" height="96" rx="24"/>
+      <circle cx="48" cy="48" r="32" fill="url(#glassBlue)" opacity=".15"/>
+      <circle cx="48" cy="48" r="20" fill="none" stroke="#77dfff" stroke-width="7" opacity=".6"/>
+      <circle cx="48" cy="48" r="8" fill="#77dfff"/>
+      <text x="48" y="122" class="name">listen</text>
+    </g>
+  </g>
+
+  <g transform="translate(40 472)">
+    <rect class="panel" width="1200" height="150" rx="12" filter="url(#shadow)"/>
+    <text x="24" y="34" class="label">C. Pixel Badge</text>
+    <text x="24" y="56" class="note">Retro, crisp, very robust on low resolution displays. Best if you want personality over polish.</text>
+    <g class="pixel" transform="translate(278 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="24" y="34" width="48" height="8" fill="#79e6ff"/><rect x="32" y="46" width="32" height="8" fill="#79e6ff"/><rect x="44" y="58" width="8" height="8" fill="#79e6ff"/>
+      <text x="48" y="122" class="name">wifi</text>
+    </g>
+    <g class="pixel" transform="translate(420 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="24" y="32" width="48" height="8" fill="#ff6b7d"/><rect x="32" y="44" width="32" height="8" fill="#ff6b7d"/>
+      <rect x="32" y="62" width="32" height="8" fill="#ff6b7d"/><rect x="44" y="50" width="8" height="32" fill="#ff6b7d"/>
+      <text x="48" y="122" class="name">wifi fail</text>
+    </g>
+    <g class="pixel" transform="translate(562 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="24" y="34" width="48" height="32" fill="#77f0a4"/><rect x="72" y="42" width="8" height="16" fill="#77f0a4"/>
+      <rect x="32" y="42" width="24" height="16" fill="#10151f"/>
+      <text x="48" y="122" class="name">battery</text>
+    </g>
+    <g class="pixel" transform="translate(704 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="40" y="20" width="16" height="38" fill="#ffd05a"/><rect x="32" y="50" width="8" height="16" fill="#ffd05a"/><rect x="56" y="50" width="8" height="16" fill="#ffd05a"/><rect x="40" y="66" width="16" height="8" fill="#ffd05a"/><rect x="36" y="78" width="24" height="8" fill="#ffd05a"/>
+      <text x="48" y="122" class="name">mic</text>
+    </g>
+    <g class="pixel" transform="translate(846 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="24" y="42" width="16" height="20" fill="#bac7ff"/><rect x="40" y="34" width="16" height="36" fill="#bac7ff"/><rect x="62" y="38" width="8" height="28" fill="#bac7ff"/><rect x="74" y="30" width="8" height="44" fill="#bac7ff"/>
+      <text x="48" y="122" class="name">speak</text>
+    </g>
+    <g class="pixel" transform="translate(988 18)">
+      <rect class="screen" width="96" height="96" rx="14"/>
+      <rect x="44" y="20" width="8" height="16" fill="#79e6ff"/><rect x="44" y="60" width="8" height="16" fill="#79e6ff"/><rect x="20" y="44" width="16" height="8" fill="#79e6ff"/><rect x="60" y="44" width="16" height="8" fill="#79e6ff"/><rect x="40" y="40" width="16" height="16" fill="#79e6ff"/>
+      <text x="48" y="122" class="name">listen</text>
+    </g>
+  </g>
+
+  <g transform="translate(40 652)">
+    <rect class="panel" width="1200" height="130" rx="12" filter="url(#shadow)"/>
+    <text x="24" y="34" class="label">D. Ink Mono</text>
+    <text x="24" y="56" class="note">Most firmware-like and calm. Single-color icons are tiny, cheap, and theme-friendly.</text>
+    <g transform="translate(278 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <path class="ring" d="M25 32c13-12 33-12 46 0M34 43c8-7 20-7 28 0M45 55h6" stroke="#182235" stroke-width="7"/>
+      <text x="48" y="102" class="name">wifi</text>
+    </g>
+    <g transform="translate(420 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <path class="ring" d="M25 29c13-11 33-11 46 0M34 40c8-6 20-6 28 0" stroke="#182235" stroke-width="7"/>
+      <path class="solid" d="M36 58l24-24M60 58L36 34" stroke="#182235" stroke-width="6"/>
+      <text x="48" y="102" class="name">wifi fail</text>
+    </g>
+    <g transform="translate(562 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <rect x="25" y="25" width="42" height="24" rx="7" fill="none" stroke="#182235" stroke-width="6"/>
+      <rect x="68" y="32" width="7" height="10" rx="3" fill="#182235"/><rect x="32" y="32" width="24" height="10" rx="4" fill="#182235"/>
+      <text x="48" y="102" class="name">battery</text>
+    </g>
+    <g transform="translate(704 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <rect x="38" y="14" width="20" height="32" rx="10" fill="#182235"/>
+      <path class="ring" d="M28 40c0 12 9 21 20 21s20-9 20-21M48 61v7M37 68h22" stroke="#182235" stroke-width="6"/>
+      <text x="48" y="102" class="name">mic</text>
+    </g>
+    <g transform="translate(846 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <path d="M25 43h12l18 13V18L37 30H25z" fill="#182235"/>
+      <path class="ring" d="M66 29c6 6 6 18 0 24M74 21c11 11 11 29 0 40" stroke="#182235" stroke-width="5"/>
+      <text x="48" y="102" class="name">speak</text>
+    </g>
+    <g transform="translate(988 18)">
+      <rect class="soft-screen" width="96" height="72" rx="18"/>
+      <circle cx="48" cy="36" r="17" fill="none" stroke="#182235" stroke-width="6"/><circle cx="48" cy="36" r="6" fill="#182235"/>
+      <text x="48" y="102" class="name">listen</text>
+    </g>
+  </g>
+</svg>

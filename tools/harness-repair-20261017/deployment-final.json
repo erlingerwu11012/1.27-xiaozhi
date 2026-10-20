@@ -1,0 +1,30 @@
+{
+  "phase": "complete",
+  "started_at": 1792239363.3729413,
+  "release": "/root/prjs/releases/harness-repair-20261017-r2",
+  "old_ids": {
+    "manager-api": 11,
+    "xiaozhi-server": 13
+  },
+  "new_ids": {
+    "manager-api": 16,
+    "xiaozhi-server": 17
+  },
+  "model_calls": 0,
+  "physical_device_operations": 0,
+  "schema_migration": false,
+  "completed_at": 1792239383.4865196,
+  "api_jar_sha256": "0e87839cf44cb36350690b1b54a1f849a6c4673b864681df02ae5fd961dcb476",
+  "checks": [
+    "public_https_200",
+    "public_add_route_exists_and_rejects_invalid_body",
+    "public_wss_rejects_invalid_token_1008",
+    "production_ports_ready",
+    "nginx_valid",
+    "device_binding_unchanged",
+    "root_config_unchanged",
+    "other_processes_unchanged"
+  ],
+  "hardware_tested": false,
+  "completed_at_beijing": "2026-10-17T20:16:23.486520+08:00"
+}

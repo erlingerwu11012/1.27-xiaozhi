@@ -1,0 +1,28 @@
+{
+  "phase": "complete",
+  "started_at": 1792242400.4028943,
+  "release": "/root/prjs/releases/experience-20261017",
+  "old_python_id": 17,
+  "api_id": 16,
+  "new_python_id": 18,
+  "hardware_tested": false,
+  "completed_at": 1792242404.814753,
+  "checks": [
+    "public_https_200",
+    "public_api_ready",
+    "public_wss_invalid_token_1008",
+    "ports_ready",
+    "binding_unchanged",
+    "config_unchanged",
+    "api_and_other_processes_unchanged"
+  ],
+  "sha256": {
+    "core/utils/tool_harness/prompt_policy.py": "8627d52dd3a442621be80af3e306ab97f2d44d570ddd5f5e8a986f8810c5e82e",
+    "core/utils/tool_harness/relative_plan.py": "a2b3ac9959ab5337a690cf47fef56cd0dcc685be228f2526b0a7580f0128148f",
+    "core/utils/tool_harness/runtime.py": "42007ab790d781aaa01861abfece12a9ec05e9291b118d78942e475de1615316",
+    "core/utils/tool_harness/reply_composer.py": "895c056400ce367e75021d62efc848847737db48f57b302601f0e62c4d217b0e",
+    "core/utils/tool_harness/contracts.py": "8b0adc66a36f851db7a105e24597a1ace89d36100b918c52e3d2cd2729574a4e",
+    "core/utils/recent_memory.py": "ea522635eb52cf957be14fdc1b00525323fb4f898d4564f0dae06e84f95173c6",
+    "core/utils/person_short_memory.py": "7963de53f3abfebc941d735f02c881fc89f49f5f75e1be77cc50a0538aeeb37f"
+  }
+}

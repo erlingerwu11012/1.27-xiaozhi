@@ -1,0 +1,29 @@
+{
+  "installed_assets": {
+    "files": 15,
+    "used": 3101908,
+    "allocated": 5046272,
+    "free": 1944364
+  },
+  "installed_app": {
+    "used": 4901584,
+    "allocated": 5177344,
+    "free": 275760
+  },
+  "spine": {
+    "files": 4,
+    "allocated": 4194304,
+    "header_valid": true,
+    "used_from_header": 267609,
+    "free_from_header": 3926695,
+    "erased_header": false
+  },
+  "wallpaper": {
+    "files": 4294967295,
+    "allocated": 2097152,
+    "header_valid": false,
+    "used_from_header": null,
+    "free_from_header": null,
+    "erased_header": true
+  }
+}

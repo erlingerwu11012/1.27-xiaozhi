@@ -1,0 +1,63 @@
+{
+  "synthetic_api": true,
+  "real_business_writes": 0,
+  "passed": 14,
+  "results": [
+    {
+      "name": "six selectable accessible preset cards",
+      "pass": true
+    },
+    {
+      "name": "preset switch emits exact editable text",
+      "pass": true
+    },
+    {
+      "name": "cancel replacing custom draft keeps original",
+      "pass": true
+    },
+    {
+      "name": "confirmed replacement emits selected preset",
+      "pass": true
+    },
+    {
+      "name": "new agent starts with natural personality",
+      "pass": true
+    },
+    {
+      "name": "third step shows presets and hides optional generators",
+      "pass": true
+    },
+    {
+      "name": "custom editing does not reset draft when navigating back",
+      "pass": true
+    },
+    {
+      "name": "unfinished generated text cannot be saved",
+      "pass": true
+    },
+    {
+      "name": "create sends custom personality through existing API",
+      "pass": true
+    },
+    {
+      "name": "opening role configuration preserves saved personality",
+      "pass": true
+    },
+    {
+      "name": "personality textarea is enabled",
+      "pass": true
+    },
+    {
+      "name": "personality-only edit enables save",
+      "pass": true
+    },
+    {
+      "name": "save persists exact draft and resets dirty state",
+      "pass": true
+    },
+    {
+      "name": "reopening reads back the saved custom personality",
+      "pass": true
+    }
+  ]
+}

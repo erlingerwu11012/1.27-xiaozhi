@@ -1,0 +1,11 @@
+{
+  "core/providers/tts/official/prompt.py": {
+    "sha256": "5ea69cecc86a57d5852142d7ac6b676b9fc68cdfcbcdbd80d1a0a0975d44635e"
+  },
+  "core/providers/tts/official/compiler.py": {
+    "sha256": "9ab54ee66b0f59b2a6a38f28820f30bf06f92579d43521a22c255987aba2cd7c"
+  },
+  "core/utils/textUtils.py": {
+    "sha256": "aa260c2ed3c379817eb102ae97a24700d6aa5d26cc0dd49967d5e39ab3670f00"
+  }
+}

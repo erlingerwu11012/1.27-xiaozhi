@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "synthetic_only": true,
+  "cases": [
+    "low-price-six-decimal-display",
+    "pending-is-not-zero-charge",
+    "failed-read-clears-old-bills",
+    "disabled-wallet-hides-component",
+    "desktop-and-narrow-layout",
+    "no-page-errors",
+    "exact-ledger-balance-source"
+  ],
+  "does_not_validate_live_payment_or_aggregate": true
+}

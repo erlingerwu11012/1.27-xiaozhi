@@ -1,0 +1,174 @@
+{
+  "hardware_writes": 0,
+  "physical_test": false,
+  "cases": [
+    {
+      "user": "查询伦敦现在的时间",
+      "spoken": "伦敦当地时间是2026年10月6日，14点46分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 14:46:19 (Tuesday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 12,
+      "success": true
+    },
+    {
+      "user": "查询东京现在的时间",
+      "spoken": "东京当地时间是2026年10月6日，22点46分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 22:46:19 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 4,
+      "success": true
+    },
+    {
+      "user": "查询上海现在的时间",
+      "spoken": "上海当地时间是2026年10月6日，21点46分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Shanghai"
+          },
+          "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月06日 21:46:19 (Tuesday)\n时区：UTC+8",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 3,
+      "success": true
+    },
+    {
+      "user": "伦敦那边现在几点了？",
+      "spoken": "伦敦现在是2026年10月6日，14点46分。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 829,
+      "success": false
+    },
+    {
+      "user": "东京的时间你能帮我看看吗？",
+      "spoken": "东京现在是2026年10月6日，22点46分。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1219,
+      "success": false
+    },
+    {
+      "user": "帮我看一下现在伦敦和东京分别几点。",
+      "spoken": "伦敦当地时间是2026年10月6日，14点46分。东京当地时间是2026年10月6日，22点46分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 14:46:22 (Tuesday)\n时区：UTC+1",
+          "action": "REQLLM"
+        },
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 22:46:22 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 995,
+      "success": true
+    },
+    {
+      "user": "打开摄像头预览",
+      "spoken": "这台设备目前不支持摄像头预览。",
+      "tool_events": [],
+      "primary_requests": [],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "把音量调到三十",
+      "spoken": "这台设备目前不支持音量。",
+      "tool_events": [],
+      "primary_requests": [],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "查询设备当前音量",
+      "spoken": "这台设备目前不支持音量。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "不要打开摄像头，只解释预览和拍照的区别。",
+      "spoken": "预览是持续开着画面，让你实时看到镜头里的情况；拍照是按下快门，只留下一张静态照片，拍完就结束了。两者互不替代，开着预览不等于拍了照。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "不用查时间，我只是说东京跟我们有时差。",
+      "spoken": "嗯，东京比我们快一个小时。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "deepseek-flash",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    }
+  ],
+  "success": false,
+  "runtime_source_sha256": {
+    "core/connection.py": "ef82f177cdb1e0f34cccd159ce01350764c58b64ac8cbee609a88325503b7d99",
+    "core/utils/prompt_manager.py": "ed6735673255be75ed088dd90f2ccad1ad9121d16cc639160b9a4823a11fe62d",
+    "core/utils/conversation_guidance.py": "b9bab6a932abf0a1c50c43ea493b24d1498b27c9315dae14a8948409cdac9dfc"
+  }
+}

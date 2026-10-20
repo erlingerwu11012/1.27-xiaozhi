@@ -1,0 +1,218 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "name": "missing_auth",
+      "status": 401,
+      "result": {
+        "code": 401,
+        "msg": "服务器密钥不能为空",
+        "data": null
+      }
+    },
+    {
+      "name": "state",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "account_id": "99003",
+          "mode": "default",
+          "default_user_id": "usr_210e4e42f6894b67b55ed8ae2894910f",
+          "default_generation": "1",
+          "directory_version": "1",
+          "updated_at": "2026-10-09 11:51:35",
+          "members": [
+            {
+              "user_id": "usr_210e4e42f6894b67b55ed8ae2894910f",
+              "display_name": "默认用户",
+              "status": "active",
+              "kind": "default"
+            }
+          ],
+          "voice_profiles": [],
+          "cleanup_tasks": [],
+          "agent_ids": [
+            "agent_http"
+          ]
+        }
+      }
+    },
+    {
+      "name": "search_before",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我喜欢咖啡",
+          "items": [
+            {
+              "record_id": "archive:2674",
+              "text": "我喜欢咖啡",
+              "source": "local_user_fact",
+              "created_at": "1791520228000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "correct",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "local_applied": true,
+          "status": "completed",
+          "operation": "correct",
+          "operation_id": "usr_ee613ffded9340999b668ac8baaa30a0",
+          "cloud_sync": "disabled"
+        }
+      }
+    },
+    {
+      "name": "search_after_correct",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我现在不喝咖啡了",
+          "items": [
+            {
+              "record_id": "override:usr_ee613ffded9340999b668ac8baaa30a0",
+              "text": "我现在不喝咖啡了",
+              "source": "local_user_fact",
+              "created_at": "1791520228000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "unrelated_preserved",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "reliable": true,
+          "status": "ok",
+          "source": "local",
+          "text": "我的台灯叫银杏灯",
+          "items": [
+            {
+              "record_id": "archive:2675",
+              "text": "我的台灯叫银杏灯",
+              "source": "local_user_fact",
+              "created_at": "1791520228000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "foreign_device",
+      "status": 200,
+      "result": {
+        "code": 500,
+        "msg": "设备归属已变更",
+        "data": null
+      }
+    },
+    {
+      "name": "forget",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "local_applied": true,
+          "status": "completed",
+          "operation": "forget",
+          "operation_id": "usr_061dbbf1e1ce4ad0853f504f8b7af8c9",
+          "cloud_sync": "disabled"
+        }
+      }
+    },
+    {
+      "name": "after_forget",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "reliable": false,
+          "status": "suppressed",
+          "source": "local",
+          "text": "",
+          "items": []
+        }
+      }
+    },
+    {
+      "name": "correct_persists_restart",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [
+            {
+              "record_id": "override:usr_ee613ffded9340999b668ac8baaa30a0",
+              "text": "我现在不喝咖啡了",
+              "source": "local_user_fact",
+              "created_at": "1791520228000"
+            }
+          ],
+          "text": "我现在不喝咖啡了",
+          "source": "local",
+          "status": "ok",
+          "reliable": true
+        }
+      }
+    },
+    {
+      "name": "forget_persists_restart",
+      "status": 200,
+      "result": {
+        "code": 0,
+        "msg": "success",
+        "data": {
+          "items": [],
+          "text": "",
+          "source": "local",
+          "status": "suppressed",
+          "reliable": false
+        }
+      }
+    }
+  ],
+  "budget": {
+    "case": {
+      "used": 1146,
+      "limit": 2000
+    },
+    "model": {
+      "used": 185,
+      "limit": 600
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  }
+}

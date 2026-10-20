@@ -1,0 +1,1144 @@
+--- a/bailian/gateway.go
++++ b/bailian/gateway.go
+@@ -27,6 +27,11 @@
+ 	total   int
+ 	wg      sync.WaitGroup
+ 	scopes  sync.Map
++    memoryRateMu sync.Mutex
++    memoryRateMinute int64
++    memoryRateTotal int
++    memoryRateAdd int
++    memoryRateSearch int
+ }
+ 
+ func NewGateway(ctx context.Context, db *gorm.DB) *Gateway {
+@@ -71,6 +76,7 @@
+ 	r.GET("/bailian/v1/bills/:id", g.AdminGetBill)
+ 	r.POST("/bailian/v1/bills/:id/admin-note", g.AdminNote)
+ 	r.POST("/bailian/v1/bills/:id/admin-resolve", g.AdminResolve)
++	r.POST("/bailian/v1/memory/operations/:id/admin-resolve", g.AdminMemoryResolve)
+ 	r.POST("/bailian/v1/prices/publish", g.PublishPrices)
+ 	r.GET("/bailian/v1/prices/published", g.PublishedPrices)
+ 	// No wildcard upstream proxy: unknown native HTTP routes stay closed.
+--- a/bailian/http_ops.go
++++ b/bailian/http_ops.go
+@@ -676,6 +676,7 @@
+ 		return
+ 	}
+ 	id := c.Param("id")
++	if strings.HasPrefix(id,"mem_") {failure(c,409,"memory_resolution_endpoint_required");return}
+ 	raw, e := io.ReadAll(io.LimitReader(c.Request.Body, 16*1024))
+ 	if e != nil {
+ 		failure(c, 400, "invalid_json")
+--- a/bailian/memory.go
++++ b/bailian/memory.go
+@@ -39,6 +39,9 @@
+ 	r.PATCH(memoryPrefix+"/memory_nodes/:id", g.memoryProxy)
+ 	r.DELETE(memoryPrefix+"/memory_nodes/:id", g.memoryProxy)
+ 	r.PATCH(memoryPrefix+"/profile_schemas/:id", g.memoryProxy)
++	r.POST(memoryPrefix+"/entities/retire",g.memoryProxy)
++	r.POST(memoryPrefix+"/entities/cleanup-complete",g.memoryProxy)
++	r.GET(memoryPrefix+"/operations/:id",g.memoryProxy)
+ }
+ 
+ var memoryIDPattern = regexp.MustCompile(`^[A-Za-z0-9_-]{1,128}$`)
+@@ -50,6 +53,10 @@
+ func (g *Gateway) memoryProxy(c *gin.Context) {
+ 	p, ok := g.httpAuth(c)
+ 	if !ok {
++		return
++	}
++	if os.Getenv("BAILIAN_MEMORY_BILLING") == "1" {
++		g.memoryProductProxy(c,p)
+ 		return
+ 	}
+ 	// One API also serves other ordinary accounts. Native memory APIs have
+--- a/bailian/memory_cloud_test.go
++++ b/bailian/memory_cloud_test.go
+@@ -0,0 +1,99 @@
++//go:build cloud_memory
++
++package bailian
++
++import (
++    "encoding/json"
++    "io"
++    "net/http/httptest"
++    "os"
++    "strconv"
++    "strings"
++    "testing"
++    "time"
++    "github.com/gin-gonic/gin"
++    "github.com/google/uuid"
++    "github.com/songquanpeng/one-api/model"
++)
++
++// Explicit opt-in only. Uses synthetic wallets and two temporary Ali persons.
++func TestMemoryRealCloudLifecycle(t *testing.T) {
++    upstream:=os.Getenv("CLOUD_MEMORY_TEST_KEY")
++    if upstream=="" || os.Getenv("CLOUD_MEMORY_TEST_AUTHORIZED")!="1" {t.Fatal("cloud test requires explicit credentials and authorization")}
++    t.Setenv("BAILIAN_MEMORY_CHANNEL_ID","2");t.Setenv("BAILIAN_MEMORY_BILLING","1")
++    t.Setenv("BAILIAN_MEMORY_SERVICE_SECRET",strings.Repeat("s",32))
++    t.Setenv("BAILIAN_MEMORY_RULES_VERIFIED","1");t.Setenv("BAILIAN_MEMORY_DEFAULT_FACT_STRATEGY","lite")
++    t.Setenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED","1");t.Setenv("BAILIAN_MEMORY_PORTRAIT_ENABLED","0")
++    g,db:=memoryFixture(t,100000)
++    key:="syntheticmemorycloudtesttoken0001"
++    db.Model(&model.Token{}).Where("id = 1").Update("key",key)
++    db.Model(&model.Channel{}).Where("id = 2").Update("key",upstream)
++    gin.SetMode(gin.TestMode);router:=gin.New();g.MemoryRoutes(router)
++    call:=func(method,path,person,idem string,body interface{})(int,map[string]interface{}) {
++        raw,_:=json.Marshal(body)
++        request:=httptest.NewRequest(method,memoryPrefix+path,strings.NewReader(string(raw)))
++        request.Header.Set("Authorization","Bearer sk-"+key)
++        expiry:=strconv.FormatInt(time.Now().Unix()+120,10)
++        request.Header.Set("X-Memory-Account","99100001");request.Header.Set("X-Memory-Person",person)
++        request.Header.Set("X-Memory-Generation","0");request.Header.Set("X-Memory-Expires",expiry)
++        request.Header.Set("X-Memory-Signature",memoryAttestation(strings.Repeat("s",32),1,"99100001",person,"0",expiry))
++        request.Header.Set("Idempotency-Key",idem)
++        response:=httptest.NewRecorder();router.ServeHTTP(response,request)
++        var result map[string]interface{};data,_:=io.ReadAll(response.Body);json.Unmarshal(data,&result)
++        return response.Code,result
++    }
++    persons:=[]string{"test_"+strings.ReplaceAll(uuid.NewString(),"-",""),"test_"+strings.ReplaceAll(uuid.NewString(),"-","")}
++    events:=map[string]string{}
++    wait:=func(person,event string)bool {
++        for i:=0;i<30;i++ {
++            status,result:=call("GET","/events/"+event,person,"",nil)
++            if status!=200 {return false}
++            states:=[]string{}
++            if list,ok:=result["events"].([]interface{});ok {for _,item:=range list {if row,ok:=item.(map[string]interface{});ok {states=append(states,str(row["status"]))}}}
++            if state,ok:=result["status"].(string);ok {states=append(states,state)}
++            complete:=len(states)>0;for _,state:=range states {if state=="FAILED" || state=="UNRECORDED" {return false};complete=complete && state=="SUCCEEDED"}
++            if complete {return true};time.Sleep(2*time.Second)
++        }
++        return false
++    }
++    cleanup:=func(person string)bool {
++        if event:=events[person];event!="" && !wait(person,event) {return false}
++        for page:=0;page<10;page++ {
++            status,result:=call("GET","/memory_nodes?page_num=1&page_size=100",person,"",nil)
++            if status!=200 {return false}
++            nodes,_:=result["memory_nodes"].([]interface{})
++            if len(nodes)==0 {call("POST","/entities/retire",person,"",map[string]interface{}{});status,_=call("POST","/entities/cleanup-complete",person,"",map[string]interface{}{});return status==200 && result["total"]==float64(0)}
++            for _,item:=range nodes {node,_:=item.(map[string]interface{});status,_=call("DELETE","/memory_nodes/"+str(node["memory_node_id"]),person,"",nil);if status!=200 {return false}}
++        }
++        return false
++    }
++    t.Cleanup(func(){for _,person:=range persons {if !cleanup(person){t.Errorf("temporary person cleanup unconfirmed: %s",person)}}})
++    report:=map[string]interface{}{"persons":persons,"portrait_written":false}
++    preferences:=[]string{"我平时喜欢喝茉莉花茶，不喜欢喝咖啡。","我平时喜欢喝拿铁咖啡，不喜欢喝茶。"}
++    for i,person:=range persons {
++        body:=map[string]interface{}{"messages":[]interface{}{map[string]string{"role":"user","content":preferences[i]}}}
++        status,result:=call("POST","/add-async",person,"cloud-add-"+person,body)
++        if status!=200 {t.Fatalf("Add failed status=%d code=%v message=%v error=%v",status,result["code"],result["message"],result["error"])}
++        event:=str(result["event_id"]);if event=="" {t.Fatal("missing event")};events[person]=event
++        if !wait(person,event) {t.Fatal("async extraction did not complete")}
++        status,result=call("GET","/memory_nodes?page_size=100",person,"",nil)
++        if status!=200 || result["total"]==nil {t.Fatal("actual storage total missing")}
++        if result["total"].(float64)<1 {t.Fatal("fact extraction returned no facts")}
++        report[person+"_total"]=result["total"]
++        nodes,_:=result["memory_nodes"].([]interface{});if len(nodes)>0 {report[person+"_project"]=nodes[0].(map[string]interface{})["project_id"]}
++        status,result=call("POST","/memory_nodes/search",person,"cloud-search-"+person,map[string]interface{}{"messages":[]interface{}{map[string]string{"role":"user","content":"我喜欢喝什么？"}}})
++        if status!=200 {t.Fatal("Search failed",status,result["error"])}
++        nodes,_=result["memory_nodes"].([]interface{});if len(nodes)==0 {t.Fatal("Search found no known preference")}
++        text,_:=json.Marshal(nodes);if i==0 && strings.Contains(string(text),"拿铁") || i==1 && strings.Contains(string(text),"茉莉") {t.Fatal("persons crossed")}
++        report[person+"_search_plan"]=result["plan_version"]
++    }
++    if !cleanup(persons[0]) {t.Fatal("single-person fact deletion not confirmed")}
++    status,other:=call("GET","/memory_nodes",persons[1],"",nil)
++    if status!=200 || other["total"]!=report[persons[1]+"_total"] {t.Fatal("deleting one person affected another")}
++    report["single_person_delete_isolated"]=true
++    if err:=g.collectMemoryStorage(g.Context,time.Now());err!=nil {t.Fatal("storage sampling failed",err)}
++    var user model.User;db.First(&user,1);report["synthetic_wallet_used_quota"]=user.UsedQuota
++    encoded,_:=json.Marshal(report);t.Log("CLOUD_REPORT "+string(encoded))
++}
++
++func str(value interface{})string {text,_:=value.(string);return text}
+--- a/bailian/memory_ledger.go
++++ b/bailian/memory_ledger.go
+@@ -0,0 +1,150 @@
++package bailian
++
++import (
++    "encoding/json"
++    "errors"
++    "math/big"
++    "time"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/gorm"
++    "gorm.io/gorm/clause"
++)
++
++const memoryPriceVersion = "aliyun-20260929-sale-1.43-v1"
++
++type MemoryEntity struct {
++    CloudUserID string `gorm:"type:varchar(128);primaryKey"`
++    UserID int `gorm:"index"`
++    TokenID int
++    ProductAccount string `gorm:"type:varchar(64);index"`
++    PersonID string `gorm:"type:varchar(64)"`
++    Generation int64
++    State string `gorm:"type:varchar(24)"`
++    PortraitWritten bool
++    CleanupConfirmed bool
++    CreatedAt int64
++}
++type MemoryResource struct {
++    Kind string `gorm:"type:varchar(24);primaryKey"`
++    ID string `gorm:"type:varchar(128);primaryKey"`
++    CloudUserID string `gorm:"type:varchar(128);index"`
++    UserID int `gorm:"index"`
++}
++type MemoryRequest struct {
++    ID string `gorm:"type:char(64);primaryKey"`
++    UserID int `gorm:"index"`
++    CloudUserID string `gorm:"type:varchar(128);index"`
++    PayloadHash string `gorm:"type:char(64)"`
++    Path string `gorm:"type:varchar(256)"`
++    State string `gorm:"type:varchar(24);index"`
++    Status int
++    Response string `gorm:"type:mediumtext"`
++    RequestID string `gorm:"type:varchar(128)"`
++    EventID string `gorm:"type:varchar(128)"`
++    EventState string `gorm:"type:varchar(24)"`
++    CreatedAt int64
++}
++type MemoryCharge struct {
++    ID string `gorm:"type:char(64);primaryKey"`
++    RequestID string `gorm:"type:char(64);index"`
++    BillID string `gorm:"type:varchar(64);uniqueIndex"`
++    UserID int `gorm:"index"`
++    CloudUserID string `gorm:"type:varchar(128);index"`
++    Operation string `gorm:"type:varchar(24)"`
++    Strategy string `gorm:"type:varchar(16)"`
++    Version string `gorm:"type:varchar(80)"`
++    UpstreamCNY string `gorm:"type:varchar(64)"`
++    Multiplier string `gorm:"type:varchar(16)"`
++    ExactQuota string `gorm:"type:varchar(128)"`
++    State string `gorm:"type:varchar(24)"`
++    Units int64
++    CreatedAt int64
++}
++type MemoryRemainder struct {
++    UserID int `gorm:"primaryKey"`
++    ExactQuota string `gorm:"type:varchar(128)"`
++}
++type MemoryStorageHour struct {
++    ID string `gorm:"type:char(64);primaryKey"`
++    CloudUserID string `gorm:"type:varchar(128);index"`
++    UserID int `gorm:"index"`
++    TokenID int
++    ChannelID int
++    Hour int64 `gorm:"index"`
++    FactCount int64
++    PortraitCount int64
++    State string `gorm:"type:varchar(24);index"`
++    ExactQuota string `gorm:"type:varchar(128)"`
++    BillID string `gorm:"type:varchar(64)"`
++    EvidenceRequestID string `gorm:"type:varchar(128)"`
++    SampledAt int64
++}
++
++func MigrateMemoryProduct(db *gorm.DB) error {
++    return db.AutoMigrate(&MemoryEntity{},&MemoryResource{},&MemoryRequest{},&MemoryCharge{},&MemoryRemainder{},&MemoryStorageHour{},&MemoryResolution{})
++}
++
++func memoryUnitPrice(operation,strategy string) (string,error) {
++    if strategy!="lite" && strategy!="pro" { return "",errors.New("invalid_strategy") }
++    switch operation {
++    case "fact": if strategy=="lite" { return "0.018",nil }; return "0.03",nil
++    case "portrait": if strategy=="lite" { return "0.025",nil }; return "0.03",nil
++    case "search": if strategy=="lite" { return "0.00002",nil }; return "0.001",nil
++    case "storage": return "0.002",nil
++    }
++    return "",errors.New("unknown_memory_operation")
++}
++func memoryExactQuota(operation,strategy string,units int64) (*big.Rat,error) {
++    price,e:=memoryUnitPrice(operation,strategy); if e!=nil || units<0 { return nil,errors.New("invalid_memory_price") }
++    value,_:=new(big.Rat).SetString(price)
++    value.Mul(value,big.NewRat(143,100)) // sale multiplier exactly once, no group/model multiplier
++    value.Mul(value,big.NewRat(500000,7))
++    value.Mul(value,big.NewRat(units,1))
++    if operation=="storage" { value.Quo(value,big.NewRat(10000,1)) }
++    return value,nil
++}
++func quotaFloor(value *big.Rat) int64 { return new(big.Int).Quo(value.Num(),value.Denom()).Int64() }
++func quotaCeil(value *big.Rat) int64 {
++    n:=quotaFloor(value); if new(big.Rat).SetInt64(n).Cmp(value)<0 { n++ }; return n
++}
++
++func (g *Gateway) reserveMemoryCharge(p Principal,ch model.Channel,request *MemoryRequest,operation,strategy string,units int64) (*MemoryCharge,error) {
++    exact,e:=memoryExactQuota(operation,strategy,units); if e!=nil { return nil,e }
++    price,_:=memoryUnitPrice(operation,strategy)
++    id:=hash([]byte(request.ID+":"+operation))
++    snapshot,_:=json.Marshal(map[string]string{"version":memoryPriceVersion,"operation":operation,"strategy":strategy,"upstream_cny":price,"sale_multiplier":"1.43","group_multiplier":"1","quota_per_usd":"500000","cny_per_usd":"7","exact_quota":exact.RatString()})
++    bill:=model.BailianBill{ID:"mem_"+id[:56],UserID:p.User.Id,TokenID:p.Token.Id,ChannelID:ch.Id,Group:p.User.Group,Model:"memory."+operation+"."+strategy,Scope:id,PayloadHash:request.PayloadHash,PriceSnapshot:string(snapshot)}
++    charge:=MemoryCharge{ID:id,RequestID:request.ID,BillID:bill.ID,UserID:p.User.Id,CloudUserID:request.CloudUserID,Operation:operation,Strategy:strategy,Version:memoryPriceVersion,UpstreamCNY:price,Multiplier:"1.43",ExactQuota:exact.RatString(),State:"reserved",Units:units,CreatedAt:time.Now().Unix()}
++    // The wallet hold and its memory accounting row are one durable operation.
++    // A crash or failed insert must not leave an unindexed reservation behind.
++    e=g.DB.Transaction(func(tx *gorm.DB)error {
++        if _,err:=model.ReserveBailian(tx,&bill,quotaCeil(exact));err!=nil{return err}
++        if err:=tx.Clauses(clause.OnConflict{DoNothing:true}).Create(&charge).Error;err!=nil{return err}
++        return tx.First(&charge,"id = ?",id).Error // Reuse the original price snapshot.
++    })
++    if e!=nil{return nil,e}
++    return &charge,nil
++}
++
++// Wallet -> bill -> fractional remainder in one transaction. A replay advances neither.
++func (g *Gateway) settleMemoryCharge(charge *MemoryCharge) error {
++    return g.DB.Transaction(func(tx *gorm.DB) error {
++        var user model.User
++        if e:=tx.Clauses(clause.Locking{Strength:"UPDATE"}).First(&user,charge.UserID).Error;e!=nil{return e}
++        var bill model.BailianBill
++        if e:=tx.Clauses(clause.Locking{Strength:"UPDATE"}).First(&bill,"id = ?",charge.BillID).Error;e!=nil{return e}
++        if bill.State==model.BLSettled || bill.State==model.BLRefunded { return nil }
++        if bill.State!=model.BLSubmitted { return model.ErrBLConflict }
++        if e:=tx.Clauses(clause.OnConflict{DoNothing:true}).Create(&MemoryRemainder{UserID:charge.UserID,ExactQuota:"0"}).Error;e!=nil{return e}
++        var carry MemoryRemainder
++        if e:=tx.Clauses(clause.Locking{Strength:"UPDATE"}).First(&carry,"user_id = ?",charge.UserID).Error;e!=nil{return e}
++        exact,ok:=new(big.Rat).SetString(charge.ExactQuota);if !ok{return errors.New("invalid_exact_quota")}
++        fraction,ok:=new(big.Rat).SetString(carry.ExactQuota);if !ok{return errors.New("invalid_carry")}
++        exact.Add(exact,fraction)
++        amount:=quotaFloor(exact)
++        if e:=model.FinishBailian(tx,charge.BillID,amount,false,0,"memory_upstream_accepted");e!=nil{return e}
++        exact.Sub(exact,new(big.Rat).SetInt64(amount))
++        if e:=tx.Model(&carry).Update("exact_quota",exact.RatString()).Error;e!=nil{return e}
++        return tx.Model(&MemoryCharge{}).Where("id = ?",charge.ID).Update("state","settled").Error
++    })
++}
+--- a/bailian/memory_ledger_test.go
++++ b/bailian/memory_ledger_test.go
+@@ -0,0 +1,61 @@
++package bailian
++
++import (
++    "context"
++    "math/big"
++    "testing"
++    "github.com/google/uuid"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/driver/sqlite"
++    "gorm.io/gorm"
++    glog "gorm.io/gorm/logger"
++)
++
++func TestMemorySalePrices(t *testing.T) {
++    for _,tc:=range []struct{op,plan,want string;units int64}{
++        {"fact","lite","12870/7",1},{"portrait","lite","17875/7",1},
++        {"search","lite","143/70",1},{"storage","lite","143/7000",1},
++        {"fact","pro","21450/7",1},{"search","pro","715/7",1},
++        {"storage","lite","1430/7",10000},
++    } {
++        got,e:=memoryExactQuota(tc.op,tc.plan,tc.units)
++        if e!=nil || got.RatString()!=tc.want {t.Fatalf("%s/%s: %v %v, want %s",tc.op,tc.plan,got,e,tc.want)}
++    }
++}
++func TestMemoryAttestationIsBoundToOwnerPersonAndGeneration(t *testing.T) {
++    original:=memoryAttestation("synthetic-secret-only",7,"10","usr_a","1","100")
++    for _,other:=range []string{
++        memoryAttestation("synthetic-secret-only",8,"10","usr_a","1","100"),
++        memoryAttestation("synthetic-secret-only",7,"11","usr_a","1","100"),
++        memoryAttestation("synthetic-secret-only",7,"10","usr_b","1","100"),
++        memoryAttestation("synthetic-secret-only",7,"10","usr_a","2","100"),
++    } {if original==other {t.Fatal("attestation not bound")}}
++}
++func TestMemoryFractionalCarryAndSettlementReplay(t *testing.T) {
++    db,e:=gorm.Open(sqlite.Open("file:"+uuid.NewString()+"?mode=memory&cache=shared"),&gorm.Config{Logger:glog.Default.LogMode(glog.Silent)})
++    if e!=nil {t.Fatal(e)};sql,_:=db.DB();defer sql.Close()
++    for _,migration:=range []func(*gorm.DB)error{
++        func(db *gorm.DB)error{return db.AutoMigrate(&model.User{},&model.Token{},&model.Channel{},&model.Log{})},
++        model.MigrateBailianLedger,MigrateMemoryProduct,
++    } {if e=migration(db);e!=nil{t.Fatal(e)}}
++    for _,row:=range []interface{}{
++        &model.User{Id:1,Username:"memory-test",Password:"unused",Status:1,Group:"default",Quota:1000,AccessToken:"test",AffCode:"test"},
++        &model.Token{Id:1,UserId:1,Key:"synthetic",Status:1,ExpiredTime:-1,RemainQuota:1000},
++        &model.Channel{Id:2,Type:17,Key:"synthetic",Status:1,Group:"default"},
++    } {if e=db.Create(row).Error;e!=nil {t.Fatal(e)}}
++    var p Principal;db.First(&p.User,1);db.First(&p.Token,1)
++    g:=NewGateway(context.Background(),db)
++    ch:=model.Channel{Id:2}
++    for i:=0;i<70;i++ {
++        request:=MemoryRequest{ID:hash([]byte(uuid.NewString())),PayloadHash:hash([]byte("synthetic")),CloudUserID:"synthetic-person"}
++        charge,e:=g.reserveMemoryCharge(p,ch,&request,"search","lite",1);if e!=nil{t.Fatal(e)}
++        if e=model.SubmitBailian(db,charge.BillID);e!=nil{t.Fatal(e)}
++        if e=g.settleMemoryCharge(charge);e!=nil{t.Fatal(e)}
++        if e=g.settleMemoryCharge(charge);e!=nil{t.Fatal(e)}
++    }
++    var user model.User;db.First(&user,1)
++    if user.Quota!=857 || user.UsedQuota!=143 {t.Fatalf("rounded or duplicate charge: balance=%d used=%d",user.Quota,user.UsedQuota)}
++    var carry MemoryRemainder;db.First(&carry,1)
++    remainder,_:=new(big.Rat).SetString(carry.ExactQuota)
++    if remainder.Sign()!=0 {t.Fatal("fraction should return to zero")}
++}
+--- a/bailian/memory_mysql_test.go
++++ b/bailian/memory_mysql_test.go
+@@ -0,0 +1,39 @@
++package bailian
++
++import (
++    "context"
++    "fmt"
++    "os"
++    "strings"
++    "sync"
++    "testing"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/driver/mysql"
++    "gorm.io/gorm"
++    glog "gorm.io/gorm/logger"
++)
++
++func TestMemoryMySQLConcurrentWalletPrecision(t *testing.T) {
++    database:=os.Getenv("MEMORY_MYSQL_TEST_DATABASE")
++    if database==""{t.Skip("isolated MySQL fixture required")}
++    if !strings.HasPrefix(database,"bailian_memory_wallet_test_"){t.Fatal("unsafe test database")}
++    for _,c:=range database{if c!='_' && !(c>='a'&&c<='z') && !(c>='0'&&c<='9'){t.Fatal("invalid database")}}
++    dsn:="root:"+os.Getenv("MEMORY_MYSQL_TEST_PASSWORD")+"@tcp(127.0.0.1:3306)/"+database+"?charset=utf8mb4&parseTime=True&loc=Local"
++    db,e:=gorm.Open(mysql.Open(dsn),&gorm.Config{Logger:glog.Default.LogMode(glog.Silent)});if e!=nil{t.Fatal("test database connection failed")}
++    sql,_:=db.DB();defer sql.Close();sql.SetMaxOpenConns(8)
++    for _,models:=range [][]interface{}{{&model.User{},&model.Token{},&model.Channel{},&model.Log{}}} {if e=db.AutoMigrate(models...);e!=nil{t.Fatal(e)}}
++    if e=model.MigrateBailianLedger(db);e!=nil{t.Fatal(e)};if e=MigrateMemoryProduct(db);e!=nil{t.Fatal(e)}
++    p:=Principal{User:model.User{Id:1,Username:"synthetic",Group:"default",Status:1,Quota:10000,AccessToken:"synthetic",AffCode:"synthetic"},Token:model.Token{Id:1,UserId:1,Key:"synthetic",Status:1,ExpiredTime:-1,RemainQuota:10000}}
++    db.Create(&p.User);db.Create(&p.Token);db.Create(&model.User{Id:2,Username:"other",Group:"default",Status:1,Quota:10000,AccessToken:"other",AffCode:"other"})
++    g:=NewGateway(context.Background(),db);var wait sync.WaitGroup;failures:=make(chan error,50)
++    for i:=0;i<50;i++{wait.Add(1);go func(index int){defer wait.Done()
++        request:=MemoryRequest{ID:hash([]byte(fmt.Sprint(index))),UserID:1,CloudUserID:"synthetic-person",PayloadHash:hash([]byte("synthetic"))}
++        charge,e:=g.reserveMemoryCharge(p,model.Channel{Id:2},&request,"search","lite",1)
++        if e==nil{e=model.SubmitBailian(db,charge.BillID)};if e==nil{e=g.settleMemoryCharge(charge)};if e==nil{e=g.settleMemoryCharge(charge)}
++        if e!=nil{failures<-e}
++    }(i)}
++    wait.Wait();close(failures);for e:=range failures{t.Fatal(e)}
++    var user model.User;db.First(&user,1);if user.UsedQuota!=102 || user.Quota!=9898{t.Fatal("concurrent price/rounding mismatch",user.UsedQuota,user.Quota)}
++    var other model.User;db.First(&other,2);if other.Quota!=10000{t.Fatal("foreign wallet changed")}
++    var carry MemoryRemainder;db.First(&carry,1);if carry.ExactQuota!="1/7"{t.Fatal("wrong accumulated fraction",carry.ExactQuota)}
++}
+--- a/bailian/memory_product.go
++++ b/bailian/memory_product.go
+@@ -0,0 +1,263 @@
++package bailian
++
++import (
++    "bytes"
++    "context"
++    "crypto/hmac"
++    "crypto/sha256"
++    "encoding/hex"
++    "encoding/json"
++    "errors"
++    "io"
++    "net/http"
++    "net/url"
++    "os"
++    "strconv"
++    "strings"
++    "time"
++    "github.com/gin-gonic/gin"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/gorm"
++    "gorm.io/gorm/clause"
++)
++
++func memoryAttestation(secret string,owner int,account,person,generation,expires string) string {
++    canonical:=strings.Join([]string{"memory-v1",strconv.Itoa(owner),account,person,generation,expires},"\n")
++    mac:=hmac.New(sha256.New,[]byte(secret));mac.Write([]byte(canonical));return hex.EncodeToString(mac.Sum(nil))
++}
++func authorizeMemoryActor(c *gin.Context,p Principal) (MemoryEntity,error) {
++    account:=c.GetHeader("X-Memory-Account")
++    person:=c.GetHeader("X-Memory-Person")
++    generation:=c.GetHeader("X-Memory-Generation")
++    expires:=c.GetHeader("X-Memory-Expires")
++    secret:=os.Getenv("BAILIAN_MEMORY_SERVICE_SECRET")
++    expiry,e:=strconv.ParseInt(expires,10,64)
++    gen,e2:=strconv.ParseInt(generation,10,64)
++    accountNumber,e3:=strconv.ParseInt(account,10,64)
++    if len(secret)<32 || e!=nil || e2!=nil || e3!=nil || accountNumber<=0 || gen<0 || !memoryIDPattern.MatchString(person) || len(person)>64 || expiry<time.Now().Unix() || expiry>time.Now().Unix()+300 {
++        return MemoryEntity{},errors.New("invalid_memory_actor")
++    }
++    expected:=memoryAttestation(secret,p.User.Id,account,person,generation,expires)
++    if !hmac.Equal([]byte(expected),[]byte(c.GetHeader("X-Memory-Signature"))) { return MemoryEntity{},errors.New("memory_service_attestation_required") }
++    cloudID:="re_"+hash([]byte(strings.Join([]string{strconv.Itoa(p.User.Id),account,person,generation},":")))[:60]
++    return MemoryEntity{CloudUserID:cloudID,UserID:p.User.Id,TokenID:p.Token.Id,ProductAccount:account,PersonID:person,Generation:gen,State:"active",CreatedAt:time.Now().Unix()},nil
++}
++func memoryPortraitEnabled() bool {
++    return os.Getenv("BAILIAN_MEMORY_PORTRAIT_ENABLED")=="1" && os.Getenv("BAILIAN_MEMORY_PORTRAIT_DELETE_VERIFIED")=="1" && os.Getenv("BAILIAN_MEMORY_PORTRAIT_COUNT_VERIFIED")=="1"
++}
++func (g *Gateway) memoryProductProxy(c *gin.Context,p Principal) {
++    actor,e:=authorizeMemoryActor(c,p)
++    if e!=nil { failure(c,403,e.Error());return }
++    if !g.acquire(p.User.Id) { failure(c,429,"gateway_busy");return };defer g.release(p.User.Id)
++    id,_:=strconv.Atoi(os.Getenv("BAILIAN_MEMORY_CHANNEL_ID"))
++    var channel model.Channel
++    if g.DB.First(&channel,id).Error!=nil || channel.Type!=17 || channel.Status!=model.ChannelStatusEnabled || channel.Key=="" || !listHas(channel.Group,p.User.Group) {failure(c,503,"memory_channel_unavailable");return}
++    if e=g.DB.Clauses(clause.OnConflict{DoNothing:true}).Create(&actor).Error;e!=nil {failure(c,503,"memory_entity_store_unavailable");return}
++    var stored MemoryEntity
++    if g.DB.First(&stored,"cloud_user_id = ?",actor.CloudUserID).Error!=nil || stored.UserID!=p.User.Id || stored.ProductAccount!=actor.ProductAccount {failure(c,403,"memory_entity_not_owned");return}
++    if stored.TokenID!=p.Token.Id {if e=g.DB.Model(&stored).Update("token_id",p.Token.Id).Error;e!=nil {failure(c,503,"memory_wallet_refresh_pending");return}}
++    path:=strings.TrimPrefix(c.Request.URL.Path,memoryPrefix+"/")
++    method:=c.Request.Method
++    if path=="entities/retire" {
++        if e=g.DB.Model(&stored).Update("state","retired").Error;e!=nil {failure(c,503,"entity_retirement_pending");return}
++        if e=g.DB.Model(&MemoryRequest{}).Where("cloud_user_id = ? AND path = ?",actor.CloudUserID,"memory_nodes/search").Update("response","").Error;e!=nil {failure(c,503,"cache_retirement_pending");return}
++        c.JSON(200,gin.H{"retired":true,"cloud_deleted":false});return
++    }
++    if path=="entities/cleanup-complete" {
++        if stored.State!="retired" || stored.PortraitWritten {failure(c,409,"entity_cleanup_not_verified");return}
++        if e=g.DB.Model(&stored).Update("cleanup_confirmed",true).Error;e!=nil {failure(c,503,"cleanup_confirmation_pending");return}
++        c.JSON(200,gin.H{"cleanup_confirmed":true,"count_verification_pending":true});return
++    }
++    if strings.HasPrefix(path,"operations/") {
++        var request MemoryRequest
++        if g.DB.First(&request,"id = ? AND user_id = ? AND cloud_user_id = ?",c.Param("id"),actor.UserID,actor.CloudUserID).Error!=nil {failure(c,404,"operation_not_found");return}
++        if request.State=="complete" && request.Status>=200 && request.Status<300 && request.Response!="" {
++            var result map[string]interface{}
++            if json.Unmarshal([]byte(request.Response),&result)==nil {
++                if e=g.rememberMemoryResources(actor,result);e!=nil {failure(c,503,"resource_index_pending");return}
++            }
++            if e=g.recoverMemorySettlement(&request);e!=nil {failure(c,503,"memory_settlement_pending");return}
++            c.JSON(200,gin.H{"state":request.State,"status":request.Status,"result":result});return
++        }
++        c.JSON(200,gin.H{"state":request.State,"status":request.Status});return
++    }
++    if stored.State!="active" && (path=="add" || path=="add-async" || path=="memory_nodes/search") {failure(c,409,"memory_entity_retired");return}
++    query,e:=url.ParseQuery(c.Request.URL.RawQuery)
++    if e!=nil {failure(c,400,"invalid_query");return}
++    for key,values:=range query {if len(values)!=1 || (key!="user_id" && key!="page_num" && key!="page_size" && key!="memory_library_id") {failure(c,400,"query_not_allowed");return}}
++    query.Set("user_id",actor.CloudUserID)
++    if library:=os.Getenv("BAILIAN_MEMORY_LIBRARY_ID");library!="" {query.Set("memory_library_id",library)} else {query.Del("memory_library_id")}
++    if objectID:=c.Param("id");objectID!="" {
++        if !memoryIDPattern.MatchString(objectID) {failure(c,400,"invalid_resource_id");return}
++        if strings.HasPrefix(path,"memory_nodes/") || strings.HasPrefix(path,"events/") {
++            kind:="node";if strings.HasPrefix(path,"events/"){kind="event"}
++            var resource MemoryResource
++            if g.DB.First(&resource,"kind = ? AND id = ? AND user_id = ? AND cloud_user_id = ?",kind,objectID,p.User.Id,actor.CloudUserID).Error!=nil {failure(c,403,"memory_resource_not_owned");return}
++        } else if strings.HasPrefix(path,"profile_schemas/") {
++            schema:=os.Getenv("BAILIAN_MEMORY_PROFILE_SCHEMA_ID")
++            if !strings.HasSuffix(path,"/user_profile") || !memoryPortraitEnabled() || schema=="" || schema!=objectID {failure(c,403,"portrait_operation_not_verified");return}
++        }
++    } else if strings.HasPrefix(path,"profile_schemas") {failure(c,403,"schema_maintenance_not_authorized");return}
++    body:=map[string]interface{}{}
++    raw:=[]byte("{}")
++    if method==http.MethodPost || method==http.MethodPatch {
++        c.Request.Body=http.MaxBytesReader(c.Writer,c.Request.Body,1024*1024)
++        raw,e=io.ReadAll(c.Request.Body)
++        if e!=nil || json.Unmarshal(raw,&body)!=nil {failure(c,400,"invalid_memory_body");return}
++        for key:=range body {
++            switch key {case "user_id","messages","custom_content","top_k","plan_version","profile_schema","extract_mode","memory_library_id","project_id","meta_data":default:failure(c,400,"body_field_not_allowed");return}
++        }
++        body["user_id"]=actor.CloudUserID
++        if library:=os.Getenv("BAILIAN_MEMORY_LIBRARY_ID");library!="" {body["memory_library_id"]=library} else {delete(body,"memory_library_id")}
++    }
++    strategy:=c.GetHeader("X-Memory-Strategy");if strategy==""{strategy="lite"}
++    portraitStrategy:=c.GetHeader("X-Memory-Portrait-Strategy");if portraitStrategy==""{portraitStrategy="lite"}
++    operations:=[]string{}
++    if path=="add" || path=="add-async" {
++        if _,exists:=body["plan_version"];exists {failure(c,400,"add_version_is_project_setting");return}
++        if _,e=memoryUnitPrice("fact",strategy);e!=nil{failure(c,400,e.Error());return}
++        project:=os.Getenv("BAILIAN_MEMORY_FACT_"+strings.ToUpper(strategy)+"_PROJECT_ID")
++        defaultStrategy:=os.Getenv("BAILIAN_MEMORY_DEFAULT_FACT_STRATEGY")
++        if (project=="" && defaultStrategy!=strategy) || os.Getenv("BAILIAN_MEMORY_RULES_VERIFIED")!="1" {failure(c,503,"memory_fact_rule_not_verified");return}
++        if project!="" {body["project_id"]=project} else {delete(body,"project_id")} // verified default-library rule
++        mode,_:=body["extract_mode"].(string)
++        if mode!="" && mode!="profile_only" {failure(c,400,"invalid_extract_mode");return}
++        if schema,exists:=body["profile_schema"];exists {
++            if !memoryPortraitEnabled() || schema!=os.Getenv("BAILIAN_MEMORY_PROFILE_SCHEMA_ID") || portraitStrategy!=os.Getenv("BAILIAN_MEMORY_PROFILE_STRATEGY") {failure(c,503,"portrait_delete_or_count_not_verified");return}
++            operations=append(operations,"portrait")
++        } else if mode=="profile_only" {failure(c,400,"profile_schema_required");return}
++        if mode!="profile_only" {operations=append(operations,"fact")}
++        delete(body,"meta_data") // backend ownership cannot be overwritten with arbitrary metadata
++    } else if path=="memory_nodes/search" {
++        if _,e=memoryUnitPrice("search",strategy);e!=nil {failure(c,400,e.Error());return}
++        body["plan_version"]=strategy
++        topK,_:=strconv.Atoi(os.Getenv("BAILIAN_MEMORY_TOP_K"));if topK<1 || topK>20 {topK=5};body["top_k"]=topK
++        delete(body,"project_id");delete(body,"profile_schema");delete(body,"extract_mode")
++        operations=append(operations,"search")
++    } else if method==http.MethodPatch {
++        if _,exists:=body["custom_content"];!exists {failure(c,400,"custom_content_required");return}
++    }
++    if len(operations)>0 && !p.Allows("memory","memory") {failure(c,403,"memory_token_permission_required");return}
++    if len(operations)>0 {
++        if os.Getenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED")!="1" {failure(c,503,"memory_storage_count_not_verified");return}
++        var debt int64
++        if e=g.DB.Model(&MemoryStorageHour{}).Where("user_id = ? AND state IN ?",p.User.Id,[]string{"pending","debt"}).Count(&debt).Error;e!=nil {failure(c,503,"memory_storage_ledger_unavailable");return}
++        if debt>0 {failure(c,402,"memory_storage_payment_pending");return}
++    }
++    payload,_:=json.Marshal(body)
++    idem:=c.GetHeader("Idempotency-Key")
++    if len(operations)>0 && (len(idem)<8 || len(idem)>128) {failure(c,400,"idempotency_key_required");return}
++    scope:=hash([]byte(strings.Join([]string{strconv.Itoa(p.User.Id),actor.CloudUserID,method,path,idem},":")))
++    payloadHash:=hash(append([]byte(method+":"+path+":"+query.Encode()+":"+strategy+":"+portraitStrategy+":"),payload...))
++    unlock:=g.lockScope(scope);defer unlock()
++    request:=MemoryRequest{ID:scope,UserID:p.User.Id,CloudUserID:actor.CloudUserID,PayloadHash:payloadHash,Path:path,State:"prepared",CreatedAt:time.Now().Unix()}
++    persisted:=len(operations)>0
++    if persisted {
++        if e=g.DB.Clauses(clause.OnConflict{DoNothing:true}).Create(&request).Error;e!=nil {failure(c,503,"memory_request_store_unavailable");return}
++        if e=g.DB.First(&request,"id = ?",scope).Error;e!=nil || request.PayloadHash!=payloadHash {failure(c,409,"idempotency_payload_conflict");return}
++        if request.State!="prepared" {
++            if request.State=="complete" && request.Response!="" {
++                if request.Status>=200 && request.Status<300 {
++                    var cached map[string]interface{}
++                    if json.Unmarshal([]byte(request.Response),&cached)!=nil || g.rememberMemoryResources(actor,cached)!=nil {failure(c,503,"resource_index_pending");return}
++                    if e=g.recoverMemorySettlement(&request);e!=nil {failure(c,503,"memory_settlement_pending");return}
++                }
++                c.Header("X-Memory-Replay","1");c.Data(request.Status,"application/json",[]byte(request.Response));return
++            }
++            failure(c,409,"memory_result_unknown_requires_reconciliation");return
++        }
++    }
++    charges:=[]*MemoryCharge{}
++    if !g.memoryRateAllow(path,time.Now()) { failure(c,429,"memory_account_rate_limit");return }
++    for _,operation:=range operations {
++        plan:=strategy;if operation=="portrait"{plan=portraitStrategy}
++        charge,err:=g.reserveMemoryCharge(p,channel,&request,operation,plan,1)
++        if err!=nil {
++            for _,held:=range charges {model.FinishBailian(g.DB,held.BillID,0,false,0,"memory_not_submitted")}
++            g.DB.Model(&request).Update("state","rejected")
++            if errors.Is(err,model.ErrBLQuota) {failure(c,402,"insufficient_quota")} else {failure(c,503,"memory_reservation_failed")};return
++        }
++        charges=append(charges,charge)
++    }
++    if persisted {
++        e=g.DB.Transaction(func(tx *gorm.DB) error {
++            result:=tx.Model(&MemoryRequest{}).Where("id = ? AND state = ?",scope,"prepared").Update("state","submitted")
++            if result.Error!=nil{return result.Error};if result.RowsAffected!=1{return model.ErrBLConflict}
++            for _,charge:=range charges {claimed,err:=model.ClaimSubmitBailian(tx,charge.BillID);if err!=nil{return err};if !claimed{return model.ErrBLConflict}}
++            if schema,exists:=body["profile_schema"];exists && schema!="" {return tx.Model(&stored).Update("portrait_written",true).Error}
++            return nil
++        })
++        if e!=nil {failure(c,409,"memory_submission_already_claimed");return}
++    }
++    ctx,cancel:=context.WithTimeout(c.Request.Context(),85*time.Second);defer cancel()
++    target:=memoryUpstream+path
++    if method==http.MethodGet || method==http.MethodDelete {target+="?"+query.Encode()}
++    httpReq,_:=http.NewRequestWithContext(ctx,method,target,bytes.NewReader(payload))
++    httpReq.Header.Set("Authorization","Bearer "+strings.TrimSpace(channel.Key));httpReq.Header.Set("Content-Type","application/json")
++    response,e:=memoryClient.Do(httpReq)
++    if e!=nil {g.memoryUnknown(&request,charges);failure(c,502,"memory_upstream_result_unknown");return}
++    defer response.Body.Close()
++    responseBody,e:=io.ReadAll(io.LimitReader(response.Body,4*1024*1024+1))
++    if e!=nil || len(responseBody)>4*1024*1024 || response.StatusCode>=300 && response.StatusCode<400 {g.memoryUnknown(&request,charges);failure(c,502,"memory_upstream_response_unknown");return}
++    var result map[string]interface{}
++    if json.Unmarshal(responseBody,&result)!=nil {g.memoryUnknown(&request,charges);failure(c,502,"memory_upstream_invalid_json");return}
++    requestID,_:=result["request_id"].(string)
++    if persisted {
++        // Persist accepted response before settlement, so restart can finish without another call.
++        if e=g.DB.Model(&request).Updates(map[string]interface{}{"state":"complete","status":response.StatusCode,"response":string(responseBody),"request_id":requestID}).Error;e!=nil {g.memoryUnknown(&request,charges);failure(c,503,"memory_response_persist_failed");return}
++    }
++    if response.StatusCode>=200 && response.StatusCode<300 {
++        if e=g.rememberMemoryResources(actor,result);e!=nil {failure(c,503,"memory_resource_index_failed");return}
++        for _,charge:=range charges {if e=g.settleMemoryCharge(charge);e!=nil {failure(c,503,"memory_settlement_pending");return}}
++        if schema,exists:=body["profile_schema"];exists && schema!="" {
++            g.DB.Model(&stored).Update("portrait_written",true)
++        }
++        if method==http.MethodDelete || method==http.MethodPatch {
++            g.DB.Model(&MemoryRequest{}).Where("cloud_user_id = ?",actor.CloudUserID).Update("response","")
++        }
++    } else if response.StatusCode>=400 && response.StatusCode<500 && response.StatusCode!=408 && response.StatusCode!=429 {
++        for _,charge:=range charges {model.FinishBailian(g.DB,charge.BillID,0,false,0,"memory_upstream_rejected")}
++    } else {g.memoryUnknown(&request,charges)}
++    c.Header("Cache-Control","no-store");c.Header("X-Memory-Cloud-User",actor.CloudUserID)
++    c.Header("X-Memory-Price-Version",memoryPriceVersion)
++    c.Data(response.StatusCode,"application/json",responseBody)
++}
++
++func (g *Gateway) memoryUnknown(request *MemoryRequest,charges []*MemoryCharge) {
++    if len(charges)==0{return}
++    g.DB.Model(request).Update("state","review")
++    for _,charge:=range charges {
++        model.FinishBailian(g.DB,charge.BillID,0,true,0,"memory_result_unknown")
++        g.DB.Model(charge).Update("state","review")
++    }
++}
++func (g *Gateway) recoverMemorySettlement(request *MemoryRequest) error {
++    if request.Status<200 || request.Status>=300{return nil}
++    var charges []MemoryCharge
++    if e:=g.DB.Where("request_id = ? AND state <> ?",request.ID,"settled").Find(&charges).Error;e!=nil{return e}
++    for i:=range charges {if e:=g.settleMemoryCharge(&charges[i]);e!=nil{return e}}
++    return nil
++}
++func (g *Gateway) rememberMemoryResources(actor MemoryEntity,result map[string]interface{}) error {
++    // Only traverse documented result containers; resource_id on events is a project/schema ID.
++    var visit func(interface{},string) error
++    visit=func(value interface{},kind string) error {
++        switch v:=value.(type) {
++        case []interface{}:for _,item:=range v {if e:=visit(item,kind);e!=nil{return e}}
++        case map[string]interface{}:
++            if user,ok:=v["user_id"].(string);ok && user!="" && user!=actor.CloudUserID{return errors.New("upstream_entity_mismatch")}
++            id,_:=v["memory_node_id"].(string);if id=="" && kind=="node" {id,_=v["id"].(string)}
++            actualKind:="node"
++            if eventID,ok:=v["event_id"].(string);ok && eventID!="" {id=eventID;actualKind="event"}
++            if id!="" && memoryIDPattern.MatchString(id) {
++                resource:=MemoryResource{Kind:actualKind,ID:id,CloudUserID:actor.CloudUserID,UserID:actor.UserID}
++                if e:=g.DB.Clauses(clause.OnConflict{DoNothing:true}).Create(&resource).Error;e!=nil{return e}
++                var existing MemoryResource
++                if g.DB.First(&existing,"kind = ? AND id = ?",actualKind,id).Error!=nil || existing.CloudUserID!=actor.CloudUserID {return errors.New("resource_owner_conflict")}
++            }
++            for _,key:=range []string{"memory_nodes","result","results","events","event"} {if child,ok:=v[key];ok {next:="node";if key=="events" || key=="event"{next="event"};if e:=visit(child,next);e!=nil{return e}}}
++        }
++        return nil
++    }
++    return visit(result,"")
++}
+--- a/bailian/memory_product_test.go
++++ b/bailian/memory_product_test.go
+@@ -0,0 +1,88 @@
++package bailian
++
++import (
++    "encoding/json"
++    "errors"
++    "io"
++    "net/http"
++    "net/http/httptest"
++    "strconv"
++    "strings"
++    "testing"
++    "time"
++    "github.com/gin-gonic/gin"
++    "github.com/songquanpeng/one-api/model"
++)
++
++func TestMemoryProductOwnershipIdempotencyAndSingleMultiplier(t *testing.T) {
++    t.Setenv("BAILIAN_MEMORY_CHANNEL_ID","2");t.Setenv("BAILIAN_MEMORY_BILLING","1")
++    t.Setenv("BAILIAN_MEMORY_SERVICE_SECRET",strings.Repeat("x",32))
++    t.Setenv("BAILIAN_MEMORY_RULES_VERIFIED","1");t.Setenv("BAILIAN_MEMORY_DEFAULT_FACT_STRATEGY","lite")
++    t.Setenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED","1")
++    g,db:=memoryFixture(t,100000)
++    key:="syntheticmemoryproducttoken000001"
++    db.Model(&model.Token{}).Where("id = 1").Update("key",key)
++    db.Create(&model.User{Id:2,Username:"other",Status:1,Group:"default",Quota:100000,AccessToken:"other",AffCode:"other"})
++    otherKey:="syntheticmemoryproducttoken000002"
++    db.Create(&model.Token{Id:2,UserId:2,Key:otherKey,Status:1,ExpiredTime:-1,RemainQuota:100000})
++    gin.SetMode(gin.TestMode);router:=gin.New();g.MemoryRoutes(router)
++    request:=func(method,path,person,idem,body,token string,owner int)*httptest.ResponseRecorder {
++        req:=httptest.NewRequest(method,memoryPrefix+path,strings.NewReader(body))
++        req.Header.Set("Authorization","Bearer sk-"+token)
++        expiry:=strconv.FormatInt(time.Now().Unix()+120,10)
++        req.Header.Set("X-Memory-Account","10");req.Header.Set("X-Memory-Person",person)
++        req.Header.Set("X-Memory-Generation","0");req.Header.Set("X-Memory-Expires",expiry)
++        req.Header.Set("X-Memory-Signature",memoryAttestation(strings.Repeat("x",32),owner,"10",person,"0",expiry))
++        req.Header.Set("Idempotency-Key",idem)
++        out:=httptest.NewRecorder();router.ServeHTTP(out,req);return out
++    }
++    prior:=memoryClient;t.Cleanup(func(){memoryClient=prior});calls:=0;unknown:=false
++    memoryClient=&http.Client{Transport:memoryTestTransport(func(req *http.Request)(*http.Response,error){
++        calls++
++        if unknown { return nil,errors.New("synthetic response loss") }
++        raw,_:=io.ReadAll(req.Body);var body map[string]interface{};json.Unmarshal(raw,&body)
++        cloud:=body["user_id"]
++        if text,ok:=cloud.(string);ok && len(text)>64 {t.Fatal("cloud user id exceeds Alibaba limit")}
++        result:=map[string]interface{}{"request_id":"synthetic-product"}
++        if strings.HasSuffix(req.URL.Path,"add-async") {
++            if _,found:=body["plan_version"];found {t.Fatal("Add version is not an API body field")}
++            if _,found:=body["project_id"];found {t.Fatal("verified default project unexpectedly changed")}
++            result["event_id"]="owned_event";result["events"]=[]interface{}{map[string]interface{}{"event_id":"owned_event","user_id":cloud,"status":"PENDING"}}
++        } else if strings.HasSuffix(req.URL.Path,"memory_nodes/search") {
++            if body["plan_version"]!="lite" || body["top_k"]!=float64(5) {t.Fatal("search budget/version changed")}
++            if cloud=="foreign" {t.Fatal("model supplied user escaped ownership binding")}
++            result["memory_nodes"]=[]interface{}{map[string]interface{}{"memory_node_id":"owned_node","content":"synthetic preference"}}
++        }
++        encoded,_:=json.Marshal(result)
++        return &http.Response{StatusCode:200,Header:make(http.Header),Body:io.NopCloser(strings.NewReader(string(encoded)))},nil
++    })}
++    payload:=`{"messages":[{"role":"user","content":"synthetic"}],"user_id":"foreign","plan_version":"pro","top_k":99}`
++    if out:=request("POST","/memory_nodes/search","usr_a","search-01",payload,key,1);out.Code!=200 {t.Fatal(out.Code,out.Body.String())}
++    if out:=request("POST","/memory_nodes/search","usr_a","search-01",payload,key,1);out.Code!=200 || out.Header().Get("X-Memory-Replay")!="1" {t.Fatal("replay failed",out.Code,out.Body.String())}
++    if calls!=1 {t.Fatal("duplicate upstream search")}
++    if out:=request("POST","/memory_nodes/search","usr_a","search-01",`{"messages":[]}`,key,1);out.Code!=409 {t.Fatal("payload conflict accepted",out.Code)}
++    if out:=request("GET","/memory_nodes/owned_node","usr_b","","",key,1);out.Code!=403 {t.Fatal("cross-person read accepted",out.Code)}
++    if out:=request("GET","/memory_nodes/owned_node","usr_a","","",otherKey,1);out.Code!=403 {t.Fatal("cross-wallet attestation accepted",out.Code)}
++    if out:=request("POST","/add-async","usr_a","fact-001",`{"messages":[{"role":"user","content":"synthetic fact"}]}`,key,1);out.Code!=200 {t.Fatal(out.Code,out.Body.String())}
++    if calls!=2 {t.Fatal("unexpected call count",calls)}
++    var user model.User;db.First(&user,1)
++    // Search + fact = (0.00002 + 0.018) * 1.43 * 500000/7 = 1840.614285 quota.
++    if user.UsedQuota!=1840 || user.Quota!=100000-1840 {t.Fatal("multiplier or rounding incorrect",user.UsedQuota,user.Quota)}
++    var other model.User;db.First(&other,2);if other.Quota!=100000 {t.Fatal("other account charged")}
++    unknown=true
++    if out:=request("POST","/memory_nodes/search","usr_a","lost-001",payload,key,1);out.Code!=502 {t.Fatal("unknown result not held",out.Code)}
++    if out:=request("POST","/memory_nodes/search","usr_a","lost-001",payload,key,1);out.Code!=409 {t.Fatal("unknown result repeated",out.Code)}
++    if calls!=3 {t.Fatal("blind resubmission after response loss")}
++    var reviews int64;db.Model(&MemoryRequest{}).Where("state = ?","review").Count(&reviews)
++    if reviews!=1 {t.Fatal("missing durable review")}
++}
++
++func TestMemoryAccountRateLimitsResetAndUseSeparateBudgets(t *testing.T) {
++    g,_:=memoryFixture(t,0);now:=time.Unix(1800000000,0)
++    for i:=0;i<120;i++ {if !g.memoryRateAllow("add-async",now){t.Fatal("early Add limit")}}
++    if g.memoryRateAllow("add-async",now){t.Fatal("Add limit not enforced")}
++    for i:=0;i<300;i++ {if !g.memoryRateAllow("memory_nodes/search",now){t.Fatal("early Search limit")}}
++    if g.memoryRateAllow("memory_nodes/search",now){t.Fatal("Search limit not enforced")}
++    if !g.memoryRateAllow("memory_nodes",now){t.Fatal("maintenance blocked by Search cap")}
++    if !g.memoryRateAllow("add-async",now.Add(time.Minute)){t.Fatal("minute budget did not reset")}
++}
+--- a/bailian/memory_rate.go
++++ b/bailian/memory_rate.go
+@@ -0,0 +1,20 @@
++package bailian
++
++import "time"
++
++// Account-level Alibaba limits; one native gateway owns all product traffic.
++// A rejected local request has no upstream call or charge.
++func (g *Gateway) memoryRateAllow(path string, now time.Time) bool {
++    g.memoryRateMu.Lock()
++    defer g.memoryRateMu.Unlock()
++    minute := now.Unix()/60
++    if minute != g.memoryRateMinute {
++        g.memoryRateMinute=minute; g.memoryRateTotal=0; g.memoryRateAdd=0; g.memoryRateSearch=0
++    }
++    add := path=="add" || path=="add-async"
++    search := path=="memory_nodes/search"
++    if g.memoryRateTotal>=3000 || (add && g.memoryRateAdd>=120) || (search && g.memoryRateSearch>=300) { return false }
++    g.memoryRateTotal++
++    if add { g.memoryRateAdd++ }; if search { g.memoryRateSearch++ }
++    return true
++}
+--- a/bailian/memory_review.go
++++ b/bailian/memory_review.go
+@@ -0,0 +1,87 @@
++package bailian
++
++import (
++    "encoding/json"
++    "errors"
++    "io"
++    "strings"
++    "time"
++    "github.com/gin-gonic/gin"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/gorm"
++    "gorm.io/gorm/clause"
++)
++
++type MemoryResolution struct {
++    OperationID string `gorm:"type:varchar(80);primaryKey"`
++    RequestID string `gorm:"type:char(64);uniqueIndex"`
++    PayloadHash string `gorm:"type:char(64)"`
++    ActorID int
++    Outcome string `gorm:"type:varchar(16)"`
++    Reason string `gorm:"type:text"`
++    Evidence string `gorm:"type:text"`
++    CreatedAt int64
++}
++
++// This is an audited human reconciliation, not an automated deletion or receipt
++// verification. Operators must obtain the upstream outcome before using it.
++func (g *Gateway) AdminMemoryResolve(c *gin.Context) {
++    p,ok:=g.adminPrincipal(c);if !ok{return}
++    raw,e:=io.ReadAll(io.LimitReader(c.Request.Body,16385))
++    var input struct {
++        OperationID string `json:"operation_id"`
++        Outcome string `json:"outcome"`
++        Reason string `json:"reason"`
++        Evidence string `json:"evidence"`
++        Result map[string]interface{} `json:"result"`
++    }
++    if e!=nil || len(raw)>16384 || strictJSON(raw,&input)!=nil || len(input.OperationID)<8 || len(input.OperationID)>80 || len(strings.TrimSpace(input.Reason))<3 || len(strings.TrimSpace(input.Evidence))<8 || (input.Outcome!="accepted" && input.Outcome!="rejected") {
++        failure(c,400,"confirmed_outcome_reason_evidence_required");return
++    }
++    id:=c.Param("id");canonical,_:=json.Marshal(input);digest:=hash(canonical)
++    unlock:=g.lockScope(id);defer unlock()
++    e=g.DB.Transaction(func(tx *gorm.DB)error{
++        var prior MemoryResolution
++        if tx.First(&prior,"operation_id = ?",input.OperationID).Error==nil {
++            if prior.RequestID!=id || prior.PayloadHash!=digest{return model.ErrBLConflict};return nil
++        }
++        var request MemoryRequest
++        if err:=tx.First(&request,"id = ?",id).Error;err!=nil{return err}
++        // Use the same wallet lock order as automatic settlement.
++        var wallet model.User
++        if err:=tx.Clauses(clause.Locking{Strength:"UPDATE"}).First(&wallet,request.UserID).Error;err!=nil{return err}
++        if err:=tx.Clauses(clause.Locking{Strength:"UPDATE"}).First(&request,"id = ?",id).Error;err!=nil{return err}
++        if request.State!="review" && request.State!="submitted" {return model.ErrBLConflict}
++        var charges []MemoryCharge
++        if err:=tx.Where("request_id = ?",id).Find(&charges).Error;err!=nil{return err}
++        if len(charges)==0{return model.ErrBLConflict}
++        if input.Outcome=="accepted" {
++            requestID,_:=input.Result["request_id"].(string)
++            if !memoryIDPattern.MatchString(requestID){return errors.New("upstream_request_evidence_required")}
++            if request.Path=="add-async" {
++                eventID,_:=input.Result["event_id"].(string)
++                if !memoryIDPattern.MatchString(eventID){return errors.New("confirmed_event_required")}
++            }else if request.Path=="memory_nodes/search" {
++                if _,ok:=input.Result["memory_nodes"].([]interface{});!ok{return errors.New("confirmed_search_result_required")}
++            }else{return errors.New("unsupported_manual_outcome")}
++            scoped:=NewGateway(g.Context,tx)
++            actor:=MemoryEntity{CloudUserID:request.CloudUserID,UserID:request.UserID}
++            if err:=scoped.rememberMemoryResources(actor,input.Result);err!=nil{return err}
++            for i:=range charges {
++                if err:=tx.Model(&model.BailianBill{}).Where("id = ? AND state IN ?",charges[i].BillID,[]string{model.BLReview,model.BLSubmitted}).Update("state",model.BLSubmitted).Error;err!=nil{return err}
++                if err:=scoped.settleMemoryCharge(&charges[i]);err!=nil{return err}
++            }
++            response,_:=json.Marshal(input.Result)
++            if err:=tx.Model(&request).Updates(map[string]interface{}{"state":"complete","status":200,"response":string(response),"request_id":requestID}).Error;err!=nil{return err}
++        }else{
++            for _,charge:=range charges {
++                if err:=model.FinishBailian(tx,charge.BillID,0,false,p.User.Id,"memory_confirmed_not_accepted");err!=nil{return err}
++                if err:=tx.Model(&charge).Update("state","refunded").Error;err!=nil{return err}
++            }
++            if err:=tx.Model(&request).Updates(map[string]interface{}{"state":"rejected","status":400,"response":""}).Error;err!=nil{return err}
++        }
++        return tx.Create(&MemoryResolution{OperationID:input.OperationID,RequestID:id,PayloadHash:digest,ActorID:p.User.Id,Outcome:input.Outcome,Reason:input.Reason,Evidence:input.Evidence,CreatedAt:time.Now().Unix()}).Error
++    })
++    if e!=nil{failure(c,409,"memory_resolution_conflict_or_invalid_evidence");return}
++    c.JSON(200,gin.H{"reconciled":true,"outcome":input.Outcome,"operation_id":input.OperationID})
++}
+--- a/bailian/memory_review_test.go
++++ b/bailian/memory_review_test.go
+@@ -0,0 +1,35 @@
++package bailian
++
++import (
++    "encoding/json"
++    "net/http/httptest"
++    "strings"
++    "testing"
++    "github.com/gin-gonic/gin"
++    "github.com/songquanpeng/one-api/model"
++)
++
++func TestMemoryManualReviewIsAuditedExactAndIdempotent(t *testing.T) {
++    for _,outcome:=range []string{"accepted","rejected"} {t.Run(outcome,func(t *testing.T){
++        g,db:=memoryFixture(t,10000)
++        key:="syntheticadminmemoryreviewtoken"
++        db.Model(&model.Token{}).Where("id = 1").Update("key",key)
++        var p Principal;db.First(&p.User,1);db.First(&p.Token,1)
++        req:=MemoryRequest{ID:strings.Repeat("a",64),CloudUserID:"review_person",UserID:1,PayloadHash:hash([]byte("synthetic")),Path:"add-async",State:"submitted"}
++        db.Create(&req)
++        charge,e:=g.reserveMemoryCharge(p,model.Channel{Id:2},&req,"fact","lite",1);if e!=nil{t.Fatal(e)}
++        model.SubmitBailian(db,charge.BillID);g.memoryUnknown(&req,[]*MemoryCharge{charge})
++        router:=gin.New();g.Routes(router)
++        payload,_:=json.Marshal(map[string]interface{}{"operation_id":"review-operation-1","outcome":outcome,"reason":"official support confirmation","evidence":"synthetic official request outcome","result":map[string]interface{}{"event_id":"verified_event","request_id":"verified_request","user_id":req.CloudUserID}})
++        call:=func()*httptest.ResponseRecorder{
++            request:=httptest.NewRequest("POST","/bailian/v1/memory/operations/"+req.ID+"/admin-resolve",strings.NewReader(string(payload)))
++            request.Header.Set("Authorization","Bearer sk-"+key);out:=httptest.NewRecorder();router.ServeHTTP(out,request);return out
++        }
++        if out:=call();out.Code!=403{t.Fatal("ordinary token accepted",out.Code)}
++        db.Model(&model.User{}).Where("id = 1").Update("role",model.RoleAdminUser)
++        for i:=0;i<2;i++ {if out:=call();out.Code!=200{t.Fatal(out.Code,out.Body.String())}}
++        var user model.User;db.First(&user,1);db.First(&req,"id = ?",req.ID)
++        if outcome=="accepted" {if user.UsedQuota!=1838 || req.State!="complete"{t.Fatal("incorrect exact settlement",user.UsedQuota,req.State)}} else if user.UsedQuota!=0 || user.Quota!=10000 || req.State!="rejected" {t.Fatal("refund failed",user.UsedQuota,user.Quota,req.State)}
++        var count int64;db.Model(&MemoryResolution{}).Count(&count);if count!=1{t.Fatal("duplicate audit",count)}
++    })}
++}
+--- a/bailian/memory_storage.go
++++ b/bailian/memory_storage.go
+@@ -0,0 +1,106 @@
++package bailian
++
++import (
++    "context"
++    "encoding/json"
++    "errors"
++    "fmt"
++    "io"
++    "log"
++    "net/http"
++    "net/url"
++    "os"
++    "strconv"
++    "time"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/gorm/clause"
++)
++
++// Samples are immutable. Missing historical samples are never fabricated from
++// today's count. The evidence request and sample time remain available to audit.
++func (g *Gateway) collectMemoryStorage(ctx context.Context, now time.Time) error {
++    if os.Getenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED") != "1" { return errors.New("storage_count_not_verified") }
++    var channel model.Channel
++    id,_:=strconv.Atoi(os.Getenv("BAILIAN_MEMORY_CHANNEL_ID"))
++    if e:=g.DB.First(&channel,id).Error;e!=nil{return e}
++    if channel.Type!=17 || channel.Status!=model.ChannelStatusEnabled || channel.Key=="" {return errors.New("memory_channel_unavailable")}
++    var entities []MemoryEntity
++    if e:=g.DB.Where("state <> ?","deleted").Order("created_at, cloud_user_id").Find(&entities).Error;e!=nil{return e}
++    failures:=0
++    for _,entity:=range entities {
++        if ctx.Err()!=nil{return ctx.Err()}
++        if entity.PortraitWritten { return errors.New("portrait_storage_count_not_verified") }
++        hour:=now.UTC().Unix()/3600
++        sampleID:=hash([]byte(entity.CloudUserID+":"+strconv.FormatInt(hour,10)))
++        var prior MemoryStorageHour
++        if g.DB.First(&prior,"id = ?",sampleID).Error==nil {continue}
++        if !g.memoryRateAllow("memory_nodes",time.Now()) {return errors.New("storage_account_rate_limit")}
++        query:=url.Values{"user_id":{entity.CloudUserID},"page_num":{"1"},"page_size":{"1"}}
++        if library:=os.Getenv("BAILIAN_MEMORY_LIBRARY_ID");library!=""{query.Set("memory_library_id",library)}
++        check,cancel:=context.WithTimeout(ctx,3*time.Second)
++        request,e:=http.NewRequestWithContext(check,http.MethodGet,memoryUpstream+"memory_nodes?"+query.Encode(),nil)
++        if e!=nil {cancel();return e}
++        request.Header.Set("Authorization","Bearer "+channel.Key)
++        response,e:=memoryClient.Do(request)
++        if e!=nil {cancel();failures++;continue}
++        raw,e:=io.ReadAll(io.LimitReader(response.Body,1024*1024+1));response.Body.Close();cancel()
++        if e!=nil || len(raw)>1024*1024 || response.StatusCode!=200 {failures++;continue}
++        var result struct { Total *int64 `json:"total"`; RequestID string `json:"request_id"`; Nodes []struct{UserID string `json:"user_id"`} `json:"memory_nodes"` }
++        if json.Unmarshal(raw,&result)!=nil || result.Total==nil || *result.Total<0 || result.RequestID=="" {failures++;continue}
++        valid:=true;for _,node:=range result.Nodes {if node.UserID!="" && node.UserID!=entity.CloudUserID {valid=false}}
++        if !valid {failures++;continue}
++        exact,e:=memoryExactQuota("storage","lite",*result.Total);if e!=nil{return e}
++        sample:=MemoryStorageHour{ID:sampleID,CloudUserID:entity.CloudUserID,UserID:entity.UserID,TokenID:entity.TokenID,ChannelID:channel.Id,Hour:hour,FactCount:*result.Total,State:"pending",ExactQuota:exact.RatString(),EvidenceRequestID:result.RequestID,SampledAt:now.Unix()}
++        if *result.Total==0 {sample.State="settled"}
++        if e=g.DB.Clauses(clause.OnConflict{DoNothing:true}).Create(&sample).Error;e!=nil{return e}
++        // Retired entities are only finished after confirmed deletion and after
++        // every possibly late Add has a definitive outcome.
++        if entity.State=="retired" && *result.Total==0 {
++            var unresolved int64
++            g.DB.Model(&MemoryRequest{}).Where("cloud_user_id = ? AND path IN ? AND state IN ?",entity.CloudUserID,[]string{"add","add-async"},[]string{"prepared","submitted","review"}).Count(&unresolved)
++            if unresolved==0 && entity.CleanupConfirmed {g.DB.Model(&entity).Update("state","deleted")}
++        }
++    }
++    if err:=g.settleMemoryStorageDebt();err!=nil{return err}
++    if failures>0{return fmt.Errorf("storage_sampling_failed_entities=%d",failures)}
++    return nil
++}
++
++func (g *Gateway) settleMemoryStorageDebt() error {
++    var samples []MemoryStorageHour
++    if e:=g.DB.Where("state IN ?",[]string{"pending","debt"}).Order("hour, id").Limit(1000).Find(&samples).Error;e!=nil{return e}
++    for i:=range samples {
++        sample:=&samples[i]
++        var p Principal
++        if g.DB.First(&p.User,sample.UserID).Error!=nil || g.DB.First(&p.Token,sample.TokenID).Error!=nil {continue}
++        // A rotated product token can settle the same account's storage debt.
++        var entity MemoryEntity
++        if g.DB.First(&entity,"cloud_user_id = ?",sample.CloudUserID).Error==nil && entity.TokenID!=sample.TokenID {
++            if g.DB.First(&p.Token,entity.TokenID).Error!=nil {continue}
++        }
++        request:=MemoryRequest{ID:sample.ID,CloudUserID:sample.CloudUserID,PayloadHash:hash([]byte(sample.ExactQuota+":"+sample.EvidenceRequestID))}
++        charge,e:=g.reserveMemoryCharge(p,model.Channel{Id:sample.ChannelID},&request,"storage","lite",sample.FactCount)
++        if e!=nil {g.DB.Model(sample).Update("state","debt");continue}
++        var bill model.BailianBill
++        if e=g.DB.First(&bill,"id = ?",charge.BillID).Error;e!=nil{return e}
++        if bill.State!=model.BLSettled {
++            if e=model.SubmitBailian(g.DB,charge.BillID);e!=nil{return e}
++        }
++        if e=g.settleMemoryCharge(charge);e!=nil{return e}
++        if e=g.DB.Model(sample).Updates(map[string]interface{}{"state":"settled","bill_id":charge.BillID}).Error;e!=nil{return e}
++    }
++    return nil
++}
++
++// The collector is deliberately independent of request authentication and wallet
++// balance: retained data continues accruing storage, while deletion stays usable.
++func (g *Gateway) StartMemoryAccounting(ctx context.Context) {
++    if os.Getenv("BAILIAN_MEMORY_BILLING")!="1" {return}
++    go func(){
++        tick:=time.NewTicker(time.Minute);defer tick.Stop()
++        for {
++            if err:=g.collectMemoryStorage(ctx,time.Now());err!=nil {log.Printf("memory storage sampling deferred: %v",err)}
++            select {case <-ctx.Done():return;case <-tick.C:}
++        }
++    }()
++}
+--- a/bailian/memory_storage_test.go
++++ b/bailian/memory_storage_test.go
+@@ -0,0 +1,90 @@
++package bailian
++
++import (
++    "context"
++    "io"
++    "net/http"
++    "strings"
++    "testing"
++    "time"
++    "github.com/google/uuid"
++    "github.com/songquanpeng/one-api/model"
++    "gorm.io/driver/sqlite"
++    "gorm.io/gorm"
++    glog "gorm.io/gorm/logger"
++)
++
++func memoryFixture(t *testing.T, quota int) (*Gateway, *gorm.DB) {
++    t.Helper()
++    db,e:=gorm.Open(sqlite.Open("file:"+uuid.NewString()+"?mode=memory&cache=shared"),&gorm.Config{Logger:glog.Default.LogMode(glog.Silent)})
++    if e!=nil {t.Fatal(e)}
++    sql,_:=db.DB();t.Cleanup(func(){sql.Close()})
++    if e=db.AutoMigrate(&model.User{},&model.Token{},&model.Channel{},&model.Log{});e!=nil {t.Fatal(e)}
++    if e=model.MigrateBailianLedger(db);e!=nil {t.Fatal(e)}
++    if e=MigrateMemoryProduct(db);e!=nil {t.Fatal(e)}
++    for _,row:=range []interface{}{
++        &model.User{Id:1,Username:"memory-storage-test",Password:"unused",Status:1,Group:"default",Quota:int64(quota),AccessToken:"test",AffCode:"test"},
++        &model.Token{Id:1,UserId:1,Key:"synthetic",Status:1,ExpiredTime:-1,RemainQuota:int64(quota)},
++        &model.Channel{Id:2,Type:17,Key:"synthetic",Status:1,Group:"default"},
++    } {if e=db.Create(row).Error;e!=nil {t.Fatal(e)}}
++    return NewGateway(context.Background(),db),db
++}
++
++func TestMemoryStorageDebtRechargeReplayAndActualDelete(t *testing.T) {
++    t.Setenv("BAILIAN_MEMORY_CHANNEL_ID","2")
++    t.Setenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED","1")
++    gateway,db:=memoryFixture(t,0)
++    entity:=MemoryEntity{CloudUserID:"storage-person",UserID:1,TokenID:1,ProductAccount:"10",PersonID:"usr_a",State:"active"}
++    if e:=db.Create(&entity).Error;e!=nil {t.Fatal(e)}
++    prior:=memoryClient;t.Cleanup(func(){memoryClient=prior})
++    count:=10000;calls:=0
++    memoryClient=&http.Client{Transport:memoryTestTransport(func(request *http.Request)(*http.Response,error){
++        calls++
++        if request.URL.Query().Get("user_id")!=entity.CloudUserID {t.Fatal("wrong person count")}
++        raw:=`{"total":10000,"request_id":"count-evidence","memory_nodes":[]}`
++        if count==0 {raw=`{"total":0,"request_id":"deleted-count-evidence","memory_nodes":[]}`}
++        return &http.Response{StatusCode:200,Header:make(http.Header),Body:io.NopCloser(strings.NewReader(raw))},nil
++    })}
++    now:=time.Unix(1800000000,0)
++    if e:=gateway.collectMemoryStorage(context.Background(),now);e!=nil {t.Fatal(e)}
++    if e:=gateway.collectMemoryStorage(context.Background(),now.Add(time.Minute));e!=nil {t.Fatal(e)}
++    var sample MemoryStorageHour;db.First(&sample)
++    if sample.State!="debt" || sample.FactCount!=10000 || calls!=1 {t.Fatalf("invalid debt/dedup: %#v calls=%d",sample,calls)}
++    db.Model(&model.User{}).Where("id = 1").Update("quota",1000)
++    db.Model(&model.Token{}).Where("id = 1").Update("remain_quota",1000)
++    if e:=gateway.settleMemoryStorageDebt();e!=nil {t.Fatal(e)}
++    if e:=gateway.settleMemoryStorageDebt();e!=nil {t.Fatal(e)}
++    var user model.User;db.First(&user,1)
++    if user.Quota!=796 || user.UsedQuota!=204 {t.Fatalf("debt charged wrong amount: %d / %d",user.Quota,user.UsedQuota)}
++    db.First(&sample,"id = ?",sample.ID)
++    if sample.State!="settled" || sample.BillID=="" {t.Fatal("missing storage bill")}
++    db.Model(&entity).Updates(map[string]interface{}{"state":"retired","cleanup_confirmed":true})
++    count=0
++    if e:=gateway.collectMemoryStorage(context.Background(),now.Add(time.Hour));e!=nil {t.Fatal(e)}
++    db.First(&entity,"cloud_user_id = ?",entity.CloudUserID)
++    if entity.State!="deleted" {t.Fatal("actual empty count and cleanup did not stop storage")}
++    if e:=gateway.collectMemoryStorage(context.Background(),now.Add(2*time.Hour));e!=nil {t.Fatal(e)}
++    if calls!=2 {t.Fatal("deleted entity still sampled")}
++    db.First(&user,1);if user.Quota!=796 {t.Fatal("zero count charged")}
++}
++
++func TestMemoryStorageNeverInventsCountOrDeletesBeforeLateAdd(t *testing.T) {
++    t.Setenv("BAILIAN_MEMORY_CHANNEL_ID","2");t.Setenv("BAILIAN_MEMORY_STORAGE_COUNT_VERIFIED","1")
++    gateway,db:=memoryFixture(t,1000)
++    entity:=MemoryEntity{CloudUserID:"storage-pending",UserID:1,TokenID:1,State:"retired",CleanupConfirmed:true}
++    db.Create(&entity)
++    db.Create(&MemoryRequest{ID:"late-add",CloudUserID:entity.CloudUserID,Path:"add-async",State:"review"})
++    prior:=memoryClient;t.Cleanup(func(){memoryClient=prior})
++    valid:=false
++    memoryClient=&http.Client{Transport:memoryTestTransport(func(*http.Request)(*http.Response,error){
++        raw:=`{"request_id":"no-count","memory_nodes":[]}`
++        if valid {raw=`{"request_id":"verified-zero","total":0,"memory_nodes":[]}`}
++        return &http.Response{StatusCode:200,Header:make(http.Header),Body:io.NopCloser(strings.NewReader(raw))},nil
++    })}
++    now:=time.Unix(1800000000,0)
++    if err:=gateway.collectMemoryStorage(context.Background(),now);err==nil {t.Fatal("sampling failure was hidden")}
++    var samples int64;db.Model(&MemoryStorageHour{}).Count(&samples);if samples!=0 {t.Fatal("missing count treated as zero")}
++    valid=true;gateway.collectMemoryStorage(context.Background(),now)
++    db.First(&entity,"cloud_user_id = ?",entity.CloudUserID)
++    if entity.State!="retired" {t.Fatal("late add could resurrect a deleted entity")}
++}
+--- a/cmd/bailian/main.go
++++ b/cmd/bailian/main.go
+@@ -42,6 +42,7 @@
+ 	sql.SetMaxIdleConns(8)
+ 	sql.SetConnMaxLifetime(5 * time.Minute)
+ 	if *migrate {
++		if e = bailian.MigrateMemoryProduct(db); e != nil { log.Fatal("memory product migration failed") }
+ 		if e = model.MigrateBailianLedger(db); e != nil {
+ 			log.Fatal("ledger migration failed")
+ 		}
+@@ -90,6 +91,7 @@
+ 	}
+ 	g.Routes(r)
+ 	g.MemoryRoutes(r)
++	g.StartMemoryAccounting(ctx)
+ 	r.GET("/healthz", func(c *gin.Context) {
+ 		check, cancel := context.WithTimeout(c.Request.Context(), time.Second)
+ 		defer cancel()

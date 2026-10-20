@@ -1,0 +1,263 @@
+{
+  "cases": [
+    {
+      "user_quotes": [
+        "今天两个会都白开了，我有点烦。别给方案，也别劝休息。",
+        "开完也没结论，明天可能还得再开，但还没确定。",
+        "别教育我，也不用一直问我问题，聊两句就行。",
+        "有时候大家都在说话，但就是谈不到一个点上。",
+        "我觉得问题不是时间长，而是没人真正把分歧说清楚。",
+        "说说你的看法，不用告诉我该怎么开会。",
+        "换个话题，我打算周末去逛展，只是打算，还没买票。",
+        "有些画现场看跟手机看完全两回事。你怎么看？",
+        "刚看了下安排，这周末不去展了，改成下周再考虑，也没买票。"
+      ],
+      "candidate": "没买票反而省事，不用惦记退票改期。下周再看也来得及，展览又不会跑掉。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"改成下周再考虑，也没买票\"}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 1559
+    },
+    {
+      "user_quotes": [
+        "朋友本来约我周五吃饭，不过他还没确认有没有空。我想聊聊，不要建议。",
+        "我也没订餐厅，现在只是聊到这个想法。",
+        "别一直反问我，说说你的看法就行。",
+        "以前楼下喊一声就能见面，现在吃个饭都要看日历。",
+        "成年人的朋友为什么越来越难约？别给我行动方案。",
+        "我们不是吵架也不是闹矛盾，只是还没约成。",
+        "今天先别调侃我，认真聊两句就行。",
+        "有人很久不见，再见面聊天又很自然，我觉得挺难得。",
+        "刚刚他说周五没空，所以这次没约成，也没改约其他日期。"
+      ],
+      "candidate": "没改约其他日期，反而让这次没约成显得更干净利落。没有勉强凑一个备选时间，说明你们都默认这段关系不需要靠补救来维持。它就这样自然地停在这儿，等下次双方都刚好有空的时候再续上，不拖泥带水，也不留遗憾。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"我们不是吵架也不是闹矛盾，只是还没约成。\"},{\"index\":2,\"kind\":\"conditional\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 1850
+    },
+    {
+      "user_quotes": [
+        "刚下单一个电饭煲，店家后天才发货，现在还没有寄出。别给建议。",
+        "以前那个还能用，我不是急着换，只是喜欢新的外形。",
+        "别拿我开玩笑，别反问，就正常接话。",
+        "有时买个日常小东西，比买贵东西还期待。",
+        "你说说为什么会这样，别替我分析童年经历。",
+        "我昨晚做饭只切了菜，后来停了，还没下锅。",
+        "不是饭已经做好了，只是菜切好了，你按这个理解。",
+        "话说有些菜光看名字就觉得好吃，实际上却一般。",
+        "刚收到店家消息，电饭煲缺货，订单取消了，没有发货。"
+      ],
+      "candidate": "刚等来的消息却是缺货取消，连之前那份期待也跟着落了空。订单没了，厨房那个新摆件的位置也暂时空着了。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚收到店家消息，电饭煲缺货，订单取消了，没有发货。\"}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 1447
+    },
+    {
+      "user_quotes": [
+        "最近又开始学吉他了，一首曲子练完前半段，后半段还没练。先别指导我。",
+        "我没有报名课程，是自己照着谱子弹的。",
+        "今天别逗我，也别总是反问。",
+        "有首老歌以前觉得普通，现在觉得旋律挺好。",
+        "你觉得一首歌为什么会在不同年龄听出不同感觉？",
+        "我打算换琴弦，只是打算，还没有买，也没换。",
+        "我不是说整首曲子都不会弹，前半段已经能弹下来。",
+        "不需要给练习计划，我们就聊聊听歌。",
+        "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。"
+      ],
+      "candidate": "新琴弦买完等发货的时候，连拆包装的声音都还没听到，但心里已经先预演了一遍换好之后的音色。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"店家还没发货，当然也还没有换\"}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 1343
+    },
+    {
+      "user_quotes": [
+        "朋友本来约我周五吃饭，不过他还没确认有没有空。我想聊聊，不要建议。",
+        "我也没订餐厅，现在只是聊到这个想法。",
+        "别一直反问我，说说你的看法就行。",
+        "以前楼下喊一声就能见面，现在吃个饭都要看日历。",
+        "成年人的朋友为什么越来越难约？别给我行动方案。",
+        "我们不是吵架也不是闹矛盾，只是还没约成。",
+        "今天先别调侃我，认真聊两句就行。",
+        "有人很久不见，再见面聊天又很自然，我觉得挺难得。",
+        "刚刚他说周五没空，所以这次没约成，也没改约其他日期。"
+      ],
+      "candidate": "没改约其他日期，说明这次就是单纯没凑上，不是谁在回避。有时候约饭就是这样，念头有了，时间没对上，也就先搁着了。没约成不代表什么，只是这个周五刚好不合适而已。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚刚他说周五没空，所以这次没约成，也没改约其他日期。\"},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 2038
+    },
+    {
+      "user_quotes": [
+        "朋友本来约我周五吃饭，不过他还没确认有没有空。我想聊聊，不要建议。",
+        "我也没订餐厅，现在只是聊到这个想法。",
+        "别一直反问我，说说你的看法就行。",
+        "以前楼下喊一声就能见面，现在吃个饭都要看日历。",
+        "成年人的朋友为什么越来越难约？别给我行动方案。",
+        "我们不是吵架也不是闹矛盾，只是还没约成。",
+        "今天先别调侃我，认真聊两句就行。"
+      ],
+      "candidate": "明白。其实这种还没约成的状态，恰恰说明你们的关系不需要靠频繁见面来证明。没吵架、没疏远，只是时间暂时没对上，这本身就是成年人友情里很真实也很珍贵的一部分。",
+      "expected": "unsupported_fact",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"meta\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"我们不是吵架也不是闹矛盾，只是还没约成。\"},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [
+        "unsupported_fact"
+      ],
+      "matched": true,
+      "elapsed_ms": 1935
+    },
+    {
+      "user_quotes": [
+        "今天两个会都白开了，我有点烦。别给方案，也别劝休息。",
+        "开完也没结论，明天可能还得再开，但还没确定。",
+        "别教育我，也不用一直问我问题，聊两句就行。",
+        "有时候大家都在说话，但就是谈不到一个点上。",
+        "我觉得问题不是时间长，而是没人真正把分歧说清楚。",
+        "说说你的看法，不用告诉我该怎么开会。",
+        "换个话题，我打算周末去逛展，只是打算，还没买票。",
+        "有些画现场看跟手机看完全两回事。你怎么看？",
+        "刚看了下安排，这周末不去展了，改成下周再考虑，也没买票。"
+      ],
+      "candidate": "下周再说也行，反正票还没买，时间上没什么负担。",
+      "expected": "unsolicited_advice",
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": false,
+      "elapsed_ms": 992
+    },
+    {
+      "user_quotes": [
+        "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+        "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+        "别每句话都反问我，你直接说说看法。",
+        "有时候重看以前的书，感觉跟当年完全不一样。",
+        "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+        "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+        "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+        "昨天正文没进展，能说整份报告正文从来没写过吗？",
+        "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+        "只根据我说过的内容，书架现在什么状态，报告完成了多少？"
+      ],
+      "candidate": "书架已经发货了，但你还没收到。报告上周写好了一半正文，昨天改了标题，剩下的正文还没动。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 1799
+    },
+    {
+      "user_quotes": [
+        "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+        "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+        "别每句话都反问我，你直接说说看法。",
+        "有时候重看以前的书，感觉跟当年完全不一样。",
+        "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+        "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+        "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+        "昨天正文没进展，能说整份报告正文从来没写过吗？"
+      ],
+      "candidate": "不能。上周已经写好一半正文了，昨天只是没动这部分，不能说从来没写过。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 1159
+    },
+    {
+      "user_quotes": [
+        "刚下单一个电饭煲，店家后天才发货，现在还没有寄出。别给建议。",
+        "以前那个还能用，我不是急着换，只是喜欢新的外形。",
+        "别拿我开玩笑，别反问，就正常接话。",
+        "有时买个日常小东西，比买贵东西还期待。",
+        "你说说为什么会这样，别替我分析童年经历。",
+        "我昨晚做饭只切了菜，后来停了，还没下锅。",
+        "不是饭已经做好了，只是菜切好了，你按这个理解。"
+      ],
+      "candidate": "对，菜切好了但还没下锅，饭确实还没做。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 2048
+    },
+    {
+      "user_quotes": [
+        "最近又开始学吉他了，一首曲子练完前半段，后半段还没练。先别指导我。",
+        "我没有报名课程，是自己照着谱子弹的。",
+        "今天别逗我，也别总是反问。",
+        "有首老歌以前觉得普通，现在觉得旋律挺好。",
+        "你觉得一首歌为什么会在不同年龄听出不同感觉？",
+        "我打算换琴弦，只是打算，还没有买，也没换。",
+        "我不是说整首曲子都不会弹，前半段已经能弹下来。",
+        "不需要给练习计划，我们就聊聊听歌。",
+        "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。",
+        "只按我说过的情况，曲子练到哪了，琴弦是什么状态？"
+      ],
+      "candidate": "曲子前半段已经能弹下来，后半段还没练。琴弦刚买了，店家还没发货，也还没有换。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 1429
+    },
+    {
+      "user_quotes": [
+        "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+        "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+        "别每句话都反问我，你直接说说看法。",
+        "有时候重看以前的书，感觉跟当年完全不一样。",
+        "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+        "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+        "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+        "昨天正文没进展，能说整份报告正文从来没写过吗？",
+        "更新一下，店家刚通知书架已经发货了，但我还没有收到。"
+      ],
+      "candidate": "发货了就在路上了，虽然还没到手，但比之前等着的时候又近了一步。等它真到了，拆包装、摆书的过程应该也挺有意思的。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"conditional\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 1117
+    },
+    {
+      "user_quotes": [
+        "最近又开始学吉他了，一首曲子练完前半段，后半段还没练。先别指导我。",
+        "我没有报名课程，是自己照着谱子弹的。",
+        "今天别逗我，也别总是反问。",
+        "有首老歌以前觉得普通，现在觉得旋律挺好。",
+        "你觉得一首歌为什么会在不同年龄听出不同感觉？",
+        "我打算换琴弦，只是打算，还没有买，也没换。",
+        "我不是说整首曲子都不会弹，前半段已经能弹下来。",
+        "不需要给练习计划，我们就聊聊听歌。",
+        "更新一下，琴弦刚买了，店家还没发货，当然也还没有换。"
+      ],
+      "candidate": "新弦到手之前这段等待，反而让换弦这件事多了点盼头。等真正装上去试音的时候，那种新鲜感可能会比平时更明显一些。",
+      "expected": null,
+      "raw_verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"conditional\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+      "parsed_codes": [],
+      "matched": true,
+      "elapsed_ms": 1252
+    }
+  ],
+  "completed": true,
+  "matched": 12,
+  "count": 13
+}

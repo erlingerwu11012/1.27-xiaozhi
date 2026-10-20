@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "single_settled_bill": true,
+  "input_tokens": 23,
+  "output_tokens": 3,
+  "cached_tokens": 0,
+  "upstream_cost_cny_exact": "7/100000",
+  "sale_cny_exact": "7/30000",
+  "sale_multiplier": "10/3",
+  "original_recharge_conversion_preserved": true,
+  "allocations_count": 1
+}

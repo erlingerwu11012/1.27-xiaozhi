@@ -1,0 +1,653 @@
+{
+  "hardware_actions": 0,
+  "recording_source": "synthetic official TTS; real ASR provider; no physical microphone",
+  "voice": [
+    {
+      "id": 1,
+      "spoken_text": "把音量调到三十",
+      "audio_ms": 1920,
+      "tts_first_audio_ms": 531,
+      "asr_text": "把音量调到三十。",
+      "asr_final_after_stop_ms": 219,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {
+              "volume": 30
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {
+              "volume": 30
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 2,
+      "spoken_text": "请把声音设置为二十",
+      "audio_ms": 2160,
+      "tts_first_audio_ms": 612,
+      "asr_text": "请把声音设置为二十。",
+      "asr_final_after_stop_ms": 1130,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {
+              "volume": 20
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {
+              "volume": 20
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 3,
+      "spoken_text": "把屏幕亮度调到八十",
+      "audio_ms": 2080,
+      "tts_first_audio_ms": 1419,
+      "asr_text": "把屏幕亮度调到八十。",
+      "asr_final_after_stop_ms": 274,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "brightness",
+            "arguments": {
+              "brightness": 80
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "brightness",
+            "arguments": {
+              "brightness": 80
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 4,
+      "spoken_text": "把音量调低十格",
+      "audio_ms": 1920,
+      "tts_first_audio_ms": 1034,
+      "asr_text": "把音量调低十格。",
+      "asr_final_after_stop_ms": 199,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {},
+            "delta": -10
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "volume",
+            "arguments": {},
+            "delta": -10
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 5,
+      "spoken_text": "打开摄像头预览",
+      "audio_ms": 1600,
+      "tts_first_audio_ms": 525,
+      "asr_text": "打开摄像头预览。",
+      "asr_final_after_stop_ms": 183,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "preview_open",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "preview_open",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 6,
+      "spoken_text": "关闭摄像头",
+      "audio_ms": 1360,
+      "tts_first_audio_ms": 536,
+      "asr_text": "关闭摄像头。",
+      "asr_final_after_stop_ms": 174,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "preview_close",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "preview_close",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 7,
+      "spoken_text": "拍一张照片，看看桌上有什么",
+      "audio_ms": 3090,
+      "tts_first_audio_ms": 475,
+      "asr_text": "拍一张照片，看看桌上有什么。",
+      "asr_final_after_stop_ms": 257,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "photo",
+            "arguments": {
+              "question": "看看桌上有什么"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "photo",
+            "arguments": {
+              "question": "看看桌上有什么"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 8,
+      "spoken_text": "查询设备当前状态",
+      "audio_ms": 2240,
+      "tts_first_audio_ms": 523,
+      "asr_text": "查询设备当前状态。",
+      "asr_final_after_stop_ms": 200,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "status",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "status",
+            "arguments": {},
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 9,
+      "spoken_text": "两分钟后提醒我喝水",
+      "audio_ms": 2240,
+      "tts_first_audio_ms": 631,
+      "asr_text": "两分钟后提醒我喝水。",
+      "asr_final_after_stop_ms": 192,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "reminder",
+            "arguments": {
+              "text": "两分钟后提醒我喝水"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "reminder",
+            "arguments": {
+              "text": "两分钟后提醒我喝水"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 10,
+      "spoken_text": "明天上午九点提醒我开会",
+      "audio_ms": 2560,
+      "tts_first_audio_ms": 480,
+      "asr_text": "明天上午九点提醒我开会。",
+      "asr_final_after_stop_ms": 232,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "reminder",
+            "arguments": {
+              "text": "明天上午九点提醒我开会"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "reminder",
+            "arguments": {
+              "text": "明天上午九点提醒我开会"
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 11,
+      "spoken_text": "帮我记个便签，出门带伞",
+      "audio_ms": 2450,
+      "tts_first_audio_ms": 701,
+      "asr_text": "帮我记个便签，出门带伞。",
+      "asr_final_after_stop_ms": 206,
+      "expected_plan": {
+        "requests": [
+          {
+            "kind": "note",
+            "arguments": {
+              "text": "，出门带伞",
+              "remind_at": 0
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [
+          {
+            "kind": "note",
+            "arguments": {
+              "text": "，出门带伞",
+              "remind_at": 0
+            },
+            "delta": null
+          }
+        ],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 12,
+      "spoken_text": "不要打开摄像头",
+      "audio_ms": 1680,
+      "tts_first_audio_ms": 485,
+      "asr_text": "不要打开摄像头。",
+      "asr_final_after_stop_ms": 184,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 13,
+      "spoken_text": "不用拍照",
+      "audio_ms": 960,
+      "tts_first_audio_ms": 646,
+      "asr_text": "不用拍照。",
+      "asr_final_after_stop_ms": 169,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 14,
+      "spoken_text": "音量是什么",
+      "audio_ms": 1440,
+      "tts_first_audio_ms": 663,
+      "asr_text": "音量是什么？",
+      "asr_final_after_stop_ms": 166,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 15,
+      "spoken_text": "如果打开摄像头会怎样",
+      "audio_ms": 2480,
+      "tts_first_audio_ms": 507,
+      "asr_text": "如果打开摄像头会怎样？",
+      "asr_final_after_stop_ms": 212,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 16,
+      "spoken_text": "提醒我喝水",
+      "audio_ms": 1680,
+      "tts_first_audio_ms": 688,
+      "asr_text": "提醒我喝水。",
+      "asr_final_after_stop_ms": 164,
+      "expected_plan": {
+        "requests": [],
+        "reply": "什么时候提醒你？"
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": "什么时候提醒你？"
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 17,
+      "spoken_text": "明天上午十点",
+      "audio_ms": 1600,
+      "tts_first_audio_ms": 531,
+      "asr_text": "明天上午十点。",
+      "asr_final_after_stop_ms": 179,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 18,
+      "spoken_text": "算了",
+      "audio_ms": 1040,
+      "tts_first_audio_ms": 706,
+      "asr_text": "算了。",
+      "asr_final_after_stop_ms": 178,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 19,
+      "spoken_text": "你好，我们正常聊一会儿",
+      "audio_ms": 2400,
+      "tts_first_audio_ms": 507,
+      "asr_text": "你好，我们正常聊一会儿。",
+      "asr_final_after_stop_ms": 188,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    },
+    {
+      "id": 20,
+      "spoken_text": "二十三乘以十七等于多少",
+      "audio_ms": 2960,
+      "tts_first_audio_ms": 546,
+      "asr_text": "二十三乘以十七等于多少？",
+      "asr_final_after_stop_ms": 204,
+      "expected_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "actual_plan": {
+        "requests": [],
+        "reply": ""
+      },
+      "contract_match": true,
+      "success": true
+    }
+  ],
+  "native_mcp": [
+    {
+      "question": "请查询东京现在的时间",
+      "first": {
+        "text": "",
+        "calls": [
+          {
+            "id": "call_a7d32008154a4cf3b342c2",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Tokyo\"}"
+          }
+        ],
+        "ttft_ms": 709,
+        "elapsed_ms": 916
+      },
+      "success": true,
+      "receipt": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Asia/Tokyo 当前时间：\n2026年10月03日 15:06:15 (Saturday)\n时区：UTC+9",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "final": {
+        "text": "东京现在是2026年10月3日星期六下午三点零六分，比北京时间快一小时。",
+        "calls": [],
+        "ttft_ms": 392,
+        "elapsed_ms": 734
+      }
+    },
+    {
+      "question": "请查询伦敦现在的时间",
+      "first": {
+        "text": "正在查询伦敦当前时间。\n\n",
+        "calls": [
+          {
+            "id": "call_6c50959a48f2444da7e8a5",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Europe/London\"}"
+          }
+        ],
+        "ttft_ms": 376,
+        "elapsed_ms": 791
+      },
+      "success": true,
+      "receipt": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Europe/London 当前时间：\n2026年10月03日 07:06:17 (Saturday)\n时区：UTC+1",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "final": {
+        "text": "伦敦现在是2026年10月3日星期六早上7点06分，UTC+1时区。",
+        "calls": [],
+        "ttft_ms": 427,
+        "elapsed_ms": 841
+      }
+    },
+    {
+      "question": "请查询上海现在的时间",
+      "first": {
+        "text": "",
+        "calls": [
+          {
+            "id": "call_13b3ab81e1b3468fbc9fde",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Asia/Shanghai\"}"
+          }
+        ],
+        "ttft_ms": 654,
+        "elapsed_ms": 857
+      },
+      "success": true,
+      "receipt": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Asia/Shanghai 当前时间：\n2026年10月03日 14:06:19 (Saturday)\n时区：UTC+8",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "final": {
+        "text": "上海现在是2026年10月3日星期六下午两点零六分。",
+        "calls": [],
+        "ttft_ms": 416,
+        "elapsed_ms": 773
+      }
+    }
+  ],
+  "model_calls": 6,
+  "maximum_model_calls": 12,
+  "maximum_tts_calls": 20,
+  "maximum_asr_sessions": 20,
+  "maximum_shared_quota": 1200000,
+  "providers": {
+    "asr_id": "ASR_Qwen3ASRRealtime",
+    "tts_id": "TTS_QwenAudioTTSPlus",
+    "asr_model": "qwen3-asr-flash-realtime",
+    "tts_model": "qwen-audio-3.0-tts-plus"
+  },
+  "summary": {
+    "mcp_pass": 3,
+    "mcp_cases": 3,
+    "voice_recognized": 20,
+    "voice_cases": 20,
+    "voice_contract_matches": 20
+  }
+}

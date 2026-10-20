@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-18",
+  "scope": {
+    "account": "2022326478036516866",
+    "person": "1",
+    "device": "ac:a7:04:fd:20:5c"
+  },
+  "silent": true,
+  "habit": {
+    "prepare_status": "no_new_analysis"
+  },
+  "memory": {
+    "status": "queued_or_existing",
+    "tasks": [
+      {
+        "id": "usr_6f9a8c4699244ec8b2dc2d9204c08ebc",
+        "state": "pending",
+        "watermark": "1041",
+        "last_error": null
+      }
+    ]
+  }
+}

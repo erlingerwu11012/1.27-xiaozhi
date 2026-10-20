@@ -1,0 +1,52 @@
+[
+  {
+    "file": "initial-final-incomplete-results.jsonl",
+    "cases": 219,
+    "failed_rows": 3
+  },
+  {
+    "file": "resume-state-validation-failures-results.jsonl",
+    "cases": 276,
+    "failed_rows": 3
+  },
+  {
+    "file": "resume-short-memory-failures-results.jsonl",
+    "cases": 52,
+    "failed_rows": 2
+  },
+  {
+    "file": "resume-card-progress-failures-results.jsonl",
+    "cases": 268,
+    "failed_rows": 2
+  },
+  {
+    "file": "resume-focus-results.jsonl",
+    "cases": 19,
+    "failed_rows": 4
+  },
+  {
+    "file": "final-results.jsonl",
+    "cases": 268,
+    "failed_rows": 21
+  },
+  {
+    "file": "resume-speech-results.jsonl",
+    "cases": 17,
+    "failed_rows": 1
+  },
+  {
+    "file": "resume-relative-failures-results.jsonl",
+    "cases": 276,
+    "failed_rows": 5
+  },
+  {
+    "file": "development-results.jsonl",
+    "cases": 27,
+    "failed_rows": 4
+  },
+  {
+    "file": "resume-card-view-results.jsonl",
+    "cases": 276,
+    "failed_rows": 3
+  }
+]

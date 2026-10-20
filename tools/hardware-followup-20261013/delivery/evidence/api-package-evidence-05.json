@@ -1,0 +1,21 @@
+{
+  "baseline": "/root/prjs/releases/harness-stream-20261012/xiaozhi-esp32-api.jar",
+  "baseline_sha256": "a2c5e9de561fe943565595c03831048f11b2af1d26d16a5a0251d1333dabef9a",
+  "candidate_sha256": "a7f721a712528b07e075082ba3147af75f0109ef7f0184ae18bd8c4c5ad24ca8",
+  "changed_entries": [
+    "BOOT-INF/classes/xiaozhi/modules/rolepack/dto/SpineOtaAckDTO.class",
+    "BOOT-INF/classes/xiaozhi/modules/rolepack/service/impl/RoleDeployServiceImpl.class",
+    "BOOT-INF/classes/xiaozhi/modules/rolepack/service/impl/RoleDeployServiceImpl$IssuedDownload.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/RecentArchiveService.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$OverrideRequest.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$AnalysisResult.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryService.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$SearchRequest.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController.class",
+    "BOOT-INF/classes/xiaozhi/modules/useridentity/service/AccountIdentityStateService.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$AddRequest.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$BatchRequest.class",
+    "BOOT-INF/classes/xiaozhi/modules/personmemory/PersonMemoryController$RecordTarget.class"
+  ],
+  "other_entries_identical": true
+}

@@ -1,0 +1,265 @@
+{
+  "java": {
+    "tests": 203,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "voice": {
+    "voice-test_person_memory_identity": 5,
+    "voice-test_identity_snapshot_request": 3,
+    "voice-test_tts_subtitle": 9,
+    "voice-test_multi_device_isolation": 35,
+    "voice-test_context_memory_200k": 15,
+    "voice-test_person_memory_recovery": 7,
+    "voice-test_prompt_pipeline_v2": 37,
+    "voice-test_tts_sentence_telemetry": 11,
+    "voice-test_person_memory_tools": 3,
+    "voice-test_person_memory_chat_init": 7
+  },
+  "regression": {
+    "bailian-memory-regression-test_predeploy_asr_guards": 11,
+    "bailian-memory-regression-test_camera_mcp_tools": 0,
+    "bailian-memory-regression-test_official_dialogue": 4,
+    "bailian-memory-regression-test_dialogue_contract_baseline": 13,
+    "bailian-memory-regression-test_mcp_initialize_identity": 15
+  },
+  "published": {
+    "published": true,
+    "at": "2026-09-29 21:40:42 +0800",
+    "source_files": 28,
+    "jar_sha256": "c73ed6d13d4bd1ec75bb108667631087234241ed7155d91dba737a30f32f5702",
+    "config_sha256": "00549be8ef93af885539f7d0a0c8b8ee3f39b5296b5b70b2ba8f4ee2927944f5",
+    "input_limit": 200000,
+    "prepare": 160000,
+    "trigger": 180000,
+    "target": 50000,
+    "portraits_enabled": false,
+    "firmware_ota": false,
+    "gateway_changed": false,
+    "frontend_changed": false,
+    "automation_recreated": false
+  },
+  "final_patch": {
+    "published": true,
+    "at": "2026-09-29 21:46:50 +0800",
+    "files": {
+      "main/xiaozhi-server/core/connection.py": "16b1c0d10865a983841b38beffc16f02dc7d068a08ac6ae816d02a47a21def4f",
+      "main/xiaozhi-server/core/utils/person_short_memory.py": "5b770c495aa4056b2294e57d1b32a6def9feb71967a8a066abb37b9abad5d466"
+    },
+    "late_summary_rejected": true
+  },
+  "health": {
+    "at": "2026-09-29 22:13:50 +0800",
+    "published": true,
+    "services": {
+      "pm2-logrotate": "online",
+      "aimi-character-worker": "online",
+      "manager-api": "online",
+      "manager-web": "online",
+      "voiceprint-api": "online",
+      "mcp-gateway": "online",
+      "xiaozhi-server": "online"
+    },
+    "http": {
+      "gateway": 200,
+      "face": 200,
+      "manager": 200,
+      "frontend": 200
+    },
+    "firmware_ota": false,
+    "portraits_enabled": false,
+    "counts": {
+      "identity_modes": "default\t1",
+      "memory_tasks": "",
+      "cleanup_tasks": "pending\t1",
+      "storage_hours": "497414\tsettled\t1\t0\n497413\tsettled\t2\t0\n497406\tsettled\t1\t0\n497405\tsettled\t2\t0",
+      "memory_charge_states": "search\tsettled\t4\nfact\tsettled\t4",
+      "retired_entity_backlog": "0",
+      "portrait_rows": "0",
+      "overdue_tasks": "0",
+      "daily_windows": "0\tNULL"
+    },
+    "healthy": true,
+    "context": {
+      "prepare": 160000,
+      "trigger": 180000,
+      "target": 50000,
+      "limit": 200000,
+      "summary_target": 3000,
+      "summary_max": 6000,
+      "batch": 24000
+    },
+    "new_schema": {
+      "changeset": "1",
+      "archive_columns": "8"
+    },
+    "cleanup_stages": "pending\t1\t1\t0\t1",
+    "cleanup_device_acknowledgments": "1\t0",
+    "portrait_disabled_verified": true,
+    "production_source_hashes_verified": 28,
+    "source_delivery": {
+      "candidate_files_verified": 34,
+      "manifest_sha256": "1af9e3debb527270bf46988658f37a18ade9d46ac90a1b946b02c5b2e47ae6ba"
+    },
+    "new_errors": {
+      "manager-api": 0,
+      "xiaozhi-server": 0
+    },
+    "manual_only": true,
+    "automatic_observation_recreated": false
+  },
+  "business_patch": {
+    "published": true,
+    "at": "2026-09-29 22:12:48 +0800",
+    "source": "main/manager-api/src/main/java/xiaozhi/modules/personmemory/RecentArchiveService.java",
+    "source_sha256": "81b75220c82ea6d747353ac28b426eaa5e2c51a305b1b8c48cb7c5ca0d3233ae",
+    "jar_sha256": "940e2cd1075c5e8e31bf28ba9dab03415fd10f4e948c784ecc25a62751638fa8",
+    "business_recall": true,
+    "schema_changed": false,
+    "config_changed": false,
+    "firmware_ota": false
+  },
+  "real_model": {
+    "passed": true,
+    "model": "qwen-plus",
+    "wallet_quota_cap": 1000000,
+    "synthetic_only": true,
+    "calls": [
+      {
+        "case": "prefix_first",
+        "estimated_tokens": 4227,
+        "usage": null,
+        "wallet_quota": 3969
+      },
+      {
+        "case": "prefix_second",
+        "estimated_tokens": 4227,
+        "usage": null,
+        "wallet_quota": 3969
+      },
+      {
+        "case": "long_input",
+        "estimated_tokens": 192794,
+        "usage": {
+          "completion_tokens": 1,
+          "prompt_tokens": 142802,
+          "total_tokens": 142803,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": null
+        },
+        "wallet_quota": 408018,
+        "upstream_public_tier": "128k<input<=256k",
+        "public_input_cny_per_million": "2.4",
+        "public_output_cny_per_million": "20"
+      }
+    ],
+    "stream_usage": "unknown; gateway did not forward a final usage chunk",
+    "summary": {
+      "valid_structure": true,
+      "characters": 383,
+      "usage": null
+    },
+    "gateway_ledger": [
+      [
+        "2777",
+        "1",
+        "3969",
+        "qwen-plus"
+      ],
+      [
+        "2777",
+        "1",
+        "3969",
+        "qwen-plus"
+      ],
+      [
+        "142802",
+        "1",
+        "204009",
+        "qwen-plus"
+      ],
+      [
+        "142802",
+        "1",
+        "204009",
+        "qwen-plus"
+      ],
+      [
+        "290",
+        "227",
+        "739",
+        "qwen-plus"
+      ]
+    ],
+    "synthetic_wallet_used_quota": 416695,
+    "upstream_discount_pass_through": "not_promised; gateway wallet is the actual product charge"
+  },
+  "cloud": {
+    "passed": true,
+    "gateway": "https://api.realecho.cn",
+    "portrait_written": false,
+    "synthetic_only": true,
+    "individual_fact_delete_isolated": true,
+    "temporary_facts_removed": true,
+    "replay_not_charged": true,
+    "normal_token_cannot_bypass_service": true,
+    "synthetic_wallet_used_quota": 3681,
+    "bills": "fact\tlite\t2\t3677\nsearch\tlite\t2\t4",
+    "fact_counts": [
+      2,
+      2
+    ],
+    "nominal_sales_cny": 0.051534
+  },
+  "model_tools": {
+    "passed": true,
+    "provider": "openai",
+    "model": "qwen-plus",
+    "synthetic_wallet_used_quota": 1437,
+    "cases": [
+      {
+        "case": "greeting",
+        "tools": [],
+        "passed": true
+      },
+      {
+        "case": "device",
+        "tools": [
+          "device_set_volume"
+        ],
+        "passed": true
+      },
+      {
+        "case": "history",
+        "tools": [
+          "memory_search"
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "boot": {
+    "passed": true,
+    "database": "bailian_memory_test_20260929_cfcbf8d5",
+    "isolated_redis": true,
+    "liquibase_new_changeset": "202609292100-context-archive",
+    "protected_routes": 7,
+    "wrong_and_missing_token_rejected": true
+  },
+  "frontend": {
+    "passed": true,
+    "synthetic": true,
+    "cases": [
+      "nickname-only-create",
+      "duplicate-feedback",
+      "normal-entry-voice-dialog",
+      "face-binding-dialog",
+      "no-technical-ids",
+      "admin-only-analysis-navigation",
+      "desktop-and-narrow-layout",
+      "exact-low-price-bill-display"
+    ],
+    "pageErrors": []
+  }
+}

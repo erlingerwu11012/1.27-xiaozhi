@@ -1,0 +1,195 @@
+{
+  "model": "qwen3.7-plus",
+  "enable_thinking": false,
+  "semantic_validation": false,
+  "hardware_writes": 0,
+  "physical_test": false,
+  "cases": [
+    {
+      "user": "查询伦敦现在的时间",
+      "spoken": "伦敦当地时间是2026年10月6日，15点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 15:43:31 (Tuesday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 11,
+      "success": true
+    },
+    {
+      "user": "查询东京现在的时间",
+      "spoken": "东京当地时间是2026年10月6日，23点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 23:43:31 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 4,
+      "success": true
+    },
+    {
+      "user": "查询上海现在的时间",
+      "spoken": "上海当地时间是2026年10月6日，22点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Shanghai"
+          },
+          "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月06日 22:43:31 (Tuesday)\n时区：UTC+8",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 4,
+      "success": true
+    },
+    {
+      "user": "伦敦那边现在几点了？",
+      "spoken": "伦敦当地时间是2026年10月6日，15点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 15:43:33 (Tuesday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1881,
+      "success": true
+    },
+    {
+      "user": "东京的时间你能帮我看看吗？",
+      "spoken": "东京当地时间是2026年10月6日，23点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 23:43:34 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1467,
+      "success": true
+    },
+    {
+      "user": "帮我看一下现在伦敦和东京分别几点。",
+      "spoken": "伦敦当地时间是2026年10月6日，15点43分。东京当地时间是2026年10月6日，23点43分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月06日 15:43:37 (Tuesday)\n时区：UTC+1",
+          "action": "REQLLM"
+        },
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月06日 23:43:37 (Tuesday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 2103,
+      "success": true
+    },
+    {
+      "user": "打开摄像头预览",
+      "spoken": "这台设备目前不支持摄像头预览。",
+      "tool_events": [],
+      "primary_requests": [],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "把音量调到三十",
+      "spoken": "这台设备目前不支持音量。",
+      "tool_events": [],
+      "primary_requests": [],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "查询设备当前音量",
+      "spoken": "这台设备目前不支持查询音量。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "不要打开摄像头，只解释预览和拍照的区别。",
+      "spoken": "预览是实时看画面，像开直播；拍照是定格一瞬间，存成图片。一个看动态，一个留静态。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    },
+    {
+      "user": "不用查时间，我只是说东京跟我们有时差。",
+      "spoken": "是啊，东京比咱们快一个小时。",
+      "tool_events": [],
+      "primary_requests": [
+        {
+          "model": "qwen3.7-plus",
+          "stream": true
+        }
+      ],
+      "case_type": "absent_capability_or_non_operation",
+      "success": true
+    }
+  ],
+  "success": true,
+  "runtime_source_sha256": {
+    "core/connection.py": "ef82f177cdb1e0f34cccd159ce01350764c58b64ac8cbee609a88325503b7d99",
+    "core/utils/prompt_manager.py": "ed6735673255be75ed088dd90f2ccad1ad9121d16cc639160b9a4823a11fe62d",
+    "core/utils/conversation_guidance.py": "b9bab6a932abf0a1c50c43ea493b24d1498b27c9315dae14a8948409cdac9dfc"
+  }
+}

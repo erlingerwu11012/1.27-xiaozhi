@@ -1,0 +1,24 @@
+[
+  {
+    "group": "combo-09",
+    "turn": 2,
+    "reason": "Firmware Act clears current_instance_id and GetCurrentJson returns active=false after secondary; preserve original request but expect clarification before any further write.",
+    "source": "main/reminder_coordinator.cc:2280; main/mcp_tools/mcp_tools_card.cc:164",
+    "old_expected": {
+      "query": "这次先跳过，之后的别动",
+      "tool": "reminder_action",
+      "card_action": "tertiary"
+    }
+  },
+  {
+    "group": "combo-29",
+    "turn": 2,
+    "reason": "Firmware Act clears current_instance_id and GetCurrentJson returns active=false after secondary; preserve original request but expect clarification before any further write.",
+    "source": "main/reminder_coordinator.cc:2280; main/mcp_tools/mcp_tools_card.cc:164",
+    "old_expected": {
+      "query": "这次先跳过，之后的别动",
+      "tool": "reminder_action",
+      "card_action": "tertiary"
+    }
+  }
+]

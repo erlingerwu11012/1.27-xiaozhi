@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "cases": 276,
+  "independent_holdout": 61,
+  "observation_seconds": 1800.7987599372864,
+  "observation_snapshots": 31,
+  "failed_batches_preserved": 10,
+  "firmware_sha256": "a1a408aec4f2144865cc36a345be99ee9c907608a4f3b15cd923232ccf817c9f",
+  "server_version": "775f88b75daa347d",
+  "device_flashed": false
+}

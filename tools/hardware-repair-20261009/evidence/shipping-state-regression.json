@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "tests": 9,
+  "rows": [
+    {
+      "query": "新书只是下单，还没送来，你别当成到了。",
+      "speech": "书还在路上。",
+      "passed": true
+    },
+    {
+      "query": "刚买了个书架，还没发货。",
+      "speech": "书架已经发货了。",
+      "passed": true
+    },
+    {
+      "query": "新书只是下单，还没送来。",
+      "speech": "书还没送到，发货状态暂时没有新的信息。",
+      "passed": true
+    },
+    {
+      "query": "店家说书架已经发货，但还没收到。",
+      "speech": "书架正在运输中，还没收到。",
+      "passed": true
+    },
+    {
+      "query": "店家说书架已经发货，但还没收到。",
+      "speech": "书架已经收到了。",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "stubborn": false,
+      "speech": "只是下单，还没送来，发货状态没有新的信息。",
+      "passed": true
+    },
+    {
+      "stubborn": true,
+      "speech": "你说的是：新书只是下单，还没送来，你别当成到了。",
+      "passed": true
+    }
+  ]
+}

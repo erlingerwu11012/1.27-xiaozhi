@@ -1,0 +1,132 @@
+{
+  "hardware_writes": 0,
+  "physical_test": false,
+  "cases": [
+    {
+      "user": "查询伦敦现在的时间",
+      "spoken": "伦敦当地时间是2026年10月5日，15点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月05日 15:56:48 (Monday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 11,
+      "success": true
+    },
+    {
+      "user": "查询东京现在的时间",
+      "spoken": "东京当地时间是2026年10月5日，23点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 23:56:48 (Monday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 4,
+      "success": true
+    },
+    {
+      "user": "查询上海现在的时间",
+      "spoken": "上海当地时间是2026年10月5日，22点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Shanghai"
+          },
+          "receipt": "🌍 Asia/Shanghai 当前时间：\n2026年10月05日 22:56:48 (Monday)\n时区：UTC+8",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [],
+      "elapsed_ms": 3,
+      "success": true
+    },
+    {
+      "user": "伦敦那边现在几点了？",
+      "spoken": "伦敦当地时间是2026年10月5日，15点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月05日 15:56:49 (Monday)\n时区：UTC+1",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.8-max",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1207,
+      "success": true
+    },
+    {
+      "user": "东京的时间你能帮我看看吗？",
+      "spoken": "东京当地时间是2026年10月5日，23点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 23:56:50 (Monday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.8-max",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1379,
+      "success": true
+    },
+    {
+      "user": "帮我看一下现在伦敦和东京分别几点。",
+      "spoken": "伦敦当地时间是2026年10月5日，15点56分。东京当地时间是2026年10月5日，23点56分。",
+      "tool_events": [
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Europe/London"
+          },
+          "receipt": "🌍 Europe/London 当前时间：\n2026年10月05日 15:56:52 (Monday)\n时区：UTC+1",
+          "action": "REQLLM"
+        },
+        {
+          "name": "get_world_time",
+          "arguments": {
+            "timezone": "Asia/Tokyo"
+          },
+          "receipt": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 23:56:52 (Monday)\n时区：UTC+9",
+          "action": "REQLLM"
+        }
+      ],
+      "primary_requests": [
+        {
+          "model": "qwen3.8-max",
+          "stream": true
+        }
+      ],
+      "elapsed_ms": 1590,
+      "success": true
+    }
+  ],
+  "success": true
+}

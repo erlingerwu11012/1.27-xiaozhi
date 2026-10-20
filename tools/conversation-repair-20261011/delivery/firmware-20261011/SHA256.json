@@ -1,0 +1,26 @@
+[
+  {
+    "address": "0x0",
+    "file": "bootloader/bootloader.bin",
+    "size": 16144,
+    "sha256": "2f8201952cb9f7a15ac198fdee4320cc0c6a9d01d640486448e9fae88eff2e5a"
+  },
+  {
+    "address": "0x20000",
+    "file": "xiaozhi.bin",
+    "size": 4893248,
+    "sha256": "415f0225c595553642b88f0f692600ece14b1f100983fb7dab13ea8a2cdcce61"
+  },
+  {
+    "address": "0x8000",
+    "file": "partition_table/partition-table.bin",
+    "size": 3072,
+    "sha256": "6319fa4c3b65714fac3f0d5ec215cb1526f29c8e0eec615308933b45c9fc933c"
+  },
+  {
+    "address": "0x530000",
+    "file": "generated_assets.bin",
+    "size": 2904366,
+    "sha256": "f82192023a0a12aaeb923407fc6f1f1da1b5f41c7da84e65154a985945525be1"
+  }
+]

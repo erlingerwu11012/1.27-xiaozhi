@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "deployment_allowed": false,
+  "reason": [
+    "final_memory_cases_incomplete_after_model_budget_exhausted",
+    "two_chat_defects_fixed_after_final_freeze_without_full_real_model_revalidation"
+  ],
+  "candidate_version": "8d3c3efa182fff9f",
+  "planned_final_cases": 268,
+  "automatic_pass": 247,
+  "manual_review_pass": 245,
+  "manual_review_failed": [
+    "holdout-38",
+    "holdout-49"
+  ],
+  "incomplete_or_failed_ids": [
+    "reg-10",
+    "reg-11",
+    "reg-12",
+    "new-2",
+    "new-3",
+    "new-4",
+    "holdout-2",
+    "holdout-3",
+    "holdout-4",
+    "holdout-5",
+    "holdout-6",
+    "holdout-7",
+    "holdout-8",
+    "holdout-9",
+    "holdout-10",
+    "holdout-11",
+    "holdout-12",
+    "holdout-13",
+    "holdout-14",
+    "holdout-15",
+    "holdout-16"
+  ],
+  "actual_model_response_turns": 241,
+  "current_code_matches_final_test_freeze": false,
+  "budget": {
+    "case": {
+      "used": 1269,
+      "limit": 2000
+    },
+    "model": {
+      "used": 900,
+      "limit": 900
+    },
+    "tts": {
+      "used": 3,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "production_modified": false,
+  "firmware_flashed": false,
+  "source_bundle_sha256": "00240674970b89ce39232194a644b09d2a1dfe293cc6d9e0be64395da8616da8"
+}

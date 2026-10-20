@@ -1,0 +1,139 @@
+{
+  "phase": "deployed_verified",
+  "deployed": true,
+  "draft": false,
+  "deployed_at": "2026-10-09T16:23:35.190616+08:00",
+  "observation_seconds": 1801,
+  "observation_snapshots": 31,
+  "all_health_passed": true,
+  "gate": {
+    "requirements": {
+      "complete": true,
+      "no_failed_rows": true,
+      "real_final_model_turns": true,
+      "new_independent_holdout": true,
+      "cases_frozen": true,
+      "python_frozen": true,
+      "fixtures_frozen": true,
+      "java_frozen": true,
+      "jar_frozen": true,
+      "summary_complete": true,
+      "latest-regression-summary.json": true,
+      "focused-regression-summary.json": true,
+      "lifecycle-summary.json": true,
+      "http-api-results.json": true,
+      "live-query-note-results.json": true,
+      "query-lifecycle-replay-summary.json": true,
+      "relative-feedback-replay-summary.json": true,
+      "relative-feedback-final-check.json": true,
+      "read-repair-final-check.json": true,
+      "java_database_tests": true,
+      "real_audio": true,
+      "vision_http": true,
+      "budget": true
+    },
+    "passed": true,
+    "cases": 322,
+    "verified_operations": 204,
+    "common_cases": 101,
+    "real_model_turns": 275,
+    "model_requests": 281,
+    "p50_ms": 2134.56,
+    "p95_ms": 4519.18,
+    "budget": {
+      "case": {
+        "used": 4207,
+        "limit": 4300
+      },
+      "model": {
+        "used": 2121,
+        "limit": 2200
+      },
+      "tts": {
+        "used": 6,
+        "limit": 12
+      },
+      "vision": {
+        "used": 2,
+        "limit": 6
+      }
+    },
+    "at": 1791534185.9986322,
+    "hardware": false,
+    "source": {
+      "core/api/vision_handler.py": "abe3e62c65d9f7f0c1a4576265e01bc36df3eaafbf53c08d6fbd39af67434366",
+      "core/utils/device_reminder.py": "76726a4d769dd74a2e524f0a3ea438553dd9bb7b8ba622fe2f0a8211b336cebe",
+      "core/websocket_server.py": "90e4e37d7e1b4265b3ea3940b65be1e62acf0f72192dc24ad33dabb17cf4c60a",
+      "core/providers/memory/bailian/bailian.py": "0d7ddcee6c711a621891046d9cc142a5b8432f8e97d98f2d06eb985aedce4d38",
+      "core/handle/helloHandle.py": "d5e7667046ba7bb058631c1fd82a7887e32a4d519ddcd4eec3b93a44dbce0fc1",
+      "core/utils/vision_capability.py": "99b7ed6a4436c6410cad1d1b1f7b49b938b2686d7f280695f5ab878e583aa4cd",
+      "core/providers/tools/device_mcp/mcp_executor.py": "779075b0830c5f4f06d68badbbf93c752b858a101a68549b049c321becfbe470",
+      "core/connection.py": "d694f4ed3bf7d814cf8e245d0aa93e7fc188d6580d7368bbb6f5a2e0fac387aa",
+      "core/handle/abortHandle.py": "4d477a6ba06a5043aeac232ae43cd38c54046ab9081dc09fb37c2f66d6bce7fc",
+      "core/handle/receiveAudioHandle.py": "85de9a1a2700514cc88d29eaa5ad1a3079f033c4b25594ebb453d9496fb0e316",
+      "core/utils/tool_harness/models.py": "950c80b9f4b1d352fab28e907d5af3ad8b9ac65b5b0b6c8a1cad9e870a0bda04",
+      "core/utils/tool_harness/runtime.py": "1535c988a449f1fb327001d48a0424f28e97cb2e7437a7081f1d8e87291f2231",
+      "core/utils/tool_harness/contracts.py": "075f64d9fd3b7ba797bf436e17b8643fe763a881992bd9b1d94d7cb0ca575137",
+      "core/utils/tool_harness/presentation.py": "98fe9ca411e3f13c4ec0cd4680673b613633db7d60e2f8b3835e67e9d8206201",
+      "core/utils/tool_harness/domains.py": "f63aedc43fd98eadd58e345658adcad61ad4f903cbf774eeb998cfd92c939bbf",
+      "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+      "core/utils/recent_memory.py": "ba681065589291ff9b0a50ff734f0a017338dadae7355306e919c4697ea379ac",
+      "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+    },
+    "jar_sha256": "c4c71b525f108d50b0c7c801684dd650eefb026fd0a5f405aea603b7501afa33"
+  },
+  "cumulative_budget": {
+    "case": {
+      "used": 4239,
+      "limit": 4300
+    },
+    "model": {
+      "used": 2121,
+      "limit": 2200
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  },
+  "model_usage_with_received_metadata": {
+    "prompt_tokens": 12222529,
+    "completion_tokens": 146725,
+    "total_tokens": 12369254
+  },
+  "model_response_status_counts": {
+    "200": 2102
+  },
+  "model_reserved_without_response_metadata": 19,
+  "actual_model_names": [
+    "qwen3.7-plus"
+  ],
+  "exact_currency_cost": null,
+  "cost_limitation": "No reliable join between retained upstream response IDs and billing transaction IDs. Token counts cover received usage only. No monetary total is fabricated.",
+  "original_failed_rows_retained": 45,
+  "tool_count": 43,
+  "quarantine": {
+    "quarantined": 4,
+    "source_kinds": [
+      "tool_result",
+      "dialogue_assistant"
+    ],
+    "raw_records_deleted": 0,
+    "user_fact_records_changed": 0,
+    "reversible": true,
+    "journal_private": "/root/prjs/releases/experience-repair-20261009/backup/memory-quarantine-journal-private.json",
+    "at": 1791534544.095655
+  },
+  "hardware_tested": false,
+  "firmware_flashed": false,
+  "real_audio_successes": 3,
+  "real_vision_paid_requests": 2,
+  "java_tests": 28,
+  "manager_http_cases": 11,
+  "backup": "/root/prjs/releases/experience-repair-20261009/deploy-backup",
+  "rollback_command": "/root/miniconda3/envs/xiaozhi-esp32-server/bin/python /root/prjs/releases/experience-repair-20261009/release.py rollback"
+}

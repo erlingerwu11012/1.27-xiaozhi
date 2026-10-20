@@ -1,0 +1,10 @@
+{
+  "status": "online",
+  "restarts": 0,
+  "uptime_seconds": 164,
+  "observation_seconds": 53,
+  "new_error_log_bytes": 0,
+  "new_tracebacks": 0,
+  "historical_shared_error_log": true,
+  "negative_probe_handshake_errors_expected": true
+}

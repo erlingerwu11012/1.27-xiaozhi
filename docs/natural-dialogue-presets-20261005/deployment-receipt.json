@@ -1,0 +1,95 @@
+{
+  "deployed": true,
+  "at_utc": "2026-10-05T09:38:13.368814+00:00",
+  "model": "qwen3.8-flash",
+  "temperature": 0.4,
+  "backup": "/root/prjs/tmp/natural-dialogue-presets-20261005/production-backup-20261005-092408",
+  "image": "one-api:natural-dialogue-20261005",
+  "compatible_channel_id": 11,
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  },
+  "processes": {
+    "manager-api": "online",
+    "mcp-gateway": "online",
+    "xiaozhi-server": "online"
+  },
+  "personas_unchanged": true,
+  "secondary_rewrite_model": false,
+  "ui_presets": 6,
+  "production_model_probe": true,
+  "source_files": {
+    "main/manager-api/src/main/java/xiaozhi/modules/model/OfficialServiceDefaults.java": {
+      "before": "5f9cb2ad89ff2e443813782b39ef952e2fde2a88f11fe757f4bfa90c6b261608",
+      "after": "470e35aa55508d4fa5d860e5f53015f2252a1ec34b0f2ba11ce65e7b809d5fbe"
+    },
+    "main/manager-api/src/main/java/xiaozhi/modules/pay/service/HardwareBillingPolicy.java": {
+      "before": "c6baacc88b215df59e420df21ab5cf56fc8583188b39c15bb5f9533a43c68015",
+      "after": "f0fb1f4222bafb45c28e57cfbc0736201a3efb5e43db398c93c606f03172413b"
+    },
+    "main/manager-api/src/main/java/xiaozhi/modules/pay/service/impl/OneApiBindingServiceImpl.java": {
+      "before": "44357b34bd816e5aa7c4fcd6e31f9d21e58ffe1852b918b777ac57a73fc0d707",
+      "after": "e90386a44904a0325117dbe23132ecd7fc600c7ac52255729e45341c001ed937"
+    },
+    "main/manager-api/src/test/java/xiaozhi/modules/pay/service/HardwareBillingPolicyTest.java": {
+      "before": "2d3493578306ab1d3483144993981ee47ae7d38f32d8cc17766c5764d16f62e2",
+      "after": "83e81ffb83c5b880b4e98e9ad028261b00b95eba9a379d545bac2b36d2fbcbe3"
+    },
+    "main/manager-web/src/components/AwakeningWizard.vue": {
+      "before": "74c7412e4ebafb55a5fb2f75f720438a31bb54cf9ab99b63d823c71ca33c81d0",
+      "after": "d17c1f4128c8d00eef40e5d194b42de29c20adf6ce0e6ec8026988bd16e1c6a6"
+    },
+    "main/manager-web/src/views/roleConfig.vue": {
+      "before": "93efacefdf900ba8adeacb86f7ddcf9e287b522a946e9fdf004582e8ec82fc9a",
+      "after": "3daef3d3878eb4ce5f5ca1511fd1bf2a4c91d3d47c6afd7a6330623e100b1505"
+    },
+    "main/xiaozhi-server/agent-base-prompt-v2.txt": {
+      "before": "53dc0165d218f93047475b3ecae8272028ce0de2be59b4c58ea215d3ce6f5d7f",
+      "after": "4f286cf8a67d5cf1ac41ccc4de9198f77b1b2b45eef8e48cd5dbfdb119bd8934"
+    },
+    "main/xiaozhi-server/core/providers/llm/openai/openai.py": {
+      "before": "87cf1d3a8713bc44351ccdae5a48e0d5f27d44963acf13125ed78811cba22029",
+      "after": "386c365a872141a4aee4e03357372eac7566111c31ee38b6f0829b8b431c7290"
+    },
+    "main/xiaozhi-server/core/utils/hardware_billing.py": {
+      "before": "08ad86cdc84ef02cc5ee231c99195bebb9dc2f8dcb884b34686b4a0940917619",
+      "after": "675b2cf575b97a0dc0f3aa466b4fd8a855fe87413faeeaef38ef2dbef8eb1e50"
+    },
+    "main/xiaozhi-server/core/utils/operation_control.py": {
+      "before": "bdaa94c0922aec027dc4934cffb5ce0096dead6bdf265d29c8fd67ad8f24ba08",
+      "after": "dc7ae30f6675ff6f9138c9c3e67d2580ae44cb9314d3996187808004018bba5a"
+    },
+    "main/xiaozhi-server/core/utils/prompt_manager.py": {
+      "before": "a9a025a189ab3c3ad3a0de3afeb688682e97fa5c0d5927b3c0a0472eb87f31fa",
+      "after": "ed6735673255be75ed088dd90f2ccad1ad9121d16cc639160b9a4823a11fe62d"
+    },
+    "main/xiaozhi-server/core/utils/conversation_guidance.py": {
+      "before": null,
+      "after": "b9bab6a932abf0a1c50c43ea493b24d1498b27c9315dae14a8948409cdac9dfc"
+    },
+    "main/manager-web/src/constants/personaPresets.js": {
+      "before": null,
+      "after": "33b8e476a41a7da8125759a67c962a5211bc0344c63c2652139b762b9e25715a"
+    },
+    "main/manager-web/src/components/PersonaPresetPicker.vue": {
+      "before": null,
+      "after": "723d2d9fc9de787ed923e029e5bd7e469da2c151211cf15a5cc53f936c6b0e18"
+    },
+    "main/xiaozhi-server/test/test_conversation_contract.py": {
+      "before": null,
+      "after": "1f1cf8b5ff298d543e426a3a24e038a50f13adedc17464ba0ac5ecfa44f647ed"
+    },
+    "main/xiaozhi-server/test/test_natural_tool_failure_regression.py": {
+      "before": null,
+      "after": "4d642ec1639ea8368e564a58f98f2120beb07b39432256d341062ebf82393f66"
+    },
+    "main/xiaozhi-server/test/test_operation_control.py": {
+      "before": "db94186489241ab0755118b054885923f2b62af290ca886e19087c60b1b1691d",
+      "after": "bb2a77affadd6d66fe1fb30e5cf345fc20759b10d737b492eefa3e5b49ab090c"
+    }
+  },
+  "hardware_test_this_release": false,
+  "mcp_read_only_routing_patch": true
+}

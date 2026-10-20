@@ -1,0 +1,10 @@
+{
+  "case_limit": 3053,
+  "model_limit": 2410,
+  "tts_limit": 24,
+  "vision_limit": 0,
+  "scope": "one formal cutover and deployment acceptance; no dialogue reruns",
+  "authorization": "允许追加1条，完成切换与30分钟观察",
+  "later_instruction": "不需要30分钟观察了。",
+  "extended_observation_waived": true
+}

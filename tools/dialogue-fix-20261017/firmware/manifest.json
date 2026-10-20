@@ -1,0 +1,16 @@
+{
+  "compiled": true,
+  "flashed": false,
+  "sha256": "e37767deafeff6ad91d2f3bf6ac6b8bcef93f17b1f0eb98a2307fef540c52a0c",
+  "bytes": 4938528,
+  "changes": [
+    "AFE feed/fetch handoff and reset synchronization",
+    "speech animation aliases and missing-role handling"
+  ],
+  "preserves": [
+    "wake phrase 你好小念",
+    "partitions",
+    "USB console",
+    "auth recovery"
+  ]
+}

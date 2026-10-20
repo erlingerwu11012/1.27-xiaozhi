@@ -1,0 +1,4 @@
+interface:
+  display_name: "SKU 详情页总导演"
+  short_description: "从真实产品分析到平台方向选择的一站式 SKU 详情页入口"
+  default_prompt: "请使用 $sku-detail-page-director 从我提供的真实产品资料开始，在同一任务中完成事实分析、平台识别和方向提案；不要让我重复调用其他 Skill，方向确认前不要输出正式生图 Prompt。"

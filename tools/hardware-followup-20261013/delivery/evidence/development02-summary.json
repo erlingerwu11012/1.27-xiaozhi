@@ -1,0 +1,71 @@
+{
+  "cases": 5,
+  "passed": 1,
+  "failed": [
+    {
+      "group": "combo-03",
+      "turn": 0,
+      "errors": [
+        "harness_error:Request timed out.",
+        "unfulfilled_business_reply",
+        "chat_replaced_by_error"
+      ]
+    },
+    {
+      "group": "combo-02",
+      "turn": 1,
+      "errors": [
+        "harness_error:Request timed out.",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:note_add",
+        "wrong_persisted_notes",
+        "public_recipient_lost"
+      ]
+    },
+    {
+      "group": "combo-00",
+      "turn": 0,
+      "errors": [
+        "harness_error:Request timed out.",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:memory_add",
+        "memory_add_not_readback_verified"
+      ]
+    },
+    {
+      "group": "combo-01",
+      "turn": 0,
+      "errors": [
+        "harness_error:Request timed out.",
+        "unfulfilled_business_reply",
+        "requested_operation_not_completed:memory_add",
+        "memory_add_not_readback_verified"
+      ]
+    }
+  ],
+  "real_model_turns": 0,
+  "model_calls": 4,
+  "reused_cases": 0,
+  "new_cases": 5,
+  "reuse_source": null,
+  "all_same_version": true,
+  "budget": {
+    "case": {
+      "used": 135,
+      "limit": 800
+    },
+    "model": {
+      "used": 4,
+      "limit": 600
+    },
+    "tts": {
+      "used": 0,
+      "limit": 12
+    },
+    "vision": {
+      "used": 0,
+      "limit": 0
+    }
+  },
+  "production_modified": false
+}

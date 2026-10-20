@@ -1,0 +1,14 @@
+PASS synthetic: 40 poses x 4 modes, masks/palette/special/sprite/rotation/UV rotation/flips/alpha/blends/mesh/text-like overlay/degenerate/clipping/guards/callbacks
+PASS raster fallback: packet allocation, task creation, worker timeout, small-region bypass
+PASS persistent: 100 frames, adaptive split bounded 25-50%, attachment removal/resource replacement/dirty history
+PASS pipeline: FIFO 103 frames, 2-slot backpressure, no overwrite, sync completion, dirty-copy bounds, failure/full-frame recovery, pause/resume/drain/destruction, buffer/task/headroom fallback
+PASS real Spine 4.2 role hero_025_bg_512_idle: 6 fixed times x 2 filters x 3 modes plus saved baseline (pixel exact)
+PASS real Spine 4.2 role hero_064_s01h_bg_512_idle: 6 fixed times x 2 filters x 3 modes plus saved baseline (pixel exact)
+ALL HOME RENDER HOST TESTS PASSED
+WARN [RENDERFALLBACK] packet allocation failed; use legacy drawing
+WARN [RENDERFALLBACK] raster timeout; cancel then join before redrawing
+WARN [RENDERFALLBACK] dual unavailable; use single core
+ERROR [RENDERFALLBACK] transfer failed; full-frame synchronous recovery
+WARN [RENDERFALLBACK] pipeline=buffer_or_queue_allocation_failed; synchronous submission
+WARN [RENDERFALLBACK] pipeline=task_allocation_failed; synchronous submission
+WARN [RENDERFALLBACK] pipeline=internal_ram_headroom; synchronous submission

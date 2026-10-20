@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "synthetic": true,
+  "cases": [
+    "nickname-only-create",
+    "duplicate-feedback",
+    "normal-entry-voice-dialog",
+    "face-binding-dialog",
+    "no-technical-ids",
+    "admin-only-analysis-navigation",
+    "desktop-and-narrow-layout",
+    "exact-low-price-bill-display"
+  ],
+  "pageErrors": []
+}

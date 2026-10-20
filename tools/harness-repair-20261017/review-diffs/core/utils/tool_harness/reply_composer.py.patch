@@ -1,0 +1,19 @@
+--- a/core/utils/tool_harness/reply_composer.py
++++ b/core/utils/tool_harness/reply_composer.py
+@@ -186,6 +186,16 @@
+     if not results:return outcome
+     from .contracts import contract
+     fallback=outcome.reply
++    # A single verified setting receipt already contains the actual applied
++    # value. Do not pay for another model call just to paraphrase that value.
++    if (len(results) == 1 and results[0].tool in {
++            'self_audio_speaker_set_volume', 'self_screen_set_brightness'}
++            and results[0].state == 'completed' and not outcome.error):
++        text = safe_speech(results[0].reply)
++        if text and not unsafe(text, results) and not status_conflict(text, results, harness.catalog()):
++            outcome.reply = text
++            harness.observe('reply', source='verified_setting_receipt', result_count=1)
++            return outcome
+     context=[]
+     for message in messages:
+         if message.get('role') in {'system','user','assistant'} and isinstance(message.get('content'),str):

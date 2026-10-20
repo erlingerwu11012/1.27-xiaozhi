@@ -1,0 +1,1644 @@
+{
+  "candidate": "current three-layer assembly with revised platform rules and examples",
+  "production_changed": false,
+  "customer_history_used": false,
+  "secondary_rewrite": false,
+  "native_tool_calls_executed": 3,
+  "max_calls": 140,
+  "calls": 69,
+  "temperature": 0.7,
+  "top_p": 1.0,
+  "max_tokens": 500,
+  "thinking": false,
+  "training_scenarios": [],
+  "heldout_scenarios": [
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "缺少截止时间",
+      "system_characters": 4464,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "稿子还没动，今天算是给自己放了个假。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1977,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 2602,
+            "total_tokens": 2614,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "行，不劝了。摸鱼就摸鱼呗，谁还没个不想干活的时候。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1133,
+          "usage": {
+            "completion_tokens": 20,
+            "prompt_tokens": 2704,
+            "total_tokens": 2724,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2704
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "如果明天就交，今晚动笔更稳妥。要是没那么急，休息够了再写效率可能更高。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1981,
+          "usage": {
+            "completion_tokens": 23,
+            "prompt_tokens": 2812,
+            "total_tokens": 2835,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2812
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "尚未发生",
+      "system_characters": 4464,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "周三到，放窗边晒太阳。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1038,
+          "usage": {
+            "completion_tokens": 8,
+            "prompt_tokens": 2604,
+            "total_tokens": 2612,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2604
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "好好好，我收回。那等你收到了再放窗边。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1088,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2703,
+            "total_tokens": 2717,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2703
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "反馈收住",
+      "system_characters": 4464,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "行，周末理阳台挺好，看着乱的东西清完心里也痛快。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1516,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 2601,
+            "total_tokens": 2617,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2601
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "收到 那就正常聊",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1356,
+          "usage": {
+            "completion_tokens": 5,
+            "prompt_tokens": 2710,
+            "total_tokens": 2715,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2710
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "成年人故事",
+      "system_characters": 4464,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "行，给你讲一个。\n\n有个男人每天坐同一班地铁去上班。有一天他注意到对面站着一个女人，手里拿着一本很旧的书。第二天他又看见了那个女人，还拿着那本书。第三天也是。他开始觉得有点奇怪，但也没多想。第七天，他突然想搭话，结果那天她没出现。第十天，他特意早到了一站，在空荡荡的车厢里等。门开了，没人。他忽然意识到，自己其实根本不知道她是上哪一站的，也不知道她叫什么名字。他低头看了看手机，发现自己已经坐了十站，比平时多绕了二十分钟。他叹了口气，决定明天还是按原来的路线走。可第二天早上出门时，他鬼使神差地又去了那个换乘站。这次他没上车，就站在站台上看着列车来来往往。后来他成了那个车站的常客，不为坐车，只为看看有没有人拿着那本旧书。故事就这么结束了，没什么大团圆，也没什么悲剧，就是一个人突然有了个说不清道不明的惦记。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 5856,
+          "usage": {
+            "completion_tokens": 216,
+            "prompt_tokens": 2605,
+            "total_tokens": 2821,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2605
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "natural",
+      "scene": "简洁事实",
+      "system_characters": 4464,
+      "persona_sha256": "d589646eb77b53b5ef01d4102543f04092db8ec2efe678968dc69f57ba05c193",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1328,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 2602,
+            "total_tokens": 2606,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "缺少截止时间",
+      "system_characters": 4462,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼的时候心里还惦记着稿子，这感觉挺矛盾的。既然还没动笔，要不先别逼自己写一整篇，哪怕就随便敲几个字或者列个提纲？有时候迈出这一小步，焦虑感就会轻不少。当然啦，今天要是真不想动，那就彻底放松会儿，明天再说也行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2906,
+          "usage": {
+            "completion_tokens": 70,
+            "prompt_tokens": 2598,
+            "total_tokens": 2668,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2598
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "好好，不劝了。就是单纯抱怨一下，那就不多说了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1713,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 2758,
+            "total_tokens": 2774,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2758
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "看你现在的心情和状态。要是今晚不写，睡前可能会一直惦记着，反而睡不安稳，那不如趁现在脑子还转得动，先随便写个开头或者大纲，哪怕就半小时，把心里的石头放下。不过如果你今天实在累透了，强行写只会更烦躁，那就明天早上再说，反正稿子又不会跑。你自己觉得哪个更轻松？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3603,
+          "usage": {
+            "completion_tokens": 79,
+            "prompt_tokens": 2862,
+            "total_tokens": 2941,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2862
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "尚未发生",
+      "system_characters": 4462,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "放在窗边看书，光线应该挺舒服的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1460,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2600,
+            "total_tokens": 2610,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2600
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "抱歉，是我多想了。等周三送到了再安心放窗边。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1178,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2701,
+            "total_tokens": 2716,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2701
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "反馈收住",
+      "system_characters": 4462,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "周末理阳台，是个不错的打算。到时候看心情慢慢弄，不用给自己太大压力。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1297,
+          "usage": {
+            "completion_tokens": 19,
+            "prompt_tokens": 2597,
+            "total_tokens": 2616,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2597
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "行，不劝了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1470,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 2709,
+            "total_tokens": 2715,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2709
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "成年人故事",
+      "system_characters": 4462,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "有个男人每天下班都去同一家便利店买一罐啤酒。店员认识他，从不多问。有一天他买了两罐，站在门口喝完一罐才走。第二天他又买一罐，说今天不打算喝第二罐了。店员点点头，把找零递过去，像什么都没发生过。其实那两罐那天他本来想请人喝，结果对方临时放了鸽子。他没提这事，店员也没问。后来他恢复成一罐，偶尔变成半罐的沉默，也算一种默契。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 4019,
+          "usage": {
+            "completion_tokens": 107,
+            "prompt_tokens": 2601,
+            "total_tokens": 2708,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2601
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "listener",
+      "scene": "简洁事实",
+      "system_characters": 4462,
+      "persona_sha256": "6e14677832d2b4e08565818a224a9299f99dc09b56fc93763660c2d8de3a8dab",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1202,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 2598,
+            "total_tokens": 2601,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2598
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "缺少截止时间",
+      "system_characters": 4465,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼摸得开心就好，反正稿子又不会自己长出来。不过既然你今天已经“充好电”了，说不定晚上稍微动一动，效率反而更高呢？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2516,
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 2602,
+            "total_tokens": 2640,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "好，不劝了。摸鱼本来就是正经事，谁还没个不想干活的时候呢。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1310,
+          "usage": {
+            "completion_tokens": 20,
+            "prompt_tokens": 2730,
+            "total_tokens": 2750,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2730
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "这个真没法替你选。要是稿子有截止时间，或者你明天一碰电脑就犯怵，那今晚硬着头皮起个草确实更稳当。但如果你现在脑子还是想摸鱼的状态，逼自己写效率可能也不高，不如明早清醒的时候再动笔。就看你是怕拖到明天更痛苦，还是觉得今晚实在没状态了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3521,
+          "usage": {
+            "completion_tokens": 80,
+            "prompt_tokens": 2838,
+            "total_tokens": 2918,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2838
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "尚未发生",
+      "system_characters": 4465,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "窗边看着舒服，就是小心别晒着书。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2760,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 2604,
+            "total_tokens": 2616,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2604
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "哈哈行，是我脑补多了。那周三到了往窗边一放，挺有仪式感的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1431,
+          "usage": {
+            "completion_tokens": 22,
+            "prompt_tokens": 2707,
+            "total_tokens": 2729,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2707
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "反馈收住",
+      "system_characters": 4465,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "阳台这回终于排上队了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1656,
+          "usage": {
+            "completion_tokens": 8,
+            "prompt_tokens": 2601,
+            "total_tokens": 2609,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2601
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "好，收到。那就不开玩笑，正常聊。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1387,
+          "usage": {
+            "completion_tokens": 11,
+            "prompt_tokens": 2702,
+            "total_tokens": 2713,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2702
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "成年人故事",
+      "system_characters": 4465,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "从前有个程序员，加班到凌晨三点才回家。路上他看见一只猫蹲在路灯底下，盯着自己的影子看。他停下来问猫：“你在干嘛？”猫头也不抬说：“我在想，如果我把影子踩住，是不是就不用再加班了。”程序员沉默了一会儿，掏出手机发了条消息给老板：“明天我请假。”然后他绕开那只猫的影子，走回了家。第二天他没再回那个公司，猫也不知道去了哪儿。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 4435,
+          "usage": {
+            "completion_tokens": 95,
+            "prompt_tokens": 2605,
+            "total_tokens": 2700,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2605
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "humorous",
+      "scene": "简洁事实",
+      "system_characters": 4465,
+      "persona_sha256": "a4e39be65d8a813234cc037b23329eea054db47175e4cb5cae10551974291375",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1178,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 2602,
+            "total_tokens": 2606,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "缺少截止时间",
+      "system_characters": 4467,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼一天，稿子还在那儿等着。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1659,
+          "usage": {
+            "completion_tokens": 11,
+            "prompt_tokens": 2602,
+            "total_tokens": 2613,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "行，不劝了。就让你发两句牢骚。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 916,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2703,
+            "total_tokens": 2716,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2703
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "这得看稿子急不急。如果明天就得交，今晚硬着头皮写点总比完全空白强；要是后天之后才用，今晚先歇着，把脑子养好了效率反而高。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2524,
+          "usage": {
+            "completion_tokens": 43,
+            "prompt_tokens": 2804,
+            "total_tokens": 2847,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2804
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "尚未发生",
+      "system_characters": 4467,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "书到了正好晒晒太阳，周三见。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1443,
+          "usage": {
+            "completion_tokens": 9,
+            "prompt_tokens": 2604,
+            "total_tokens": 2613,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2604
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "抱歉，是我理解错了。书还没到，等周三送来了再放窗边。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1439,
+          "usage": {
+            "completion_tokens": 19,
+            "prompt_tokens": 2704,
+            "total_tokens": 2723,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2704
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "反馈收住",
+      "system_characters": 4467,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "周末理阳台，这回排上日程了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1365,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2601,
+            "total_tokens": 2611,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2601
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "好，收到。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2665,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 2704,
+            "total_tokens": 2708,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2704
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "成年人故事",
+      "system_characters": 4467,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "有个男人每天坐同一班地铁，对面总坐着同一个看报纸的女人。他注意她很久了，从没说过话。\n\n有一天女人没来上班，空座位像把刀。他慌了，开始找她。调监控、问同事、翻社交媒体，拼凑出她的生活：她养猫，住老小区，爱喝美式不加糖。\n\n终于他在一家咖啡馆门口堵到她。心跳如鼓，开口第一句却是：“你今天的报纸看了吗？”\n\n她抬头，眼神陌生又礼貌：“你是谁？”\n\n他愣住。原来这三年，只有他一个人在这段关系里活过。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 4264,
+          "usage": {
+            "completion_tokens": 129,
+            "prompt_tokens": 2605,
+            "total_tokens": 2734,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2605
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "rational",
+      "scene": "简洁事实",
+      "system_characters": 4467,
+      "persona_sha256": "de9f63ee6968af4429cc862bbbea7a4583712783cb157a22f745359e47eb0677",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1270,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 2602,
+            "total_tokens": 2605,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "缺少截止时间",
+      "system_characters": 4469,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼一天还能心安理得地承认，看来心态挺稳。稿子既然没动，今晚打算补吗？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1857,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 2602,
+            "total_tokens": 2628,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2602
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "行，不劝了。抱怨出来心里能痛快点就行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1163,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2718,
+            "total_tokens": 2732,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2718
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "看稿子急不急。今晚写能早点踏实，明天写脑子可能更清醒。要是没那么紧，我倾向于今天稍微动一动，哪怕只列个提纲，明天接着写压力会小很多。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2021,
+          "usage": {
+            "completion_tokens": 44,
+            "prompt_tokens": 2820,
+            "total_tokens": 2864,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2820
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "尚未发生",
+      "system_characters": 4469,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "周三才到呀，窗边采光好，看着也舒服。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1311,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 2604,
+            "total_tokens": 2618,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2604
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "抱歉，是我理解岔了。刚才是你说周三才送来对吧？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1272,
+          "usage": {
+            "completion_tokens": 15,
+            "prompt_tokens": 2709,
+            "total_tokens": 2724,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2709
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "反馈收住",
+      "system_characters": 4469,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "好呀，趁周末阳光正好，把阳台收拾一下，看着也清爽。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1745,
+          "usage": {
+            "completion_tokens": 17,
+            "prompt_tokens": 2601,
+            "total_tokens": 2618,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2601
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "行，不劝了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1045,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 2711,
+            "total_tokens": 2717,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2711
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "成年人故事",
+      "system_characters": 4469,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "有个人每天下班都走同一条路回家，路过一家亮着灯的旧书店。他从来不停下来，只是远远看一眼橱窗里那本没翻开的《百年孤独》。\n\n直到有一天书店关了门，窗上贴着“转让”。他站在那儿愣了半天，忽然发现，自己竟然连书名以外的任何一行字都没读过。\n\n故事就讲完了。有时候我们以为自己在等一个合适的时机，其实只是在等那个习惯消失。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3175,
+          "usage": {
+            "completion_tokens": 95,
+            "prompt_tokens": 2605,
+            "total_tokens": 2700,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2605
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "partner",
+      "scene": "简洁事实",
+      "system_characters": 4469,
+      "persona_sha256": "d92ae1b67feb0aae551731e662ff9360345b28931ec0b40b07c967a969b4c09d",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1080,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 2602,
+            "total_tokens": 2605,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2602
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "缺少截止时间",
+      "system_characters": 4475,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼一时爽，一直摸鱼……稿子就在那儿岌岌可危。不过现在才下午五点，要是能逼自己一把，说不定还能抢救一下？还是说，你已经打算把这份“焦虑”留到明天早上再处理了？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2584,
+          "usage": {
+            "completion_tokens": 56,
+            "prompt_tokens": 2611,
+            "total_tokens": 2667,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2611
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "行，不劝了。摸鱼确实快乐，谁规定必须一直努力啊。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1720,
+          "usage": {
+            "completion_tokens": 18,
+            "prompt_tokens": 2757,
+            "total_tokens": 2775,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2757
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "这得看你现在的状态。要是现在脑子还清醒，早点写完今晚就能躺平；要是已经摸鱼摸到不想动，硬逼自己可能效率极低，不如明天脑子清醒时再战。你自己更倾向哪种？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2728,
+          "usage": {
+            "completion_tokens": 48,
+            "prompt_tokens": 2863,
+            "total_tokens": 2911,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2863
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "尚未发生",
+      "system_characters": 4475,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "窗边光线好，看书确实舒服。不过周三才到，这几天先别急着摆位置，等书到了再挪也不迟。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1203,
+          "usage": {
+            "completion_tokens": 29,
+            "prompt_tokens": 2613,
+            "total_tokens": 2642,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2613
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "行行行，是我脑补了。既然书已经到手，窗边确实是个好位置，光线足看着也舒服，那就赶紧摆好吧。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1977,
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 2733,
+            "total_tokens": 2765,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2733
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "反馈收住",
+      "system_characters": 4475,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "阳台那堆东西终于排上日程啦。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1788,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 2610,
+            "total_tokens": 2620,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2610
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "好，那我就不贫了。周末理阳台确实是个大工程，到时候有具体想先动手的部分，再跟我说就行。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2782,
+          "usage": {
+            "completion_tokens": 27,
+            "prompt_tokens": 2713,
+            "total_tokens": 2740,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2713
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "成年人故事",
+      "system_characters": 4475,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "行，给你讲个成年人的。\n\n有个男人在深夜的便利店买烟，店员多找了他五块钱。他犹豫了一下，把钱放在柜台上，说了句“刚才算错了”，然后走了。第二天他又来，还是那家店，买了包烟，没说话。店员低头扫码，也没抬头。两个人就这样维持着一种奇怪的默契，谁也没提昨天的事。后来男人搬家了，再也没去过那条街。偶尔路过别的便利店，他会下意识看看收银台有没有人。其实他也不知道自己在找什么，可能只是想知道，那天放回去的五块钱，是不是真的被看见了。\n\n故事完了，挺短吧？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 4540,
+          "usage": {
+            "completion_tokens": 134,
+            "prompt_tokens": 2614,
+            "total_tokens": 2748,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2614
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "playful",
+      "scene": "简洁事实",
+      "system_characters": 4475,
+      "persona_sha256": "636ff3508a75e6d9c501fdb123fc950dc2a629530e0509381f50d853934ab268",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 4061,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 2611,
+            "total_tokens": 2614,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2611
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "缺少截止时间",
+      "system_characters": 4443,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "这篇稿子还没写，我今天一直在摸鱼。",
+          "assistant": "摸鱼摸得这么理直气壮，稿子它自己又不会偷偷长出来。不过看你今天这状态，估计也是累狠了想偷个懒吧？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2797,
+          "usage": {
+            "completion_tokens": 37,
+            "prompt_tokens": 2590,
+            "total_tokens": 2627,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 1024,
+              "text_tokens": 2590
+            }
+          }
+        },
+        {
+          "user": "不要劝我努力，我就是抱怨一句。",
+          "assistant": "行，不劝了。摸鱼一时爽，一直摸鱼……咳，那也挺舒服的。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1488,
+          "usage": {
+            "completion_tokens": 21,
+            "prompt_tokens": 2717,
+            "total_tokens": 2738,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2717
+            }
+          }
+        },
+        {
+          "user": "你说今晚写还是明天写？",
+          "assistant": "今晚写，明天就能心安理得继续摸鱼；明天写，今晚就得带着愧疚感入睡。看你更怕哪种痛苦了，反正稿子又不会因为你拖到明天就变短。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2187,
+          "usage": {
+            "completion_tokens": 42,
+            "prompt_tokens": 2826,
+            "total_tokens": 2868,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2826
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "尚未发生",
+      "system_characters": 4443,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "新买的书周三才送来，我打算放在窗边。",
+          "assistant": "窗边看书倒是挺有情调的，就是得看太阳给不给面子。要是晒太狠了，你这新书还没读热乎呢，先被烤成脆皮了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2454,
+          "usage": {
+            "completion_tokens": 40,
+            "prompt_tokens": 2592,
+            "total_tokens": 2632,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2592
+            }
+          }
+        },
+        {
+          "user": "不是已经送到了，你别替我脑补。",
+          "assistant": "好好好，是我多嘴了。那等你周三收到货，直接摆窗边就行，我就不瞎操心了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2095,
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 2722,
+            "total_tokens": 2747,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2722
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "反馈收住",
+      "system_characters": 4443,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "我想周末把阳台那些东西理一理。",
+          "assistant": "阳台终于被你惦记上了。不过周末嘛，谁知道你到时候是打算动真格，还是又赖在床上假装没这回事呢？",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2071,
+          "usage": {
+            "completion_tokens": 29,
+            "prompt_tokens": 2589,
+            "total_tokens": 2618,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2589
+            }
+          }
+        },
+        {
+          "user": "先别安排，也别跟我开玩笑，正常说话就行。",
+          "assistant": "行，不闹了。周末理阳台，记下了。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 1502,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 2711,
+            "total_tokens": 2724,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2711
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "成年人故事",
+      "system_characters": 4443,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "给我讲个短故事，听众是成年人，不用哄小孩。",
+          "assistant": "一个中年男人每天坐同一班地铁，对面总有个老太太盯着他看。\n\n有一天他实在忍不住问：“您看我干嘛？”\n老太太说：“我在想，你鞋带开了。”\n他低头一看，确实开了。系好抬起头，发现对面的座位空了。\n旁边的人告诉他，那个位子三年前就没人坐过。\n他回头看了看车厢连接处，那里也没人。\n后来他再没坐过那班车。不是因为怕鬼，是因为那天之后，他发现只要自己一弯腰系鞋带，余光里总有双旧皮鞋在晃。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3593,
+          "usage": {
+            "completion_tokens": 119,
+            "prompt_tokens": 2593,
+            "total_tokens": 2712,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2593
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "qwen3.8-flash",
+      "preset": "existing-playful",
+      "scene": "简洁事实",
+      "system_characters": 4443,
+      "persona_sha256": "93146200279e899c71f91585b140b58ee9a857681d73661db4e539a2006ecb11",
+      "turns": [
+        {
+          "user": "17乘23是多少？直接告诉我结果。",
+          "assistant": "391。",
+          "tool_calls": [],
+          "response_model": "qwen3.8-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 2208,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 2590,
+            "total_tokens": 2594,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2048,
+              "text_tokens": 2590
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "model_comparison": [],
+  "tool_probes": [
+    {
+      "preset": "natural",
+      "actual_mcp_execution": true,
+      "name": "get_world_time",
+      "arguments": {
+        "timezone": "Asia/Tokyo"
+      },
+      "result": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 18:14:47 (Monday)\n时区：UTC+9",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "assistant": "东京现在是2026年10月5日星期一，下午六点十四分，比咱们这边快一个小时。",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 978,
+      "usage": {
+        "completion_tokens": 25,
+        "prompt_tokens": 3045,
+        "total_tokens": 3070,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 3045
+        }
+      }
+    },
+    {
+      "preset": "partner",
+      "actual_mcp_execution": true,
+      "name": "get_world_time",
+      "arguments": {
+        "timezone": "Asia/Tokyo"
+      },
+      "result": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 18:14:49 (Monday)\n时区：UTC+9",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "assistant": "东京现在是十月五号晚上六点十四分，比咱们这边快一个小时。",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1093,
+      "usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 3045,
+        "total_tokens": 3061,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 3045
+        }
+      }
+    },
+    {
+      "preset": "existing-playful",
+      "actual_mcp_execution": true,
+      "name": "get_world_time",
+      "arguments": {
+        "timezone": "Asia/Tokyo"
+      },
+      "result": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Asia/Tokyo 当前时间：\n2026年10月05日 18:14:51 (Monday)\n时区：UTC+9",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "assistant": "东京现在是2026年10月5日星期一的傍晚六点十四分五十一秒，比咱们这边快一个小时。你是不是又在盘算那边有什么安排呀？",
+      "tool_calls": [],
+      "response_model": "qwen3.8-flash",
+      "finish_reason": "stop",
+      "elapsed_ms": 1222,
+      "usage": {
+        "completion_tokens": 37,
+        "prompt_tokens": 3035,
+        "total_tokens": 3072,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048,
+          "text_tokens": 3035
+        }
+      }
+    }
+  ],
+  "round": 2,
+  "validation_policy": "New dialogue phrasing; preserve exploratory round one; no post-hoc exclusion."
+}

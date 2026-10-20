@@ -1,0 +1,13 @@
+{
+  "partitions/v2/16m.csv": "40dbd0043277306aa45769196981f949151684f2b2d9db7a146215d1d2ee123a",
+  "sdkconfig": "25dff93eac329dc9fabe83c3079cb64a5cc6265075d92f88e02b112b30dcda37",
+  "sdkconfig.defaults": "010b5749d6b8fda93805eea4f1415a18b990c9cd14cdfba76820e0b25c6aedad",
+  "sdkconfig.defaults.esp32s3": "50e90c9c82df5b46c0488daa90008c54b608838e8593832491e2f5160bef3284",
+  "main/Kconfig.projbuild": "802a21422a56e77a90fca18cead0e41ec35bfa4bb67a11fa82a65155fea1503e",
+  "main/audio/wake_word.h": "d3c231143d5f22e69eaf7bdc5fdeb015b2a03f6035008088654e6129629c7355",
+  "main/audio/wake_words/afe_wake_word.h": "5a5a5569a71c22b681f81f1c6254ee1f0bbf9b01bc34ead4ac91e2db16bebc1a",
+  "main/audio/wake_words/custom_wake_word.h": "fbb991a9f7b50a3bd8d032e79e4e8ca058d033b3247859ebdf0ff6a24cd5457a",
+  "main/audio/wake_words/custom_wake_word.cc": "ebaeff89fa9fd9862456a49013f75f052c5e309bcdcfe896466b2f93970f6a24",
+  "main/audio/audio_service.cc": "6833e984540dd2e7be36c54054ab649951fcebbef002e4c0142710bdff0e253b",
+  "main/application.cc": "350d6cb02f1b67ec5f07b81f003188d75b8ed6b8c5870859fb7e4350c6d3f6af"
+}

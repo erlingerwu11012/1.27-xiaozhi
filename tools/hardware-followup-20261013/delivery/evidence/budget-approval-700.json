@@ -1,0 +1,11 @@
+{
+  "human_authorization": "允许主模型上限提高到700次，继续剩余验收",
+  "previous_model_cap": 600,
+  "model_cap": 700,
+  "case_cap": 800,
+  "tts_cap": 12,
+  "vision_cap": 0,
+  "ledger_reset": false,
+  "at": 1791853971.2166533,
+  "prior_budget_source_sha256": "467f5b7cec2afc3d546a8f7c9d0f1429af4da33a2b79ce26a0b2611582bede97"
+}

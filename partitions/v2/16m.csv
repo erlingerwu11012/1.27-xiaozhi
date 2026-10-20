@@ -1,0 +1,13 @@
+# ESP-IDF Partition Table
+# Name,   Type, SubType, Offset,  Size, Flags
+# NOTE: Single factory app only — no ota_0/ota_1/otadata.
+# Default UI, room.png and default Spine role live in fixed assets.
+# Online Spine and wallpaper resources have independent single slots.
+# Old devices require the verified segmented USB migration package (not OTA).
+nvs,      data, nvs,     0x9000,    0x10000,
+phy_init, data, phy,     0x19000,   0x1000,
+factory,  app,  factory, 0x20000,   0x4F0000,
+userdata, data, spiffs,  0x510000,  0x20000,
+assets,   data, spiffs,  0x530000,  0x6D0000,
+spine,    data, 0x40,    0xC00000,  0x300000,
+wallpaper,data, 0x41,    0xF00000,  0x100000,

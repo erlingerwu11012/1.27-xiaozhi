@@ -1,0 +1,2616 @@
+Compiled from "RecentArchiveService.java"
+public class xiaozhi.modules.personmemory.RecentArchiveService {
+  private final org.springframework.jdbc.core.JdbcTemplate jdbc;
+
+  private final xiaozhi.modules.personmemory.PersonMemoryService memory;
+
+  private final xiaozhi.modules.useridentity.service.AccountIdentityStateService identities;
+
+  public boolean audioOwned(java.lang.String, java.lang.Long);
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc           #7                  // String SELECT COUNT(*) FROM ai_agent_chat_history h JOIN ai_agent a ON a.id=h.agent_id WHERE h.audio_id=? AND a.user_id=?
+       6: ldc           #9                  // class java/lang/Integer
+       8: iconst_2
+       9: anewarray     #11                 // class java/lang/Object
+      12: dup
+      13: iconst_0
+      14: aload_1
+      15: aastore
+      16: dup
+      17: iconst_1
+      18: aload_2
+      19: aastore
+      20: invokevirtual #13                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+      23: checkcast     #9                  // class java/lang/Integer
+      26: astore_3
+      27: aload_3
+      28: ifnull        42
+      31: aload_3
+      32: invokevirtual #19                 // Method java/lang/Integer.intValue:()I
+      35: ifle          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ireturn
+
+  public boolean duplicate(java.lang.Long, java.lang.String);
+    Code:
+       0: aload_2
+       1: ifnull        11
+       4: aload_2
+       5: invokevirtual #23                 // Method java/lang/String.isBlank:()Z
+       8: ifeq          13
+      11: iconst_0
+      12: ireturn
+      13: aload_0
+      14: getfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+      17: aload_1
+      18: invokevirtual #33                 // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      21: pop
+      22: aload_0
+      23: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      26: ldc           #39                 // String SELECT id FROM ai_agent_chat_history WHERE account_id=? AND event_id=? LIMIT 1 FOR UPDATE
+      28: iconst_2
+      29: anewarray     #11                 // class java/lang/Object
+      32: dup
+      33: iconst_0
+      34: aload_1
+      35: aastore
+      36: dup
+      37: iconst_1
+      38: aload_2
+      39: aastore
+      40: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      43: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      48: ifne          53
+      51: iconst_1
+      52: ireturn
+      53: aload_0
+      54: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      57: ldc           #50                 // String SELECT event_id FROM ai_archive_retired_event WHERE account_id=? AND event_id=? LIMIT 1 FOR UPDATE
+      59: iconst_2
+      60: anewarray     #11                 // class java/lang/Object
+      63: dup
+      64: iconst_0
+      65: aload_1
+      66: aastore
+      67: dup
+      68: iconst_1
+      69: aload_2
+      70: aastore
+      71: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      74: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      79: ifne          86
+      82: iconst_1
+      83: goto          87
+      86: iconst_0
+      87: ireturn
+
+  public boolean recallAllowed(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       4: ldc           #52                 // String SELECT MAX(created_at) FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=? AND match_text=\'*\'
+       6: ldc           #54                 // class java/util/Date
+       8: iconst_3
+       9: anewarray     #11                 // class java/lang/Object
+      12: dup
+      13: iconst_0
+      14: aload_1
+      15: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      18: aastore
+      19: dup
+      20: iconst_1
+      21: aload_1
+      22: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      25: aastore
+      26: dup
+      27: iconst_2
+      28: aload_1
+      29: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      32: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      35: aastore
+      36: invokevirtual #76                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/util/List;
+      39: astore_2
+      40: aload_2
+      41: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      46: ifeq          53
+      49: aconst_null
+      50: goto          63
+      53: aload_2
+      54: iconst_0
+      55: invokeinterface #79,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      60: checkcast     #54                 // class java/util/Date
+      63: astore_3
+      64: aload_3
+      65: ifnull        94
+      68: aload_1
+      69: invokevirtual #83                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+      72: ifnull        98
+      75: aload_1
+      76: invokevirtual #83                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getCapturedAt:()Ljava/lang/Long;
+      79: invokevirtual #86                 // Method java/lang/Long.longValue:()J
+      82: aload_3
+      83: invokevirtual #89                 // Method java/util/Date.getTime:()J
+      86: ldc2_w        #92                 // long 1000l
+      89: ladd
+      90: lcmp
+      91: ifle          98
+      94: iconst_1
+      95: goto          99
+      98: iconst_0
+      99: ireturn
+
+  public boolean validateReport(xiaozhi.modules.agent.dto.AgentChatHistoryReportDTO, xiaozhi.modules.agent.entity.AgentEntity);
+    Code:
+       0: aload_1
+       1: invokevirtual #94                 // Method xiaozhi/modules/agent/dto/AgentChatHistoryReportDTO.getIdentity:()Lxiaozhi/modules/personmemory/PersonTurnDTO;
+       4: astore_3
+       5: aload_3
+       6: ifnonnull     11
+       9: iconst_0
+      10: ireturn
+      11: aload_3
+      12: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      15: ifnull        91
+      18: aload_3
+      19: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      22: invokevirtual #86                 // Method java/lang/Long.longValue:()J
+      25: lconst_0
+      26: lcmp
+      27: ifle          91
+      30: aload_3
+      31: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      34: aload_2
+      35: invokevirtual #100                // Method xiaozhi/modules/agent/entity/AgentEntity.getUserId:()Ljava/lang/Long;
+      38: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      41: ifeq          91
+      44: aload_3
+      45: invokevirtual #111                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDeviceId:()Ljava/lang/String;
+      48: aload_1
+      49: invokevirtual #114                // Method xiaozhi/modules/agent/dto/AgentChatHistoryReportDTO.getMacAddress:()Ljava/lang/String;
+      52: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      55: ifeq          91
+      58: aload_3
+      59: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+      62: aload_2
+      63: invokevirtual #120                // Method xiaozhi/modules/agent/entity/AgentEntity.getId:()Ljava/lang/String;
+      66: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      69: ifeq          91
+      72: aload_3
+      73: invokevirtual #123                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+      76: ifnull        91
+      79: aload_3
+      80: invokevirtual #123                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+      83: ldc           #126                // String [A-Za-z0-9_-]{1,64}
+      85: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      88: ifne          101
+      91: new           #132                // class xiaozhi/common/exception/RenException
+      94: dup
+      95: ldc           #134                // String 存档归属无效
+      97: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     100: athrow
+     101: aload_0
+     102: getfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+     105: aload_3
+     106: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     109: invokevirtual #33                 // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+     112: pop
+     113: ldc           #140                // String default
+     115: ldc           #142                // String matched
+     117: invokestatic  #144                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+     120: aload_3
+     121: invokevirtual #150                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getStatus:()Ljava/lang/String;
+     124: ldc           #153                // String
+     126: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     129: invokeinterface #159,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     134: ifeq          147
+     137: aload_0
+     138: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+     141: aload_3
+     142: invokevirtual #167                // Method xiaozhi/modules/personmemory/PersonMemoryService.validateArchiveActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;)V
+     145: iconst_1
+     146: ireturn
+     147: aload_3
+     148: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     151: ifnull        174
+     154: aload_3
+     155: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     158: invokevirtual #23                 // Method java/lang/String.isBlank:()Z
+     161: ifne          174
+     164: new           #132                // class xiaozhi/common/exception/RenException
+     167: dup
+     168: ldc           #173                // String 未知身份不可指定人物
+     170: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     173: athrow
+     174: aload_0
+     175: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     178: ldc           #175                // String SELECT COUNT(*) FROM ai_device WHERE mac_address=? AND user_id=? AND agent_id=?
+     180: ldc           #9                  // class java/lang/Integer
+     182: iconst_3
+     183: anewarray     #11                 // class java/lang/Object
+     186: dup
+     187: iconst_0
+     188: aload_3
+     189: invokevirtual #111                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getDeviceId:()Ljava/lang/String;
+     192: aastore
+     193: dup
+     194: iconst_1
+     195: aload_3
+     196: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     199: aastore
+     200: dup
+     201: iconst_2
+     202: aload_3
+     203: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     206: aastore
+     207: invokevirtual #13                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForObject:(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     210: checkcast     #9                  // class java/lang/Integer
+     213: astore        4
+     215: aload         4
+     217: ifnull        229
+     220: aload         4
+     222: invokevirtual #19                 // Method java/lang/Integer.intValue:()I
+     225: iconst_1
+     226: if_icmpeq     239
+     229: new           #132                // class xiaozhi/common/exception/RenException
+     232: dup
+     233: ldc           #177                // String 设备归属已变更
+     235: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     238: athrow
+     239: iconst_0
+     240: ireturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> continuation(xiaozhi.modules.personmemory.PersonTurnDTO);
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #33                 // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      16: aload_1
+      17: iconst_0
+      18: invokevirtual #179                // Method xiaozhi/modules/personmemory/PersonMemoryService.validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+      21: ldc           #183                // String account_id=? AND person_id=? AND agent_id=? AND default_generation=? AND recall_allowed=TRUE AND content<>\'\'
+      23: astore_2
+      24: iconst_4
+      25: anewarray     #11                 // class java/lang/Object
+      28: dup
+      29: iconst_0
+      30: aload_1
+      31: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: aload_1
+      38: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+      41: aastore
+      42: dup
+      43: iconst_2
+      44: aload_1
+      45: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+      48: aastore
+      49: dup
+      50: iconst_3
+      51: aload_1
+      52: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+      55: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      58: aastore
+      59: astore_3
+      60: aload_0
+      61: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+      64: aload_2
+      65: invokedynamic #185,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      70: aload_3
+      71: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+      74: astore        4
+      76: new           #189                // class java/util/ArrayList
+      79: dup
+      80: invokespecial #191                // Method java/util/ArrayList."<init>":()V
+      83: astore        5
+      85: aload         4
+      87: invokestatic  #194                // Method java/util/Collections.reverse:(Ljava/util/List;)V
+      90: aload         4
+      92: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      97: astore        6
+      99: aload         6
+     101: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     106: ifeq          350
+     109: aload         6
+     111: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     116: checkcast     #213                // class java/util/Map
+     119: astore        7
+     121: new           #189                // class java/util/ArrayList
+     124: dup
+     125: aload_3
+     126: invokestatic  #215                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     129: invokespecial #221                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     132: astore        8
+     134: aload         8
+     136: aload         7
+     138: ldc           #224                // String turn_id
+     140: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     145: invokevirtual #229                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+     148: pop
+     149: aload_0
+     150: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     153: aload_2
+     154: invokedynamic #232,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     159: aload         8
+     161: invokevirtual #233                // Method java/util/ArrayList.toArray:()[Ljava/lang/Object;
+     164: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     167: astore        9
+     169: new           #237                // class java/lang/StringBuilder
+     172: dup
+     173: invokespecial #239                // Method java/lang/StringBuilder."<init>":()V
+     176: astore        10
+     178: new           #237                // class java/lang/StringBuilder
+     181: dup
+     182: invokespecial #239                // Method java/lang/StringBuilder."<init>":()V
+     185: astore        11
+     187: aload         9
+     189: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     194: astore        12
+     196: aload         12
+     198: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     203: ifeq          285
+     206: aload         12
+     208: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     213: checkcast     #213                // class java/util/Map
+     216: astore        13
+     218: aload         13
+     220: ldc           #240                // String content
+     222: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     227: ldc           #153                // String
+     229: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     232: astore        14
+     234: aload         13
+     236: ldc           #242                // String chat_type
+     238: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     243: checkcast     #244                // class java/lang/Number
+     246: invokevirtual #246                // Method java/lang/Number.intValue:()I
+     249: iconst_1
+     250: if_icmpne     269
+     253: aload         10
+     255: aload         14
+     257: invokevirtual #247                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     260: bipush        10
+     262: invokevirtual #251                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+     265: pop
+     266: goto          282
+     269: aload         11
+     271: aload         14
+     273: invokevirtual #247                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     276: bipush        10
+     278: invokevirtual #251                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+     281: pop
+     282: goto          196
+     285: aload         10
+     287: invokevirtual #254                // Method java/lang/StringBuilder.isEmpty:()Z
+     290: ifne          347
+     293: aload         11
+     295: invokevirtual #254                // Method java/lang/StringBuilder.isEmpty:()Z
+     298: ifne          347
+     301: aload         5
+     303: ldc           #255                // String role
+     305: ldc_w         #257                // String user
+     308: ldc           #240                // String content
+     310: aload         10
+     312: invokevirtual #259                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     315: invokestatic  #261                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     318: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     323: pop
+     324: aload         5
+     326: ldc           #255                // String role
+     328: ldc_w         #265                // String assistant
+     331: ldc           #240                // String content
+     333: aload         11
+     335: invokevirtual #259                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     338: invokestatic  #261                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     341: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     346: pop
+     347: goto          99
+     350: ldc_w         #267                // String messages
+     353: aload         5
+     355: ldc_w         #269                // String turns
+     358: aload         5
+     360: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+     365: iconst_2
+     366: idiv
+     367: invokestatic  #274                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     370: invokestatic  #261                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     373: areturn
+
+  private static void validateReplacement(java.lang.String, java.lang.String, java.lang.String);
+    Code:
+       0: ldc_w         #277                // String correct
+       3: aload_0
+       4: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       7: ifne          11
+      10: return
+      11: aload_2
+      12: ifnull        34
+      15: aload_2
+      16: aload_2
+      17: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+      20: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      23: ifeq          34
+      26: aload_2
+      27: iconst_1
+      28: invokestatic  #284                // Method factualUser:(Ljava/lang/String;I)Z
+      31: ifne          45
+      34: new           #132                // class xiaozhi/common/exception/RenException
+      37: dup
+      38: ldc_w         #288                // String 更正需要完整事实
+      41: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      44: athrow
+      45: bipush        13
+      47: anewarray     #24                 // class java/lang/String
+      50: dup
+      51: iconst_0
+      52: ldc_w         #290                // String 老婆
+      55: aastore
+      56: dup
+      57: iconst_1
+      58: ldc_w         #292                // String 妻子
+      61: aastore
+      62: dup
+      63: iconst_2
+      64: ldc_w         #294                // String 配偶
+      67: aastore
+      68: dup
+      69: iconst_3
+      70: ldc_w         #296                // String 丈夫
+      73: aastore
+      74: dup
+      75: iconst_4
+      76: ldc_w         #298                // String 老公
+      79: aastore
+      80: dup
+      81: iconst_5
+      82: ldc_w         #300                // String 妈妈
+      85: aastore
+      86: dup
+      87: bipush        6
+      89: ldc_w         #302                // String 母亲
+      92: aastore
+      93: dup
+      94: bipush        7
+      96: ldc_w         #304                // String 爸爸
+      99: aastore
+     100: dup
+     101: bipush        8
+     103: ldc_w         #306                // String 父亲
+     106: aastore
+     107: dup
+     108: bipush        9
+     110: ldc_w         #308                // String 女儿
+     113: aastore
+     114: dup
+     115: bipush        10
+     117: ldc_w         #310                // String 儿子
+     120: aastore
+     121: dup
+     122: bipush        11
+     124: ldc_w         #312                // String 朋友
+     127: aastore
+     128: dup
+     129: bipush        12
+     131: ldc_w         #314                // String 同事
+     134: aastore
+     135: invokestatic  #316                // InterfaceMethod java/util/List.of:([Ljava/lang/Object;)Ljava/util/List;
+     138: astore_3
+     139: aload_3
+     140: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     145: aload_1
+     146: dup
+     147: invokestatic  #322                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     150: pop
+     151: invokedynamic #325,  0            // InvokeDynamic #2:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     156: invokeinterface #329,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+     161: ifeq          200
+     164: aload_3
+     165: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     170: aload_2
+     171: dup
+     172: invokestatic  #322                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     175: pop
+     176: invokedynamic #325,  0            // InvokeDynamic #2:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     181: invokeinterface #335,  2          // InterfaceMethod java/util/stream/Stream.noneMatch:(Ljava/util/function/Predicate;)Z
+     186: ifeq          200
+     189: new           #132                // class xiaozhi/common/exception/RenException
+     192: dup
+     193: ldc_w         #338                // String 更正需要保留人物关系
+     196: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     199: athrow
+     200: return
+
+  static java.lang.String normalizeFact(java.lang.String);
+    Code:
+       0: aload_0
+       1: ifnonnull     7
+       4: ldc           #153                // String
+       6: areturn
+       7: aload_0
+       8: invokevirtual #340                // Method java/lang/String.strip:()Ljava/lang/String;
+      11: astore_1
+      12: iconst_0
+      13: istore_2
+      14: iload_2
+      15: iconst_3
+      16: if_icmpge     116
+      19: aload_1
+      20: ldc_w         #343                // String {
+      23: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+      26: ifeq          116
+      29: new           #348                // class com/fasterxml/jackson/databind/ObjectMapper
+      32: dup
+      33: invokespecial #350                // Method com/fasterxml/jackson/databind/ObjectMapper."<init>":()V
+      36: aload_1
+      37: invokevirtual #351                // Method com/fasterxml/jackson/databind/ObjectMapper.readTree:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      40: astore_3
+      41: aload_3
+      42: invokevirtual #355                // Method com/fasterxml/jackson/databind/JsonNode.isObject:()Z
+      45: ifeq          87
+      48: aload_3
+      49: ldc           #240                // String content
+      51: invokevirtual #360                // Method com/fasterxml/jackson/databind/JsonNode.path:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      54: invokevirtual #363                // Method com/fasterxml/jackson/databind/JsonNode.isTextual:()Z
+      57: ifeq          87
+      60: aload_3
+      61: ldc           #255                // String role
+      63: invokevirtual #366                // Method com/fasterxml/jackson/databind/JsonNode.has:(Ljava/lang/String;)Z
+      66: ifeq          90
+      69: ldc_w         #257                // String user
+      72: aload_3
+      73: ldc           #255                // String role
+      75: invokevirtual #360                // Method com/fasterxml/jackson/databind/JsonNode.path:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      78: invokevirtual #369                // Method com/fasterxml/jackson/databind/JsonNode.asText:()Ljava/lang/String;
+      81: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      84: ifne          90
+      87: ldc           #153                // String
+      89: areturn
+      90: aload_3
+      91: ldc           #240                // String content
+      93: invokevirtual #360                // Method com/fasterxml/jackson/databind/JsonNode.path:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      96: invokevirtual #369                // Method com/fasterxml/jackson/databind/JsonNode.asText:()Ljava/lang/String;
+      99: invokevirtual #340                // Method java/lang/String.strip:()Ljava/lang/String;
+     102: astore_1
+     103: goto          110
+     106: astore_3
+     107: ldc           #153                // String
+     109: areturn
+     110: iinc          2, 1
+     113: goto          14
+     116: aload_1
+     117: ldc_w         #374                // String ^(?:(?:那|好|嗯|呃)[，, ]*)?(?:(?:请|你|帮我|给我|替我|现在|这次)\\s*)*(?:记一下|记住|保存(?:一下)?|记录(?:一下)?)[，,：: ]*
+     120: ldc           #153                // String
+     122: invokevirtual #376                // Method java/lang/String.replaceFirst:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     125: invokevirtual #340                // Method java/lang/String.strip:()Ljava/lang/String;
+     128: astore_1
+     129: aload_1
+     130: ldc_w         #380                // String [，,。 ]*(?:请|你|帮我|给我)?(?:存到记忆库(?:里)?|存进去|保存到记忆库)(?:吧|啊|呀)?[。！! ]*$
+     133: ldc           #153                // String
+     135: invokevirtual #376                // Method java/lang/String.replaceFirst:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     138: invokevirtual #340                // Method java/lang/String.strip:()Ljava/lang/String;
+     141: astore_1
+     142: aload_1
+     143: areturn
+    Exception table:
+       from    to  target type
+          29    89   106   Class java/lang/Exception
+          90   103   106   Class java/lang/Exception
+
+  public java.util.Map<java.lang.String, java.lang.Object> overrideRecord(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #33                 // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      16: aload_1
+      17: iconst_0
+      18: invokevirtual #179                // Method xiaozhi/modules/personmemory/PersonMemoryService.validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+      21: aload_3
+      22: ifnull        637
+      25: aload_3
+      26: invokevirtual #23                 // Method java/lang/String.isBlank:()Z
+      29: ifne          637
+      32: aload_3
+      33: ldc_w         #382                // String :
+      36: iconst_2
+      37: invokevirtual #384                // Method java/lang/String.split:(Ljava/lang/String;I)[Ljava/lang/String;
+      40: astore        8
+      42: aload         8
+      44: arraylength
+      45: iconst_2
+      46: if_icmpne     89
+      49: ldc_w         #388                // String archive
+      52: ldc_w         #390                // String material
+      55: ldc_w         #392                // String override
+      58: ldc_w         #394                // String cloud
+      61: invokestatic  #396                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+      64: aload         8
+      66: iconst_0
+      67: aaload
+      68: invokeinterface #159,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      73: ifeq          89
+      76: aload         8
+      78: iconst_1
+      79: aaload
+      80: ldc_w         #399                // String [A-Za-z0-9_-]{1,128}
+      83: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      86: ifne          100
+      89: new           #132                // class xiaozhi/common/exception/RenException
+      92: dup
+      93: ldc_w         #401                // String 记忆记录无效
+      96: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      99: athrow
+     100: ldc_w         #394                // String cloud
+     103: aload         8
+     105: iconst_0
+     106: aaload
+     107: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     110: ifeq          304
+     113: aload         5
+     115: ifnull        126
+     118: aload         5
+     120: invokevirtual #23                 // Method java/lang/String.isBlank:()Z
+     123: ifeq          137
+     126: new           #132                // class xiaozhi/common/exception/RenException
+     129: dup
+     130: ldc_w         #403                // String 请先查询要修改的记忆
+     133: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     136: athrow
+     137: aload_0
+     138: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+     141: aload_1
+     142: aload         5
+     144: invokevirtual #405                // Method xiaozhi/modules/personmemory/PersonMemoryService.search:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/lang/String;)Ljava/util/Map;
+     147: ldc_w         #409                // String items
+     150: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     155: checkcast     #46                 // class java/util/List
+     158: astore        9
+     160: aload         9
+     162: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     167: aload_3
+     168: invokedynamic #411,  0            // InvokeDynamic #3:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     173: invokeinterface #412,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     178: invokeinterface #416,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     183: astore        10
+     185: aload         10
+     187: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+     192: iconst_1
+     193: if_icmpne     223
+     196: aload         10
+     198: iconst_0
+     199: invokeinterface #79,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     204: checkcast     #213                // class java/util/Map
+     207: ldc_w         #420                // String version
+     210: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     215: aload         4
+     217: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     220: ifne          234
+     223: new           #132                // class xiaozhi/common/exception/RenException
+     226: dup
+     227: ldc_w         #422                // String 记忆版本已变化，请重新查询
+     230: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     233: athrow
+     234: aload         10
+     236: iconst_0
+     237: invokeinterface #79,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     242: checkcast     #213                // class java/util/Map
+     245: ldc_w         #424                // String text
+     248: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     253: ldc           #153                // String
+     255: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     258: astore        7
+     260: aload_2
+     261: aload         7
+     263: aload         6
+     265: invokestatic  #426                // Method validateReplacement:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+     268: new           #430                // class java/util/LinkedHashMap
+     271: dup
+     272: aload_0
+     273: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+     276: aload_1
+     277: aload_2
+     278: aload         7
+     280: aload         6
+     282: invokevirtual #432                // Method xiaozhi/modules/personmemory/PersonMemoryService.override:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+     285: invokespecial #435                // Method java/util/LinkedHashMap."<init>":(Ljava/util/Map;)V
+     288: astore        11
+     290: aload         11
+     292: ldc_w         #438                // String resolved_match
+     295: aload         7
+     297: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     300: pop
+     301: aload         11
+     303: areturn
+     304: aload         8
+     306: iconst_0
+     307: aaload
+     308: astore        10
+     310: iconst_m1
+     311: istore        11
+     313: aload         10
+     315: invokevirtual #444                // Method java/lang/String.hashCode:()I
+     318: lookupswitch  { // 2
+            -748101438: 344
+             299066663: 361
+               default: 375
+          }
+     344: aload         10
+     346: ldc_w         #388                // String archive
+     349: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     352: ifeq          375
+     355: iconst_0
+     356: istore        11
+     358: goto          375
+     361: aload         10
+     363: ldc_w         #390                // String material
+     366: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     369: ifeq          375
+     372: iconst_1
+     373: istore        11
+     375: iload         11
+     377: lookupswitch  { // 2
+                     0: 404
+                     1: 410
+               default: 416
+          }
+     404: ldc_w         #447                // String SELECT content FROM ai_agent_chat_history WHERE id=? AND account_id=? AND person_id=? AND default_generation=? AND agent_id=? AND recall_allowed=TRUE AND chat_type=1
+     407: goto          419
+     410: ldc_w         #449                // String SELECT content FROM ai_person_material WHERE id=? AND account_id=? AND user_id=? AND generation=? AND agent_id=? AND recall_allowed=TRUE AND kind IN(\'dialogue\',\'explicit_fact\')
+     413: goto          419
+     416: ldc_w         #451                // String SELECT replacement AS content FROM ai_memory_override WHERE id=? AND account_id=? AND user_id=? AND generation=? AND state<>\'superseded\'
+     419: astore        9
+     421: aload         8
+     423: iconst_0
+     424: aaload
+     425: ldc_w         #392                // String override
+     428: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     431: ifeq          472
+     434: iconst_4
+     435: anewarray     #11                 // class java/lang/Object
+     438: dup
+     439: iconst_0
+     440: aload         8
+     442: iconst_1
+     443: aaload
+     444: aastore
+     445: dup
+     446: iconst_1
+     447: aload_1
+     448: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     451: aastore
+     452: dup
+     453: iconst_2
+     454: aload_1
+     455: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     458: aastore
+     459: dup
+     460: iconst_3
+     461: aload_1
+     462: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     465: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     468: aastore
+     469: goto          514
+     472: iconst_5
+     473: anewarray     #11                 // class java/lang/Object
+     476: dup
+     477: iconst_0
+     478: aload         8
+     480: iconst_1
+     481: aaload
+     482: aastore
+     483: dup
+     484: iconst_1
+     485: aload_1
+     486: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     489: aastore
+     490: dup
+     491: iconst_2
+     492: aload_1
+     493: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     496: aastore
+     497: dup
+     498: iconst_3
+     499: aload_1
+     500: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     503: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     506: aastore
+     507: dup
+     508: iconst_4
+     509: aload_1
+     510: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     513: aastore
+     514: astore        10
+     516: aload_0
+     517: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     520: aload         9
+     522: aload         10
+     524: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     527: astore        11
+     529: aload         11
+     531: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+     536: iconst_1
+     537: if_icmpeq     551
+     540: new           #132                // class xiaozhi/common/exception/RenException
+     543: dup
+     544: ldc_w         #453                // String 记忆已变化或当前身份无权访问
+     547: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     550: athrow
+     551: aload         11
+     553: iconst_0
+     554: invokeinterface #79,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     559: checkcast     #213                // class java/util/Map
+     562: ldc           #240                // String content
+     564: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     569: ldc           #153                // String
+     571: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     574: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+     577: astore        7
+     579: aload         7
+     581: aload         8
+     583: iconst_0
+     584: aaload
+     585: ldc_w         #392                // String override
+     588: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     591: ifeq          598
+     594: iconst_1
+     595: goto          599
+     598: iconst_4
+     599: invokestatic  #284                // Method factualUser:(Ljava/lang/String;I)Z
+     602: ifeq          623
+     605: aload         4
+     607: ifnull        623
+     610: aload         7
+     612: invokestatic  #455                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     615: aload         4
+     617: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     620: ifne          634
+     623: new           #132                // class xiaozhi/common/exception/RenException
+     626: dup
+     627: ldc_w         #422                // String 记忆版本已变化，请重新查询
+     630: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     633: athrow
+     634: goto          731
+     637: ldc_w         #460                // String *
+     640: aload         5
+     642: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     645: ifeq          655
+     648: aload         5
+     650: astore        7
+     652: goto          731
+     655: aload_0
+     656: aload_1
+     657: aload         5
+     659: invokevirtual #462                // Method search:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/lang/String;)Ljava/util/Map;
+     662: astore        8
+     664: aload         8
+     666: ldc_w         #409                // String items
+     669: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     674: checkcast     #46                 // class java/util/List
+     677: astore        9
+     679: aload         9
+     681: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     686: aload         5
+     688: invokedynamic #463,  0            // InvokeDynamic #4:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     693: invokeinterface #412,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     698: invokeinterface #416,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     703: astore        10
+     705: aload         10
+     707: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+     712: iconst_1
+     713: if_icmpeq     727
+     716: new           #132                // class xiaozhi/common/exception/RenException
+     719: dup
+     720: ldc_w         #464                // String 没有唯一定位到要修改的旧记忆
+     723: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     726: athrow
+     727: aload         5
+     729: astore        7
+     731: aload_2
+     732: aload         7
+     734: aload         6
+     736: invokestatic  #426                // Method validateReplacement:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+     739: new           #430                // class java/util/LinkedHashMap
+     742: dup
+     743: aload_0
+     744: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+     747: aload_1
+     748: aload_2
+     749: aload         7
+     751: aload         6
+     753: invokevirtual #432                // Method xiaozhi/modules/personmemory/PersonMemoryService.override:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+     756: invokespecial #435                // Method java/util/LinkedHashMap."<init>":(Ljava/util/Map;)V
+     759: astore        8
+     761: aload_3
+     762: ifnull        830
+     765: aload_3
+     766: ldc_w         #466                // String archive:
+     769: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+     772: ifeq          830
+     775: aload_0
+     776: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     779: ldc_w         #468                // String UPDATE ai_agent_chat_history SET recall_allowed=FALSE WHERE id=? AND account_id=? AND person_id=? AND default_generation=? AND agent_id=?
+     782: iconst_5
+     783: anewarray     #11                 // class java/lang/Object
+     786: dup
+     787: iconst_0
+     788: aload_3
+     789: bipush        8
+     791: invokevirtual #470                // Method java/lang/String.substring:(I)Ljava/lang/String;
+     794: aastore
+     795: dup
+     796: iconst_1
+     797: aload_1
+     798: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     801: aastore
+     802: dup
+     803: iconst_2
+     804: aload_1
+     805: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     808: aastore
+     809: dup
+     810: iconst_3
+     811: aload_1
+     812: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     815: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     818: aastore
+     819: dup
+     820: iconst_4
+     821: aload_1
+     822: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     825: aastore
+     826: invokevirtual #474                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     829: pop
+     830: aload_3
+     831: ifnull        899
+     834: aload_3
+     835: ldc_w         #478                // String material:
+     838: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+     841: ifeq          899
+     844: aload_0
+     845: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     848: ldc_w         #480                // String UPDATE ai_person_material SET recall_allowed=FALSE WHERE id=? AND account_id=? AND user_id=? AND generation=? AND agent_id=?
+     851: iconst_5
+     852: anewarray     #11                 // class java/lang/Object
+     855: dup
+     856: iconst_0
+     857: aload_3
+     858: bipush        9
+     860: invokevirtual #470                // Method java/lang/String.substring:(I)Ljava/lang/String;
+     863: aastore
+     864: dup
+     865: iconst_1
+     866: aload_1
+     867: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     870: aastore
+     871: dup
+     872: iconst_2
+     873: aload_1
+     874: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     877: aastore
+     878: dup
+     879: iconst_3
+     880: aload_1
+     881: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     884: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     887: aastore
+     888: dup
+     889: iconst_4
+     890: aload_1
+     891: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     894: aastore
+     895: invokevirtual #474                // Method org/springframework/jdbc/core/JdbcTemplate.update:(Ljava/lang/String;[Ljava/lang/Object;)I
+     898: pop
+     899: aload         8
+     901: ldc_w         #438                // String resolved_match
+     904: aload         7
+     906: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     909: pop
+     910: aload         8
+     912: areturn
+
+  static boolean factualUser(java.lang.String);
+    Code:
+       0: aload_0
+       1: iconst_4
+       2: invokestatic  #284                // Method factualUser:(Ljava/lang/String;I)Z
+       5: ireturn
+
+  static boolean factualUser(java.lang.String, int);
+    Code:
+       0: aload_0
+       1: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+       4: astore_2
+       5: aload_2
+       6: ldc_w         #482                // String [来源:
+       9: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      12: ifne          55
+      15: aload_2
+      16: ldc_w         #487                // String [来源：
+      19: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      22: ifne          55
+      25: aload_2
+      26: ldc_w         #489                // String [本轮可信
+      29: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      32: ifne          55
+      35: aload_2
+      36: ldc_w         #491                // String \"tool_calls\"
+      39: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      42: ifne          55
+      45: aload_2
+      46: ldc_w         #493                // String [工具 Harness
+      49: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      52: ifeq          57
+      55: iconst_0
+      56: ireturn
+      57: aload_2
+      58: ldc_w         #495                // String (?s).*(忘掉|忘记|删掉.*记忆|更正.*记忆|纠正.*记忆).*
+      61: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      64: ifeq          69
+      67: iconst_0
+      68: ireturn
+      69: aload_2
+      70: ldc_w         #497                // String (?s).*(我|你).*(喜欢|爱喝|爱吃).*(什么|啥).*
+      73: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      76: ifeq          81
+      79: iconst_0
+      80: ireturn
+      81: aload_2
+      82: ldc_w         #499                // String (?s).*(?:记忆|记录).{0,12}(?:删除|删掉|忘掉|清空).*
+      85: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      88: ifeq          93
+      91: iconst_0
+      92: ireturn
+      93: aload_2
+      94: ldc_w         #501                // String (?s).*(改一下|改成|改为|更正|纠正).*
+      97: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     100: ifeq          105
+     103: iconst_0
+     104: ireturn
+     105: aload_2
+     106: ldc_w         #503                // String (?s)^(?:请|你|帮我|给我|把|将|这条|这些|这个|全部|所有|刚才|那|好|行|记忆|记录|了|吧|啊|呀|[，,。！! ])*(?:存|保存|删除|删掉|忘掉|修改|待机|取消|不用了|记一下|记好|记住).{0,20}$
+     109: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     112: ifeq          117
+     115: iconst_0
+     116: ireturn
+     117: aload_2
+     118: invokevirtual #505                // Method java/lang/String.isEmpty:()Z
+     121: ifne          134
+     124: aload_2
+     125: ldc_w         #506                // String (?s).*[？?]\\s*$
+     128: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     131: ifeq          136
+     134: iconst_0
+     135: ireturn
+     136: aload_2
+     137: ldc_w         #508                // String (?s).*(叫什么|是什么|在哪里|放在哪|记得吗|有没有|是否|告诉我|请问|怎么|能不能|为什么|你觉得|猜猜|假如|如果|也许|可能|是不是).*
+     140: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     143: ifeq          148
+     146: iconst_0
+     147: ireturn
+     148: aload_2
+     149: iconst_0
+     150: aload_2
+     151: invokevirtual #510                // Method java/lang/String.length:()I
+     154: invokevirtual #513                // Method java/lang/String.codePointCount:(II)I
+     157: iload_1
+     158: if_icmplt     165
+     161: iconst_1
+     162: goto          166
+     165: iconst_0
+     166: ireturn
+
+  static java.util.Set<java.lang.String> terms(java.lang.String);
+    Code:
+       0: new           #517                // class java/util/LinkedHashSet
+       3: dup
+       4: invokespecial #519                // Method java/util/LinkedHashSet."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ldc_w         #520                // String 咖啡
+      12: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      15: ifeq          40
+      18: aload_1
+      19: ldc_w         #520                // String 咖啡
+      22: ldc_w         #522                // String 美式
+      25: ldc_w         #524                // String 拿铁
+      28: ldc_w         #526                // String 浓缩
+      31: invokestatic  #528                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      34: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+      39: pop
+      40: aload_0
+      41: ldc_w         #535                // String 茶
+      44: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      47: ifeq          69
+      50: aload_1
+      51: ldc_w         #535                // String 茶
+      54: ldc_w         #537                // String 普洱
+      57: ldc_w         #539                // String 龙井
+      60: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      63: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+      68: pop
+      69: aload_0
+      70: ldc_w         #544                // String 早餐
+      73: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      76: ifeq          98
+      79: aload_1
+      80: ldc_w         #544                // String 早餐
+      83: ldc_w         #546                // String 豆浆
+      86: ldc_w         #548                // String 牛奶
+      89: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      92: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+      97: pop
+      98: aload_0
+      99: ldc_w         #550                // String 水果
+     102: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     105: ifeq          127
+     108: aload_1
+     109: ldc_w         #550                // String 水果
+     112: ldc_w         #552                // String 苹果
+     115: ldc_w         #554                // String 梨
+     118: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     121: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     126: pop
+     127: aload_0
+     128: ldc_w         #556                // String 运动
+     131: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     134: ifeq          156
+     137: aload_1
+     138: ldc_w         #556                // String 运动
+     141: ldc_w         #558                // String 慢跑
+     144: ldc_w         #560                // String 游泳
+     147: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     150: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     155: pop
+     156: aload_0
+     157: ldc_w         #562                // String 颜色
+     160: invokevirtual #484                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+     163: ifeq          185
+     166: aload_1
+     167: ldc_w         #562                // String 颜色
+     170: ldc_w         #564                // String 蓝色
+     173: ldc_w         #566                // String 绿色
+     176: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     179: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     184: pop
+     185: aload_0
+     186: ldc_w         #568                // String (?s).*(老婆|妻子|配偶).*
+     189: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     192: ifeq          214
+     195: aload_1
+     196: ldc_w         #290                // String 老婆
+     199: ldc_w         #292                // String 妻子
+     202: ldc_w         #294                // String 配偶
+     205: invokestatic  #541                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     208: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     213: pop
+     214: aload_0
+     215: ldc_w         #570                // String (?s).*(爱喝|喝什么|喝啥|喝哪|饮料|饮品|喜欢喝).*
+     218: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     221: ifeq          258
+     224: aload_1
+     225: ldc_w         #572                // String 喝
+     228: ldc_w         #520                // String 咖啡
+     231: ldc_w         #535                // String 茶
+     234: ldc_w         #548                // String 牛奶
+     237: ldc_w         #546                // String 豆浆
+     240: ldc_w         #574                // String 果汁
+     243: ldc_w         #576                // String 可乐
+     246: ldc_w         #578                // String 饮料
+     249: invokestatic  #580                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     252: invokeinterface #531,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+     257: pop
+     258: ldc_w         #583                // String [a-z0-9_]{2,}
+     261: iconst_2
+     262: invokestatic  #587                // Method java/util/regex/Pattern.compile:(Ljava/lang/String;I)Ljava/util/regex/Pattern;
+     265: aload_0
+     266: invokevirtual #591                // Method java/util/regex/Pattern.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+     269: astore_2
+     270: aload_2
+     271: invokevirtual #595                // Method java/util/regex/Matcher.find:()Z
+     274: ifeq          297
+     277: aload_1
+     278: aload_2
+     279: invokevirtual #600                // Method java/util/regex/Matcher.group:()Ljava/lang/String;
+     282: getstatic     #603                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+     285: invokevirtual #609                // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+     288: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     293: pop
+     294: goto          270
+     297: ldc_w         #614                // String [\\p{IsHan}]{2,}
+     300: invokestatic  #616                // Method java/util/regex/Pattern.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern;
+     303: aload_0
+     304: invokevirtual #591                // Method java/util/regex/Pattern.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+     307: astore_3
+     308: bipush        34
+     310: anewarray     #24                 // class java/lang/String
+     313: dup
+     314: iconst_0
+     315: ldc_w         #619                // String 我的
+     318: aastore
+     319: dup
+     320: iconst_1
+     321: ldc_w         #621                // String 你的
+     324: aastore
+     325: dup
+     326: iconst_2
+     327: ldc_w         #623                // String 我喝
+     330: aastore
+     331: dup
+     332: iconst_3
+     333: ldc_w         #625                // String 你喝
+     336: aastore
+     337: dup
+     338: iconst_4
+     339: ldc_w         #627                // String 我爱
+     342: aastore
+     343: dup
+     344: iconst_5
+     345: ldc_w         #629                // String 我喜
+     348: aastore
+     349: dup
+     350: bipush        6
+     352: ldc_w         #631                // String 我更
+     355: aastore
+     356: dup
+     357: bipush        7
+     359: ldc_w         #633                // String 更喜
+     362: aastore
+     363: dup
+     364: bipush        8
+     366: ldc_w         #635                // String 喜欢
+     369: aastore
+     370: dup
+     371: bipush        9
+     373: ldc_w         #637                // String 好什
+     376: aastore
+     377: dup
+     378: bipush        10
+     380: ldc_w         #639                // String 的偏
+     383: aastore
+     384: dup
+     385: bipush        11
+     387: ldc_w         #641                // String 偏好
+     390: aastore
+     391: dup
+     392: bipush        12
+     394: ldc_w         #643                // String 现在
+     397: aastore
+     398: dup
+     399: bipush        13
+     401: ldc_w         #645                // String 记忆
+     404: aastore
+     405: dup
+     406: bipush        14
+     408: ldc_w         #647                // String 说过
+     411: aastore
+     412: dup
+     413: bipush        15
+     415: ldc_w         #649                // String 提过
+     418: aastore
+     419: dup
+     420: bipush        16
+     422: ldc_w         #651                // String 知道
+     425: aastore
+     426: dup
+     427: bipush        17
+     429: ldc_w         #653                // String 还有
+     432: aastore
+     433: dup
+     434: bipush        18
+     436: ldc_w         #655                // String 什么
+     439: aastore
+     440: dup
+     441: bipush        19
+     443: ldc_w         #657                // String 记得
+     446: aastore
+     447: dup
+     448: bipush        20
+     450: ldc_w         #659                // String 告诉
+     453: aastore
+     454: dup
+     455: bipush        21
+     457: ldc_w         #661                // String 昨天
+     460: aastore
+     461: dup
+     462: bipush        22
+     464: ldc_w         #663                // String 今天
+     467: aastore
+     468: dup
+     469: bipush        23
+     471: ldc_w         #665                // String 之前
+     474: aastore
+     475: dup
+     476: bipush        24
+     478: ldc_w         #667                // String 曾经
+     481: aastore
+     482: dup
+     483: bipush        25
+     485: ldc_w         #669                // String 一下
+     488: aastore
+     489: dup
+     490: bipush        26
+     492: ldc_w         #671                // String 那个
+     495: aastore
+     496: dup
+     497: bipush        27
+     499: ldc_w         #673                // String 这个
+     502: aastore
+     503: dup
+     504: bipush        28
+     506: ldc_w         #675                // String 我们
+     509: aastore
+     510: dup
+     511: bipush        29
+     513: ldc_w         #677                // String 你说
+     516: aastore
+     517: dup
+     518: bipush        30
+     520: ldc_w         #679                // String 我说
+     523: aastore
+     524: dup
+     525: bipush        31
+     527: ldc_w         #681                // String 过的
+     530: aastore
+     531: dup
+     532: bipush        32
+     534: ldc_w         #683                // String 的是
+     537: aastore
+     538: dup
+     539: bipush        33
+     541: ldc_w         #685                // String 请问
+     544: aastore
+     545: invokestatic  #687                // InterfaceMethod java/util/Set.of:([Ljava/lang/Object;)Ljava/util/Set;
+     548: astore        4
+     550: aload_3
+     551: invokevirtual #595                // Method java/util/regex/Matcher.find:()Z
+     554: ifeq          621
+     557: aload_3
+     558: invokevirtual #600                // Method java/util/regex/Matcher.group:()Ljava/lang/String;
+     561: astore        5
+     563: iconst_0
+     564: istore        6
+     566: iload         6
+     568: iconst_1
+     569: iadd
+     570: aload         5
+     572: invokevirtual #510                // Method java/lang/String.length:()I
+     575: if_icmpge     618
+     578: aload         5
+     580: iload         6
+     582: iload         6
+     584: iconst_2
+     585: iadd
+     586: invokevirtual #690                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     589: astore        7
+     591: aload         4
+     593: aload         7
+     595: invokeinterface #159,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     600: ifne          612
+     603: aload_1
+     604: aload         7
+     606: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     611: pop
+     612: iinc          6, 1
+     615: goto          566
+     618: goto          550
+     621: aload_0
+     622: ldc_w         #693                // String (?s).*(爱喝|喝什么|喝啥|饮料|饮品|喜欢喝).*
+     625: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     628: ifeq          641
+     631: aload_1
+     632: ldc_w         #572                // String 喝
+     635: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     640: pop
+     641: aload_0
+     642: ldc_w         #695                // String (?s).*(爱吃|吃什么|吃啥|喜欢吃|食物).*
+     645: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     648: ifeq          661
+     651: aload_1
+     652: ldc_w         #697                // String 吃
+     655: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     660: pop
+     661: aload_0
+     662: ldc_w         #699                // String (?s).*(喜好|偏好|喜欢什么|喜欢啥).*
+     665: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     668: ifeq          681
+     671: aload_1
+     672: ldc_w         #635                // String 喜欢
+     675: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     680: pop
+     681: aload_1
+     682: invokeinterface #701,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+     687: ldc2_w        #702                // long 24l
+     690: invokeinterface #704,  3          // InterfaceMethod java/util/stream/Stream.limit:(J)Ljava/util/stream/Stream;
+     695: invokedynamic #708,  0            // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+     700: invokestatic  #711                // Method java/util/stream/Collectors.toCollection:(Ljava/util/function/Supplier;)Ljava/util/stream/Collector;
+     703: invokeinterface #717,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     708: checkcast     #145                // class java/util/Set
+     711: areturn
+
+  static int score(java.lang.String, java.util.Set<java.lang.String>);
+    Code:
+       0: aload_0
+       1: getstatic     #603                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+       4: invokevirtual #609                // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+       7: astore_2
+       8: aload_1
+       9: invokeinterface #701,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      14: aload_2
+      15: dup
+      16: invokestatic  #322                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      19: pop
+      20: invokedynamic #325,  0            // InvokeDynamic #2:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+      25: invokeinterface #412,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      30: invokeinterface #721,  1          // InterfaceMethod java/util/stream/Stream.count:()J
+      35: l2i
+      36: ireturn
+
+  static long sourceTime(java.lang.Object);
+    Code:
+       0: aload_0
+       1: instanceof    #54                 // class java/util/Date
+       4: ifeq          17
+       7: aload_0
+       8: checkcast     #54                 // class java/util/Date
+      11: astore_1
+      12: aload_1
+      13: invokevirtual #89                 // Method java/util/Date.getTime:()J
+      16: lreturn
+      17: aload_0
+      18: instanceof    #724                // class java/time/LocalDateTime
+      21: ifeq          46
+      24: aload_0
+      25: checkcast     #724                // class java/time/LocalDateTime
+      28: astore_1
+      29: aload_1
+      30: ldc_w         #726                // String Asia/Shanghai
+      33: invokestatic  #728                // Method java/time/ZoneId.of:(Ljava/lang/String;)Ljava/time/ZoneId;
+      36: invokevirtual #733                // Method java/time/LocalDateTime.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+      39: invokevirtual #737                // Method java/time/ZonedDateTime.toInstant:()Ljava/time/Instant;
+      42: invokevirtual #743                // Method java/time/Instant.toEpochMilli:()J
+      45: lreturn
+      46: lconst_0
+      47: lreturn
+
+  static boolean suppressedBy(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+    Code:
+       0: ldc_w         #460                // String *
+       3: aload_1
+       4: ldc_w         #748                // String match_text
+       7: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      15: ifne          44
+      18: aload_2
+      19: aload_1
+      20: ldc_w         #748                // String match_text
+      23: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      28: ldc           #153                // String
+      30: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      33: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+      36: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      39: ifne          44
+      42: iconst_0
+      43: ireturn
+      44: aload_0
+      45: ldc_w         #750                // String record_id
+      48: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      53: ldc           #153                // String
+      55: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      58: astore_3
+      59: aload_1
+      60: aload_3
+      61: ldc_w         #478                // String material:
+      64: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+      67: ifeq          76
+      70: ldc_w         #752                // String material_cutoff_id
+      73: goto          79
+      76: ldc_w         #754                // String archive_cutoff_id
+      79: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      84: astore        4
+      86: aload_3
+      87: ldc_w         #478                // String material:
+      90: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+      93: ifne          106
+      96: aload_3
+      97: ldc_w         #466                // String archive:
+     100: invokevirtual #345                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+     103: ifeq          167
+     106: aload         4
+     108: instanceof    #244                // class java/lang/Number
+     111: ifeq          167
+     114: aload         4
+     116: checkcast     #244                // class java/lang/Number
+     119: astore        5
+     121: aload_0
+     122: ldc_w         #756                // String id
+     125: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     130: astore        7
+     132: aload         7
+     134: instanceof    #244                // class java/lang/Number
+     137: ifeq          167
+     140: aload         7
+     142: checkcast     #244                // class java/lang/Number
+     145: astore        6
+     147: aload         6
+     149: invokevirtual #758                // Method java/lang/Number.longValue:()J
+     152: aload         5
+     154: invokevirtual #758                // Method java/lang/Number.longValue:()J
+     157: lcmp
+     158: ifgt          165
+     161: iconst_1
+     162: goto          166
+     165: iconst_0
+     166: ireturn
+     167: aload_1
+     168: ldc_w         #759                // String created_at
+     171: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     176: invokestatic  #761                // Method sourceTime:(Ljava/lang/Object;)J
+     179: aload_0
+     180: ldc_w         #759                // String created_at
+     183: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     188: invokestatic  #761                // Method sourceTime:(Ljava/lang/Object;)J
+     191: lcmp
+     192: iflt          199
+     195: iconst_1
+     196: goto          200
+     199: iconst_0
+     200: ireturn
+
+  static java.lang.String excerpt(java.lang.String, java.util.Set<java.lang.String>, int);
+    Code:
+       0: aload_0
+       1: invokevirtual #510                // Method java/lang/String.length:()I
+       4: iload_2
+       5: if_icmpgt     10
+       8: aload_0
+       9: areturn
+      10: aload_0
+      11: getstatic     #603                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      14: invokevirtual #609                // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      17: astore_3
+      18: aload_1
+      19: invokeinterface #701,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      24: aload_3
+      25: dup
+      26: invokestatic  #322                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      29: pop
+      30: invokedynamic #765,  0            // InvokeDynamic #6:applyAsInt:(Ljava/lang/String;)Ljava/util/function/ToIntFunction;
+      35: invokeinterface #769,  2          // InterfaceMethod java/util/stream/Stream.mapToInt:(Ljava/util/function/ToIntFunction;)Ljava/util/stream/IntStream;
+      40: invokedynamic #773,  0            // InvokeDynamic #7:test:()Ljava/util/function/IntPredicate;
+      45: invokeinterface #776,  2          // InterfaceMethod java/util/stream/IntStream.filter:(Ljava/util/function/IntPredicate;)Ljava/util/stream/IntStream;
+      50: invokeinterface #781,  1          // InterfaceMethod java/util/stream/IntStream.min:()Ljava/util/OptionalInt;
+      55: iconst_0
+      56: invokevirtual #785                // Method java/util/OptionalInt.orElse:(I)I
+      59: istore        4
+      61: iconst_0
+      62: iload         4
+      64: bipush        120
+      66: isub
+      67: invokestatic  #791                // Method java/lang/Math.max:(II)I
+      70: istore        5
+      72: aload_0
+      73: invokevirtual #510                // Method java/lang/String.length:()I
+      76: iload         5
+      78: iload_2
+      79: iadd
+      80: invokestatic  #796                // Method java/lang/Math.min:(II)I
+      83: istore        6
+      85: iload         5
+      87: ifle          105
+      90: aload_0
+      91: iload         5
+      93: invokevirtual #798                // Method java/lang/String.charAt:(I)C
+      96: invokestatic  #802                // Method java/lang/Character.isLowSurrogate:(C)Z
+      99: ifeq          105
+     102: iinc          5, -1
+     105: iload         6
+     107: aload_0
+     108: invokevirtual #510                // Method java/lang/String.length:()I
+     111: if_icmpge     131
+     114: aload_0
+     115: iload         6
+     117: iconst_1
+     118: isub
+     119: invokevirtual #798                // Method java/lang/String.charAt:(I)C
+     122: invokestatic  #808                // Method java/lang/Character.isHighSurrogate:(C)Z
+     125: ifeq          131
+     128: iinc          6, -1
+     131: iload         5
+     133: ifle          142
+     136: ldc_w         #811                // String …
+     139: goto          144
+     142: ldc           #153                // String
+     144: aload_0
+     145: iload         5
+     147: iload         6
+     149: invokevirtual #690                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     152: iload         6
+     154: aload_0
+     155: invokevirtual #510                // Method java/lang/String.length:()I
+     158: if_icmpge     167
+     161: ldc_w         #811                // String …
+     164: goto          169
+     167: ldc           #153                // String
+     169: invokedynamic #813,  0            // InvokeDynamic #8:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     174: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> search(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: ldc_w         #816                // String related
+       6: iconst_1
+       7: invokestatic  #818                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      10: invokevirtual #820                // Method search:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/lang/String;Ljava/lang/String;ILjava/util/List;)Ljava/util/Map;
+      13: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> search(xiaozhi.modules.personmemory.PersonTurnDTO, java.lang.String, java.lang.String, int, java.util.List<java.lang.String>);
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+       4: aload_1
+       5: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+       8: invokevirtual #33                 // Method xiaozhi/modules/useridentity/service/AccountIdentityStateService.lock:(Ljava/lang/Long;)Ljava/util/Map;
+      11: pop
+      12: aload_0
+      13: getfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      16: aload_1
+      17: iconst_0
+      18: invokevirtual #179                // Method xiaozhi/modules/personmemory/PersonMemoryService.validateActor:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Z)V
+      21: aload_2
+      22: ifnull        42
+      25: aload_2
+      26: invokevirtual #23                 // Method java/lang/String.isBlank:()Z
+      29: ifne          42
+      32: aload_2
+      33: invokevirtual #510                // Method java/lang/String.length:()I
+      36: sipush        2048
+      39: if_icmple     53
+      42: new           #132                // class xiaozhi/common/exception/RenException
+      45: dup
+      46: ldc_w         #823                // String 检索内容无效
+      49: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      52: athrow
+      53: ldc_w         #816                // String related
+      56: ldc_w         #825                // String facts
+      59: invokestatic  #144                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+      62: aload_3
+      63: invokeinterface #159,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      68: ifeq          102
+      71: iload         4
+      73: iconst_1
+      74: if_icmplt     102
+      77: iload         4
+      79: sipush        1000
+      82: if_icmpgt     102
+      85: aload         5
+      87: ifnull        102
+      90: aload         5
+      92: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+      97: bipush        8
+      99: if_icmple     113
+     102: new           #132                // class xiaozhi/common/exception/RenException
+     105: dup
+     106: ldc_w         #827                // String 查询范围无效
+     109: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+     112: athrow
+     113: aload         5
+     115: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     120: ifne          131
+     123: aload_0
+     124: aload_1
+     125: aload         5
+     127: invokevirtual #829                // Method readRecords:(Lxiaozhi/modules/personmemory/PersonTurnDTO;Ljava/util/List;)Ljava/util/Map;
+     130: areturn
+     131: aload_2
+     132: invokestatic  #833                // Method terms:(Ljava/lang/String;)Ljava/util/Set;
+     135: astore        6
+     137: new           #54                 // class java/util/Date
+     140: dup
+     141: invokestatic  #837                // Method java/lang/System.currentTimeMillis:()J
+     144: ldc2_w        #842                // long 86400000l
+     147: lsub
+     148: invokespecial #844                // Method java/util/Date."<init>":(J)V
+     151: astore        7
+     153: aload_0
+     154: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     157: ldc_w         #847                // String SELECT id,turn_id,content,created_at FROM ai_agent_chat_history WHERE account_id=? AND person_id=? AND agent_id=? AND default_generation=? AND recall_allowed=TRUE AND chat_type=1 AND created_at>=? AND (turn_id IS NULL OR turn_id<>?) ORDER BY created_at DESC,id DESC LIMIT 1000
+     160: bipush        6
+     162: anewarray     #11                 // class java/lang/Object
+     165: dup
+     166: iconst_0
+     167: aload_1
+     168: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     171: aastore
+     172: dup
+     173: iconst_1
+     174: aload_1
+     175: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     178: aastore
+     179: dup
+     180: iconst_2
+     181: aload_1
+     182: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     185: aastore
+     186: dup
+     187: iconst_3
+     188: aload_1
+     189: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     192: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     195: aastore
+     196: dup
+     197: iconst_4
+     198: aload         7
+     200: aastore
+     201: dup
+     202: iconst_5
+     203: aload_1
+     204: invokevirtual #123                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     207: aastore
+     208: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     211: astore        8
+     213: aload         8
+     215: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     220: astore        9
+     222: aload         9
+     224: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     229: ifeq          276
+     232: aload         9
+     234: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     239: checkcast     #213                // class java/util/Map
+     242: astore        10
+     244: aload         10
+     246: ldc_w         #750                // String record_id
+     249: aload         10
+     251: ldc_w         #756                // String id
+     254: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     259: invokestatic  #849                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     262: invokedynamic #852,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     267: invokeinterface #853,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     272: pop
+     273: goto          222
+     276: aload_0
+     277: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     280: ldc_w         #854                // String SELECT id,turn_id,kind,content,created_at FROM ai_person_material WHERE account_id=? AND user_id=? AND agent_id=? AND generation=? AND recall_allowed=TRUE AND (kind=\'explicit_fact\' OR kind=\'dialogue\' AND turn_id<>?) ORDER BY id DESC LIMIT 1000
+     283: iconst_5
+     284: anewarray     #11                 // class java/lang/Object
+     287: dup
+     288: iconst_0
+     289: aload_1
+     290: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     293: aastore
+     294: dup
+     295: iconst_1
+     296: aload_1
+     297: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     300: aastore
+     301: dup
+     302: iconst_2
+     303: aload_1
+     304: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     307: aastore
+     308: dup
+     309: iconst_3
+     310: aload_1
+     311: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     314: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     317: aastore
+     318: dup
+     319: iconst_4
+     320: aload_1
+     321: invokevirtual #123                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getTurnId:()Ljava/lang/String;
+     324: aastore
+     325: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     328: astore        9
+     330: aload         9
+     332: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     337: astore        10
+     339: aload         10
+     341: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     346: ifeq          403
+     349: aload         10
+     351: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     356: checkcast     #213                // class java/util/Map
+     359: astore        11
+     361: aload         11
+     363: ldc_w         #750                // String record_id
+     366: aload         11
+     368: ldc_w         #756                // String id
+     371: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     376: invokestatic  #849                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     379: invokedynamic #856,  0            // InvokeDynamic #10:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     384: invokeinterface #853,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     389: pop
+     390: aload         8
+     392: aload         11
+     394: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     399: pop
+     400: goto          339
+     403: aload_0
+     404: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     407: ldc_w         #857                // String SELECT id,action,match_text,replacement,state,created_at,material_cutoff_id,archive_cutoff_id FROM ai_memory_override WHERE account_id=? AND user_id=? AND generation=?
+     410: iconst_3
+     411: anewarray     #11                 // class java/lang/Object
+     414: dup
+     415: iconst_0
+     416: aload_1
+     417: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     420: aastore
+     421: dup
+     422: iconst_1
+     423: aload_1
+     424: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     427: aastore
+     428: dup
+     429: iconst_2
+     430: aload_1
+     431: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     434: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     437: aastore
+     438: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     441: astore        10
+     443: aload         10
+     445: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     450: astore        11
+     452: aload         11
+     454: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     459: ifeq          664
+     462: aload         11
+     464: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     469: checkcast     #213                // class java/util/Map
+     472: astore        12
+     474: ldc_w         #277                // String correct
+     477: aload         12
+     479: ldc_w         #859                // String action
+     482: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     487: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     490: ifeq          661
+     493: ldc_w         #861                // String superseded
+     496: aload         12
+     498: ldc_w         #863                // String state
+     501: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     506: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     509: ifne          661
+     512: aload         12
+     514: ldc_w         #865                // String replacement
+     517: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     522: ifnull        661
+     525: new           #867                // class java/util/HashMap
+     528: dup
+     529: invokespecial #869                // Method java/util/HashMap."<init>":()V
+     532: astore        13
+     534: aload         13
+     536: ldc           #240                // String content
+     538: aload         12
+     540: ldc_w         #865                // String replacement
+     543: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     548: invokevirtual #870                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     551: pop
+     552: aload         13
+     554: ldc_w         #759                // String created_at
+     557: aload         12
+     559: ldc_w         #759                // String created_at
+     562: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     567: invokevirtual #870                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     570: pop
+     571: aload         13
+     573: ldc_w         #750                // String record_id
+     576: aload         12
+     578: ldc_w         #756                // String id
+     581: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     586: invokestatic  #849                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     589: invokedynamic #871,  0            // InvokeDynamic #11:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     594: invokevirtual #870                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     597: pop
+     598: aload         13
+     600: ldc_w         #872                // String authoritative
+     603: iconst_1
+     604: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     607: invokevirtual #870                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     610: pop
+     611: aload         13
+     613: ldc_w         #879                // String search_text
+     616: aload         12
+     618: ldc_w         #748                // String match_text
+     621: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     626: invokestatic  #849                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     629: aload         12
+     631: ldc_w         #865                // String replacement
+     634: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     639: invokestatic  #849                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     642: invokedynamic #881,  0            // InvokeDynamic #12:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     647: invokevirtual #870                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     650: pop
+     651: aload         8
+     653: aload         13
+     655: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     660: pop
+     661: goto          452
+     664: aload         8
+     666: invokedynamic #883,  0            // InvokeDynamic #13:applyAsLong:()Ljava/util/function/ToLongFunction;
+     671: invokestatic  #887                // InterfaceMethod java/util/Comparator.comparingLong:(Ljava/util/function/ToLongFunction;)Ljava/util/Comparator;
+     674: invokeinterface #893,  1          // InterfaceMethod java/util/Comparator.reversed:()Ljava/util/Comparator;
+     679: invokeinterface #897,  2          // InterfaceMethod java/util/List.sort:(Ljava/util/Comparator;)V
+     684: aload         8
+     686: aload         6
+     688: invokedynamic #901,  0            // InvokeDynamic #14:applyAsInt:(Ljava/util/Set;)Ljava/util/function/ToIntFunction;
+     693: invokestatic  #904                // InterfaceMethod java/util/Comparator.comparingInt:(Ljava/util/function/ToIntFunction;)Ljava/util/Comparator;
+     696: invokeinterface #893,  1          // InterfaceMethod java/util/Comparator.reversed:()Ljava/util/Comparator;
+     701: invokeinterface #897,  2          // InterfaceMethod java/util/List.sort:(Ljava/util/Comparator;)V
+     706: aload_2
+     707: ldc_w         #908                // String (?s).*(上下文|记忆库|说过什么).*
+     710: invokevirtual #340                // Method java/lang/String.strip:()Ljava/lang/String;
+     713: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     716: istore        11
+     718: new           #189                // class java/util/ArrayList
+     721: dup
+     722: invokespecial #191                // Method java/util/ArrayList."<init>":()V
+     725: astore        12
+     727: new           #910                // class java/util/HashSet
+     730: dup
+     731: invokespecial #912                // Method java/util/HashSet."<init>":()V
+     734: astore        13
+     736: aload         8
+     738: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     743: astore        14
+     745: aload         14
+     747: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     752: ifeq          1161
+     755: aload         14
+     757: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     762: checkcast     #213                // class java/util/Map
+     765: astore        15
+     767: aload         15
+     769: ldc           #240                // String content
+     771: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     776: ldc           #153                // String
+     778: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     781: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+     784: astore        16
+     786: ldc_w         #825                // String facts
+     789: aload_3
+     790: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     793: ifeq          837
+     796: getstatic     #913                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+     799: aload         15
+     801: ldc_w         #872                // String authoritative
+     804: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     809: invokevirtual #917                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+     812: ifne          837
+     815: ldc_w         #918                // String explicit_fact
+     818: aload         15
+     820: ldc_w         #920                // String kind
+     823: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     828: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     831: ifne          837
+     834: goto          745
+     837: aload         16
+     839: getstatic     #913                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+     842: aload         15
+     844: ldc_w         #872                // String authoritative
+     847: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     852: invokevirtual #917                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+     855: ifeq          862
+     858: iconst_1
+     859: goto          863
+     862: iconst_4
+     863: invokestatic  #284                // Method factualUser:(Ljava/lang/String;I)Z
+     866: ifeq          745
+     869: aload         16
+     871: invokevirtual #510                // Method java/lang/String.length:()I
+     874: sipush        1024
+     877: if_icmpgt     745
+     880: aload         15
+     882: ldc_w         #879                // String search_text
+     885: aload         16
+     887: invokeinterface #922,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     892: ldc           #153                // String
+     894: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     897: aload         6
+     899: invokestatic  #925                // Method score:(Ljava/lang/String;Ljava/util/Set;)I
+     902: iconst_1
+     903: if_icmplt     916
+     906: aload         6
+     908: invokeinterface #929,  1          // InterfaceMethod java/util/Set.isEmpty:()Z
+     913: ifeq          934
+     916: iload         11
+     918: ifne          934
+     921: ldc_w         #825                // String facts
+     924: aload_3
+     925: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     928: ifne          934
+     931: goto          745
+     934: getstatic     #913                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+     937: aload         15
+     939: ldc_w         #872                // String authoritative
+     942: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     947: invokevirtual #917                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+     950: ifne          980
+     953: aload         10
+     955: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     960: aload         15
+     962: aload         16
+     964: invokedynamic #930,  0            // InvokeDynamic #15:test:(Ljava/util/Map;Ljava/lang/String;)Ljava/util/function/Predicate;
+     969: invokeinterface #329,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+     974: ifeq          980
+     977: goto          745
+     980: aload         13
+     982: aload         16
+     984: invokeinterface #613,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     989: ifne          995
+     992: goto          745
+     995: new           #430                // class java/util/LinkedHashMap
+     998: dup
+     999: invokespecial #933                // Method java/util/LinkedHashMap."<init>":()V
+    1002: astore        17
+    1004: aload         17
+    1006: ldc_w         #750                // String record_id
+    1009: aload         15
+    1011: ldc_w         #750                // String record_id
+    1014: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1019: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1022: pop
+    1023: aload         17
+    1025: ldc_w         #424                // String text
+    1028: aload         16
+    1030: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1033: pop
+    1034: aload         17
+    1036: ldc_w         #420                // String version
+    1039: aload         16
+    1041: invokestatic  #455                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+    1044: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1047: pop
+    1048: aload         17
+    1050: ldc_w         #934                // String owner
+    1053: aload_1
+    1054: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+    1057: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1060: pop
+    1061: aload         17
+    1063: ldc_w         #936                // String source
+    1066: getstatic     #913                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+    1069: aload         15
+    1071: ldc_w         #872                // String authoritative
+    1074: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1079: invokevirtual #917                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+    1082: ifeq          1091
+    1085: ldc_w         #938                // String local_override
+    1088: goto          1119
+    1091: ldc_w         #918                // String explicit_fact
+    1094: aload         15
+    1096: ldc_w         #920                // String kind
+    1099: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1104: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    1107: ifeq          1116
+    1110: ldc_w         #918                // String explicit_fact
+    1113: goto          1119
+    1116: ldc_w         #940                // String user_archive_statement
+    1119: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1122: pop
+    1123: aload         17
+    1125: ldc_w         #759                // String created_at
+    1128: aload         15
+    1130: ldc_w         #759                // String created_at
+    1133: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1138: invokestatic  #761                // Method sourceTime:(Ljava/lang/Object;)J
+    1141: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+    1144: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1147: pop
+    1148: aload         12
+    1150: aload         17
+    1152: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+    1157: pop
+    1158: goto          745
+    1161: aload         10
+    1163: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+    1168: invokedynamic #942,  0            // InvokeDynamic #16:test:()Ljava/util/function/Predicate;
+    1173: invokeinterface #329,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+    1178: istore        14
+    1180: aload         12
+    1182: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+    1187: istore        15
+    1189: iload         15
+    1191: iload         4
+    1193: iconst_1
+    1194: isub
+    1195: bipush        8
+    1197: imul
+    1198: invokestatic  #796                // Method java/lang/Math.min:(II)I
+    1201: istore        16
+    1203: aload         8
+    1205: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+    1210: sipush        1000
+    1213: if_icmplt     1220
+    1216: iconst_1
+    1217: goto          1221
+    1220: iconst_0
+    1221: istore        17
+    1223: aload         12
+    1225: iload         16
+    1227: iload         15
+    1229: iload         16
+    1231: bipush        8
+    1233: iadd
+    1234: invokestatic  #796                // Method java/lang/Math.min:(II)I
+    1237: invokeinterface #945,  3          // InterfaceMethod java/util/List.subList:(II)Ljava/util/List;
+    1242: astore        18
+    1244: ldc_w         #949                // String ；
+    1247: aload         18
+    1249: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+    1254: invokedynamic #951,  0            // InvokeDynamic #17:apply:()Ljava/util/function/Function;
+    1259: invokeinterface #955,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+    1264: invokeinterface #416,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+    1269: invokestatic  #959                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+    1272: astore        19
+    1274: new           #430                // class java/util/LinkedHashMap
+    1277: dup
+    1278: invokespecial #933                // Method java/util/LinkedHashMap."<init>":()V
+    1281: astore        20
+    1283: aload         20
+    1285: ldc_w         #424                // String text
+    1288: aload         19
+    1290: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1293: pop
+    1294: aload         20
+    1296: ldc_w         #409                // String items
+    1299: aload         18
+    1301: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1304: pop
+    1305: aload         20
+    1307: ldc_w         #963                // String reliable
+    1310: aload         18
+    1312: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+    1317: ifne          1324
+    1320: iconst_1
+    1321: goto          1325
+    1324: iconst_0
+    1325: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    1328: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1331: pop
+    1332: aload         20
+    1334: ldc_w         #965                // String status
+    1337: aload         18
+    1339: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+    1344: ifeq          1364
+    1347: iload         14
+    1349: ifeq          1358
+    1352: ldc_w         #967                // String suppressed
+    1355: goto          1367
+    1358: ldc_w         #969                // String not_found
+    1361: goto          1367
+    1364: ldc_w         #971                // String ok
+    1367: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1370: pop
+    1371: aload         20
+    1373: ldc_w         #936                // String source
+    1376: ldc_w         #973                // String local
+    1379: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1382: pop
+    1383: aload         20
+    1385: ldc_w         #975                // String scope
+    1388: aload_3
+    1389: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1392: pop
+    1393: aload         20
+    1395: ldc_w         #977                // String page
+    1398: iload         4
+    1400: invokestatic  #274                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1403: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1406: pop
+    1407: aload         20
+    1409: ldc_w         #979                // String truncated
+    1412: iload         17
+    1414: ifne          1427
+    1417: iload         16
+    1419: bipush        8
+    1421: iadd
+    1422: iload         15
+    1424: if_icmpge     1431
+    1427: iconst_1
+    1428: goto          1432
+    1431: iconst_0
+    1432: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    1435: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1438: pop
+    1439: aload         20
+    1441: ldc_w         #981                // String total_complete
+    1444: iconst_0
+    1445: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    1448: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1451: pop
+    1452: aload         20
+    1454: ldc_w         #983                // String returned_count
+    1457: aload         18
+    1459: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+    1464: invokestatic  #274                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1467: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1470: pop
+    1471: aload         20
+    1473: ldc_w         #985                // String has_more
+    1476: iload         16
+    1478: bipush        8
+    1480: iadd
+    1481: iload         15
+    1483: if_icmpge     1490
+    1486: iconst_1
+    1487: goto          1491
+    1490: iconst_0
+    1491: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    1494: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1497: pop
+    1498: aload         20
+    1500: ldc_w         #987                // String local_matched_count
+    1503: iload         15
+    1505: invokestatic  #274                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    1508: invokevirtual #440                // Method java/util/LinkedHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1511: pop
+    1512: aload         20
+    1514: areturn
+
+  private java.util.Map<java.lang.String, java.lang.Object> readRecords(xiaozhi.modules.personmemory.PersonTurnDTO, java.util.List<java.lang.String>);
+    Code:
+       0: new           #189                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #191                // Method java/util/ArrayList."<init>":()V
+       7: astore_3
+       8: new           #189                // class java/util/ArrayList
+      11: dup
+      12: invokespecial #191                // Method java/util/ArrayList."<init>":()V
+      15: astore        4
+      17: aload_2
+      18: invokeinterface #200,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      23: astore        5
+      25: aload         5
+      27: invokeinterface #204,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          503
+      35: aload         5
+      37: invokeinterface #209,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      42: checkcast     #24                 // class java/lang/String
+      45: astore        6
+      47: aload         6
+      49: ifnull        63
+      52: aload         6
+      54: ldc_w         #989                // String (?:material|archive|override):[A-Za-z0-9_-]{1,128}
+      57: invokevirtual #128                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+      60: ifne          74
+      63: new           #132                // class xiaozhi/common/exception/RenException
+      66: dup
+      67: ldc_w         #991                // String 记录编号无效
+      70: invokespecial #136                // Method xiaozhi/common/exception/RenException."<init>":(Ljava/lang/String;)V
+      73: athrow
+      74: aload         6
+      76: ldc_w         #382                // String :
+      79: iconst_2
+      80: invokevirtual #384                // Method java/lang/String.split:(Ljava/lang/String;I)[Ljava/lang/String;
+      83: astore        7
+      85: aload         7
+      87: iconst_0
+      88: aaload
+      89: astore        9
+      91: iconst_m1
+      92: istore        10
+      94: aload         9
+      96: invokevirtual #444                // Method java/lang/String.hashCode:()I
+      99: lookupswitch  { // 2
+            -748101438: 141
+             299066663: 124
+               default: 155
+          }
+     124: aload         9
+     126: ldc_w         #390                // String material
+     129: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     132: ifeq          155
+     135: iconst_0
+     136: istore        10
+     138: goto          155
+     141: aload         9
+     143: ldc_w         #388                // String archive
+     146: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     149: ifeq          155
+     152: iconst_1
+     153: istore        10
+     155: iload         10
+     157: lookupswitch  { // 2
+                     0: 184
+                     1: 190
+               default: 196
+          }
+     184: ldc_w         #993                // String SELECT content,created_at,recall_allowed FROM ai_person_material WHERE id=? AND account_id=? AND user_id=? AND generation=? AND agent_id=?
+     187: goto          199
+     190: ldc_w         #995                // String SELECT content,created_at,recall_allowed FROM ai_agent_chat_history WHERE id=? AND account_id=? AND person_id=? AND default_generation=? AND agent_id=? AND chat_type=1
+     193: goto          199
+     196: ldc_w         #997                // String SELECT replacement AS content,created_at,(state<>\'superseded\' AND action=\'correct\') AS recall_allowed FROM ai_memory_override WHERE id=? AND account_id=? AND user_id=? AND generation=?
+     199: astore        8
+     201: aload         7
+     203: iconst_0
+     204: aaload
+     205: ldc_w         #392                // String override
+     208: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     211: ifeq          252
+     214: iconst_4
+     215: anewarray     #11                 // class java/lang/Object
+     218: dup
+     219: iconst_0
+     220: aload         7
+     222: iconst_1
+     223: aaload
+     224: aastore
+     225: dup
+     226: iconst_1
+     227: aload_1
+     228: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     231: aastore
+     232: dup
+     233: iconst_2
+     234: aload_1
+     235: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     238: aastore
+     239: dup
+     240: iconst_3
+     241: aload_1
+     242: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     245: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     248: aastore
+     249: goto          294
+     252: iconst_5
+     253: anewarray     #11                 // class java/lang/Object
+     256: dup
+     257: iconst_0
+     258: aload         7
+     260: iconst_1
+     261: aaload
+     262: aastore
+     263: dup
+     264: iconst_1
+     265: aload_1
+     266: invokevirtual #56                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAccountId:()Ljava/lang/Long;
+     269: aastore
+     270: dup
+     271: iconst_2
+     272: aload_1
+     273: invokevirtual #62                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getPersonId:()Ljava/lang/String;
+     276: aastore
+     277: dup
+     278: iconst_3
+     279: aload_1
+     280: invokevirtual #66                 // Method xiaozhi/modules/personmemory/PersonTurnDTO.getGeneration:()J
+     283: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     286: aastore
+     287: dup
+     288: iconst_4
+     289: aload_1
+     290: invokevirtual #117                // Method xiaozhi/modules/personmemory/PersonTurnDTO.getAgentId:()Ljava/lang/String;
+     293: aastore
+     294: astore        9
+     296: aload_0
+     297: getfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+     300: aload         8
+     302: aload         9
+     304: invokevirtual #41                 // Method org/springframework/jdbc/core/JdbcTemplate.queryForList:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/List;
+     307: astore        10
+     309: iconst_0
+     310: istore        11
+     312: aload         10
+     314: invokeinterface #271,  1          // InterfaceMethod java/util/List.size:()I
+     319: iconst_1
+     320: if_icmpne     476
+     323: aload         10
+     325: iconst_0
+     326: invokeinterface #79,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     331: checkcast     #213                // class java/util/Map
+     334: astore        12
+     336: aload         12
+     338: ldc           #240                // String content
+     340: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     345: ldc           #153                // String
+     347: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+     350: invokestatic  #281                // Method normalizeFact:(Ljava/lang/String;)Ljava/lang/String;
+     353: astore        13
+     355: aload         12
+     357: ldc_w         #999                // String recall_allowed
+     360: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     365: astore        14
+     367: getstatic     #913                // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+     370: aload         14
+     372: invokevirtual #917                // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+     375: ifne          402
+     378: aload         14
+     380: instanceof    #244                // class java/lang/Number
+     383: ifeq          415
+     386: aload         14
+     388: checkcast     #244                // class java/lang/Number
+     391: astore        15
+     393: aload         15
+     395: invokevirtual #246                // Method java/lang/Number.intValue:()I
+     398: iconst_1
+     399: if_icmpne     415
+     402: aload         13
+     404: iconst_1
+     405: invokestatic  #284                // Method factualUser:(Ljava/lang/String;I)Z
+     408: ifeq          415
+     411: iconst_1
+     412: goto          416
+     415: iconst_0
+     416: istore        11
+     418: iload         11
+     420: ifeq          476
+     423: aload_3
+     424: ldc_w         #750                // String record_id
+     427: aload         6
+     429: ldc_w         #424                // String text
+     432: aload         13
+     434: ldc_w         #420                // String version
+     437: aload         13
+     439: invokestatic  #455                // Method xiaozhi/modules/personmemory/MemoryGatewayClient.sha:(Ljava/lang/String;)Ljava/lang/String;
+     442: ldc_w         #936                // String source
+     445: ldc_w         #1001               // String record_readback
+     448: ldc_w         #759                // String created_at
+     451: aload         12
+     453: ldc_w         #759                // String created_at
+     456: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     461: invokestatic  #761                // Method sourceTime:(Ljava/lang/Object;)J
+     464: invokestatic  #70                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     467: invokestatic  #1003               // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     470: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     475: pop
+     476: aload         4
+     478: ldc_w         #750                // String record_id
+     481: aload         6
+     483: ldc_w         #1006               // String visible
+     486: iload         11
+     488: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     491: invokestatic  #261                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     494: invokeinterface #264,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     499: pop
+     500: goto          25
+     503: ldc_w         #409                // String items
+     506: aload_3
+     507: ldc_w         #424                // String text
+     510: ldc_w         #949                // String ；
+     513: aload_3
+     514: invokeinterface #318,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     519: invokedynamic #1008,  0           // InvokeDynamic #18:apply:()Ljava/util/function/Function;
+     524: invokeinterface #955,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     529: invokeinterface #416,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     534: invokestatic  #959                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+     537: ldc_w         #965                // String status
+     540: aload_3
+     541: invokeinterface #45,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     546: ifeq          555
+     549: ldc_w         #969                // String not_found
+     552: goto          558
+     555: ldc_w         #971                // String ok
+     558: ldc_w         #963                // String reliable
+     561: iconst_1
+     562: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     565: ldc_w         #936                // String source
+     568: ldc_w         #973                // String local
+     571: ldc_w         #975                // String scope
+     574: ldc_w         #1009               // String records
+     577: ldc_w         #1011               // String checked_records
+     580: aload         4
+     582: ldc_w         #981                // String total_complete
+     585: iconst_0
+     586: invokestatic  #874                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     589: invokestatic  #1013               // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     592: areturn
+
+  public xiaozhi.modules.personmemory.RecentArchiveService(org.springframework.jdbc.core.JdbcTemplate, xiaozhi.modules.personmemory.PersonMemoryService, xiaozhi.modules.useridentity.service.AccountIdentityStateService);
+    Code:
+       0: aload_0
+       1: invokespecial #1016               // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #1                  // Field jdbc:Lorg/springframework/jdbc/core/JdbcTemplate;
+       9: aload_0
+      10: aload_2
+      11: putfield      #163                // Field memory:Lxiaozhi/modules/personmemory/PersonMemoryService;
+      14: aload_0
+      15: aload_3
+      16: putfield      #29                 // Field identities:Lxiaozhi/modules/useridentity/service/AccountIdentityStateService;
+      19: return
+
+  private static java.lang.String lambda$readRecords$8(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc_w         #424                // String text
+       4: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: ldc           #153                // String
+      11: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      14: areturn
+
+  private static java.lang.String lambda$search$7(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc_w         #424                // String text
+       4: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: ldc           #153                // String
+      11: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      14: areturn
+
+  private static boolean lambda$search$6(java.util.Map);
+    Code:
+       0: ldc_w         #1017               // String complete
+       3: aload_0
+       4: ldc_w         #863                // String state
+       7: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokevirtual #279                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      15: ifne          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  private static boolean lambda$search$5(java.util.Map, java.lang.String, java.util.Map);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: aload_1
+       3: invokestatic  #1019               // Method suppressedBy:(Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)Z
+       6: ireturn
+
+  private static int lambda$search$4(java.util.Set, java.util.Map);
+    Code:
+       0: aload_1
+       1: ldc_w         #879                // String search_text
+       4: aload_1
+       5: ldc           #240                // String content
+       7: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: invokeinterface #922,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      17: ldc           #153                // String
+      19: invokestatic  #155                // Method java/util/Objects.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+      22: aload_0
+      23: invokestatic  #925                // Method score:(Ljava/lang/String;Ljava/util/Set;)I
+      26: ireturn
+
+  private static long lambda$search$3(java.util.Map);
+    Code:
+       0: aload_0
+       1: ldc_w         #759                // String created_at
+       4: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: invokestatic  #761                // Method sourceTime:(Ljava/lang/Object;)J
+      12: lreturn
+
+  private static boolean lambda$excerpt$2(int);
+    Code:
+       0: iload_0
+       1: iflt          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  private static boolean lambda$overrideRecord$1(java.lang.String, java.util.Map);
+    Code:
+       0: aload_1
+       1: ldc_w         #424                // String text
+       4: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: aload_0
+      10: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      13: ireturn
+
+  private static boolean lambda$overrideRecord$0(java.lang.String, java.util.Map);
+    Code:
+       0: aload_1
+       1: ldc_w         #750                // String record_id
+       4: invokeinterface #226,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: aload_0
+      10: invokestatic  #105                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      13: ireturn
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SKU 产品事实核心"
+  short_description: "分析真实产品事实、保真边界并生成可复用的跨平台 SKU 上下文"
+  default_prompt: "Use $sku-product-core to analyze my real product materials and produce a verified cross-platform SKU context."

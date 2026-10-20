@@ -1,0 +1,54 @@
+{
+  "state": "published_verified",
+  "time": 1790856528,
+  "domains": [
+    "https://www.realecho.cn",
+    "https://api.realecho.cn"
+  ],
+  "server_commit": "a7da3cecf4a029e219cfc7d9e211c579b9a1a1b2",
+  "tag": "hardware-billing70-published-20261001",
+  "tested_code_commit": "93b9cc0",
+  "tests": {
+    "full_steps": 58,
+    "java": 211,
+    "python": 753,
+    "ui": 7,
+    "formal_calls": 8,
+    "financial_bills": 26
+  },
+  "artifact_matches": {
+    "/opt/one-api-bailian/one-api-bailian": true,
+    "/root/prjs/xiaozhi-esp32-server/main/manager-api/target/xiaozhi-esp32-api.jar": true,
+    "main_container": true
+  },
+  "artifacts": {
+    "candidate/one-api-hardware70": "71ce83af54e8f20b8829221e3ddc842acaee2c00413c04f74290114c163c9a8c",
+    "candidate/one-api-bailian-hardware70": "a43b9488fd47e7a905de2ca17c2053350e9e539bc14b98df1148ef1947fe81a8",
+    "candidate/server/main/manager-api/target/xiaozhi-esp32-api.jar": "1e872e402e7d074dc24f3fd03787663eb4a7b46f7926f29cbba5c4b2f7f5a051",
+    "candidate/server/main/manager-web/dist/index.html": "f1f9e16ce876e9f9b5574794c4ad7d53a2a69335a132db3b6c5f299501a40eb1"
+  },
+  "portraits": false,
+  "firmware_ota": false,
+  "automated_observation": false,
+  "limits": [
+    "device acceptance pending",
+    "real payment not performed",
+    "storage settlement replay only",
+    "70% only for settled new paid API charges"
+  ],
+  "backup": "/root/prjs/tmp/hardware-billing70-20261001/release-backup",
+  "resource_hotfix": {
+    "time": 1790857176,
+    "passed": true,
+    "restored": 14,
+    "business_classes_changed": false,
+    "login_expiry_checks": 4
+  },
+  "frontend_env_hotfix": {
+    "published": true,
+    "api_base": "https://api.realecho.cn/xiaozhi",
+    "index_sha256": "f1f9e16ce876e9f9b5574794c4ad7d53a2a69335a132db3b6c5f299501a40eb1",
+    "app": "/js/app.9f3c33ae.js",
+    "time": 1790857619
+  }
+}

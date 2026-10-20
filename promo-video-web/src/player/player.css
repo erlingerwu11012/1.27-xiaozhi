@@ -1,0 +1,109 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --panel: #151517;
+  --line: #2a2a2e;
+  --text: #e8e6e1;
+  --muted: #8b8a86;
+  --accent: #d9b48a;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}
+body.export {
+  overflow: hidden;
+}
+body.export canvas {
+  display: block;
+  width: 1920px;
+  height: 1080px;
+}
+.player {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  min-height: 100vh;
+}
+.viewport {
+  position: relative;
+  width: 100%;
+  max-width: calc((100vh - 140px) * 16 / 9);
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  outline: 1px solid var(--line);
+}
+.frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+.loading.error {
+  color: #ff8a7a;
+  padding: 24px;
+  text-align: center;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  max-width: calc((100vh - 140px) * 16 / 9);
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.controls.secondary {
+  padding: 8px 12px;
+}
+.controls button {
+  background: #222226;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.controls button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.scrub {
+  flex: 1 1 240px;
+  accent-color: var(--accent);
+}
+.tc {
+  font-variant-numeric: tabular-nums;
+  min-width: 150px;
+  color: var(--muted);
+}
+.muted {
+  color: var(--muted);
+}
+label {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}

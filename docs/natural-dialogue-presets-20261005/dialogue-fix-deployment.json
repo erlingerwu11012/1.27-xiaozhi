@@ -1,0 +1,53 @@
+{
+  "deployed": true,
+  "scope": "verified tool receipts, context labels and plain speech only",
+  "default_model_changed": false,
+  "candidate_chat_rules_deployed": false,
+  "user_personalities_changed": false,
+  "secondary_rewrite": false,
+  "physical_voice_test": false,
+  "backup": "/root/prjs/tmp/natural-dialogue-presets-20261005/verified-facts-backup-20261005-125544",
+  "files": {
+    "main/xiaozhi-server/core/connection.py": {
+      "before": "6123671f4610d562719cfba3f9d08c2f6cbf01b6ceecbcb0ad1b07cfc65cd6e9",
+      "after": "ef82f177cdb1e0f34cccd159ce01350764c58b64ac8cbee609a88325503b7d99"
+    },
+    "main/xiaozhi-server/core/utils/tool_fact_reply.py": {
+      "before": null,
+      "after": "3b404b574733560c68804a12467258ecbae4711ce982142ac8a0018efac66826"
+    },
+    "main/xiaozhi-server/core/utils/dialogue.py": {
+      "before": "ce49f06ec232655f88f33b41f4ab2065836ec391aa114f67e8d578787abcc76d",
+      "after": "68b7250aa473c00c0b782075436a1db07cfcb2764a8a334493a2fc8a93f48154"
+    },
+    "main/xiaozhi-server/core/utils/turn_context.py": {
+      "before": "359829e946ce0eb5057cf9746a4594680462e18e1ef7edae244bf15f9ebaf38f",
+      "after": "caf58577784bc62349b1a888c48fa5e7e8388c136031d84b043d090395cc75a8"
+    },
+    "main/xiaozhi-server/core/providers/tools/server_mcp/mcp_executor.py": {
+      "before": "e2c587d5aadec11e0b2d7749e6ae8bf1e5f4a68666e2c911334ecef8c7cf52c1",
+      "after": "7df905213abc342768a1a47a595f7d3d457d7fcdc69ec2fd9f5f9922471af8a2"
+    },
+    "main/xiaozhi-server/core/providers/tts/official/prompt.py": {
+      "before": "45fd8c39c5b4c89d0ef48c2495b33ceed1667ae53adbac332d4dfce7ba106eb3",
+      "after": "35e0e866a726b1cca600abef08ba425435554e5001e6dcde046e4b9c5c4b2ea7"
+    },
+    "main/xiaozhi-server/test/test_verified_tool_facts.py": {
+      "before": null,
+      "after": "5c51e45eb147f4e759acdddfe80cb11ade9119b06d5743e5fe9cd0c211d03221"
+    },
+    "main/xiaozhi-server/test/test_prompt_pipeline_v2.py": {
+      "before": "93a309028a07230c0b7e2335a0f2255a30d7d03d701722166b702fe589003b0a",
+      "after": "7a8a93b3aef5f35a50a5f3581cc19261796dcfd4a197daad2053afb8abe0fd6a"
+    }
+  },
+  "processes": {
+    "manager-api": "online",
+    "mcp-gateway": "online",
+    "xiaozhi-server": "online"
+  },
+  "public_http": {
+    "https://www.realecho.cn/": 200,
+    "https://api.realecho.cn/mcp/vision/explain": 200
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "local static checks and independent financial oracle",
+  "passed": true,
+  "tests": 8,
+  "production_go_java_vue_builds": "not run",
+  "upstream_calls": 0,
+  "api_cost_cny": "0",
+  "production_changed": false
+}

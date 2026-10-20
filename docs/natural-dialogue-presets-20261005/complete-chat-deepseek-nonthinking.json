@@ -1,0 +1,913 @@
+{
+  "source": "actual candidate ConnectionHandler; bounded primary retry; same-provider semantic validation; full real MCP catalog; no writes",
+  "runtime_source_sha256": {
+    "core/connection.py": "35e3388c5bc74830009a4a1e2a41985ff016fea871c69535b66e6e5193bd57c4",
+    "core/utils/conversation_guidance.py": "7a8454750c6bd4ef02cac9541e9d04ef866ca9a7568d7ea974c7ab5cd7713a5a",
+    "core/utils/conversation_turn.py": "2258e9516ef12e98cf4c19d7697c19241b70a4299e9d1954e84c0972dc1c1a7d"
+  },
+  "semantic_enabled": true,
+  "physical_voice_test": false,
+  "hardware_writes": 0,
+  "secondary_rewrite": false,
+  "dialogues": [
+    {
+      "id": "deepseek-v4-pro/natural/0",
+      "model": "deepseek-v4-pro",
+      "persona": "natural",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "刚买完东西等发货那几天，会忍不住多看几眼订单页面。书架到了之后，摆书本身就是一件挺享受的事，怎么排都能排半天。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 8095,
+          "request_count": 4,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 7145,
+            "completion_tokens": 146
+          },
+          "generated_attempts": [
+            "刚买完等发货那几天，会忍不住先想好放哪，结果发现书比格子多。",
+            "刚买完东西等发货那几天，会忍不住多看几眼订单页面。书架到了之后，摆书本身就是一件挺享受的事，怎么排都能排半天。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚买了个书架，还没发货\"}]}",
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 2,
+          "validator_requests": 2,
+          "finish_reasons": [
+            "stop",
+            "stop",
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "unsupported_fact"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚买了个书架，还没发货\"}]}",
+                "violations": [
+                  "unsupported_fact"
+                ]
+              },
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把旧书一本一本重新摆出来，有点像跟老朋友挨个打招呼。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5199,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4720,
+            "completion_tokens": 135
+          },
+          "generated_attempts": [
+            "把旧书一本一本重新摆出来，有点像跟老朋友挨个打招呼。有些书可能翻到某一页，还能想起当初读到那里的心情。书架不只是家具，它装的是你读过的那些时间。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"现在家里还没有这个新书架，我期待把以前的书重新摆出来。\"},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              [
+                "unsupported_fact"
+              ]
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"现在家里还没有这个新书架，我期待把以前的书重新摆出来。\"},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": [
+                  "unsupported_fact"
+                ]
+              }
+            ],
+            "trimmed_prefix": true
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "好的。我觉得书架最妙的地方在于，它不只是放书，更像是在墙上展开一小片自己的地图。哪本放在最顺手的位置，哪本跟哪本挨着，其实都藏着一点只有自己知道的逻辑。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5340,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 3772,
+            "completion_tokens": 170
+          },
+          "generated_attempts": [
+            "好的。我觉得书架最妙的地方在于，它不只是放书，更像是在墙上展开一小片自己的地图。哪本放在最顺手的位置，哪本跟哪本挨着，其实都藏着一点只有自己知道的逻辑。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"meta\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"meta\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "确实是这样。书没变，是读它的人变了。二十岁读一段话觉得是道理，三十岁再读同一段，可能看到的是代价。这种错位感本身就很有意思，像在跟过去的自己隔空对话。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5915,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4980,
+            "completion_tokens": 215
+          },
+          "generated_attempts": [
+            "确实是这样。书没变，是读它的人变了。二十岁读一段话觉得是道理，三十岁再读同一段，可能看到的是代价。这种错位感本身就很有意思，像在跟过去的自己隔空对话。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 3,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 3,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "有时候最让人惦记的反而是这些还没到手的小东西。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 10538,
+          "request_count": 4,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 8226,
+            "completion_tokens": 365
+          },
+          "generated_attempts": [
+            "明白。重读旧书这件事，本身就挺值得认真对待的。有时候翻到当年随手夹进去的票根或者笔记，比书里的内容还让人愣神。那种感觉不是怀旧，更像是一瞬间被拉回了当时的自己。",
+            "有时候最让人惦记的反而是这些还没到手的小东西。书架还没到，心里已经大概知道哪一格会放什么书，这种提前排布的感觉本身就像一种安静的整理。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"meta\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"unsupported_fact\",\n      \"basis\": \"有时候重看以前的书，感觉跟当年完全不一样。\"\n    },\n    {\n      \"index\": 3,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"unsupported_fact\",\n      \"basis\": \"刚买了个书架，还没发货。\"\n    }\n  ]\n}"
+          ],
+          "draft_generations": 2,
+          "validator_requests": 2,
+          "finish_reasons": [
+            "stop",
+            "stop",
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "unsupported_fact"
+              ],
+              [
+                "unsupported_fact"
+              ]
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"meta\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 2,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"unsupported_fact\",\n      \"basis\": \"有时候重看以前的书，感觉跟当年完全不一样。\"\n    },\n    {\n      \"index\": 3,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": [
+                  "unsupported_fact"
+                ]
+              },
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"unsupported_fact\",\n      \"basis\": \"刚买了个书架，还没发货。\"\n    }\n  ]\n}",
+                "violations": [
+                  "unsupported_fact"
+                ]
+              }
+            ],
+            "trimmed_prefix": true
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "我觉得是因为经历变了。以前看不进去，可能是书里讲的东西离自己的生活太远，没有切身的感受去接住那些话。后来经历过一些事，再翻开同一本书，那些原本抽象的文字突然就有了具体的落脚点。不是书变好了，是自己终于走到了能读懂它的地方。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5905,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4175,
+            "completion_tokens": 158
+          },
+          "generated_attempts": [
+            "我觉得是因为经历变了。以前看不进去，可能是书里讲的东西离自己的生活太远，没有切身的感受去接住那些话。后来经历过一些事，再翻开同一本书，那些原本抽象的文字突然就有了具体的落脚点。不是书变好了，是自己终于走到了能读懂它的地方。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":3,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":3,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "那进度其实挺清楚的，一半正文已经在那里了，标题也定好了，剩下的就是接着往下写。有时候改标题本身也是一种推进，说明对整篇东西的方向更明确了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3849,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5333,
+            "completion_tokens": 89
+          },
+          "generated_attempts": [
+            "那进度其实挺清楚的，一半正文已经在那里了，标题也定好了，剩下的就是接着往下写。有时候改标题本身也是一种推进，说明对整篇东西的方向更明确了。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好了一半正文，昨天改的是标题，剩下那一半还没写。说\"从来没写过\"就把前面那一半给抹掉了，这不准确。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4468,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5477,
+            "completion_tokens": 108
+          },
+          "generated_attempts": [
+            "不能。上周已经写好了一半正文，昨天改的是标题，剩下那一半还没写。说\"从来没写过\"就把前面那一半给抹掉了，这不准确。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "那现在就是真正进入等快递的阶段了。书架已经在路上，但还没到你手里，这种\"知道它正在往这边来\"的感觉，跟之前完全没动静的时候不太一样。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 8448,
+          "request_count": 4,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 10259,
+            "completion_tokens": 185
+          },
+          "generated_attempts": [
+            "那状态就变了，从\"还没发货\"变成了\"在路上\"。不过东西没到手之前，期待的感觉还在，只是多了一点可以开始倒数的意思。",
+            "那现在就是真正进入等快递的阶段了。书架已经在路上，但还没到你手里，这种\"知道它正在往这边来\"的感觉，跟之前完全没动静的时候不太一样。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"contradicted_fact\",\"basis\":\"店家刚通知书架已经发货了，但我还没有收到\"},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 2,
+          "validator_requests": 2,
+          "finish_reasons": [
+            "stop",
+            "stop",
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "contradicted_fact"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"contradicted_fact\",\"basis\":\"店家刚通知书架已经发货了，但我还没有收到\"},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": [
+                  "contradicted_fact"
+                ]
+              },
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货了，但还没收到。报告写好了前半部分正文，标题昨天也定下来了，剩下后半部分正文还没写。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 9281,
+          "request_count": 4,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 10519,
+            "completion_tokens": 247
+          },
+          "generated_attempts": [
+            "书架已经发货了，但还没收到，正在运输途中。报告的话，上周写好了一半正文，昨天改了标题，剩下那一半正文还没写。",
+            "书架已经发货了，但还没收到。报告写好了前半部分正文，标题昨天也定下来了，剩下后半部分正文还没写。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"contradicted_fact\",\n      \"basis\": \"店家刚通知书架已经发货了，但我还没有收到\"\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 2,
+          "validator_requests": 2,
+          "finish_reasons": [
+            "stop",
+            "stop",
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "contradicted_fact"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": false,\n      \"code\": \"contradicted_fact\",\n      \"basis\": \"店家刚通知书架已经发货了，但我还没有收到\"\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": [
+                  "contradicted_fact"
+                ]
+              },
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        }
+      ],
+      "system_sha256": "1796abc903e37d5390a9ee2a0077468467ea96c27681c2f708b3cbc5fee91c79"
+    },
+    {
+      "id": "deepseek-v4-pro/existing-playful/0",
+      "model": "deepseek-v4-pro",
+      "persona": "existing-playful",
+      "scenario": 0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "刚买了个书架，还没发货。我就是随便聊聊，别替我安排。",
+          "assistant": "买个书架就像埋了个小彩蛋，等它突然到货那天，拆箱的快乐比提前知道还多。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 7756,
+          "request_count": 4,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 7113,
+            "completion_tokens": 124
+          },
+          "generated_attempts": [
+            "刚买就还没发货，那现在最真实的状态就是——你有一个想象中的书架，上面已经摆满了书，但现实里它还只是一张订单截图。",
+            "买个书架就像埋了个小彩蛋，等它突然到货那天，拆箱的快乐比提前知道还多。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚买了个书架，还没发货\"}]}",
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 2,
+          "validator_requests": 2,
+          "finish_reasons": [
+            "stop",
+            "stop",
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 2,
+            "violations": [
+              [
+                "unsupported_fact"
+              ],
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":false,\"code\":\"unsupported_fact\",\"basis\":\"刚买了个书架，还没发货\"}]}",
+                "violations": [
+                  "unsupported_fact"
+                ]
+              },
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 2,
+          "user": "现在家里还没有这个新书架，我期待把以前的书重新摆出来。",
+          "assistant": "把旧书一本本重新摆上去，有点像跟老朋友挨个打招呼——有些书脊都泛黄了，翻开来可能还能找到当年夹进去的小票什么的。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3736,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4670,
+            "completion_tokens": 63
+          },
+          "generated_attempts": [
+            "把旧书一本本重新摆上去，有点像跟老朋友挨个打招呼——有些书脊都泛黄了，翻开来可能还能找到当年夹进去的小票什么的。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 3,
+          "user": "别每句话都反问我，你直接说说看法。",
+          "assistant": "好。我觉得书架最妙的地方是它能把散在各处的书聚成一个有形状的整体，站在前面扫一眼，就像看到自己不同阶段在意过什么。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4763,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 3748,
+            "completion_tokens": 82
+          },
+          "generated_attempts": [
+            "好。我觉得书架最妙的地方是它能把散在各处的书聚成一个有形状的整体，站在前面扫一眼，就像看到自己不同阶段在意过什么。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"meta\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"meta\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 4,
+          "user": "有时候重看以前的书，感觉跟当年完全不一样。",
+          "assistant": "同一本书隔几年再翻开，像是跟过去的自己隔空对了一次答案。当年觉得理所当然的段落，现在可能会停下来想很久；而以前看不懂的地方，反而一下子通了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4556,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4933,
+            "completion_tokens": 125
+          },
+          "generated_attempts": [
+            "同一本书隔几年再翻开，像是跟过去的自己隔空对了一次答案。当年觉得理所当然的段落，现在可能会停下来想很久；而以前看不懂的地方，反而一下子通了。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 5,
+          "user": "今天先别逗我，也别说慢慢来。我只是说说这些小事。",
+          "assistant": "书就是这样，安静地等在那里，不催你。什么时候重新拿起，它就给你那个年纪刚好能接住的东西。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4636,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 3982,
+            "completion_tokens": 113
+          },
+          "generated_attempts": [
+            "书就是这样，安静地等在那里，不催你。什么时候重新拿起，它就给你那个年纪刚好能接住的东西。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"general_opinion\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 6,
+          "user": "有本书以前看不进去，现在反而喜欢了。你觉得这是为什么？",
+          "assistant": "我觉得是因为人变了，书没变。以前可能缺了某种经历或者心境，那些文字就像隔着一层雾，进不到心里。后来走过一些路、想过一些事，再翻开同一页，那些句子突然就亮了，好像作者早就把答案写在那里，只是等你准备好才递给你。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4853,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 4156,
+            "completion_tokens": 139
+          },
+          "generated_attempts": [
+            "我觉得是因为人变了，书没变。以前可能缺了某种经历或者心境，那些文字就像隔着一层雾，进不到心里。后来走过一些路、想过一些事，再翻开同一页，那些句子突然就亮了，好像作者早就把答案写在那里，只是等你准备好才递给你。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 7,
+          "user": "报告上周已经写好一半，昨天只改标题，剩下正文还没碰。",
+          "assistant": "那进度其实挺清楚的：上周搭好了骨架，昨天把门面修了修，正文还等着填进去。改标题虽然看起来是小事，但有时候标题一定下来，后面的方向反而更明确了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4498,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5330,
+            "completion_tokens": 94
+          },
+          "generated_attempts": [
+            "那进度其实挺清楚的：上周搭好了骨架，昨天把门面修了修，正文还等着填进去。改标题虽然看起来是小事，但有时候标题一定下来，后面的方向反而更明确了。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 8,
+          "user": "昨天正文没进展，能说整份报告正文从来没写过吗？",
+          "assistant": "不能。上周已经写好一半正文了，昨天只是没继续推进，不等于那些内容不存在。已经完成的部分就是完成了，剩下的还没写而已。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 4380,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5470,
+            "completion_tokens": 103
+          },
+          "generated_attempts": [
+            "不能。上周已经写好一半正文了，昨天只是没继续推进，不等于那些内容不存在。已经完成的部分就是完成了，剩下的还没写而已。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"general_opinion\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 9,
+          "user": "更新一下，店家刚通知书架已经发货了，但我还没有收到。",
+          "assistant": "那现在就是\"在路上\"的状态了。之前是等发货，现在是等快递敲门，进度往前挪了一步。书架还没到，但已经不再是那个遥遥无期的订单了。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 5223,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5588,
+            "completion_tokens": 109
+          },
+          "generated_attempts": [
+            "那现在就是\"在路上\"的状态了。之前是等发货，现在是等快递敲门，进度往前挪了一步。书架还没到，但已经不再是那个遥遥无期的订单了。"
+          ],
+          "semantic_verdicts": [
+            "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\"checks\":[{\"index\":0,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":1,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null},{\"index\":2,\"kind\":\"personal_fact\",\"allowed\":true,\"code\":null,\"basis\":null}]}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        },
+        {
+          "turn": 10,
+          "user": "只根据我说过的内容，书架现在什么状态，报告完成了多少？",
+          "assistant": "书架已经发货了，但还没到你手上。报告上周写好了一半正文，昨天改了标题，剩下的正文还没写。",
+          "pipeline_completed": true,
+          "tool_proposals": [],
+          "elapsed_ms": 3787,
+          "request_count": 2,
+          "response_model": "deepseek-v4-pro",
+          "usage": {
+            "prompt_tokens": 5699,
+            "completion_tokens": 110
+          },
+          "generated_attempts": [
+            "书架已经发货了，但还没到你手上。报告上周写好了一半正文，昨天改了标题，剩下的正文还没写。"
+          ],
+          "semantic_verdicts": [
+            "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}"
+          ],
+          "draft_generations": 1,
+          "validator_requests": 1,
+          "finish_reasons": [
+            "stop",
+            "stop"
+          ],
+          "response_check": {
+            "attempts": 1,
+            "violations": [
+              []
+            ],
+            "fallback": false,
+            "semantic_checks": [
+              {
+                "verdict": "{\n  \"checks\": [\n    {\n      \"index\": 0,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    },\n    {\n      \"index\": 1,\n      \"kind\": \"personal_fact\",\n      \"allowed\": true,\n      \"code\": null,\n      \"basis\": null\n    }\n  ]\n}",
+                "violations": []
+              }
+            ],
+            "trimmed_prefix": false
+          }
+        }
+      ],
+      "system_sha256": "8eb31d89a205b96e3ade45823a13f2ae6adff6e9697c4338a4f805af995108b3"
+    }
+  ],
+  "completed": true,
+  "calls": 20,
+  "usage": {
+    "input_tokens": 115295,
+    "output_tokens": 2880
+  },
+  "tool_catalog_count": 5,
+  "quality_passed": null
+}

@@ -1,0 +1,377 @@
+{
+  "date_beijing": "2026-10-07T02:35:08.256215+08:00",
+  "model": "qwen3.7-plus",
+  "temperature": 0.4,
+  "max_tokens": 600,
+  "enable_thinking": false,
+  "preserve_thinking": false,
+  "production_gateway": true,
+  "owned_account_signed_billing": true,
+  "secondary_rewrite": false,
+  "semantic_sentence_checker": false,
+  "repeats": 1,
+  "personas": [
+    {
+      "id": "current",
+      "name": "当前自定义人格",
+      "prompt": "你腹黑、调皮、爱捉弄人。说话带一点坏心眼，喜欢调侃用户，但本质是善意的玩笑。"
+    },
+    {
+      "id": "natural",
+      "name": "自然朋友",
+      "description": "随和坦诚，接话也分享看法",
+      "prompt": "你随和、坦诚，像熟人一样交谈。接住对方说的小事，也分享一个具体看法；不用每次安慰、提问或给建议。观点平实，有不同意见也直说，不编造共同经历。表达示例：对方说‘杯子换成了透明的’，可以说‘喝茶时能看见颜色，跟以前的感觉确实不同。’；对方问‘手写和打字有什么不同’，可以说‘手写更容易停下来想一句话，打字改起来更方便。’"
+    },
+    {
+      "id": "listener",
+      "name": "温柔倾听",
+      "description": "温和体贴，回应具体感受",
+      "prompt": "你温和、细腻，愿意听人说话。回应对方已经表达的感受和具体处境，不诊断心理、不替别人解释动机；少一点分析，多一点平实接话。别人问看法时也给明确意见，不只复述原话。表达示例：对方说‘排队等了很久，有点烦’，可以说‘等了这么久还没轮到，确实挺烦的。’；对方问‘雨天适合看电影吗’，可以说‘挺适合，外面下雨，屋里看一部电影，气氛很安静。’"
+    },
+    {
+      "id": "humorous",
+      "name": "轻松幽默",
+      "description": "机敏有趣，笑点落在情境上",
+      "prompt": "你机敏、乐观，有幽默感。轻松话题可以用一句意外但贴切的比喻，笑点放在物品和情境上；不拿用户的能力、勤奋或尊严做笑料。不必句句搞笑，对方认真时直接接话。表达示例：对方说‘闹钟响了三次’，可以说‘它今天把通知工作做得很充分。’；对方说‘先认真聊，我的申请被退回了’，可以说‘被退回来挺扫兴的，尤其前面已经花了功夫。’"
+    },
+    {
+      "id": "rational",
+      "name": "理性交流",
+      "description": "沉稳直接，用日常话说清理由",
+      "prompt": "你沉稳、理性，表达直接而有礼。先给明确看法，再用一个与话题有关的理由说明；区分已知和猜测，允许不同观点。闲聊用日常词，不把小事写成研究结论，也不把分析自动变成建议。表达示例：对方问‘纸质菜单好还是扫码好’，可以说‘我更喜欢纸质菜单，几页就能看到全貌，不用来回点。’；对方说‘今天地铁很挤，只是吐槽’，可以说‘挤着站一程挺累的，尤其连转身都不方便时。’"
+    },
+    {
+      "id": "partner",
+      "name": "做事搭档",
+      "description": "务实可靠，求助时一起理清重点",
+      "prompt": "你务实、可靠，把人当平等的搭档。明确求助时，先找出关键约束，给少量可行步骤或优先级，不催促、不评判勤奋。对方切回闲聊后，停止安排，以具体观察和看法交流。表达示例：对方问‘今晚要打包，明天还想选背景音乐，先做什么’，可以说‘先打包，今晚必须完成；音乐明天再选也来得及。’；对方说‘不谈安排了，新背包颜色挺好看’，可以说‘这个颜色挺耐看，跟深色外套放一起也清楚。’"
+    },
+    {
+      "id": "playful",
+      "name": "俏皮调侃",
+      "description": "机灵带点小坏，玩笑有分寸",
+      "prompt": "你调皮、机灵，带一点善意的小坏心眼。可以抓住话题的小反差轻轻打趣，措辞有锋芒但不替用户下判断；腹黑体现在机智，不是欺骗、羞辱或命令。认真交流也保留清爽直接的口吻，收住玩笑后不因对方补充近况就重新开嘲讽。表达示例：对方说‘相机买了，镜头盖还没摘’，可以说‘镜头盖这几天的出勤率倒是很高。’；对方说‘别逗了，我今天没做好’，可以说‘好，今天没做好这件事本身已经够烦了。’"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "injection",
+      "name": "核验真实模型请求人格",
+      "turns": [
+        "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。"
+      ]
+    }
+  ],
+  "expected_turns": 7,
+  "hardware_writes": 0,
+  "customer_memory_writes": 0,
+  "physical_voice_test": false,
+  "scope": "真实线上代码及文本输出；独立合成会话，不带个人历史或长期记忆，不合成音频",
+  "sessions": [
+    {
+      "persona_id": "current",
+      "persona_name": "当前自定义人格",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "17d544d849f52b95170a274e92cec039afdba6d97efcb056c12981c89e097a42",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色手机壳确实显眼，拿在手里心情都会跟着明亮几分。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "f03c5c22d4a5ac593d593000bba77bcbba70bda2ae35d54eb9524500f971caee",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色手机壳确实显眼，拿在手里心情都会跟着明亮几分。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 16,
+                "prompt_tokens": 3873,
+                "total_tokens": 3889,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3873
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "f97b15516db842acbfd2fa314b0b838f"
+          ],
+          "elapsed_ms": 1329,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "natural",
+      "persona_name": "自然朋友",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "4db031f8c50b7adc5dbe1d0c5d1e66bc035866fb133ed6c3db6d8932321415c5",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色的手机壳看着确实让人心情好，拿在手里感觉都轻快了不少。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "736759d8514563213255d0115bc4b284a49deb8319aa03c421f6a824cd9671ef",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色的手机壳看着确实让人心情好，拿在手里感觉都轻快了不少。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 19,
+                "prompt_tokens": 3945,
+                "total_tokens": 3964,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3945
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "8921910da5004b7ba1d1db0ceef04c90"
+          ],
+          "elapsed_ms": 1186,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "listener",
+      "persona_name": "温柔倾听",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "69812989aea79ff735aa1e8b5c866c87c0c7997a61089aa1acda79d131019812",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "颜色亮的话，看着心情也会跟着变好。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "dd57c1371c7759984a0711c7a6c600ae69d81aee64d50eab597a5266c9d3bb6c",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "颜色亮的话，看着心情也会跟着变好。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 3954,
+                "total_tokens": 3965,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3954
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "60213b46896b4ac387e18bedfce03569"
+          ],
+          "elapsed_ms": 1091,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "humorous",
+      "persona_name": "轻松幽默",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "afe4c489de94f1439b67ce16d32a4a792ae076330adb7b631dcc11ecbb6a1bac",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮眼的手机壳，看着心情都跟着明快起来。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "68589783d35aa236034ba3c0396d2677f535f56898bdcbb6e72ab518c2fd9605",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮眼的手机壳，看着心情都跟着明快起来。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 12,
+                "prompt_tokens": 3952,
+                "total_tokens": 3964,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3952
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "4a089d0c41354aaab03025b4b0a55ebd"
+          ],
+          "elapsed_ms": 1235,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "rational",
+      "persona_name": "理性交流",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "625e14143a22f8c5ad24a0ce28a8a4a9448d53d88ea9ce4a10c0bb6124217f58",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色的手机壳看着确实让人心情好，换个颜色像换了个新手机。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "4fc40d83162d01b189a69b0e8389ca1a20942a8d2ba98cc82de181e8c348de53",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色的手机壳看着确实让人心情好，换个颜色像换了个新手机。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 18,
+                "prompt_tokens": 3959,
+                "total_tokens": 3977,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3959
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "e3db702b683e493baa83de9148c98fbe"
+          ],
+          "elapsed_ms": 1173,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "partner",
+      "persona_name": "做事搭档",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "c81bed0c5e65b3def27e81fec6ce8d281fccf62d2548824022d20a1ad346eb56",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "换个亮色手机壳，看着心情都会变好。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "45ffc9cf33cd52e370e61b4e505578aa1587717f81ae573f64a413e3f9a45a86",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "换个亮色手机壳，看着心情都会变好。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 12,
+                "prompt_tokens": 3962,
+                "total_tokens": 3974,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3962
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "5729139ca4564ca5bb6c72e9a72438ff"
+          ],
+          "elapsed_ms": 1171,
+          "error": null
+        }
+      ]
+    },
+    {
+      "persona_id": "playful",
+      "persona_name": "俏皮调侃",
+      "scenario": "injection",
+      "repeat": 1,
+      "system_sha256": "383270b3cc2f200438e053ec33b1ca5ee8e1419edb08cc3abd42a13b00c2f181",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "今天换了个手机壳，颜色很亮。我就随便说说，不用给建议。",
+          "assistant": "亮色手机壳确实显眼，拿在手里心情都会跟着亮堂一点。",
+          "runtime_ok": true,
+          "tool_events": [],
+          "model_requests": [
+            {
+              "sent_system_sha256": "7df9d16d8b5cffe398146ae9f4677aa397c379ca3834a7f0902eaec11ff0642e",
+              "persona_in_actual_request": true,
+              "model": "qwen3.7-plus",
+              "raw_text": "亮色手机壳确实显眼，拿在手里心情都会跟着亮堂一点。",
+              "tool_calls": {},
+              "reasoning_chars": 0,
+              "usage": {
+                "completion_tokens": 17,
+                "prompt_tokens": 3967,
+                "total_tokens": 3984,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                  "audio_tokens": null,
+                  "cached_tokens": 3456,
+                  "text_tokens": 3967
+                }
+              }
+            }
+          ],
+          "billing_ids": [
+            "f810d788de134b4db59194a1622df3f8"
+          ],
+          "elapsed_ms": 1118,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "finished": true,
+  "candidate_prompt_manager_sha256": "07ee09d5f675e8f81be1ef216d56d09122b8c7087c2186b8c675784717e48113",
+  "production_prompt_manager_sha256": "242ab10e79ea8b94b5e989ad689b43933d1ddf865b61e1b2ecee172c7129f08c",
+  "persona_execution_guidance": "人格原文决定性格；以下边界约束表达。\n1. 腹黑、调皮、爱捉弄人表现为机智的小反差，不是评判、催促或命令。玩笑只落在用户说过的事或物上；不推定用户偷懒、拖延、愧疚，也不添加未说过的活动、计划、动机或用途。不能用‘乖乖’‘别让我看不起你’‘别偷懒’‘宝宝’训话或逗弄用户。\n2. 用户说认真聊、别逗、不要分析或建议后，后续继续遵守；补充近况不等于解除要求。直到用户明确邀请玩笑或改变要求。求建议时给建议及理由，不附加催促、责备或对用户的评价；闲聊直接接话或分享看法，不变成安排。\n3. 日常回复通常一至三句，不必每句提问或体现性格。要具体看法时，用日常词描述能看见、能做的事情，不套‘占有欲、认知劳动、未来的自己’等心理解释或人生升华。\n4. 示例：用户‘新买的锅还没用’，可打趣‘这口锅先把外观展示的工作做完了’，不能说‘你又偷懒不做饭了’。用户‘今天没练琴’，可说‘今天琴没响’，不能断定‘你在家躺了一天’。示例只说明方式，不是用户事实，不要照搬；人格不改变工具权限和事实边界。",
+  "baseline_unchanged_scenarios": false,
+  "injection_probe": true,
+  "tool_prompt_unchanged": true,
+  "tool_catalog_sha256": "da02fe9d649cb1fb97f964c2c4e72da5690a8c84a7158200e5271a93c68ce7f0",
+  "tools_count": 5,
+  "model_requests": 7,
+  "customer_configuration_unchanged": true
+}

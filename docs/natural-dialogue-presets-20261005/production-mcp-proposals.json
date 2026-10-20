@@ -1,0 +1,67 @@
+{
+  "hardware_actions": 0,
+  "recording_source": "synthetic official TTS; real ASR provider; no physical microphone",
+  "voice": [],
+  "native_mcp": [
+    {
+      "question": "请查询东京现在的时间",
+      "first": {
+        "text": "我查一下东京现在的时间。",
+        "calls": [],
+        "ttft_ms": 938,
+        "elapsed_ms": 1067
+      },
+      "success": false
+    },
+    {
+      "question": "请查询伦敦现在的时间",
+      "first": {
+        "text": "我查一下伦敦现在的时间。\n\n",
+        "calls": [
+          {
+            "id": "call_1a1d6b5ce2614aa1abb602fe",
+            "name": "get_world_time",
+            "arguments": "{\"timezone\": \"Europe/London\"}"
+          }
+        ],
+        "ttft_ms": 720,
+        "elapsed_ms": 1148
+      },
+      "success": true,
+      "receipt": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "🌍 Europe/London 当前时间：\n2026年10月05日 10:40:53 (Monday)\n时区：UTC+1",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "final": {
+        "text": "伦敦现在是2026年10月5日，星期一，上午10点40分左右，比咱们这边慢7个小时。那边刚过上午，正是喝早茶看报纸的悠闲时候，你问这个是要给谁打电话，还是准备飞过去呀？",
+        "calls": [],
+        "ttft_ms": 1133,
+        "elapsed_ms": 2550
+      }
+    },
+    {
+      "question": "请查询上海现在的时间",
+      "first": {
+        "text": "我这就帮你看看上海现在几点。",
+        "calls": [],
+        "ttft_ms": 1038,
+        "elapsed_ms": 1261
+      },
+      "success": false
+    }
+  ],
+  "model_calls": 4,
+  "maximum_model_calls": 12,
+  "maximum_tts_calls": 20,
+  "maximum_asr_sessions": 20,
+  "maximum_shared_quota": 1200000
+}

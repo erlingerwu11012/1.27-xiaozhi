@@ -1,0 +1,17 @@
+{
+  "captured_bytes": 106830,
+  "reset_and_crash_markers": {
+    "USB_UART_CHIP_RESET": 0,
+    "RESET_REASON=": 0,
+    "Guru Meditation": 0,
+    "Backtrace:": 0,
+    "Brownout": 0,
+    "Task watchdog": 0,
+    "Interrupt wdt": 0,
+    "Rebooting": 0,
+    "assert failed": 0
+  },
+  "first_device_uptime_ms": 73620,
+  "last_device_uptime_ms": 128500,
+  "afe_empty_warnings": 1034
+}

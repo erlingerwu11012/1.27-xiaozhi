@@ -1,0 +1,18 @@
+{
+  "device_mac": "ac:a7:04:fd:20:2c",
+  "model": "qwen3.8-flash",
+  "temperature": 0.4,
+  "owned_token_and_service_signature": true,
+  "real_gateway_reply": "391",
+  "bill_state": "settled",
+  "usage": {
+    "confirmed": true,
+    "source": "upstream",
+    "upstream_request_id": "chatcmpl-7201afe1-add2-9c55-9225-72f62ec741c0",
+    "input_tokens": 36,
+    "output_tokens": 3,
+    "cached_tokens": 0
+  },
+  "hardware_actions": 0,
+  "persona_sent_to_model": false
+}

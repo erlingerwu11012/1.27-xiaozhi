@@ -1,0 +1,23 @@
+ M main/application.cc
+ M main/mcp_tools/mcp_tools_camera.cc
+ M main/reminder_coordinator.cc
+ M main/vision_credentials.cc
+ M main/vision_credentials.h
+ M tools/run_tts_interrupt_host_test.py
+ M tools/test_tts_interrupt_host.cpp
+ M tools/test_vision_credentials_host.cpp
+?? assets/character_concepts/blue_character_extracted_20261008/
+?? assets/character_concepts/blue_expression_hand_fix_20261008/
+?? assets/character_concepts/blue_hand_local_fix_20261008/
+?? assets/character_concepts/two_character_device_preview_20261008/
+?? assets/character_concepts/violet_half_body_20261007/
+?? assets/wallpapers/
+?? build-experience-repair-20261009/
+?? docs/blue-chin-rest-artist-brief-20261008.canvas.tsx
+?? docs/blue_chin_rest_artist_brief_20261008.md
+?? tools/experience-repair-20261009/
+?? tools/hardware-repair-20261009/
+?? tools/harness-20261007/
+?? tools/package_reply_only_subtitles.py
+?? tools/tts-start-fix-20261009/
+?? tools/tts-subtitle-fix-20261009/

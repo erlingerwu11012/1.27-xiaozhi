@@ -1,0 +1,55 @@
+{
+  "source": {
+    "core/api/vision_handler.py": "abe3e62c65d9f7f0c1a4576265e01bc36df3eaafbf53c08d6fbd39af67434366",
+    "core/utils/device_reminder.py": "76726a4d769dd74a2e524f0a3ea438553dd9bb7b8ba622fe2f0a8211b336cebe",
+    "core/websocket_server.py": "90e4e37d7e1b4265b3ea3940b65be1e62acf0f72192dc24ad33dabb17cf4c60a",
+    "core/providers/memory/bailian/bailian.py": "0d7ddcee6c711a621891046d9cc142a5b8432f8e97d98f2d06eb985aedce4d38",
+    "core/handle/helloHandle.py": "d5e7667046ba7bb058631c1fd82a7887e32a4d519ddcd4eec3b93a44dbce0fc1",
+    "core/utils/vision_capability.py": "99b7ed6a4436c6410cad1d1b1f7b49b938b2686d7f280695f5ab878e583aa4cd",
+    "core/providers/tools/device_mcp/mcp_executor.py": "779075b0830c5f4f06d68badbbf93c752b858a101a68549b049c321becfbe470",
+    "core/connection.py": "0ebcee20625bf867fa0814d257303d9803a365984405bfbf243785b85d90e864",
+    "core/handle/abortHandle.py": "4d477a6ba06a5043aeac232ae43cd38c54046ab9081dc09fb37c2f66d6bce7fc",
+    "core/handle/receiveAudioHandle.py": "85de9a1a2700514cc88d29eaa5ad1a3079f033c4b25594ebb453d9496fb0e316",
+    "core/utils/tool_harness/runtime.py": "6be7d6b92b4282f8e7471e7a4781fe2c05241a6961904fe134c4ab06267b3e81",
+    "core/utils/tool_harness/contracts.py": "7464cc2337fcff98af88a2e6fc218af59ab38de4fc56cd67487a98d847b14701",
+    "core/utils/tool_harness/presentation.py": "43f70b0a6722a224ec2f85bc479fe8042270f8dc18dcbca21c2fe051c7c53adf",
+    "core/utils/tool_harness/domains.py": "f63aedc43fd98eadd58e345658adcad61ad4f903cbf774eeb998cfd92c939bbf",
+    "core/utils/tool_result.py": "f1cc9b1a764a5b21f33dbb46bbae1738548d8d72931d2a03948734cb549f8363",
+    "core/utils/recent_memory.py": "6a652f190ce29524bf2fe9247777fab44beb06716f7f82907ff73a35d8bdb9eb",
+    "core/utils/unified_recipient_resolver.py": "997fcfe21228ec515a6e2dde92bee4f71ecdd3705691c5157a23b6615437fcfe"
+  },
+  "java_source": {
+    "PersonBehaviorService.java": "660bcc565ea0709fa2ae91aeae5976932033eb2c3defb2becb49f0252b7ca65c",
+    "MemoryDailyWorker.java": "30192d2b9c7793fdba529f4f0e459205240c08a55b3e91a31dbdc1272ff9918d",
+    "PersonMemoryController.java": "91cf4dcfb252d1661d28c00e84c07398dca6303e71ae84d017098585d7793b25",
+    "PersonTurnDTO.java": "06aaa2226956e4598226549b1fbe1a4384889324ecaa6500908c696e5157b2af",
+    "MemoryBillingController.java": "64e6e93769a2330422214e2cd899e0781a19a68b0c295cbbf6abe9d45b61efef",
+    "ArchiveRetentionWorker.java": "4d90cec846e6522ee1731bd6b736d3098e43ac9c7e9bbf77cbea41d13e28e67d",
+    "PersonMemoryService.java": "93f4c7a5af2963ff521bc68e2609ced0a8eb15bd640e6a680302cb7be9cdf2ed",
+    "MemoryGatewayClient.java": "e796a237f64f200ed03011a1560ee21e779141a71a376a3f1ec10559d664db68",
+    "MemoryMaterialPolicy.java": "d11696879816a72d3773463330881b856f39c20b5ad58b7c9e4dd3173e13ecca",
+    "RecentArchiveService.java": "93f6e242cc391caf0e3b7b005b30aa15515a9a6e328c6845f7e8a8cde22f6114",
+    "MemoryBillingService.java": "ab680a903a1382ef44534c16dc2dbc0303ca405b36297643b5bd5dd78eee1ce3"
+  },
+  "jar_sha256": "c4c71b525f108d50b0c7c801684dd650eefb026fd0a5f405aea603b7501afa33",
+  "cases_sha256": "9cefd1f97086d4f432b4464babdc3503070c733c5f2db7ad46d9acb36f279549",
+  "time": 1791520287.290747,
+  "budget": {
+    "case": {
+      "used": 1146,
+      "limit": 2000
+    },
+    "model": {
+      "used": 185,
+      "limit": 600
+    },
+    "tts": {
+      "used": 6,
+      "limit": 12
+    },
+    "vision": {
+      "used": 2,
+      "limit": 6
+    }
+  }
+}

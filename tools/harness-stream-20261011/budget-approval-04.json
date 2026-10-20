@@ -1,0 +1,8 @@
+{
+  "source": "User reply in current chat",
+  "answer": "允许增加10次，只补齐这段并完成上线验收",
+  "previous_limits": {"case": 3050, "model": 2400, "tts": 24, "vision": 0},
+  "approved_limits": {"case": 3050, "model": 2410, "tts": 24, "vision": 0},
+  "scope": "Retry only the interrupted five-turn memory dialogue; complete release verification",
+  "existing_charges_and_failures_preserved": true
+}

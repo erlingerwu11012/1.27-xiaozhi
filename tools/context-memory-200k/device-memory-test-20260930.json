@@ -1,0 +1,170 @@
+{
+  "device": "ac:a7:04:fd:20:2c",
+  "identity_mode": "default",
+  "portrait_written": false,
+  "schedule_changed": false,
+  "run_id": "memory_test_20260930_692409de04",
+  "started_at": "2026-09-30 00:44:13 +0800",
+  "conversation": [
+    "我把书房里的测试小台灯取名为蓝松果，它放在书房书桌左边。",
+    "我的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的。",
+    "我把测试笔记本取名为银月亮。",
+    "更正一下，测试笔记本现在改名叫小山雀，银月亮是旧名字，以后按小山雀来记。"
+  ],
+  "state": "complete",
+  "baseline_fact_count": 0,
+  "watermark": 4,
+  "completed_at": "2026-09-30 00:44:50 +0800",
+  "task": {
+    "state": "complete",
+    "attempts": 1,
+    "last_error": null,
+    "event_received": true
+  },
+  "fact_count": 4,
+  "extracted_facts": [
+    {
+      "content": "用户把测试笔记本取名为“小山雀”"
+    },
+    {
+      "content": "用户把书房里的测试小台灯取名为蓝松果"
+    },
+    {
+      "content": "蓝松果放在书房书桌左边"
+    },
+    {
+      "content": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的"
+    }
+  ],
+  "recall": [
+    {
+      "query": "我书房的测试小台灯叫什么，放在哪里？",
+      "plan": "lite",
+      "text": "用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n用户把测试笔记本取名为“小山雀”\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的"
+    },
+    {
+      "query": "我的测试饮品偏好是什么，温度和糖有什么要求？",
+      "plan": "lite",
+      "text": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为“小山雀”\n用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边"
+    },
+    {
+      "query": "我给测试笔记本改了名字，现在叫什么？",
+      "plan": "lite",
+      "text": "用户把测试笔记本取名为“小山雀”\n用户把书房里的测试小台灯取名为蓝松果\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n蓝松果放在书房书桌左边"
+    }
+  ],
+  "service_recall": [
+    {
+      "query": "我书房的测试小台灯叫什么，放在哪里？",
+      "http_status": 200,
+      "code": 0,
+      "text": "用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n用户把测试笔记本取名为“小山雀”\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户的测试笔记本现在取名为小山雀。\n",
+      "elapsed_ms": 242
+    },
+    {
+      "query": "我的测试饮品偏好是什么，温度和糖有什么要求？",
+      "http_status": 200,
+      "code": 0,
+      "text": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为“小山雀”\n用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n用户的测试笔记本现在取名为小山雀。\n",
+      "elapsed_ms": 255
+    },
+    {
+      "query": "我给测试笔记本改了名字，现在叫什么？",
+      "http_status": 200,
+      "code": 0,
+      "text": "用户把测试笔记本取名为“小山雀”\n用户把书房里的测试小台灯取名为蓝松果\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n蓝松果放在书房书桌左边\n用户的测试笔记本现在取名为小山雀。\n",
+      "elapsed_ms": 254
+    }
+  ],
+  "charges": "search\tlite\tsettled\t12\t24\nfact\tlite\tsettled\t2\t3677\nstorage\tlite\tsettled\t1\t0",
+  "kept_for_device_questions": true,
+  "local_archive_seeded": false,
+  "local_summary_seeded": false,
+  "initial_cloud_result": {
+    "fact_count": 4,
+    "extracted_facts": [
+      {
+        "content": "用户把书房里的测试小台灯取名为蓝松果"
+      },
+      {
+        "content": "蓝松果放在书房书桌左边"
+      },
+      {
+        "content": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的"
+      },
+      {
+        "content": "用户把测试笔记本取名为银月亮"
+      }
+    ],
+    "recall": [
+      {
+        "query": "我书房的测试小台灯叫什么，放在哪里？",
+        "plan": "lite",
+        "text": "用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为银月亮"
+      },
+      {
+        "query": "我的测试饮品偏好是什么，温度和糖有什么要求？",
+        "plan": "lite",
+        "text": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为银月亮\n用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边"
+      },
+      {
+        "query": "我给测试笔记本改了名字，现在叫什么？",
+        "plan": "lite",
+        "text": "用户把测试笔记本取名为银月亮\n用户把书房里的测试小台灯取名为蓝松果\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n蓝松果放在书房书桌左边"
+      }
+    ],
+    "service_recall": [
+      {
+        "query": "我书房的测试小台灯叫什么，放在哪里？",
+        "http_status": 200,
+        "code": 0,
+        "text": "用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为银月亮\n",
+        "elapsed_ms": 266
+      },
+      {
+        "query": "我的测试饮品偏好是什么，温度和糖有什么要求？",
+        "http_status": 200,
+        "code": 0,
+        "text": "用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n用户把测试笔记本取名为银月亮\n用户把书房里的测试小台灯取名为蓝松果\n蓝松果放在书房书桌左边\n",
+        "elapsed_ms": 331
+      },
+      {
+        "query": "我给测试笔记本改了名字，现在叫什么？",
+        "http_status": 200,
+        "code": 0,
+        "text": "用户把测试笔记本取名为银月亮\n用户把书房里的测试小台灯取名为蓝松果\n用户的测试饮品偏好是温的茉莉花茶，不加糖，也不要冰的\n蓝松果放在书房书桌左边\n",
+        "elapsed_ms": 294
+      }
+    ]
+  },
+  "same_batch_correction_passed": false,
+  "correction_requested": true,
+  "immediate_correction_text": "用户的测试笔记本现在取名为小山雀。\n",
+  "correction_watermark": 5,
+  "correction_sync_done": true,
+  "correction_completed": true,
+  "correction_completed_at": "2026-09-30 00:49:36 +0800",
+  "correction_task": {
+    "state": "complete",
+    "attempts": 1,
+    "last_error": null,
+    "event_received": true
+  },
+  "corrected_cloud_fact_passed": true,
+  "corrected_chat_recall_passed": true,
+  "final_status": {
+    "at": "2026-09-30 00:51:07 +0800",
+    "pending_materials": 0,
+    "pending_tasks": 0,
+    "pending_corrections": 0,
+    "unbalanced_watermarks": 0,
+    "portraits": 0,
+    "unsettled_charges": 0,
+    "pm2": {
+      "manager-api": "online",
+      "manager-web": "online",
+      "voiceprint-api": "online",
+      "xiaozhi-server": "online"
+    }
+  }
+}

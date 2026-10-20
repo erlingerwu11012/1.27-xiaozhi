@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/root/prjs/tmp/hardware-followup-20261013/candidate-api.jar",
+    "bytes": 129882573,
+    "sha256": "8c8628bdcc3683a628f16d4e24168dc98aef0709e5eba70f778abbe96ab8196e",
+    "reason": "superseded isolated rebuildable artifact; source and package evidence preserved"
+  },
+  {
+    "path": "/root/prjs/tmp/hardware-followup-20261013/candidate-api-02.jar",
+    "bytes": 129882607,
+    "sha256": "9be5fba601f44bba91e3d7816b339b5169c96af7ac1dc9485d9bb6329d5ca527",
+    "reason": "superseded isolated rebuildable artifact; source and package evidence preserved"
+  },
+  {
+    "path": "/root/prjs/tmp/hardware-followup-20261013/candidate-update.tgz",
+    "bytes": 17871609,
+    "sha256": "4505c856d3b5c61f7ac75d02cddd06efd4bc0b12ab90e9e61664e33cfb58f141",
+    "reason": "superseded isolated rebuildable artifact; source and package evidence preserved"
+  }
+]

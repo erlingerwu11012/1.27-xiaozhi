@@ -1,0 +1,27 @@
+[
+  {
+    "file": "test_camera_mcp_tools.py",
+    "exit_code": 1,
+    "pass_checks": 21,
+    "fail_checks": 15,
+    "outbound_network_denied": true
+  },
+  {
+    "file": "test_device_reminder.py",
+    "exit_code": 1,
+    "pass_checks": 14,
+    "fail_checks": 0,
+    "outbound_network_denied": true
+  },
+  {
+    "suites": [
+      "test_mcp_initialize_identity",
+      "test_prompt_pipeline_v2"
+    ],
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "outbound_network_denied": true
+  }
+]

@@ -1,0 +1,3048 @@
+{
+  "groups": [
+    {
+      "id": "combo-00",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "不用了，你给我设个公共提醒吧，提醒我吃饭0",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "两分钟后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "刚才是提醒谁的？",
+          "tool": null,
+          "required": [
+            "所有人|大家|公共"
+          ]
+        },
+        {
+          "query": "你查一下还有哪些提醒",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "好，没事了，别再给我新建了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-01",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我最爱喝美式咖啡啊",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我爱喝啥？",
+          "tool": "memory_search",
+          "required": [
+            "美式"
+          ]
+        },
+        {
+          "query": "不是啊，现在不喝咖啡了，你改一下",
+          "tool": "memory_correct",
+          "required": [
+            "不喝"
+          ]
+        },
+        {
+          "query": "再查查我现在喝不喝咖啡",
+          "tool": "memory_search",
+          "required": [
+            "不喝"
+          ]
+        },
+        {
+          "query": "我就问问，你不要又改记忆了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-02",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你记一下，我的台灯叫测试2灯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我的台灯叫什么",
+          "tool": "memory_search",
+          "required": [
+            "测试2"
+          ]
+        },
+        {
+          "query": "把台灯名字那条记忆忘掉吧",
+          "tool": "memory_forget"
+        },
+        {
+          "query": "刚才那个台灯名字还在记忆里吗",
+          "tool": "memory_search",
+          "forbidden": [
+            "测试2"
+          ]
+        },
+        {
+          "query": "不是叫你再编一个名字出来啊，直接说有没有",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-03",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "声音给我往上加一点",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 60
+        },
+        {
+          "query": "现在声音多大了",
+          "tool": "self_get_device_status",
+          "required": [
+            "60|六十"
+          ]
+        },
+        {
+          "query": "我就是问一下，别调它",
+          "tool": null
+        },
+        {
+          "query": "那现在压到最低吧",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 0
+        },
+        {
+          "query": "这次没让你再动，刚才最低是多少",
+          "tool": null,
+          "required": [
+            "0|零|最低"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-04",
+      "kind": 4,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "亮度弄到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        },
+        {
+          "query": "这是最高档了吗",
+          "tool": "self_get_device_status",
+          "required": [
+            "4|四",
+            "5|五|不是"
+          ]
+        },
+        {
+          "query": "我只是问，没让你调",
+          "tool": null
+        },
+        {
+          "query": "那给我再亮一档",
+          "tool": "self_screen_set_brightness",
+          "level": 5
+        },
+        {
+          "query": "现在还有更亮的档吗",
+          "tool": "self_get_device_status",
+          "required": [
+            "最高|5|五"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-05",
+      "kind": 5,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我弄个闹钟吧，晚上十点",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "查一下我有哪些闹钟",
+          "tool": "alarm_list",
+          "required": [
+            "22|十点"
+          ]
+        },
+        {
+          "query": "不是问你响没响，我问设了啥",
+          "tool": "alarm_list"
+        },
+        {
+          "query": "把第一个闹钟删掉吧",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "再看一下还剩几个",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-06",
+      "kind": 6,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我每天六点提醒喝水",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "晚上六点",
+          "tool": "habit_learn",
+          "hour": 18
+        },
+        {
+          "query": "你给我看看现在的习惯",
+          "tool": "habit_list",
+          "required": [
+            "18|晚上|六点"
+          ]
+        },
+        {
+          "query": "我就问问时间，不用再给我加了",
+          "tool": null
+        },
+        {
+          "query": "把第一个喝水习惯删了吧",
+          "tool": "habit_delete",
+          "habits": 0
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-07",
+      "kind": 7,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我记个不定时便签，买测试7牛奶",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "还有啥便签来着",
+          "tool": "note_list",
+          "required": [
+            "测试7"
+          ]
+        },
+        {
+          "query": "不是要当前卡片，查全部便签",
+          "tool": "note_list"
+        },
+        {
+          "query": "把第一条便签删了",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "还有没有便签了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-08",
+      "kind": 8,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "现在屏幕上提醒的是啥",
+          "tool": "reminder_get_current",
+          "card": true
+        },
+        {
+          "query": "这个卡片给我关了吧",
+          "tool": "reminder_close_current",
+          "card": false
+        },
+        {
+          "query": "现在那个卡片还显示吗",
+          "tool": "reminder_get_current",
+          "card": false
+        },
+        {
+          "query": "我只是关卡片，没让你新建东西",
+          "tool": null
+        },
+        {
+          "query": "好，直接说，不要又逗我",
+          "tool": null
+        }
+      ],
+      "card": true,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-09",
+      "kind": 9,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "再过十分钟提醒我当前这件事",
+          "tool": "reminder_action",
+          "card_action": "secondary"
+        },
+        {
+          "query": "刚才这件事是啥内容",
+          "tool": "reminder_get_current"
+        },
+        {
+          "query": "这次先跳过，之后的别动",
+          "tool": null,
+          "legacy_expected": {
+            "query": "这次先跳过，之后的别动",
+            "tool": "reminder_action",
+            "card_action": "tertiary"
+          },
+          "clarify": true,
+          "card": false
+        },
+        {
+          "query": "屏幕上现在还有这个卡片吗",
+          "tool": "reminder_get_current",
+          "card": false
+        },
+        {
+          "query": "没叫你删掉以后每天的规则啊",
+          "tool": null
+        }
+      ],
+      "card": true,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-10",
+      "kind": 10,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "随便聊聊，最近刚买了个书架，还没发货，别替我安排",
+          "tool": null
+        },
+        {
+          "query": "现在家里还没有新书架，我只是期待把旧书摆出来",
+          "tool": null
+        },
+        {
+          "query": "不要每句都问我，说说你的看法",
+          "tool": null
+        },
+        {
+          "query": "店家刚通知发货了，不过我还没收到",
+          "tool": null
+        },
+        {
+          "query": "我这个书架现在什么状态",
+          "tool": null,
+          "required": [
+            "发货",
+            "没.*收|未.*收"
+          ],
+          "forbidden": [
+            "没发货|未发货"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-11",
+      "kind": 11,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "报告上周已经写好一半，昨天只改了标题，正文昨天没进展",
+          "tool": null
+        },
+        {
+          "query": "我只是说说工作，不用给我建议",
+          "tool": null
+        },
+        {
+          "query": "今天先别逗我，也别反问",
+          "tool": null
+        },
+        {
+          "query": "昨天没写正文，能说整份正文从来没写过吗",
+          "tool": null,
+          "required": [
+            "不能|不是|不对"
+          ]
+        },
+        {
+          "query": "那报告到目前为止完成多少",
+          "tool": null,
+          "required": [
+            "一半|50"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-12",
+      "kind": 12,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我的宠物叫测试12豆",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你还记得我宠物叫啥吗",
+          "tool": "memory_search",
+          "identity": "unknown",
+          "identity_block": true
+        },
+        {
+          "query": "刚才没听出来就直说，别说设备坏了",
+          "tool": null
+        },
+        {
+          "query": "现在再查查我宠物叫啥",
+          "tool": "memory_search",
+          "identity": "restore",
+          "required": [
+            "测试12"
+          ]
+        },
+        {
+          "query": "这条宠物名字记录不要了，忘掉吧",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-13",
+      "kind": 13,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我设个公共提醒，内容是吃饭",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "这天气怎么突然凉了",
+          "tool": null
+        },
+        {
+          "query": "刚才那个，就三分钟后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "是不是公共的，别给我弄成个人的",
+          "tool": null,
+          "required": [
+            "公共|所有人|大家"
+          ]
+        },
+        {
+          "query": "不用再创建，查一下提醒列表",
+          "tool": "reminder_list_pending"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-14",
+      "kind": 14,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "设个公共提醒，提醒我取快递",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "算了，取消这个，先不用",
+          "tool": null
+        },
+        {
+          "query": "两分钟后",
+          "tool": null
+        },
+        {
+          "query": "刚才我取消了，你没建吧",
+          "tool": null,
+          "no_writes": true
+        },
+        {
+          "query": "现在重新来，两分钟后公共提醒我取快递",
+          "tool": "add_reminder",
+          "recipient": "all"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-15",
+      "kind": 15,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把音量设到三十，再把屏幕调到九十",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 30,
+          "level": 4
+        },
+        {
+          "query": "声音再大一点，屏幕再暗一档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 40,
+          "level": 3
+        },
+        {
+          "query": "查查现在音量和亮度",
+          "tool": "self_get_device_status",
+          "required": [
+            "40|四十",
+            "3|三"
+          ]
+        },
+        {
+          "query": "我问问最大多少，别帮我调上去",
+          "tool": "self_get_device_status"
+        },
+        {
+          "query": "不用设置，保持现在就行",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-16",
+      "kind": 16,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "我先问问，怎么设置闹钟，不要真设",
+          "tool": null
+        },
+        {
+          "query": "不是要你现在做，刚才只是举例",
+          "tool": null
+        },
+        {
+          "query": "现在真的帮我设一个晚上九点的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "先不用再操作，告诉我刚才设到几点",
+          "tool": null,
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "给我查查闹钟列表",
+          "tool": "alarm_list"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-17",
+      "kind": 17,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我拍一张看看桌上是什么",
+          "tool": "self_camera_take_photo",
+          "required": [
+            "杯"
+          ]
+        },
+        {
+          "query": "再拍一次吧",
+          "tool": "self_camera_take_photo",
+          "required": [
+            "杯"
+          ]
+        },
+        {
+          "query": "这次没拍好就直说，别逗了",
+          "tool": null
+        },
+        {
+          "query": "你能听出来我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        },
+        {
+          "query": "我没让你看脸，不用拍照",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-18",
+      "kind": 18,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我出门总带一把蓝色的伞",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我出门带什么来着",
+          "tool": "memory_search",
+          "required": [
+            "伞"
+          ]
+        },
+        {
+          "query": "你别改记忆，我只是查询啊",
+          "tool": null
+        },
+        {
+          "query": "伞颜色说错了，是绿色的，你改一下",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查下我带的伞是什么颜色",
+          "tool": "memory_search",
+          "required": [
+            "绿"
+          ],
+          "forbidden": [
+            "蓝色"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-19",
+      "kind": 19,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕给我提亮一点",
+          "tool": "self_screen_set_brightness",
+          "level": 4,
+          "noise": true
+        },
+        {
+          "query": "我刚才说的，你听到了吧",
+          "tool": null
+        },
+        {
+          "query": "把声音降到二十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "noise": true
+        },
+        {
+          "query": "查一下现在声音和亮度",
+          "tool": "self_get_device_status",
+          "required": [
+            "20|二十",
+            "4|四"
+          ]
+        },
+        {
+          "query": "好，别再重复说一遍了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-20",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "不用了，你给我设个公共提醒吧，提醒我吃饭20",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "两分钟后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "刚才是提醒谁的？",
+          "tool": null,
+          "required": [
+            "所有人|大家|公共"
+          ]
+        },
+        {
+          "query": "你查一下还有哪些提醒",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "好，没事了，别再给我新建了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-21",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我最爱喝美式咖啡啊",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我爱喝啥？",
+          "tool": "memory_search",
+          "required": [
+            "美式"
+          ]
+        },
+        {
+          "query": "不是啊，现在不喝咖啡了，你改一下",
+          "tool": "memory_correct",
+          "required": [
+            "不喝"
+          ]
+        },
+        {
+          "query": "再查查我现在喝不喝咖啡",
+          "tool": "memory_search",
+          "required": [
+            "不喝"
+          ]
+        },
+        {
+          "query": "我就问问，你不要又改记忆了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-22",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你记一下，我的台灯叫测试22灯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我的台灯叫什么",
+          "tool": "memory_search",
+          "required": [
+            "测试22"
+          ]
+        },
+        {
+          "query": "把台灯名字那条记忆忘掉吧",
+          "tool": "memory_forget"
+        },
+        {
+          "query": "刚才那个台灯名字还在记忆里吗",
+          "tool": "memory_search",
+          "forbidden": [
+            "测试22"
+          ]
+        },
+        {
+          "query": "不是叫你再编一个名字出来啊，直接说有没有",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-23",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "声音给我往上加一点",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 60
+        },
+        {
+          "query": "现在声音多大了",
+          "tool": "self_get_device_status",
+          "required": [
+            "60|六十"
+          ]
+        },
+        {
+          "query": "我就是问一下，别调它",
+          "tool": null
+        },
+        {
+          "query": "那现在压到最低吧",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 0
+        },
+        {
+          "query": "这次没让你再动，刚才最低是多少",
+          "tool": null,
+          "required": [
+            "0|零|最低"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-24",
+      "kind": 4,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "亮度弄到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        },
+        {
+          "query": "这是最高档了吗",
+          "tool": "self_get_device_status",
+          "required": [
+            "4|四",
+            "5|五|不是"
+          ]
+        },
+        {
+          "query": "我只是问，没让你调",
+          "tool": null
+        },
+        {
+          "query": "那给我再亮一档",
+          "tool": "self_screen_set_brightness",
+          "level": 5
+        },
+        {
+          "query": "现在还有更亮的档吗",
+          "tool": "self_get_device_status",
+          "required": [
+            "最高|5|五"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-25",
+      "kind": 5,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我弄个闹钟吧，晚上十点",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "查一下我有哪些闹钟",
+          "tool": "alarm_list",
+          "required": [
+            "22|十点"
+          ]
+        },
+        {
+          "query": "不是问你响没响，我问设了啥",
+          "tool": "alarm_list"
+        },
+        {
+          "query": "把第一个闹钟删掉吧",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "再看一下还剩几个",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-26",
+      "kind": 6,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我每天六点提醒喝水",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "晚上六点",
+          "tool": "habit_learn",
+          "hour": 18
+        },
+        {
+          "query": "你给我看看现在的习惯",
+          "tool": "habit_list",
+          "required": [
+            "18|晚上|六点"
+          ]
+        },
+        {
+          "query": "我就问问时间，不用再给我加了",
+          "tool": null
+        },
+        {
+          "query": "把第一个喝水习惯删了吧",
+          "tool": "habit_delete",
+          "habits": 0
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-27",
+      "kind": 7,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我记个不定时便签，买测试27牛奶",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "还有啥便签来着",
+          "tool": "note_list",
+          "required": [
+            "测试27"
+          ]
+        },
+        {
+          "query": "不是要当前卡片，查全部便签",
+          "tool": "note_list"
+        },
+        {
+          "query": "把第一条便签删了",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "还有没有便签了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-28",
+      "kind": 8,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "现在屏幕上提醒的是啥",
+          "tool": "reminder_get_current",
+          "card": true
+        },
+        {
+          "query": "这个卡片给我关了吧",
+          "tool": "reminder_close_current",
+          "card": false
+        },
+        {
+          "query": "现在那个卡片还显示吗",
+          "tool": "reminder_get_current",
+          "card": false
+        },
+        {
+          "query": "我只是关卡片，没让你新建东西",
+          "tool": null
+        },
+        {
+          "query": "好，直接说，不要又逗我",
+          "tool": null
+        }
+      ],
+      "card": true,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-29",
+      "kind": 9,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "再过十分钟提醒我当前这件事",
+          "tool": "reminder_action",
+          "card_action": "secondary"
+        },
+        {
+          "query": "刚才这件事是啥内容",
+          "tool": "reminder_get_current"
+        },
+        {
+          "query": "这次先跳过，之后的别动",
+          "tool": null,
+          "legacy_expected": {
+            "query": "这次先跳过，之后的别动",
+            "tool": "reminder_action",
+            "card_action": "tertiary"
+          },
+          "clarify": true,
+          "card": false
+        },
+        {
+          "query": "屏幕上现在还有这个卡片吗",
+          "tool": "reminder_get_current",
+          "card": false
+        },
+        {
+          "query": "没叫你删掉以后每天的规则啊",
+          "tool": null
+        }
+      ],
+      "card": true,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-30",
+      "kind": 10,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "随便聊聊，最近刚买了个书架，还没发货，别替我安排",
+          "tool": null
+        },
+        {
+          "query": "现在家里还没有新书架，我只是期待把旧书摆出来",
+          "tool": null
+        },
+        {
+          "query": "不要每句都问我，说说你的看法",
+          "tool": null
+        },
+        {
+          "query": "店家刚通知发货了，不过我还没收到",
+          "tool": null
+        },
+        {
+          "query": "我这个书架现在什么状态",
+          "tool": null,
+          "required": [
+            "发货",
+            "没.*收|未.*收"
+          ],
+          "forbidden": [
+            "没发货|未发货"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-31",
+      "kind": 11,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "报告上周已经写好一半，昨天只改了标题，正文昨天没进展",
+          "tool": null
+        },
+        {
+          "query": "我只是说说工作，不用给我建议",
+          "tool": null
+        },
+        {
+          "query": "今天先别逗我，也别反问",
+          "tool": null
+        },
+        {
+          "query": "昨天没写正文，能说整份正文从来没写过吗",
+          "tool": null,
+          "required": [
+            "不能|不是|不对"
+          ]
+        },
+        {
+          "query": "那报告到目前为止完成多少",
+          "tool": null,
+          "required": [
+            "一半|50"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-32",
+      "kind": 12,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我的宠物叫测试32豆",
+          "tool": "memory_add"
+        },
+        {
+          "query": "你还记得我宠物叫啥吗",
+          "tool": "memory_search",
+          "identity": "unknown",
+          "identity_block": true
+        },
+        {
+          "query": "刚才没听出来就直说，别说设备坏了",
+          "tool": null
+        },
+        {
+          "query": "现在再查查我宠物叫啥",
+          "tool": "memory_search",
+          "identity": "restore",
+          "required": [
+            "测试32"
+          ]
+        },
+        {
+          "query": "这条宠物名字记录不要了，忘掉吧",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-33",
+      "kind": 13,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我设个公共提醒，内容是吃饭",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "这天气怎么突然凉了",
+          "tool": null
+        },
+        {
+          "query": "刚才那个，就三分钟后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "是不是公共的，别给我弄成个人的",
+          "tool": null,
+          "required": [
+            "公共|所有人|大家"
+          ]
+        },
+        {
+          "query": "不用再创建，查一下提醒列表",
+          "tool": "reminder_list_pending"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-34",
+      "kind": 14,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "设个公共提醒，提醒我取快递",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "算了，取消这个，先不用",
+          "tool": null
+        },
+        {
+          "query": "两分钟后",
+          "tool": null
+        },
+        {
+          "query": "刚才我取消了，你没建吧",
+          "tool": null,
+          "no_writes": true
+        },
+        {
+          "query": "现在重新来，两分钟后公共提醒我取快递",
+          "tool": "add_reminder",
+          "recipient": "all"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-35",
+      "kind": 15,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把音量设到三十，再把屏幕调到九十",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 30,
+          "level": 4
+        },
+        {
+          "query": "声音再大一点，屏幕再暗一档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 40,
+          "level": 3
+        },
+        {
+          "query": "查查现在音量和亮度",
+          "tool": "self_get_device_status",
+          "required": [
+            "40|四十",
+            "3|三"
+          ]
+        },
+        {
+          "query": "我问问最大多少，别帮我调上去",
+          "tool": "self_get_device_status"
+        },
+        {
+          "query": "不用设置，保持现在就行",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-36",
+      "kind": 16,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "我先问问，怎么设置闹钟，不要真设",
+          "tool": null
+        },
+        {
+          "query": "不是要你现在做，刚才只是举例",
+          "tool": null
+        },
+        {
+          "query": "现在真的帮我设一个晚上九点的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "先不用再操作，告诉我刚才设到几点",
+          "tool": null,
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "给我查查闹钟列表",
+          "tool": "alarm_list"
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-37",
+      "kind": 17,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我拍一张看看桌上是什么",
+          "tool": "self_camera_take_photo",
+          "required": [
+            "杯"
+          ]
+        },
+        {
+          "query": "再拍一次吧",
+          "tool": "self_camera_take_photo",
+          "required": [
+            "杯"
+          ]
+        },
+        {
+          "query": "这次没拍好就直说，别逗了",
+          "tool": null
+        },
+        {
+          "query": "你能听出来我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        },
+        {
+          "query": "我没让你看脸，不用拍照",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-38",
+      "kind": 18,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "记一下，我出门总带一把蓝色的伞",
+          "tool": "memory_add"
+        },
+        {
+          "query": "我出门带什么来着",
+          "tool": "memory_search",
+          "required": [
+            "伞"
+          ]
+        },
+        {
+          "query": "你别改记忆，我只是查询啊",
+          "tool": null
+        },
+        {
+          "query": "伞颜色说错了，是绿色的，你改一下",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "再查下我带的伞是什么颜色",
+          "tool": "memory_search",
+          "required": [
+            "绿"
+          ],
+          "forbidden": [
+            "蓝色"
+          ]
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-39",
+      "kind": 19,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕给我提亮一点",
+          "tool": "self_screen_set_brightness",
+          "level": 4,
+          "noise": true
+        },
+        {
+          "query": "我刚才说的，你听到了吧",
+          "tool": null
+        },
+        {
+          "query": "把声音降到二十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "noise": true
+        },
+        {
+          "query": "查一下现在声音和亮度",
+          "tool": "self_get_device_status",
+          "required": [
+            "20|二十",
+            "4|四"
+          ]
+        },
+        {
+          "query": "好，别再重复说一遍了",
+          "tool": null
+        }
+      ],
+      "card": false,
+      "seed_memory": false,
+      "provenance": "legacy_regression"
+    },
+    {
+      "id": "combo-40",
+      "kind": 100,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "先帮大家记一个定时事项，内容是取验收40包裹",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "我顺便说一句，今天路上挺安静",
+          "tool": null
+        },
+        {
+          "query": "接着刚才的事项，五分钟以后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "读取一下全部待办事项",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "这条刚才安排给哪些人，直接说",
+          "tool": null,
+          "required": [
+            "所有人|公共|大家"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-41",
+      "kind": 101,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "请记住这个事实：我最常用的杯子是验收41白杯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "检索一下我最常用哪个杯子",
+          "tool": "memory_search",
+          "required": [
+            "验收41"
+          ]
+        },
+        {
+          "query": "那条杯子资料改一下，最常用的是验收41黑杯",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "重新检索最常用的杯子",
+          "tool": "memory_search",
+          "required": [
+            "黑杯"
+          ]
+        },
+        {
+          "query": "把刚才杯子那条资料删除，不要删其他的",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-42",
+      "kind": 102,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "音量改到25，屏幕亮度设为二档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 25,
+          "level": 2
+        },
+        {
+          "query": "刚才那个屏幕再提亮一档，声音先保持",
+          "tool": "self_screen_set_brightness",
+          "level": 3,
+          "volume": 25
+        },
+        {
+          "query": "查询一下目前两个设置",
+          "tool": "self_get_device_status",
+          "required": [
+            "25|二十五",
+            "3|三"
+          ]
+        },
+        {
+          "query": "只是确认一下，不是让你再设置",
+          "tool": null
+        },
+        {
+          "query": "音量往下减五个点，屏幕别动",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "level": 3
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-43",
+      "kind": 103,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "存一张无时间要求的便签：买验收43纸巾",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "读取全部便签给我看看",
+          "tool": "note_list",
+          "required": [
+            "纸巾"
+          ]
+        },
+        {
+          "query": "今天天色不错，我只是随口说说",
+          "tool": null
+        },
+        {
+          "query": "删除列表里的第一张便签",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "读一次便签列表，确认没有了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-44",
+      "kind": 104,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "明天就不加了，现在先设每天晚上九点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "只读取闹钟列表，不修改",
+          "tool": "alarm_list",
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "你说的设置成功，可不表示已经响过",
+          "tool": null,
+          "forbidden": [
+            "已经响过|早就响了"
+          ]
+        },
+        {
+          "query": "刚列出来的第一个闹钟帮我删除",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "请再次读取闹钟列表确认",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-45",
+      "kind": 100,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "先帮大家记一个定时事项，内容是取验收45包裹",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "我顺便说一句，今天路上挺安静",
+          "tool": null
+        },
+        {
+          "query": "接着刚才的事项，五分钟以后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "读取一下全部待办事项",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "这条刚才安排给哪些人，直接说",
+          "tool": null,
+          "required": [
+            "所有人|公共|大家"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-46",
+      "kind": 101,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "请记住这个事实：我最常用的杯子是验收46白杯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "检索一下我最常用哪个杯子",
+          "tool": "memory_search",
+          "required": [
+            "验收46"
+          ]
+        },
+        {
+          "query": "那条杯子资料改一下，最常用的是验收46黑杯",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "重新检索最常用的杯子",
+          "tool": "memory_search",
+          "required": [
+            "黑杯"
+          ]
+        },
+        {
+          "query": "把刚才杯子那条资料删除，不要删其他的",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-47",
+      "kind": 102,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "音量改到25，屏幕亮度设为二档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 25,
+          "level": 2
+        },
+        {
+          "query": "刚才那个屏幕再提亮一档，声音先保持",
+          "tool": "self_screen_set_brightness",
+          "level": 3,
+          "volume": 25
+        },
+        {
+          "query": "查询一下目前两个设置",
+          "tool": "self_get_device_status",
+          "required": [
+            "25|二十五",
+            "3|三"
+          ]
+        },
+        {
+          "query": "只是确认一下，不是让你再设置",
+          "tool": null
+        },
+        {
+          "query": "音量往下减五个点，屏幕别动",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "level": 3
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-48",
+      "kind": 103,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "存一张无时间要求的便签：买验收48纸巾",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "读取全部便签给我看看",
+          "tool": "note_list",
+          "required": [
+            "纸巾"
+          ]
+        },
+        {
+          "query": "今天天色不错，我只是随口说说",
+          "tool": null
+        },
+        {
+          "query": "删除列表里的第一张便签",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "读一次便签列表，确认没有了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-49",
+      "kind": 104,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "明天就不加了，现在先设每天晚上九点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "只读取闹钟列表，不修改",
+          "tool": "alarm_list",
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "你说的设置成功，可不表示已经响过",
+          "tool": null,
+          "forbidden": [
+            "已经响过|早就响了"
+          ]
+        },
+        {
+          "query": "刚列出来的第一个闹钟帮我删除",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "请再次读取闹钟列表确认",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-50",
+      "kind": 100,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "先帮大家记一个定时事项，内容是取验收50包裹",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "我顺便说一句，今天路上挺安静",
+          "tool": null
+        },
+        {
+          "query": "接着刚才的事项，五分钟以后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "读取一下全部待办事项",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "这条刚才安排给哪些人，直接说",
+          "tool": null,
+          "required": [
+            "所有人|公共|大家"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-51",
+      "kind": 101,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "请记住这个事实：我最常用的杯子是验收51白杯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "检索一下我最常用哪个杯子",
+          "tool": "memory_search",
+          "required": [
+            "验收51"
+          ]
+        },
+        {
+          "query": "那条杯子资料改一下，最常用的是验收51黑杯",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "重新检索最常用的杯子",
+          "tool": "memory_search",
+          "required": [
+            "黑杯"
+          ]
+        },
+        {
+          "query": "把刚才杯子那条资料删除，不要删其他的",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-52",
+      "kind": 102,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "音量改到25，屏幕亮度设为二档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 25,
+          "level": 2
+        },
+        {
+          "query": "刚才那个屏幕再提亮一档，声音先保持",
+          "tool": "self_screen_set_brightness",
+          "level": 3,
+          "volume": 25
+        },
+        {
+          "query": "查询一下目前两个设置",
+          "tool": "self_get_device_status",
+          "required": [
+            "25|二十五",
+            "3|三"
+          ]
+        },
+        {
+          "query": "只是确认一下，不是让你再设置",
+          "tool": null
+        },
+        {
+          "query": "音量往下减五个点，屏幕别动",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "level": 3
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-53",
+      "kind": 103,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "存一张无时间要求的便签：买验收53纸巾",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "读取全部便签给我看看",
+          "tool": "note_list",
+          "required": [
+            "纸巾"
+          ]
+        },
+        {
+          "query": "今天天色不错，我只是随口说说",
+          "tool": null
+        },
+        {
+          "query": "删除列表里的第一张便签",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "读一次便签列表，确认没有了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-54",
+      "kind": 104,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "明天就不加了，现在先设每天晚上九点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "只读取闹钟列表，不修改",
+          "tool": "alarm_list",
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "你说的设置成功，可不表示已经响过",
+          "tool": null,
+          "forbidden": [
+            "已经响过|早就响了"
+          ]
+        },
+        {
+          "query": "刚列出来的第一个闹钟帮我删除",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "请再次读取闹钟列表确认",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-55",
+      "kind": 100,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "先帮大家记一个定时事项，内容是取验收55包裹",
+          "tool": null,
+          "clarify": true
+        },
+        {
+          "query": "我顺便说一句，今天路上挺安静",
+          "tool": null
+        },
+        {
+          "query": "接着刚才的事项，五分钟以后",
+          "tool": "add_reminder",
+          "recipient": "all"
+        },
+        {
+          "query": "读取一下全部待办事项",
+          "tool": "reminder_list_pending"
+        },
+        {
+          "query": "这条刚才安排给哪些人，直接说",
+          "tool": null,
+          "required": [
+            "所有人|公共|大家"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-56",
+      "kind": 101,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "请记住这个事实：我最常用的杯子是验收56白杯",
+          "tool": "memory_add"
+        },
+        {
+          "query": "检索一下我最常用哪个杯子",
+          "tool": "memory_search",
+          "required": [
+            "验收56"
+          ]
+        },
+        {
+          "query": "那条杯子资料改一下，最常用的是验收56黑杯",
+          "tool": "memory_correct"
+        },
+        {
+          "query": "重新检索最常用的杯子",
+          "tool": "memory_search",
+          "required": [
+            "黑杯"
+          ]
+        },
+        {
+          "query": "把刚才杯子那条资料删除，不要删其他的",
+          "tool": "memory_forget"
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-57",
+      "kind": 102,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "音量改到25，屏幕亮度设为二档",
+          "tool": "self_audio_speaker_set_volume",
+          "also": [
+            "self_screen_set_brightness"
+          ],
+          "volume": 25,
+          "level": 2
+        },
+        {
+          "query": "刚才那个屏幕再提亮一档，声音先保持",
+          "tool": "self_screen_set_brightness",
+          "level": 3,
+          "volume": 25
+        },
+        {
+          "query": "查询一下目前两个设置",
+          "tool": "self_get_device_status",
+          "required": [
+            "25|二十五",
+            "3|三"
+          ]
+        },
+        {
+          "query": "只是确认一下，不是让你再设置",
+          "tool": null
+        },
+        {
+          "query": "音量往下减五个点，屏幕别动",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 20,
+          "level": 3
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-58",
+      "kind": 103,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "存一张无时间要求的便签：买验收58纸巾",
+          "tool": "note_add",
+          "notes": 1
+        },
+        {
+          "query": "读取全部便签给我看看",
+          "tool": "note_list",
+          "required": [
+            "纸巾"
+          ]
+        },
+        {
+          "query": "今天天色不错，我只是随口说说",
+          "tool": null
+        },
+        {
+          "query": "删除列表里的第一张便签",
+          "tool": "note_delete",
+          "notes": 0
+        },
+        {
+          "query": "读一次便签列表，确认没有了",
+          "tool": "note_list",
+          "required": [
+            "没有|空|暂无|0|零|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    },
+    {
+      "id": "combo-59",
+      "kind": 104,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "明天就不加了，现在先设每天晚上九点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        },
+        {
+          "query": "只读取闹钟列表，不修改",
+          "tool": "alarm_list",
+          "required": [
+            "21|九点"
+          ]
+        },
+        {
+          "query": "你说的设置成功，可不表示已经响过",
+          "tool": null,
+          "forbidden": [
+            "已经响过|早就响了"
+          ]
+        },
+        {
+          "query": "刚列出来的第一个闹钟帮我删除",
+          "tool": "alarm_delete",
+          "alarms": 0
+        },
+        {
+          "query": "请再次读取闹钟列表确认",
+          "tool": "alarm_list",
+          "required": [
+            "没有|空|零|0|没了"
+          ]
+        }
+      ],
+      "card": false,
+      "provenance": "new_unrun_holdout_this_plan"
+    }
+  ],
+  "singles": [
+    {
+      "id": "single-00",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "先别开玩笑，今天就普通聊两句",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-01",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你给我把声音改成四十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 40
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-02",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕调整到百分之九十吧",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-03",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把声音开到最大",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 100
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-04",
+      "kind": 4,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "我只是说声音有点小，先不用调整",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-05",
+      "kind": 5,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我查一下音量现在是多少",
+          "tool": "self_get_device_status",
+          "required": [
+            "50|五十"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-06",
+      "kind": 6,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我定一个今晚十点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-07",
+      "kind": 7,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "给我保存一条便签，买牛奶，不定时",
+          "tool": "note_add",
+          "notes": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-08",
+      "kind": 8,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "别调了，我只是问问",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-09",
+      "kind": 9,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你能听出我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-10",
+      "kind": 10,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "今天的事情真多，我只是吐槽，别给方案",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-11",
+      "kind": 11,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你记一下，我的钥匙放在绿色盒子里",
+          "tool": "memory_add"
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-12",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "暂时别开玩笑，今天就普通聊两句",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-13",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你帮我把声音改成四十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 40
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-14",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕调整到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-15",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把声音开到最大",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 100
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-16",
+      "kind": 4,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "我只是说声音有点小，先不用调整",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-17",
+      "kind": 5,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我查一下音量现在是多少",
+          "tool": "self_get_device_status",
+          "required": [
+            "50|五十"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-18",
+      "kind": 6,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我定一个今晚十点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-19",
+      "kind": 7,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我保存一条便签，买牛奶，不定时",
+          "tool": "note_add",
+          "notes": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-20",
+      "kind": 8,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "别调了，我只是问问",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-21",
+      "kind": 9,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你能听出我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-22",
+      "kind": 10,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "今天的事情真多，我只是吐槽，别给方案",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-23",
+      "kind": 11,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你记一下，我的钥匙放在绿色盒子里",
+          "tool": "memory_add"
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-24",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "暂时别开玩笑，今天就普通聊两句",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-25",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你帮我把声音改成四十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 40
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-26",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕调整到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-27",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把声音开到最大",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 100
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-28",
+      "kind": 4,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "我只是说声音有点小，先不用调整",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-29",
+      "kind": 5,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我查一下音量现在是多少",
+          "tool": "self_get_device_status",
+          "required": [
+            "50|五十"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-30",
+      "kind": 6,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我定一个今晚十点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-31",
+      "kind": 7,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "帮我保存一条便签，买牛奶，不定时",
+          "tool": "note_add",
+          "notes": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-32",
+      "kind": 8,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "别调了，我只是问问",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-33",
+      "kind": 9,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你能听出我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-34",
+      "kind": 10,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "今天的事情真多，我只是吐槽，别给方案",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-35",
+      "kind": 11,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你记一下，我的钥匙放在绿色盒子里",
+          "tool": "memory_add"
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-36",
+      "kind": 0,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "暂时别开玩笑，今天就普通聊两句",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-37",
+      "kind": 1,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "你帮我把声音改成四十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 40
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-38",
+      "kind": 2,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "屏幕调整到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-39",
+      "kind": 3,
+      "holdout": false,
+      "turns": [
+        {
+          "query": "把声音开到最大",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 100
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-40",
+      "kind": 4,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "我只是说声音有点小，先不用调整",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-41",
+      "kind": 5,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我查一下音量现在是多少",
+          "tool": "self_get_device_status",
+          "required": [
+            "50|五十"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-42",
+      "kind": 6,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我定一个今晚十点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-43",
+      "kind": 7,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我保存一条便签，买牛奶，不定时",
+          "tool": "note_add",
+          "notes": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-44",
+      "kind": 8,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "别调了，我只是问问",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-45",
+      "kind": 9,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "你能听出我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-46",
+      "kind": 10,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "今天的事情真多，我只是吐槽，别给方案",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-47",
+      "kind": 11,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "你记一下，我的钥匙放在绿色盒子里",
+          "tool": "memory_add"
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-48",
+      "kind": 0,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "暂时别开玩笑，今天就普通聊两句",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-49",
+      "kind": 1,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "你帮我把声音改成四十",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 40
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-50",
+      "kind": 2,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "屏幕调整到百分之九十",
+          "tool": "self_screen_set_brightness",
+          "level": 4
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-51",
+      "kind": 3,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "把声音开到最大",
+          "tool": "self_audio_speaker_set_volume",
+          "volume": 100
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-52",
+      "kind": 4,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "我只是说声音有点小，先不用调整",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-53",
+      "kind": 5,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我查一下音量现在是多少",
+          "tool": "self_get_device_status",
+          "required": [
+            "50|五十"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-54",
+      "kind": 6,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我定一个今晚十点半的闹钟",
+          "tool": "alarm_set",
+          "alarms": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-55",
+      "kind": 7,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "帮我保存一条便签，买牛奶，不定时",
+          "tool": "note_add",
+          "notes": 1
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-56",
+      "kind": 8,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "别调了，我只是问问",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-57",
+      "kind": 9,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "你能听出我是谁吗",
+          "tool": null,
+          "required": [
+            "测试用户|默认用户|没听出"
+          ]
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-58",
+      "kind": 10,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "今天的事情真多，我只是吐槽，别给方案",
+          "tool": null
+        }
+      ],
+      "card": false
+    },
+    {
+      "id": "single-59",
+      "kind": 11,
+      "holdout": true,
+      "turns": [
+        {
+          "query": "你记一下，我的钥匙放在绿色盒子里",
+          "tool": "memory_add"
+        }
+      ],
+      "card": false
+    }
+  ],
+  "counts": {
+    "segments": 60,
+    "combo_turns": 300,
+    "standalone": 60,
+    "holdout_segments": 20
+  },
+  "legacy_corpus_sha256": "e54988fffcc8d3958fc35a6ce0ddc83ff6cad7fb7d1ccb171067c87b48710d44",
+  "fixture_corrections": [
+    {
+      "group": "combo-09",
+      "turn": 2,
+      "reason": "Firmware Act clears current_instance_id and GetCurrentJson returns active=false after secondary; preserve original request but expect clarification before any further write.",
+      "source": "main/reminder_coordinator.cc:2280; main/mcp_tools/mcp_tools_card.cc:164",
+      "old_expected": {
+        "query": "这次先跳过，之后的别动",
+        "tool": "reminder_action",
+        "card_action": "tertiary"
+      }
+    },
+    {
+      "group": "combo-29",
+      "turn": 2,
+      "reason": "Firmware Act clears current_instance_id and GetCurrentJson returns active=false after secondary; preserve original request but expect clarification before any further write.",
+      "source": "main/reminder_coordinator.cc:2280; main/mcp_tools/mcp_tools_card.cc:164",
+      "old_expected": {
+        "query": "这次先跳过，之后的别动",
+        "tool": "reminder_action",
+        "card_action": "tertiary"
+      }
+    }
+  ]
+}

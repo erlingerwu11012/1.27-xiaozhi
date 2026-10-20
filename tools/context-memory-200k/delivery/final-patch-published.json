@@ -1,0 +1,9 @@
+{
+  "published": true,
+  "at": "2026-09-29 21:46:50 +0800",
+  "files": {
+    "main/xiaozhi-server/core/connection.py": "16b1c0d10865a983841b38beffc16f02dc7d068a08ac6ae816d02a47a21def4f",
+    "main/xiaozhi-server/core/utils/person_short_memory.py": "5b770c495aa4056b2294e57d1b32a6def9feb71967a8a066abb37b9abad5d466"
+  },
+  "late_summary_rejected": true
+}

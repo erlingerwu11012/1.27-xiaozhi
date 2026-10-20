@@ -1,0 +1,7 @@
+{
+  "main/vision_credentials.h": "c498061d8716727e092fff538af22b8b3aecacd8860de142d15aed5f304c8432",
+  "main/vision_credentials.cc": "671997cbc47dc91b7c965610574665457c19af656f7b07f221b603d72ce00bfc",
+  "main/mcp_tools/mcp_tools_camera.cc": "ab6cb47a261bf2527ba918ea1b30acf064176ed46cb1aa0f0d08d67dc28b1af6",
+  "main/reminder_coordinator.cc": "f411917de2005f2e188497f8b6a7c6365254c59a99c46b208440568304c74804",
+  "tools/test_vision_credentials_host.cpp": "6bf56b3487e77ac4e43fa70accb60e9dcd45c74f72ba774111ab88189c0655e5"
+}

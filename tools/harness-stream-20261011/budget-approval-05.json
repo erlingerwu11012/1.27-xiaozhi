@@ -1,0 +1,8 @@
+{
+  "source": "User reply in current chat",
+  "answer": "允许追加2条，完成发布验收后上线",
+  "previous_limits": {"case": 3050, "model": 2410, "tts": 24, "vision": 0},
+  "approved_limits": {"case": 3052, "model": 2410, "tts": 24, "vision": 0},
+  "scope": "One corrected isolated candidate startup/auth case and one production cutover/30-minute observation case",
+  "existing_charges_and_failures_preserved": true
+}
