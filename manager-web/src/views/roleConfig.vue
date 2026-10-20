@@ -273,7 +273,6 @@ export default {
       this.loadFailedMsg = '';
       this.initializationReady = false;
       this.fetchAgentConfig(this.agentId);
-      this.fetchModelOptions();
     },
 
     takeSnapshot() {
@@ -391,6 +390,8 @@ export default {
             },
           };
           const savedMappings = data.data.functions || [];
+          // 配置读取成功后再加载各类模型选项（读取失败时不再发出一串注定失败的请求）
+          this.fetchModelOptions();
 
           const ensureFuncs = this.allFunctions.length
             ? Promise.resolve()
@@ -736,10 +737,9 @@ export default {
   mounted() {
     const agentId = this.agentId;
     if (agentId) {
+      // 功能列表在 fetchAgentConfig 内按需加载
       this.fetchAgentConfig(agentId);
-      this.fetchAllFunctions().catch(() => {});
     }
-    this.fetchModelOptions();
   },
 
   beforeDestroy() {

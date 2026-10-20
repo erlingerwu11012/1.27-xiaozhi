@@ -165,6 +165,7 @@ export default {
 
 <style scoped>
 .xa-panel { overflow: hidden; }
+.xa-panel ::v-deep .el-table th.el-table__cell:first-child > .cell, .xa-panel ::v-deep .el-table td.el-table__cell:first-child > .cell { padding-left: 20px; }
 .xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
 .xa-result { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .xa-danger { color: var(--xn-danger); }
