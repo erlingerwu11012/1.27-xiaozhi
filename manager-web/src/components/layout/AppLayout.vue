@@ -160,7 +160,7 @@ export default {
     isSuperAdmin() { return this.$store.getters.getIsSuperAdmin; },
     visibleGroups() { return NAV_GROUPS.filter((g) => !g.adminOnly || this.isSuperAdmin); },
     active() { return locate(this.$route.path) || {}; },
-    crumb() { return locate(this.$route.path) || {}; },
+    crumb() { return this.denied ? {} : (locate(this.$route.path) || {}); },   // 无权限时不显示管理员页面名称
     denied() { return this.$route.meta && this.$route.meta.adminOnly && !this.isSuperAdmin; },
     initial() { return (this.userInfo.username || 'U').slice(0, 1).toUpperCase(); },
     balanceState() {

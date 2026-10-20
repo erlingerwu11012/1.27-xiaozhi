@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 
 export const register = () => {
+  // 演示（mock）构建不注册 Service Worker：避免缓存演示包，也避免它预取任何外部资源。real 构建保持原逻辑。
+  if (process.env.VUE_APP_DATA_MODE !== 'real') return;
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       const swUrl = `${process.env.BASE_URL}service-worker.js`;

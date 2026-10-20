@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "analyze": "cross-env ANALYZE=true vue-cli-service build",
-    "check:i18n-ota": "node scripts/check-i18n-ota.js"
+    "check:i18n-ota": "node scripts/check-i18n-ota.js",
+    "check:mock": "node scripts/check-mock-coverage.js"
   },
   "dependencies": {
     "core-js": "^3.41.0",

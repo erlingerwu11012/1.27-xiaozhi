@@ -1,106 +1,52 @@
 <template>
-  <div class="welcome" @keyup.enter="retrievePassword">
-    <el-container style="height: 100%;">
-      <!-- 保持相同的头部 -->
-      <el-header>
-        <div style="display: flex;align-items: center;margin-top: 15px;margin-left: 10px;gap: 10px;">
-          <img loading="lazy" alt="" src="@/assets/xiaozhi-logo.png" style="width: 45px;height: 45px;" />
-          <img loading="lazy" alt="" src="@/assets/xiaozhi-ai.png" style="height: 18px;" />
+  <auth-layout :title="$t('retrievePassword.title')" :subtitle="$t('xn.auth.retrieveSub')">
+    <form class="auth-form" @submit.prevent="retrievePassword">
+      <div class="auth-field">
+        <span class="auth-field__label">{{ $t('retrievePassword.mobile') }}</span>
+        <div class="auth-mobile">
+          <el-select v-model="form.areaCode">
+            <el-option v-for="item in mobileAreaList" :key="item.key" :label="`${item.name} (${item.key})`" :value="item.key" />
+          </el-select>
+          <el-input v-model="form.mobile" :placeholder="$t('retrievePassword.mobilePlaceholder')" autocomplete="tel" />
         </div>
-      </el-header>
-      <div class="login-person">
-        <img loading="lazy" alt="" src="@/assets/login/register-person.png" style="width: 100%;" />
       </div>
-      <el-main style="position: relative;">
-        <form @submit.prevent="retrievePassword">
-          <div class="login-box">
-            <!-- 修改标题部分 -->
-            <div style="display: flex;align-items: center;gap: 20px;margin-bottom: 39px;padding: 0 30px;">
-              <img loading="lazy" alt="" src="@/assets/login/hi.png" style="width: 34px;height: 34px;" />
-              <div class="login-text">{{ $t('retrievePassword.title') }}</div>
-              <div class="login-welcome">
-                {{ $t('retrievePassword.subtitle') }}
-              </div>
-            </div>
-
-            <div style="padding: 0 30px;">
-              <!-- 手机号输入 -->
-              <div class="input-box">
-                <div style="display: flex; align-items: center; width: 100%;">
-                  <el-select v-model="form.areaCode" style="width: 220px; margin-right: 10px;">
-                    <el-option v-for="item in mobileAreaList" :key="item.key" :label="`${item.name} (${item.key})`"
-                      :value="item.key" />
-                  </el-select>
-                  <el-input v-model="form.mobile" :placeholder="$t('retrievePassword.mobilePlaceholder')" />
-                </div>
-              </div>
-
-              <div style="display: flex; align-items: center; margin-top: 20px; width: 100%; gap: 10px;">
-                <div class="input-box" style="width: calc(100% - 130px); margin-top: 0;">
-                  <img loading="lazy" alt="" class="input-icon" src="@/assets/login/shield.png" />
-                  <el-input v-model="form.captcha" :placeholder="$t('retrievePassword.captchaPlaceholder')" style="flex: 1;" />
-                </div>
-                <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" alt="验证码"
-                  style="width: 150px; height: 40px; cursor: pointer;" @click="fetchCaptcha" />
-              </div>
-
-              <!-- 手机验证码 -->
-              <div style="display: flex; align-items: center; margin-top: 20px; width: 100%; gap: 10px;">
-                <div class="input-box" style="width: calc(100% - 130px); margin-top: 0;">
-                  <img loading="lazy" alt="" class="input-icon" src="@/assets/login/phone.png" />
-                  <el-input v-model="form.mobileCaptcha" :placeholder="$t('retrievePassword.mobileCaptchaPlaceholder')" style="flex: 1;" maxlength="6" />
-                </div>
-                <el-button type="primary" class="send-captcha-btn" :disabled="!canSendMobileCaptcha"
-                  @click="sendMobileCaptcha">
-                  <span>
-                    {{ countdown > 0 ? `${countdown}${$t('register.secondsLater')}` : $t('retrievePassword.getMobileCaptcha') }}
-                  </span>
-                </el-button>
-              </div>
-
-              <!-- 新密码 -->
-              <div class="input-box">
-                <img loading="lazy" alt="" class="input-icon" src="@/assets/login/password.png" />
-                <el-input v-model="form.newPassword" :placeholder="$t('retrievePassword.newPasswordPlaceholder')" type="password" show-password />
-              </div>
-
-              <!-- 确认新密码 -->
-              <div class="input-box">
-                <img loading="lazy" alt="" class="input-icon" src="@/assets/login/password.png" />
-                <el-input v-model="form.confirmPassword" :placeholder="$t('retrievePassword.confirmNewPasswordPlaceholder')" type="password" show-password />
-              </div>
-
-              <!-- 修改底部链接 -->
-              <div style="font-weight: 400;font-size: 14px;text-align: left;color: #5778ff;margin-top: 20px;">
-                <div style="cursor: pointer;" @click="goToLogin">{{ $t('retrievePassword.goToLogin') }}</div>
-              </div>
-            </div>
-
-            <!-- 修改按钮文本 -->
-            <div class="login-btn" @click="retrievePassword">{{ $t('retrievePassword.resetButton') }}</div>
-
-            <!-- 保持相同的协议声明 -->
-            <div style="font-size: 14px;color: #979db1;">
-              {{ $t('retrievePassword.agreeTo') }}
-              <div style="display: inline-block;color: #5778FF;cursor: pointer;">{{ $t('register.userAgreement') }}</div>
-              {{ $t('register.and') }}
-              <div style="display: inline-block;color: #5778FF;cursor: pointer;">{{ $t('register.privacyPolicy') }}</div>
+      <div class="auth-field">
+            <span class="auth-field__label">{{ $t('xn.auth.captcha') }}</span>
+            <div class="auth-captcha">
+              <el-input v-model="form.captcha" :placeholder="$t('retrievePassword.captchaPlaceholder')" autocomplete="off" />
+              <button type="button" class="auth-captcha__img" :title="$t('xn.auth.refreshCaptcha')" :aria-label="$t('xn.auth.refreshCaptcha')" @click="fetchCaptcha">
+                <img v-if="captchaUrl" :src="captchaUrl" alt="" /><xn-icon v-else name="refresh" />
+              </button>
             </div>
           </div>
-        </form>
-      </el-main>
-
-      <!-- 保持相同的页脚 -->
-      <el-footer>
-        <version-footer />
-      </el-footer>
-    </el-container>
-  </div>
+      <div class="auth-field">
+        <span class="auth-field__label">{{ $t('retrievePassword.mobileCaptcha') }}</span>
+        <div class="auth-sms">
+          <el-input v-model="form.mobileCaptcha" :placeholder="$t('retrievePassword.mobileCaptchaPlaceholder')" maxlength="6" autocomplete="one-time-code" />
+          <el-button :disabled="!canSendMobileCaptcha" @click="sendMobileCaptcha">
+            {{ countdown > 0 ? `${countdown}${$t('register.secondsLater')}` : $t('retrievePassword.getMobileCaptcha') }}
+          </el-button>
+        </div>
+      </div>
+      <label class="auth-field">
+        <span class="auth-field__label">{{ $t('retrievePassword.newPassword') }}</span>
+        <el-input v-model="form.newPassword" :placeholder="$t('retrievePassword.newPasswordPlaceholder')" type="password" show-password autocomplete="new-password" />
+      </label>
+      <label class="auth-field">
+        <span class="auth-field__label">{{ $t('retrievePassword.confirmNewPassword') }}</span>
+        <el-input v-model="form.confirmPassword" :placeholder="$t('retrievePassword.confirmNewPasswordPlaceholder')" type="password" show-password autocomplete="new-password" />
+      </label>
+      <el-button type="primary" native-type="submit" class="auth-submit">{{ $t('retrievePassword.resetButton') }}</el-button>
+      <div class="auth-links">
+        <a href="javascript:void(0)" @click.prevent="goToLogin">{{ $t('retrievePassword.goToLogin') }}</a>
+      </div>
+    </form>
+  </auth-layout>
 </template>
 
 <script>
 import Api from '@/apis/api';
-import VersionFooter from '@/components/VersionFooter.vue';
+import AuthLayout from '@/components/layout/AuthLayout.vue';
 import { getUUID, goToPage, showDanger, showSuccess, validateMobile, sm2Encrypt } from '@/utils';
 import { mapState } from 'vuex';
 
@@ -110,7 +56,7 @@ import { changeLanguage } from '@/i18n';
 export default {
   name: 'retrieve',
   components: {
-    VersionFooter
+    AuthLayout
   },
   computed: {
     ...mapState({
@@ -269,24 +215,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import './auth.scss';
-
-.send-captcha-btn {
-  margin-right: -5px;
-  min-width: 100px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 4px;
-  font-size: 14px;
-  background: rgb(87, 120, 255);
-  border: none;
-  padding: 0;
-
-  &:disabled {
-    background: #c0c4cc;
-    cursor: not-allowed;
-  }
-}
-</style>

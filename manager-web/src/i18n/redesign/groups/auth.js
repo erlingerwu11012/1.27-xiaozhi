@@ -10,6 +10,7 @@ export default {
     'xn.auth.captcha': '图形验证码',
     'xn.auth.refreshCaptcha': '看不清，换一张',
     'xn.auth.demoTitle': '演示模式',
+    'xn.auth.retrieveSub': '用注册时绑定的手机号重置密码。',
   },
   en: {
     'login.welcome': 'Sign in to manage your agents, devices and account.',
@@ -21,5 +22,6 @@ export default {
     'xn.auth.captcha': 'Captcha',
     'xn.auth.refreshCaptcha': 'Get a new captcha',
     'xn.auth.demoTitle': 'Demo mode',
+    'xn.auth.retrieveSub': 'Reset your password with the mobile number on your account.',
   },
 };
