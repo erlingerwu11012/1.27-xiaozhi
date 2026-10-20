@@ -110,7 +110,7 @@
       </main>
     </div>
 
-    <device-bind-dialog :visible.sync="bindVisible" :agent-id="bindAgentId" @bound="onDevicesChanged" />
+    <device-bind-dialog :visible.sync="bindVisible" :agent-id="bindAgentId" :mode="bindMode" @bound="onDevicesChanged" />
     <change-password-dialog v-model="passwordVisible" />
     <mock-panel v-if="mock" :visible.sync="mockPanel" :is-admin="isSuperAdmin" />
   </div>
@@ -143,6 +143,7 @@ export default {
       deviceTotal: null,
       bindVisible: false,
       bindAgentId: '',
+      bindMode: 'code',
       passwordVisible: false,
       mockPanel: false,
       mock: isMockMode(),
@@ -235,6 +236,7 @@ export default {
     },
     openBind(payload) {
       this.bindAgentId = (payload && payload.agentId) || '';
+      this.bindMode = (payload && payload.mode) || 'code';
       this.bindVisible = true;
     },
     onDevicesChanged(info) {
@@ -306,7 +308,7 @@ export default {
   height: var(--xn-topbar-h); padding: 0 32px; background: rgba(238, 242, 245, 0.92);
   backdrop-filter: blur(8px); border-bottom: 1px solid transparent;
 }
-.xn-top__menu { display: none; }
+.xn-top .xn-top__menu { display: none; }
 .xn-crumb { display: flex; align-items: center; gap: 6px; min-width: 0; font-size: 14px; color: var(--xn-ink-3); white-space: nowrap; }
 .xn-crumb__link { color: var(--xn-ink-3); }
 .xn-crumb__link:hover { color: var(--xn-ink); }
@@ -348,7 +350,7 @@ export default {
   .is-nav-open .xn-side { transform: none; }
   .is-nav-open .xn-scrim { display: block; position: fixed; inset: 0; z-index: 35; background: rgba(30, 43, 64, 0.32); }
   .xn-top { padding: 0 16px; gap: 8px; }
-  .xn-top__menu { display: grid; }
+  .xn-top .xn-top__menu { display: grid; }
   .xn-crumb__group, .xn-crumb .xn-crumb__sep:first-of-type, .xn-account__name { display: none; }
 }
 @media (max-width: 640px) {

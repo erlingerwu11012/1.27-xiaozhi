@@ -1,296 +1,165 @@
 <template>
-  <div class="device-item glass-panel" :class="{ 'has-bound-device': hasBoundDevice }">
-    <!-- 已绑定设备时出现：旋转彩虹描边（与官方语音输入框同一套做法） -->
-    <span v-if="hasBoundDevice" class="device-item__ring" aria-hidden="true"></span>
-    <div class="device-item-header">
-      <div class="device-title">
-        {{ device.agentName }}
+  <article class="ac">
+    <header class="ac__head">
+      <span class="ac__ava" aria-hidden="true">{{ initial }}</span>
+      <div class="ac__id">
+        <h3 class="ac__name xn-clip" :title="device.agentName">{{ device.agentName }}</h3>
+        <p class="ac__meta">
+          <span v-if="count > 0" class="ac__bound"><i class="dot"></i>{{ $t('xn.home.boundN', { n: count }) }}</span>
+          <span v-else class="ac__unbound"><i class="dot"></i>{{ $t('xn.home.unbound') }}</span>
+          <span>{{ $t('xn.home.lastTalk', { t: lastTime }) }}</span>
+        </p>
       </div>
-      <div class="device-actions">
-        <img src="@/assets/home/delete.png" alt="" class="device-icon" @click.stop="handleDelete" />
-        <el-tooltip class="item" effect="dark" :content="device.systemPrompt" placement="top"
-          popper-class="custom-tooltip">
-          <img src="@/assets/home/info.png" alt="" class="device-icon" />
-        </el-tooltip>
+      <el-tooltip :content="$t('xn.home.deleteAgent')" placement="top">
+        <button type="button" class="ac__del" :aria-label="$t('xn.home.deleteAgent')" @click.stop="handleDelete">
+          <xn-icon name="trash" />
+        </button>
+      </el-tooltip>
+    </header>
+
+    <p class="ac__prompt" :class="{ 'is-empty': !device.systemPrompt }">{{ device.systemPrompt || $t('xn.home.noPrompt') }}</p>
+
+    <dl class="ac__spec">
+      <div><dt>{{ $t('xn.home.llm') }}</dt><dd class="xn-clip">{{ device.llmModelName || '—' }}</dd></div>
+      <div>
+        <dt>{{ $t('xn.home.voice') }}</dt>
+        <dd class="xn-clip">{{ device.ttsVoiceName || '—' }}<span v-if="device.ttsModelName" class="xn-muted">（{{ device.ttsModelName }}）</span></dd>
       </div>
+      <div><dt>{{ $t('xn.home.memory') }}</dt><dd class="xn-clip">{{ device.memName || '—' }}</dd></div>
+    </dl>
+
+    <!-- 绑定的设备：已绑定 ≠ 在线，这里只显示绑定关系与最后对话时间 -->
+    <div class="ac__devices">
+      <template v-if="device.devices && device.devices.length">
+        <div v-for="d in device.devices.slice(0, 2)" :key="d.id" class="ac__dev">
+          <xn-icon name="device" class="xn-muted" />
+          <span class="ac__dev-name xn-clip">{{ d.alias || d.boardName || d.board }}</span>
+          <span class="ac__dev-mac xn-num xn-clip">{{ d.macAddress }}</span>
+          <span class="ac__dev-time">{{ relTime(d.lastConnectedAt) }}</span>
+        </div>
+        <router-link v-if="device.devices.length > 2" class="ac__more" :to="devicesRoute">
+          {{ $t('xn.home.moreDevices', { n: device.devices.length - 2 }) }}
+        </router-link>
+      </template>
+      <div v-else-if="count === 0" class="ac__nodev">
+        <span>{{ $t('xn.home.noDevice') }}</span>
+        <el-button type="text" @click="$emit('bind', device.agentId)">{{ $t('xn.home.bindDevice') }}</el-button>
+      </div>
+      <div v-else class="ac__nodev xn-muted">{{ $t('xn.home.loadingDevices') }}</div>
     </div>
-    <div class="device-name">
-      {{ $t('home.languageModel') }}：{{ device.llmModelName }}
-    </div>
-    <div class="device-name">
-      {{ $t('home.voiceModel') }}：{{ device.ttsModelName }} ({{ device.ttsVoiceName }})
-    </div>
-    <div class="btn-group">
-      <div class="settings-btn" @click="handleConfigure">
-        {{ $t('home.configureRole') }}
-      </div>
-      <div class="settings-btn" @click="handleUnifiedUserManagement">
-        用户管理
-      </div>
-      <div class="settings-btn" @click="handleDeviceManage">
-        {{ $t('home.deviceManagement') }}({{ device.deviceCount }})
-      </div>
-      <div :class="['settings-btn', { 'disabled-btn': device.memModelId === 'Memory_nomem' }]"
-        @click="handleChatHistory">
-        <el-tooltip v-if="device.memModelId === 'Memory_nomem'" :content="$t('home.enableMemory')" placement="top">
-          <span>{{ $t('home.chatHistory') }}</span>
-        </el-tooltip>
-        <span v-else>{{ $t('home.chatHistory') }}</span>
-      </div>
-    </div>
-    <div class="version-info">
-      <div>{{ $t('home.lastConversation') }}：{{ formattedLastConnectedTime }}</div>
-    </div>
-  </div>
+
+    <footer class="ac__actions">
+      <el-button type="primary" size="small" @click="handleConfigure">
+        <xn-icon name="tune" /> {{ $t('home.configureRole') }}
+      </el-button>
+      <el-button type="text" @click="handleDeviceManage">{{ $t('xn.home.devices') }} <span class="xn-num">{{ count }}</span></el-button>
+      <el-button type="text" @click="handleUnifiedUserManagement">{{ $t('xn.home.identities') }}</el-button>
+      <el-tooltip :disabled="!noMemory" :content="$t('home.enableMemory')" placement="top">
+        <span class="ac__chat-wrap">
+          <el-button type="text" :disabled="noMemory" @click="handleChatHistory">{{ $t('home.chatHistory') }}</el-button>
+        </span>
+      </el-tooltip>
+    </footer>
+  </article>
 </template>
 
 <script>
-import i18n from '@/i18n';
+/**
+ * 首页的智能体卡片（沿用原 DeviceItem 的跳转与事件：配置角色、设备管理、人员身份、聊天记录、删除）。
+ * 记忆为“无记忆”(Memory_nomem) 时聊天记录不可用，原逻辑不变，只是把原因直接写在提示里。
+ */
+export function relativeTime(vm, value) {
+  if (!value) return vm.$t('home.noConversation');
+  const diffMinutes = Math.floor((Date.now() - new Date(value).getTime()) / 60000);
+  if (diffMinutes <= 1) return vm.$t('home.justNow');
+  if (diffMinutes < 60) return vm.$t('home.minutesAgo', { minutes: diffMinutes });
+  if (diffMinutes < 24 * 60) return vm.$t('home.hoursAgo', { hours: Math.floor(diffMinutes / 60), minutes: diffMinutes % 60 });
+  return String(value).slice(0, 16);
+}
 
 export default {
   name: 'DeviceItem',
   props: {
-    device: { type: Object, required: true }
-  },
-  data() {
-    return { switchValue: false }
+    device: { type: Object, required: true },
   },
   computed: {
-    // 该智能体名下是否已绑定设备（deviceCount 由 /agent/list 下发）
-    // 大于 0 时卡片显示旋转彩虹描边，用于一眼区分「有设备」的智能体
-    hasBoundDevice() {
-      const count = Number(this.device && this.device.deviceCount);
-      return Number.isFinite(count) && count > 0;
-    },
-    formattedLastConnectedTime() {
-      if (!this.device.lastConnectedAt) return this.$t('home.noConversation');
-
-      const lastTime = new Date(this.device.lastConnectedAt);
-      const now = new Date();
-      const diffMinutes = Math.floor((now - lastTime) / (1000 * 60));
-
-      if (diffMinutes <= 1) {
-        return this.$t('home.justNow');
-      } else if (diffMinutes < 60) {
-        return this.$t('home.minutesAgo', { minutes: diffMinutes });
-      } else if (diffMinutes < 24 * 60) {
-        const hours = Math.floor(diffMinutes / 60);
-        const minutes = diffMinutes % 60;
-        return this.$t('home.hoursAgo', { hours, minutes });
-      } else {
-        return this.device.lastConnectedAt;
-      }
-    }
+    count() { return Number(this.device.deviceCount) || 0; },
+    noMemory() { return this.device.memModelId === 'Memory_nomem'; },
+    initial() { return Array.from(this.device.agentName || '?')[0]; },
+    lastTime() { return relativeTime(this, this.device.lastConnectedAt); },
+    devicesRoute() { return { path: '/device-management', query: { agentId: this.device.agentId } }; },
   },
   methods: {
+    relTime(v) { return relativeTime(this, v); },
     handleDelete() {
-      this.$emit('delete', this.device.agentId)
+      this.$emit('delete', this.device.agentId);
     },
     handleConfigure() {
       this.$router.push({ path: '/role-config', query: { agentId: this.device.agentId } });
     },
-    handleVoicePrint() {
-      this.$router.push({ path: '/voice-print', query: { agentId: this.device.agentId } });
-    },
     handleUnifiedUserManagement() {
       this.$router.push({ path: '/unified-user-management', query: { agentId: this.device.agentId } });
     },
-    handleFaceManagement() {
-      this.$router.push({ path: '/face-management', query: { agentId: this.device.agentId } });
-    },
     handleDeviceManage() {
-      this.$router.push({ path: '/device-management', query: { agentId: this.device.agentId } });
+      this.$router.push(this.devicesRoute);
     },
     handleChatHistory() {
-      if (this.device.memModelId === 'Memory_nomem') {
-        return
-      }
-      this.$emit('chat-history', { agentId: this.device.agentId, agentName: this.device.agentName })
-    }
-  }
-}
+      if (this.noMemory) return;
+      this.$emit('chat-history', { agentId: this.device.agentId, agentName: this.device.agentName });
+    },
+  },
+};
 </script>
+
 <style scoped>
-.device-item.glass-panel {
-  background: #fff;
-  border: none;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  border-radius: 12px;
+.ac {
+  display: flex; flex-direction: column; min-width: 0; padding: 20px 20px 14px;
+  background: #fff; border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg);
+}
+.ac:hover { border-color: #C9D4DE; }
+.ac__head { display: flex; align-items: flex-start; gap: 12px; }
+.ac__ava {
+  display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--xn-lake-soft); color: var(--xn-lake-ink); font: 600 19px/1 var(--xn-serif);
+}
+.ac__id { flex: 1; min-width: 0; }
+.ac__name { margin: 0; font: 600 19px/1.35 var(--xn-serif); letter-spacing: 0.02em; color: var(--xn-ink); }
+.ac__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 14px; margin: 4px 0 0; font-size: 13px; color: var(--xn-ink-3); }
+.ac__bound, .ac__unbound { display: inline-flex; align-items: center; gap: 6px; }
+.ac__bound { color: var(--xn-lake); font-weight: 500; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.ac__unbound .dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--xn-ink-4); }
+.ac__del {
+  display: grid; place-items: center; flex: none; width: 32px; height: 32px; margin: -4px -6px 0 0;
+  border: 0; border-radius: var(--xn-r); background: none; color: var(--xn-ink-3); font-size: 18px; cursor: pointer;
+}
+.ac__del:hover { background: var(--xn-danger-soft); color: var(--xn-danger); }
+
+.ac__prompt {
+  margin: 14px 0 0; font-size: 14px; line-height: 1.7; color: var(--xn-ink-2);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.4em;
+}
+.ac__prompt.is-empty { color: var(--xn-ink-4); }
+
+.ac__spec { margin: 14px 0 0; padding: 12px 14px; display: grid; gap: 6px; border-radius: var(--xn-r); background: var(--xn-mist-2); }
+.ac__spec div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 8px; font-size: 13px; }
+.ac__spec dt { color: var(--xn-ink-3); }
+.ac__spec dd { margin: 0; color: var(--xn-ink); }
+
+.ac__devices { margin-top: 12px; min-height: 64px; }
+.ac__dev { display: grid; grid-template-columns: 16px minmax(0, max-content) minmax(96px, 1fr) auto; align-items: center; gap: 8px; padding: 7px 0; font-size: 13px; border-bottom: 1px dashed var(--xn-line-2); }
+.ac__dev:last-of-type { border-bottom: 0; }
+.ac__dev .xn-icon { font-size: 15px; }
+.ac__dev-name { font-weight: 600; color: var(--xn-ink); }
+.ac__dev-mac { color: var(--xn-ink-3); }
+.ac__dev-time { color: var(--xn-ink-3); white-space: nowrap; }
+.ac__more { display: inline-block; margin-top: 4px; font-size: 13px; }
+.ac__nodev {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 4px 6px 4px 14px;
+  border: 1px dashed var(--xn-line); border-radius: var(--xn-r); font-size: 13px; color: var(--xn-ink-3);
 }
 
-/* ===== 已绑定设备：旋转彩虹描边 =====
-   与「官方语音」输入框（styles/official-tts-studio.scss 的 .ot-composer__ring）同一套做法：
-   外层裁出圆角矩形，内部一张更大的渐变盘持续自转，视觉上是「彩虹彗星绕边跑」。
-   描边 = 卡片圆角矩形 与 ::after 白底内芯（inset 2px）之间露出的那 2px。 */
-.device-item.has-bound-device {
-  position: relative;
-  /* 裁掉旋转到卡片外的渐变盘 */
-  overflow: hidden;
-  /* 自成层叠上下文：把内部 ring/内容 的 z-index 关在卡片里，
-     避免逃逸到全局盖住相邻卡片或顶栏 */
-  isolation: isolate;
-  /* 有设备的卡片给一圈柔和外发光，与描边呼应 */
-  box-shadow:
-    0 0 18px rgba(167, 139, 250, 0.22),
-    0 0 34px rgba(125, 211, 252, 0.14),
-    0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-.device-item__ring {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.device-item__ring::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 220%;
-  aspect-ratio: 1 / 1;
-  /* 渐变里带一段浅灰，转动时就是「彩虹彗星 + 灰尾巴」 */
-  background: conic-gradient(
-    from 0deg,
-    #dfe2e8 0deg,
-    #7dd3fc 40deg,
-    #a78bfa 95deg,
-    #f9a8d4 150deg,
-    #fcd34d 205deg,
-    #86efac 260deg,
-    #7dd3fc 305deg,
-    #dfe2e8 350deg,
-    #dfe2e8 360deg
-  );
-  animation: device-ring-spin 5s linear infinite;
-  will-change: transform;
-}
-
-.device-item.has-bound-device::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  border-radius: 10px;
-  background: #fff;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* 内容提到描边与白底内芯之上（::after 不会被 * 选中，层级不变） */
-.device-item.has-bound-device > *:not(.device-item__ring) {
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes device-ring-spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* 尊重系统的「减少动态效果」偏好 */
-@media (prefers-reduced-motion: reduce) {
-  .device-item__ring::before {
-    animation: none;
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-}
-
-.device-item {
-  width: 100%;
-  padding: 24px;
-  box-sizing: border-box;
-  color: #1a1a2e;
-}
-
-.device-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.device-title {
-  font-weight: 600;
-  font-size: 17px;
-  text-align: left;
-  color: #1a1a2e;
-}
-
-.device-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.device-icon {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.device-name {
-  margin: 7px 0 10px;
-  font-weight: 400;
-  font-size: 12px;
-  color: #6b7280;
-  text-align: left;
-}
-
-.btn-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.settings-btn {
-  font-size: 12px;
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.08);
-  width: auto;
-  padding: 0 14px;
-  height: 26px;
-  line-height: 26px;
-  cursor: pointer;
-  border-radius: 999px;
-  border: 1px solid rgba(37, 99, 235, 0.15);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.settings-btn:hover {
-  background: rgba(37, 99, 235, 0.15);
-}
-
-.version-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-  font-size: 12px;
-  color: #9ca3af;
-  font-weight: 400;
-}
-
-.disabled-btn {
-  background: rgba(148, 163, 184, 0.1);
-  color: #9ca3af;
-  cursor: not-allowed;
-  border-color: rgba(148, 163, 184, 0.3);
-  box-shadow: none;
-}
-</style>
-
-<style>
-.custom-tooltip {
-  max-width: 400px;
-  word-break: break-word;
-}
+.ac__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 14px; margin-top: auto; padding-top: 14px; }
+.ac__actions .el-button + .el-button { margin-left: 0; }
+.ac__chat-wrap { display: inline-block; }
 </style>

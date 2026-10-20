@@ -43,6 +43,8 @@ route('GET', '/user/captcha', ({ query }) => {
   let code = '';
   for (let i = 0; i < 4; i++) code += alphabet[Math.floor(Math.random() * alphabet.length)];
   captchas.set(query.uuid, code);
+  // 仅 mock 构建：供自动化检查读取最近一次演示验证码（real 构建不包含 src/mock）
+  if (typeof window !== 'undefined') (window.__xnMock = window.__xnMock || {}).lastCaptcha = code;
   return blob(captchaBlob(code));
 });
 

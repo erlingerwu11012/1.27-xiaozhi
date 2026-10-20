@@ -1,139 +1,115 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('device.management')" :description="$t('xn.devices.desc')">
+      <el-button @click="handleRecoverDevice" :disabled="!currentAgentId"><xn-icon name="refresh" /> {{ $t('xn.devices.recover') }}</el-button>
+      <el-button @click="handleManualAddDevice" :disabled="!currentAgentId"><xn-icon name="edit" /> {{ $t('xn.devices.manual') }}</el-button>
+      <el-button type="primary" @click="handleAddDevice" :disabled="!currentAgentId"><xn-icon name="plus" /> {{ $t('xn.top.addDevice') }}</el-button>
+    </page-header>
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t('device.management') }}</h2>
-      <div class="right-operations">
-        <el-input :placeholder="$t('device.searchPlaceholder')" v-model="searchKeyword" class="search-input"
-          @keyup.enter.native="handleSearch" clearable />
-        <el-button class="btn-search" @click="handleSearch">{{ $t('device.search') }}</el-button>
-      </div>
+    <div v-if="agentsLoaded && !agents.length" class="xn-panel">
+      <xn-empty icon="agent" :title="$t('xn.devices.noAgentTitle')" :description="$t('xn.devices.noAgentDesc')">
+        <el-button type="primary" @click="$router.push({ path: '/home', query: { create: '1' } })">{{ $t('home.addAgent') }}</el-button>
+      </xn-empty>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="device-card" shadow="never">
-            <el-table ref="deviceTable" :data="paginatedDeviceList" class="transparent-table"
-              :header-cell-class-name="headerCellClassName" v-loading="loading"
-              :element-loading-text="$t('deviceManagement.loading')" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)">
-              <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
-                <template slot-scope="scope">
-                  <el-checkbox v-model="scope.row.selected"></el-checkbox>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('device.model')" prop="model" align="center">
-                <template slot-scope="scope">
-                  {{ getFirmwareTypeName(scope.row.model) }}
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('device.firmwareVersion')" prop="firmwareVersion"
-                align="center"></el-table-column>
-              <el-table-column :label="$t('device.macAddress')" prop="macAddress" align="center"></el-table-column>
-              <el-table-column :label="$t('device.bindTime')" prop="bindTime" align="center"></el-table-column>
-              <el-table-column :label="$t('device.lastConversation')" prop="lastConversation"
-                align="center"></el-table-column>
-              <el-table-column :label="$t('device.remark')" align="center">
-                <template #default="{ row }">
-                  <el-input v-show="row.isEdit" v-model="row.remark" size="mini" maxlength="64" show-word-limit
-                    @blur="onRemarkBlur(row)" @keyup.enter.native="onRemarkEnter(row)" />
-                  <span v-show="!row.isEdit" class="remark-view">
-                    <i class="el-icon-edit" @click="row.isEdit = true" style="cursor: pointer;"></i>
-                    <span @click="row.isEdit = true">
-                      {{ row.remark || '-' }}
-                    </span>
-                  </span>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('device.operation')" align="center" width="160">
-                <template slot-scope="scope">
-                  <el-button size="mini" type="text" @click="handleOpenAssets(scope.row.device_id)">
-                    {{ $t('deviceAssets.entry') }}
-                  </el-button>
-                  <el-button size="mini" type="text" @click="handleUnbind(scope.row.device_id)">
-                    {{ $t('device.unbind') }}
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-
-            <div class="table_bottom">
-              <div class="ctrl_btn">
-                <el-button size="mini" type="primary" class="select-all-btn" @click="handleSelectAll">
-                  {{ isCurrentPageAllSelected ? $t('common.deselectAll') : $t('common.selectAll') }}
-                </el-button>
-                <el-button type="success" size="mini" class="add-device-btn" @click="handleAddDevice">
-                  {{ $t('device.bindWithCode') }}
-                </el-button>
-                <el-button type="warning" size="mini" class="add-device-btn" @click="handleRecoverDevice">
-                  {{ $t('device.recoverConnection') }}
-                </el-button>
-                <el-button type="success" size="mini" class="add-device-btn" @click="handleManualAddDevice">
-                  {{ $t('device.manualAdd') }}
-                </el-button>
-                <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteSelected">
-                  {{ $t('device.unbind') }}
-                </el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select v-model="pageSize" @change="handlePageSizeChange" class="page-size-select">
-                  <el-option v-for="item in pageSizeOptions" :key="item"
-                    :label="$t('dictManagement.itemsPerPage').replace('{items}', item)" :value="item">
-                  </el-option>
-                </el-select>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                  {{ $t('dictManagement.firstPage') }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                  {{ $t('dictManagement.prevPage') }}
-                </button>
-                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                  :class="{ active: page === currentPage }" @click="goToPage(page)">
-                  {{ page }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                  {{ $t('dictManagement.nextPage') }}
-                </button>
-                <span class="total-text">
-                  {{ $t('dictManagement.totalRecords').replace('{total}', deviceList.length) }}
-                </span>
-              </div>
-            </div>
-          </el-card>
-        </div>
+    <template v-else>
+      <div class="xn-toolbar">
+        <label class="dm-agent">
+          <span class="xn-muted">{{ $t('xn.devices.agent') }}</span>
+          <el-select :value="currentAgentId" filterable :loading="!agentsLoaded" @change="selectAgent">
+            <el-option v-for="a in agents" :key="a.id" :label="a.agentName" :value="a.id">
+              <span>{{ a.agentName }}</span><span class="dm-opt-count xn-num">{{ a.deviceCount || 0 }}</span>
+            </el-option>
+          </el-select>
+        </label>
+        <el-input v-model="searchKeyword" :placeholder="$t('xn.devices.searchPlaceholder')" clearable
+          @keyup.enter.native="handleSearch" @clear="handleSearch" @input="handleSearch">
+          <xn-icon slot="prefix" name="search" class="dm-search-icon" />
+        </el-input>
+        <span class="xn-toolbar__grow"></span>
+        <template v-if="selectedCount">
+          <span class="xn-muted">{{ $t('xn.devices.selected', { n: selectedCount }) }}</span>
+          <el-button type="danger" plain size="small" @click="deleteSelected"><xn-icon name="link" /> {{ $t('xn.devices.unbindSelected') }}</el-button>
+        </template>
       </div>
-    </div>
 
-    <AddDeviceDialog :visible.sync="addDeviceDialogVisible" :agent-id="currentAgentId" :mode="deviceDialogMode"
-      @refresh="fetchBindDevices(currentAgentId)" />
-    <ManualAddDeviceDialog :visible.sync="manualAddDeviceDialogVisible" :agent-id="currentAgentId"
-      @refresh="fetchBindDevices(currentAgentId)" />
+      <div class="xn-panel xn-panel--flush dm-panel">
+        <xn-empty v-if="loadFailed && !loading" error @retry="fetchBindDevices(currentAgentId)" />
+        <template v-else>
+          <el-table ref="deviceTable" :data="paginatedDeviceList" v-loading="loading" row-key="device_id">
+            <el-table-column width="52" align="center">
+              <template slot="header">
+                <el-checkbox :value="isCurrentPageAllSelected" :disabled="!paginatedDeviceList.length"
+                  :aria-label="isCurrentPageAllSelected ? $t('common.deselectAll') : $t('common.selectAll')" @change="handleSelectAll" />
+              </template>
+              <template slot-scope="scope">
+                <el-checkbox v-model="scope.row.selected" />
+              </template>
+            </el-table-column>
+            <el-table-column :label="$t('device.remark')" min-width="200">
+              <template #default="{ row }">
+                <el-input v-if="row.isEdit" v-model="row.remark" size="small" maxlength="64" show-word-limit autofocus
+                  @blur="onRemarkBlur(row)" @keyup.enter.native="onRemarkEnter(row)" />
+                <button v-else type="button" class="dm-remark" :title="$t('xn.devices.editRemark')" @click="row.isEdit = true">
+                  <span :class="{ 'xn-muted': !row.remark }">{{ row.remark || $t('xn.devices.noRemark') }}</span>
+                  <xn-icon name="edit" class="dm-remark__icon" />
+                </button>
+              </template>
+            </el-table-column>
+            <el-table-column :label="$t('device.model')" min-width="150">
+              <template slot-scope="scope">{{ getFirmwareTypeName(scope.row.model) }}</template>
+            </el-table-column>
+            <el-table-column :label="$t('device.macAddress')" min-width="160">
+              <template slot-scope="{ row }"><span class="xn-num">{{ row.macAddress }}</span></template>
+            </el-table-column>
+            <el-table-column :label="$t('device.firmwareVersion')" prop="firmwareVersion" min-width="100" />
+            <el-table-column :label="$t('device.bindTime')" min-width="160" class-name="dm-nowrap">
+              <template slot-scope="{ row }"><span class="xn-num">{{ (row.bindTime || '').slice(0, 16) }}</span></template>
+            </el-table-column>
+            <el-table-column :label="$t('device.lastConversation')" min-width="140">
+              <template slot-scope="{ row }">{{ relTime(row.lastConversation) }}</template>
+            </el-table-column>
+            <el-table-column :label="$t('device.operation')" width="170" align="right">
+              <template slot-scope="scope">
+                <el-button type="text" @click="handleOpenAssets(scope.row.device_id)">{{ $t('deviceAssets.entry') }}</el-button>
+                <el-button type="text" class="dm-danger" @click="handleUnbind(scope.row.device_id)">{{ $t('device.unbind') }}</el-button>
+              </template>
+            </el-table-column>
+            <template slot="empty">
+              <xn-empty v-if="!deviceList.length" icon="device" :title="$t('xn.devices.emptyTitle')" :description="$t('xn.devices.emptyDesc')">
+                <el-button type="primary" @click="handleAddDevice"><xn-icon name="plus" /> {{ $t('xn.top.addDevice') }}</el-button>
+              </xn-empty>
+              <xn-empty v-else icon="search" :title="$t('xn.devices.noMatch')" />
+            </template>
+          </el-table>
+          <div v-if="filteredDeviceList.length" class="dm-foot">
+            <span class="xn-muted dm-note"><xn-icon name="info" /> {{ $t('xn.devices.boundNotOnline') }}</span>
+            <el-pagination background layout="total, sizes, prev, pager, next" :total="filteredDeviceList.length"
+              :page-size="pageSize" :page-sizes="pageSizeOptions" :current-page="currentPage"
+              @size-change="handlePageSizeChange" @current-change="goToPage" />
+          </div>
+        </template>
+      </div>
+    </template>
+
     <DeviceAssetsDialog :visible.sync="assetsDialogVisible" :device-id="selectedDeviceIdForAssets" />
-
   </div>
 </template>
 
 <script>
 import Api from '@/apis/api';
-import AddDeviceDialog from "@/components/AddDeviceDialog.vue";
-import HeaderBar from "@/components/HeaderBar.vue";
-import ManualAddDeviceDialog from "@/components/ManualAddDeviceDialog.vue";
 import DeviceAssetsDialog from "@/components/DeviceAssetsDialog.vue";
+import { relativeTime } from "@/components/DeviceItem.vue";
 
 export default {
   components: {
-    HeaderBar,
-    AddDeviceDialog,
-    ManualAddDeviceDialog,
     DeviceAssetsDialog
   },
   data() {
     return {
-      addDeviceDialogVisible: false,
-      deviceDialogMode: 'bind',
-      manualAddDeviceDialogVisible: false,
+      agents: [],
+      agentsLoaded: false,
+      loadFailed: false,
       assetsDialogVisible: false,
       selectedDeviceIdForAssets: '',
       selectedDeviceId: '',
@@ -155,7 +131,8 @@ export default {
       if (!keyword) return this.deviceList;
       return this.deviceList.filter(device =>
         (device.model && device.model.toLowerCase().includes(keyword)) ||
-        (device.macAddress && device.macAddress.toLowerCase().includes(keyword))
+        (device.macAddress && device.macAddress.toLowerCase().includes(keyword)) ||
+        (device.remark && device.remark.toLowerCase().includes(keyword))
       );
     },
 
@@ -163,6 +140,9 @@ export default {
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
       return this.filteredDeviceList.slice(start, end);
+    },
+    selectedCount() {
+      return this.deviceList.filter((d) => d.selected).length;
     },
     pageCount() {
       return Math.ceil(this.filteredDeviceList.length / this.pageSize);
@@ -189,10 +169,21 @@ export default {
     },
   },
   mounted() {
-    const agentId = this.$route.query.agentId;
-    if (agentId) {
-      this.fetchBindDevices(agentId);
-    }
+    // 原页面依赖 ?agentId；新版从侧栏进入时没有 agentId，则读取智能体列表并默认选第一个
+    this.fetchAgents();
+    this.$eventBus.$on('xn:devices-changed', this.onDevicesChanged);
+  },
+  beforeDestroy() {
+    this.$eventBus.$off('xn:devices-changed', this.onDevicesChanged);
+  },
+  watch: {
+    '$route.query.agentId'(id) {
+      if (id && id !== this.currentAgentId) {
+        this.currentAgentId = id;
+        this.currentPage = 1;
+        this.fetchBindDevices(id);
+      }
+    },
   },
   created() {
     this.getFirmwareTypes()
@@ -269,16 +260,37 @@ export default {
           });
         });
     },
+    fetchAgents() {
+      Api.agent.getAgentList(({ data }) => {
+        this.agentsLoaded = true;
+        if (!data || data.code !== 0) { this.loadFailed = true; return; }
+        this.agents = data.data || [];
+        const wanted = this.$route.query.agentId;
+        const id = wanted && this.agents.some((a) => a.id === wanted) ? wanted : (this.agents[0] && this.agents[0].id);
+        if (id) this.selectAgent(id);
+      });
+    },
+    selectAgent(id) {
+      this.currentAgentId = id;
+      this.currentPage = 1;
+      if (this.$route.query.agentId !== id) this.$router.replace({ query: { ...this.$route.query, agentId: id } }).catch(() => {});
+      this.fetchBindDevices(id);
+    },
+    onDevicesChanged() {
+      if (this.currentAgentId) this.fetchBindDevices(this.currentAgentId);
+    },
+    relTime(v) {
+      return relativeTime(this, v);
+    },
+    // 添加 / 恢复 / 手动添加：统一打开外壳里的“添加设备”弹窗（DeviceBindDialog），预选当前智能体
     handleAddDevice() {
-      this.deviceDialogMode = 'bind';
-      this.addDeviceDialogVisible = true;
+      this.$eventBus.$emit('xn:open-bind', { agentId: this.currentAgentId });
     },
     handleRecoverDevice() {
-      this.deviceDialogMode = 'recovery';
-      this.addDeviceDialogVisible = true;
+      this.$eventBus.$emit('xn:open-bind', { agentId: this.currentAgentId, mode: 'recovery' });
     },
     handleManualAddDevice() {
-      this.manualAddDeviceDialogVisible = true;
+      this.$eventBus.$emit('xn:open-bind', { agentId: this.currentAgentId, mode: 'manual' });
     },
     handleOpenAssets(deviceId) {
       this.selectedDeviceIdForAssets = deviceId || '';
@@ -357,6 +369,7 @@ export default {
 
     fetchBindDevices(agentId) {
       this.loading = true;
+      this.loadFailed = false;
       Api.device.getAgentBindDevices(agentId, ({ data }) => {
         this.loading = false;
         if (data.code === 0) {
@@ -380,6 +393,7 @@ export default {
           this.activeSearchKeyword = "";
           this.searchKeyword = "";
         } else {
+          this.loadFailed = true;
           this.$message.error(data.msg || this.$t('device.getListFailed'));
         }
       });
@@ -405,298 +419,19 @@ export default {
 </script>
 
 <style scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background: transparent;
-}
-
-.main-wrapper {
-  margin: 5px 22px;
-  border-radius: 24px;
-  min-height: calc(100vh - 24vh);
-  height: auto;
-  max-height: 80vh;
-  box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.16);
-  position: relative;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-direction: column;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin: 0;
-  color: #0f172a;
-}
-
-.right-operations {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.search-input {
-  width: 280px;
-  border-radius: 8px;
-}
-
-.btn-search {
-  background: rgba(59, 130, 246, 0.08) !important;
-  color: #2563eb !important;
-  border: 1px solid rgba(59, 130, 246, 0.2) !important;
-}
-
-::v-deep .search-input .el-input__inner {
-  border-radius: 8px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background-color: rgba(255, 255, 255, 0.9);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-::v-deep .search-input .el-input__inner:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
-  outline: none;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 20px;
-  background: transparent;
-}
-
-.content-area {
-  flex: 1;
-  height: 100%;
-  min-width: 600px;
-  overflow: auto;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-.device-card {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-}
-
-::v-deep .el-card__body {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-}
-
-.table_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-
-.ctrl_btn {
-  display: flex;
-  gap: 8px;
-  padding-left: 26px;
-}
-
-.ctrl_btn .el-button {
-  min-width: 72px;
-  height: 32px;
-  padding: 7px 12px 7px 10px;
-  font-size: 12px;
-  border-radius: 8px;
-  line-height: 1;
-  font-weight: 500;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  box-shadow: none;
-  background: transparent;
-  color: #475569;
-}
-
-.ctrl_btn .el-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.18);
-}
-
-.ctrl_btn .el-button--primary {
-  background: rgba(59, 130, 246, 0.08);
-  color: #2563eb;
-  border-color: rgba(59, 130, 246, 0.2);
-}
-
-.ctrl_btn .el-button--success {
-  background: rgba(16, 185, 129, 0.08);
-  color: #059669;
-  border-color: rgba(16, 185, 129, 0.2);
-}
-
-.ctrl_btn .el-button--danger {
-  background: #fd5b63;
-  color: white;
-}
-
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.custom-pagination .el-select {
-  margin-right: 8px;
-}
-
-.custom-pagination .pagination-btn {
-  min-width: 32px;
-  height: 30px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #475569;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.custom-pagination .pagination-btn:hover:not(.active):not(:disabled) {
-  background: rgba(148, 163, 184, 0.12);
-}
-
-.custom-pagination .pagination-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.custom-pagination .pagination-btn.active {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
-}
-
-.custom-pagination .total-text {
-  color: #909399;
-  font-size: 14px;
-  margin-left: 10px;
-}
-
-:deep(.transparent-table) {
-  background: white;
-  border: none;
-}
-
-:deep(.transparent-table .el-table__header th) {
-  background: white !important;
-  color: black;
-  border-right: none !important;
-}
-
-:deep(.transparent-table .el-table__body tr td) {
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  border-right: none !important;
-}
-
-:deep(.transparent-table .el-table__header tr th:first-child .cell),
-:deep(.transparent-table .el-table__body tr td:first-child .cell) {
-  padding-left: 10px;
-}
-
-:deep(.el-icon-edit) {
-  color: #7079aa;
-  cursor: pointer;
-}
-
-:deep(.el-icon-edit:hover) {
-  color: #5a64b5;
-}
-
-:deep(.custom-selection-header .el-checkbox) {
-  display: none !important;
-}
-
-
-:deep(.el-table .el-button--text) {
-  color: #7079aa;
-}
-
-:deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
-}
-
-:deep(.transparent-table) {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100vh - 40vh);
-}
-
-:deep(.el-table__body-wrapper) {
-  flex: 1;
-  overflow-y: auto;
-  max-height: none !important;
-}
-
-:deep(.el-table__header-wrapper) {
-  flex-shrink: 0;
-}
-
-@media (min-width: 1144px) {
-  .table_bottom {
-    margin-top: 40px;
-  }
-
-  :deep(.transparent-table) .el-table__body tr td {
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-}
-
-:deep(.el-checkbox__inner) {
-  background-color: #eeeeee !important;
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
-}
-
-::v-deep .el-table--border::after,
-::v-deep .el-table--group::after,
-::v-deep .el-table::before {
-  display: none !important;
-}
+.dm-agent { display: inline-flex; align-items: center; gap: 8px; }
+.dm-agent .el-select { width: 220px; }
+.dm-opt-count { float: right; margin-left: 16px; color: var(--xn-ink-3); font-size: 12px; }
+.dm-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.dm-panel { overflow: hidden; }
+.dm-remark { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; padding: 4px 6px; margin-left: -6px; border: 0; border-radius: 6px; background: none; color: var(--xn-ink); font: inherit; font-weight: 500; cursor: pointer; text-align: left; }
+.dm-remark:hover { background: var(--xn-mist-2); }
+.dm-remark__icon { color: var(--xn-ink-4); }
+.dm-remark:hover .dm-remark__icon { color: var(--xn-lake); }
+.dm-panel ::v-deep .dm-nowrap .cell { white-space: nowrap; }
+.dm-danger { color: var(--xn-danger); }
+.dm-danger:hover, .dm-danger:focus { color: #8D3523; }
+.dm-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
+.dm-note { display: inline-flex; align-items: center; gap: 6px; padding-top: 10px; font-size: 13px; }
+@media (max-width: 760px) { .dm-agent, .dm-agent .el-select { width: 100%; } }
 </style>
