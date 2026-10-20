@@ -261,8 +261,8 @@ export default {
         chatHistoryConf: 2,
       },
       rules: {
-        deviceName: [{ required: true, whitespace: true, message: this.$t("xn.agents.wizard.nameRequired"), trigger: "blur" }],
-        userNickname: [{ required: true, whitespace: true, message: this.$t("xn.agents.wizard.nicknameRequired"), trigger: "blur" }],
+        deviceName: [{ required: true, validator: (r, v, cb) => ((v || "").trim() ? cb() : cb(new Error(this.$t("xn.agents.wizard.nameRequired")))), trigger: "blur" }],
+        userNickname: [{ required: true, validator: (r, v, cb) => ((v || "").trim() ? cb() : cb(new Error(this.$t("xn.agents.wizard.nicknameRequired")))), trigger: "blur" }],
       },
     };
   },

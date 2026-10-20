@@ -20,7 +20,7 @@
     <div class="tm-table" ref="tableContainer" @scroll="handleScroll">
       <el-table v-loading="loading" :data="filteredTtsModels" style="width: 100%;">
         <el-table-column width="44" align="center">
-          <template slot="header">
+          <template slot="header" slot-scope="{}">
             <el-checkbox :value="allSelected" :disabled="!filteredTtsModels.length" :aria-label="$t('ttsModel.selectAll')" @change="toggleSelectAll" />
           </template>
           <template slot-scope="scope">

@@ -35,7 +35,7 @@
       <div class="pv-fields">
         <el-table :data="form.fields" size="small" :key="tableKey">
           <el-table-column width="44" align="center">
-            <template slot="header">
+            <template slot="header" slot-scope="{}">
               <el-checkbox :value="isAllFieldsSelected" :disabled="!(form.fields && form.fields.length)"
                 :aria-label="$t('providerDialog.selectAll')" @change="toggleSelectAllFields" />
             </template>

@@ -26,7 +26,7 @@
       <template v-else>
         <el-table ref="providersTable" :data="filteredProvidersList" v-loading="loading" row-key="id">
           <el-table-column width="52" align="center">
-            <template slot="header">
+            <template slot="header" slot-scope="{}">
               <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
                 :disabled="!providersList.length" :aria-label="$t('common.selectAll')" @change="handleSelectAll" />
             </template>

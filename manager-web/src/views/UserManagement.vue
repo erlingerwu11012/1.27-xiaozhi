@@ -22,7 +22,7 @@
       <template v-else>
         <el-table ref="userTable" :data="userList" v-loading="loading" row-key="userid">
           <el-table-column width="52" align="center">
-            <template slot="header">
+            <template slot="header" slot-scope="{}">
               <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
                 :disabled="!userList.length" :aria-label="$t('user.selectAll')" @change="handleSelectAll" />
             </template>

@@ -22,7 +22,7 @@
       <template v-else>
         <el-table ref="paramsTable" :data="paramsList" v-loading="loading" row-key="id">
           <el-table-column width="52" align="center">
-            <template slot="header">
+            <template slot="header" slot-scope="{}">
               <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
                 :disabled="!paramsList.length" :aria-label="$t('paramManagement.selectAll')" @change="handleSelectAll" />
             </template>

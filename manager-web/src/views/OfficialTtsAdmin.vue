@@ -58,7 +58,7 @@
           <el-table-column :label="$t('xn.ttsAdmin.colLifecycle')" min-width="100">
             <template slot-scope="{ row }"><span class="xn-tag" :class="row.lifecycleStatus === 'active' ? 'xn-tag--success' : 'xn-tag--muted'">{{ lifecycleLabel(row.lifecycleStatus) }}</span></template>
           </el-table-column>
-          <el-table-column :label="$t('xn.ttsAdmin.colActions')" min-width="250" align="right">
+          <el-table-column :label="$t('xn.ttsAdmin.colActions')" min-width="290" align="right">
             <template slot-scope="{ row }">
               <div class="ota-actions">
                 <el-button v-if="canEditDraft(row)" type="text" @click="editDraft(row)">{{ $t('xn.ttsAdmin.editDraft') }}</el-button>
@@ -476,7 +476,7 @@ export default {
 .ota-stats dd { margin: 4px 0 0; font-size: 18px; font-weight: 600; color: var(--xn-ink); }
 .ota-stats dd.is-warn { color: var(--xn-warning); }
 .ota-hint { margin: 12px 0 0; font-size: 13px; color: var(--xn-ink-3); }
-.ota-actions { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 12px; }
+.ota-actions { display: inline-flex; flex-wrap: nowrap; white-space: nowrap; justify-content: flex-end; gap: 0 12px; }
 .ota-actions .el-button + .el-button { margin-left: 0; }
 .ota-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 16px; margin-top: 16px; align-items: start; }
 .ota-grid .xn-panel + .xn-panel { margin-top: 0; }

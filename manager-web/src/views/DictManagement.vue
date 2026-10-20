@@ -67,7 +67,7 @@
         <template v-else>
           <el-table ref="dictDataTable" :data="dictDataList" v-loading="dictDataLoading" row-key="id">
             <el-table-column width="52" align="center">
-              <template slot="header">
+              <template slot="header" slot-scope="{}">
                 <el-checkbox :value="isAllDictDataSelected" :indeterminate="selectedDataCount > 0 && !isAllDictDataSelected"
                   :disabled="!dictDataList.length" :aria-label="$t('dictManagement.selectAll')" @change="selectAllDictData" />
               </template>
