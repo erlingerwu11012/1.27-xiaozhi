@@ -75,9 +75,19 @@ export default {
         };
     },
     mounted() {
+        window.addEventListener('xn:request-failed', this.onRequestFailed);
         this.loadData();
     },
+    beforeDestroy() {
+        window.removeEventListener('xn:request-failed', this.onRequestFailed);
+    },
     methods: {
+        // memory.js 的列表方法没有 fail 回调：业务错误时由请求层广播事件，这里结束加载并显示失败状态
+        onRequestFailed({ detail }) {
+            if (!this.loading || !/\/admin\/memory\?/.test(detail.url)) return;
+            this.loading = false;
+            this.loadFailed = true;
+        },
         loadData() {
             this.loading = true;
             this.loadFailed = false;

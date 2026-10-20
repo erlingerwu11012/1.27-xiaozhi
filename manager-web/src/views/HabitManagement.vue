@@ -141,11 +141,21 @@ export default {
         },
     },
     mounted() {
+        window.addEventListener('xn:request-failed', this.onRequestFailed);
         this.loadHabits();
         this.refreshTimer = setInterval(() => this.loadHabits(), 15000);
     },
-    beforeDestroy() { clearInterval(this.refreshTimer); },
+    beforeDestroy() {
+        clearInterval(this.refreshTimer);
+        window.removeEventListener('xn:request-failed', this.onRequestFailed);
+    },
     methods: {
+        // habit.js 的列表方法没有 fail 回调：业务错误时由请求层广播事件，这里结束加载；还没有数据时显示失败状态
+        onRequestFailed({ detail }) {
+            if (!this.loading || !/\/habits(\?|$)/.test(detail.url)) return;
+            this.loading = false;
+            if (!this.habitList.length) this.loadFailed = true;
+        },
         loadHabits() {
             this.loading = true;
             Api.habit.listHabits({ enabledOnly: false }, (res) => {

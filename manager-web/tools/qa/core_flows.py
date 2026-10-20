@@ -1,9 +1,10 @@
 """核心交互检查：首页、添加设备、删除确认、设备管理、账户菜单、演示模式、英文界面。"""
-import sys, json
+import sys, json, os
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from xnqa import launch, new_page, login, BASE
 from playwright.sync_api import sync_playwright
-OUT = __file__.rsplit('/', 1)[0] + '/core/'
+OUT = os.environ.get('QA_OUT', 'qa-out/core') + '/'   # 截图输出目录
+os.makedirs(OUT, exist_ok=True)
 results = []
 def check(name, cond, detail=''):
     results.append((name, bool(cond), detail)); print(('PASS ' if cond else 'FAIL ') + name, detail)

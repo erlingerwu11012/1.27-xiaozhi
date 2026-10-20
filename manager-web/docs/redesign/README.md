@@ -4,7 +4,7 @@
 
 - 路由、业务逻辑、API 契约（URL、方法、字段、枚举）与权限边界保持不变；
 - 新增独立的演示数据层（`src/mock`），默认开启，**不向任何服务发送请求**；
-- 后端联调由后续阶段完成，见 [INTEGRATION.md](./INTEGRATION.md)；页面与接口对照见 [PAGE_MAPPING.md](./PAGE_MAPPING.md)；开发约定见 [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)。
+- 后端联调由后续阶段完成，见 [INTEGRATION.md](./INTEGRATION.md)；页面与接口对照见 [PAGE_MAPPING.md](./PAGE_MAPPING.md)；开发约定见 [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)；功能清单见 [FEATURES.md](./FEATURES.md)；检查记录见 [QA.md](./QA.md)。
 
 > 用演示数据跑通的流程只说明前端交互完整，**不代表真实业务已经联调验证**。
 
@@ -45,6 +45,18 @@ npm run check:mock            # 新增：检查每个接口调用都有演示实
 ```sh
 npx serve dist                # 或：cd dist && python3 -m http.server 8080
 ```
+
+### 浏览器检查脚本（可选）
+
+需要 Python 3 与 Playwright（`pip install playwright==1.55.0 && python -m playwright install chromium`；已有 Chromium 时用环境变量 `CHROMIUM=/path/to/chromium` 指定）。先启动 `npm run serve`（或静态打开 mock 构建的 `dist/`）：
+
+```sh
+python3 tools/qa/crawl_routes.py --base http://localhost:8001 --out qa-out             # 两种身份逐页检查 + 截图
+python3 tools/qa/crawl_routes.py --base http://localhost:8001 --out qa-960 --width 960 --height 800
+python3 tools/qa/core_flows.py                                                         # 首页、添加设备、删除确认、设备、账户菜单、演示模式、英文界面
+```
+
+`core_flows.py` 默认访问 `http://localhost:8001`、Chromium 路径 `/opt/pw-browsers/chromium`，需要时改 `tools/qa/xnqa.py` 顶部两行；截图写到 `qa-out/core`（可用环境变量 `QA_OUT` 指定）。`qa-out*` 是本地输出，不要提交。
 
 ### 切换到真实接口
 
