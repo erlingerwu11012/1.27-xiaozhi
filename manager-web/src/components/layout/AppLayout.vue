@@ -258,7 +258,12 @@ export default {
 </script>
 
 <style scoped>
-.xn-shell { display: flex; min-height: 100vh; }
+.xn-shell { position: relative; display: flex; min-height: 100vh; }
+/* 侧栏本身是 sticky + 100vh；这条底色让长页面下侧栏一列始终延伸到页面底部 */
+.xn-shell::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--xn-sidebar-w);
+  background: #fff; border-right: 1px solid var(--xn-line); pointer-events: none;
+}
 
 /* 侧栏 */
 .xn-side {
@@ -346,12 +351,13 @@ export default {
   .xn-balance__flag, .xn-balance__demo { display: none; }
 }
 @media (max-width: 960px) {
-  .xn-side { position: fixed; left: 0; top: 0; transform: translateX(-100%); transition: transform 0.2s ease; box-shadow: var(--xn-shadow-pop); }
-  .is-nav-open .xn-side { transform: none; }
+  .xn-shell::before { display: none; }
+  .xn-side { position: fixed; left: 0; top: 0; transform: translateX(-100%); transition: transform 0.2s ease; }
+  .is-nav-open .xn-side { transform: none; box-shadow: var(--xn-shadow-pop); }   /* 收起时不留阴影，否则左边缘会透出一条灰影 */
   .is-nav-open .xn-scrim { display: block; position: fixed; inset: 0; z-index: 35; background: rgba(30, 43, 64, 0.32); }
   .xn-top { padding: 0 16px; gap: 8px; }
   .xn-top .xn-top__menu { display: grid; }
-  .xn-crumb__group, .xn-crumb .xn-crumb__sep:first-of-type, .xn-account__name { display: none; }
+  .xn-crumb__group, .xn-crumb__group + .xn-crumb__sep, .xn-account__name { display: none; }
 }
 @media (max-width: 640px) {
   .xn-top__add { padding: 0 12px; }
