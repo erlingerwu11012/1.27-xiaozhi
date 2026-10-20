@@ -31,7 +31,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="fact" :label="$t('memoryManagement.fact')" min-width="300" show-overflow-tooltip />
-                    <el-table-column prop="updated_at" :label="$t('memoryManagement.updatedAt')" width="170" class-name="mm-nowrap">
+                    <el-table-column prop="updated_at" :label="$t('memoryManagement.updatedAt')" width="185" class-name="mm-nowrap">
                         <template slot-scope="{ row }"><span class="xn-num">{{ row.updated_at }}</span></template>
                     </el-table-column>
                     <el-table-column :label="$t('memoryManagement.action')" width="90" align="right">
@@ -40,7 +40,9 @@
                         </template>
                     </el-table-column>
                     <template slot="empty">
-                        <xn-empty v-if="activeDeviceId" icon="search" :title="$t('xn.knowledge.memoryNoMatch')"
+                        <!-- 接口业务错误时原 API 模块不回调，外壳会提示错误；加载未结束前不显示“没有数据” -->
+                        <span v-if="loading"></span>
+                        <xn-empty v-else-if="activeDeviceId" icon="search" :title="$t('xn.knowledge.memoryNoMatch')"
                             :description="$t('xn.knowledge.memoryNoMatchDesc')" />
                         <xn-empty v-else icon="memory" :title="$t('xn.knowledge.memoryEmptyTitle')"
                             :description="$t('xn.knowledge.memoryEmptyDesc')" />

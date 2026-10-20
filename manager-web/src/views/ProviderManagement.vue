@@ -1,139 +1,98 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('header.providerManagement')" :description="$t('xn.admin.provider.desc')">
+      <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('common.addProvider') }}</el-button>
+    </page-header>
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t('header.providerManagement') }}</h2>
-      <div class="right-operations">
-        <el-dropdown trigger="click" @command="handleSelectModelType" @visible-change="handleDropdownVisibleChange">
-          <el-button class="category-btn">
-            {{ $t('providerManagement.categoryFilter') }} {{ selectedModelTypeLabel }}<i class="el-icon-arrow-down el-icon--right"
-              :class="{ 'rotate-down': DropdownVisible }"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="">{{ $t('common.all') }}</el-dropdown-item>
-            <el-dropdown-item v-for="item in translatedModelTypes" :key="item.value" :command="item.value">
-              {{ item.label }}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <el-input :placeholder="$t('providerManagement.searchPlaceholder')" v-model="searchName" class="search-input" @keyup.enter.native="handleSearch"
-          clearable />
-        <el-button class="btn-search" @click="handleSearch">{{ $t('common.search') }}</el-button>
-      </div>
+    <div class="xn-toolbar">
+      <el-select :value="searchModelType" class="pm-type" @change="handleSelectModelType" :aria-label="$t('providerManagement.categoryFilter')">
+        <el-option :label="$t('xn.admin.provider.allTypes')" value="" />
+        <el-option v-for="item in translatedModelTypes" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+      <el-input :placeholder="$t('providerManagement.searchPlaceholder')" v-model="searchName" clearable
+        @keyup.enter.native="handleSearch" @clear="handleSearch">
+        <xn-icon slot="prefix" name="search" class="xa-search-icon" />
+      </el-input>
+      <el-button @click="handleSearch">{{ $t('common.search') }}</el-button>
+      <span class="xn-toolbar__grow"></span>
+      <template v-if="selectedCount">
+        <span class="xn-muted">{{ $t('xn.admin.selected', { n: selectedCount }) }}</span>
+        <el-button type="danger" plain size="small" @click="deleteSelectedProviders"><xn-icon name="trash" /> {{ $t('xn.admin.deleteSelected') }}</el-button>
+      </template>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="provider-card" shadow="never">
-            <el-table ref="providersTable" :data="filteredProvidersList" class="transparent-table" v-loading="loading"
-              element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)" :header-cell-class-name="headerCellClassName">
-              <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
-                <template slot-scope="scope">
-                  <el-checkbox v-model="scope.row.selected"></el-checkbox>
-                </template>
-              </el-table-column>
-
-              <el-table-column :label="$t('providerManagement.category')" prop="modelType" align="center" width="200">
-                <template slot="header" slot-scope="scope">
-                  <el-dropdown trigger="click" @command="handleSelectModelType"
-                    @visible-change="isDropdownOpen = $event">
-                    <span class="dropdown-trigger" :class="{ 'active': isDropdownOpen }">
-                      {{ $t('providerManagement.category') }}{{ selectedModelTypeLabel }} <i class="dropdown-arrow"
-                        :class="{ 'is-active': isDropdownOpen }"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item command="">{{ $t('common.all') }}</el-dropdown-item>
-                      <el-dropdown-item v-for="item in translatedModelTypes" :key="item.value" :command="item.value">
-                        {{ item.label }}
-                      </el-dropdown-item>
-                    </el-dropdown-menu>
-                  </el-dropdown>
-                </template>
-                <template slot-scope="scope">
-                  <el-tag :type="getModelTypeTag(scope.row.modelType)">
-                    {{ getModelTypeLabel(scope.row.modelType) }}
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('providerManagement.providerCode')" prop="providerCode" align="center" width="150"></el-table-column>
-              <el-table-column :label="$t('common.name')" prop="name" align="center"></el-table-column>
-              <el-table-column :label="$t('providerManagement.fieldConfig')" align="center">
-                <template slot-scope="scope">
-                  <el-popover placement="top-start" width="400" trigger="hover">
-                    <div v-for="field in scope.row.fields" :key="field.key" class="field-item">
-                      <span class="field-label">{{ field.label }}:</span>
-                      <span class="field-type">{{ field.type }}</span>
-                      <span v-if="isSensitiveField(field.key)" class="sensitive-tag">{{ $t('common.sensitive') }}</span>
-                    </div>
-                    <el-button slot="reference" size="mini" type="text">{{ $t('providerManagement.viewFields') }}</el-button>
-                  </el-popover>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('common.sort')" prop="sort" align="center" width="80"></el-table-column>
-              <el-table-column :label="$t('common.action')" align="center" width="180">
-                <template slot-scope="scope">
-                  <el-button size="mini" type="text" @click="editProvider(scope.row)">{{ $t('common.edit') }}</el-button>
-                  <el-button size="mini" type="text" @click="deleteProvider(scope.row)">{{ $t('common.delete') }}</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-
-            <div class="table_bottom">
-              <div class="ctrl_btn">
-                <el-button size="mini" type="primary" class="select-all-btn" @click="handleSelectAll">
-                  {{ isAllSelected ? $t('common.deselectAll') : $t('common.selectAll') }}
-                </el-button>
-                <el-button size="mini" type="success" @click="showAddDialog">{{ $t('common.add') }}</el-button>
-                <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteSelectedProviders">{{ $t('common.delete') }}
-                </el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select v-model="pageSize" @change="handlePageSizeChange" class="page-size-select">
-                  <el-option v-for="item in pageSizeOptions" :key="item" :label="$t('common.perPage', { number: item })" :value="item">
-                  </el-option>
-                </el-select>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                  {{ $t('common.firstPage') }}
+    <div class="xn-panel xn-panel--flush xa-panel">
+      <xn-empty v-if="loadFailed && !loading" error @retry="fetchProviders" />
+      <template v-else>
+        <el-table ref="providersTable" :data="filteredProvidersList" v-loading="loading" row-key="id">
+          <el-table-column width="52" align="center">
+            <template slot="header">
+              <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
+                :disabled="!providersList.length" :aria-label="$t('common.selectAll')" @change="handleSelectAll" />
+            </template>
+            <template slot-scope="scope"><el-checkbox v-model="scope.row.selected" /></template>
+          </el-table-column>
+          <el-table-column :label="$t('providerManagement.category')" width="130">
+            <template slot-scope="scope">
+              <span class="xn-tag xn-tag--lake">{{ getModelTypeLabel(scope.row.modelType) }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('common.name')" prop="name" min-width="180" />
+          <el-table-column :label="$t('providerManagement.providerCode')" min-width="150">
+            <template slot-scope="{ row }"><span class="xa-code">{{ row.providerCode }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('providerManagement.fieldConfig')" min-width="200">
+            <template slot-scope="scope">
+              <el-popover v-if="scope.row.fields.length" placement="bottom-start" width="380" trigger="hover">
+                <table class="pm-fields">
+                  <tr v-for="field in scope.row.fields" :key="field.key">
+                    <td class="xa-code">{{ field.key }}</td>
+                    <td>{{ field.label }}</td>
+                    <td class="xn-muted">{{ field.type }}</td>
+                    <td><span v-if="isSensitiveField(field.key)" class="xn-tag xn-tag--warning">{{ $t('common.sensitive') }}</span></td>
+                  </tr>
+                </table>
+                <button slot="reference" type="button" class="pm-fields-btn">
+                  {{ $t('xn.admin.provider.fieldCount', { n: scope.row.fields.length }) }}
+                  <span class="xn-muted xa-clip">{{ scope.row.fields.map((f) => f.key).join(', ') }}</span>
                 </button>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                  {{ $t('common.prevPage') }}
-                </button>
-                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                  :class="{ active: page === currentPage }" @click="goToPage(page)">
-                  {{ page }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                  {{ $t('common.nextPage') }}
-                </button>
-                <span class="total-text">{{ $t('common.totalRecords', { number: total }) }}</span>
-              </div>
-            </div>
-          </el-card>
+              </el-popover>
+              <span v-else class="xn-muted">{{ $t('xn.admin.provider.noFieldsShort') }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('common.sort')" prop="sort" width="70" align="right" class-name="xn-num" />
+          <el-table-column :label="$t('common.action')" width="120" align="right">
+            <template slot-scope="scope">
+              <el-button type="text" @click="editProvider(scope.row)">{{ $t('common.edit') }}</el-button>
+              <el-button type="text" class="xa-danger" @click="deleteProvider(scope.row)">{{ $t('common.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty v-if="lastSearch || searchModelType" icon="search" :title="$t('xn.admin.provider.noMatch')" :description="$t('xn.admin.noMatchDesc')" />
+            <xn-empty v-else icon="plug" :title="$t('xn.admin.provider.empty')" :description="$t('xn.admin.provider.emptyDesc')">
+              <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('common.addProvider') }}</el-button>
+            </xn-empty>
+          </template>
+        </el-table>
+        <div v-if="total" class="xa-foot">
+          <el-pagination background layout="total, sizes, prev, pager, next" :total="total" :page-size="pageSize"
+            :page-sizes="pageSizeOptions" :current-page="currentPage" @size-change="handlePageSizeChange" @current-change="goToPage" />
         </div>
-      </div>
+      </template>
     </div>
 
     <!-- 新增/编辑供应器对话框 -->
-    <provider-dialog :title="dialogTitle" :visible.sync="dialogVisible" :form="providerForm" :model-types="modelTypes"
+    <provider-dialog :title="dialogTitle" :visible.sync="dialogVisible" :form="providerForm" :model-types="translatedModelTypes"
       @submit="handleSubmit" @cancel="dialogVisible = false" />
-
-    <el-footer>
-      <version-footer />
-    </el-footer>
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
 import ProviderDialog from "@/components/ProviderDialog.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 
 export default {
-  components: { HeaderBar, ProviderDialog, VersionFooter },
+  components: { ProviderDialog },
   data() {
     return {
       searchName: "",
@@ -156,8 +115,9 @@ export default {
       total: 0,
       dialogVisible: false,
       dialogTitle: "新增供应器",
-      isAllSelected: false,
       isDropdownOpen: false,
+      loadFailed: false,
+      lastSearch: "",
       sensitive_keys: ["api_key", "personal_access_token", "access_token", "token", "secret", "access_key_secret", "secret_key"],
       providerForm: {
         id: null,
@@ -173,7 +133,16 @@ export default {
   created() {
     this.fetchProviders();
   },
+  beforeDestroy() {
+    clearTimeout(this._loadTimer);
+  },
   computed: {
+    selectedCount() {
+      return this.providersList.filter((p) => p.selected).length;
+    },
+    isAllSelected() {
+      return this.providersList.length > 0 && this.providersList.every((p) => p.selected);
+    },
     translatedModelTypes() {
       return this.modelTypes.map(type => ({
         value: type.value,
@@ -222,6 +191,13 @@ export default {
   methods: {
     fetchProviders() {
       this.loading = true;
+      this.loadFailed = false;
+      clearTimeout(this._loadTimer);
+      // 业务错误由请求层统一提示且不回调；超过 8 秒仍无结果时显示失败状态
+      this._loadTimer = setTimeout(() => {
+        if (this.loading) { this.loading = false; this.loadFailed = true; }
+      }, 8000);
+      const keyword = this.searchName;
 
       Api.model.getModelProvidersPage(
         {
@@ -232,18 +208,21 @@ export default {
         },
         ({ data }) => {
           this.loading = false;
+          clearTimeout(this._loadTimer);
           if (data.code === 0) {
+            this.lastSearch = keyword;
             this.providersList = data.data.list.map(item => {
               return {
                 ...item,
                 selected: false,
-                fields: JSON.parse(item.fields)
+                fields: (() => { try { return JSON.parse(item.fields || '[]') || []; } catch (e) { return []; } })()
               };
             });
             this.total = data.data.total;
           } else {
+            this.loadFailed = true;
             this.$message.error({
-              message: data.msg || '获取参数列表失败'
+              message: data.msg || this.$t('xn.admin.provider.loadFailed')
             });
           }
         }
@@ -259,9 +238,9 @@ export default {
       this.handleSearch();
     },
     handleSelectAll() {
-      this.isAllSelected = !this.isAllSelected;
+      const next = !this.isAllSelected;
       this.providersList.forEach(row => {
-        row.selected = this.isAllSelected;
+        row.selected = next;
       });
     },
     showAddDialog() {
@@ -339,7 +318,6 @@ export default {
         Api.model.deleteModelProviderByIds(ids, ({ data }) => {
           if (data.code === 0) {
 
-            this.isAllSelected = false;
             this.fetchProviders(); // 刷新表格
 
             this.$message.success({
@@ -427,7 +405,6 @@ export default {
     },
     goNext() {
       if (this.currentPage < this.pageCount) {
-        console.log("this.currentPage", this.currentPage);
         this.currentPage++;
         this.fetchProviders();
       }
@@ -443,486 +420,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  overflow: hidden;
-}
-
-.main-wrapper {
-  margin: 5px 22px;
-  border-radius: 15px;
-  min-height: calc(100vh - 24vh);
-  height: auto;
-  max-height: 80vh;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  background: rgba(237, 242, 255, 0.5);
-  display: flex;
-  flex-direction: column;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin: 0;
-}
-
-.right-operations {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.search-input {
-  width: 240px;
-}
-
-.btn-search {
-  background: rgba(59, 130, 246, 0.08) !important;
-  color: #2563eb !important;
-  border: 1px solid rgba(59, 130, 246, 0.2) !important;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 15px;
-  background: transparent;
-  border: 1px solid #fff;
-}
-
-.content-area {
-  flex: 1;
-  height: 100%;
-  min-width: 600px;
-  overflow: auto;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.el-card {
-  border: none;
-}
-
-.provider-card {
-  background: white;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  box-shadow: none;
-  overflow: hidden;
-
-  ::v-deep .el-card__body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-}
-
-.table_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ctrl_btn {
-  display: flex;
-  gap: 8px;
-  padding-left: 26px;
-
-  .el-button {
-    min-width: 72px;
-    height: 32px;
-    padding: 7px 12px 7px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    line-height: 1;
-    font-weight: 500;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  .el-button--primary {
-    background: rgba(59, 130, 246, 0.08);
-    color: #2563eb;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-  }
-
-  .el-button--danger {
-    background: #fd5b63;
-    color: white;
-  }
-}
-
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  .el-select {
-    margin-right: 8px;
-  }
-
-  .pagination-btn:first-child,
-  .pagination-btn:nth-child(2),
-  .pagination-btn:nth-last-child(2),
-  .pagination-btn:nth-child(3) {
-    min-width: 60px;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: #d7dce6;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
-  .pagination-btn:not(:first-child):not(:nth-child(3)):not(:nth-child(2)):not(:nth-last-child(2)) {
-    min-width: 28px;
-    height: 32px;
-    padding: 0;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(245, 247, 250, 0.3);
-    }
-  }
-
-  .pagination-btn.active {
-    background: #5f70f3 !important;
-    color: #ffffff !important;
-    border-color: #5f70f3 !important;
-
-    &:hover {
-      background: #6d7cf5 !important;
-    }
-  }
-
-  .total-text {
-    color: #909399;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-}
-
-:deep(.transparent-table) {
-  background: white;
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .el-table__body-wrapper {
-    flex: 1;
-    overflow-y: auto;
-    max-height: none !important;
-  }
-
-  .el-table__header-wrapper {
-    flex-shrink: 0;
-  }
-
-  .el-table__header th {
-    background: white !important;
-    color: black;
-  }
-
-  &::before {
-    display: none;
-  }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
-}
-
-
-:deep(.el-checkbox__inner) {
-  background-color: #eeeeee !important;
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
-}
-
-@media (min-width: 1144px) {
-  .table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-  }
-
-  :deep(.transparent-table) {
-    .el-table__body tr {
-      td {
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      &+tr {
-        margin-top: 10px;
-      }
-    }
-  }
-}
-
-:deep(.el-table .el-button--text) {
-  color: #7079aa;
-}
-
-:deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
-}
-
-.el-button--success {
-  background: #5bc98c;
-  color: white;
-}
-
-:deep(.el-table .cell) {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.page-size-select {
-  width: 100px;
-  margin-right: 10px;
-
-  :deep(.el-input__inner) {
-    height: 32px;
-    line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-  }
-
-  :deep(.el-input__suffix) {
-    right: 6px;
-    width: 15px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 6px;
-    border-radius: 4px;
-  }
-
-  :deep(.el-input__suffix-inner) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  :deep(.el-icon-arrow-up:before) {
-    content: "";
-    display: inline-block;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-  }
-}
-
-:deep(.el-table) {
-  .el-table__body-wrapper {
-    transition: height 0.3s ease;
-  }
-}
-
-.el-table {
-  --table-max-height: calc(100vh - 40vh);
-  max-height: var(--table-max-height);
-
-  .el-table__body-wrapper {
-    max-height: calc(var(--table-max-height) - 40px);
-  }
-}
-
-:deep(.el-loading-mask) {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(2px);
-}
-
-:deep(.el-loading-spinner .circular) {
-  width: 28px;
-  height: 28px;
-}
-
-:deep(.el-loading-spinner .path) {
-  stroke: #6b8cff;
-}
-
-:deep(.el-loading-text) {
-  color: #6b8cff !important;
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-.field-item {
-  padding: 5px 0;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  align-items: center;
-
-  .field-label {
-    flex: 1;
-    font-weight: bold;
-  }
-
-  .field-type {
-    width: 80px;
-    color: #666;
-  }
-
-  .sensitive-tag {
-    margin-left: 10px;
-    color: #f56c6c;
-    font-size: 12px;
-  }
-}
-
-.dropdown-trigger {
-  font-size: 14px;
-  color: #303133;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    color: #409EFF;
-  }
-}
-
-.dropdown-trigger.active {
-  color: #409EFF;
-}
-
-.dropdown-arrow {
-  display: inline-block;
-  margin-left: 5px;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 7px solid black;
-  position: relative;
-  transition: transform 0.3s ease;
-  transform: rotate(0deg);
-
-  &.is-active {
-    transform: rotate(180deg);
-    border-top-color: #409EFF;
-  }
-}
-
-.rotate-down {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease;
-}
-
-.el-icon-arrow-down {
-  transition: transform 0.3s ease;
-}
-
-.dropdown-trigger {
-  font-size: 14px;
-  color: #303133;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    color: #409EFF;
-  }
-}
-
-.dropdown-trigger.active {
-  color: #409EFF;
-}
-
-/* 确保选择列标题样式正确 */
-.custom-selection-header {
-  position: relative;
-}
-
-:deep(.custom-selection-header .el-checkbox) {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
-:deep(.custom-selection-header .el-checkbox__label) {
-  position: relative;
-  white-space: nowrap;
-}
-
-:deep(.custom-selection-cell) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+<style scoped>
+.pm-type { width: 160px; }
+.xa-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.xa-panel { overflow: hidden; }
+.xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
+.xa-clip { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.pm-fields-btn { display: block; max-width: 100%; padding: 2px 0; border: 0; background: none; font: inherit; color: var(--xn-lake); text-align: left; cursor: pointer; }
+.pm-fields-btn:hover { color: var(--xn-lake-ink); }
+.pm-fields { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--xn-ink); }
+.pm-fields td { padding: 6px 8px; border-bottom: 1px solid var(--xn-line-2); vertical-align: middle; }
+.pm-fields tr:last-child td { border-bottom: 0; }
+.xa-danger { color: var(--xn-danger); }
+.xa-danger:hover, .xa-danger:focus { color: #8D3523; }
+.xa-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
+@media (max-width: 960px) { .pm-type { width: 100%; } }
 </style>

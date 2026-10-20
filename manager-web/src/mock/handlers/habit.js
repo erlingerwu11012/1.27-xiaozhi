@@ -85,7 +85,7 @@ route('POST', '/habits', ({ body, db, user }) => {
   const h = {
     id: nextId(), userId: user.id, description: String(body.description).trim(), hour: Number(body.hour), minute: Number(body.minute),
     advanceMinutes: Number(body.advanceMinutes), deviceId: body.deviceId, recipientPersonId: body.recipientPersonId,
-    source: 'manual', enabled: 1, syncState: 'pending', syncError: '', _syncPolls: 1, createdAt: nowStr(),
+    source: 'manual', enabled: 1, syncState: 'pending', syncError: '', _syncPolls: 2, createdAt: nowStr(),
   };
   db.habits.push(h);
   return ok(publicHabit(h), '已保存，等待设备同步（演示）');
@@ -101,7 +101,7 @@ route('PUT', '/habits/:id', ({ params, body, db, user }) => {
   Object.assign(h, {
     description: String(body.description).trim(), hour: Number(body.hour), minute: Number(body.minute),
     advanceMinutes: Number(body.advanceMinutes), deviceId: body.deviceId, recipientPersonId: body.recipientPersonId,
-    syncState: 'pending', syncError: '', _syncPolls: 1, updatedAt: nowStr(),
+    syncState: 'pending', syncError: '', _syncPolls: 2, updatedAt: nowStr(),
   });
   return ok(publicHabit(h), '已保存，等待设备同步（演示）');
 });
@@ -112,6 +112,6 @@ route('DELETE', '/habits/:id', ({ params, db, user }) => {
   const h = db.habits.find((x) => x.id === Number(params.id) && x.userId === user.id);
   if (!h) return fail('习惯不存在或无权操作');
   if (h.enabled !== 1) return fail('这条习惯已删除');
-  Object.assign(h, { enabled: 0, syncState: h.deviceId ? 'pending' : 'synced', syncError: '', _syncPolls: 1, updatedAt: nowStr() });
+  Object.assign(h, { enabled: 0, syncState: h.deviceId ? 'pending' : 'synced', syncError: '', _syncPolls: 2, updatedAt: nowStr() });
   return ok(null);
 });

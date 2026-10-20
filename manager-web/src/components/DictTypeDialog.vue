@@ -1,17 +1,20 @@
 <template>
-    <el-dialog :title="title" :visible.sync="dialogVisible"  width="30%" @close="handleClose">
-        <el-form :model="form" :rules="rules" ref="form" label-width="auto">
+    <el-dialog :title="title" :visible.sync="dialogVisible" width="480px" append-to-body :close-on-click-modal="false" @close="handleClose">
+        <el-form :model="form" :rules="rules" ref="form" label-position="top" @submit.native.prevent>
             <el-form-item :label="$t('dictTypeDialog.dictName')" prop="dictName">
-                <el-input v-model="form.dictName" :placeholder="$t('dictTypeDialog.dictNamePlaceholder')"></el-input>
+                <el-input v-model="form.dictName" maxlength="64" :placeholder="$t('dictTypeDialog.dictNamePlaceholder')"></el-input>
             </el-form-item>
             <el-form-item :label="$t('dictTypeDialog.dictType')" prop="dictType">
-                <el-input v-model="form.dictType" :placeholder="$t('dictTypeDialog.dictTypePlaceholder')"></el-input>
+                <el-input v-model="form.dictType" maxlength="64" class="dt-code" :placeholder="$t('dictTypeDialog.dictTypePlaceholder')"></el-input>
+                <p v-if="form.id" class="dt-hint">{{ $t('xn.admin.dict.typeCodeHint') }}</p>
             </el-form-item>
         </el-form>
-        <div slot="footer" class="dialog-footer">
+        <span slot="footer" class="dt-footer">
+            <el-button @click="resetToInitial">{{ $t('xn.common.reset') }}</el-button>
+            <span class="dt-grow"></span>
             <el-button @click="handleClose">{{ $t('button.cancel') }}</el-button>
             <el-button type="primary" @click="handleSave">{{ $t('button.save') }}</el-button>
-        </div>
+        </span>
     </el-dialog>
 </template>
 
@@ -25,7 +28,7 @@ export default {
         },
         title: {
             type: String,
-            default: () => this.$t('dictTypeDialog.addDictType')
+            default() { return this.$t('dictTypeDialog.addDictType') }
         },
         dictTypeData: {
             type: Object,
@@ -49,6 +52,7 @@ export default {
     watch: {
         visible(val) {
           this.dialogVisible = val;
+          if (val) this.form = { ...(this.dictTypeData || {}) };
         },
         dialogVisible(val) {
           this.$emit('update:visible', val);
@@ -75,6 +79,11 @@ export default {
             }
             this.$refs.form?.resetFields()
         },
+        // 恢复到打开弹窗时的内容
+        resetToInitial() {
+            this.form = { ...(this.dictTypeData || {}) }
+            this.$nextTick(() => this.$refs.form && this.$refs.form.clearValidate())
+        },
         handleSave() {
             this.$refs.form.validate(valid => {
                 if (valid) {
@@ -87,11 +96,8 @@ export default {
 </script>
 
 <style scoped>
-.dialog-footer {
-    text-align: right;
-}
-:deep(.el-dialog) {
-    border-radius: 15px;
-}
-
+.dt-footer { display: flex; align-items: center; }
+.dt-grow { flex: 1; }
+.dt-code ::v-deep .el-input__inner { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.dt-hint { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--xn-ink-3); }
 </style>

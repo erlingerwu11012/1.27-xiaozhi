@@ -469,6 +469,7 @@ export default {
 .uu-agent .el-select { width: 200px; margin-left: 2px; }
 .uu-agent__hint { color: var(--xn-ink-4); cursor: help; }
 .uu-panel { overflow: hidden; }
+.uu-panel ::v-deep .el-table__empty-text { width: 100%; line-height: 1.6; }
 
 .uu-member { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .uu-avatar {

@@ -47,7 +47,7 @@
               </span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('knowledgeBaseManagement.createdAt')" width="150" class-name="kb-nowrap">
+          <el-table-column :label="$t('knowledgeBaseManagement.createdAt')" width="170" class-name="kb-nowrap">
             <template slot-scope="scope"><span class="xn-num">{{ formatDate(scope.row.createdAt) }}</span></template>
           </el-table-column>
           <el-table-column :label="$t('knowledgeBaseManagement.operation')" width="190" align="right">

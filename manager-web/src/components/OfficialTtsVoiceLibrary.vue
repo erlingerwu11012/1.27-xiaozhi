@@ -1,105 +1,62 @@
 <template>
   <el-dialog
     :visible.sync="visibleProxy"
-    title="音色库"
-    width="860px"
-    custom-class="ot-voice-lib-dialog"
+    :title="$t('xn.tts.libTitle')"
+    width="820px"
+    custom-class="ot-lib-dialog"
     append-to-body
     :close-on-click-modal="false"
   >
-    <div class="ot-voice-lib">
-      <div class="ot-voice-lib__tabs">
-        <button
-          v-for="t in tabs"
-          :key="t.key"
-          type="button"
-          class="ot-voice-lib__tab"
-          :class="{ 'is-active': tab === t.key }"
-          @click="tab = t.key"
-        >
-          {{ t.label }}
-        </button>
+    <div class="ot-lib">
+      <div class="ot-lib__toolbar">
+        <el-radio-group v-model="tab" size="small">
+          <el-radio-button v-for="t in tabs" :key="t.key" :label="t.key">{{ $t(t.label) }}</el-radio-button>
+        </el-radio-group>
+        <el-input v-model="keyword" size="small" clearable :placeholder="$t('xn.tts.libSearch')" class="ot-lib__search">
+          <xn-icon slot="prefix" name="search" class="ot-lib__search-icon" />
+        </el-input>
+        <span class="xn-toolbar__grow"></span>
+        <el-button size="small" @click="goCreate"><xn-icon name="plus" /> {{ $t('xn.tts.libCreate') }}</el-button>
       </div>
 
-      <div class="ot-voice-lib__toolbar">
-        <el-select v-model="filterScene" size="small" class="ot-voice-lib__filter">
-          <el-option label="全场景" value="" />
-        </el-select>
-        <el-select v-model="filterGender" size="small" class="ot-voice-lib__filter">
-          <el-option label="全性别" value="" />
-        </el-select>
-        <el-select v-model="filterLang" size="small" class="ot-voice-lib__filter">
-          <el-option label="全语言" value="" />
-        </el-select>
-        <el-input
-          v-model="keyword"
-          size="small"
-          clearable
-          prefix-icon="el-icon-search"
-          placeholder="搜索音色名"
-          class="ot-voice-lib__search"
-        />
-        <button type="button" class="ot-voice-lib__create" @click="goCreate">
-          + 创建音色
-        </button>
-      </div>
-
-      <div class="ot-voice-lib__grid" v-loading="loading">
-        <div v-if="!loading && !filteredItems.length" class="ot-voice-lib__empty">
-          {{ emptyText }}
-        </div>
+      <div class="ot-lib__grid" v-loading="loading" role="radiogroup" :aria-label="$t('xn.tts.libTitle')">
+        <xn-empty v-if="!loading && !filteredItems.length" class="ot-lib__empty" icon="voice"
+          :title="keyword ? $t('xn.tts.libNoMatch') : emptyText" />
         <div
-          v-for="(item, idx) in filteredItems"
+          v-for="item in filteredItems"
           :key="item.code"
-          class="ot-voice-lib__card"
-          :class="{
-            'is-selected': selected === item.code,
-            'is-playing': playingCode === item.code,
-          }"
-          role="button"
+          class="ot-lib__card"
+          :class="{ 'is-selected': selected === item.code, 'is-playing': playingCode === item.code }"
+          role="radio"
+          :aria-checked="String(selected === item.code)"
           tabindex="0"
           @click="selected = item.code"
           @keydown.enter.prevent="selected = item.code"
           @keydown.space.prevent="selected = item.code"
         >
-          <button
-            v-if="item.id"
-            type="button"
-            class="ot-voice-lib__avatar ot-voice-lib__avatar--action"
-            :class="avatarClass(idx)"
-            :title="playingCode === item.code && !playPaused ? '暂停试听' : '试听'"
-            :aria-label="playingCode === item.code && !playPaused ? '暂停试听' : '试听'"
-            @click.stop="togglePlay(item)"
-          >
+          <button v-if="item.id" type="button" class="ot-play"
+            :class="{ 'is-on': playingCode === item.code && !playPaused }"
+            :title="playingCode === item.code && !playPaused ? $t('xn.tts.pause') : $t('xn.tts.play')"
+            :aria-label="(playingCode === item.code && !playPaused ? $t('xn.tts.pause') : $t('xn.tts.play')) + ' ' + item.name"
+            @click.stop="togglePlay(item)">
             <i v-if="loadingCode === item.code" class="el-icon-loading" />
-            <i
-              v-else
-              :class="playingCode === item.code && !playPaused ? 'el-icon-video-pause' : 'el-icon-video-play'"
-            />
+            <svg v-else-if="playingCode === item.code && !playPaused" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+            <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z" /></svg>
           </button>
-          <span v-else class="ot-voice-lib__avatar" :class="avatarClass(idx)">
-            <i class="el-icon-video-play" />
-          </span>
-          <div class="ot-voice-lib__body">
-            <p class="ot-voice-lib__name">
-              {{ item.name }}
-              <span class="ot-voice-lib__id-tag">ID</span>
-            </p>
-            <p class="ot-voice-lib__meta">{{ item.meta }}</p>
+          <span v-else class="ot-lib__avatar" aria-hidden="true"><xn-icon name="voice" /></span>
+          <div class="ot-lib__body">
+            <p class="ot-lib__name xn-clip">{{ item.name }}</p>
+            <p class="ot-lib__meta xn-clip">{{ item.meta }}</p>
           </div>
-          <i v-if="selected === item.code" class="el-icon-check ot-voice-lib__check" />
-          <span
-            v-if="playingCode === item.code"
-            class="ot-voice-lib__progress"
-            :style="{ width: playPercent + '%' }"
-          />
+          <xn-icon v-if="selected === item.code" name="check" class="ot-lib__check" />
+          <span v-if="playingCode === item.code" class="ot-lib__progress" :style="{ width: playPercent + '%' }" />
         </div>
       </div>
     </div>
 
     <audio
       ref="libAudio"
-      class="ot-voice-lib__audio"
+      class="ot-audio-el"
       @timeupdate="onAudioTime"
       @loadedmetadata="onAudioMeta"
       @ended="stopPlay"
@@ -107,10 +64,9 @@
       @play="playPaused = false"
     />
 
-    <span slot="footer" class="ot-voice-lib__footer">
-      <button type="button" class="ot-voice-lib__confirm" :disabled="!selected" @click="confirm">
-        确认
-      </button>
+    <span slot="footer">
+      <el-button @click="visibleProxy = false">{{ $t('xn.common.cancel') }}</el-button>
+      <el-button type="primary" :disabled="!selected" @click="confirm">{{ $t('xn.tts.libConfirm') }}</el-button>
     </span>
   </el-dialog>
 </template>
@@ -129,13 +85,10 @@ export default {
     return {
       tab: "official",
       tabs: [
-        { key: "official", label: "官方" },
-        { key: "design", label: "我的设计" },
-        { key: "clone", label: "我的复刻" },
+        { key: "official", label: "xn.tts.libOfficial" },
+        { key: "design", label: "xn.tts.libDesign" },
+        { key: "clone", label: "xn.tts.libClone" },
       ],
-      filterScene: "",
-      filterGender: "",
-      filterLang: "",
       keyword: "",
       selected: "",
       myVoices: [],
@@ -175,7 +128,7 @@ export default {
         return (this.officialVoices || []).map((v) => ({
           code: v.code,
           name: v.name || v.code,
-          meta: "官方音色",
+          meta: this.$t("xn.tts.libOfficialMeta"),
           kind: "official",
           id: null,
           playable: false,
@@ -191,16 +144,16 @@ export default {
         .map((v) => ({
           code: v.upstreamVoiceId,
           name: v.name || v.upstreamVoiceId,
-          meta: v.kind === "design" ? "我的设计" : "我的复刻",
+          meta: v.kind === "design" ? this.$t("xn.tts.libDesign") : this.$t("xn.tts.libClone"),
           kind: v.kind,
           id: v.id,
           playable: v.hasPreview === true || v.hasPreview === "true",
         }));
     },
     emptyText() {
-      if (this.tab === "official") return "暂无官方音色";
-      if (this.tab === "design") return "暂无可用的设计音色，请先在「音色设计」中创建";
-      return "暂无可用的复刻音色，请先在「音色复刻」中创建";
+      if (this.tab === "official") return this.$t("xn.tts.libEmptyOfficial");
+      if (this.tab === "design") return this.$t("xn.tts.libEmptyDesign");
+      return this.$t("xn.tts.libEmptyClone");
     },
   },
   watch: {
@@ -221,10 +174,6 @@ export default {
     this.stopPlay();
   },
   methods: {
-    avatarClass(idx) {
-      const list = ["is-blue", "is-pink", "is-amber", "is-green"];
-      return list[idx % list.length];
-    },
     onAudioTime(e) {
       this.playCurrent = (e && e.target && e.target.currentTime) || 0;
     },

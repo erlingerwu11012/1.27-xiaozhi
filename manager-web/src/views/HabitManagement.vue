@@ -42,7 +42,7 @@
                         </template>
                     </el-table-column>
                     <template slot="empty">
-                        <xn-empty icon="chat" :title="$t('xn.knowledge.habitEmptyTitle')" :description="$t('xn.knowledge.habitEmptyDesc')">
+                        <xn-empty v-if="loaded" icon="chat" :title="$t('xn.knowledge.habitEmptyTitle')" :description="$t('xn.knowledge.habitEmptyDesc')">
                             <el-button type="primary" @click="openCreateDialog"><xn-icon name="plus" /> {{ $t('habitManagement.addHabit') }}</el-button>
                         </xn-empty>
                     </template>

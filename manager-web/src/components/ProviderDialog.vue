@@ -1,132 +1,97 @@
 <template>
-  <el-dialog :visible="visible" :close-on-click-modal="false" @update:visible="handleVisibleChange" width="57%" center custom-class="custom-dialog"
-    :show-close="false" class="center-dialog">
-
-    <div style="margin: 0 18px; text-align: left; padding: 10px; border-radius: 10px;">
-      <div style="font-size: 30px; color: #3d4566; margin-top: -15px; margin-bottom: 20px; text-align: center;">
-        {{ title }}
+  <el-dialog :visible="visible" :title="title" :close-on-click-modal="false" @update:visible="handleVisibleChange"
+    width="820px" append-to-body custom-class="xn-provider-dialog" @close="handleClose">
+    <el-form :model="form" :rules="rules" ref="form" label-position="top" @submit.native.prevent>
+      <div class="pv-grid">
+        <el-form-item :label="$t('providerDialog.category')" prop="modelType">
+          <el-select v-model="form.modelType" :placeholder="$t('providerDialog.selectCategory')" style="width: 100%;">
+            <el-option v-for="item in modelTypes" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t('providerDialog.code')" prop="providerCode">
+          <el-input v-model="form.providerCode" class="pv-code" :placeholder="$t('providerDialog.inputCode')" />
+        </el-form-item>
+        <el-form-item :label="$t('providerDialog.name')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('providerDialog.inputName')" />
+        </el-form-item>
+        <el-form-item :label="$t('providerDialog.sort')" prop="sort">
+          <el-input-number v-model="form.sort" :min="0" controls-position="right" style="width: 100%;" />
+        </el-form-item>
       </div>
 
-      <button class="custom-close-btn" @click="handleClose">×</button>
-
-      <el-form :model="form" label-width="auto" :rules="rules" ref="form" class="custom-form">
-        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-          <el-form-item :label="$t('providerDialog.category')" prop="modelType" style="flex: 1;">
-            <el-select v-model="form.modelType" :placeholder="$t('providerDialog.selectCategory')" class="custom-input-bg" style="width: 100%;">
-              <el-option v-for="item in modelTypes" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-
-          <el-form-item :label="$t('providerDialog.code')" prop="providerCode" style="flex: 1;">
-            <el-input v-model="form.providerCode" :placeholder="$t('providerDialog.inputCode')" class="custom-input-bg"></el-input>
-          </el-form-item>
+      <div class="pv-fields-head">
+        <div>
+          <h3 class="pv-fields-title">{{ $t('providerDialog.fieldConfig') }}</h3>
+          <p class="pv-fields-help">{{ $t('xn.admin.provider.fieldsHelp') }}</p>
         </div>
-
-        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-          <el-form-item :label="$t('providerDialog.name')" prop="name" style="flex: 1;">
-            <el-input v-model="form.name" :placeholder="$t('providerDialog.inputName')" class="custom-input-bg"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('providerDialog.sort')" prop="sort" style="flex: 1;">
-            <el-input-number v-model="form.sort" :min="0" controls-position="right" class="custom-input-bg"
-              style="width: 100%;"></el-input-number>
-          </el-form-item>
+        <div class="pv-fields-actions">
+          <el-button v-if="selectedFieldCount" type="danger" plain size="small" @click="batchRemoveFields">
+            <xn-icon name="trash" /> {{ $t('xn.admin.provider.deleteFields', { n: selectedFieldCount }) }}
+          </el-button>
+          <el-button size="small" @click="addField" :disabled="hasIncompleteFields"><xn-icon name="plus" /> {{ $t('xn.admin.provider.addField') }}</el-button>
         </div>
+      </div>
 
-        <div style="font-size: 20px; font-weight: bold; color: #3d4566; margin-bottom: 15px;">
-          {{ $t('providerDialog.fieldConfig') }}
-          <div style="display: inline-block; float: right;">
-            <el-button type="primary" @click="addField" size="small" style="background: #5bc98c; border: none;"
-              :disabled="hasIncompleteFields">
-              {{ $t('providerDialog.add') }}
-            </el-button>
-            <el-button type="primary" @click="toggleSelectAllFields" size="small"
-              style="background: #5f70f3; border: none; margin-left: 10px;">
-              {{ isAllFieldsSelected ? $t('providerDialog.deselectAll') : $t('providerDialog.selectAll') }}
-            </el-button>
-            <el-button type="danger" @click="batchRemoveFields" size="small"
-              style="background: red; border: none; margin-left: 10px;">
-              {{ $t('providerDialog.batchDelete') }}
-            </el-button>
-          </div>
-        </div>
-        <div style="height: 2px; background: #e9e9e9; margin-bottom: 22px;"></div>
+      <div class="pv-fields">
+        <el-table :data="form.fields" size="small" :key="tableKey">
+          <el-table-column width="44" align="center">
+            <template slot="header">
+              <el-checkbox :value="isAllFieldsSelected" :disabled="!(form.fields && form.fields.length)"
+                :aria-label="$t('providerDialog.selectAll')" @change="toggleSelectAllFields" />
+            </template>
+            <template slot-scope="scope">
+              <el-checkbox v-model="scope.row.selected" @change="handleFieldSelectChange"></el-checkbox>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('providerDialog.fieldKey')" min-width="140">
+            <template slot-scope="scope">
+              <el-input v-if="scope.row.editing" v-model="scope.row.key" size="small" class="pv-code" :placeholder="$t('providerDialog.fieldKey')" />
+              <span v-else class="pv-mono">{{ scope.row.key }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('providerDialog.fieldLabel')" min-width="140">
+            <template slot-scope="scope">
+              <el-input v-if="scope.row.editing" v-model="scope.row.label" size="small" :placeholder="$t('providerDialog.fieldLabel')" />
+              <span v-else>{{ scope.row.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('providerDialog.fieldType')" width="130">
+            <template slot-scope="scope">
+              <el-select v-if="scope.row.editing" v-model="scope.row.type" size="small" :placeholder="$t('providerDialog.type')">
+                <el-option :label="$t('providerDialog.stringType')" value="string"></el-option>
+                <el-option :label="$t('providerDialog.numberType')" value="number"></el-option>
+                <el-option :label="$t('providerDialog.booleanType')" value="boolean"></el-option>
+                <el-option :label="$t('providerDialog.dictType')" value="dict"></el-option>
+                <el-option :label="$t('providerDialog.arrayType')" value="array"></el-option>
+                <el-option :label="$t('providerDialog.ragType')" value="RAG"></el-option>
+              </el-select>
+              <span v-else>{{ getTypeLabel(scope.row.type) }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('providerDialog.defaultValue')" min-width="140">
+            <template slot-scope="scope">
+              <el-input v-if="scope.row.editing" v-model="scope.row.default" size="small" :placeholder="$t('providerDialog.inputDefaultValue')" />
+              <span v-else class="pv-mono xn-muted">{{ scope.row.default }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('providerDialog.operation')" width="110" align="right">
+            <template slot-scope="scope">
+              <el-button v-if="!scope.row.editing" type="text" @click="startEditing(scope.row)">{{ $t('providerDialog.edit') }}</el-button>
+              <el-button v-else type="text" @click="stopEditing(scope.row)">{{ $t('providerDialog.complete') }}</el-button>
+              <el-button type="text" class="pv-danger" @click="removeField(scope.$index)">{{ $t('providerDialog.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <p class="pv-empty">{{ $t('xn.admin.provider.noFields') }}</p>
+          </template>
+        </el-table>
+      </div>
+    </el-form>
 
-        <div class="fields-container">
-          <el-table :data="form.fields" style="width: 100%;" border size="medium" :key="tableKey">
-            <el-table-column :label="$t('modelConfig.select')" align="center" width="50">
-              <template slot-scope="scope">
-                <el-checkbox v-model="scope.row.selected" @change="handleFieldSelectChange"></el-checkbox>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('providerDialog.fieldKey')">
-              <template slot-scope="scope">
-                <template v-if="scope.row.editing">
-                  <el-input v-model="scope.row.key" :placeholder="$t('providerDialog.fieldKey')"></el-input>
-                </template>
-                <template v-else>
-                  {{ scope.row.key }}
-                </template>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('providerDialog.fieldLabel')">
-              <template slot-scope="scope">
-                <template v-if="scope.row.editing">
-                  <el-input v-model="scope.row.label" :placeholder="$t('providerDialog.fieldLabel')"></el-input>
-                </template>
-                <template v-else>
-                  {{ scope.row.label }}
-                </template>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('providerDialog.fieldType')">
-              <template slot-scope="scope">
-                <template v-if="scope.row.editing">
-                  <el-select v-model="scope.row.type" :placeholder="$t('providerDialog.type')">
-                    <el-option :label="$t('providerDialog.stringType')" value="string"></el-option>
-                    <el-option :label="$t('providerDialog.numberType')" value="number"></el-option>
-                    <el-option :label="$t('providerDialog.booleanType')" value="boolean"></el-option>
-                    <el-option :label="$t('providerDialog.dictType')" value="dict"></el-option>
-                    <el-option :label="$t('providerDialog.arrayType')" value="array"></el-option>
-                    <el-option :label="$t('providerDialog.ragType')" value="RAG"></el-option>
-                  </el-select>
-                </template>
-                <template v-else>
-                  {{ getTypeLabel(scope.row.type) }}
-                </template>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('providerDialog.defaultValue')">
-              <template slot-scope="scope">
-                <template v-if="scope.row.editing">
-                  <el-input v-model="scope.row.default" :placeholder="$t('providerDialog.inputDefaultValue')"></el-input>
-                </template>
-                <template v-else>
-                  {{ scope.row.default }}
-                </template>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('providerDialog.operation')" width="150" align="center">
-              <template slot-scope="scope">
-                <el-button v-if="!scope.row.editing" type="primary" size="mini" @click="startEditing(scope.row)">
-                  {{ $t('providerDialog.edit') }}
-                </el-button>
-                <el-button v-else type="success" size="mini" @click="stopEditing(scope.row)">
-                  {{ $t('providerDialog.complete') }}
-                </el-button>
-                <el-button type="danger" size="mini" @click="removeField(scope.$index)">
-                  {{ $t('providerDialog.delete') }}
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-form>
-    </div>
-
-    <div style="display: flex; justify-content: center;">
-      <el-button type="primary" @click="submit" class="save-btn" :loading="saving">{{ $t('providerDialog.save') }}</el-button>
-    </div>
+    <span slot="footer">
+      <el-button @click="handleClose">{{ $t('xn.common.cancel') }}</el-button>
+      <el-button type="primary" @click="submit" :loading="saving">{{ $t('providerDialog.save') }}</el-button>
+    </span>
   </el-dialog>
 </template>
 
@@ -146,6 +111,9 @@ export default {
     };
   },
   computed: {
+    selectedFieldCount() {
+      return (this.form.fields || []).filter((f) => f.selected).length;
+    },
     rules() {
       return {
         modelType: [{ required: true, message: this.$t('providerDialog.requiredCategory'), trigger: 'change' }],
@@ -277,7 +245,7 @@ export default {
           });
       }).catch(() => {
         this.$message.info({
-          message: '已取消删除',
+          message: this.$t('common.deleteCancelled'),
           showClose: true
         });
       });
@@ -345,97 +313,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-::v-deep .custom-dialog.el-dialog {
-  margin-top: 0 !important;
-  border-radius: 20px !important;
-}
-
-::v-deep .custom-dialog .el-dialog__header {
-  padding: 0;
-  border-bottom: none;
-}
-
-.custom-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 2px solid #cfcfcf;
-  background: none;
-  font-size: 30px;
-  font-weight: lighter;
-  color: #cfcfcf;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  padding: 0;
-  outline: none;
-}
-
-.custom-close-btn:hover {
-  color: #409EFF;
-  border-color: #409EFF;
-}
-
-.custom-form .el-form-item {
-  margin-bottom: 20px;
-}
-
-.custom-form .el-form-item__label {
-  color: #3d4566;
-  font-weight: normal;
-  text-align: right;
-  padding-right: 20px;
-}
-
-.custom-input-bg .el-input__inner {
-  background-color: #f6f8fc;
-  height: 32px;
-}
-
-.custom-input-bg .el-input__inner::-webkit-input-placeholder {
-  color: #9c9f9e;
-}
-
-.fields-container {
-  margin-bottom: 20px;
-}
-
-.save-btn {
-  background: #e6f0fd;
-  color: #237ff4;
-  border: 1px solid #b3d1ff;
-  width: 150px;
-  height: 40px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.save-btn:hover {
-  background: linear-gradient(to right, #237ff4, #9c40d5);
-  color: white;
-  border: none;
-}
-
-.el-table {
-  border-radius: 4px;
-}
-
-.el-table::before {
-  display: none;
-}
-
-.el-table th,
-.el-table td {
-  padding: 8px 0;
-}
-
-.el-button.is-circle {
-  border-radius: 2px;
-}
+<style scoped>
+.pv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.pv-code ::v-deep .el-input__inner, .pv-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.pv-fields-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 4px 0 10px; padding-top: 14px; border-top: 1px solid var(--xn-line-2); }
+.pv-fields-title { margin: 0; font-size: 16px; font-weight: 600; color: var(--xn-ink); }
+.pv-fields-help { margin: 4px 0 0; font-size: 13px; color: var(--xn-ink-3); }
+.pv-fields-actions { display: flex; gap: 8px; }
+.pv-fields-actions .el-button + .el-button { margin-left: 0; }
+.pv-fields { border: 1px solid var(--xn-line); border-radius: var(--xn-r); overflow: hidden; }
+.pv-fields ::v-deep .el-table::before { display: none; }
+.pv-danger { color: var(--xn-danger); }
+.pv-danger:hover, .pv-danger:focus { color: #8D3523; }
+.pv-empty { margin: 0; padding: 20px 0; font-size: 13px; color: var(--xn-ink-3); }
+@media (max-width: 640px) { .pv-grid { grid-template-columns: 1fr; } }
 </style>

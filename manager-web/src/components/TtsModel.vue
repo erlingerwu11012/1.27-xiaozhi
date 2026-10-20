@@ -1,101 +1,95 @@
 <template>
-  <el-dialog :visible.sync="localVisible" width="90%" @close="handleClose" :show-close="false" :append-to-body="true"
-    :close-on-click-modal="true">
-    <button class="custom-close-btn" @click="handleClose">
-      ×
-    </button>
-    <div class="scroll-wrapper">
-      <div class="table-container" ref="tableContainer" @scroll="handleScroll">
-        <el-table v-loading="loading" :data="filteredTtsModels" style="width: 100%;" class="data-table"
-          header-row-class-name="table-header" :fit="true" :element-loading-text="$t('voicePrint.loading')"
-          element-loading-spinner="el-icon-loading" element-loading-background="rgba(0, 0, 0, 0.8)">
-          <el-table-column :label="$t('ttsModel.select')" width="50" align="center">
-            <template slot-scope="scope">
-              <el-checkbox v-model="scope.row.selected"></el-checkbox>
-            </template>
-          </el-table-column>
-          <el-table-column :label="$t('ttsModel.voiceCode')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.voiceCode"></el-input>
-              <span v-else>{{ scope.row.voiceCode }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column :label="$t('ttsModel.voiceName')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.voiceName"></el-input>
-              <span v-else>{{ scope.row.voiceName }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column :label="$t('ttsModel.languageType')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.languageType"></el-input>
-              <span v-else>{{ scope.row.languageType }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.preview')" align="center" class-name="audio-column">
-            <template slot-scope="scope">
-              <div class="custom-audio-container">
-                <el-input v-if="scope.row.editing" v-model="scope.row.voiceDemo" :placeholder="$t('ttsModel.enterMp3Url')"
-                  class="audio-input">
-                </el-input>
-                <AudioPlayer v-else-if="isValidAudioUrl(scope.row.voiceDemo)" :audioUrl="scope.row.voiceDemo" />
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.remark')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" type="textarea" :rows="1" autosize v-model="scope.row.remark"
-                  :placeholder="$t('ttsModel.enterRemark')" class="remark-input"></el-input>
-              <span v-else>{{ scope.row.remark }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioPath')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.referenceAudio" :placeholder="$t('ttsModel.enterCloneAudioPath')"></el-input>
-              <span v-else>{{ scope.row.referenceAudio }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioText')" align="center">
-            <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.referenceText" :placeholder="$t('ttsModel.enterCloneAudioText')"></el-input>
-              <span v-else>{{ scope.row.referenceText }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column :label="$t('ttsModel.operation')" align="center" width="150">
-            <template slot-scope="scope">
-              <template v-if="!scope.row.editing">
-                <el-button type="text" size="mini" @click="startEdit(scope.row)" class="edit-btn">
-                    {{ $t('ttsModel.edit') }}
-                  </el-button>
-                  <el-button type="text" size="mini" @click="deleteRow(scope.row)" class="delete-btn">
-                    {{ $t('ttsModel.delete') }}
-                  </el-button>
-              </template>
-              <el-button v-else type="success" size="mini" @click="saveEdit(scope.row)" class="save-Tts">{{ $t('ttsModel.save') }}
-                </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+  <el-dialog :visible.sync="localVisible" width="min(1080px, calc(100vw - 32px))" @close="handleClose" :append-to-body="true"
+    :close-on-click-modal="false" :title="$t('xn.admin.voice.title', { name: (modelConfig && modelConfig.modelName) || ttsModelId })"
+    custom-class="xn-tts-dialog">
+    <div class="tm-toolbar">
+      <el-input v-model="searchQuery" size="small" clearable :placeholder="$t('xn.admin.voice.search')" class="tm-search">
+        <xn-icon slot="prefix" name="search" class="tm-search-icon" />
+      </el-input>
+      <span v-if="showReferenceColumns" class="xn-tag xn-tag--lake">{{ $t('xn.admin.voice.cloneMode') }}</span>
+      <span class="tm-grow"></span>
+      <template v-if="selectedCount">
+        <span class="xn-muted">{{ $t('xn.admin.selected', { n: selectedCount }) }}</span>
+        <el-button type="danger" plain size="small" @click="deleteRow(filteredTtsModels.filter(row => row.selected))">
+          <xn-icon name="trash" /> {{ $t('xn.admin.deleteSelected') }}
+        </el-button>
+      </template>
+      <el-button type="primary" size="small" @click="addNew"><xn-icon name="plus" /> {{ $t('xn.admin.voice.add') }}</el-button>
+    </div>
 
-      <!-- 自定义滚动条 -->
-      <div class="custom-scrollbar" ref="scrollbar">
-        <div class="custom-scrollbar-track" ref="scrollbarTrack" @click="handleTrackClick">
-          <div class="custom-scrollbar-thumb" ref="scrollbarThumb" @mousedown="startDrag"></div>
-        </div>
-      </div>
+    <div class="tm-table" ref="tableContainer" @scroll="handleScroll">
+      <el-table v-loading="loading" :data="filteredTtsModels" style="width: 100%;">
+        <el-table-column width="44" align="center">
+          <template slot="header">
+            <el-checkbox :value="allSelected" :disabled="!filteredTtsModels.length" :aria-label="$t('ttsModel.selectAll')" @change="toggleSelectAll" />
+          </template>
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.selected"></el-checkbox>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('ttsModel.voiceCode')" min-width="150">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.voiceCode" size="small" class="tm-code"></el-input>
+            <span v-else class="tm-mono">{{ scope.row.voiceCode }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('ttsModel.voiceName')" min-width="140">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.voiceName" size="small"></el-input>
+            <span v-else class="tm-strong">{{ scope.row.voiceName }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('ttsModel.languageType')" width="120">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.languageType" size="small"></el-input>
+            <span v-else>{{ scope.row.languageType }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.preview')" min-width="230">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.voiceDemo" size="small" :placeholder="$t('ttsModel.enterMp3Url')"></el-input>
+            <AudioPlayer v-else-if="isValidAudioUrl(scope.row.voiceDemo)" :audioUrl="scope.row.voiceDemo" />
+            <span v-else class="xn-muted">{{ $t('xn.admin.voice.noDemo') }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.remark')" min-width="140">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" type="textarea" :rows="1" autosize v-model="scope.row.remark"
+              :placeholder="$t('ttsModel.enterRemark')"></el-input>
+            <span v-else>{{ scope.row.remark }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioPath')" min-width="200">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.referenceAudio" size="small" :placeholder="$t('ttsModel.enterCloneAudioPath')"></el-input>
+            <span v-else class="tm-mono">{{ scope.row.referenceAudio }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.cloneAudioText')" min-width="200">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.editing" v-model="scope.row.referenceText" size="small" :placeholder="$t('ttsModel.enterCloneAudioText')"></el-input>
+            <span v-else>{{ scope.row.referenceText }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('ttsModel.operation')" width="130" align="right">
+          <template slot-scope="scope">
+            <template v-if="!scope.row.editing">
+              <el-button type="text" @click="startEdit(scope.row)">{{ $t('ttsModel.edit') }}</el-button>
+              <el-button type="text" class="tm-danger" @click="deleteRow(scope.row)">{{ $t('ttsModel.delete') }}</el-button>
+            </template>
+            <template v-else>
+              <el-button type="text" @click="cancelEdit(scope.row)">{{ $t('xn.common.cancel') }}</el-button>
+              <el-button type="primary" size="mini" @click="saveEdit(scope.row)">{{ $t('ttsModel.save') }}</el-button>
+            </template>
+          </template>
+        </el-table-column>
+        <template slot="empty">
+          <xn-empty icon="voice" :title="searchQuery ? $t('xn.admin.voice.noMatch') : $t('xn.admin.voice.empty')"
+            :description="searchQuery ? '' : $t('xn.admin.voice.emptyDesc')" />
+        </template>
+      </el-table>
     </div>
-    <div class="action-buttons">
-      <el-button type="primary" size="mini" @click="toggleSelectAll" style="background: #606ff3;border: None">
-        {{ selectAll ? $t('ttsModel.deselectAll') : $t('ttsModel.selectAll') }}
-      </el-button>
-      <el-button type="primary" size="mini" @click="addNew" style="background: #5bc98c;border: None;">
-        {{ $t('ttsModel.add') }}
-      </el-button>
-      <el-button type="primary" size="mini" @click="deleteRow(filteredTtsModels.filter(row => row.selected))"
-        style="background: red;border:None">{{ $t('ttsModel.delete') }}
-      </el-button>
-    </div>
+    <p class="tm-foot xn-muted">{{ $t('xn.admin.voice.total', { n: filteredTtsModels.length }) }}</p>
   </el-dialog>
 </template>
 
@@ -163,6 +157,12 @@ export default {
     }
   },
   computed: {
+    selectedCount() {
+      return this.filteredTtsModels.filter((r) => r.selected).length;
+    },
+    allSelected() {
+      return this.filteredTtsModels.length > 0 && this.filteredTtsModels.every((r) => r.selected);
+    },
     filteredTtsModels() {
       return this.ttsModels.filter(model =>
         model.voiceName.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -419,8 +419,22 @@ export default {
       }
     },
 
+    // 取消编辑：已有音色恢复原值，新增的空行直接移除
+    cancelEdit(row) {
+      if (!row.id) {
+        this.ttsModels = this.ttsModels.filter((r) => r !== row);
+        return;
+      }
+      if (row.originalData) {
+        const { originalData, ...orig } = row.originalData;
+        Object.assign(row, orig);
+        delete row.originalData;
+      }
+      row.editing = false;
+    },
+
     toggleSelectAll() {
-      this.selectAll = !this.selectAll;
+      this.selectAll = !this.allSelected;
       this.filteredTtsModels.forEach(row => {
         row.selected = this.selectAll;
       });
@@ -514,222 +528,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-::v-deep .el-dialog {
-  border-radius: 8px !important;
-  overflow: hidden;
-  top: 1vh !important;
-}
-
-::v-deep .el-dialog__header {
-  display: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* 表格样式 */
-::v-deep .data-table .el-table__header th {
-  color: black;
-  padding: 6px 0 !important;
-}
-
-::v-deep .data-table .el-table__row td {
-  padding: 8px 0 12px !important;
-}
-
-::v-deep .data-table {
-  border: none !important;
-}
-
-::v-deep .data-table.el-table::before {
-  display: none !important;
-}
-
-::v-deep .data-table .el-table__header-wrapper {
-  border-bottom: 2px solid #f1f2fb !important;
-}
-
-::v-deep .data-table .el-table__body-wrapper .el-table__body td {
-  border: none !important;
-}
-
-/* 关闭按钮 */
-.custom-close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid #cfcfcf;
-  background: none;
-  font-size: 30px;
-  font-weight: lighter;
-  color: #cfcfcf;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  padding: 0;
-  outline: none;
-}
-
-.custom-close-btn:hover {
-  color: #409EFF;
-  border-color: #409EFF;
-}
-
-/* 备注文本 */
-::v-deep .remark-input .el-textarea__inner {
-  border-radius: 4px;
-  border: 1px solid #e6e6e6;
-  padding: 8px 12px;
-  resize: none;
-  max-height: 40px !important;
-  line-height: 1.5;
-  background-color: transparent !important;
-}
-
-::v-deep .remark-input .el-textarea__inner:focus {
-  border-color: #409EFF !important;
-  outline: none;
-}
-
-::v-deep .remark-input .el-textarea__inner::placeholder {
-  color: #c0c4cc !important;
-  opacity: 1;
-}
-
-
-/* 滚动容器 */
-.scroll-wrapper {
-  display: flex;
-  max-height: 55vh;
-  position: relative;
-}
-
-.table-container {
-  flex: 1;
-  overflow: auto;
-  scrollbar-width: none;
-  padding-right: 15px;
-  width: calc(100% - 16px);
-}
-
-.table-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* 自定义滚动条 */
-.custom-scrollbar {
-  width: 8px;
-  background: #f1f1f1;
-  border-radius: 4px;
-  position: relative;
-  margin-left: 8px;
-  height: 100%;
-  top: 55px;
-}
-
-.custom-scrollbar-track {
-  position: relative;
-  height: 380px;
-  cursor: pointer;
-}
-
-.custom-scrollbar-thumb {
-  position: absolute;
-  width: 100%;
-  background: #9dade7;
-  border-radius: 4px;
-  cursor: grab;
-  transition: background 0.2s;
-}
-
-.custom-scrollbar-thumb:hover {
-  background: #6b84d9;
-}
-
-.custom-scrollbar-thumb:active {
-  cursor: grabbing;
-}
-
-.save-Tts {
-  background: #796dea;
-  border: None;
-}
-
-.save-Tts:hover {
-  background: #8b80f0;
-}
-
-.custom-audio-container audio {
-  display: none;
-}
-
-/* 音频播放器容器样式 */
-.custom-audio-container {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.action-buttons .el-button {
-  padding: 8px 15px;
-  font-size: 11px;
-}
-
-.edit-btn,
-.delete-btn,
-.save-btn {
-  margin: 0 8px;
-  color: #7079aa !important;
-  transition: all 0.3s;
-}
-
-.edit-btn:hover,
-.delete-btn:hover,
-.save-btn:hover {
-  color: #5f70f3 !important;
-  transform: scale(1.05);
-}
-
-.save-btn {
-  color: #5cca8e !important;
-}
-
-/* 表格单元格自适应 */
-::v-deep .el-table__body-wrapper {
-  overflow-x: hidden !important;
-}
-
-::v-deep .el-table td {
-  white-space: pre-wrap !important;
-  word-break: break-all !important;
-}
-
-/* 按钮组定位调整 */
-.action-buttons {
-  position: static;
-  padding: 15px 0;
-  background: white;
-}
-
-/* 输入框自适应 */
-::v-deep .el-input__inner,
-::v-deep .el-textarea__inner {
-  width: 100% !important;
-  min-width: 120px;
-}
-
-/* 音频输入框特殊处理 */
-.audio-input ::v-deep .el-input__inner {
-  min-width: 200px;
-}
-
-/* 操作按钮弹性布局 */
-::v-deep .el-table__row .el-button {
-  flex-shrink: 0;
-  margin: 2px !important;
-}
+<style scoped>
+.tm-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.tm-search { width: 240px; }
+.tm-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 15px; color: var(--xn-ink-3); }
+.tm-grow { flex: 1; }
+.tm-table { max-height: 60vh; overflow: auto; border: 1px solid var(--xn-line); border-radius: var(--xn-r); }
+.tm-table ::v-deep .el-table::before { display: none; }
+.tm-mono, .tm-code ::v-deep .el-input__inner { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
+.tm-strong { font-weight: 500; }
+.tm-danger { color: var(--xn-danger); }
+.tm-danger:hover, .tm-danger:focus { color: #8D3523; }
+.tm-foot { margin: 10px 0 0; font-size: 13px; }
 </style>

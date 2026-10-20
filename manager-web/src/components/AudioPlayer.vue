@@ -1,78 +1,29 @@
 <template>
-  <div class="audio-container">
-    <audio
-      ref="audioRef"
-      :src="audioUrl"
-      @timeupdate="updateProgress"
-      @loadedmetadata="updateDuration"
-      style="display: none"
-    ></audio>
+  <div class="ap">
+    <audio ref="audioRef" :src="src" preload="metadata" @timeupdate="updateProgress" @loadedmetadata="updateDuration"
+      @ended="onEnded" style="display: none"></audio>
 
-    <div class="custom-controls">
-      <!-- 播放/暂停按钮 -->
-      <button class="play-btn" @click="togglePlay">
-        <svg width="20" height="20" viewBox="0 0 20 20">
-          <path
-            fill="#4362b3"
-            :d="isPlaying
-              ? 'M6 3h3v14H6zm5 0h3v14h-3z'
-              : 'M5 3l12 7-12 7z'"
-          />
-        </svg>
+    <button type="button" class="ap-play" :aria-label="isPlaying ? 'Pause' : 'Play'" @click="togglePlay">
+      <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
+        <path fill="currentColor" :d="isPlaying ? 'M5 3h3.5v14H5zm6.5 0H15v14h-3.5z' : 'M6 3l11 7-11 7z'" />
+      </svg>
+    </button>
+
+    <div class="ap-bar" ref="progressBar" @click="handleProgressClick">
+      <div class="ap-track" :style="{ width: progress + '%' }"></div>
+      <div class="ap-thumb" :style="{ left: progress + '%' }" @mousedown="startDrag"></div>
+    </div>
+
+    <span class="ap-time">{{ formattedCurrentTime }} / {{ formattedDuration }}</span>
+
+    <div class="ap-volume" ref="volumeControl">
+      <button type="button" ref="volumeButton" class="ap-vol-btn" aria-label="Mute" @click="toggleMute"
+        @mouseenter="handleVolumeMouseEnter" @mouseleave="startVolumeSliderHideTimer">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" :d="volumeIconPath" /></svg>
       </button>
-
-      <!-- 时间显示 -->
-      <span class="time-display">{{ formattedCurrentTime }}/{{ formattedDuration }}</span>
-
-      <!-- 进度条 -->
-      <div class="progress-container">
-        <div class="progress-bar" @click="handleProgressClick">
-          <div
-            class="progress-track"
-            :style="{ width: progress + '%' }"
-          ></div>
-          <div
-            class="progress-thumb"
-            :style="{ left: progress + '%' }"
-            @mousedown="startDrag"
-          ></div>
-        </div>
-      </div>
-
-      <!-- 音量控制 -->
-      <div class="volume-control" ref="volumeControl">
-        <button
-          @click="toggleMute"
-          @mouseenter="handleVolumeMouseEnter"
-          @mouseleave="startVolumeSliderHideTimer"
-          ref="volumeButton"
-          class="volume-button"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24">
-            <path fill="currentColor" :d="volumeIconPath"/>
-          </svg>
-        </button>
-        <div
-          v-show="showVolumeSlider"
-          class="volume-slider-container"
-          @mouseenter="cancelVolumeSliderHideTimer"
-          @mouseleave="startVolumeSliderHideTimer"
-          ref="volumeSlider"
-        >
-          <div class="volume-slider-track">
-            <input
-              type="range"
-              v-model="volume"
-              min="0"
-              max="1"
-              step="0.1"
-              class="volume-slider"
-              @input="handleVolumeChange"
-              orient="vertical"
-            >
-            <div class="volume-slider-thumb" :style="{ bottom: volume * 100 + '%' }"></div>
-          </div>
-        </div>
+      <div v-show="showVolumeSlider" class="ap-vol-pop" ref="volumeSlider"
+        @mouseenter="cancelVolumeSliderHideTimer" @mouseleave="startVolumeSliderHideTimer">
+        <input type="range" v-model="volume" min="0" max="1" step="0.1" class="ap-vol-range" aria-label="Volume" @input="handleVolumeChange">
       </div>
     </div>
   </div>
@@ -80,13 +31,18 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { playableUrl } from '@/utils/media'
 
 const props = defineProps({
   audioUrl: String
 })
 
+// 播放地址：real 模式原样使用；mock 模式换成浏览器内生成的演示音频，不请求服务端地址
+const src = computed(() => (props.audioUrl ? playableUrl(props.audioUrl) : ''))
+
 // 音频元素引用
 const audioRef = ref(null)
+const progressBar = ref(null)
 const volumeButton = ref(null)
 const volumeSlider = ref(null)
 
@@ -124,9 +80,14 @@ const togglePlay = () => {
   if (isPlaying.value) {
     audioRef.value.pause()
   } else {
-    audioRef.value.play()
+    const p = audioRef.value.play()
+    if (p && p.catch) p.catch(() => { isPlaying.value = false })
   }
   isPlaying.value = !isPlaying.value
+}
+
+const onEnded = () => {
+  isPlaying.value = false
 }
 
 const updateDuration = () => {
@@ -179,7 +140,8 @@ const startDrag = (e) => {
 const handleDrag = (e) => {
   if (!isDragging) return
 
-  const rect = document.querySelector('.progress-bar').getBoundingClientRect()
+  if (!progressBar.value) return
+  const rect = progressBar.value.getBoundingClientRect()
   const percentage = ((e.clientX - rect.left) / rect.width) * 100
   seekToPercentage(percentage)
 }
@@ -212,16 +174,7 @@ const updateSliderPosition = () => {
   nextTick(() => {
     if (!volumeButton.value || !volumeSlider.value) return
 
-    const buttonRect = volumeButton.value.getBoundingClientRect()
-    const slider = volumeSlider.value
-
-    // 计算相对于视口的位置
-    const left = buttonRect.left + window.scrollX
-    const top = buttonRect.top + window.scrollY
-
-    // 定位到按钮正中间，垂直居中
-    slider.style.left = `${left + 5}px`
-    slider.style.top = `${top - 85}px`
+    // 音量滑块相对音量按钮绝对定位（见样式 .ap-vol-pop），这里无需再按视口坐标计算
   })
 }
 
@@ -244,136 +197,16 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.audio-container {
-  background: #eef0fd;
-  padding: 8px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-}
-
-.custom-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.play-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.time-display {
-  font-size: 12px;
-  color: #5f7ba7;
-  min-width: 40px;
-  text-align: center;
-}
-
-.progress-container {
-  flex: 1;
-  padding: 0 10px;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-
-.progress-container:hover {
-  opacity: 1;
-}
-
-.progress-bar {
-  height: 2px;
-  background: #bfcadb;
-  position: relative;
-  cursor: pointer;
-}
-
-.progress-track {
-  position: absolute;
-  height: 100%;
-  background: #4167ed;
-}
-
-.progress-thumb {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #4167ed;
-  border: 2px solid #d6dcfc;
-  border-radius: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  z-index: 2;
-}
-
-.volume-control {
-  position: relative;
-}
-
-.volume-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #8f95cd;
-  cursor: pointer;
-}
-
-.volume-slider-container {
-  position: fixed;
-  padding: 10px 4px;
-  background: #eef0fd;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  height: 75px;
-}
-
-.volume-slider-track {
-  position: relative;
-  height: 55px;
-  width: 2px;
-  background: #bfcadb;
-  margin: 1px;
-}
-
-.volume-slider-thumb {
-  position: absolute;
-  left: 1px;
-  width: 9px;
-  height: 9px;
-  background: #4167ed;
-  border: 2px solid #d6dcfc;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.volume-slider {
-  position: absolute;
-  left: -14px;
-  width: 30px;
-  height: 60px;
-  writing-mode: vertical-lr;
-  direction: rtl;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.volume-slider-track::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 2px;
-  height: calc(100% * v-bind(volume));
-  background: #4167ed;
-}
+.ap { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 8px 0 4px; border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; min-width: 200px; }
+.ap-play { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 28px; height: 28px; border: 0; border-radius: 50%; background: var(--xn-ink); color: #fff; cursor: pointer; }
+.ap-play:hover { background: #2B3C57; }
+.ap-bar { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--xn-line); cursor: pointer; }
+.ap-track { height: 100%; border-radius: 2px; background: var(--xn-lake); }
+.ap-thumb { position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--xn-lake); transform: translate(-50%, -50%); cursor: grab; }
+.ap-time { flex: none; font-size: 12px; color: var(--xn-ink-3); font-variant-numeric: tabular-nums; }
+.ap-volume { position: relative; flex: none; }
+.ap-vol-btn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 0; border: 0; background: none; color: var(--xn-ink-3); cursor: pointer; }
+.ap-vol-btn:hover { color: var(--xn-ink); }
+.ap-vol-pop { position: absolute; right: calc(100% + 4px); top: 50%; transform: translateY(-50%); z-index: 10; display: flex; align-items: center; padding: 4px 8px; border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; box-shadow: var(--xn-shadow-pop); }
+.ap-vol-range { width: 90px; accent-color: var(--xn-lake); }
 </style>

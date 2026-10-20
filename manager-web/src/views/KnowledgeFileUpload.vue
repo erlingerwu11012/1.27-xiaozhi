@@ -116,7 +116,7 @@
     </el-dialog>
 
     <!-- 查看切片 -->
-    <el-dialog :title="$t('knowledgeFileUpload.viewSlices')" :visible.sync="sliceDialogVisible" width="820px" append-to-body custom-class="kf-slice-dialog">
+    <el-dialog :title="$t('knowledgeFileUpload.viewSlices')" :visible.sync="sliceDialogVisible" width="820px" top="8vh" append-to-body custom-class="kf-slice-dialog">
       <p class="kf-dialog-sub xn-clip" :title="currentDocumentName">{{ currentDocumentName }}</p>
       <div v-loading="sliceLoading" class="kf-slices">
         <ol v-if="sliceList.length > 0" class="kf-slice-list">
@@ -138,7 +138,7 @@
     </el-dialog>
 
     <!-- 召回测试 -->
-    <el-dialog :title="$t('knowledgeFileUpload.retrievalTest')" :visible.sync="retrievalTestDialogVisible" width="760px" append-to-body>
+    <el-dialog :title="$t('knowledgeFileUpload.retrievalTest')" :visible.sync="retrievalTestDialogVisible" width="760px" top="8vh" append-to-body>
       <p class="kf-dialog-sub">{{ $t('xn.knowledge.retrievalHelp') }}</p>
       <el-form :model="retrievalTestForm" label-position="top" @submit.native.prevent>
         <el-form-item :label="$t('knowledgeFileUpload.testQuestion')" required>
@@ -1073,7 +1073,7 @@ export default {
 .kf-uploader ::v-deep .el-upload-dragger { height: auto; padding: 28px 20px 22px; }
 .kf-uploader ::v-deep .el-upload__text { font-size: 14px; color: var(--xn-ink); }
 .kf-uploader__icon { display: block; margin: 0 auto 10px; font-size: 32px; color: var(--xn-ink-3); }
-.kf-uploader__tip { margin: 8px auto 0; max-width: 46ch; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.kf-uploader__tip { margin: 8px auto 0; max-width: 560px; overflow-wrap: anywhere; word-break: normal; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
 .kf-picked { margin-top: 16px; }
 .kf-picked__title { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: var(--xn-ink); }
 .kf-picked__list { max-height: 220px; overflow-y: auto; margin: 0; padding: 0; list-style: none; border: 1px solid var(--xn-line); border-radius: 8px; }
@@ -1103,6 +1103,7 @@ export default {
 .kf-rt-score { flex: none; font-size: 13px; color: var(--xn-ink-3); }
 .kf-rt-score b { margin-left: 4px; font-weight: 600; color: var(--xn-lake-ink); }
 .kf-rt-result .xn-empty { padding: 28px 16px; }
+.kf-rt-result .kf-slice-list { max-height: 42vh; }
 @media (max-width: 640px) {
   .kf-rt-row { flex-direction: column; }
 }

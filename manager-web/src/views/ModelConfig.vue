@@ -1,280 +1,104 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('header.modelConfig')" :description="$t('xn.admin.model.desc')">
+      <el-button type="primary" @click="addModel"><xn-icon name="plus" /> {{ $t('xn.admin.model.add') }}</el-button>
+    </page-header>
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t("modelConfig." + activeTab) }}</h2>
-      <div class="action-group">
-        <div class="search-group">
-          <el-input
-            :placeholder="$t('modelConfig.searchPlaceholder')"
-            v-model="search"
-            class="search-input"
-            clearable
-            @keyup.enter.native="handleSearch"
-            style="width: 240px"
-          />
-          <el-button class="btn-search" @click="handleSearch">
-            {{ $t("modelConfig.search") }}
-          </el-button>
+    <div class="mc-layout">
+      <!-- 左侧：模型类别 -->
+      <nav class="xn-panel mc-nav" :aria-label="$t('xn.admin.model.categories')">
+        <p class="mc-nav__title">{{ $t('xn.admin.model.categories') }}</p>
+        <button v-for="c in categories" :key="c" type="button" class="mc-nav__item" :class="{ 'is-on': activeTab === c }"
+          :aria-current="activeTab === c ? 'true' : null" @click="handleMenuSelect(c)">
+          <span>{{ $t('modelConfig.' + c) }}</span>
+          <span class="mc-nav__code">{{ c.toUpperCase() }}</span>
+        </button>
+      </nav>
+
+      <!-- 右侧：当前类别的模型 -->
+      <section class="mc-main">
+        <div class="xn-toolbar">
+          <el-input :placeholder="$t('modelConfig.searchPlaceholder')" v-model="search" clearable
+            @keyup.enter.native="handleSearch" @clear="handleSearch">
+            <xn-icon slot="prefix" name="search" class="xa-search-icon" />
+          </el-input>
+          <el-button @click="handleSearch">{{ $t('modelConfig.search') }}</el-button>
+          <span class="xn-toolbar__grow"></span>
+          <template v-if="selectedModels.length">
+            <span class="xn-muted">{{ $t('xn.admin.selected', { n: selectedModels.length }) }}</span>
+            <el-button type="danger" plain size="small" @click="batchDelete"><xn-icon name="trash" /> {{ $t('xn.admin.deleteSelected') }}</el-button>
+          </template>
         </div>
-      </div>
-    </div>
 
-    <!-- 主体内容 -->
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <!-- 左侧导航 -->
-        <el-menu
-          :default-active="activeTab"
-          class="nav-panel"
-          @select="handleMenuSelect"
-          style="background-size: cover; background-position: center"
-        >
-          <el-menu-item index="vad">
-            <span class="menu-text">{{ $t("modelConfig.vad") }}</span>
-          </el-menu-item>
-          <el-menu-item index="asr">
-            <span class="menu-text">{{ $t("modelConfig.asr") }}</span>
-          </el-menu-item>
-          <el-menu-item index="llm">
-            <span class="menu-text">{{ $t("modelConfig.llm") }}</span>
-          </el-menu-item>
-          <el-menu-item index="vllm">
-            <span class="menu-text">{{ $t("modelConfig.vllm") }}</span>
-          </el-menu-item>
-          <el-menu-item index="intent">
-            <span class="menu-text">{{ $t("modelConfig.intent") }}</span>
-          </el-menu-item>
-          <el-menu-item index="tts">
-            <span class="menu-text">{{ $t("modelConfig.tts") }}</span>
-          </el-menu-item>
-          <el-menu-item index="memory">
-            <span class="menu-text">{{ $t("modelConfig.memory") }}</span>
-          </el-menu-item>
-          <el-menu-item index="rag">
-            <span class="menu-text">{{ $t("modelConfig.rag") }}</span>
-          </el-menu-item>
-        </el-menu>
-
-        <!-- 右侧内容 -->
-        <div class="content-area">
-          <el-card class="model-card" shadow="never">
-            <el-table
-              ref="modelTable"
-              style="width: 100%"
-              v-loading="loading"
-              :element-loading-text="$t('modelConfig.loading')"
-              element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)"
-              :header-cell-style="{ background: 'transparent' }"
-              :data="modelList"
-              class="data-table"
-              header-row-class-name="table-header"
-              :header-cell-class-name="headerCellClassName"
-              @selection-change="handleSelectionChange"
-            >
-              <el-table-column
-                type="selection"
-                width="55"
-                align="center"
-                :cell-class-name="selectionCellClassName"
-              ></el-table-column>
-              <el-table-column
-                :label="$t('modelConfig.modelId')"
-                prop="id"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                :label="$t('modelConfig.modelName')"
-                prop="modelName"
-                align="center"
-              ></el-table-column>
-              <el-table-column :label="$t('modelConfig.provider')" align="center">
-                <template slot-scope="scope">
-                  {{ scope.row.configJson.type || $t("modelConfig.unknown") }}
+        <div class="xn-panel xn-panel--flush xa-panel">
+          <header class="xn-panel__head">
+            <h2 class="xn-panel__title">{{ modelTypeText }}</h2>
+            <span class="xn-muted mc-count">{{ $t('xn.admin.model.count', { n: total }) }}</span>
+          </header>
+          <xn-empty v-if="loadFailed && !loading" error @retry="loadData" />
+          <template v-else>
+            <el-table ref="modelTable" :data="modelList" v-loading="loading" row-key="id" @selection-change="handleSelectionChange">
+              <el-table-column type="selection" width="48" align="center" />
+              <el-table-column :label="$t('modelConfig.modelName')" min-width="200">
+                <template slot-scope="{ row }">
+                  <div class="mc-name">{{ row.modelName }}</div>
+                  <div class="mc-id">{{ row.id }}</div>
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('modelConfig.isEnabled')" align="center">
+              <el-table-column :label="$t('modelConfig.provider')" min-width="130">
                 <template slot-scope="scope">
-                  <el-switch
-                    v-model="scope.row.isEnabled"
-                    class="custom-switch"
-                    :active-value="1"
-                    :inactive-value="0"
-                    @change="handleStatusChange(scope.row)"
-                  />
+                  <span class="xa-code">{{ (scope.row.configJson && scope.row.configJson.type) || $t("modelConfig.unknown") }}</span>
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('modelConfig.isDefault')" align="center">
+              <el-table-column :label="$t('xn.admin.model.enabled')" width="90">
                 <template slot-scope="scope">
-                  <el-switch
-                    v-model="scope.row.isDefault"
-                    class="custom-switch"
-                    :active-value="1"
-                    :inactive-value="0"
-                    @change="handleDefaultChange(scope.row)"
-                  />
+                  <el-switch v-model="scope.row.isEnabled" :active-value="1" :inactive-value="0"
+                    :aria-label="$t('xn.admin.model.enabled')" @change="handleStatusChange(scope.row)" />
                 </template>
               </el-table-column>
-              <el-table-column
-                v-if="activeTab === 'tts'"
-                :label="$t('modelConfig.voiceManagement')"
-                align="center"
-              >
+              <el-table-column :label="$t('xn.admin.model.default')" width="110">
                 <template slot-scope="scope">
-                  <el-button
-                    type="text"
-                    size="mini"
-                    @click="openTtsDialog(scope.row)"
-                    class="voice-management-btn"
-                  >
-                    {{ $t("modelConfig.voiceManagement") }}
-                  </el-button>
+                  <span v-if="scope.row.isDefault === 1" class="xn-tag xn-tag--lake"><i class="dot"></i>{{ $t('xn.admin.model.isDefault') }}</span>
+                  <el-button v-else type="text" @click="handleDefaultChange(scope.row)">{{ $t('xn.admin.model.setDefault') }}</el-button>
                 </template>
               </el-table-column>
-              <el-table-column
-                :label="$t('modelConfig.action')"
-                align="center"
-                width="210px"
-              >
+              <el-table-column :label="$t('modelConfig.action')" :width="activeTab === 'tts' ? 220 : 160" align="right">
                 <template slot-scope="scope">
-                  <el-button
-                    type="text"
-                    size="mini"
-                    @click="editModel(scope.row)"
-                    class="edit-btn"
-                  >
-                    {{ $t("modelConfig.edit") }}
-                  </el-button>
-                  <el-button
-                    type="text"
-                    size="mini"
-                    @click="duplicateModel(scope.row)"
-                    class="edit-btn"
-                  >
-                    {{ $t("modelConfig.duplicate") }}
-                  </el-button>
-                  <el-button
-                    type="text"
-                    size="mini"
-                    @click="deleteModel(scope.row)"
-                    class="delete-btn"
-                  >
-                    {{ $t("modelConfig.delete") }}
-                  </el-button>
+                  <el-button v-if="activeTab === 'tts'" type="text" @click="openTtsDialog(scope.row)">{{ $t("modelConfig.voiceManagement") }}</el-button>
+                  <el-button type="text" @click="editModel(scope.row)">{{ $t("modelConfig.edit") }}</el-button>
+                  <el-button type="text" @click="duplicateModel(scope.row)">{{ $t("xn.admin.model.duplicate") }}</el-button>
+                  <el-button type="text" class="xa-danger" @click="deleteModel(scope.row)">{{ $t("modelConfig.delete") }}</el-button>
                 </template>
               </el-table-column>
+              <template slot="empty">
+                <xn-empty v-if="lastSearch" icon="search" :title="$t('xn.admin.model.noMatch')" :description="$t('xn.admin.noMatchDesc')" />
+                <xn-empty v-else icon="chip" :title="$t('xn.admin.model.empty', { type: modelTypeText })" :description="$t('xn.admin.model.emptyDesc')">
+                  <el-button type="primary" @click="addModel"><xn-icon name="plus" /> {{ $t('xn.admin.model.add') }}</el-button>
+                </xn-empty>
+              </template>
             </el-table>
-            <div class="table-footer">
-              <div class="batch-actions">
-                <el-button size="mini" type="primary" @click="selectAll">
-                  {{
-                    isAllSelected
-                      ? $t("modelConfig.deselectAll")
-                      : $t("modelConfig.selectAll")
-                  }}
-                </el-button>
-                <el-button type="success" size="mini" @click="addModel" class="add-btn">
-                  {{ $t("modelConfig.add") }}
-                </el-button>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="batchDelete"
-                >
-                  {{ $t("modelConfig.delete") }}
-                </el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select
-                  v-model="pageSize"
-                  @change="handlePageSizeChange"
-                  class="page-size-select"
-                >
-                  <el-option
-                    v-for="item in pageSizeOptions"
-                    :key="item"
-                    :label="$t('modelConfig.itemsPerPage', { items: item })"
-                    :value="item"
-                  >
-                  </el-option>
-                </el-select>
-
-                <button
-                  class="pagination-btn"
-                  :disabled="currentPage === 1"
-                  @click="goFirst"
-                >
-                  {{ $t("modelConfig.firstPage") }}
-                </button>
-                <button
-                  class="pagination-btn"
-                  :disabled="currentPage === 1"
-                  @click="goPrev"
-                >
-                  {{ $t("modelConfig.prevPage") }}
-                </button>
-
-                <button
-                  v-for="page in visiblePages"
-                  :key="page"
-                  class="pagination-btn"
-                  :class="{ active: page === currentPage }"
-                  @click="goToPage(page)"
-                >
-                  {{ page }}
-                </button>
-
-                <button
-                  class="pagination-btn"
-                  :disabled="currentPage === pageCount"
-                  @click="goNext"
-                >
-                  {{ $t("modelConfig.nextPage") }}
-                </button>
-                <span class="total-text">{{
-                  $t("modelConfig.totalRecords", { total })
-                }}</span>
-              </div>
+            <div v-if="total" class="xa-foot">
+              <el-pagination background layout="total, sizes, prev, pager, next" :total="total" :page-size="pageSize"
+                :page-sizes="pageSizeOptions" :current-page="currentPage" @size-change="handlePageSizeChange" @current-change="goToPage" />
             </div>
-          </el-card>
+          </template>
         </div>
-      </div>
-
-      <ModelEditDialog
-        :modelType="activeTab"
-        :visible.sync="editDialogVisible"
-        :modelData="editModelData"
-        @save="handleModelSave"
-      />
-      <TtsModel
-        :visible.sync="ttsDialogVisible"
-        :ttsModelId="selectedTtsModelId"
-        :modelConfig="selectedModelConfig"
-      />
-      <AddModelDialog
-        :modelType="activeTab"
-        :visible.sync="addDialogVisible"
-        @confirm="handleAddConfirm"
-      />
+      </section>
     </div>
-    <el-footer>
-      <version-footer />
-    </el-footer>
+
+    <ModelEditDialog :modelType="activeTab" :visible.sync="editDialogVisible" :modelData="editModelData" @save="handleModelSave" />
+    <TtsModel :visible.sync="ttsDialogVisible" :ttsModelId="selectedTtsModelId" :modelConfig="selectedModelConfig" />
+    <AddModelDialog :modelType="activeTab" :visible.sync="addDialogVisible" @confirm="handleAddConfirm" />
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
 import AddModelDialog from "@/components/AddModelDialog.vue";
-import HeaderBar from "@/components/HeaderBar.vue";
 import ModelEditDialog from "@/components/ModelEditDialog.vue";
 import TtsModel from "@/components/TtsModel.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 export default {
-  components: { HeaderBar, ModelEditDialog, TtsModel, AddModelDialog, VersionFooter },
+  components: { ModelEditDialog, TtsModel, AddModelDialog },
   data() {
     return {
       addDialogVisible: false,
@@ -292,6 +116,9 @@ export default {
       selectedModels: [],
       isAllSelected: false,
       loading: false,
+      loadFailed: false,
+      lastSearch: "",
+      categories: ["vad", "asr", "llm", "vllm", "intent", "tts", "memory", "rag"],
       selectedModelConfig: {},
     };
   },
@@ -300,16 +127,8 @@ export default {
     this.loadData();
   },
 
-  mounted() {
-    // 在组件挂载后确保表头翻译文本正确显示
-    setTimeout(() => {
-      this.updateSelectionHeaderText();
-    }, 100);
-  },
-
-  updated() {
-    // 在组件更新后重新设置表头翻译文本
-    this.updateSelectionHeaderText();
+  beforeDestroy() {
+    clearTimeout(this._loadTimer);
   },
 
   computed: {
@@ -321,31 +140,9 @@ export default {
     pageCount() {
       return Math.ceil(this.total / this.pageSize);
     },
-    visiblePages() {
-      const pages = [];
-      const maxVisible = 3;
-      let start = Math.max(1, this.currentPage - 1);
-      let end = Math.min(this.pageCount, start + maxVisible - 1);
-
-      if (end - start + 1 < maxVisible) {
-        start = Math.max(1, end - maxVisible + 1);
-      }
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-      return pages;
-    },
   },
 
   methods: {
-    // 更新选择列表头翻译文本
-    updateSelectionHeaderText() {
-      const thElement = document.querySelector(`.el-table__header th:nth-child(1) .cell`);
-      if (thElement) {
-        thElement.setAttribute("data-content", this.$t("modelConfig.select"));
-      }
-    },
     handlePageSizeChange(val) {
       this.pageSize = val;
       this.currentPage = 1;
@@ -356,29 +153,10 @@ export default {
       this.selectedModelConfig = row;
       this.ttsDialogVisible = true;
     },
-    headerCellClassName({ column, columnIndex }) {
-      if (columnIndex === 0) {
-        return "custom-selection-header";
-      }
-      return "";
-    },
-    selectionCellClassName({ row, column, rowIndex, columnIndex }) {
-      // 只对表头行设置data-content
-      if (rowIndex === undefined) {
-        // 使用setTimeout确保DOM已经渲染完成
-        setTimeout(() => {
-          const thElement = document.querySelector(
-            `.el-table__header th:nth-child(1) .cell`
-          );
-          if (thElement) {
-            thElement.setAttribute("data-content", this.$t("modelConfig.select"));
-          }
-        }, 0);
-      }
-      return "";
-    },
     handleMenuSelect(index) {
+      if (index === this.activeTab) return;
       this.activeTab = index;
+      this.search = "";
       this.currentPage = 1; // 重置到第一页
       this.pageSize = 10; // 可选：重置每页条数
       this.loadData();
@@ -404,6 +182,8 @@ export default {
             (model) =>
               new Promise((resolve) => {
                 Api.model.deleteModel(model.id, ({ data }) => resolve(data.code === 0));
+                // 业务错误（如默认模型、正在被使用）时请求层只提示不回调：超时按失败计
+                setTimeout(() => resolve(false), 8000);
               })
           );
 
@@ -419,6 +199,7 @@ export default {
                 message: this.$t("modelConfig.partialDeleteFailed"),
                 showClose: true,
               });
+              this.loadData();
             }
           });
         })
@@ -542,23 +323,6 @@ export default {
       });
     },
 
-    // 分页器
-    goFirst() {
-      this.currentPage = 1;
-      this.loadData();
-    },
-    goPrev() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.loadData();
-      }
-    },
-    goNext() {
-      if (this.currentPage < this.pageCount) {
-        this.currentPage++;
-        this.loadData();
-      }
-    },
     goToPage(page) {
       this.currentPage = page;
       this.loadData();
@@ -567,6 +331,13 @@ export default {
     // 获取模型配置列表
     loadData() {
       this.loading = true; // 开始加载
+      this.loadFailed = false;
+      clearTimeout(this._loadTimer);
+      // 业务错误由请求层统一提示且不回调；超过 8 秒仍无结果时显示失败状态
+      this._loadTimer = setTimeout(() => {
+        if (this.loading) { this.loading = false; this.loadFailed = true; }
+      }, 8000);
+      const keyword = this.search;
       const params = {
         modelType: this.activeTab,
         modelName: this.search,
@@ -576,10 +347,18 @@ export default {
 
       Api.model.getModelList(params, ({ data }) => {
         this.loading = false; // 结束加载
+        clearTimeout(this._loadTimer);
         if (data.code === 0) {
+          this.lastSearch = keyword;
           this.modelList = data.data.list;
           this.total = data.data.total;
+          // 删除最后一页的全部数据后回到上一页
+          if (!this.modelList.length && this.currentPage > 1 && this.total) {
+            this.currentPage = Math.max(1, this.pageCount);
+            this.loadData();
+          }
         } else {
+          this.loadFailed = true;
           this.$message.error(data.msg || this.$t("modelConfig.fetchModelsFailed"));
         }
       });
@@ -622,519 +401,32 @@ export default {
 </script>
 
 <style scoped>
-.el-switch {
-  height: 23px;
+.mc-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px; align-items: start; }
+.mc-nav { padding: 8px; position: sticky; top: calc(var(--xn-topbar-h) + 16px); }
+.mc-nav__title { margin: 6px 10px 8px; font-size: 12px; font-weight: 600; color: var(--xn-ink-3); }
+.mc-nav__item {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; height: 40px; padding: 0 12px;
+  border: 0; border-radius: var(--xn-r); background: none; color: var(--xn-ink-2); font: inherit; font-size: 14px; text-align: left; cursor: pointer;
 }
-
-:deep(.el-dialog__wrapper) {
-  z-index: 9999 !important;
-}
-
-::v-deep .el-table tr {
-  background: transparent;
-}
-
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  /* 欧泊云海 - 氛围感背景 */
-  background-color: #f8fafc !important;
-  background-image:
-    radial-gradient(circle at 15% 25%, rgba(99, 102, 241, 0.12), transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(56, 189, 248, 0.12), transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03), transparent 60%) !important;
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-.main-wrapper {
-  margin: 5px 22px;
-  min-height: calc(100vh - 26vh);
-  height: auto;
-  max-height: 80vh;
-  position: relative;
-  padding: 12px 16px 18px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.08);
-  box-sizing: border-box;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin: 0;
-  color: #0f172a;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 20px;
-  background: transparent;
-}
-
-.nav-panel {
-  min-width: 242px;
-  height: 100%;
-  border-right: none;
-  background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08), transparent 55%),
-    radial-gradient(circle at 0% 80%, rgba(99, 102, 241, 0.06), transparent 55%),
-    rgba(255, 255, 255, 0.18);
-  padding: 16px 0;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-panel .el-menu-item {
-  height: 50px;
-  background: #e9f0ff;
-  line-height: 50px;
-  border-radius: 4px 0 0 4px !important;
-  transition: all 0.3s;
-  display: flex !important;
-  justify-content: flex-end;
-  padding-right: 12px !important;
-  width: fit-content;
-  margin: 8px 0 8px auto;
-  min-width: unset;
-}
-
-.nav-panel .el-menu-item.is-active {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  position: relative;
-  padding-left: 40px !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-}
-
-.nav-panel .el-menu-item.is-active::before {
-  content: "";
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 13px;
-  height: 13px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgba(64, 158, 255, 0.5);
-}
-
-.menu-text {
-  font-size: 14px;
-  color: #475569;
-  text-align: right;
-  width: 100%;
-  padding-right: 8px;
-}
-
-.content-area {
-  flex: 1;
-  padding: 24px;
-  height: 100%;
-  min-width: 600px;
-  overflow: hidden;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-.action-group {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.search-group {
-  display: flex;
-  gap: 10px;
-}
-
-.search-input {
-  width: 240px;
-}
-
-.btn-search {
-  background: rgba(59, 130, 246, 0.08) !important;
-  color: #2563eb !important;
-  border: 1px solid rgba(59, 130, 246, 0.2) !important;
-}
-
-.btn-search:hover {
-  background: rgba(59, 130, 246, 0.15) !important;
-}
-
-::v-deep .search-input .el-input__inner {
-  border-radius: 8px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background-color: rgba(255, 255, 255, 0.9);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-::v-deep .page-size-select {
-  width: 100px;
-  margin-right: 8px;
-}
-
-::v-deep .page-size-select .el-input__inner {
-  height: 32px;
-  line-height: 32px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(255, 255, 255, 0.9);
-  color: #475569;
-  font-size: 13px;
-}
-
-::v-deep .page-size-select .el-input__suffix {
-  right: 6px;
-  width: 15px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 6px;
-  border-radius: 4px;
-}
-
-::v-deep .page-size-select .el-input__suffix-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-::v-deep .page-size-select .el-icon-arrow-up:before {
-  content: "";
-  display: inline-block;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 9px solid #606266;
-  position: relative;
-  transform: rotate(0deg);
-  transition: transform 0.3s;
-}
-
-::v-deep .search-input .el-input__inner:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
-  outline: none;
-}
-
-.data-table {
-  border-radius: 6px;
-  overflow: hidden;
-  background-color: transparent !important;
-}
-
-.data-table /deep/ .el-table__row {
-  background-color: transparent !important;
-}
-
-.table-header th {
-  background-color: transparent !important;
-  color: #606266;
-  font-weight: 600;
-}
-
-.table-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  width: 100%;
-  flex-shrink: 0;
-  min-height: 60px;
-  background: white;
-}
-
-.batch-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.batch-actions .el-button {
-  min-width: 72px;
-  height: 32px;
-  padding: 7px 12px 7px 10px;
-  font-size: 12px;
-  border-radius: 8px;
-  line-height: 1;
-  font-weight: 500;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  box-shadow: none;
-  background: transparent;
-  color: #475569;
-}
-
-.batch-actions .el-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.18);
-}
-
-.batch-actions .el-button--primary {
-  background: rgba(59, 130, 246, 0.08) !important;
-  color: #2563eb !important;
-  border-color: rgba(59, 130, 246, 0.2) !important;
-}
-
-.batch-actions .el-button--success {
-  background: rgba(16, 185, 129, 0.08);
-  color: #059669;
-  border-color: rgba(16, 185, 129, 0.2);
-}
-
-.batch-actions .el-button--danger {
-  background: #fd5b63;
-  color: white;
-}
-
-.el-table th /deep/ .el-table__cell {
-  overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  background-color: transparent !important;
-}
-
-::v-deep .el-table .custom-selection-header .cell .el-checkbox__inner {
-  display: none !important;
-}
-
-::v-deep .el-table .custom-selection-header .cell::before {
-  content: attr(data-content);
-  display: block;
-  text-align: center;
-  line-height: 32px;
-  /* 设置合适的行高，确保文本完整显示 */
-  color: black;
-  margin-top: 0;
-  /* 移除可能导致偏移的上边距 */
-  height: 32px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-
-.custom-selection-header .cell {
-  position: relative;
-}
-
-/* 已移除可能影响文本显示的空伪元素 */
-
-::v-deep .el-table__body .el-checkbox__inner {
-  display: inline-block !important;
-  background: #e6edfa;
-}
-
-::v-deep .el-table thead th:not(:first-child) .cell {
-  color: #303133 !important;
-}
-
-::v-deep .nav-panel .el-menu-item.is-active .menu-text {
-  color: #fff !important;
-}
-
-::v-deep .data-table {
-  &.el-table::before,
-  &.el-table::after,
-  &.el-table__inner-wrapper::before {
-    display: none !important;
-  }
-}
-
-::v-deep .data-table .el-table__header-wrapper {
-  border-bottom: 1px solid rgb(224, 227, 237);
-}
-
-::v-deep .data-table .el-table__body td {
-  border-bottom: 1px solid rgb(224, 227, 237) !important;
-}
-
-.el-button img {
-  height: 1em;
-  vertical-align: middle;
-  padding-right: 2px;
-  padding-bottom: 2px;
-}
-
-::v-deep .el-checkbox__inner {
-  border-color: #cfcfcf !important;
-  transition: all 0.2s ease-in-out;
-}
-
-::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
-  background-color: #5f70f3;
-  border-color: #5f70f3;
-}
-
-.voice-management-btn {
-  background: #9db3ea;
-  color: white;
-  min-width: 68px;
-  line-height: 14px;
-  white-space: nowrap;
-  transition: all 0.3s;
-  border-radius: 10px;
-}
-
-.voice-management-btn:hover {
-  background: #8aa2e0;
-  /* 悬停时颜色加深 */
-  transform: scale(1.05);
-}
-
-::v-deep .el-table .el-table-column--selection .cell {
-  padding-left: 15px !important;
-}
-
-::v-deep .el-table .el-table__fixed-right .cell {
-  padding-right: 15px !important;
-}
-
-.edit-btn,
-.delete-btn {
-  margin: 0 8px;
-  color: #7079aa !important;
-}
-
-::v-deep .el-table .cell {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-/* 分页器 */
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  /* 导航按钮样式 (首页、上一页、下一页) */
-  .pagination-btn:first-child,
-  .pagination-btn:nth-child(2),
-  .pagination-btn:nth-child(3),
-  .pagination-btn:nth-last-child(2) {
-    min-width: 60px;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: #d7dce6;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
-  /* 数字按钮样式 */
-  .pagination-btn:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:nth-last-child(2)) {
-    min-width: 28px;
-    height: 32px;
-    padding: 0;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(245, 247, 250, 0.3);
-    }
-  }
-
-  .pagination-btn.active {
-    background: #5f70f3 !important;
-    color: #ffffff !important;
-    border-color: #5f70f3 !important;
-
-    &:hover {
-      background: #6d7cf5 !important;
-    }
-  }
-
-  .total-text {
-    color: #909399;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-}
-
-.model-card {
-  background: white;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: none;
-  box-shadow: none;
-  overflow: hidden;
-}
-
-.model-card ::v-deep .el-card__body {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-}
-
-.data-table {
-  --table-max-height: calc(100vh - 45vh);
-  max-height: var(--table-max-height);
-}
-
-.data-table ::v-deep .el-table__body-wrapper {
-  max-height: calc(var(--table-max-height) - 80px);
-  overflow-y: auto;
-}
-
-::v-deep .el-loading-mask {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(2px);
-}
-
-::v-deep .el-loading-spinner .circular {
-  width: 28px;
-  height: 28px;
-}
-
-::v-deep .el-loading-spinner .path {
-  stroke: #6b8cff;
-}
-
-::v-deep .el-loading-text {
-  color: #6b8cff !important;
-  font-size: 14px;
-  margin-top: 8px;
+.mc-nav__item:hover { background: var(--xn-mist-2); color: var(--xn-ink); }
+.mc-nav__item.is-on { background: var(--xn-lake-soft); color: var(--xn-lake-ink); font-weight: 600; }
+.mc-nav__code { font-size: 12px; font-weight: 500; color: var(--xn-ink-4); }
+.mc-nav__item.is-on .mc-nav__code { color: var(--xn-lake); }
+.mc-main { min-width: 0; }
+.mc-count { font-size: 13px; }
+.mc-name { font-weight: 500; color: var(--xn-ink); }
+.mc-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--xn-ink-3); word-break: break-all; }
+.xa-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.xa-panel { overflow: hidden; }
+.xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
+.xa-danger { color: var(--xn-danger); }
+.xa-danger:hover, .xa-danger:focus { color: #8D3523; }
+.xa-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
+@media (max-width: 1100px) {
+  .mc-layout { grid-template-columns: minmax(0, 1fr); }
+  .mc-nav { position: static; display: flex; flex-wrap: wrap; gap: 4px; }
+  .mc-nav__title { display: none; }
+  .mc-nav__item { width: auto; }
+  .mc-nav__code { display: none; }
 }
 </style>

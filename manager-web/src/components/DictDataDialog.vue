@@ -1,20 +1,23 @@
 <template>
-    <el-dialog :title="title" :visible.sync="dialogVisible" width="30%" @close="handleClose">
-        <el-form :model="form" :rules="rules" ref="form" label-width="auto">
+    <el-dialog :title="title" :visible.sync="dialogVisible" width="480px" append-to-body :close-on-click-modal="false" @close="handleClose">
+        <el-form :model="form" :rules="rules" ref="form" label-position="top" @submit.native.prevent>
             <el-form-item :label="$t('dictDataDialog.dictLabel')" prop="dictLabel">
-                <el-input v-model="form.dictLabel" :placeholder="$t('dictDataDialog.dictLabelPlaceholder')"></el-input>
+                <el-input v-model="form.dictLabel" maxlength="64" :placeholder="$t('dictDataDialog.dictLabelPlaceholder')"></el-input>
             </el-form-item>
             <el-form-item :label="$t('dictDataDialog.dictValue')" prop="dictValue">
-                <el-input v-model="form.dictValue" :placeholder="$t('dictDataDialog.dictValuePlaceholder')"></el-input>
+                <el-input v-model="form.dictValue" maxlength="128" class="dd-code" :placeholder="$t('dictDataDialog.dictValuePlaceholder')"></el-input>
             </el-form-item>
             <el-form-item :label="$t('dictDataDialog.sort')" prop="sort">
-                <el-input-number v-model="form.sort" :min="0" :max="999" style="width: 100%;"></el-input-number>
+                <el-input-number v-model="form.sort" :min="0" :max="999" controls-position="right" style="width: 160px;"></el-input-number>
+                <p class="dd-hint">{{ $t('xn.admin.dict.sortHint') }}</p>
             </el-form-item>
         </el-form>
-        <div slot="footer" class="dialog-footer">
+        <span slot="footer" class="dd-footer">
+            <el-button @click="resetToInitial">{{ $t('xn.common.reset') }}</el-button>
+            <span class="dd-grow"></span>
             <el-button @click="handleClose">{{ $t('button.cancel') }}</el-button>
             <el-button type="primary" @click="handleSave">{{ $t('button.save') }}</el-button>
-        </div>
+        </span>
     </el-dialog>
 </template>
 
@@ -28,7 +31,7 @@ export default {
         },
         title: {
             type: String,
-            default: () => this.$t('dictDataDialog.addDictData')
+            default() { return this.$t('dictDataDialog.addDictData') }
         },
         dictData: {
             type: Object,
@@ -74,6 +77,7 @@ export default {
         },
         visible(val) {
           this.dialogVisible = val;
+          if (val) this.resetToInitial();
         },
         dialogVisible(val) {
           this.$emit('update:visible', val);
@@ -94,6 +98,12 @@ export default {
             }
             this.$refs.form?.resetFields()
         },
+        // 恢复到打开弹窗时的内容
+        resetToInitial() {
+            this.form = { ...(this.dictData || {}) }
+            if (!this.form.dictTypeId && this.dictTypeId) this.form.dictTypeId = this.dictTypeId
+            this.$nextTick(() => this.$refs.form && this.$refs.form.clearValidate())
+        },
         handleSave() {
             this.$refs.form.validate(valid => {
                 if (valid) {
@@ -106,11 +116,8 @@ export default {
 </script>
 
 <style scoped>
-.dialog-footer {
-    text-align: right;
-}
-:deep(.el-dialog) {
-    border-radius: 15px;
-}
-
+.dd-footer { display: flex; align-items: center; }
+.dd-grow { flex: 1; }
+.dd-code ::v-deep .el-input__inner { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.dd-hint { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--xn-ink-3); }
 </style>

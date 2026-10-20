@@ -1,99 +1,70 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('serverSideManager.pageTitle')" :description="$t('xn.admin.server.desc')">
+      <el-button @click="fetchParams" :loading="loading"><xn-icon name="refresh" /> {{ $t('xn.admin.refresh') }}</el-button>
+    </page-header>
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t('serverSideManager.pageTitle') }}</h2>
+    <div v-if="isMock" class="xa-demo-note">
+      <demo-tag :text="$t('xn.common.simulated')" />
+      <span>{{ $t('xn.admin.server.demoNote') }}</span>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="params-card" shadow="never">
-            <el-table ref="paramsTable" :data="paramsList" class="transparent-table" v-loading="loading"
-              :element-loading-text="$t('serverSideManager.loading')" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)" :header-cell-class-name="headerCellClassName">
-              <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
-                <template slot-scope="scope">
-                  <el-checkbox v-model="scope.row.selected"></el-checkbox>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('serverSideManager.wsAddress')" prop="address" align="center"></el-table-column>
-              <el-table-column :label="$t('serverSideManager.operation')" prop="operator" align="center" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-button size="medium" type="text" @click="emitAction(scope.row, actionMap.restart)">{{ $t('serverSideManager.restart') }}</el-button>
-                  <el-button size="medium" type="text"
-                    @click="emitAction(scope.row, actionMap.update_config)">{{ $t('serverSideManager.updateConfig') }}</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-card>
-        </div>
-      </div>
+    <div class="xn-panel xn-panel--flush xa-panel">
+      <xn-empty v-if="loadFailed && !loading" error @retry="fetchParams" />
+      <el-table v-else ref="paramsTable" :data="paramsList" v-loading="loading" row-key="address">
+        <el-table-column :label="$t('serverSideManager.wsAddress')" min-width="320">
+          <template slot-scope="{ row }"><span class="xa-code">{{ row.address }}</span></template>
+        </el-table-column>
+        <el-table-column :label="$t('xn.admin.server.lastAction')" min-width="260">
+          <template slot-scope="{ row }">
+            <span v-if="row.pending" class="xn-tag xn-tag--lake"><i class="dot"></i>{{ $t('xn.admin.server.sending') }}</span>
+            <span v-else-if="row.lastResult" class="xa-result">
+              <span class="xn-tag" :class="row.lastResult.ok ? 'xn-tag--success' : 'xn-tag--danger'">
+                <i class="dot"></i>{{ row.lastResult.label }}{{ row.lastResult.ok ? $t('xn.admin.server.sent') : $t('xn.admin.server.failed') }}
+              </span>
+              <span class="xn-muted xn-num">{{ row.lastResult.time }}</span>
+              <demo-tag v-if="isMock && row.lastResult.ok" :text="$t('xn.common.simulated')" />
+            </span>
+            <span v-else class="xn-muted">{{ $t('xn.admin.server.noAction') }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('serverSideManager.operation')" width="200" align="right">
+          <template slot-scope="scope">
+            <el-button type="text" :disabled="scope.row.pending" @click="emitAction(scope.row, actionMap.update_config)">{{ $t('serverSideManager.updateConfig') }}</el-button>
+            <el-button type="text" class="xa-danger" :disabled="scope.row.pending" @click="emitAction(scope.row, actionMap.restart)">{{ $t('serverSideManager.restart') }}</el-button>
+          </template>
+        </el-table-column>
+        <template slot="empty">
+          <xn-empty icon="globe" :title="$t('xn.admin.server.empty')" :description="$t('xn.admin.server.emptyDesc')">
+            <el-button @click="$router.push('/params-management')">{{ $t('xn.admin.server.goParams') }}</el-button>
+          </xn-empty>
+        </template>
+      </el-table>
     </div>
-
-
-    <el-footer>
-      <version-footer />
-    </el-footer>
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
-import ParamDialog from "@/components/ParamDialog.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
-import i18n from '@/i18n';
+import { IS_MOCK } from "@/utils/media";
 
 export default {
-  components: { HeaderBar, ParamDialog, VersionFooter },
   data() {
     return {
+      isMock: IS_MOCK,
       paramsList: [],
-      currentPage: 1,
       loading: false,
-      pageSize: 10,
-      pageSizeOptions: [10, 20, 50, 100],
+      loadFailed: false,
       total: 0,
-      dialogVisible: false,
-      dialogTitle: '',
-      isAllSelected: false,
-      sensitive_keys: ["api_key", "personal_access_token", "access_token", "token", "secret", "access_key_secret", "secret_key"],
-      paramForm: {
-        id: null,
-        paramCode: "",
-        paramValue: "",
-        remark: ""
-      },
     };
   },
   created() {
     this.fetchParams();
   },
-  mounted() {
-    this.dialogTitle = this.$t('paramManagement.addParam');
+  beforeDestroy() {
+    clearTimeout(this._loadTimer);
   },
-
   computed: {
-    pageCount() {
-      return Math.ceil(this.total / this.pageSize);
-    },
-    visiblePages() {
-      const pages = [];
-      const maxVisible = 3;
-      let start = Math.max(1, this.currentPage - 1);
-      let end = Math.min(this.pageCount, start + maxVisible - 1);
-
-      if (end - start + 1 < maxVisible) {
-        start = Math.max(1, end - maxVisible + 1);
-      }
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-      return pages;
-    },
     actionMap() {
       return {
         restart: {
@@ -112,21 +83,24 @@ export default {
     }
   },
   methods: {
-    handlePageSizeChange(val) {
-      this.pageSize = val;
-      this.currentPage = 1;
-      this.fetchParams();
-    },
     fetchParams() {
       this.loading = true;
+      this.loadFailed = false;
+      clearTimeout(this._loadTimer);
+      // 业务错误由请求层统一提示且不回调；超过 8 秒仍无结果时显示失败状态
+      this._loadTimer = setTimeout(() => {
+        if (this.loading) { this.loading = false; this.loadFailed = true; }
+      }, 8000);
       Api.admin.getWsServerList(
         {},
         ({ data }) => {
           this.loading = false;
+          clearTimeout(this._loadTimer);
           if (data.code === 0) {
-            this.paramsList = data.data.map(item => ({ address: item }));
-            this.total = data.data.length;
+            this.paramsList = (data.data || []).map(item => ({ address: item, pending: false, lastResult: null }));
+            this.total = (data.data || []).length;
           } else {
+            this.loadFailed = true;
             this.$message.error({
               message: data.msg || this.$t('serverSideManager.getServerListFailed'),
               showClose: true
@@ -135,329 +109,71 @@ export default {
         }
       );
     },
+    timeNow() {
+      const d = new Date();
+      const p = (n) => String(n).padStart(2, '0');
+      return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+    },
     emitAction(rowItem, actionItem) {
       if (actionItem === undefined || rowItem.address === undefined) {
         return;
       }
       // 弹开询问框
-      this.$confirm(actionItem.message, actionItem.title, {
+      this.$confirm(this.$t('xn.admin.server.confirm', { msg: actionItem.message, address: rowItem.address }), actionItem.title, {
         confirmButtonText: actionItem.confirmText, // 确认按钮文本
-        cancelButtonText: this.$t('common.cancel') // 取消按钮文本
+        cancelButtonText: this.$t('common.cancel'), // 取消按钮文本
+        type: 'warning',
       }).then(() => {
         // 用户点击了确认按钮
+        rowItem.pending = true;
+        clearTimeout(rowItem._timer);
+        // 业务错误时请求层不回调：超时后显示为失败
+        rowItem._timer = setTimeout(() => {
+          if (rowItem.pending) {
+            rowItem.pending = false;
+            rowItem.lastResult = { ok: false, label: actionItem.confirmText, time: this.timeNow() };
+          }
+        }, 8000);
         Api.admin.sendWsServerAction({
           targetWs: rowItem.address,
           action: actionItem.value
         }, ({ data }) => {
+          rowItem.pending = false;
+          clearTimeout(rowItem._timer);
           if (data.code !== 0) {
+            rowItem.lastResult = { ok: false, label: actionItem.confirmText, time: this.timeNow() };
             this.$message.error({
               message: data.msg || this.$t('serverSideManager.operationFailed'),
               showClose: true
             });
             return;
           }
+          rowItem.lastResult = { ok: true, label: actionItem.confirmText, time: this.timeNow() };
+          // 演示模式下显示接口返回的“演示结果”说明，避免误以为真实服务器已执行
+          const simulated = this.isMock && data.msg && data.msg !== 'success';
           this.$message.success({
-            message: actionItem.value === 'restart' ? this.$t('serverSideManager.restartSuccess') : this.$t('serverSideManager.updateConfigSuccess'),
-            showClose: true
+            message: simulated ? data.msg : (actionItem.value === 'restart' ? this.$t('serverSideManager.restartSuccess') : this.$t('serverSideManager.updateConfigSuccess')),
+            showClose: true,
+            duration: simulated ? 5000 : 3000,
           })
         })
-      })
+      }).catch(() => {})
     },
-    headerCellClassName({ columnIndex }) {
-      if (columnIndex === 0) {
-        return "custom-selection-header";
-      }
-      return "";
-    }
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  overflow: hidden;
+<style scoped>
+.xa-panel { overflow: hidden; }
+.xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
+.xa-result { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.xa-danger { color: var(--xn-danger); }
+.xa-danger:hover, .xa-danger:focus { color: #8D3523; }
+.xa-danger.is-disabled { color: var(--xn-ink-4); }
+.xa-demo-note {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 10px 14px;
+  border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg); background: var(--xn-white);
+  font-size: 13px; line-height: 1.6; color: var(--xn-ink-2);
 }
-
-.main-wrapper {
-  margin: 5px 22px;
-  border-radius: 15px;
-  min-height: calc(100vh - 24vh);
-  height: auto;
-  max-height: 80vh;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  background: rgba(237, 242, 255, 0.5);
-  display: flex;
-  flex-direction: column;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin: 0;
-}
-
-.right-operations {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.search-input {
-  width: 240px;
-}
-
-.btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 15px;
-  background: transparent;
-  border: 1px solid #fff;
-}
-
-.content-area {
-  flex: 1;
-  height: 100%;
-  min-width: 600px;
-  overflow: auto;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.params-card {
-  background: white;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: none;
-  box-shadow: none;
-  overflow: hidden;
-
-  ::v-deep .el-card__body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-}
-
-.table_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ctrl_btn {
-  display: flex;
-  gap: 8px;
-  padding-left: 26px;
-
-  .el-button {
-    min-width: 72px;
-    height: 32px;
-    padding: 7px 12px 7px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    line-height: 1;
-    font-weight: 500;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  .el-button--primary {
-    background: #5f70f3;
-    color: white;
-  }
-
-  .el-button--danger {
-    background: #fd5b63;
-    color: white;
-  }
-}
-
-:deep(.transparent-table) {
-  background: white;
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .el-table__body-wrapper {
-    flex: 1;
-    overflow-y: auto;
-    max-height: none !important;
-  }
-
-  .el-table__header-wrapper {
-    flex-shrink: 0;
-  }
-
-  .el-table__header th {
-    background: white !important;
-    color: black;
-  }
-
-  &::before {
-    display: none;
-  }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
-}
-
-
-:deep(.el-checkbox__inner) {
-  background-color: #eeeeee !important;
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
-}
-
-@media (min-width: 1144px) {
-  .table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-  }
-
-  :deep(.transparent-table) {
-    .el-table__body tr {
-      td {
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      &+tr {
-        margin-top: 10px;
-      }
-    }
-  }
-}
-
-:deep(.el-table .el-button--text) {
-  color: #7079aa;
-}
-
-:deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
-}
-
-.el-button--success {
-  background: #5bc98c;
-  color: white;
-}
-
-:deep(.el-table .cell) {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.page-size-select {
-  width: 100px;
-  margin-right: 10px;
-
-  :deep(.el-input__inner) {
-    height: 32px;
-    line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-  }
-
-  :deep(.el-input__suffix) {
-    right: 6px;
-    width: 15px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 6px;
-    border-radius: 4px;
-  }
-
-  :deep(.el-input__suffix-inner) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  :deep(.el-icon-arrow-up:before) {
-    content: "";
-    display: inline-block;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-  }
-}
-
-:deep(.el-table) {
-  .el-table__body-wrapper {
-    transition: height 0.3s ease;
-  }
-}
-
-.el-table {
-  --table-max-height: calc(100vh - 40vh);
-  max-height: var(--table-max-height);
-
-  .el-table__body-wrapper {
-    max-height: calc(var(--table-max-height) - 40px);
-    overflow-y: auto;
-  }
-}
+.xa-demo-note .xn-tag { flex: none; }
 </style>

@@ -14,7 +14,7 @@
           <button v-for="session in sessions" :key="session.sessionId" type="button" class="ch-session"
             :class="{ 'is-on': currentSessionId === session.sessionId }" :aria-current="currentSessionId === session.sessionId ? 'true' : null"
             @click="selectSession(session)">
-            <span class="ch-ava ch-ava--user" :class="'tone-' + getUserAvatar(session.sessionId)" aria-hidden="true"><xn-icon name="chat" /></span>
+            <xn-icon name="chat" class="ch-session__icon" />
             <span class="ch-session__time xn-num">{{ formatTime(session.createdAt) }}</span>
             <span class="ch-session__count xn-num" :title="$t('xn.agents.chat.count', { n: session.chatCount })">{{ session.chatCount > 99 ? '99+' : session.chatCount }}</span>
           </button>
@@ -430,15 +430,17 @@ export default {
 <style scoped>
 .ch-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-right: 32px; }
 .ch-title__text { font-size: 18px; font-weight: 600; color: var(--xn-ink); }
-.ch { display: grid; grid-template-columns: 240px minmax(0, 1fr); height: min(62vh, 620px); min-height: 360px; border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg); overflow: hidden; }
+.ch { display: grid; grid-template-columns: 250px minmax(0, 1fr); height: min(62vh, 620px); min-height: 360px; border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg); overflow: hidden; }
 .ch-sessions { position: relative; overflow-y: auto; padding: 8px; border-right: 1px solid var(--xn-line-2); background: var(--xn-mist-2); }
 .ch-session {
-  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 6px 10px; margin-bottom: 2px;
+  display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 6px 10px; margin-bottom: 2px;
   border: 0; border-radius: var(--xn-r); background: none; font: inherit; color: var(--xn-ink); text-align: left; cursor: pointer;
 }
 .ch-session:hover { background: #fff; }
 .ch-session.is-on { background: #fff; box-shadow: inset 0 0 0 1px var(--xn-line); }
 .ch-session.is-on .ch-session__time { font-weight: 600; }
+.ch-session__icon { flex: none; font-size: 16px; color: var(--xn-ink-4); }
+.ch-session.is-on .ch-session__icon { color: var(--xn-lake); }
 .ch-session__time { flex: 1; min-width: 0; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ch-session__count { flex: none; min-width: 24px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--xn-line); color: var(--xn-ink-2); font-size: 12px; line-height: 20px; text-align: center; }
 .ch-session.is-on .ch-session__count { background: var(--xn-lake-soft); color: var(--xn-lake-ink); }

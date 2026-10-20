@@ -315,6 +315,7 @@ export default {
 <style scoped>
 .tm-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
 .tm-panel { overflow: hidden; }
+.tm-panel ::v-deep .el-table__empty-text { width: 100%; line-height: 1.6; }
 .tm-name { max-width: 100%; padding: 0; border: 0; background: none; font: inherit; font-weight: 600; color: var(--xn-ink); text-align: left; cursor: pointer; }
 .tm-name:hover { color: var(--xn-lake); }
 .tm-prompt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 13px; color: var(--xn-ink-2); }

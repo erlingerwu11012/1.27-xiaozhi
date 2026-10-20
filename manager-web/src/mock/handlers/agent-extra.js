@@ -126,7 +126,7 @@ route('GET', '/agent/:agentId/chat-history/:sessionId', ({ db, user, params }) =
   if (!sessions) return fail('智能体不存在或无权查看');
   const s = sessions.find((x) => x.sessionId === params.sessionId);
   if (!s) return fail('会话不存在');
-  return ok(clone(s.messages).reverse());
+  return ok(clone(s.messages));
 });
 
 /** 当前账号可见的全部消息（用于按 audioId 查找） */

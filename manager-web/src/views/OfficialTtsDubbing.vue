@@ -1,9 +1,7 @@
 <template>
   <div class="ot-page">
-  <OfficialTtsStudioShell active-tab="synth" :warning="actionBlockedReason">
-    <template #hero>
-      <h1>欢迎体验语音合成，今天想合成什么？</h1>
-    </template>
+  <OfficialTtsStudioShell active-tab="synth" :warning="caps ? actionBlockedReason : ''">
+    <template #hero>{{ $t('xn.tts.heroSynth') }}</template>
 
     <template #composer>
       <div
@@ -12,7 +10,9 @@
         :class="{ 'is-empty': !form.text }"
         contenteditable="true"
         role="textbox"
-        data-placeholder="输入你要合成的语音文本内容"
+        aria-multiline="true"
+        :aria-label="$t('xn.tts.synthLabel')"
+        :data-placeholder="$t('xn.tts.synthPlaceholder')"
         @input="onEditorInput"
         @keydown="onEditorKeydown"
         @paste="onEditorPaste"
@@ -20,310 +20,187 @@
         @keyup="saveEditorRange"
         @focus="saveEditorRange"
       />
-      <div class="ot-composer__toolbar">
+      <div class="ot-composer__bar">
         <div class="ot-composer__tools">
-          <el-popover
-            v-model="tagMenuVisible"
-            placement="top-start"
-            trigger="click"
-            popper-class="ot-tag-popper"
-            :visible-arrow="false"
-          >
+          <el-popover v-model="tagMenuVisible" placement="bottom-start" trigger="click" popper-class="ot-tag-popper" :visible-arrow="false">
             <div class="ot-tag-cascade">
               <div class="ot-tag-panel ot-tag-panel--root">
-                <div class="ot-tag-panel__title">语气标签</div>
-                <button
-                  v-for="cat in tagCategories"
-                  :key="cat.id"
-                  type="button"
-                  class="ot-tag-panel__row"
-                  :class="{ 'is-active': tagMenuHover === cat.id }"
-                  @mouseenter="tagMenuHover = cat.id"
-                >
+                <div class="ot-tag-panel__title">{{ $t('xn.tts.toneTags') }}</div>
+                <button v-for="cat in tagCategories" :key="cat.id" type="button" class="ot-tag-panel__row"
+                  :class="{ 'is-active': tagMenuHover === cat.id }" @mouseenter="tagMenuHover = cat.id" @click="tagMenuHover = cat.id">
                   <span>{{ cat.name }}</span>
-                  <i class="el-icon-arrow-right" />
+                  <xn-icon name="chevron" />
                 </button>
               </div>
               <div class="ot-tag-panel ot-tag-panel--sub">
                 <div class="ot-tag-panel__title">{{ activeTagCategoryName }}</div>
                 <div class="ot-tag-panel__scroll">
-                  <button
-                    v-for="item in activeTagItems"
-                    :key="item.code"
-                    type="button"
-                    class="ot-tag-panel__item"
-                    @click="pickToneTag(item)"
-                  >
-                    {{ item.label }}
-                  </button>
+                  <button v-for="item in activeTagItems" :key="item.code" type="button" class="ot-tag-panel__item" @click="pickToneTag(item)">{{ item.label }}</button>
                 </div>
               </div>
             </div>
-            <button
-              slot="reference"
-              type="button"
-              class="ot-tool"
-              :class="{ 'is-open': tagMenuVisible }"
-            >
-              <span>/ 语气标签</span>
+            <button slot="reference" type="button" class="ot-tool" :class="{ 'is-open': tagMenuVisible }">
+              <xn-icon name="plus" /><span>{{ $t('xn.tts.toneTags') }}</span>
             </button>
           </el-popover>
 
-          <button
-            type="button"
-            class="ot-tool ot-tool--voice"
-            @click="voiceLibVisible = true"
-          >
-            <i class="el-icon-sort" />
-            <span>{{ currentVoiceLabel }}</span>
-            <i class="el-icon-arrow-down" style="font-size: 12px; margin-left: 2px" />
+          <button type="button" class="ot-tool" :title="$t('xn.tts.pickVoice')" @click="voiceLibVisible = true">
+            <xn-icon name="voice" /><span class="ot-tool__val">{{ currentVoiceLabel }}</span><xn-icon name="chevronDown" class="ot-tool__caret" />
           </button>
 
-          <el-popover
-            v-model="langMenuVisible"
-            placement="top-start"
-            trigger="click"
-            popper-class="ot-lang-popper"
-            :visible-arrow="false"
-          >
+          <el-popover v-model="langMenuVisible" placement="bottom-start" trigger="click" popper-class="ot-lang-popper" :visible-arrow="false">
             <div class="ot-lang-menu">
               <div class="ot-lang-col">
-                <div class="ot-lang-col__title">语言</div>
+                <div class="ot-lang-col__title">{{ $t('xn.tts.language') }}</div>
                 <div class="ot-lang-col__scroll">
-                  <button
-                    v-for="l in languageOptions"
-                    :key="l.code"
-                    type="button"
-                    class="ot-lang-col__item"
-                    :class="{ 'is-active': form.lang === l.code }"
-                    @click="selectLanguage(l)"
-                  >
-                    <span>{{ l.label }}</span>
-                    <i v-if="form.lang === l.code" class="el-icon-check" />
+                  <button v-for="l in languageOptions" :key="l.code" type="button" class="ot-lang-col__item"
+                    :class="{ 'is-active': form.lang === l.code }" @click="selectLanguage(l)">
+                    <span>{{ l.label }}</span><xn-icon v-if="form.lang === l.code" name="check" />
                   </button>
                 </div>
               </div>
               <div v-if="form.lang === 'zh'" class="ot-lang-col ot-lang-col--dialect">
-                <div class="ot-lang-col__title">方言</div>
+                <div class="ot-lang-col__title">{{ $t('xn.tts.dialect') }}</div>
                 <div class="ot-lang-col__scroll">
-                  <button
-                    v-for="d in dialectOptions"
-                    :key="d"
-                    type="button"
-                    class="ot-lang-col__item"
-                    :class="{ 'is-active': form.dialect === d }"
-                    @click="selectDialect(d)"
-                  >
-                    <span>{{ d }}</span>
-                    <i v-if="form.dialect === d" class="el-icon-check" />
+                  <button v-for="d in dialectOptions" :key="d" type="button" class="ot-lang-col__item"
+                    :class="{ 'is-active': form.dialect === d }" @click="selectDialect(d)">
+                    <span>{{ d }}</span><xn-icon v-if="form.dialect === d" name="check" />
                   </button>
                 </div>
               </div>
             </div>
-            <button
-              slot="reference"
-              type="button"
-              class="ot-tool"
-              :class="{ 'is-open': langMenuVisible }"
-            >
-              <span>{{ langDisplayLabel }}</span>
-              <i class="el-icon-arrow-down" style="font-size: 12px; margin-left: 2px" />
+            <button slot="reference" type="button" class="ot-tool" :class="{ 'is-open': langMenuVisible }">
+              <xn-icon name="globe" /><span>{{ langDisplayLabel }}</span><xn-icon name="chevronDown" class="ot-tool__caret" />
             </button>
           </el-popover>
 
-          <el-popover placement="top" width="260" trigger="click">
+          <el-popover placement="bottom" width="280" trigger="click">
             <div class="ot-popover-row">
-              <span>音量</span>
-              <el-slider v-model="form.volume" :min="0" :max="100" style="width: 140px; margin: 0 8px" />
-              <span>{{ form.volume }}</span>
+              <span>{{ $t('xn.tts.volume') }}</span>
+              <el-slider v-model="form.volume" :min="0" :max="100" class="ot-popover-row__slider" />
+              <span class="xn-num">{{ form.volume }}</span>
             </div>
-            <button slot="reference" type="button" class="ot-tool">
-              <i class="el-icon-microphone" />
-              <span>{{ form.volume }}</span>
-            </button>
+            <button slot="reference" type="button" class="ot-tool"><span class="xn-muted">{{ $t('xn.tts.volume') }}</span><span class="xn-num">{{ form.volume }}</span></button>
           </el-popover>
 
-          <el-popover placement="top" width="240" trigger="click">
+          <el-popover placement="bottom" width="280" trigger="click">
             <div class="ot-popover-row">
-              <span>语速</span>
-              <el-slider
-                v-model="form.rate"
-                :min="0.5"
-                :max="2"
-                :step="0.1"
-                style="width: 140px; margin: 0 8px"
-              />
-              <span>{{ form.rate.toFixed(1) }}X</span>
+              <span>{{ $t('xn.tts.rate') }}</span>
+              <el-slider v-model="form.rate" :min="0.5" :max="2" :step="0.1" class="ot-popover-row__slider" />
+              <span class="xn-num">{{ form.rate.toFixed(1) }}x</span>
             </div>
-            <button slot="reference" type="button" class="ot-tool">
-              <i class="el-icon-timer" />
-              <span>{{ form.rate.toFixed(1).replace(/\.0$/, "") }}X</span>
-            </button>
+            <button slot="reference" type="button" class="ot-tool"><span class="xn-muted">{{ $t('xn.tts.rate') }}</span><span class="xn-num">{{ form.rate.toFixed(1).replace(/\.0$/, "") }}x</span></button>
           </el-popover>
 
-          <el-popover placement="top" width="280" trigger="click">
+          <el-popover placement="bottom" width="300" trigger="click">
             <div class="ot-popover-row">
-              <span>导出格式</span>
-              <el-select v-model="form.format" size="mini" style="width: 120px">
+              <span>{{ $t('xn.tts.format') }}</span>
+              <el-select v-model="form.format" size="small" class="ot-popover-row__select">
                 <el-option v-for="f in formats" :key="f" :label="f.toUpperCase()" :value="f" />
               </el-select>
             </div>
             <div v-if="form.format === 'opus'" class="ot-popover-row">
-              <span>码率 kbps</span>
-              <el-input-number v-model="form.bitRate" :min="6" :max="510" size="mini" />
+              <span>{{ $t('xn.tts.bitRate') }}</span>
+              <el-input-number v-model="form.bitRate" :min="6" :max="510" size="small" />
             </div>
-            <p style="margin: 8px 0 0; color: #86909c; font-size: 12px; line-height: 1.5">
-              仅影响配音下载，不影响设备实时播放。
-            </p>
-            <button slot="reference" type="button" class="ot-tool">
-              <i class="el-icon-setting" />
-              <span>导出设定</span>
-            </button>
+            <p class="ot-popover-note">{{ $t('xn.tts.formatNote') }}</p>
+            <button slot="reference" type="button" class="ot-tool"><xn-icon name="download" /><span>{{ form.format.toUpperCase() }}</span></button>
           </el-popover>
         </div>
-
-        <div class="ot-composer__actions">
-          <button
-            type="button"
-            class="ot-btn-send"
-            :class="{ 'is-ready': canSubmit }"
-            :disabled="!canSubmit"
-            :title="sendTitle"
-            @click="generate"
-          >
-            <i class="el-icon-top" />
-          </button>
-        </div>
+        <span class="xn-toolbar__grow"></span>
+        <span class="ot-count-chars xn-muted xn-num">{{ $t('xn.tts.chars', { n: textLength }) }}</span>
+        <el-button type="primary" :disabled="!canSubmit || submitting" :loading="submitting" :title="sendTitle" @click="generate">
+          {{ $t('xn.tts.generate') }}
+        </el-button>
       </div>
     </template>
 
     <template #bottom>
-      <div class="ot-bottom__bar">
-        <div class="ot-bottom__tabs ot-bottom__tabs--text">
-          <button
-            type="button"
-            class="ot-bottom__tab"
-            :class="{ 'is-active': bottomTab === 'inspire' }"
-            @click="bottomTab = 'inspire'"
-          >
-            灵感
-          </button>
-          <button
-            type="button"
-            class="ot-bottom__tab"
-            :class="{ 'is-active': bottomTab === 'jobs' }"
-            @click="bottomTab = 'jobs'"
-          >
-            资产
-          </button>
-        </div>
-      </div>
-
-      <div v-if="bottomTab === 'inspire'" class="ot-card-grid">
-        <button
-          v-for="(item, idx) in inspireCards"
-          :key="idx"
-          type="button"
-          class="ot-card"
-          @click="applyInspire(item)"
-        >
-          <div class="ot-card__swatch" :class="item.swatch" />
-          <div class="ot-card__body">
-            <p class="ot-card__title">{{ item.title }}</p>
-            <p class="ot-card__meta">{{ item.meta }}</p>
-          </div>
+      <div class="ot-subtabs" role="tablist">
+        <button type="button" role="tab" class="ot-subtabs__tab" :class="{ 'is-active': bottomTab === 'inspire' }"
+          :aria-selected="String(bottomTab === 'inspire')" @click="bottomTab = 'inspire'">{{ $t('xn.tts.inspire') }}</button>
+        <button type="button" role="tab" class="ot-subtabs__tab" :class="{ 'is-active': bottomTab === 'jobs' }"
+          :aria-selected="String(bottomTab === 'jobs')" @click="bottomTab = 'jobs'">
+          {{ $t('xn.tts.myJobs') }} <span class="ot-count xn-num">{{ jobs.length }}</span>
         </button>
       </div>
 
-      <div v-else class="ot-asset-list">
-        <div v-if="showGenerating" class="ot-generating" role="status" aria-live="polite">
-          <span class="ot-generating__text">
-            <i class="el-icon-loading" />
-            生成中，请等待…
+      <div v-if="bottomTab === 'inspire'" class="ot-ideas">
+        <button v-for="(item, idx) in inspireCards" :key="idx" type="button" class="ot-idea" @click="applyInspire(item)">
+          <span class="ot-idea__title">{{ item.title }}</span>
+          <span class="ot-idea__meta">{{ item.meta }}</span>
+          <span class="ot-idea__text">{{ item.text }}</span>
+          <span class="ot-idea__use">{{ $t('xn.tts.useIdea') }}</span>
+        </button>
+      </div>
+
+      <section v-else class="xn-panel xn-panel--flush ot-list">
+        <div class="xn-panel__head">
+          <h2 class="xn-panel__title">{{ $t('xn.tts.myJobs') }}</h2>
+          <span class="ot-list__head-right">
+            <span v-if="showGenerating" class="xn-tag xn-tag--lake" role="status"><i class="el-icon-loading"></i>{{ $t('xn.tts.generatingN', { n: pendingJobs.length || 1 }) }}</span>
+            <demo-tag />
+            <el-button type="text" @click="reloadJobs"><xn-icon name="refresh" /> {{ $t('xn.billing.refresh') }}</el-button>
           </span>
         </div>
-        <div v-if="!jobs.length && !showGenerating" class="ot-empty">暂无合成资产</div>
-        <div
-          v-for="(row, idx) in jobs"
-          :key="row.id"
-          class="ot-asset"
-          :class="{ 'is-playing': playingId === row.id }"
-        >
-          <div class="ot-asset__icon" :class="jobIconClass(row, idx)">
-            <i class="el-icon-document" />
-          </div>
-          <div class="ot-asset__main">
-            <p class="ot-asset__title" :title="jobTitle(row)">{{ jobTitle(row) }}</p>
-            <div class="ot-asset__meta">
-              <span class="ot-asset__dot" :class="jobDotClass(row, idx)" />
-              <span>{{ voiceLabel(row) }}</span>
-              <span class="ot-asset__sep"><i class="el-icon-microphone" />{{ jobVolume(row) }}</span>
-              <span class="ot-asset__sep"><i class="el-icon-timer" />{{ jobRateLabel(row) }}</span>
-              <span class="ot-asset__sep">{{ jobLangLabel(row) }}</span>
-              <span class="ot-asset__sep">{{ formatJobTime(row.createdAt) }}</span>
-              <span v-if="row.status && row.status !== 'done'" class="ot-asset__status">{{ row.status }}</span>
-            </div>
-          </div>
-          <div class="ot-asset__player" @click.stop>
-            <span class="ot-asset__time">{{ playingId === row.id ? formatClock(playCurrent) : '00:00' }}</span>
-            <div
-              class="ot-asset__seek"
-              :class="{ 'is-disabled': row.status !== 'done' }"
-              @click="onSeekClick(row, $event)"
-            >
-              <div
-                class="ot-asset__seek-fill"
-                :style="{ width: playingId === row.id ? playProgress + '%' : '0%' }"
-              />
-              <div
-                class="ot-asset__seek-thumb"
-                :style="{ left: playingId === row.id ? playProgress + '%' : '0%' }"
-              />
-            </div>
-            <span class="ot-asset__time">{{ playingId === row.id ? formatClock(playDuration) : (row.status === 'done' ? '--:--' : '--:--') }}</span>
-            <button
-              type="button"
-              class="ot-asset__play-btn"
-              :disabled="row.status !== 'done' || loadingId === row.id"
-              :title="playingId === row.id && !playPaused ? '暂停' : '播放'"
-              @click="togglePlay(row)"
-            >
-              <i :class="playingId === row.id && !playPaused ? 'el-icon-video-pause' : 'el-icon-video-play'" />
-            </button>
-          </div>
-          <div class="ot-asset__actions">
-            <button
-              type="button"
-              class="ot-asset__action"
-              :disabled="row.status !== 'done'"
-              title="下载"
-              @click="download(row)"
-            >
-              <i class="el-icon-download" />
-            </button>
-            <button type="button" class="ot-asset__action" title="编辑" @click="editJob(row)">
-              <i class="el-icon-edit" />
-            </button>
-            <button
-              type="button"
-              class="ot-asset__action"
-              title="删除"
-              @click="removeJob(row)"
-            >
-              <i class="el-icon-delete" />
-            </button>
-          </div>
-        </div>
-        <audio
-          ref="audioEl"
-          class="ot-asset__audio-el"
-          @timeupdate="onAudioTime"
-          @loadedmetadata="onAudioMeta"
-          @ended="onAudioEnded"
-          @pause="playPaused = true"
-          @play="playPaused = false"
-        />
-      </div>
+        <xn-empty v-if="jobsFailed && !jobs.length" error @retry="reloadJobs" />
+        <el-table v-else :data="jobs" v-loading="!jobsLoaded" row-key="id" class="ot-table" :row-class-name="jobRowClass">
+          <el-table-column :label="$t('xn.tts.colContent')" min-width="240">
+            <template slot-scope="{ row }">
+              <div class="ot-job">
+                <span class="ot-job__title xn-clip" :title="jobTitle(row)">{{ jobTitle(row) }}</span>
+                <span class="ot-job__meta xn-muted">
+                  <span>{{ voiceLabel(row) }}</span>
+                  <span>{{ $t('xn.tts.volume') }} {{ jobVolume(row) }}</span>
+                  <span>{{ jobRateLabel(row) }}</span>
+                  <span>{{ jobLangLabel(row) }}</span>
+                  <span>{{ formatJobTime(row.createdAt) }}</span>
+                </span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colStatus')" min-width="100">
+            <template slot-scope="{ row }">
+              <span class="xn-tag" :class="jobStatusClass(row.status)">{{ jobStatusLabel(row.status) }}</span>
+              <el-tooltip v-if="row.errorMsg" :content="row.errorMsg" placement="top" popper-class="xn-tip-wide">
+                <button type="button" class="ot-info" :aria-label="row.errorMsg"><xn-icon name="info" /></button>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colListen')" min-width="230">
+            <template slot-scope="{ row }">
+              <div class="ot-player" :class="{ 'is-disabled': row.status !== 'done' }" @click.stop>
+                <button type="button" class="ot-play" :class="{ 'is-on': playingId === row.id && !playPaused }"
+                  :disabled="row.status !== 'done' || loadingId === row.id"
+                  :aria-label="playingId === row.id && !playPaused ? $t('xn.tts.pause') : $t('xn.tts.play')"
+                  @click="togglePlay(row)">
+                  <i v-if="loadingId === row.id" class="el-icon-loading"></i>
+                  <svg v-else-if="playingId === row.id && !playPaused" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+                  <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z" /></svg>
+                </button>
+                <span class="ot-player__time xn-num">{{ playingId === row.id ? formatClock(playCurrent) : '00:00' }}</span>
+                <div class="ot-player__seek" @click="onSeekClick(row, $event)">
+                  <div class="ot-player__fill" :style="{ width: playingId === row.id ? playProgress + '%' : '0%' }" />
+                </div>
+                <span class="ot-player__time xn-num">{{ playingId === row.id ? formatClock(playDuration) : '--:--' }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colActions')" min-width="200" align="right">
+            <template slot-scope="{ row }">
+              <el-button type="text" :disabled="row.status !== 'done'" @click="download(row)">{{ $t('xn.tts.download') }}</el-button>
+              <el-button v-if="isPending(row)" type="text" @click="cancelJob(row)">{{ $t('xn.tts.cancelJob') }}</el-button>
+              <el-button v-else type="text" @click="editJob(row)">{{ $t('xn.tts.reuse') }}</el-button>
+              <el-button type="text" class="ot-danger" :disabled="isPending(row)" @click="removeJob(row)">{{ $t('xn.tts.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty icon="mic" :title="$t('xn.tts.emptyJobs')" :description="$t('xn.tts.emptyJobsDesc')" />
+          </template>
+        </el-table>
+        <audio ref="audioEl" class="ot-audio-el" @timeupdate="onAudioTime" @loadedmetadata="onAudioMeta" @ended="onAudioEnded"
+          @pause="playPaused = true" @play="playPaused = false" />
+      </section>
     </template>
   </OfficialTtsStudioShell>
 
@@ -340,6 +217,18 @@
 import OfficialTtsStudioShell from "@/components/OfficialTtsStudioShell.vue";
 import OfficialTtsVoiceLibrary from "@/components/OfficialTtsVoiceLibrary.vue";
 import officialTts from "@/apis/module/officialTts";
+import { isMockMode } from "@/mock/config";
+
+const JOB_STATUS = {
+  queued: ["排队中", "xn-tag--lake"],
+  running: ["生成中", "xn-tag--lake"],
+  uncertain: ["处理中", "xn-tag--warning"],
+  done: ["已完成", "xn-tag--success"],
+  failed: ["失败", "xn-tag--danger"],
+  error: ["失败", "xn-tag--danger"],
+  canceled: ["已取消", "xn-tag--muted"],
+  cancelled: ["已取消", "xn-tag--muted"],
+};
 
 const DEFAULT_DESIGN_TEXT = "欢迎使用文本朗读，这是一段设计的音色。";
 
@@ -524,6 +413,9 @@ export default {
         instruction: "",
       },
       jobs: [],
+      jobsLoaded: false,
+      jobsFailed: false,
+      mock: isMockMode(),
       submitting: false,
       pollTimer: null,
       bottomTab: "inspire",
@@ -578,10 +470,10 @@ export default {
       if (!this.caps) return "当前不可用：正在加载能力状态…";
       if (this.caps.accessStatusText) return this.caps.accessStatus === "ready" ? "" : this.caps.accessStatusText;
       if (this.caps.enhancedEnabled === false) {
-        return "官方增强功能尚未启用（总开关关闭或未加入灰度名单），因此无法试用合成。";
+        return "官方语音功能尚未对你的账号开放，暂时无法使用合成。";
       }
       if (this.caps.pricingStatus === "pricing_pending") {
-        return "该操作尚未配置并发布有效售价，无法发起收费/试用调用。";
+        return "该功能暂未开放计费，暂时无法使用。";
       }
       if (this.caps.customerCallable === false) return "当前不可用";
       if (this.caps.customerCallable !== true) return "当前不可用";
@@ -592,6 +484,9 @@ export default {
         return !!this.caps.operations.synthesize.callable;
       }
       return !this.actionBlockedReason;
+    },
+    textLength() {
+      return Array.from(String(this.form.text || "").replace(/\[[^\]]+\]/g, "")).length;
     },
     canSubmit() {
       return this.actionsEnabled && !!this.form.text.trim();
@@ -888,7 +783,39 @@ export default {
     reloadJobs() {
       officialTts.listJobs((res) => {
         this.jobs = (res.data && res.data.data) || [];
+        this.jobsLoaded = true;
+        this.jobsFailed = false;
+      }, () => {
+        this.jobsLoaded = true;
+        this.jobsFailed = true;
       });
+    },
+    isPending(row) {
+      return !["done", "failed", "error", "canceled", "cancelled", "deleted"].includes(String((row && row.status) || "").toLowerCase());
+    },
+    jobStatusLabel(status) {
+      return (JOB_STATUS[status] || [status || "-"])[0];
+    },
+    jobStatusClass(status) {
+      return (JOB_STATUS[status] || [null, "xn-tag--muted"])[1];
+    },
+    jobRowClass({ row }) {
+      return this.playingId === row.id ? "is-playing" : "";
+    },
+    cancelJob(row) {
+      this.$confirm("取消后不会生成音频，已冻结的点数会释放。", "取消这条配音？", {
+        confirmButtonText: "取消任务",
+        cancelButtonText: "继续生成",
+        type: "warning",
+      })
+        .then(() => {
+          officialTts.cancelJob(row.id, (res) => {
+            const msg = res && res.data && res.data.msg;
+            this.$message.success(msg && msg !== "success" ? msg : "已取消任务");
+            this.reloadJobs();
+          }, (err) => this.$message.error(this.apiMsg(err, "取消失败")));
+        })
+        .catch(() => {});
     },
     applyInspire(item) {
       this.setEditorHtmlFromText(item.text);
@@ -1036,7 +963,8 @@ export default {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `official-tts-${row.id}.${format || "wav"}`;
+        // 演示模式下载的是浏览器内生成的 WAV 提示音，扩展名如实写成 wav
+        a.download = `official-tts-${row.id}.${this.mock ? "wav" : (format || "wav")}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1059,7 +987,7 @@ export default {
       if (req.dialect) this.form.dialect = String(req.dialect);
       else if (this.form.lang === "zh") this.form.dialect = "普通话";
       else this.form.dialect = "";
-      this.$message.success("已填入合成区，可修改后重新生成");
+      this.$message.success("已填入上方合成区，可修改后重新生成");
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     removeJob(row) {

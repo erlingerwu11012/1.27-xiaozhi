@@ -128,6 +128,8 @@ export default {
     'visualOta.error.E_SHA': '文件校验失败，请重新下载',
 
     'xn.visuals.pack.search': '搜索名称',
+    'xn.visuals.pack.noDesc': '暂无简介',
+    'xn.visuals.pack.state': '状态',
     'xn.visuals.pack.count': '共 {n} 个',
     'xn.visuals.pack.detail': '详情',
     'xn.visuals.pack.version': '版本',
@@ -299,6 +301,8 @@ export default {
     'visualOta.error.E_SHA': 'File verification failed. Download it again.',
 
     'xn.visuals.pack.search': 'Search by name',
+    'xn.visuals.pack.noDesc': 'No description',
+    'xn.visuals.pack.state': 'Status',
     'xn.visuals.pack.count': '{n} in total',
     'xn.visuals.pack.detail': 'Details',
     'xn.visuals.pack.version': 'Version',
