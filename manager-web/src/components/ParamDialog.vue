@@ -9,8 +9,8 @@
       <el-form-item :label="$t('paramDialog.paramValue')" prop="paramValue">
         <el-input v-model="form.paramValue" type="textarea" :autosize="{ minRows: 1, maxRows: 6 }"
           :placeholder="$t('paramDialog.paramValuePlaceholder')" />
-        <p v-if="isMock && isSecret" class="pd-hint"><demo-tag /> {{ $t('xn.admin.secretNotSaved') }}</p>
       </el-form-item>
+      <p v-if="isMock && isSecret" class="pd-hint"><demo-tag /> {{ $t('xn.admin.secretNotSaved') }}</p>
 
       <el-form-item :label="$t('paramDialog.valueType')" prop="valueType">
         <el-select v-model="form.valueType" :placeholder="$t('paramDialog.valueTypePlaceholder')" style="width: 100%">
@@ -138,7 +138,8 @@ export default {
 </script>
 
 <style scoped>
-.pd-hint { display: flex; align-items: center; gap: 8px; margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--xn-ink-3); }
+.el-form--label-top ::v-deep .el-form-item__label { padding: 0 0 6px; line-height: 1.5; }
+.pd-hint { display: flex; align-items: flex-start; gap: 8px; margin: -6px 0 18px; font-size: 13px; line-height: 1.5; color: var(--xn-ink-3); }
 .pd-footer { display: flex; align-items: center; }
 .pd-grow { flex: 1; }
 </style>

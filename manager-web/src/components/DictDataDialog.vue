@@ -116,6 +116,7 @@ export default {
 </script>
 
 <style scoped>
+.el-form--label-top ::v-deep .el-form-item__label { padding: 0 0 6px; line-height: 1.5; }
 .dd-footer { display: flex; align-items: center; }
 .dd-grow { flex: 1; }
 .dd-code ::v-deep .el-input__inner { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }

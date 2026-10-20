@@ -314,6 +314,7 @@ export default {
 </script>
 
 <style scoped>
+.el-form--label-top ::v-deep .el-form-item__label { padding: 0 0 6px; line-height: 1.5; }
 .pv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 .pv-code ::v-deep .el-input__inner, .pv-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
 .pv-fields-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 4px 0 10px; padding-top: 14px; border-top: 1px solid var(--xn-line-2); }

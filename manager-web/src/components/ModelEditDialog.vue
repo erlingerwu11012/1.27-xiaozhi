@@ -439,6 +439,7 @@ export default {
 </script>
 
 <style scoped>
+.el-form--label-top ::v-deep .el-form-item__label { padding: 0 0 6px; line-height: 1.5; }
 .md-section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
 .md-section-head--call { margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--xn-line-2); }
 .md-section-title { margin: 0; font-size: 16px; font-weight: 600; color: var(--xn-ink); }
