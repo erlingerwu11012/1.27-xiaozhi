@@ -230,6 +230,9 @@ const JOB_STATUS = {
   cancelled: ["已取消", "xn-tag--muted"],
 };
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
+
 const DEFAULT_DESIGN_TEXT = "欢迎使用文本朗读，这是一段设计的音色。";
 
 const TAG_LABELS = {
@@ -781,7 +784,13 @@ export default {
       return (err && err.data && (err.data.msg || err.data.message)) || fallback;
     },
     reloadJobs() {
+      clearTimeout(this.jobsGuard);
+      this.jobsGuard = setTimeout(() => {
+        if (!this.jobsLoaded) { this.jobsLoaded = true; this.jobsFailed = true; }
+        if (!this.caps) this.caps = {};
+      }, NO_REPLY_MS);
       officialTts.listJobs((res) => {
+        clearTimeout(this.jobsGuard);
         this.jobs = (res.data && res.data.data) || [];
         this.jobsLoaded = true;
         this.jobsFailed = false;
@@ -1128,6 +1137,7 @@ export default {
     },
   },
   beforeDestroy() {
+    clearTimeout(this.jobsGuard);
     this.stopPoll();
     this.stopPlay();
   },

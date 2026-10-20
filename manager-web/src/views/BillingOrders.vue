@@ -114,6 +114,8 @@
 <script>
 import Api from '@/apis/api';
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
 const MEMORY_OPS = { fact: 'memFact', portrait: 'memPortrait', search: 'memSearch', storage: 'memStorage' };
 const MEMORY_STATES = { settled: 'msSettled', refunded: 'msRefunded', reserved: 'msProcessing', submitted: 'msProcessing', review: 'msReview', manual_review: 'msReview', pending: 'msPending', debt: 'msDebt' };
 
@@ -137,6 +139,11 @@ export default {
     this.fetchQuota();
     this.fetchMemoryBills();
   },
+  beforeDestroy() {
+    clearTimeout(this.ordersGuard);
+    clearTimeout(this.memoryGuard);
+    clearTimeout(this.quotaGuard);
+  },
   computed: {
     /** 与外壳余额条一致：读取失败 / 余额或来源为空 → 暂不可用；cache 或非实时 → 可能不是最新 */
     balanceState() {
@@ -159,7 +166,10 @@ export default {
     formatMemoryAmount(value) { return Number(value || 0).toFixed(8).replace(/0+$/, '').replace(/\.$/, '.00'); },
     fetchMemoryBills() {
       this.memoryLoading = true;
+      clearTimeout(this.memoryGuard);
+      this.memoryGuard = setTimeout(() => { if (this.memoryLoading) { this.memoryLoading = false; this.memoryAvailable = false; } }, NO_REPLY_MS);
       Api.pay.memoryBills(this.memoryPage, (res) => {
+        clearTimeout(this.memoryGuard);
         this.memoryLoading = false;
         this.memoryAvailable = !!(res && res.code === 0 && res.data && res.data.available);
         this.memoryBills = this.memoryAvailable ? res.data.list || [] : [];
@@ -216,7 +226,10 @@ export default {
     fetchOrders() {
       this.loading = true;
       this.ordersFailed = false;
+      clearTimeout(this.ordersGuard);
+      this.ordersGuard = setTimeout(() => { if (this.loading) { this.loading = false; this.ordersFailed = true; } }, NO_REPLY_MS);
       Api.pay.orders({ page: this.page, limit: this.pageSize }, (res) => {
+        clearTimeout(this.ordersGuard);
         this.loading = false;
         if (res && res.code === 0) {
           const data = res.data || {};
@@ -230,7 +243,10 @@ export default {
     },
     fetchQuota() {
       this.quotaLoading = true;
+      clearTimeout(this.quotaGuard);
+      this.quotaGuard = setTimeout(() => { if (this.quotaLoading) { this.quotaLoading = false; this.quota = null; } }, NO_REPLY_MS);
       Api.pay.myQuota((res) => {
+        clearTimeout(this.quotaGuard);
         this.quotaLoading = false;
         if (res && res.code === 0) {
           this.quota = res.data;

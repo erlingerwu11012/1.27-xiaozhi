@@ -87,7 +87,7 @@
       </template>
       <template v-else>
         <p class="vp-help">{{ $t('wallpaperPack.deployConfirm', { name: selectedPack && selectedPack.displayName }) }}</p>
-        <el-form label-position="top" @submit.native.prevent>
+        <el-form label-position="top" class="vp-form" @submit.native.prevent>
           <el-form-item :label="$t('wallpaperPack.selectDevice')" required>
             <el-select v-model="selectedDeviceId" filterable class="vp-full" :loading="!devicesLoaded" :placeholder="$t('wallpaperPack.selectDevicePlaceholder')">
               <el-option v-for="d in myDevices" :key="d.id" :label="deviceLabel(d)" :value="d.id">
@@ -139,7 +139,7 @@
     <el-dialog :title="$t('wallpaperPack.publishTitle')" :visible.sync="publishVisible" width="560px" append-to-body
       :close-on-click-modal="false" @close="resetPublish">
       <p class="vp-help">{{ $t('wallpaperPack.publishHelp') }}</p>
-      <el-form label-position="top" @submit.native.prevent>
+      <el-form label-position="top" class="vp-form" @submit.native.prevent>
         <el-form-item :label="$t('wallpaperPack.displayName')" required>
           <el-input v-model="publishForm.displayName" maxlength="64" show-word-limit />
         </el-form-item>
@@ -154,7 +154,7 @@
             </label>
             <span v-if="publishFile" class="vp-file__name xn-clip">{{ publishFile.name }}</span>
             <span v-if="publishFile" class="xn-muted xn-num">{{ formatSize(publishFile.size) }}</span>
-            <span v-if="publishFile && publishFile.size > MAX_SIZE" class="vp-err-inline">{{ $t('wallpaperPack.exceedsMaxSize') }}</span>
+            <span v-if="publishFile && publishFile.size > 2097152" class="vp-err-inline">{{ $t('wallpaperPack.exceedsMaxSize') }}</span>
           </div>
           <p v-if="!inspecting" class="vp-hint">{{ $t('wallpaperPack.sizeHint') }}</p>
           <p v-if="inspecting" class="vp-hint"><i class="el-icon-loading"></i> {{ $t('xn.visuals.pack.inspecting') }}</p>
@@ -595,7 +595,7 @@ export default {
 .vp-skel-line.w60 { width: 60%; }
 
 .vp-detail__cover { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--xn-r-lg); background: var(--xn-mist-2); }
-.vp-detail__cover img { width: 100%; height: 100%; object-fit: cover; }
+.vp-detail__cover img { width: 100%; height: 100%; object-fit: contain; }
 .vp-detail__desc { margin: 14px 0; font-size: 14px; line-height: 1.7; color: var(--xn-ink-2); }
 .vp-dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0 0 8px; font-size: 14px; }
 .vp-dl dt { color: var(--xn-ink-3); }
@@ -612,6 +612,7 @@ export default {
 .vp-demo { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; font-size: 13px; color: var(--xn-ink-3); }
 .vp-demo-media { display: block; width: 100%; max-height: 70vh; border-radius: var(--xn-r); background: var(--xn-mist-2); object-fit: contain; }
 .vp-full { width: 100%; }
+.vp-form ::v-deep .el-form-item__label { padding-bottom: 6px; line-height: 1.5; }
 .vp-opt-meta { float: right; margin-left: 16px; font-size: 12px; color: var(--xn-ink-3); }
 
 .vp-file { display: flex; align-items: center; gap: 10px; min-width: 0; line-height: 1.4; }

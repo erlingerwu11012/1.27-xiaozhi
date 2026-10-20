@@ -161,6 +161,9 @@ import OfficialTtsStudioShell from "@/components/OfficialTtsStudioShell.vue";
 import officialTts from "@/apis/module/officialTts";
 import { isMockMode } from "@/mock/config";
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
+
 const DEFAULT_PREVIEW = "欢迎使用文本朗读，这是一段设计的音色。";
 
 const STATUS_LABEL = {
@@ -346,6 +349,7 @@ export default {
     this.reload();
   },
   beforeDestroy() {
+    clearTimeout(this.listGuard);
     this.stopPoll();
     this.stopPlay();
     this.stopRecord(true);
@@ -429,7 +433,15 @@ export default {
       officialTts.capabilities((res) => {
         this.caps = (res.data && res.data.data) || res.data || null;
       }, () => { this.caps = this.caps || {}; });
+      clearTimeout(this.listGuard);
+      if (!silent) {
+        this.listGuard = setTimeout(() => {
+          if (this.loading) { this.loading = false; this.loadFailed = true; }
+          if (!this.caps) this.caps = {};
+        }, NO_REPLY_MS);
+      }
       officialTts.listVoices((res) => {
+        clearTimeout(this.listGuard);
         this.voices = (res.data && res.data.data) || [];
         this.loading = false;
         this.loadFailed = false;

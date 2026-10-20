@@ -193,6 +193,9 @@
 <script>
 import officialTts from "@/apis/module/officialTts";
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
+
 const OPS = { synthesize: "语音合成", design: "音色设计", clone: "音色复刻" };
 const KINDS = { sale_points: "售价", cost: "成本" };
 const UNITS = { weighted_character: "计费字符", audio_second: "秒", official_units: "官方计量单位" };
@@ -273,6 +276,9 @@ export default {
   created() {
     this.reload();
   },
+  beforeDestroy() {
+    clearTimeout(this.guard);
+  },
   methods: {
     show(v) { return v === undefined || v === null || v === "" ? "—" : v; },
     opLabel(v) { return OPS[v] || v || "—"; },
@@ -284,7 +290,10 @@ export default {
     reload() {
       this.loading = true;
       this.failed = false;
+      clearTimeout(this.guard);
+      this.guard = setTimeout(() => { if (this.loading) { this.loading = false; this.failed = !this.loaded; } }, NO_REPLY_MS);
       officialTts.adminOverview((res) => {
+        clearTimeout(this.guard);
         this.overview = (res.data && res.data.data) || {};
         this.loading = false;
         this.loaded = true;

@@ -174,6 +174,9 @@ import HardwareCallBills from '@/components/HardwareCallBills.vue';
 import Api from '@/apis/api';
 import { isMockMode } from '@/mock/config';
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
+
 // 构建期常量：real 构建不包含演示付款逻辑
 const demoPay = process.env.VUE_APP_DATA_MODE !== 'real' ? require('@/mock/handlers/pay').simulatePayment : null;
 
@@ -242,6 +245,11 @@ export default {
     this.fetchSummary();
     this.fetchPackages();
   },
+  beforeDestroy() {
+    clearTimeout(this.summaryGuard);
+    clearTimeout(this.packagesGuard);
+    clearTimeout(this.submitGuard);
+  },
   methods: {
     formatYuan(cents) {
       if (cents === null || cents === undefined) return '0.00';
@@ -301,7 +309,15 @@ export default {
       this.summaryError = '';
       // 立即清空旧区间数据，避免加载期间继续展示错误日期范围的账单
       this.summary = null;
+      clearTimeout(this.summaryGuard);
+      this.summaryGuard = setTimeout(() => {
+        if (seq === this.summaryRequestId && this.summaryLoading) {
+          this.summaryLoading = false;
+          this.summaryError = this.$t('billing.billingLoadFail');
+        }
+      }, NO_REPLY_MS);
       Api.pay.billingSummary(requestedDays, (res) => {
+        clearTimeout(this.summaryGuard);
         // 过期请求：不得修改任何页面状态
         if (seq !== this.summaryRequestId) {
           return;
@@ -319,7 +335,12 @@ export default {
     fetchPackages() {
       this.packagesLoading = true;
       this.packagesFailed = false;
+      clearTimeout(this.packagesGuard);
+      this.packagesGuard = setTimeout(() => {
+        if (this.packagesLoading) { this.packagesLoading = false; this.packagesFailed = true; }
+      }, NO_REPLY_MS);
       Api.pay.packages((res) => {
+        clearTimeout(this.packagesGuard);
         if (res && res.code === 0) {
           this.packages = res.data || [];
           if (this.packages.length > 0 && !this.packages.some((p) => p.id === this.selectedId)) {
@@ -339,7 +360,10 @@ export default {
         return;
       }
       this.submitting = true;
+      clearTimeout(this.submitGuard);
+      this.submitGuard = setTimeout(() => { this.submitting = false; }, NO_REPLY_MS);
       Api.pay.createOrder(this.selectedId, 'alipay', (res) => {
+        clearTimeout(this.submitGuard);
         this.submitting = false;
         if (res && res.code === 0) {
           const order = res.data || {};

@@ -206,6 +206,24 @@ export default {
       };
     },
 
+    init() {
+      const templateId = this.$route.query.templateId;
+      this.loadFailed = false;
+      this.templateId = '';
+      this.form = { agentCode: "小智", agentName: "", systemPrompt: "", sort: 0, model: { ...DEFAULT_MODEL_CONFIG } };
+      this.$nextTick(() => this.$refs.form && this.$refs.form.clearValidate());
+      if (templateId) {
+        // 编辑模式：加载现有模板
+        this.fetchTemplateById(templateId);
+      } else {
+        // 新建模式：设置默认值并获取排序号
+        this.form.agentName = this.$t('templateQuickConfig.newTemplate');
+        this.originalForm = JSON.parse(JSON.stringify(this.form));
+        this.fetchTemplateListForSort();
+      }
+    },
+
+
     // 获取模板列表并设置排序号
     fetchTemplateListForSort() {
       agentApi.getAgentTemplate((res) => {
@@ -225,19 +243,17 @@ export default {
     }
   },
 
+  watch: {
+    // 同一页面内切换到另一个模板 / 新建（路由组件被复用，不会重新挂载）
+    '$route.query.templateId'() {
+      this.init();
+    },
+  },
+
   // 组件挂载时执行初始化
   mounted() {
-    const templateId = this.$route.query.templateId;
-    if (templateId) {
-      // 编辑模式：加载现有模板
-      this.fetchTemplateById(templateId);
-    } else {
-      // 新建模式：设置默认值并获取排序号
-      this.form.agentName = this.$t('templateQuickConfig.newTemplate');
-      this.originalForm = JSON.parse(JSON.stringify(this.form));
-      this.fetchTemplateListForSort();
-    }
-  }
+    this.init();
+  },
 };
 </script>
 

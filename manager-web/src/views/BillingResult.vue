@@ -47,6 +47,9 @@
 <script>
 import Api from '@/apis/api';
 
+/** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
+const NO_REPLY_MS = 10000;
+
 export default {
   name: 'BillingResult',
   data() {
@@ -99,6 +102,7 @@ export default {
     this.fetchOrder();
   },
   beforeDestroy() {
+    clearTimeout(this.guard);
     this.clearPoll();
   },
   methods: {
@@ -121,7 +125,10 @@ export default {
         return;
       }
       this.loadFailed = false;
+      clearTimeout(this.guard);
+      this.guard = setTimeout(() => { if (this.loading) { this.loading = false; this.loadFailed = true; } }, NO_REPLY_MS);
       Api.pay.queryOrder(orderNo, (res) => {
+        clearTimeout(this.guard);
         this.loading = false;
         if (res && res.code === 0) {
           this.order = res.data;
