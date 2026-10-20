@@ -167,12 +167,12 @@ const NO_REPLY_MS = 10000;
 const DEFAULT_PREVIEW = "欢迎使用文本朗读，这是一段设计的音色。";
 
 const STATUS_LABEL = {
-  available: "可用",
-  processing: "生成中",
-  uncertain: "处理中",
-  failed: "失败",
-  deleted: "已删除",
-  pending_authorization: "待授权",
+  available: "xn.tts.voiceStatus.available",
+  processing: "xn.tts.voiceStatus.processing",
+  uncertain: "xn.tts.voiceStatus.uncertain",
+  failed: "xn.tts.voiceStatus.failed",
+  deleted: "xn.tts.voiceStatus.deleted",
+  pending_authorization: "xn.tts.voiceStatus.pending_authorization",
 };
 
 export default {
@@ -234,39 +234,39 @@ export default {
       });
     },
     previewPlaceholder() {
-      return `请输入预览文本（长度需大于15字符），不输入则播放默认文案：“${DEFAULT_PREVIEW}”`;
+      return this.$t("xn.tts.previewPlaceholder", { text: DEFAULT_PREVIEW });
     },
     previewDraftLength() {
       return Array.from(this.previewDraft || "").length;
     },
     actionBlockedReason() {
-      if (!this.caps) return "当前不可用：正在加载能力状态…";
+      if (!this.caps) return this.$t("xn.tts.capsLoading");
       if (this.caps.accessStatusText && this.caps.accessStatus !== "ready") {
         return this.caps.accessStatusText;
       }
       if (this.mode === "design" && this.caps.operations && this.caps.operations.design
           && this.caps.operations.design.callable === false) {
         if (this.caps.enhancedEnabled && !this.caps.operations.design.priced) {
-          return "音色设计尚未配置有效售价，暂不可用";
+          return this.$t("xn.tts.designNoPrice");
         }
-        return "音色设计当前不可用";
+        return this.$t("xn.tts.designUnavailable");
       }
       if (this.mode === "clone" && this.caps.operations && this.caps.operations.clone
           && this.caps.operations.clone.callable === false) {
         if (this.caps.enhancedEnabled && !this.caps.operations.clone.priced) {
-          return "音色复刻尚未配置有效售价，暂不可用";
+          return this.$t("xn.tts.cloneNoPrice");
         }
-        return "音色复刻当前不可用";
+        return this.$t("xn.tts.cloneUnavailable");
       }
       if (this.caps.accessStatusText) return this.caps.accessStatus === "ready" ? "" : this.caps.accessStatusText;
       if (this.caps.enhancedEnabled === false) {
-        return "官方语音功能尚未对你的账号开放，暂时无法使用。";
+        return this.$t("xn.tts.notEnabled");
       }
       if (this.caps.pricingStatus === "pricing_pending") {
-        return "该功能暂未开放计费，暂时无法使用。";
+        return this.$t("xn.tts.pricingPending");
       }
-      if (this.caps.customerCallable === false) return "当前不可用";
-      if (this.caps.customerCallable !== true) return "当前不可用";
+      if (this.caps.customerCallable === false) return this.$t("xn.tts.unavailable");
+      if (this.caps.customerCallable !== true) return this.$t("xn.tts.unavailable");
       return "";
     },
     actionsEnabled() {
@@ -314,14 +314,14 @@ export default {
     },
     sendTitle() {
       if (this.actionBlockedReason) return this.actionBlockedReason;
-      if (!this.designPrompt.trim()) return "请先输入音色描述";
-      return "开始设计";
+      if (!this.designPrompt.trim()) return this.$t("xn.tts.needDesignPrompt");
+      return this.$t("xn.tts.startDesign");
     },
     cloneSendTitle() {
       if (this.actionBlockedReason) return this.actionBlockedReason;
-      if (this.recording) return "请先结束录制";
-      if (!this.cloneFile) return "请先上传或录制声音";
-      return "开始复刻";
+      if (this.recording) return this.$t("xn.tts.needStopRecord");
+      if (!this.cloneFile) return this.$t("xn.tts.needCloneFile");
+      return this.$t("xn.tts.startClone");
     },
     hasPending() {
       return this.filteredVoices.some((v) => v.status === "processing" || v.status === "uncertain");
@@ -366,14 +366,14 @@ export default {
       return "xn-tag--muted";
     },
     statusLabel(status) {
-      return STATUS_LABEL[status] || status || "-";
+      return STATUS_LABEL[status] ? this.$t(STATUS_LABEL[status]) : (status || "-");
     },
     shortVoiceId(id) {
       if (!id) return "";
       return id.length > 28 ? `${id.slice(0, 14)}…${id.slice(-8)}` : id;
     },
     voiceTitle(row) {
-      return row.name || "未命名音色";
+      return row.name || this.$t("xn.tts.unnamedVoice");
     },
     canPlay(row) {
       return !!(row && (row.hasPreview === true || row.hasPreview === "true"));
@@ -391,7 +391,7 @@ export default {
       if (!ts) return "-";
       const d = new Date(ts);
       if (Number.isNaN(d.getTime())) return String(ts);
-      return `${d.getMonth() + 1}月${d.getDate()}日 ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+      return this.$t("xn.tts.dateShort", { m: d.getMonth() + 1, d: d.getDate(), time: `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}` });
     },
     openPreviewDialog() {
       this.previewDraft = this.previewText === DEFAULT_PREVIEW ? "" : this.previewText;
@@ -402,21 +402,21 @@ export default {
       if (!text) {
         this.previewText = DEFAULT_PREVIEW;
         this.previewDialogVisible = false;
-        this.$message.success("已使用默认预览文案");
+        this.$message.success(this.$t("xn.tts.previewDefaultUsed"));
         return;
       }
       const len = Array.from(text).length;
       if (len < 15) {
-        this.$message.warning("预览文本长度需大于等于 15 个字符");
+        this.$message.warning(this.$t("xn.tts.previewTooShort"));
         return;
       }
       if (len > 230) {
-        this.$message.warning("预览文本不能超过 230 个字符");
+        this.$message.warning(this.$t("xn.tts.previewTooLong"));
         return;
       }
       this.previewText = text;
       this.previewDialogVisible = false;
-      this.$message.success("预览文本已更新");
+      this.$message.success(this.$t("xn.tts.previewUpdated"));
     },
     startPoll() {
       if (this.pollTimer) return;
@@ -521,9 +521,9 @@ export default {
         this.recordLevels = new Array(this.recordBarCount).fill(0);
         this.recordStartAt = (window.performance && performance.now) ? performance.now() : Date.now();
         this.startRecordMeter();
-        this.$message.info(`开始录制，建议 3–${this.maxRecordSeconds} 秒，点击停止结束`);
+        this.$message.info(this.$t("xn.tts.recordStarted", { n: this.maxRecordSeconds }));
       } catch (e) {
-        this.$message.error("无法访问麦克风，请检查浏览器权限");
+        this.$message.error(this.$t("xn.tts.micDenied"));
       }
     },
     startRecordMeter() {
@@ -611,7 +611,7 @@ export default {
         return;
       }
       if (!chunks.length || this.recordSeconds < 3) {
-        this.$message.warning("录制太短，请至少录制 3 秒");
+        this.$message.warning(this.$t("xn.tts.recordTooShort"));
         return;
       }
       const wavBlob = this.encodeWavBlob(chunks, sampleRate);
@@ -619,7 +619,7 @@ export default {
       this.setCloneFile(file, { name: "录音.wav" });
       this.recordLevels = [];
       this.recordProgress = 0;
-      this.$message.success("录制完成，可点击右下角提交复刻");
+      this.$message.success(this.$t("xn.tts.recordDone"));
     },
     encodeWavBlob(chunks, sampleRate) {
       let length = 0;
@@ -664,12 +664,12 @@ export default {
       this.submitting = true;
       officialTts.uploadClone(this.cloneFile, this.cloneName || "我的音色", () => {
         this.submitting = false;
-        this.$message.success("已提交复刻");
+        this.$message.success(this.$t("xn.tts.cloneSubmitted"));
         this.clearCloneFile();
         this.reload();
       }, (err) => {
         this.submitting = false;
-        this.$message.error(this.apiMsg(err, "复刻上传请求失败"));
+        this.$message.error(this.apiMsg(err, this.$t("xn.tts.cloneFailed")));
         this.reload();
       });
     },
@@ -687,21 +687,21 @@ export default {
         previewText: preview,
       }, () => {
         this.submitting = false;
-        this.$message.success("已登记设计任务");
+        this.$message.success(this.$t("xn.tts.designSubmitted"));
         this.designPrompt = "";
         this.reload();
       }, (err) => {
         this.submitting = false;
-        this.$message.error(this.apiMsg(err, "设计请求失败"));
+        this.$message.error(this.apiMsg(err, this.$t("xn.tts.designFailed")));
       });
     },
     goSynth(row) {
       if (!this.canGoSynth(row)) {
-        this.$message.warning("音色尚未生成 ID，请稍后再试");
+        this.$message.warning(this.$t("xn.tts.voiceNoId"));
         return;
       }
       if (row.status !== "available") {
-        this.$message.info("音色仍在处理中，已跳转合成页；若合成失败请稍后重试");
+        this.$message.info(this.$t("xn.tts.voiceStillProcessing"));
       }
       const query = {
         voice: row.upstreamVoiceId,
@@ -712,21 +712,21 @@ export default {
       this.$router.push({ path: "/official-tts/dubbing", query });
     },
     rename(row) {
-      this.$prompt("请输入新的音色名称", "重命名", {
+      this.$prompt(this.$t("xn.tts.renamePrompt"), this.$t("xn.tts.rename"), {
         inputValue: row.name || "",
         inputPattern: /\S+/,
-        inputErrorMessage: "名称不能为空",
+        inputErrorMessage: this.$t("xn.tts.nameRequired"),
       }).then(({ value }) => {
         officialTts.renameVoice(row.id, value.trim(), () => {
-          this.$message.success("已重命名");
+          this.$message.success(this.$t("xn.tts.renamed"));
           this.reload();
-        }, (err) => this.$message.error(this.apiMsg(err, "重命名失败")));
+        }, (err) => this.$message.error(this.apiMsg(err, this.$t("xn.tts.renameFailed"))));
       }).catch(() => {});
     },
     remove(row) {
-      this.$confirm("资产删除后无法找回，请谨慎操作。", "你确认删除该资产吗？", {
-        confirmButtonText: "删除",
-        cancelButtonText: "取消",
+      this.$confirm(this.$t("xn.tts.deleteConfirmBody"), this.$t("xn.tts.deleteConfirmTitle"), {
+        confirmButtonText: this.$t("xn.tts.delete"),
+        cancelButtonText: this.$t("xn.tts.cancel"),
         customClass: "ot-delete-confirm",
         confirmButtonClass: "ot-delete-confirm__danger",
         cancelButtonClass: "ot-delete-confirm__cancel",
@@ -734,15 +734,15 @@ export default {
         .then(() => {
           officialTts.deleteVoice(row.id, () => {
             if (this.playingId === row.id) this.stopPlay();
-            this.$message.success("已删除");
+            this.$message.success(this.$t("xn.tts.deleted"));
             this.reload();
-          }, (err) => this.$message.error(this.apiMsg(err, "删除失败，可能仍在使用")));
+          }, (err) => this.$message.error(this.apiMsg(err, this.$t("xn.tts.deleteFailedInUse"))));
         })
         .catch(() => {});
     },
     togglePlay(row) {
       if (!this.canPlay(row)) {
-        this.$message.warning("该音色暂无预览音频");
+        this.$message.warning(this.$t("xn.tts.voiceNoPreview"));
         return;
       }
       if (this.playingId === row.id) {
@@ -762,11 +762,11 @@ export default {
           const el = this.$refs.audioEl;
           if (!el) return;
           el.src = this.playUrl;
-          el.play().catch(() => this.$message.error("播放失败"));
+          el.play().catch(() => this.$message.error(this.$t("xn.tts.playFailed")));
         });
       }, () => {
         this.loadingId = null;
-        this.$message.error("预览音频加载失败");
+        this.$message.error(this.$t("xn.tts.previewLoadFailed"));
       });
     },
     onAudioTime() {

@@ -10,7 +10,7 @@
 | `views/BillingOrders.vue` | `/billing/orders` | 页头的主按钮是“立即充值”。余额条和 `balanceCacheHint` 提示放在页头下方。“充值订单”表格增加到账点数列、“查看”（跳到结果页）和每页条数切换。“回响现实官方服务费用”表格的文案移到 i18n，并补了空状态和失败状态。 | GET `/pay/orders?page=&limit=`；GET `/pay/quota/me`；GET `/pay/memory-bills?page=&limit=10` | 完成 |
 | `components/OfficialTtsStudioShell.vue` | — | 去掉 HeaderBar、hero 大标题、旋转彩虹描边（`ot-composer__ring`）和渐变。现在是 page-header（标题取导航名，`hero` 插槽作为说明文字）、分段 tab（语音合成 / 音色设计 / 音色复刻）、警告 el-alert 和白色面板 composer。props、插槽名不变，另外新增 `actions` 插槽。 | — | 完成 |
 | `views/OfficialTtsVoices.vue` | `/official-tts/voices?mode=design\|clone` | 设计模式：textarea 加“试听文本”按钮和主按钮“开始设计”。复刻模式：上传 / 录制两张卡、文件条、录音条、主按钮“开始复刻”。资产列表改为 el-table（试听、状态标签、错误提示、去合成、重命名、删除并二次确认），有加载、空和失败三种状态。复刻模式里原来不起作用的“文本预览”入口已去掉（复刻上传并不提交 previewText）。 | GET `/official-tts/capabilities`；GET `/official-tts/voices`；POST `/official-tts/voices`（设计）；POST `/official-tts/assets`（复刻，FormData file/kind/name）；PUT `/official-tts/voices/{id}`；DELETE `/official-tts/voices/{id}`；GET `/official-tts/voices/{id}/preview`（blob） | 完成 |
-| `views/OfficialTtsDubbing.vue` | `/official-tts/dubbing` | 编辑器下方的工具条包含语气标签、音色、语言/方言、音量、语速、导出格式、字数和主按钮“生成配音”。“灵感”卡片去掉了色块。“我的配音”改为 el-table（内容与参数、状态标签、内嵌播放器、下载 / 再次编辑 / 删除），排队或生成中的任务可以“取消”（调用已有的 `cancelJob` 接口，原页面没有这个入口），有加载、空和失败三种状态。mock 模式下载的文件扩展名如实写成 `.wav`。 | GET `/official-tts/capabilities`；GET `/official-tts/voices`；GET `/official-tts/jobs`；POST `/official-tts/jobs`；POST `/official-tts/jobs/{id}/cancel`；DELETE `/official-tts/jobs/{id}`；GET `/official-tts/jobs/{id}/download`（blob） | 完成 |
+| `views/OfficialTtsDubbing.vue` | `/official-tts/dubbing` | 编辑器下方的工具条包含语气标签、音色、语言/方言、音量、语速、导出格式、字数和主按钮“生成配音”。“灵感”卡片去掉了色块。“我的配音”改为 el-table（内容与参数、状态标签、内嵌播放器、下载 / 再次编辑 / 删除），有加载、空和失败三种状态。mock 模式下载的文件扩展名如实写成 `.wav`。 | GET `/official-tts/capabilities`；GET `/official-tts/voices`；GET `/official-tts/jobs`；POST `/official-tts/jobs`；DELETE `/official-tts/jobs/{id}`；GET `/official-tts/jobs/{id}/download`（blob） | 完成 |
 | `components/OfficialTtsVoiceLibrary.vue` | （配音页弹窗） | 标准 el-dialog。顶部是分段切换（官方 / 我的设计 / 我的复刻），配搜索框和“创建音色”按钮（跳到我的音色）。卡片可单选并能试听，底部是取消和“使用这个音色”。原来的三个筛选下拉（全场景 / 全性别 / 全语言）只有“全部”一个选项，没有作用，已去掉。props（visible / value / officialVoices）和事件（update:visible / input / confirm）不变。 | GET `/official-tts/voices`；GET 和 POST `/official-tts/voices/{id}/preview`（blob） | 完成 |
 | `views/OfficialTtsAdmin.vue` | `/admin/official-tts`（adminOnly） | 规则提示、概览统计、价格版本表格（中文标签、状态 tag）。编辑草稿从 `$prompt` 改为表单弹窗（金额必须是大于 0 的数字），发布也改为弹窗（显示版本信息，理由选填）。人工备注表单带必填校验和重置。结算面板改为读取账单、键值表、表单、预览、二次确认。保留全部 `data-testid` 和幂等 operationId 逻辑。“网关 / ack / 灰度 / 令牌”等文案改成管理员能看懂的说法。 | GET `/admin/official-tts/overview`；PUT `/admin/official-tts/prices`；POST `/admin/official-tts/prices/draft-from`；POST `/admin/official-tts/prices/publish`；POST `/admin/official-tts/prices/sync`；GET `/admin/official-tts/jobs/{jobId}/ledger`；POST `/admin/official-tts/notes`；POST `/admin/official-tts/settle` | 完成 |
 | `styles/official-tts-studio.scss` | — | 重写，只用 `--xn-*` 变量。没有渐变、发光、旋转动画；`.ot-delete-confirm` 仍由 global.scss 提供。行数从 1928 降到约 230。 | — | 完成 |
@@ -39,11 +39,11 @@ Mock：`src/mock/handlers/pay.js`（扩展，8 个路由）、`src/mock/handlers
 6. 价格表 `status` / `lifecycleStatus` 的完整取值待确认。页面已映射的取值：draft、published、publish_ack_pending、publish_failed / active、draft、superseded、retired；其余取值原样显示。
 7. 复刻音色生成后是否自动带 `hasPreview`：mock 中设计音色为 true，复刻音色为 false。复刻音色可以在音色库里按需生成试听（POST preview）。
 8. 配音下载的真实文件格式和 `requestJson.format` 一致。mock 只能生成 WAV，所以 mock 模式下下载的文件名用 `.wav`。
-9. 取消配音（`cancelJob`）是本次新增的入口。确认后端允许取消 queued/running 状态后，这个入口即可直接使用；如果不允许，后端会返回错误，页面会弹出提示。
+9. API module exposes detail/disable (role & wallpaper packs) and cancelJob (dubbing) but the original pages have no entry for them; not added in the redesign (no new features).（mock 仍保留 `POST /official-tts/jobs/{id}/cancel`。）
 
 ## (c) 未完成 / 已知问题
 
-- 官方语音页面脚本里原有的提示消息（`$message` 文案、状态名）仍是中文硬编码，英文界面下会混有中文；模板里的文案已经全部 i18n（zh_CN 和 en）。
+- 官方语音页面脚本里的提示消息（`$message` / `$confirm` 文案、状态名、校验文案）已移到 `xn.tts.*`（zh_CN 和 en）；服务端返回的 `msg` 仍原样显示。
 - 管理员备注表单校验失败时，控制台会出现 Element 自带的 `async-validator` warning，属于正常校验行为。
 - 外壳余额条只在进入 `/billing/*` 页面或收到 `xn:quota-changed` 事件时刷新。配音完成扣除的演示点数，要到下次进入账单页才会体现。
 - 已验证：1440×900 和 960 宽度下无横向滚动；正常、空数据、服务异常三种场景，以及余额可能不是最新、暂不可用两种状态；整个过程没有任何非 localhost 的网络请求。

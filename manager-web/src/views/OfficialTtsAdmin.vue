@@ -196,16 +196,26 @@ import officialTts from "@/apis/module/officialTts";
 /** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
 const NO_REPLY_MS = 10000;
 
-const OPS = { synthesize: "语音合成", design: "音色设计", clone: "音色复刻" };
-const KINDS = { sale_points: "售价", cost: "成本" };
-const UNITS = { weighted_character: "计费字符", audio_second: "秒", official_units: "官方计量单位" };
-const STATUS = {
-  draft: ["草稿", "xn-tag--lake"],
-  published: ["已发布", "xn-tag--success"],
-  publish_ack_pending: ["等待确认", "xn-tag--warning"],
-  publish_failed: ["发布失败", "xn-tag--danger"],
+/* 以下映射的值是 i18n key，显示时经 $t 翻译 */
+const OPS = { synthesize: "xn.tts.admin.op.synthesize", design: "xn.tts.admin.op.design", clone: "xn.tts.admin.op.clone" };
+const KINDS = { sale_points: "xn.tts.admin.kind.sale_points", cost: "xn.tts.admin.kind.cost" };
+const UNITS = {
+  weighted_character: "xn.tts.admin.unit.weighted_character",
+  audio_second: "xn.tts.admin.unit.audio_second",
+  official_units: "xn.tts.admin.unit.official_units",
 };
-const LIFECYCLE = { active: "生效中", draft: "未生效", superseded: "已被替换", retired: "已停用" };
+const STATUS = {
+  draft: ["xn.tts.admin.status.draft", "xn-tag--lake"],
+  published: ["xn.tts.admin.status.published", "xn-tag--success"],
+  publish_ack_pending: ["xn.tts.admin.status.publish_ack_pending", "xn-tag--warning"],
+  publish_failed: ["xn.tts.admin.status.publish_failed", "xn-tag--danger"],
+};
+const LIFECYCLE = {
+  active: "xn.tts.admin.lifecycle.active",
+  draft: "xn.tts.admin.lifecycle.draft",
+  superseded: "xn.tts.admin.lifecycle.superseded",
+  retired: "xn.tts.admin.lifecycle.retired",
+};
 
 export default {
   name: "OfficialTtsAdmin",
@@ -243,34 +253,34 @@ export default {
     },
     noteRules() {
       return {
-        noteJobId: [{ required: true, message: "请填写任务 ID", trigger: "blur" }, { pattern: /^\d+$/, message: "任务 ID 是数字", trigger: "blur" }],
-        noteReason: [{ required: true, message: "请填写备注理由", trigger: "blur" }],
+        noteJobId: [{ required: true, message: this.$t("xn.tts.admin.jobIdRequired"), trigger: "blur" }, { pattern: /^\d+$/, message: this.$t("xn.tts.admin.jobIdNumeric"), trigger: "blur" }],
+        noteReason: [{ required: true, message: this.$t("xn.tts.admin.reasonRequired"), trigger: "blur" }],
       };
     },
     draftRules() {
       return {
         amount: [
-          { required: true, message: "请填写金额", trigger: "blur" },
-          { validator: (r, v, cb) => (Number.isNaN(Number(v)) || Number(v) <= 0 ? cb(new Error("金额必须是大于 0 的数字")) : cb()), trigger: "blur" },
+          { required: true, message: this.$t("xn.tts.admin.amountRequired"), trigger: "blur" },
+          { validator: (r, v, cb) => (Number.isNaN(Number(v)) || Number(v) <= 0 ? cb(new Error(this.$t("xn.tts.admin.amountPositive"))) : cb()), trigger: "blur" },
         ],
       };
     },
     previewText() {
       if (!this.ledger || this.finalTotal === "" || this.finalTotal === null) {
-        return "最终累计费用未填写，提交会被拒绝。";
+        return this.$t("xn.tts.admin.finalMissing");
       }
       const finalTotal = Number(this.finalTotal);
       if (Number.isNaN(finalTotal)) {
-        return "最终累计费用必须是数字。";
+        return this.$t("xn.tts.admin.finalNotNumber");
       }
       const charged = Number(this.ledger.charged || 0);
       const held = Number(this.ledger.held || 0);
       if (finalTotal < charged) {
-        return "不得把最终金额降到已确认扣费以下。补偿退款须走独立账务流程。";
+        return this.$t("xn.tts.admin.finalBelowCharged");
       }
       const add = finalTotal - charged;
       const release = held - add;
-      return `最终累计费用 ${finalTotal}（不是增量）。预计追加扣费 ${add}，预计释放冻结 ${release}。`;
+      return this.$t("xn.tts.admin.finalPreview", { finalTotal, add, release });
     },
   },
   created() {
@@ -281,12 +291,12 @@ export default {
   },
   methods: {
     show(v) { return v === undefined || v === null || v === "" ? "—" : v; },
-    opLabel(v) { return OPS[v] || v || "—"; },
-    kindLabel(v) { return KINDS[v] || v || "—"; },
-    unitLabel(v) { return UNITS[v] || v || "—"; },
-    statusLabel(v) { return (STATUS[v] || [v || "—"])[0]; },
+    opLabel(v) { return OPS[v] ? this.$t(OPS[v]) : (v || "—"); },
+    kindLabel(v) { return KINDS[v] ? this.$t(KINDS[v]) : (v || "—"); },
+    unitLabel(v) { return UNITS[v] ? this.$t(UNITS[v]) : (v || "—"); },
+    statusLabel(v) { return STATUS[v] ? this.$t(STATUS[v][0]) : (v || "—"); },
     statusClass(v) { return (STATUS[v] || [null, "xn-tag--muted"])[1]; },
-    lifecycleLabel(v) { return LIFECYCLE[v] || v || "—"; },
+    lifecycleLabel(v) { return LIFECYCLE[v] ? this.$t(LIFECYCLE[v]) : (v || "—"); },
     reload() {
       this.loading = true;
       this.failed = false;
@@ -330,11 +340,11 @@ export default {
         }, () => {
           this.draftSaving = false;
           this.draftVisible = false;
-          this.$message.success("已保存草稿，当前生效价未变");
+          this.$message.success(this.$t("xn.tts.admin.draftSaved"));
           this.reload();
         }, () => {
           this.draftSaving = false;
-          this.$message.error("保存草稿失败");
+          this.$message.error(this.$t("xn.tts.admin.draftSaveFailed"));
         });
         // 业务错误由请求层提示；稍后复位按钮状态
         setTimeout(() => { this.draftSaving = false; }, 3000);
@@ -342,9 +352,9 @@ export default {
     },
     draftFrom(row) {
       officialTts.draftFromPublished(row.id, () => {
-        this.$message.success("已创建新版本草稿，原已发布版本仍生效");
+        this.$message.success(this.$t("xn.tts.admin.draftCreated"));
         this.reload();
-      }, () => this.$message.error("新建草稿失败"));
+      }, () => this.$message.error(this.$t("xn.tts.admin.draftCreateFailed")));
     },
     publishPrice(row) {
       this.publishRow = row;
@@ -358,19 +368,19 @@ export default {
       officialTts.publishPrice({ id: row.id, reason: this.publishReason || "admin_publish" }, () => {
         this.publishing = false;
         this.publishVisible = false;
-        this.$message.success("已发布，该版本已生效");
+        this.$message.success(this.$t("xn.tts.admin.published"));
         this.reload();
       }, () => {
         this.publishing = false;
-        this.$message.error("发布结果未确认，当前仍使用原生效版本；可稍后点“同步状态”");
+        this.$message.error(this.$t("xn.tts.admin.publishUnconfirmed"));
       });
       setTimeout(() => { this.publishing = false; }, 3000);
     },
     syncPrice(row) {
       officialTts.syncPublished(row.id, () => {
-        this.$message.success("已同步生效状态");
+        this.$message.success(this.$t("xn.tts.admin.synced"));
         this.reload();
-      }, () => this.$message.error("同步失败"));
+      }, () => this.$message.error(this.$t("xn.tts.admin.syncFailed")));
     },
     resetNote() {
       this.noteJobId = "";
@@ -383,19 +393,19 @@ export default {
     },
     doNote() {
       if (!this.noteJobId || !this.noteReason) {
-        this.$message.error("任务 ID 和理由必填");
+        this.$message.error(this.$t("xn.tts.admin.noteRequired"));
         return;
       }
       const op = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : ("note-" + Date.now());
       officialTts.addNote(this.noteJobId, op, this.noteReason, this.noteEvidence || "console", () => {
-        this.$message.success("已添加备注，未结算、未退款、未改冻结");
+        this.$message.success(this.$t("xn.tts.admin.noteAdded"));
         this.resetNote();
         this.reload();
-      }, () => this.$message.error("添加备注失败"));
+      }, () => this.$message.error(this.$t("xn.tts.admin.noteFailed")));
     },
     loadLedger() {
       if (!this.settleJobId) {
-        this.$message.error("请填写任务 ID");
+        this.$message.error(this.$t("xn.tts.admin.jobIdRequired"));
         return;
       }
       this.finalTotal = "";
@@ -406,38 +416,38 @@ export default {
         this.ledger = (res.data && res.data.data) || {};
       }, () => {
         this.ledgerLoading = false;
-        this.$message.error("读取账单失败");
+        this.$message.error(this.$t("xn.tts.admin.ledgerFailed"));
       });
       setTimeout(() => { this.ledgerLoading = false; }, 3000);
     },
     doSettle() {
       if (!this.ledger) {
-        this.$message.error("请先读取账单");
+        this.$message.error(this.$t("xn.tts.admin.needLedger"));
         return;
       }
       if (this.finalTotal === "" || this.finalTotal === null) {
-        this.$message.error("最终累计费用未填写，已拒绝");
+        this.$message.error(this.$t("xn.tts.admin.finalMissingRejected"));
         return;
       }
       const finalTotal = Number(this.finalTotal);
       if (Number.isNaN(finalTotal)) {
-        this.$message.error("最终累计费用必须是数字");
+        this.$message.error(this.$t("xn.tts.admin.finalNotNumberShort"));
         return;
       }
       if (finalTotal === 0 && !this.confirmZero) {
-        this.$message.error("零费用结算必须勾选确认");
+        this.$message.error(this.$t("xn.tts.admin.zeroNeedsConfirm"));
         return;
       }
       const charged = Number(this.ledger.charged || 0);
       if (finalTotal < charged) {
-        this.$message.error("不得降到已确认扣费以下");
+        this.$message.error(this.$t("xn.tts.admin.belowCharged"));
         return;
       }
-      this.$confirm(this.previewText + " 确认提交？", "二次确认人工结算", {
+      this.$confirm(this.previewText + " " + this.$t("xn.tts.admin.settleConfirmSuffix"), this.$t("xn.tts.admin.settleConfirmTitle"), {
         type: "warning",
         customClass: "official-tts-settle-confirm",
-        confirmButtonText: "提交结算",
-        cancelButtonText: "取消",
+        confirmButtonText: this.$t("xn.ttsAdmin.submitSettle"),
+        cancelButtonText: this.$t("xn.tts.cancel"),
       }).then(() => {
         const sig = [this.settleJobId, String(finalTotal), String(this.confirmZero)].join(":");
         if (!this.lastSettleOpId || this.lastSettleSig !== sig) {
@@ -455,10 +465,10 @@ export default {
           evidence: this.settleEvidence,
         };
         officialTts.settle(body, () => {
-          this.$message.success("已按最终累计费用结算/释放冻结");
+          this.$message.success(this.$t("xn.tts.admin.settled"));
           this.loadLedger();
           this.reload();
-        }, () => this.$message.error("结算失败，未改前端展示值"));
+        }, () => this.$message.error(this.$t("xn.tts.admin.settleFailed")));
       }).catch(() => {});
     },
   },

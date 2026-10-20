@@ -189,8 +189,7 @@
           <el-table-column :label="$t('xn.tts.colActions')" min-width="200" align="right">
             <template slot-scope="{ row }">
               <el-button type="text" :disabled="row.status !== 'done'" @click="download(row)">{{ $t('xn.tts.download') }}</el-button>
-              <el-button v-if="isPending(row)" type="text" @click="cancelJob(row)">{{ $t('xn.tts.cancelJob') }}</el-button>
-              <el-button v-else type="text" @click="editJob(row)">{{ $t('xn.tts.reuse') }}</el-button>
+              <el-button type="text" @click="editJob(row)">{{ $t('xn.tts.reuse') }}</el-button>
               <el-button type="text" class="ot-danger" :disabled="isPending(row)" @click="removeJob(row)">{{ $t('xn.tts.delete') }}</el-button>
             </template>
           </el-table-column>
@@ -220,14 +219,14 @@ import officialTts from "@/apis/module/officialTts";
 import { isMockMode } from "@/mock/config";
 
 const JOB_STATUS = {
-  queued: ["排队中", "xn-tag--lake"],
-  running: ["生成中", "xn-tag--lake"],
-  uncertain: ["处理中", "xn-tag--warning"],
-  done: ["已完成", "xn-tag--success"],
-  failed: ["失败", "xn-tag--danger"],
-  error: ["失败", "xn-tag--danger"],
-  canceled: ["已取消", "xn-tag--muted"],
-  cancelled: ["已取消", "xn-tag--muted"],
+  queued: ["xn.tts.jobStatus.queued", "xn-tag--lake"],
+  running: ["xn.tts.jobStatus.running", "xn-tag--lake"],
+  uncertain: ["xn.tts.jobStatus.uncertain", "xn-tag--warning"],
+  done: ["xn.tts.jobStatus.done", "xn-tag--success"],
+  failed: ["xn.tts.jobStatus.failed", "xn-tag--danger"],
+  error: ["xn.tts.jobStatus.failed", "xn-tag--danger"],
+  canceled: ["xn.tts.jobStatus.cancelled", "xn-tag--muted"],
+  cancelled: ["xn.tts.jobStatus.cancelled", "xn-tag--muted"],
 };
 
 /** 请求层对业务错误（code≠0）只弹出提示、不回调页面；超过这个时间仍无响应就显示失败状态，避免一直加载 */
@@ -470,16 +469,16 @@ export default {
   },
   computed: {
     actionBlockedReason() {
-      if (!this.caps) return "当前不可用：正在加载能力状态…";
+      if (!this.caps) return this.$t("xn.tts.capsLoading");
       if (this.caps.accessStatusText) return this.caps.accessStatus === "ready" ? "" : this.caps.accessStatusText;
       if (this.caps.enhancedEnabled === false) {
-        return "官方语音功能尚未对你的账号开放，暂时无法使用合成。";
+        return this.$t("xn.tts.notEnabledSynth");
       }
       if (this.caps.pricingStatus === "pricing_pending") {
-        return "该功能暂未开放计费，暂时无法使用。";
+        return this.$t("xn.tts.pricingPending");
       }
-      if (this.caps.customerCallable === false) return "当前不可用";
-      if (this.caps.customerCallable !== true) return "当前不可用";
+      if (this.caps.customerCallable === false) return this.$t("xn.tts.unavailable");
+      if (this.caps.customerCallable !== true) return this.$t("xn.tts.unavailable");
       return "";
     },
     actionsEnabled() {
@@ -496,8 +495,8 @@ export default {
     },
     sendTitle() {
       if (this.actionBlockedReason) return this.actionBlockedReason;
-      if (!this.form.text.trim()) return "请先输入要合成的文本";
-      return "生成配音";
+      if (!this.form.text.trim()) return this.$t("xn.tts.needSynthText");
+      return this.$t("xn.tts.generate");
     },
     playProgress() {
       if (!this.playDuration) return 0;
@@ -506,8 +505,8 @@ export default {
     tagCategories() {
       // 与百炼控制台对齐：展示完整官方 CONTROL_TAGS，不收窄为 capabilities 短名单
       return [
-        { id: "emotion", name: "情绪语气", items: EMOTION_TAGS.map((t) => ({ ...t })) },
-        { id: "action", name: "声音动作", items: ACTION_TAGS.map((t) => ({ ...t })) },
+        { id: "emotion", name: this.$t("xn.tts.tagCatEmotion"), items: EMOTION_TAGS.map((t) => ({ ...t })) },
+        { id: "action", name: this.$t("xn.tts.tagCatAction"), items: ACTION_TAGS.map((t) => ({ ...t })) },
       ];
     },
     activeTagItems() {
@@ -516,7 +515,7 @@ export default {
     },
     activeTagCategoryName() {
       const cat = this.tagCategories.find((c) => c.id === this.tagMenuHover);
-      return (cat && cat.name) || "情绪语气";
+      return (cat && cat.name) || this.$t("xn.tts.tagCatEmotion");
     },
     languageOptions() {
       return LANGUAGE_OPTIONS;
@@ -537,7 +536,7 @@ export default {
       const hit = (this.verified || []).find((v) => v.code === code);
       if (hit) return hit.name;
       if (this.myVoiceNames[code]) return this.myVoiceNames[code];
-      if (!code) return "选择音色";
+      if (!code) return this.$t("xn.tts.pickVoice");
       return code.length > 16 ? `${code.slice(0, 8)}…` : code;
     },
     pendingJobs() {
@@ -619,7 +618,7 @@ export default {
       if (item.name) {
         this.myVoiceNames = { ...this.myVoiceNames, [item.code]: item.name };
       }
-      this.$message.success(`已选择音色：${item.name || item.code}`);
+      this.$message.success(this.$t("xn.tts.voiceSelected", { name: item.name || item.code }));
     },
     tagLabel(code) {
       return TAG_LABELS[code] || code;
@@ -743,7 +742,7 @@ export default {
     },
     pickToneTag(item) {
       if (!item || !item.code) {
-        this.$message.warning("无效的语气标签");
+        this.$message.warning(this.$t("xn.tts.invalidTag"));
         return;
       }
       this.insertToneChip(item.code, item.label);
@@ -803,28 +802,13 @@ export default {
       return !["done", "failed", "error", "canceled", "cancelled", "deleted"].includes(String((row && row.status) || "").toLowerCase());
     },
     jobStatusLabel(status) {
-      return (JOB_STATUS[status] || [status || "-"])[0];
+      return JOB_STATUS[status] ? this.$t(JOB_STATUS[status][0]) : (status || "-");
     },
     jobStatusClass(status) {
       return (JOB_STATUS[status] || [null, "xn-tag--muted"])[1];
     },
     jobRowClass({ row }) {
       return this.playingId === row.id ? "is-playing" : "";
-    },
-    cancelJob(row) {
-      this.$confirm("取消后不会生成音频，已冻结的点数会释放。", "取消这条配音？", {
-        confirmButtonText: "取消任务",
-        cancelButtonText: "继续生成",
-        type: "warning",
-      })
-        .then(() => {
-          officialTts.cancelJob(row.id, (res) => {
-            const msg = res && res.data && res.data.msg;
-            this.$message.success(msg && msg !== "success" ? msg : "已取消任务");
-            this.reloadJobs();
-          }, (err) => this.$message.error(this.apiMsg(err, "取消失败")));
-        })
-        .catch(() => {});
     },
     applyInspire(item) {
       this.setEditorHtmlFromText(item.text);
@@ -848,7 +832,7 @@ export default {
         const req = this.parseRequest(row);
         if (req.text) raw = String(req.text);
       }
-      if (!raw) return `任务 #${row.id}`;
+      if (!raw) return this.$t("xn.tts.jobN", { id: row.id });
       return this.displaySynthesisText(raw);
     },
     shortModel(version) {
@@ -908,7 +892,7 @@ export default {
       if (!val) return "";
       const d = new Date(val);
       if (Number.isNaN(d.getTime())) return "";
-      return `${d.getMonth() + 1}月${d.getDate()}日 ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+      return this.$t("xn.tts.dateShort", { m: d.getMonth() + 1, d: d.getDate(), time: `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}` });
     },
     formatClock(sec) {
       const n = Math.max(0, Math.floor(Number(sec) || 0));
@@ -934,12 +918,12 @@ export default {
       this.bottomTab = "jobs";
       officialTts.createJob(this.jobBody("dubbing"), () => {
         this.submitting = false;
-        this.$message.success("已提交配音");
+        this.$message.success(this.$t("xn.tts.jobSubmitted"));
         this.bottomTab = "jobs";
         this.reloadJobs();
       }, (err) => {
         this.submitting = false;
-        this.$message.error(this.apiMsg(err, "配音请求失败"));
+        this.$message.error(this.apiMsg(err, this.$t("xn.tts.jobFailed")));
       });
     },
     jobBody(jobType) {
@@ -996,13 +980,13 @@ export default {
       if (req.dialect) this.form.dialect = String(req.dialect);
       else if (this.form.lang === "zh") this.form.dialect = "普通话";
       else this.form.dialect = "";
-      this.$message.success("已填入上方合成区，可修改后重新生成");
+      this.$message.success(this.$t("xn.tts.jobReused"));
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     removeJob(row) {
-      this.$confirm("资产删除后无法找回，请谨慎操作。", "你确认删除该资产吗？", {
-        confirmButtonText: "删除",
-        cancelButtonText: "取消",
+      this.$confirm(this.$t("xn.tts.deleteConfirmBody"), this.$t("xn.tts.deleteConfirmTitle"), {
+        confirmButtonText: this.$t("xn.tts.delete"),
+        cancelButtonText: this.$t("xn.tts.cancel"),
         customClass: "ot-delete-confirm",
         confirmButtonClass: "ot-delete-confirm__danger",
         cancelButtonClass: "ot-delete-confirm__cancel",
@@ -1010,9 +994,9 @@ export default {
         .then(() => {
           officialTts.deleteJob(row.id, () => {
             if (this.playingId === row.id) this.stopPlay();
-            this.$message.success("已删除");
+            this.$message.success(this.$t("xn.tts.deleted"));
             this.reloadJobs();
-          }, (err) => this.$message.error(this.apiMsg(err, "删除失败")));
+          }, (err) => this.$message.error(this.apiMsg(err, this.$t("xn.tts.deleteFailed"))));
         })
         .catch(() => {});
     },
@@ -1048,7 +1032,7 @@ export default {
     startPlay(row, afterLoad) {
       const format = this.jobFormat(row);
       if (format === "pcm" || format === "opus") {
-        this.$message.warning("当前格式请下载后用本地播放器试听");
+        this.$message.warning(this.$t("xn.tts.formatNoPlay"));
         return;
       }
       this.loadingId = row.id;
@@ -1067,7 +1051,7 @@ export default {
             .then(() => {
               if (typeof afterLoad === "function") afterLoad();
             })
-            .catch(() => this.$message.error("播放失败"));
+            .catch(() => this.$message.error(this.$t("xn.tts.playFailed")));
         });
       });
     },
@@ -1106,12 +1090,12 @@ export default {
     },
     fetchAudio(row, onOk) {
       if (row.status !== "done") {
-        this.$message.warning("任务未完成，暂不可用");
+        this.$message.warning(this.$t("xn.tts.jobNotDone"));
         return;
       }
       officialTts.fetchJobAudio(row.id, (blob) => {
         if (!blob || !(blob instanceof Blob)) {
-          this.$message.error("获取音频失败");
+          this.$message.error(this.$t("xn.tts.audioFetchFailed"));
           this.loadingId = null;
           return;
         }
@@ -1120,9 +1104,9 @@ export default {
           reader.onload = () => {
             try {
               const obj = JSON.parse(reader.result);
-              this.$message.error(obj.msg || "获取音频失败");
+              this.$message.error(obj.msg || this.$t("xn.tts.audioFetchFailed"));
             } catch (e) {
-              this.$message.error("获取音频失败");
+              this.$message.error(this.$t("xn.tts.audioFetchFailed"));
             }
             this.loadingId = null;
           };
@@ -1132,7 +1116,7 @@ export default {
         onOk(blob, this.jobFormat(row));
       }, (err) => {
         this.loadingId = null;
-        this.$message.error(this.apiMsg(err, "获取音频失败"));
+        this.$message.error(this.apiMsg(err, this.$t("xn.tts.audioFetchFailed")));
       });
     },
   },

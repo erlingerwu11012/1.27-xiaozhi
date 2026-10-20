@@ -200,12 +200,12 @@ export default {
     },
     /** 该音色暂无可播音频：给出服务端原因并刷新列表 */
     previewMissing(err) {
-      this.$message.warning(this.blobError(err) || "试听音频生成失败，请稍后重试");
+      this.$message.warning(this.blobError(err) || this.$t("xn.tts.previewGenFailed"));
       this.loadMine();
     },
     /** blob 请求失败时服务端返回的是 JSON，需要读出来才能拿到 msg */
     blobError(err) {
-      const fallback = "试听音频生成失败，请稍后重试";
+      const fallback = this.$t("xn.tts.previewGenFailed");
       if (!err) return fallback;
       if (err.__blobText) {
         try {
@@ -255,7 +255,7 @@ export default {
           el.src = this.playUrl;
           el.play().catch(() => {
             this.stopPlay();
-            this.$message.error("播放失败");
+            this.$message.error(this.$t("xn.tts.playFailed"));
           });
         });
       };

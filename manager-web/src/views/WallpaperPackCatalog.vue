@@ -34,10 +34,10 @@
 
     <div v-else class="xn-grid vp-grid" v-loading="loading">
       <article v-for="item in filtered" :key="item.packId" class="vp-card">
-        <button type="button" class="vp-cover" :aria-label="$t('xn.visuals.pack.detail') + ' ' + item.displayName" @click="openDetail(item)">
+        <div class="vp-cover">
           <img v-if="coverSrc(item)" :src="coverSrc(item)" alt="" />
           <span v-else class="vp-cover__name">{{ item.displayName }}</span>
-        </button>
+        </div>
         <div class="vp-body">
           <div class="vp-title-row">
             <h3 class="vp-title xn-clip" :title="item.displayName">{{ item.displayName }}</h3>
@@ -47,36 +47,10 @@
           <div class="vp-actions">
             <el-button size="small" @click="openDeploy(item)"><xn-icon name="download" /> {{ $t('wallpaperPack.downloadToDevice') }}</el-button>
             <el-button v-if="videoSrc(item)" size="small" type="text" @click="openDemo(item)">{{ $t('wallpaperPack.watchDemo') }}</el-button>
-            <span class="xn-toolbar__grow"></span>
-            <el-button size="small" type="text" @click="openDetail(item)">{{ $t('xn.visuals.pack.detail') }}</el-button>
           </div>
         </div>
       </article>
     </div>
-
-    <!-- 详情 -->
-    <el-dialog :title="detail ? detail.displayName : ''" :visible.sync="detailVisible" width="600px" append-to-body>
-      <div v-if="detail" v-loading="detailLoading" class="vp-detail">
-        <div class="vp-detail__cover">
-          <img v-if="coverSrc(detail)" :src="coverSrc(detail)" alt="" />
-          <span v-else class="vp-cover__name">{{ detail.displayName }}</span>
-        </div>
-        <p v-if="detailFailed" class="vp-warn">{{ $t('xn.visuals.pack.detailFailed') }}</p>
-        <p class="vp-detail__desc">{{ detail.description || $t('xn.visuals.pack.noDesc') }}</p>
-        <dl class="vp-dl">
-          <template v-for="f in detailFields">
-            <dt :key="f.k + '-t'">{{ f.label }}</dt>
-            <dd :key="f.k + '-d'" :class="{ 'xn-num': f.num }">{{ f.value }}</dd>
-          </template>
-        </dl>
-      </div>
-      <span slot="footer" class="vp-foot">
-        <el-button v-if="isSuperAdmin && detail" type="danger" plain :loading="disabling" @click="confirmDisable(detail)">{{ $t('xn.visuals.pack.disable') }}</el-button>
-        <span class="xn-toolbar__grow"></span>
-        <el-button v-if="detail && videoSrc(detail)" @click="openDemo(detail)">{{ $t('wallpaperPack.watchDemo') }}</el-button>
-        <el-button type="primary" @click="detailToDeploy"><xn-icon name="download" /> {{ $t('wallpaperPack.downloadToDevice') }}</el-button>
-      </span>
-    </el-dialog>
 
     <!-- 下载到设备 -->
     <el-dialog :title="$t('wallpaperPack.deployTitle')" :visible.sync="deployVisible" width="480px" append-to-body>
@@ -143,9 +117,6 @@
         <el-form-item :label="$t('wallpaperPack.displayName')" required>
           <el-input v-model="publishForm.displayName" maxlength="64" show-word-limit />
         </el-form-item>
-        <el-form-item :label="$t('xn.visuals.pack.descLabel')">
-          <el-input v-model="publishForm.description" type="textarea" :rows="2" maxlength="200" show-word-limit :placeholder="$t('xn.visuals.pack.descPlaceholder')" />
-        </el-form-item>
         <el-form-item :label="$t('wallpaperPack.file')" required>
           <div class="vp-file">
             <label class="el-button el-button--default el-button--small vp-file__btn">
@@ -204,7 +175,7 @@
 <script>
 /**
  * 官方壁纸包（设备屏幕的整包壁纸，与设备管理里用户自己上传的图片互不影响）。
- * 接口：Api.wallpaperPack.catalog / detail / deploy / getTask / inspect / publish / disable（后三个仅管理员入口）。
+ * 接口：Api.wallpaperPack.catalog / deploy / getTask / inspect / publish（后两个仅管理员入口）。
  */
 import Api from '@/apis/api'
 import userApi from '@/apis/module/user'
@@ -228,11 +199,6 @@ export default {
       myDevices: [],
       devicesLoaded: false,
       isSuperAdmin: false,
-      detailVisible: false,
-      detail: null,
-      detailLoading: false,
-      detailFailed: false,
-      disabling: false,
       deployVisible: false,
       selectedPack: null,
       selectedDeviceId: '',
@@ -252,8 +218,7 @@ export default {
       demoSrc: '',
       demoPoster: '',
       publishForm: {
-        displayName: '',
-        description: ''
+        displayName: ''
       },
       isMock: IS_MOCK,
       guards: {}
@@ -264,18 +229,6 @@ export default {
       const kw = this.keyword.toLowerCase()
       if (!kw) return this.catalog
       return this.catalog.filter((p) => String(p.displayName || '').toLowerCase().includes(kw) || String(p.description || '').toLowerCase().includes(kw))
-    },
-    detailFields() {
-      const d = this.detail || {}
-      const rows = [
-        { k: 'packId', label: this.$t('xn.visuals.pack.packId'), value: d.packId, num: true },
-        { k: 'version', label: this.$t('xn.visuals.pack.version'), value: d.version, num: true },
-        { k: 'size', label: this.$t('xn.visuals.pack.size'), value: d.size ? this.formatSize(d.size) : '', num: true },
-        { k: 'itemCount', label: this.$t('xn.visuals.pack.itemCount'), value: d.itemCount, num: true },
-        { k: 'defaultId', label: this.$t('wallpaperPack.parsedDefaultId'), value: d.defaultId, num: true },
-        { k: 'publishedAt', label: this.$t('xn.visuals.pack.publishedAt'), value: (d.publishedAt || d.createdAt || '').slice(0, 16), num: true },
-      ]
-      return rows.filter((r) => r.value)
     },
     taskStateLabel() {
       return translateOtaState(this, this.deployTask && this.deployTask.state)
@@ -396,45 +349,6 @@ export default {
         })
       })
     },
-    openDetail(item) {
-      this.detail = { ...item }
-      this.detailFailed = false
-      this.detailVisible = true
-      this.detailLoading = true
-      this.guard('detail', () => { this.detailLoading = false; this.detailFailed = true })
-      Api.wallpaperPack.detail(item.packId, (res) => {
-        this.release('detail')
-        this.detailLoading = false
-        if (!this.detail || this.detail.packId !== item.packId) return
-        if (res && res.code === 0 && res.data) this.detail = { ...item, ...res.data }
-        else this.detailFailed = true
-      })
-    },
-    detailToDeploy() {
-      const item = this.catalog.find((p) => p.packId === this.detail.packId) || this.detail
-      this.detailVisible = false
-      this.openDeploy(item)
-    },
-    confirmDisable(item) {
-      this.$confirm(this.$t('xn.visuals.pack.disableConfirm', { name: item.displayName }), this.$t('xn.visuals.pack.disableTitle'), {
-        type: 'warning', confirmButtonText: this.$t('xn.visuals.pack.disable'), cancelButtonText: this.$t('button.cancel'),
-        customClass: 'ot-delete-confirm'
-      }).then(() => {
-        this.disabling = true
-        this.guard('disable', () => { this.disabling = false })
-        Api.wallpaperPack.disable(item.packId, (res) => {
-          this.release('disable')
-          this.disabling = false
-          if (res && res.code === 0) {
-            this.$message.success(this.$t('xn.visuals.pack.disabled'))
-            this.detailVisible = false
-            this.loadCatalog()
-          } else {
-            this.$message.error(resolveOtaApiMessage(this, res, 'xn.visuals.pack.disableFailed'))
-          }
-        })
-      }).catch(() => {})
-    },
     openDeploy(item) {
       this.selectedPack = item
       this.selectedDeviceId = this.myDevices.length === 1 ? this.myDevices[0].id : ''
@@ -516,7 +430,6 @@ export default {
       this.publishing = false
       this.inspecting = false
       this.publishForm.displayName = ''
-      this.publishForm.description = ''
       // 清空文件选择框，便于再次选择同一个文件（弹窗挂在 body 上）
       document.querySelectorAll('.vp-file input[type=file]').forEach((i) => { i.value = '' })
     },
@@ -541,7 +454,6 @@ export default {
       this.guard('publish', () => { this.publishing = false })
       Api.wallpaperPack.publish({
         displayName: this.publishForm.displayName.trim(),
-        description: this.publishForm.description.trim(),
         spineBin: this.publishFile,
         previewImage: this.previewImage,
         previewVideo: this.previewVideo
@@ -578,7 +490,7 @@ export default {
 .vp-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; background: #fff; border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg); }
 .vp-cover {
   display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 10; padding: 0; overflow: hidden;
-  border: 0; border-bottom: 1px solid var(--xn-line-2); background: var(--xn-mist-2); cursor: pointer;
+  border: 0; border-bottom: 1px solid var(--xn-line-2); background: var(--xn-mist-2);
 }
 .vp-cover img { width: 100%; height: 100%; object-fit: cover; }
 .vp-cover__name { padding: 12px; font-weight: 600; color: var(--xn-ink-2); text-align: center; }
@@ -590,18 +502,13 @@ export default {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .vp-actions { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
-.vp-card--skel .vp-cover { cursor: default; }
 .vp-skel-line { display: block; height: 12px; border-radius: 6px; background: var(--xn-mist-2); }
 .vp-skel-line.w60 { width: 60%; }
 
-.vp-detail__cover { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--xn-r-lg); background: var(--xn-mist-2); }
-.vp-detail__cover img { width: 100%; height: 100%; object-fit: contain; }
-.vp-detail__desc { margin: 14px 0; font-size: 14px; line-height: 1.7; color: var(--xn-ink-2); }
 .vp-dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0 0 8px; font-size: 14px; }
 .vp-dl dt { color: var(--xn-ink-3); }
 .vp-dl dd { margin: 0; min-width: 0; color: var(--xn-ink); word-break: break-all; }
 .vp-dl--task { margin-bottom: 14px; }
-.vp-foot { display: flex; align-items: center; }
 
 .vp-help { margin: 0 0 14px; font-size: 14px; line-height: 1.7; color: var(--xn-ink-2); }
 .vp-ready { margin-top: 16px; }

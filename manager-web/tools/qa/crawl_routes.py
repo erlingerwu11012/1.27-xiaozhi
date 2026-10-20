@@ -10,10 +10,11 @@ from playwright.sync_api import sync_playwright
 
 USER_ROUTES = ['/home', '/role-config?agentId=demo-a-1', '/device-management', '/unified-user-management?agentId=demo-a-1',
                '/role-pack-catalog', '/wallpaper-pack-catalog', '/official-tts/voices', '/official-tts/dubbing',
-               '/knowledge-base-management', '/billing/packages', '/billing/orders', '/billing/result']
+               '/knowledge-base-management', '/knowledge-file-upload?datasetId=ds-demo-0001&knowledgeBaseName=demo', '/billing/packages', '/billing/orders', '/billing/result']
 ADMIN_ROUTES = ['/user-management', '/model-config', '/params-management', '/dict-management', '/provider-management',
                 '/server-side-management', '/agent-template-management', '/template-quick-config', '/admin/official-tts',
                 '/memory-management', '/memory-extract-config', '/habit-management', '/habit-analyze-config']
+OWNER_ONLY = ['/knowledge-file-upload?datasetId=ds-demo-0001&knowledgeBaseName=demo']   # 演示知识库属于 demo_user，其他身份打开会被拒绝
 GUARDED = ['/habit-management', '/memory-management', '/memory-extract-config']   # 原路由守卫：非管理员跳回首页
 
 def login(pg, base, username):
@@ -53,6 +54,8 @@ def main():
             login(pg, a.base, who)
             os.makedirs(os.path.join(a.out, who), exist_ok=True)
             for route in routes:
+                if who != 'demo_user' and route in OWNER_ONLY:
+                    continue
                 del events[:]
                 pg.goto(a.base + '/#' + route)
                 pg.wait_for_timeout(1800)
