@@ -1,145 +1,111 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('header.userManagement')" :description="$t('xn.admin.users.desc')" />
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t('header.userManagement') }}</h2>
-      <div class="right-operations">
-        <el-input :placeholder="$t('user.searchPhone')" v-model="searchPhone" class="search-input" clearable
-          @keyup.enter.native="handleSearch" />
-        <el-button class="btn-search" @click="handleSearch">{{ $t('user.search') }}</el-button>
-      </div>
+    <div class="xn-toolbar">
+      <el-input v-model="searchPhone" :placeholder="$t('user.searchPhone')" clearable
+        @keyup.enter.native="handleSearch" @clear="handleSearch">
+        <xn-icon slot="prefix" name="search" class="xa-search-icon" />
+      </el-input>
+      <el-button @click="handleSearch">{{ $t('user.search') }}</el-button>
+      <span class="xn-toolbar__grow"></span>
+      <template v-if="selectedCount">
+        <span class="xn-muted">{{ $t('xn.admin.selected', { n: selectedCount }) }}</span>
+        <el-button size="small" @click="handleBatchStatusChange(1)">{{ $t('user.enable') }}</el-button>
+        <el-button size="small" @click="handleBatchStatusChange(0)">{{ $t('user.disable') }}</el-button>
+        <el-button type="danger" plain size="small" @click="batchDelete"><xn-icon name="trash" /> {{ $t('user.delete') }}</el-button>
+      </template>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="user-card" shadow="never">
-            <el-table ref="userTable" :data="userList" class="transparent-table" v-loading="loading"
-              :element-loading-text="$t('modelConfig.loading')" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)">
-              <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
-                <template slot-scope="scope">
-                  <el-checkbox v-model="scope.row.selected"></el-checkbox>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('user.userid')" prop="userid" align="center"></el-table-column>
-              <el-table-column :label="$t('user.mobile')" prop="mobile" align="center"></el-table-column>
-              <el-table-column :label="$t('user.deviceCount')" prop="deviceCount" align="center"></el-table-column>
-              <el-table-column :label="$t('user.createDate')" prop="createDate" align="center"></el-table-column>
-              <el-table-column :label="$t('user.status')" prop="status" align="center">
-                <template slot-scope="scope">
-                  <el-tag v-if="scope.row.status === 1" type="success">{{ $t('user.normal') }}</el-tag>
-                  <el-tag v-else type="danger">{{ $t('user.disabled') }}</el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('modelConfig.action')" align="center" width="300px">
-                <template slot-scope="scope">
-                  <el-button size="mini" type="text" @click="resetPassword(scope.row)">{{ $t('user.resetPassword')
-                    }}</el-button>
-                  <el-button size="mini" type="text" v-if="scope.row.status === 1"
-                    @click="handleChangeStatus(scope.row, 0)">{{ $t('user.disableAccount') }}</el-button>
-                  <el-button size="mini" type="text" v-if="scope.row.status === 0"
-                    @click="handleChangeStatus(scope.row, 1)">{{ $t('user.enableAccount') }}</el-button>
-                  <el-button size="mini" type="text" @click="deleteUser(scope.row)">{{ $t('user.deleteUser')
-                    }}</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-
-            <div class="table_bottom">
-              <div class="ctrl_btn">
-                <el-button size="mini" type="primary" class="select-all-btn" @click="handleSelectAll">
-                  {{ isAllSelected ? $t('user.deselectAll') : $t('user.selectAll') }}
-                </el-button>
-                <el-button size="mini" type="success" icon="el-icon-circle-check" @click="batchEnable">{{
-                  $t('user.enable')
-                  }}</el-button>
-                <el-button size="mini" type="warning" @click="batchDisable"><i
-                    class="el-icon-remove-outline rotated-icon"></i>{{
-                      $t('user.disable') }}</el-button>
-                <el-button size="mini" type="danger" icon="el-icon-delete" @click="batchDelete">{{ $t('user.delete')
-                  }}</el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select v-model="pageSize" @change="handlePageSizeChange"
-                  :class="['page-size-select', { 'page-size-select-en': $i18n.locale === 'en' }]">
-                  <el-option v-for="item in pageSizeOptions" :key="item"
-                    :label="$t('modelConfig.itemsPerPage', { items: item })" :value="item">
-                  </el-option>
-                </el-select>
-
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                  {{ $t('modelConfig.firstPage') }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                  {{ $t('modelConfig.prevPage') }}
-                </button>
-                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                  :class="{ active: page === currentPage }" @click="goToPage(page)">
-                  {{ page }}
-                </button> <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                  {{ $t('modelConfig.nextPage') }}
-                </button>
-                <span class="total-text">{{ $t('modelConfig.totalRecords', { total: total }) }}</span>
-              </div>
-            </div>
-          </el-card>
+    <div class="xn-panel xn-panel--flush xa-panel">
+      <xn-empty v-if="loadFailed && !loading" error @retry="fetchUsers" />
+      <template v-else>
+        <el-table ref="userTable" :data="userList" v-loading="loading" row-key="userid">
+          <el-table-column width="52" align="center">
+            <template slot="header">
+              <el-checkbox :value="isAllSelected" :indeterminate="selectedCount > 0 && !isAllSelected"
+                :disabled="!userList.length" :aria-label="$t('user.selectAll')" @change="handleSelectAll" />
+            </template>
+            <template slot-scope="scope"><el-checkbox v-model="scope.row.selected" /></template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.admin.users.account')" min-width="180">
+            <template slot-scope="{ row }"><span class="xa-strong">{{ row.mobile }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('user.userid')" min-width="150">
+            <template slot-scope="{ row }"><span class="xn-num xn-muted">{{ row.userid }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('user.deviceCount')" prop="deviceCount" width="100" align="right" class-name="xn-num" />
+          <el-table-column :label="$t('user.createDate')" min-width="160">
+            <template slot-scope="{ row }"><span class="xn-num">{{ row.createDate }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('user.status')" width="100">
+            <template slot-scope="{ row }">
+              <span v-if="row.status === 1" class="xn-tag xn-tag--success"><i class="dot"></i>{{ $t('user.normal') }}</span>
+              <span v-else class="xn-tag xn-tag--danger"><i class="dot"></i>{{ $t('user.disabled') }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('modelConfig.action')" width="240" align="right">
+            <template slot-scope="scope">
+              <el-button type="text" @click="resetPassword(scope.row)">{{ $t('user.resetPassword') }}</el-button>
+              <el-button v-if="scope.row.status === 1" type="text" @click="handleChangeStatus(scope.row, 0)">{{ $t('user.disableAccount') }}</el-button>
+              <el-button v-else type="text" @click="handleChangeStatus(scope.row, 1)">{{ $t('user.enableAccount') }}</el-button>
+              <el-button type="text" class="xa-danger" @click="deleteUser(scope.row)">{{ $t('user.deleteUser') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty v-if="lastSearch" icon="search" :title="$t('xn.admin.users.noMatch')" :description="$t('xn.admin.noMatchDesc')" />
+            <xn-empty v-else icon="users" :title="$t('xn.admin.users.empty')" :description="$t('xn.admin.users.emptyDesc')" />
+          </template>
+        </el-table>
+        <div v-if="total" class="xa-foot">
+          <el-pagination background layout="total, sizes, prev, pager, next" :total="total" :page-size="pageSize"
+            :page-sizes="pageSizeOptions" :current-page="currentPage" @size-change="handlePageSizeChange" @current-change="goToPage" />
         </div>
-      </div>
+      </template>
     </div>
 
     <view-password-dialog :visible.sync="showViewPassword" :password="currentPassword" />
-    <el-footer>
-      <version-footer />
-    </el-footer>
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 import ViewPasswordDialog from "@/components/ViewPasswordDialog.vue";
-import i18n from '@/i18n';
+import { IS_MOCK } from "@/utils/media";
+
 export default {
-  components: { HeaderBar, ViewPasswordDialog, VersionFooter },
+  components: { ViewPasswordDialog },
   data() {
     return {
       showViewPassword: false,
       currentPassword: "",
       searchPhone: "",
+      lastSearch: "",
       userList: [],
       pageSizeOptions: [10, 20, 50, 100],
       currentPage: 1,
       pageSize: 10,
       total: 0,
-      isAllSelected: false,
       loading: false,
+      loadFailed: false,
     };
   },
   created() {
     this.fetchUsers();
   },
+  beforeDestroy() {
+    clearTimeout(this._loadTimer);
+  },
   computed: {
     pageCount() {
       return Math.ceil(this.total / this.pageSize);
     },
-    visiblePages() {
-      const pages = [];
-      const maxVisible = 3;
-      let start = Math.max(1, this.currentPage - 1);
-      let end = Math.min(this.pageCount, start + maxVisible - 1);
-
-      if (end - start + 1 < maxVisible) {
-        start = Math.max(1, end - maxVisible + 1);
-      }
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-      return pages;
-    }
+    selectedCount() {
+      return this.userList.filter((u) => u.selected).length;
+    },
+    isAllSelected() {
+      return this.userList.length > 0 && this.userList.every((u) => u.selected);
+    },
   },
   methods: {
     handlePageSizeChange(val) {
@@ -147,9 +113,17 @@ export default {
       this.currentPage = 1;
       this.fetchUsers();
     },
-
-    fetchUsers() {
+    // 业务错误由请求层统一提示且不回调；超过 8 秒仍无结果时显示失败状态
+    startLoading() {
       this.loading = true;
+      this.loadFailed = false;
+      clearTimeout(this._loadTimer);
+      this._loadTimer = setTimeout(() => {
+        if (this.loading) { this.loading = false; this.loadFailed = true; }
+      }, 8000);
+    },
+    fetchUsers() {
+      this.startLoading();
       Api.admin.getUserList(
         {
           page: this.currentPage,
@@ -158,12 +132,16 @@ export default {
         },
         ({ data }) => {
           this.loading = false; // 结束加载
+          clearTimeout(this._loadTimer);
           if (data.code === 0) {
+            this.lastSearch = this.searchPhone;
             this.userList = data.data.list.map(item => ({
               ...item,
               selected: false
             }));
             this.total = data.data.total;
+          } else {
+            this.loadFailed = true;
           }
         }
       );
@@ -173,9 +151,9 @@ export default {
       this.fetchUsers();
     },
     handleSelectAll() {
-      this.isAllSelected = !this.isAllSelected;
+      const next = !this.isAllSelected;
       this.userList.forEach(row => {
-        row.selected = this.isAllSelected;
+        row.selected = next;
       });
     },
     batchDelete() {
@@ -191,13 +169,7 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          const loading = this.$loading({
-            lock: true,
-            text: this.$t('user.deleting'),
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.7)",
-          });
-
+          this.loading = true;
           try {
             const results = await Promise.all(
               selectedUsers.map((user) => {
@@ -209,6 +181,8 @@ export default {
                       resolve({ success: false, userid: user.userid, msg: data.msg });
                     }
                   });
+                  // 业务错误时请求层不回调：短暂等待后按失败计
+                  setTimeout(() => resolve({ success: false, userid: user.userid }), 8000);
                 });
               })
             );
@@ -235,8 +209,7 @@ export default {
             this.fetchUsers();
           } catch (error) {
             this.$message.error(this.$t('user.deleteError'));
-          } finally {
-            loading.close();
+            this.loading = false;
           }
         })
         .catch(() => {
@@ -244,38 +217,34 @@ export default {
         });
     },
     batchEnable() {
-      const selectedUsers = this.userList.filter(user => user.selected);
-      this.handleChangeStatus(selectedUsers, 1);
+      this.handleBatchStatusChange(1);
     },
     batchDisable() {
-      const selectedUsers = this.userList.filter(user => user.selected);
-      this.handleChangeStatus(selectedUsers, 0);
+      this.handleBatchStatusChange(0);
     },
     resetPassword(row) {
-      this.$confirm(this.$t('user.confirmResetPassword'), this.$t('common.warning'), {
-        confirmButtonText: this.$t('common.confirm'),
+      this.$confirm(this.$t('user.confirmResetPassword'), this.$t('user.resetPassword'), {
+        confirmButtonText: this.$t('xn.admin.users.resetConfirm'),
         cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(() => {
         Api.admin.resetUserPassword(row.userid, ({ data }) => {
           if (data.code === 0) {
-            // 显示生成的默认密码
-            this.$alert(this.$t('user.resetPasswordSuccess') + '\n\n' + this.$t('user.generatedPassword') + ': ' + data.data, this.$t('common.success'), {
-              confirmButtonText: this.$t('common.confirm'),
-              dangerouslyUseHTMLString: true
-            });
+            // 新密码只放在弹窗里显示（不再用可注入 HTML 的提示框）
+            this.currentPassword = String(data.data || '');
+            this.showViewPassword = true;
             this.fetchUsers();
           } else {
             this.$message.error(data.msg || this.$t('user.operationFailed'));
           }
         });
       }).catch(() => {
-        this.$message.info(this.$t('common.deleteCancelled'));
+        this.$message.info(this.$t('xn.admin.cancelled'));
       });
     },
     deleteUser(row) {
-      this.$confirm(this.$t('user.confirmDeleteUser'), this.$t('common.warning'), {
-        confirmButtonText: this.$t('common.confirm'),
+      this.$confirm(this.$t('user.confirmDeleteUser'), this.$t('user.deleteUser'), {
+        confirmButtonText: this.$t('user.deleteUser'),
         cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(() => {
@@ -291,22 +260,6 @@ export default {
         this.$message.info(this.$t('common.deleteCancelled'));
       });
     },
-    goFirst() {
-      this.currentPage = 1;
-      this.fetchUsers();
-    },
-    goPrev() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.fetchUsers();
-      }
-    },
-    goNext() {
-      if (this.currentPage < this.pageCount) {
-        this.currentPage++;
-        this.fetchUsers();
-      }
-    },
     goToPage(page) {
       this.currentPage = page;
       this.fetchUsers();
@@ -318,12 +271,13 @@ export default {
       const userCount = users.length;
 
       this.$confirm(this.$t('user.confirmStatusChange', { action: actionText, count: userCount }), this.$t('common.warning'), {
-        confirmButtonText: this.$t('common.confirm'),
+        confirmButtonText: actionText,
         cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(() => {
         const userIds = users.map(user => user.userid);
-        if (userIds.some(id => isNaN(id))) {
+        // 真实账号 ID 为数字；演示数据的 ID 是 demo-u-xxxx，只在 mock 模式下放宽数字校验
+        if (userIds.some(id => !id || (!IS_MOCK && isNaN(id)))) {
           this.$message.error(this.$t('user.invalidUserId'));
           return;
         }
@@ -350,402 +304,23 @@ export default {
     handleBatchDelete() {
       this.batchDelete();
     },
-    // This method has been fixed to use existing functionality
     handleBatchStatusChange(status) {
       const selectedUsers = this.userList.filter(user => user.selected);
       if (selectedUsers.length === 0) {
-        this.$message.warning(this.$t('user.selectUsersFirst'));
+        this.$message.warning(this.$t('xn.admin.selectFirst'));
         return;
       }
-      
-      // Call the existing handleChangeStatus method which already handles both single and multiple users
       this.handleChangeStatus(selectedUsers, status);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  overflow: hidden;
-}
-
-.main-wrapper {
-  margin: 5px 22px;
-  border-radius: 15px;
-  min-height: calc(100vh - 24vh);
-  height: auto;
-  max-height: 80vh;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  background: rgba(237, 242, 255, 0.5);
-  display: flex;
-  flex-direction: column;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin: 0;
-}
-
-.right-operations {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.search-input {
-  width: 240px;
-}
-
-.btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 15px;
-  background: transparent;
-  border: 1px solid #fff;
-}
-
-.content-area {
-  flex: 1;
-  height: 100%;
-  min-width: 600px;
-  overflow-x: auto;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.user-card {
-  background: white;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: none;
-  box-shadow: none;
-  overflow: hidden;
-
-  ::v-deep .el-card__body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-}
-
-.table_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.ctrl_btn {
-  display: flex;
-  gap: 8px;
-  padding-left: 26px;
-
-  .el-button {
-    min-width: 72px;
-    height: 32px;
-    padding: 7px 12px 7px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    line-height: 1;
-    font-weight: 500;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  .el-button--primary {
-    background: #5f70f3;
-    color: white;
-  }
-
-  .el-button--success {
-    background: #5bc98c;
-    color: white;
-  }
-
-  .el-button--warning {
-    background: #f6d075;
-    color: black;
-  }
-
-  .el-button--danger {
-    background: #fd5b63;
-    color: white;
-  }
-}
-
-.rotated-icon {
-  display: inline-block;
-  transform: rotate(45deg);
-  margin-right: 4px;
-  color: black;
-}
-
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  .el-select {
-    margin-right: 8px;
-  }
-
-  .pagination-btn:first-child,
-  .pagination-btn:nth-child(2),
-  .pagination-btn:nth-child(3),
-  .pagination-btn:nth-last-child(2) {
-    min-width: 60px;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: #d7dce6;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
-  .pagination-btn:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:nth-last-child(2)) {
-    min-width: 28px;
-    height: 32px;
-    padding: 0;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: #606266;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(245, 247, 250, 0.3);
-    }
-  }
-
-  .pagination-btn.active {
-    background: #5f70f3 !important;
-    color: #ffffff !important;
-    border-color: #5f70f3 !important;
-
-    &:hover {
-      background: #6d7cf5 !important;
-    }
-  }
-
-  .total-text {
-    color: #909399;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-}
-
-:deep(.transparent-table) {
-  background: white;
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .el-table__body-wrapper {
-    flex: 1;
-    overflow-y: auto;
-    max-height: none !important;
-  }
-
-  .el-table__header-wrapper {
-    flex-shrink: 0;
-  }
-
-  .el-table__header th {
-    background: white !important;
-    color: black;
-  }
-
-  &::before {
-    display: none;
-  }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
-}
-
-:deep(.el-table .el-button--text) {
-  color: #7079aa !important;
-}
-
-:deep(.el-table .el-button--text:hover) {
-  color: #5a64b5 !important;
-}
-
-
-:deep(.el-checkbox__inner) {
-  background-color: #eeeeee !important;
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
-}
-
-@media (min-width: 1144px) {
-  .table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-  }
-
-  :deep(.transparent-table) {
-    .el-table__body tr {
-      td {
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      &+tr {
-        margin-top: 10px;
-      }
-    }
-  }
-}
-
-.page-size-select {
-  width: 100px;
-  margin-right: 10px;
-
-  :deep(.el-input__inner) {
-    height: 32px;
-    line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-  }
-
-  &.page-size-select-en {
-    width: 130px;
-
-    :deep(.el-input__inner) {
-      height: 36px;
-      line-height: 36px;
-      font-size: 15px;
-    }
-  }
-
-  :deep(.el-input__suffix) {
-    right: 6px;
-    width: 15px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 6px;
-    border-radius: 4px;
-  }
-
-  :deep(.el-input__suffix-inner) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  :deep(.el-icon-arrow-up:before) {
-    content: "";
-    display: inline-block;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-  }
-}
-
-.el-table {
-  --table-max-height: calc(100vh - 40vh);
-  max-height: var(--table-max-height);
-
-  .el-table__body-wrapper {
-    max-height: calc(var(--table-max-height) - 40px);
-  }
-}
-
-:deep(.el-loading-mask) {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(2px);
-}
-
-:deep(.el-loading-spinner .circular) {
-  width: 28px;
-  height: 28px;
-}
-
-:deep(.el-loading-spinner .path) {
-  stroke: #6b8cff;
-}
-
-:deep(.el-loading-text) {
-  color: #6b8cff !important;
-  font-size: 14px;
-  margin-top: 8px;
-}
+<style scoped>
+.xa-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.xa-panel { overflow: hidden; }
+.xa-strong { font-weight: 500; }
+.xa-danger { color: var(--xn-danger); }
+.xa-danger:hover, .xa-danger:focus { color: #8D3523; }
+.xa-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
 </style>

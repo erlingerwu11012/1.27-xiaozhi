@@ -1,6 +1,5 @@
 <template>
     <div class="welcome">
-        <HeaderBar />
 
         <div class="operation-bar">
             <h2 class="page-title">{{ $t('faceManagement.pageTitle') }}</h2>
@@ -291,12 +290,10 @@
 </template>
 
 <script>
-import HeaderBar from "@/components/HeaderBar.vue";
 import Api from "@/apis/api";
 
 export default {
     name: "FaceManagement",
-    components: { HeaderBar },
     data() {
         return {
             loading: false,

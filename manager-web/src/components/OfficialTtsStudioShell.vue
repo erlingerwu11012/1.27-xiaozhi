@@ -1,51 +1,35 @@
 <template>
-  <div class="ot-studio">
-    <HeaderBar />
-    <div class="ot-studio__stage">
-      <div class="ot-studio__body">
-        <nav class="ot-studio__tabs" aria-label="官方语音功能">
-          <button
-            v-for="tab in tabs"
-            :key="tab.key"
-            type="button"
-            class="ot-studio__tab"
-            :class="{ 'is-active': activeTab === tab.key }"
-            :disabled="tab.disabled"
-            :title="tab.disabled ? '暂未开放' : ''"
-            @click="goTab(tab)"
-          >
-            {{ tab.label }}
-          </button>
-        </nav>
+  <div class="xn-page ot-studio">
+    <page-header :title="title">
+      <template v-if="$slots.hero" #description><slot name="hero" /></template>
+      <slot name="actions" />
+    </page-header>
 
-        <div class="ot-studio__hero">
-          <slot name="hero" />
-        </div>
+    <nav class="ot-tabs" role="tablist" :aria-label="$t('xn.tts.tabsLabel')">
+      <button v-for="tab in tabs" :key="tab.key" type="button" role="tab" class="ot-tabs__tab"
+        :class="{ 'is-active': activeTab === tab.key }" :aria-selected="String(activeTab === tab.key)"
+        :disabled="tab.disabled" @click="goTab(tab)">
+        <xn-icon :name="tab.icon" /> {{ $t(tab.label) }}
+      </button>
+    </nav>
 
-        <p v-if="warning" class="ot-studio__banner">{{ warning }}</p>
+    <el-alert v-if="warning" class="ot-warning" type="warning" :title="warning" :closable="false" show-icon />
 
-        <div class="ot-composer" :class="{ 'is-compact': compact }">
-          <span class="ot-composer__ring" aria-hidden="true" />
-          <div class="ot-composer__inner">
-            <slot name="composer" />
-          </div>
-        </div>
+    <section class="xn-panel ot-composer" :class="{ 'is-compact': compact }">
+      <slot name="composer" />
+    </section>
 
-        <div class="ot-bottom">
-          <slot name="bottom" />
-        </div>
-      </div>
+    <div class="ot-bottom">
+      <slot name="bottom" />
     </div>
   </div>
 </template>
 
 <script>
-import HeaderBar from "@/components/HeaderBar.vue";
 import "@/styles/official-tts-studio.scss";
 
 export default {
   name: "OfficialTtsStudioShell",
-  components: { HeaderBar },
   props: {
     activeTab: {
       type: String,
@@ -58,11 +42,16 @@ export default {
   data() {
     return {
       tabs: [
-        { key: "synth", label: "语音合成", path: "/official-tts/dubbing" },
-        { key: "design", label: "音色设计", path: "/official-tts/voices", query: { mode: "design" } },
-        { key: "clone", label: "音色复刻", path: "/official-tts/voices", query: { mode: "clone" } },
+        { key: "synth", label: "xn.tts.tabSynth", icon: "mic", path: "/official-tts/dubbing" },
+        { key: "design", label: "xn.tts.tabDesign", icon: "tune", path: "/official-tts/voices", query: { mode: "design" } },
+        { key: "clone", label: "xn.tts.tabClone", icon: "voice", path: "/official-tts/voices", query: { mode: "clone" } },
       ],
     };
+  },
+  computed: {
+    title() {
+      return this.activeTab === "synth" ? this.$t("xn.nav.ttsDubbing") : this.$t("xn.nav.ttsVoices");
+    },
   },
   methods: {
     goTab(tab) {

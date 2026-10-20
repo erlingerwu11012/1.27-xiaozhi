@@ -1,280 +1,199 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :back="'/knowledge-base-management'" :back-label="$t('knowledgeBaseManagement.title')"
+      :title="knowledgeBaseName || $t('xn.nav.knowledgeUpload')" :description="$t('xn.knowledge.docsDesc')">
+      <template v-if="datasetId">
+        <el-button @click="showRetrievalTestDialog"><xn-icon name="flask" /> {{ $t('knowledgeFileUpload.retrievalTest') }}</el-button>
+        <el-button type="primary" @click="showUploadDialog"><xn-icon name="upload" /> {{ $t('knowledgeFileUpload.uploadDocument') }}</el-button>
+      </template>
+    </page-header>
 
-    <div class="operation-bar">
-      <div class="left-operations">
-        <el-button class="btn-back" type="text" @click="$router.back()">
-          &lt;
-        </el-button>
-        <h2 class="knowledge-base-title">{{ knowledgeBaseName }}</h2>
-      </div>
-      <div class="right-operations">
-        <el-input :placeholder="$t('knowledgeFileUpload.searchPlaceholder')" v-model="searchName" class="search-input"
-          @keyup.enter.native="handleSearch" clearable />
-        <el-button class="btn-search" @click="handleSearch">{{ $t('knowledgeFileUpload.search') }}</el-button>
-      </div>
+    <div v-if="!datasetId" class="xn-panel">
+      <xn-empty icon="book" :title="$t('xn.knowledge.noDatasetTitle')" :description="$t('xn.knowledge.noDatasetDesc')">
+        <el-button type="primary" @click="goBack">{{ $t('xn.knowledge.backToList') }}</el-button>
+      </xn-empty>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="params-card" shadow="never">
-            <div class="table-wrapper">
-              <el-table ref="fileTable" :data="fileList" class="transparent-table" v-loading="loading"
-                element-loading-text="Loading" element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(255, 255, 255, 0.7)" :header-cell-class-name="headerCellClassName"
-                @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column :label="$t('knowledgeFileUpload.documentName')" prop="name" align="left">
-                  <template slot-scope="scope">
-                    <span class="document-name">{{ scope.row.name }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeFileUpload.uploadTime')" prop="createdAt" align="center"
-                  width="300">
-                  <template slot-scope="scope">
-                    <span>{{ formatDate(scope.row.createdAt) }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeFileUpload.status')" align="center" width="120">
-                  <template slot-scope="scope">
-                    <el-tag :type="getParseStatusType(scope.row.parseStatusCode)" size="small">
-                      {{ getParseStatusText(scope.row.parseStatusCode) }}
-                    </el-tag>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeFileUpload.sliceCount')" align="center" width="100">
-                  <template slot-scope="scope">
-                    <span>{{ scope.row.sliceCount || 0 }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeFileUpload.operation')" align="center" width="200">
-                  <template slot-scope="scope">
-                    <el-button size="mini" type="text" @click="handleParse(scope.row)"
-                      :disabled="scope.row.parseStatusCode === 1 || scope.row.parseStatusCode === 3 || scope.row.parseStatusCode === 4" v-if="!scope.row.sliceCount || scope.row.sliceCount <= 0">
-                      {{ $t('knowledgeFileUpload.parse') }}
-                    </el-button>
-                    <el-button size="mini" type="text" @click="handleViewSlices(scope.row)"
-                      v-if="scope.row.sliceCount && scope.row.sliceCount > 0">
-                      {{ $t('knowledgeFileUpload.viewSlices') }}
-                    </el-button>
-                    <el-button size="mini" type="text" @click="handleDelete(scope.row)">
-                      {{ $t('knowledgeFileUpload.delete') }}
-                    </el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </div>
-
-            <div class="table_bottom">
-              <div class="ctrl_btn">
-                <el-button type="primary" @click="handleSelectAll">
-                  {{ isAllSelected ? $t('knowledgeFileUpload.deselectAll') : $t('knowledgeFileUpload.selectAll') }}
-                </el-button>
-                <el-button type="success" @click="showUploadDialog">
-                  {{ $t('knowledgeFileUpload.add') }}
-                </el-button>
-                <el-button type="danger" @click="handleBatchDelete" :disabled="selectedFiles.length === 0">
-                  {{ $t('knowledgeFileUpload.batchDelete') }}
-                </el-button>
-                <el-button type="primary" icon="el-icon-search" @click="showRetrievalTestDialog"
-                  style="background-color: #409EFF; border-color: #409EFF;">
-                  {{ $t('knowledgeFileUpload.retrievalTest') }}
-                </el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select v-model="pageSize" @change="handlePageSizeChange" class="page-size-select">
-                  <el-option v-for="item in pageSizeOptions" :key="item"
-                    :label="`${item}${$t('knowledgeFileUpload.itemsPerPage')}`" :value="item">
-                  </el-option>
-                </el-select>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                  {{ $t('knowledgeFileUpload.firstPage') }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                  {{ $t('knowledgeFileUpload.prevPage') }}
-                </button>
-                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                  :class="{ active: page === currentPage }" @click="goToPage(page)">
-                  {{ page }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                  {{ $t('knowledgeFileUpload.nextPage') }}
-                </button>
-                <span class="total-text">{{ $t('knowledgeFileUpload.totalRecords', { total }) }}</span>
-              </div>
-            </div>
-          </el-card>
-        </div>
+    <template v-else>
+      <div class="xn-toolbar">
+        <el-input v-model="searchName" :placeholder="$t('knowledgeFileUpload.searchPlaceholder')" clearable
+          @keyup.enter.native="handleSearch" @clear="handleSearch">
+          <xn-icon slot="prefix" name="search" class="kf-search-icon" />
+        </el-input>
+        <el-button @click="handleSearch">{{ $t('knowledgeFileUpload.search') }}</el-button>
+        <span class="xn-toolbar__grow"></span>
+        <template v-if="selectedFiles.length">
+          <span class="xn-muted">{{ $t('xn.knowledge.selectedDocs', { n: selectedFiles.length }) }}</span>
+          <el-button type="danger" plain size="small" @click="handleBatchDelete"><xn-icon name="trash" /> {{ $t('xn.knowledge.deleteSelected') }}</el-button>
+        </template>
       </div>
-    </div>
 
-    <!-- 上传文档对话框 -->
-    <el-dialog :title="$t('knowledgeFileUpload.uploadDocument')" :visible.sync="uploadDialogVisible" width="800px">
-      <el-upload class="document-uploader" drag :action="uploadUrl" :auto-upload="false" :on-change="handleFileChange"
+      <div class="xn-panel xn-panel--flush kf-panel">
+        <xn-empty v-if="loadFailed && !loading" error @retry="fetchFileList" />
+        <template v-else>
+          <el-table ref="fileTable" :data="fileList" v-loading="loading" row-key="id" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="52" align="center"></el-table-column>
+            <el-table-column :label="$t('knowledgeFileUpload.documentName')" min-width="260">
+              <template slot-scope="scope">
+                <span class="kf-doc">
+                  <span class="kf-doc__ext">{{ fileExt(scope.row.name) }}</span>
+                  <span class="kf-doc__name xn-clip" :title="scope.row.name">{{ scope.row.name }}</span>
+                </span>
+              </template>
+            </el-table-column>
+            <el-table-column :label="$t('knowledgeFileUpload.uploadTime')" width="160" class-name="kf-nowrap">
+              <template slot-scope="scope"><span class="xn-num">{{ formatDate(scope.row.createdAt) }}</span></template>
+            </el-table-column>
+            <el-table-column :label="$t('knowledgeFileUpload.status')" width="120">
+              <template slot-scope="scope">
+                <span class="xn-tag" :class="statusTagClass(scope.row.parseStatusCode)">
+                  <i v-if="scope.row.parseStatusCode === 1" class="dot kf-pulse"></i>{{ getParseStatusText(scope.row.parseStatusCode) }}
+                </span>
+              </template>
+            </el-table-column>
+            <el-table-column :label="$t('knowledgeFileUpload.sliceCount')" width="100" align="right">
+              <template slot-scope="scope"><span class="xn-num">{{ scope.row.sliceCount || 0 }}</span></template>
+            </el-table-column>
+            <el-table-column :label="$t('knowledgeFileUpload.operation')" width="170" align="right">
+              <template slot-scope="scope">
+                <el-button type="text" @click="handleParse(scope.row)"
+                  :disabled="scope.row.parseStatusCode === 1 || scope.row.parseStatusCode === 3 || scope.row.parseStatusCode === 4" v-if="!scope.row.sliceCount || scope.row.sliceCount <= 0">
+                  {{ $t('knowledgeFileUpload.parse') }}
+                </el-button>
+                <el-button type="text" @click="handleViewSlices(scope.row)" v-if="scope.row.sliceCount && scope.row.sliceCount > 0">
+                  {{ $t('knowledgeFileUpload.viewSlices') }}
+                </el-button>
+                <el-button type="text" class="kf-danger" @click="handleDelete(scope.row)">{{ $t('knowledgeFileUpload.delete') }}</el-button>
+              </template>
+            </el-table-column>
+            <template slot="empty">
+              <xn-empty v-if="searchName && total === 0" icon="search" :title="$t('xn.knowledge.docNoMatch')" />
+              <xn-empty v-else icon="upload" :title="$t('xn.knowledge.docEmptyTitle')" :description="$t('xn.knowledge.docEmptyDesc')">
+                <el-button type="primary" @click="showUploadDialog"><xn-icon name="upload" /> {{ $t('knowledgeFileUpload.uploadDocument') }}</el-button>
+              </xn-empty>
+            </template>
+          </el-table>
+          <div v-if="total > 0" class="kf-foot">
+            <span class="xn-muted kf-note"><xn-icon name="info" /> {{ $t('xn.knowledge.parseNote') }}</span>
+            <el-pagination background layout="total, sizes, prev, pager, next" :total="total"
+              :page-size="pageSize" :page-sizes="pageSizeOptions" :current-page="currentPage"
+              @size-change="handlePageSizeChange" @current-change="goToPage" />
+          </div>
+        </template>
+      </div>
+    </template>
+
+    <!-- 上传文档 -->
+    <el-dialog :title="$t('knowledgeFileUpload.uploadDocument')" :visible.sync="uploadDialogVisible" width="640px" append-to-body>
+      <p v-if="isMock" class="kf-mock-note"><demo-tag /> {{ $t('xn.knowledge.uploadMockNote') }}</p>
+      <el-upload class="kf-uploader" drag :action="uploadUrl" :auto-upload="false" :on-change="handleFileChange"
         :multiple="true" :show-file-list="false" accept=".doc,.docx,.pdf,.txt,.md,.mdx,.csv,.xls,.xlsx,.ppt,.pptx">
-        <i class="el-icon-upload"></i>
+        <xn-icon name="upload" class="kf-uploader__icon" />
         <div class="el-upload__text">{{ $t('knowledgeFileUpload.dragOrClick') }}</div>
-        <div class="el-upload__tip">{{ $t('knowledgeFileUpload.uploadTip') }}</div>
+        <div class="kf-uploader__tip">{{ $t('knowledgeFileUpload.uploadTip') }}</div>
       </el-upload>
 
-      <!-- 已选择文件列表 -->
-      <div class="selected-files-section" v-if="selectedFilesList.length > 0">
-        <h4>{{ $t('knowledgeFileUpload.selectedFiles') }} ({{ selectedFilesList.length }})</h4>
-        <div class="selected-files-list">
-          <div v-for="(file, index) in selectedFilesList" :key="index" class="selected-file-item">
-            <div class="file-info">
-              <i class="el-icon-document"></i>
-              <span class="file-name">{{ file.name }}</span>
-              <span class="file-size">{{ formatFileSize(file.size) }}</span>
-            </div>
-            <el-button type="text" class="remove-btn" @click="removeSelectedFile(index)">
-              <i class="el-icon-close"></i>
+      <div v-if="selectedFilesList.length > 0" class="kf-picked">
+        <p class="kf-picked__title">{{ $t('knowledgeFileUpload.selectedFiles') }}<span class="xn-num xn-muted">（{{ selectedFilesList.length }}）</span></p>
+        <ul class="kf-picked__list">
+          <li v-for="(file, index) in selectedFilesList" :key="index" class="kf-picked__item">
+            <span class="kf-doc__ext">{{ fileExt(file.name) }}</span>
+            <span class="kf-picked__name xn-clip" :title="file.name">{{ file.name }}</span>
+            <span class="kf-picked__size xn-num">{{ formatFileSize(file.size) }}</span>
+            <el-button type="text" class="kf-picked__remove" :aria-label="$t('xn.knowledge.removeFile')" @click="removeSelectedFile(index)">
+              <xn-icon name="close" />
             </el-button>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
 
-      <div slot="footer" class="dialog-footer">
+      <div slot="footer">
         <el-button @click="uploadDialogVisible = false">{{ $t('knowledgeFileUpload.cancel') }}</el-button>
-        <el-button type="primary" @click="handleBatchUploadSubmit" :loading="uploading"
-          :disabled="selectedFilesList.length === 0">
-          {{ $t('knowledgeFileUpload.confirm') }} {{ selectedFilesList.length > 0 ?
-            `(${selectedFilesList.length}${$t('knowledgeFileUpload.itemsPerPage').replace('条/页', '个文件')})` : '' }}
+        <el-button type="primary" @click="handleBatchUploadSubmit" :loading="uploading" :disabled="selectedFilesList.length === 0">
+          {{ selectedFilesList.length ? $t('xn.knowledge.uploadN', { n: selectedFilesList.length }) : $t('xn.knowledge.upload') }}
         </el-button>
       </div>
     </el-dialog>
 
-    <!-- 切片管理弹窗 -->
-    <el-dialog :title="`${$t('knowledgeFileUpload.viewSlices')} - ${currentDocumentName}`"
-      :visible.sync="sliceDialogVisible" width="1200px" class="slice-dialog">
-      <div class="slice-management">
-        <!-- 切片列表 -->
-        <div class="slice-list-section">
-          <!-- 切片内容卡片式布局 -->
-          <div v-loading="sliceLoading" class="slice-content-container">
-            <div v-if="sliceList.length > 0" class="slice-cards-container">
-              <div v-for="(slice, index) in sliceList" :key="index" class="slice-card">
-                <div class="slice-header-info">
-                  <p><strong>{{ $t('knowledgeFileUpload.slice') }} {{ (sliceCurrentPage - 1) * slicePageSize + index + 1
-                      }}</strong></p>
-                </div>
-                <div class="slice-card-content">
-                  <div class="content-text">{{ slice.content }}</div>
-                </div>
-              </div>
-            </div>
-            <div v-else class="no-slice-data">
-              <el-alert type="info" :title="$t('knowledgeFileUpload.noSliceData')"></el-alert>
-            </div>
-          </div>
-
-          <!-- 切片分页 -->
-          <div class="slice-pagination" style="margin-top: 20px; text-align: right;">
-            <div class="custom-pagination">
-              <!-- 条/页选择器 -->
-              <el-select v-model="slicePageSize" @change="handleSliceSizeChange" class="page-size-select"
-                :popper-append-to-body="false">
-                <el-option v-for="item in pageSizeOptions" :key="item"
-                  :label="`${item}${$t('knowledgeFileUpload.itemsPerPage')}`" :value="item">
-                </el-option>
-              </el-select>
-
-              <!-- 首页按钮 -->
-              <button class="pagination-btn" :disabled="sliceCurrentPage === 1" @click="goToSliceFirstPage">
-                {{ $t('knowledgeFileUpload.firstPage') }}
-              </button>
-
-              <!-- 上一页按钮 -->
-              <button class="pagination-btn" :disabled="sliceCurrentPage === 1" @click="goToSlicePrevPage">
-                {{ $t('knowledgeFileUpload.prevPage') }}
-              </button>
-
-              <!-- 页码按钮 -->
-              <button v-for="page in sliceVisiblePages" :key="page" class="pagination-btn"
-                :class="{ active: page === sliceCurrentPage }" @click="goToSlicePage(page)">
-                {{ page }}
-              </button>
-
-              <!-- 下一页按钮 -->
-              <button class="pagination-btn" :disabled="sliceCurrentPage === slicePageCount" @click="goToSliceNextPage">
-                {{ $t('knowledgeFileUpload.nextPage') }}
-              </button>
-
-              <!-- 总记录数 -->
-              <span class="total-text">{{ $t('knowledgeFileUpload.totalRecords', { total: sliceTotal }) }}</span>
-            </div>
-          </div>
-        </div>
+    <!-- 查看切片 -->
+    <el-dialog :title="$t('knowledgeFileUpload.viewSlices')" :visible.sync="sliceDialogVisible" width="820px" append-to-body custom-class="kf-slice-dialog">
+      <p class="kf-dialog-sub xn-clip" :title="currentDocumentName">{{ currentDocumentName }}</p>
+      <div v-loading="sliceLoading" class="kf-slices">
+        <ol v-if="sliceList.length > 0" class="kf-slice-list">
+          <li v-for="(slice, index) in sliceList" :key="slice.id || index" class="kf-slice">
+            <span class="kf-slice__no xn-num">{{ $t('knowledgeFileUpload.slice') }} {{ (sliceCurrentPage - 1) * slicePageSize + index + 1 }}</span>
+            <p class="kf-slice__text">{{ slice.content }}</p>
+          </li>
+        </ol>
+        <xn-empty v-else-if="!sliceLoading" icon="list" :title="$t('knowledgeFileUpload.noSliceData')" />
+      </div>
+      <div v-if="sliceTotal > 0" class="kf-slice-foot">
+        <el-pagination background small layout="total, sizes, prev, pager, next" :total="sliceTotal"
+          :page-size="slicePageSize" :page-sizes="pageSizeOptions" :current-page="sliceCurrentPage"
+          @size-change="handleSliceSizeChange" @current-change="handleSlicePageChange" />
+      </div>
+      <div slot="footer">
+        <el-button @click="sliceDialogVisible = false">{{ $t('xn.common.close') }}</el-button>
       </div>
     </el-dialog>
 
-    <!-- 召回测试弹窗 -->
-    <el-dialog :title="$t('knowledgeFileUpload.retrievalTest')" :visible.sync="retrievalTestDialogVisible"
-      width="1200px" class="retrieval-test-dialog">
-      <div class="retrieval-test-form">
-        <el-form :model="retrievalTestForm" label-width="80px">
-          <el-form-item :label="$t('knowledgeFileUpload.testQuestion')" required>
-            <el-input v-model="retrievalTestForm.question"
-              :placeholder="$t('knowledgeFileUpload.testQuestionPlaceholder')" style="width: 100%; max-height: 80px;"
-              @keyup.enter.native="runRetrievalTest">
-            </el-input>
-          </el-form-item>
-        </el-form>
+    <!-- 召回测试 -->
+    <el-dialog :title="$t('knowledgeFileUpload.retrievalTest')" :visible.sync="retrievalTestDialogVisible" width="760px" append-to-body>
+      <p class="kf-dialog-sub">{{ $t('xn.knowledge.retrievalHelp') }}</p>
+      <el-form :model="retrievalTestForm" label-position="top" @submit.native.prevent>
+        <el-form-item :label="$t('knowledgeFileUpload.testQuestion')" required>
+          <div class="kf-rt-row">
+            <el-input v-model="retrievalTestForm.question" :placeholder="$t('knowledgeFileUpload.testQuestionPlaceholder')"
+              maxlength="200" clearable @keyup.enter.native="runRetrievalTest" />
+            <el-button type="primary" @click="runRetrievalTest" :loading="retrievalTestLoading">{{ $t('knowledgeFileUpload.runTest') }}</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
 
-        <div class="retrieval-test-actions" style="text-align: center;">
-          <el-button type="primary" @click="runRetrievalTest" :loading="retrievalTestLoading">
-            {{ $t('knowledgeFileUpload.runTest') }}
-          </el-button>
-          <el-button @click="retrievalTestDialogVisible = false">{{ $t('knowledgeFileUpload.cancel') }}</el-button>
+      <section v-if="retrievalTestResult" class="kf-rt-result">
+        <div class="kf-rt-result__head">
+          <h3 class="kf-rt-result__title">{{ $t('xn.knowledge.testResult') }}</h3>
+          <demo-tag :text="$t('xn.common.simulated')" />
+          <span class="xn-toolbar__grow"></span>
+          <span v-if="retrievalTestResult.chunks && retrievalTestResult.chunks.length" class="xn-muted kf-rt-count">{{ $t('xn.knowledge.retrievalCount', { n: retrievalTestResult.chunks.length }) }}</span>
         </div>
-
-        <div v-if="retrievalTestResult" class="retrieval-test-result">
-          <h4>{{ $t('knowledgeFileUpload.testResult') }}</h4>
-          <el-card v-if="retrievalTestResult.chunks && retrievalTestResult.chunks.length > 0">
-            <div class="result-chunk-container">
-              <div v-for="(chunk, index) in retrievalTestResult.chunks" :key="index" class="result-chunk">
-                <p><strong>{{ $t('knowledgeFileUpload.slice') }} {{ index + 1 }}</strong></p>
-                <div class="similarity-scores">
-                  <div class="score-item">
-                    <span class="score-label">{{ $t('knowledgeFileUpload.comprehensiveSimilarity') }}</span>
-                    <span class="score-value">{{ (chunk.similarity || 0).toFixed(4) }}</span>
-                  </div>
-                </div>
-                <div class="chunk-content">
-                  <p><strong>{{ $t('knowledgeFileUpload.content') }}</strong></p>
-                  <p>{{ chunk.content }}</p>
-                </div>
-                <el-divider v-if="index < retrievalTestResult.chunks.length - 1"></el-divider>
-              </div>
+        <ol v-if="retrievalTestResult.chunks && retrievalTestResult.chunks.length > 0" class="kf-slice-list">
+          <li v-for="(chunk, index) in retrievalTestResult.chunks" :key="chunk.id || index" class="kf-slice">
+            <div class="kf-rt-meta">
+              <span class="kf-slice__no xn-num">{{ $t('knowledgeFileUpload.slice') }} {{ index + 1 }}</span>
+              <span v-if="chunk.document_name || chunk.document_keyword" class="xn-muted xn-clip kf-rt-src">{{ chunk.document_name || chunk.document_keyword }}</span>
+              <span class="xn-toolbar__grow"></span>
+              <span class="kf-rt-score">{{ $t('knowledgeFileUpload.comprehensiveSimilarity') }} <b class="xn-num">{{ (chunk.similarity || 0).toFixed(4) }}</b></span>
             </div>
-          </el-card>
-          <el-alert v-else type="info" :title="$t('knowledgeFileUpload.noRelatedSlices')"></el-alert>
-        </div>
+            <p class="kf-slice__text">{{ chunk.content }}</p>
+          </li>
+        </ol>
+        <xn-empty v-else icon="search" :title="$t('knowledgeFileUpload.noRelatedSlices')" :description="$t('xn.knowledge.noRelatedDesc')" />
+      </section>
+
+      <div slot="footer">
+        <el-button @click="retrievalTestDialogVisible = false">{{ $t('xn.common.close') }}</el-button>
       </div>
     </el-dialog>
-
-    <el-footer>
-      <version-footer />
-    </el-footer>
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
 import KnowledgeBaseAPI from "@/apis/module/knowledgeBase";
-import HeaderBar from "@/components/HeaderBar.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
+import { IS_MOCK } from "@/utils/media";
+
+const STATUS_TAG = { info: 'muted', primary: 'lake', warning: 'warning', success: 'success', danger: 'danger' };
 
 export default {
-  components: { HeaderBar, VersionFooter },
   data() {
     return {
       datasetId: '',
       knowledgeBaseName: '',
       searchName: "",
       fileList: [],
+      loadFailed: false,
+      isMock: IS_MOCK,
       selectedFiles: [],
       currentPage: 1,
       loading: false,
@@ -299,6 +218,7 @@ export default {
       sliceCurrentPage: 1,
       slicePageSize: 10,
       sliceTotal: 0,
+      sliceSearchKeyword: '',
 
       // 召回测试相关数据
       retrievalTestDialogVisible: false,
@@ -319,7 +239,8 @@ export default {
     this.datasetId = this.$route.query.datasetId || '';
     this.knowledgeBaseName = this.$route.query.knowledgeBaseName || '';
     this.uploadUrl = `${Api.getServiceUrl()}/api/v1/documents/upload`;
-    this.fetchFileList();
+    // 没有指定知识库时不请求文档列表，页面引导回知识库列表
+    if (this.datasetId) this.fetchFileList();
   },
   
   beforeDestroy() {
@@ -369,6 +290,10 @@ export default {
     goBack() {
       this.$router.push('/knowledge-base-management');
     },
+    fileExt(name) {
+      const m = /\.([A-Za-z0-9]+)$/.exec(name || '');
+      return m ? m[1].slice(0, 4).toUpperCase() : 'FILE';
+    },
     handlePageSizeChange: function (val) {
       this.pageSize = val;
       this.currentPage = 1;
@@ -376,6 +301,7 @@ export default {
     },
     fetchFileList: function () {
       this.loading = true;
+      this.loadFailed = false;
       const params = {
         page: this.currentPage,
         page_size: this.pageSize,
@@ -388,6 +314,12 @@ export default {
           if (data && data.code === 0) {
             this.fileList = data.data.list;
             this.total = data.data.total;
+            // 删除最后一页的最后一条后回到上一页
+            if (!this.fileList.length && this.total > 0 && this.currentPage > 1) {
+              this.currentPage = Math.max(1, Math.ceil(this.total / this.pageSize));
+              this.fetchFileList();
+              return;
+            }
 
             // 为每个文档获取切片数量
             await this.fetchSliceCountsForDocuments();
@@ -395,6 +327,7 @@ export default {
             // 自动为处理中的文档启动状态检测
             this.startStatusPolling();
           } else {
+            this.loadFailed = true;
             this.$message.error(data?.msg || this.$t('knowledgeFileUpload.getListFailed'));
             this.fileList = [];
             this.total = 0;
@@ -402,6 +335,7 @@ export default {
         },
         (err) => {
           this.loading = false;
+          this.loadFailed = true;
           console.log('Error callback received:', err);
           if (err && err.data) {
             console.log('后端返回错误消息:', err.data.msg || err.msg);
@@ -604,7 +538,7 @@ export default {
       // 文件上传前的验证
       const isLt10M = file.size / 1024 / 1024 < 10;
       if (!isLt10M) {
-        this.$message.error('文件大小不能超过10MB!');
+        this.$message.error(this.$t('xn.knowledge.fileTooLarge'));
         return;
       }
 
@@ -619,7 +553,7 @@ export default {
       // 文件上传前的验证
       const isLt10M = file.size / 1024 / 1024 < 10;
       if (!isLt10M) {
-        this.$message.error('文件大小不能超过10MB!');
+        this.$message.error(this.$t('xn.knowledge.fileTooLarge'));
         return false;
       }
       // 保存文件到uploadForm
@@ -643,7 +577,7 @@ export default {
     // 批量上传提交
     handleBatchUploadSubmit: function () {
       if (this.selectedFilesList.length === 0) {
-        this.$message.error('请选择要上传的文件');
+        this.$message.error(this.$t('knowledgeFileUpload.fileRequired'));
         return;
       }
 
@@ -685,12 +619,12 @@ export default {
           const failedCount = results.filter(r => !r.success).length;
 
           if (successCount > 0) {
-            this.$message.success(`成功上传 ${successCount} 个文件`);
+            this.$message.success(this.$t(this.isMock ? 'xn.knowledge.uploadDoneMock' : 'xn.knowledge.uploadDone', { n: successCount }));
           }
 
           if (failedCount > 0) {
             const failedFiles = results.filter(r => !r.success).map(r => r.fileName);
-            this.$message.error(`上传失败 ${failedCount} 个文件: ${failedFiles.join(', ')}`);
+            this.$message.error(this.$t('xn.knowledge.uploadPartFailed', { n: failedCount, files: failedFiles.join('、') }));
           }
 
           if (successCount > 0) {
@@ -700,7 +634,7 @@ export default {
         })
         .catch(error => {
           this.uploading = false;
-          this.$message.error('批量上传失败');
+          this.$message.error(this.$t('knowledgeFileUpload.uploadFailed'));
           console.error('批量上传失败:', error);
         });
     },
@@ -749,7 +683,7 @@ export default {
         KnowledgeBaseAPI.parseDocument(this.datasetId, row.id,
           ({ data }) => {
             if (data && data.code === 0) {
-              this.$message.success('请求已提交，解析中');
+              this.$message.success(this.$t('xn.knowledge.parseStarted'));
               
               // 立即更新文档状态为处理中
               const document = this.fileList.find(doc => doc.id === row.id);
@@ -897,6 +831,9 @@ export default {
           return 'info'; // 默认灰色
       }
     },
+    statusTagClass: function (parseStatusCode) {
+      return 'xn-tag--' + (STATUS_TAG[this.getParseStatusType(parseStatusCode)] || 'muted');
+    },
     getParseStatusText: function (parseStatusCode) {
       switch (parseStatusCode) {
         case 0:
@@ -963,7 +900,7 @@ export default {
             // 解析切片列表数据
             this.parseSliceData(data.data);
           } else {
-            this.$message.error(data?.msg || '获取切片列表失败');
+            this.$message.error(data?.msg || this.$t('xn.knowledge.slicesLoadFailed'));
             this.sliceList = [];
             this.sliceTotal = 0;
           }
@@ -972,9 +909,9 @@ export default {
           this.sliceLoading = false;
           // 错误回调处理后端返回的错误信息
           if (err && err.data) {
-            this.$message.error(err.data.msg || err.msg || '获取切片列表失败');
+            this.$message.error(err.data.msg || err.msg || this.$t('xn.knowledge.slicesLoadFailed'));
           } else {
-            this.$message.error('获取切片列表失败');
+            this.$message.error(this.$t('xn.knowledge.slicesLoadFailed'));
           }
           console.error('获取切片列表失败:', err);
           this.sliceList = [];
@@ -1085,18 +1022,18 @@ export default {
           this.retrievalTestLoading = false;
           if (data && data.code === 0) {
             this.retrievalTestResult = data.data || data;
-            this.$message.success('召回测试完成');
+            this.$message.success(this.$t(this.isMock ? 'xn.knowledge.retrievalDoneMock' : 'xn.knowledge.retrievalDone'));
           } else {
-            this.$message.error(data?.msg || '召回测试失败');
+            this.$message.error(data?.msg || this.$t('xn.knowledge.retrievalFailed'));
           }
         },
         (err) => {
           this.retrievalTestLoading = false;
           // 错误回调处理后端返回的错误信息
           if (err && err.data) {
-            this.$message.error(err.data.msg || err.msg || '召回测试失败');
+            this.$message.error(err.data.msg || err.msg || this.$t('xn.knowledge.retrievalFailed'));
           } else {
-            this.$message.error('召回测试失败');
+            this.$message.error(this.$t('xn.knowledge.retrievalFailed'));
           }
           console.error('召回测试失败:', err);
         }
@@ -1111,983 +1048,62 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background: #f8fafc;
-  overflow: hidden;
+<style scoped>
+.kf-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.kf-panel { overflow: hidden; }
+.kf-panel ::v-deep .kf-nowrap .cell { white-space: nowrap; }
+.kf-doc { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; min-width: 0; }
+.kf-doc__ext {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 22px; padding: 0 4px;
+  border: 1px solid var(--xn-line); border-radius: 6px; background: var(--xn-mist-2);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: var(--xn-ink-2);
 }
-
-.main-wrapper {
-  margin: 5px 22px;
-  border-radius: 24px;
-  min-height: calc(100vh - 24vh);
-  height: auto;
-  max-height: 80vh;
-  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.08);
-  position: relative;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-direction: column;
-  padding: 12px 16px 18px;
-  box-sizing: border-box;
-}
-
-.operation-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
-
-.left-operations {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.btn-back {
-  font-size: 20px;
-  font-weight: bold;
-  color: #606266;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.btn-back:hover {
-  background-color: #f5f7fa;
-  color: #409eff;
-}
-
-.knowledge-base-title {
-  font-size: 24px;
-  margin: 0;
-  color: #303133;
-  font-weight: 600;
-}
-
-.right-operations {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.search-input {
-  width: 240px;
-}
-
-.btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
-}
-
-.content-panel {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  border-radius: 20px;
-  background: transparent;
-}
-
-.content-area {
-  flex: 1;
-  height: 100%;
-  min-width: 600px;
-  overflow: auto;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-.params-card {
-  background: transparent;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: none;
-  box-shadow: none;
-  overflow: hidden;
-
-  ::v-deep .el-card__body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-}
-
-.table_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-  padding-bottom: 10px;
-  width: 100%;
-}
-
-.ctrl_btn {
-  display: flex;
-  gap: 8px;
-  padding-left: 26px;
-
-  .el-button {
-    min-width: 72px;
-    height: 32px;
-    padding: 7px 12px 7px 10px;
-    font-size: 12px;
-    border-radius: 8px;
-    line-height: 1;
-    font-weight: 500;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
-    box-shadow: none;
-    background: transparent;
-    color: #475569;
-
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.18);
-    }
-  }
-
-  .el-button--primary {
-    background: rgba(99, 102, 241, 0.08);
-    color: #4f46e5;
-    border-color: rgba(99, 102, 241, 0.3);
-  }
-
-  .el-button--success {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-    border-color: rgba(16, 185, 129, 0.2);
-  }
-
-  .el-button--danger {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border-color: rgba(239, 68, 68, 0.2);
-  }
-}
-
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  .el-select {
-    margin-right: 8px;
-  }
-
-  .pagination-btn {
-    min-width: 32px;
-    height: 30px;
-    padding: 0 12px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: #475569;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .pagination-btn:hover:not(.active):not(:disabled) {
-    background: rgba(148, 163, 184, 0.12);
-  }
-
-  .pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .pagination-btn.active {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
-    color: #ffffff !important;
-    border-color: transparent !important;
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
-  }
-}
-
-.total-text {
-  margin-left: 10px;
-  color: #606266;
-  font-size: 14px;
-}
-
-.page-size-select {
-  width: 100px;
-  margin-right: 10px;
-
-  :deep(.el-input__inner) {
-    height: 32px;
-    line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
-    font-size: 14px;
-  }
-
-  :deep(.el-input__suffix) {
-    right: 6px;
-    width: 15px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 6px;
-    border-radius: 4px;
-  }
-
-  :deep(.el-input__suffix-inner) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  :deep(.el-icon-arrow-up:before) {
-    content: "";
-    display: inline-block;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-  }
-}
-
-:deep(.transparent-table) {
-  background: transparent;
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .el-table__body-wrapper {
-    flex: 1;
-    overflow-y: auto;
-    max-height: none !important;
-  }
-
-  .el-table__header-wrapper {
-    flex-shrink: 0;
-    border-bottom: none;
-  }
-
-  .el-table__header th {
-    background: transparent !important;
-    color: #64748b;
-    font-weight: 500;
-    height: 40px;
-    padding: 8px 0;
-    font-size: 13px;
-    border-bottom: none;
-  }
-
-  .el-table__body tr {
-    background-color: transparent !important;
-
-    td {
-      border-top: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
-      padding: 8px 0;
-      height: 40px;
-      color: #606266;
-      font-size: 14px;
-    }
-  }
-
-  .el-table__row:hover>td {
-    background: rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-  }
-
-  &::before {
-    display: none;
-  }
-}
-
-:deep(.el-table .el-button--text) {
-  color: #7079aa !important;
-}
-
-:deep(.el-table .el-button--text:hover) {
-  color: #5a64b5 !important;
-}
-
-:deep(.el-checkbox__inner) {
-  background-color: #eeeeee !important;
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
-}
-
-:deep(.el-loading-mask) {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(2px);
-}
-
-:deep(.el-loading-spinner .path) {
-  stroke: #6b8cff;
-}
-
-:deep(.el-table__empty-block) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
-}
-
-/* 拖拽上传区域样式 */
-.document-uploader {
-  :deep(.el-upload-dragger) {
-    width: 600px;
-    height: 200px;
-    min-height: 200px;
-    border: 2px dashed #c0c4cc;
-    border-radius: 16px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-
-    &:hover {
-      border-color: #409eff;
-    }
-
-    .el-icon-upload {
-      font-size: 48px;
-      color: #c0c4cc;
-      margin: 20px 0 16px;
-      line-height: 1;
-    }
-
-    .el-upload__text {
-      font-size: 16px;
-      color: #606266;
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-
-    .el-upload__tip {
-      font-size: 14px;
-      color: #909399;
-      line-height: 1.5;
-    }
-  }
-}
-
-/* 召回测试弹窗样式 */
-.retrieval-test-dialog {
-  ::v-deep .el-dialog__wrapper {
-    display: block !important;
-  }
-
-  ::v-deep .el-dialog {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
-    width: 1200px !important;
-    height: 90vh !important;
-    max-height: 90vh !important;
-    min-height: 90vh !important;
-  }
-
-  ::v-deep .el-dialog__body {
-    height: calc(100% - 90px) !important;
-    max-height: calc(100% - 90px) !important;
-    overflow: hidden;
-    padding: 15px 25px;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.retrieval-test-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.retrieval-test-result {
-  margin-top: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  h4 {
-    margin: 0 0 12px 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #303133;
-    flex-shrink: 0;
-  }
-
-  :deep(.el-card) {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-
-    .el-card__body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0;
-    }
-  }
-}
-
-.result-chunk-container {
-  flex: 1;
-  overflow-y: auto;
-  max-height: 100%;
-  padding: 16px;
-
-  /* 滚动条样式 */
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #fafafa;
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
-    border-radius: 3px;
-    border: 1px solid #f0f0f0;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #d0d0d0;
-  }
-}
-
-.result-chunk {
-  background-color: #f8f9fa;
-  border: 1px solid #e4e7ed;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  p {
-    margin: 0 0 8px 0;
-    font-size: 14px;
-    line-height: 1.5;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    strong {
-      color: #303133;
-      font-weight: 600;
-    }
-  }
-
-  .similarity-scores {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 12px;
-
-    .score-item {
-      display: flex;
-      flex-direction: column;
-
-      .score-label {
-        font-size: 12px;
-        color: #909399;
-        margin-bottom: 4px;
-      }
-
-      .score-value {
-        font-size: 14px;
-        font-weight: 600;
-        color: #409eff;
-      }
-    }
-  }
-
-  .chunk-content {
-    background-color: white;
-    border: 1px solid #f0f0f0;
-    border-radius: 4px;
-    padding: 12px;
-    margin-top: 8px;
-    max-height: 120px;
-    overflow-y: auto;
-
-    /* 内容滚动条样式 */
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #fafafa;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
-      border-radius: 2px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #d0d0d0;
-    }
-  }
-
-  :deep(.el-divider) {
-    margin: 12px 0;
-  }
-}
-
-/* 已选择文件列表样式 */
-.selected-files-section {
-  margin-top: 20px;
-  border: 1px solid #e4e7ed;
-  border-radius: 8px;
-  padding: 16px;
-  background-color: #f8f9fa;
-
-  h4 {
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #606266;
-  }
-}
-
-.selected-files-list {
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.selected-file-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background-color: white;
-  border: 1px solid #e4e7ed;
-  border-radius: 4px;
-  margin-bottom: 8px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  .file-info {
-    display: flex;
-    align-items: center;
-    flex: 1;
-
-    .el-icon-document {
-      color: #409eff;
-      margin-right: 8px;
-      font-size: 16px;
-    }
-
-    .file-name {
-      font-size: 14px;
-      color: #303133;
-      margin-right: 12px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 300px;
-    }
-
-    .file-size {
-      font-size: 12px;
-      color: #909399;
-    }
-  }
-
-  .remove-btn {
-    color: #f56c6c;
-    padding: 4px;
-
-    &:hover {
-      color: #f78989;
-      background-color: #fef0f0;
-      border-radius: 4px;
-    }
-  }
-}
-
-/* 上传对话框容器样式 */
-:deep(.el-dialog) {
-  border-radius: 16px !important;
-  overflow: hidden;
-}
-
-.el-table {
-  --table-max-height: calc(100vh - 40vh);
-  max-height: var(--table-max-height);
-  flex: 1;
-
-  .el-table__body-wrapper {
-    max-height: calc(var(--table-max-height) - 40px);
-  }
-}
-
-.slice-dialog-content {
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-/* 切片管理弹窗固定容器大小 */
-.slice-dialog {
-  ::v-deep .el-dialog__wrapper {
-    display: block !important;
-  }
-
-  /* 切片管理弹窗滚动条样式 */
-  ::v-deep .el-dialog::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::v-deep .el-dialog::-webkit-scrollbar-track {
-    background: #f8f9fa;
-    border-radius: 4px;
-  }
-
-  ::v-deep .el-dialog::-webkit-scrollbar-thumb {
-    background: #f0f0f0;
-    border-radius: 4px;
-    border: 1px solid #e8e8e8;
-  }
-
-  ::v-deep .el-dialog::-webkit-scrollbar-thumb:hover {
-    background: #e8e8e8;
-  }
-
-  ::v-deep .el-dialog {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
-    width: 1200px !important;
-    height: 90vh !important;
-    max-height: 90vh !important;
-    min-height: 90vh !important;
-  }
-
-  :deep(.el-dialog__body) {
-    height: calc(100% - 90px) !important;
-    max-height: calc(100% - 90px) !important;
-    overflow: hidden;
-    padding: 15px 20px;
-  }
-
-  .slice-management {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .slice-list-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  /* 切片内容容器样式 */
-  .slice-content-container {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .slice-cards-container {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 100%;
-    padding: 16px;
-
-    /* 滚动条样式 */
-    &::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #fafafa;
-      border-radius: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
-      border-radius: 3px;
-      border: 1px solid #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #d0d0d0;
-    }
-  }
-
-  .slice-card {
-    background-color: #f8f9fa;
-    border: 1px solid #e4e7ed;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    .slice-header-info {
-      margin-bottom: 12px;
-
-      p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.5;
-
-        strong {
-          color: #303133;
-          font-weight: 600;
-        }
-      }
-    }
-
-    .slice-card-content {
-      background-color: white;
-      border: 1px solid #f0f0f0;
-      border-radius: 4px;
-      padding: 12px;
-      max-height: 280px;
-      min-height: 120px;
-      overflow-y: auto;
-
-      /* 内容滚动条样式 */
-      &::-webkit-scrollbar {
-        width: 4px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: #fafafa;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: #e0e0e0;
-        border-radius: 2px;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background: #d0d0d0;
-      }
-
-      .content-text {
-        font-size: 14px;
-        line-height: 1.6;
-        text-align: left;
-        color: #333;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-
-        /* 确保文本正常显示，包括空格和换行 */
-        white-space: pre-wrap;
-        word-break: break-word;
-        overflow-wrap: break-word;
-
-        /* 段落样式 */
-        p {
-          margin: 0 0 12px 0;
-          line-height: 1.6;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-
-        /* 列表样式 */
-        ul,
-        ol {
-          margin: 8px 0;
-          padding-left: 24px;
-
-          li {
-            margin-bottom: 4px;
-            line-height: 1.5;
-          }
-        }
-
-        /* 标题样式 */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-          margin: 16px 0 8px 0;
-          font-weight: 600;
-          line-height: 1.4;
-        }
-
-        h1 {
-          font-size: 18px;
-        }
-
-        h2 {
-          font-size: 16px;
-        }
-
-        h3 {
-          font-size: 15px;
-        }
-
-        h4,
-        h5,
-        h6 {
-          font-size: 14px;
-        }
-
-        /* 强调文本 */
-        strong,
-        b {
-          font-weight: 600;
-          color: #1a1a1a;
-        }
-
-        /* 代码样式 */
-        code {
-          background-color: #f5f5f5;
-          padding: 2px 4px;
-          border-radius: 3px;
-          font-family: 'Courier New', monospace;
-          font-size: 13px;
-        }
-
-        /* 引用样式 */
-        blockquote {
-          margin: 12px 0;
-          padding: 8px 12px;
-          border-left: 4px solid #e0e0e0;
-          background-color: #f9f9f9;
-          font-style: italic;
-          color: #666;
-        }
-      }
-    }
-  }
-
-  .no-slice-data {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-}
-
-.slice-count {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  color: #606266;
-  background-color: #f5f7fa;
-  padding: 6px 12px;
-  border-radius: 4px;
-  border: 1px solid #e4e7ed;
-}
-
-.count-label {
-  font-weight: 500;
-  color: #303133;
-}
-
-.count-value {
-  font-weight: 600;
-  color: #409eff;
-  font-size: 15px;
-}
-
-.count-unit {
-  color: #909399;
-}
-
-.slice-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.slice-pagination {
-  text-align: right;
-  margin-top: 20px;
-
-  .custom-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 5px;
-  }
-}
-
-@media (min-width: 1144px) {
-  .table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-  }
-
-  :deep(.transparent-table) {
-    .el-table__body tr {
-      td {
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      &+tr {
-        margin-top: 10px;
-      }
-    }
-  }
+.kf-doc__name { min-width: 0; font-weight: 500; }
+.kf-pulse { animation: kf-pulse 1.4s ease-in-out infinite; }
+@keyframes kf-pulse { 50% { opacity: 0.35; } }
+.kf-danger { color: var(--xn-danger); }
+.kf-danger:hover, .kf-danger:focus { color: #8D3523; }
+.kf-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
+.kf-note { display: inline-flex; align-items: center; gap: 6px; padding-top: 10px; font-size: 13px; }
+
+/* 上传 */
+.kf-mock-note { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 14px; font-size: 13px; line-height: 1.7; color: var(--xn-ink-2); }
+.kf-mock-note .xn-tag { flex: none; margin-top: 1px; }
+.kf-uploader ::v-deep .el-upload, .kf-uploader ::v-deep .el-upload-dragger { width: 100%; }
+.kf-uploader ::v-deep .el-upload-dragger { height: auto; padding: 28px 20px 22px; }
+.kf-uploader ::v-deep .el-upload__text { font-size: 14px; color: var(--xn-ink); }
+.kf-uploader__icon { display: block; margin: 0 auto 10px; font-size: 32px; color: var(--xn-ink-3); }
+.kf-uploader__tip { margin: 8px auto 0; max-width: 46ch; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.kf-picked { margin-top: 16px; }
+.kf-picked__title { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: var(--xn-ink); }
+.kf-picked__list { max-height: 220px; overflow-y: auto; margin: 0; padding: 0; list-style: none; border: 1px solid var(--xn-line); border-radius: 8px; }
+.kf-picked__item { display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 12px; }
+.kf-picked__item + .kf-picked__item { border-top: 1px solid var(--xn-line-2); }
+.kf-picked__name { flex: 1 1 auto; min-width: 0; color: var(--xn-ink); }
+.kf-picked__size { flex: none; font-size: 13px; color: var(--xn-ink-3); }
+.kf-picked__remove { flex: none; color: var(--xn-ink-3); font-size: 16px; }
+.kf-picked__remove:hover { color: var(--xn-danger); }
+
+/* 切片与召回结果 */
+.kf-dialog-sub { margin: -4px 0 14px; font-size: 13px; color: var(--xn-ink-3); }
+.kf-slices { min-height: 120px; }
+.kf-slice-list { display: grid; gap: 10px; max-height: 52vh; overflow-y: auto; margin: 0; padding: 0; list-style: none; }
+.kf-slice { padding: 12px 14px; border: 1px solid var(--xn-line); border-radius: 10px; background: #fff; }
+.kf-slice__no { display: inline-block; font-size: 12px; font-weight: 600; color: var(--xn-ink-3); }
+.kf-slice__text { margin: 6px 0 0; font-size: 14px; line-height: 1.75; color: var(--xn-ink); white-space: pre-wrap; word-break: break-word; }
+.kf-slice-foot { display: flex; justify-content: flex-end; margin-top: 8px; }
+.kf-rt-row { display: flex; gap: 10px; }
+.kf-rt-row .el-input { flex: 1 1 auto; }
+.kf-rt-result { margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--xn-line-2); }
+.kf-rt-result__head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.kf-rt-result__title { margin: 0; font-size: 16px; font-weight: 600; color: var(--xn-ink); }
+.kf-rt-count { font-size: 13px; }
+.kf-rt-meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.kf-rt-src { min-width: 0; font-size: 13px; }
+.kf-rt-score { flex: none; font-size: 13px; color: var(--xn-ink-3); }
+.kf-rt-score b { margin-left: 4px; font-weight: 600; color: var(--xn-lake-ink); }
+.kf-rt-result .xn-empty { padding: 28px 16px; }
+@media (max-width: 640px) {
+  .kf-rt-row { flex-direction: column; }
 }
 </style>

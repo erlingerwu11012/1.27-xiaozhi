@@ -1,134 +1,95 @@
 <template>
-  <div class="welcome">
-    <HeaderBar />
+  <div class="xn-page">
+    <page-header :title="$t('knowledgeBaseManagement.title')" :description="$t('xn.knowledge.kbDesc')">
+      <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('knowledgeBaseManagement.addKnowledgeBase') }}</el-button>
+    </page-header>
 
-    <div class="operation-bar">
-      <h2 class="page-title">{{ $t('knowledgeBaseManagement.title') }}</h2>
-      <div class="right-operations">
-        <el-input :placeholder="$t('knowledgeBaseManagement.searchPlaceholder')" v-model="searchName" class="search-input"
-          @keyup.enter.native="handleSearch" clearable />
-        <el-button class="btn-search" @click="handleSearch">{{ $t('knowledgeBaseManagement.search') }}</el-button>
-      </div>
+    <div class="xn-toolbar">
+      <el-input v-model="searchName" :placeholder="$t('knowledgeBaseManagement.searchPlaceholder')" clearable
+        @keyup.enter.native="handleSearch" @clear="handleSearch">
+        <xn-icon slot="prefix" name="search" class="kb-search-icon" />
+      </el-input>
+      <el-button @click="handleSearch">{{ $t('knowledgeBaseManagement.search') }}</el-button>
+      <span class="xn-toolbar__grow"></span>
+      <template v-if="selectedKnowledgeBase.length">
+        <span class="xn-muted">{{ $t('xn.knowledge.selectedKb', { n: selectedKnowledgeBase.length }) }}</span>
+        <el-button type="danger" plain size="small" @click="deleteSelectedKnowledgeBase"><xn-icon name="trash" /> {{ $t('xn.knowledge.deleteSelected') }}</el-button>
+      </template>
     </div>
 
-    <div class="main-wrapper">
-      <div class="content-panel">
-        <div class="content-area">
-          <el-card class="params-card" shadow="never">
-            <div>
-              <el-table ref="paramsTable" :data="knowledgeBaseList" class="transparent-table" v-loading="loading"
-                :element-loading-text="$t('common.loading')" element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(255, 255, 255, 0.7)"
-                :header-cell-class-name="headerCellClassName" @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55" align="center" />
-                <el-table-column :label="$t('knowledgeBaseManagement.name')" prop="name" align="center">
-                  <template slot-scope="scope">
-                    <span class="knowledge-base-name">{{ scope.row.name }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeBaseManagement.description')" prop="description" align="center" show-overflow-tooltip>
-                  <template slot-scope="scope">
-                    <span>{{ scope.row.description || '-' }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeBaseManagement.documentCount')" align="center">
-                  <template slot-scope="scope">
-                    <span>{{ scope.row.documentCount || 0 }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeBaseManagement.status')" align="center">
-                  <template slot-scope="scope">
-                    <el-switch
-                      v-model="scope.row.status"
-                      :active-value="1"
-                      :inactive-value="0"
-                      active-color="#13ce66"
-                      inactive-color="#909399"
-                      @change="handleStatusChange(scope.row)"
-                    ></el-switch>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeBaseManagement.createdAt')" prop="createdAt" align="center">
-                  <template slot-scope="scope">
-                    <span>{{ formatDate(scope.row.createdAt) }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column :label="$t('knowledgeBaseManagement.operation')" align="center">
-                  <template slot-scope="scope">
-                    <el-button size="mini" type="text" @click="showViewDialog(scope.row)">
-                      {{ $t('knowledgeBaseManagement.view') }}
-                    </el-button>
-                    <el-button size="mini" type="text" @click="showEditDialog(scope.row)">
-                      {{ $t('knowledgeBaseManagement.edit') }}
-                    </el-button>
-                    <el-button size="mini" type="text" @click="deleteSingleKnowledgeBase(scope.row)">
-                      {{ $t('knowledgeBaseManagement.delete') }}
-                    </el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </div>
-
-            <div class="table_bottom">
-              <div class="ctrl_btn">
-                <el-button size="mini" type="primary" @click="toggleSelectAll">
-                  {{ isAllSelected ? $t('knowledgeBaseManagement.cancelSelectAll') : $t('knowledgeBaseManagement.selectAll') }}
-                </el-button>
-                <el-button size="mini" type="success" @click="showAddDialog">
-                  {{ $t('knowledgeBaseManagement.add') }}
-                </el-button>
-                <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteSelectedKnowledgeBase" :disabled="selectedKnowledgeBase.length === 0">
-                  {{ $t('knowledgeBaseManagement.delete') }}
-                </el-button>
-              </div>
-              <div class="custom-pagination">
-                <el-select v-model="pageSize" @change="handlePageSizeChange" class="page-size-select">
-                  <el-option v-for="item in pageSizeOptions" :key="item"
-                    :label="`${item}${$t('knowledgeBaseManagement.itemsPerPage')}`" :value="item">
-                  </el-option>
-                </el-select>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goFirst">
-                  {{ $t('knowledgeBaseManagement.firstPage') }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === 1" @click="goPrev">
-                  {{ $t('knowledgeBaseManagement.prevPage') }}
-                </button>
-                <button v-for="page in visiblePages" :key="page" class="pagination-btn"
-                  :class="{ active: page === currentPage }" @click="goToPage(page)">
-                  {{ page }}
-                </button>
-                <button class="pagination-btn" :disabled="currentPage === pageCount" @click="goNext">
-                  {{ $t('knowledgeBaseManagement.nextPage') }}
-                </button>
-                <span class="total-text">{{ $t('knowledgeBaseManagement.totalRecords', { total }) }}</span>
-              </div>
-            </div>
-          </el-card>
+    <div class="xn-panel xn-panel--flush kb-panel">
+      <xn-empty v-if="loadFailed && !loading" error @retry="fetchKnowledgeBaseList" />
+      <template v-else>
+        <el-table ref="paramsTable" :data="knowledgeBaseList" v-loading="loading" row-key="datasetId"
+          @selection-change="handleSelectionChange">
+          <el-table-column type="selection" width="52" align="center" />
+          <el-table-column :label="$t('knowledgeBaseManagement.name')" min-width="180">
+            <template slot-scope="scope">
+              <button type="button" class="kb-name" @click="showViewDialog(scope.row)">
+                <xn-icon name="book" class="kb-name__icon" /><span class="xn-clip">{{ scope.row.name }}</span>
+              </button>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('knowledgeBaseManagement.description')" min-width="240" show-overflow-tooltip>
+            <template slot-scope="scope">
+              <span :class="{ 'xn-muted': !scope.row.description }">{{ scope.row.description || '-' }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('knowledgeBaseManagement.documentCount')" width="100" align="right">
+            <template slot-scope="scope"><span class="xn-num">{{ scope.row.documentCount || 0 }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('knowledgeBaseManagement.status')" width="110">
+            <template slot-scope="scope">
+              <span class="kb-status">
+                <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0"
+                  :aria-label="$t('knowledgeBaseManagement.status')" @change="handleStatusChange(scope.row)" />
+                <span class="kb-status__text" :class="{ 'xn-muted': scope.row.status !== 1 }">{{ scope.row.status === 1 ? $t('knowledgeBaseDialog.statusEnabled') : $t('knowledgeBaseDialog.statusDisabled') }}</span>
+              </span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('knowledgeBaseManagement.createdAt')" width="150" class-name="kb-nowrap">
+            <template slot-scope="scope"><span class="xn-num">{{ formatDate(scope.row.createdAt) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('knowledgeBaseManagement.operation')" width="190" align="right">
+            <template slot-scope="scope">
+              <el-button type="text" @click="showViewDialog(scope.row)">{{ $t('knowledgeBaseManagement.view') }}</el-button>
+              <el-button type="text" @click="showEditDialog(scope.row)">{{ $t('knowledgeBaseManagement.edit') }}</el-button>
+              <el-button type="text" class="kb-danger" @click="deleteSingleKnowledgeBase(scope.row)">{{ $t('knowledgeBaseManagement.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty v-if="activeSearchName" icon="search" :title="$t('xn.knowledge.kbNoMatch')"
+              :description="$t('xn.knowledge.kbNoMatchDesc')" />
+            <xn-empty v-else icon="book" :title="$t('xn.knowledge.kbEmptyTitle')" :description="$t('xn.knowledge.kbEmptyDesc')">
+              <el-button type="primary" @click="showAddDialog"><xn-icon name="plus" /> {{ $t('knowledgeBaseManagement.addKnowledgeBase') }}</el-button>
+            </xn-empty>
+          </template>
+        </el-table>
+        <div v-if="total > 0" class="kb-foot">
+          <el-pagination background layout="total, sizes, prev, pager, next" :total="total"
+            :page-size="pageSize" :page-sizes="pageSizeOptions" :current-page="currentPage"
+            @size-change="handlePageSizeChange" @current-change="goToPage" />
         </div>
-      </div>
+      </template>
     </div>
 
     <!-- 新增/编辑知识库对话框 -->
     <knowledge-base-dialog ref="knowledgeBaseDialog" :title="dialogTitle" :visible.sync="dialogVisible" :form="knowledgeBaseForm"
       @submit="handleSubmit" @cancel="dialogVisible = false" />
-
-    <el-footer>
-      <version-footer />
-    </el-footer>
   </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 import KnowledgeBaseDialog from "@/components/KnowledgeBaseDialog.vue";
 
 export default {
-  components: { HeaderBar, VersionFooter, KnowledgeBaseDialog },
+  components: { KnowledgeBaseDialog },
   data() {
     return {
       searchName: "",
+      activeSearchName: "",
+      loadFailed: false,
       knowledgeBaseList: [],
       currentPage: 1,
       loading: false,
@@ -179,6 +140,7 @@ export default {
     },
     fetchKnowledgeBaseList: function() {
       this.loading = true;
+      this.loadFailed = false;
       Api.knowledgeBase.getKnowledgeBaseList(
         {
           page: this.currentPage,
@@ -195,8 +157,16 @@ export default {
             const pageData = res.data.data || {};
             this.knowledgeBaseList = pageData.list || [];
             this.total = pageData.total || 0;
+            // 删除最后一页的最后一条后回到上一页
+            if (!this.knowledgeBaseList.length && this.total > 0 && this.currentPage > 1) {
+              this.currentPage = Math.max(1, Math.ceil(this.total / this.pageSize));
+              this.fetchKnowledgeBaseList();
+              return;
+            }
+            this.activeSearchName = this.searchName;
             console.log('Updated knowledgeBaseList:', this.knowledgeBaseList); // 添加调试日志
           } else {
+            this.loadFailed = true;
             this.$message.error({
               message: res.data?.msg || this.$t('knowledgeBaseManagement.getKnowledgeBaseListFailed'),
               showClose: true
@@ -205,6 +175,7 @@ export default {
         },
         () => {
           this.loading = false;
+          this.loadFailed = true;
           this.$message.error(this.$t('knowledgeBaseManagement.getKnowledgeBaseListFailed'));
         }
       );
@@ -456,379 +427,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.welcome {
-    min-width: 900px;
-    min-height: 506px;
-    height: 100vh;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    /* 欧泊云海 - 氛围感背景 */
-    background-color: #f8fafc !important;
-    background-image:
-        radial-gradient(circle at 15% 25%, rgba(99, 102, 241, 0.12), transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(56, 189, 248, 0.12), transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03), transparent 60%) !important;
-    background-attachment: fixed;
-    background-size: cover;
-    overflow: hidden;
+<style scoped>
+.kb-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.kb-panel { overflow: hidden; }
+.kb-name {
+  display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 2px 0; border: 0; background: none;
+  color: var(--xn-ink); font: inherit; font-weight: 600; text-align: left; cursor: pointer;
 }
-
-.main-wrapper {
-    margin: 5px 22px;
-    min-height: calc(100vh - 24vh);
-    height: auto;
-    max-height: 80vh;
-    position: relative;
-    padding: 12px 16px 18px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.08);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.operation-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-}
-
-.page-title {
-    font-size: 24px;
-    margin: 0;
-}
-
-.right-operations {
-    display: flex;
-    gap: 10px;
-    margin-left: auto;
-}
-
-.search-input {
-    width: 240px;
-}
-
-.btn-search {
-    background: rgba(59, 130, 246, 0.08) !important;
-    color: #2563eb !important;
-    border: 1px solid rgba(59, 130, 246, 0.2) !important;
-    border-radius: 999px;
-    padding: 0 18px;
-    height: 32px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.btn-search:hover {
-    background: rgba(59, 130, 246, 0.15) !important;
-}
-.content-panel {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-    height: 100%;
-    border-radius: 20px;
-    background: transparent;
-}
-
-.content-area {
-    flex: 1;
-    height: 100%;
-    min-width: 600px;
-    overflow: auto;
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-}
-
-.params-card {
-    background: transparent;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    box-shadow: none;
-    overflow: hidden;
-
-    ::v-deep .el-card__body {
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: hidden;
-    }
-}
-
-.table_bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto; 
-    padding-bottom: 10px;
-    width: 100%;
-}
-
-.ctrl_btn {
-    display: flex;
-    gap: 8px;
-    padding-left: 26px;
-
-    .el-button {
-        min-width: 72px;
-        height: 32px;
-        padding: 7px 12px 7px 10px;
-        font-size: 12px;
-        border-radius: 8px;
-        line-height: 1;
-        font-weight: 500;
-        border: 1px solid transparent;
-        transition: all 0.2s ease;
-        box-shadow: none;
-        background: transparent;
-        color: #475569;
-
-        &:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(148, 163, 184, 0.18);
-        }
-    }
-
-    .el-button--primary {
-        background: rgba(59, 130, 246, 0.08) !important;
-        color: #2563eb !important;
-        border-color: rgba(59, 130, 246, 0.2) !important;
-    }
-
-
-    .el-button--success {
-        background: rgba(16, 185, 129, 0.08) !important;
-        color: #059669 !important;
-        border-color: rgba(16, 185, 129, 0.2) !important;
-    }
-
-    .el-button--danger {
-        background: rgba(239, 68, 68, 0.1) !important;
-        color: #ef4444 !important;
-        border-color: rgba(239, 68, 68, 0.3) !important;
-    }
-
-}
-
-.custom-pagination {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-    .el-select {
-        margin-right: 8px;
-    }
-
-    .pagination-btn {
-        min-width: 32px;
-        height: 30px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        background: transparent;
-        color: #475569;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-            background: rgba(148, 163, 184, 0.12);
-        }
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    }
-
-    .pagination-btn.active {
-        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%) !important;
-        color: #ffffff !important;
-        border-color: transparent !important;
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
-    }
-}
-
-.total-text {
-    margin-left: 10px;
-    color: #606266;
-    font-size: 14px;
-}
-
-.page-size-select {
-    width: 100px;
-    margin-right: 10px;
-
-    :deep(.el-input__inner) {
-        height: 32px;
-        line-height: 32px;
-        border-radius: 4px;
-        border: 1px solid #e4e7ed;
-        background: #dee7ff;
-        color: #606266;
-        font-size: 14px;
-    }
-
-    :deep(.el-input__suffix) {
-        right: 6px;
-        width: 15px;
-        height: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 6px;
-        border-radius: 4px;
-    }
-
-    :deep(.el-input__suffix-inner) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    :deep(.el-icon-arrow-up:before) {
-        content: "";
-        display: inline-block;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 9px solid #606266;
-        position: relative;
-        transform: rotate(0deg);
-        transition: transform 0.3s;
-    }
-}
-
-:deep(.transparent-table) {
-    background: transparent;
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .el-table__body-wrapper {
-        flex: 1;
-        overflow-y: auto;
-        max-height: none !important;
-    }
-
-    .el-table__header-wrapper {
-        flex-shrink: 0;
-        border-bottom: none;
-    }
-
-    .el-table__header th {
-        background: transparent !important;
-        color: #64748b;
-        font-weight: 500;
-        height: 40px;
-        padding: 8px 0;
-        font-size: 13px;
-        border-bottom: none;
-    }
-
-    .el-table__body tr {
-        background-color: transparent !important;
-
-        td {
-            border-top: none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
-            padding: 8px 0;
-            height: 40px;
-            color: #606266;
-            font-size: 14px;
-        }
-    }
-
-    .el-table__row:hover>td {
-        background: rgba(255, 255, 255, 0.6) !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-    }
-
-    &::before {
-        display: none;
-    }
-}
-
-:deep(.el-table .el-button--text) {
-    color: #7079aa !important;
-}
-
-:deep(.el-table .el-button--text:hover) {
-    color: #5a64b5 !important;
-}
-
-:deep(.el-checkbox__inner) {
-    background-color: #eeeeee !important;
-    border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__inner:hover) {
-    border-color: #cccccc !important;
-}
-
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-    background-color: #5f70f3 !important;
-    border-color: #5f70f3 !important;
-}
-
-:deep(.el-loading-mask) {
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(2px);
-}
-
-:deep(.el-loading-spinner .path) {
-    stroke: #6b8cff;
-}
-
-:deep(.el-table__empty-block) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px;
-}
-
-.el-table {
-    --table-max-height: calc(100vh - 40vh);
-    max-height: var(--table-max-height);
-    flex: 1;
-
-    .el-table__body-wrapper {
-        max-height: calc(var(--table-max-height) - 40px);
-    }
-}
-
-@media (min-width: 1144px) {
-    .table_bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: auto;
-    }
-
-    :deep(.transparent-table) {
-        .el-table__body tr {
-            td {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
-
-            &+tr {
-                margin-top: 10px;
-            }
-        }
-    }
-}
+.kb-name:hover { color: var(--xn-lake); }
+.kb-name__icon { font-size: 16px; color: var(--xn-ink-3); }
+.kb-name:hover .kb-name__icon { color: var(--xn-lake); }
+.kb-status { display: inline-flex; align-items: center; gap: 8px; }
+.kb-status__text { font-size: 13px; }
+.kb-panel ::v-deep .kb-nowrap .cell { white-space: nowrap; }
+.kb-danger { color: var(--xn-danger); }
+.kb-danger:hover, .kb-danger:focus { color: #8D3523; }
+.kb-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
 </style>

@@ -1,74 +1,134 @@
 <template>
-  <div class="billing-page">
-    <HeaderBar />
+  <div class="xn-page bo">
+    <page-header :title="$t('billing.ordersTitle')" :description="$t('xn.billing.ordersDesc')">
+      <el-button type="primary" @click="$router.push('/billing/packages')"><xn-icon name="wallet" /> {{ $t('billing.rechargeNow') }}</el-button>
+    </page-header>
 
-    <div class="main-wrapper">
-    <div class="billing-container glass-panel">
-      <div class="page-header">
-        <h2 class="page-title">{{ $t('billing.ordersTitle') }}</h2>
+    <!-- 余额：不显示来源名称，只区分 正常 / 可能不是最新 / 暂不可用 -->
+    <div class="xn-toolbar bo-balance" aria-live="polite">
+      <span class="xn-muted">{{ $t('billing.balance') }}</span>
+      <template v-if="balanceState === 'loading'"><span class="xn-muted">{{ $t('billing.loading') }}</span></template>
+      <template v-else-if="balanceState === 'unavailable'">
+        <strong class="bo-balance__warn">{{ $t('billing.balanceUnavailable') }}</strong>
+      </template>
+      <template v-else>
+        <strong class="bo-balance__num xn-num">{{ formatPoints(quota.balance) }}</strong>
+        <span class="xn-muted">{{ $t('billing.pointsUnit') }}</span>
+        <span v-if="balanceState === 'stale'" class="xn-tag xn-tag--warning"><i class="dot"></i>{{ $t('billing.balanceSourceCache') }}</span>
+      </template>
+      <demo-tag />
+      <span class="xn-toolbar__grow"></span>
+      <el-button type="text" @click="fetchQuota"><xn-icon name="refresh" /> {{ $t('xn.billing.refreshBalance') }}</el-button>
+    </div>
+    <el-alert v-if="balanceState === 'stale'" class="bo-alert" :title="$t('billing.balanceCacheHint')" type="warning" :closable="false" show-icon />
+
+    <!-- 充值订单 -->
+    <section class="xn-panel xn-panel--flush bo-panel">
+      <div class="xn-panel__head">
+        <h2 class="xn-panel__title">{{ $t('xn.billing.ordersPanel') }}</h2>
+        <el-button type="text" :disabled="loading" @click="fetchOrders"><xn-icon name="refresh" /> {{ $t('xn.billing.refresh') }}</el-button>
       </div>
-
-      <div class="quota-bar" v-if="quota">
-        <span>{{ $t('billing.balance') }}：</span>
-        <span class="balance-value">{{ formatPoints(quota.balance) }} {{ $t('billing.pointsUnit') }}</span>
-        <el-tag size="mini" :type="balanceTagType" effect="plain" class="balance-tag">{{ balanceSourceText }}</el-tag>
-      </div>
-      <el-alert v-if="quota && !quota.balanceRealtime" class="mb16" :title="$t('billing.balanceCacheHint')"
-        type="warning" :closable="false" show-icon />
-
-      <el-table :data="orders" v-loading="loading" style="width: 100%" :empty-text="$t('billing.noOrders')">
-        <el-table-column prop="outTradeNo" :label="$t('billing.orderNo')" min-width="200" />
-        <el-table-column prop="packageName" :label="$t('billing.packageName')" min-width="140" />
-        <el-table-column :label="$t('billing.amount')" width="120">
-          <template slot-scope="scope">¥{{ formatYuan(scope.row.amountCents) }}</template>
-        </el-table-column>
-        <el-table-column :label="$t('billing.channel')" width="100">
-          <template slot-scope="scope">{{ channelText(scope.row.channel) }}</template>
-        </el-table-column>
-        <el-table-column :label="$t('billing.status')" width="120">
-          <template slot-scope="scope">
-            <el-tag :type="statusTagType(scope.row.status)" size="small">{{ statusText(scope.row.status) }}</el-tag>
+      <xn-empty v-if="ordersFailed && !loading" error @retry="fetchOrders" />
+      <template v-else>
+        <el-table :data="orders" v-loading="loading" row-key="outTradeNo">
+          <el-table-column prop="outTradeNo" :label="$t('billing.orderNo')" min-width="190">
+            <template slot-scope="scope"><span class="xn-num">{{ scope.row.outTradeNo }}</span></template>
+          </el-table-column>
+          <el-table-column prop="packageName" :label="$t('billing.packageName')" min-width="130" show-overflow-tooltip />
+          <el-table-column :label="$t('billing.amount')" min-width="100" align="right">
+            <template slot-scope="scope"><span class="xn-num">¥{{ formatYuan(scope.row.amountCents) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('billing.rechargePoints')" min-width="100" align="right">
+            <template slot-scope="scope"><span class="xn-num">{{ formatPoints(scope.row.quotaPoints) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('billing.channel')" min-width="90">
+            <template slot-scope="scope">{{ channelText(scope.row.channel) }}</template>
+          </el-table-column>
+          <el-table-column :label="$t('billing.status')" min-width="110">
+            <template slot-scope="scope">
+              <span class="xn-tag" :class="statusTagClass(scope.row.status)">{{ statusText(scope.row.status) }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('billing.createdAt')" min-width="170">
+            <template slot-scope="scope"><span class="xn-num">{{ formatTime(scope.row.createdAt) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.billing.colActions')" width="90" align="right">
+            <template slot-scope="scope">
+              <el-button type="text" @click="openOrder(scope.row)">{{ $t('xn.billing.viewOrder') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty icon="receipt" :title="$t('billing.noOrders')" :description="$t('xn.billing.noOrdersDesc')">
+              <el-button @click="$router.push('/billing/packages')">{{ $t('xn.billing.goPackages') }}</el-button>
+            </xn-empty>
           </template>
-        </el-table-column>
-        <el-table-column :label="$t('billing.createdAt')" width="180">
-          <template slot-scope="scope">{{ formatTime(scope.row.createdAt) }}</template>
-        </el-table-column>
-      </el-table>
+        </el-table>
+        <div v-if="total > 0" class="bo-pager">
+          <el-pagination background layout="total, sizes, prev, pager, next" :total="total" :page-size="pageSize"
+            :page-sizes="[10, 20, 50]" :current-page.sync="page" @current-change="fetchOrders" @size-change="onSizeChange" />
+        </div>
+      </template>
+    </section>
 
-      <div class="pagination-wrap" v-if="total > 0">
-        <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"
-          :current-page.sync="page" @current-change="fetchOrders" />
+    <!-- 官方服务（记忆）费用 -->
+    <section class="xn-panel xn-panel--flush bo-panel">
+      <div class="xn-panel__head">
+        <div>
+          <h2 class="xn-panel__title">{{ $t('xn.billing.memoryTitle') }}</h2>
+          <p class="bo-sub xn-muted">{{ $t('xn.billing.memoryDesc') }}</p>
+        </div>
+        <el-button type="text" :disabled="memoryLoading" @click="fetchMemoryBills"><xn-icon name="refresh" /> {{ $t('xn.billing.refresh') }}</el-button>
       </div>
-      <h3 style="margin-top:32px">回响现实官方服务费用</h3>
-      <el-alert v-if="!memoryAvailable" title="费用暂时无法读取，请稍后刷新" type="info" :closable="false" />
-      <el-table :data="memoryBills" v-loading="memoryLoading" style="width:100%" empty-text="暂无记忆服务费用">
-        <el-table-column label="时间" min-width="170"><template slot-scope="scope">{{ formatTime(scope.row.createdAt) }}</template></el-table-column>
-        <el-table-column label="计费项" min-width="100"><template slot-scope="scope">{{ memoryOperation(scope.row.operation) }}</template></el-table-column>
-        <el-table-column label="费用（元）" min-width="130"><template slot-scope="scope">¥{{ formatMemoryAmount(scope.row.amountCny) }}</template></el-table-column>
-        <el-table-column label="已扣点数" min-width="100"><template slot-scope="scope">{{ formatPoints(scope.row.chargedPoints) }}</template></el-table-column>
-        <el-table-column label="状态" min-width="100"><template slot-scope="scope">{{ memoryState(scope.row.state) }}</template></el-table-column>
-      </el-table>
-      <div class="pagination-wrap" v-if="memoryTotal>0"><el-pagination background layout="prev, pager, next" :total="memoryTotal" :page-size="10" :current-page.sync="memoryPage" @current-change="fetchMemoryBills" /></div>
-    </div>
-    </div>
+      <xn-empty v-if="!memoryAvailable && !memoryLoading" error :title="$t('xn.billing.memoryUnavailable')"
+        :description="$t('xn.billing.memoryUnavailableDesc')" @retry="fetchMemoryBills" />
+      <template v-else>
+        <el-table :data="memoryBills" v-loading="memoryLoading">
+          <el-table-column :label="$t('xn.billing.colTime')" min-width="170">
+            <template slot-scope="scope"><span class="xn-num">{{ formatTime(scope.row.createdAt) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.billing.colItem')" min-width="110">
+            <template slot-scope="scope">{{ memoryOperation(scope.row.operation) }}</template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.billing.colFeeYuan')" min-width="130" align="right">
+            <template slot-scope="scope"><span class="xn-num">¥{{ formatMemoryAmount(scope.row.amountCny) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.billing.colCharged')" min-width="100" align="right">
+            <template slot-scope="scope"><span class="xn-num">{{ formatPoints(scope.row.chargedPoints) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('billing.status')" min-width="100">
+            <template slot-scope="scope"><span class="xn-tag" :class="memoryStateClass(scope.row.state)">{{ memoryState(scope.row.state) }}</span></template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty icon="memory" :title="$t('xn.billing.memoryEmpty')" />
+          </template>
+        </el-table>
+        <div v-if="memoryTotal > 0" class="bo-pager">
+          <el-pagination background layout="total, prev, pager, next" :total="memoryTotal" :page-size="10"
+            :current-page.sync="memoryPage" @current-change="fetchMemoryBills" />
+        </div>
+      </template>
+    </section>
   </div>
 </template>
 
 <script>
-import HeaderBar from '@/components/HeaderBar.vue';
 import Api from '@/apis/api';
+
+const MEMORY_OPS = { fact: 'memFact', portrait: 'memPortrait', search: 'memSearch', storage: 'memStorage' };
+const MEMORY_STATES = { settled: 'msSettled', refunded: 'msRefunded', reserved: 'msProcessing', submitted: 'msProcessing', review: 'msReview', manual_review: 'msReview', pending: 'msPending', debt: 'msDebt' };
 
 export default {
   name: 'BillingOrders',
-  components: { HeaderBar },
   data() {
     return {
       loading: false,
+      ordersFailed: false,
       orders: [],
       total: 0,
       page: 1,
       pageSize: 10,
       quota: null,
+      quotaLoading: true,
       memoryBills: [], memoryPage: 1, memoryTotal: 0, memoryAvailable: true, memoryLoading: false
     };
   },
@@ -78,24 +138,34 @@ export default {
     this.fetchMemoryBills();
   },
   computed: {
-    balanceSourceText() {
-      const source = this.quota ? this.quota.balanceSource : null;
-      if (source === 'oneapi') return this.$t('billing.balanceSourceOneapi');
-      if (source === 'cache') return this.$t('billing.balanceSourceCache');
-      return this.$t('billing.balanceSourceNone');
-    },
-    balanceTagType() {
-      const source = this.quota ? this.quota.balanceSource : null;
-      if (source === 'oneapi') return 'success';
-      if (source === 'cache') return 'warning';
-      return 'info';
+    /** 与外壳余额条一致：读取失败 / 余额或来源为空 → 暂不可用；cache 或非实时 → 可能不是最新 */
+    balanceState() {
+      if (this.quotaLoading) return 'loading';
+      const q = this.quota;
+      if (!q || q.balance === null || q.balance === undefined || q.balanceSource == null) return 'unavailable';
+      if (q.balanceRealtime === false || q.balanceSource === 'cache') return 'stale';
+      return 'ok';
     }
   },
   methods: {
-    memoryOperation(value) { return ({fact:'事实写入',portrait:'画像抽取',search:'记忆检索',storage:'记忆存储'})[value] || '记忆服务'; },
-    memoryState(value) { return ({settled:'已结算',refunded:'已退还',reserved:'处理中',submitted:'处理中',review:'核对中',manual_review:'核对中',pending:'待结算',debt:'待补扣'})[value] || '处理中'; },
+    memoryOperation(value) { return this.$t('xn.billing.' + (MEMORY_OPS[value] || 'memOther')); },
+    memoryState(value) { return this.$t('xn.billing.' + (MEMORY_STATES[value] || 'msProcessing')); },
+    memoryStateClass(value) {
+      if (value === 'settled') return 'xn-tag--success';
+      if (value === 'refunded') return 'xn-tag--muted';
+      if (value === 'debt') return 'xn-tag--warning';
+      return 'xn-tag--lake';
+    },
     formatMemoryAmount(value) { return Number(value || 0).toFixed(8).replace(/0+$/, '').replace(/\.$/, '.00'); },
-    fetchMemoryBills() { this.memoryLoading=true; Api.pay.memoryBills(this.memoryPage,res=>{ this.memoryLoading=false; this.memoryAvailable=!!(res && res.code===0 && res.data && res.data.available); this.memoryBills=this.memoryAvailable ? res.data.list || [] : []; this.memoryTotal=this.memoryAvailable ? res.data.total || 0 : 0; }); },
+    fetchMemoryBills() {
+      this.memoryLoading = true;
+      Api.pay.memoryBills(this.memoryPage, (res) => {
+        this.memoryLoading = false;
+        this.memoryAvailable = !!(res && res.code === 0 && res.data && res.data.available);
+        this.memoryBills = this.memoryAvailable ? res.data.list || [] : [];
+        this.memoryTotal = this.memoryAvailable ? res.data.total || 0 : 0;
+      });
+    },
     formatYuan(cents) {
       if (cents === null || cents === undefined) return '0.00';
       return (Number(cents) / 100).toFixed(2);
@@ -128,14 +198,24 @@ export default {
       if (s === 'failed') return this.$t('billing.statusFailed');
       return s || '-';
     },
-    statusTagType(s) {
-      if (s === 'delivered') return 'success';
-      if (s === 'paid') return 'warning';
-      if (s === 'pending') return 'info';
-      return 'danger';
+    statusTagClass(s) {
+      if (s === 'delivered') return 'xn-tag--success';
+      if (s === 'paid') return 'xn-tag--lake';
+      if (s === 'pending') return 'xn-tag--warning';
+      if (s === 'failed') return 'xn-tag--danger';
+      return 'xn-tag--muted';
+    },
+    openOrder(row) {
+      this.$router.push({ path: '/billing/result', query: { out_trade_no: row.outTradeNo } });
+    },
+    onSizeChange(size) {
+      this.pageSize = size;
+      this.page = 1;
+      this.fetchOrders();
     },
     fetchOrders() {
       this.loading = true;
+      this.ordersFailed = false;
       Api.pay.orders({ page: this.page, limit: this.pageSize }, (res) => {
         this.loading = false;
         if (res && res.code === 0) {
@@ -143,12 +223,15 @@ export default {
           this.orders = data.list || [];
           this.total = data.total || 0;
         } else {
+          this.ordersFailed = true;
           this.$message.error(res && res.msg ? res.msg : this.$t('billing.loadFail'));
         }
       });
     },
     fetchQuota() {
+      this.quotaLoading = true;
       Api.pay.myQuota((res) => {
+        this.quotaLoading = false;
         if (res && res.code === 0) {
           this.quota = res.data;
         } else {
@@ -163,62 +246,11 @@ export default {
 </script>
 
 <style scoped>
-.billing-page {
-  min-height: 100vh;
-  background: #f5f7fb;
-  box-sizing: border-box;
-}
-.main-wrapper {
-  padding: 16px 24px 24px;
-}
-.billing-container {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 28px 32px;
-  border-radius: 12px;
-  background: #fff;
-  border: none;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-.page-header {
-  margin-bottom: 20px;
-}
-.page-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1a1a2e;
-}
-.quota-bar {
-  margin-bottom: 16px;
-  text-align: right;
-  color: #64748b;
-  font-size: 14px;
-}
-.balance-value {
-  color: #3b82f6;
-  font-weight: 700;
-}
-.balance-tag {
-  margin-left: 8px;
-}
-.mb16 {
-  margin-bottom: 16px;
-}
-.pagination-wrap {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-</style>
-<style scoped>
-@media (max-width: 700px) {
-  .main-wrapper { padding: 12px; }
-  .billing-container { padding: 16px 12px; min-width: 0; }
-  .billing-page ::v-deep .header { min-width: 0; height: auto !important; padding: 0 8px; }
-  .billing-page ::v-deep .header-container { flex-wrap: wrap; height: auto; margin: 0; padding: 12px; }
-  .billing-page ::v-deep .header-left { min-width: 0; }
-  .billing-page ::v-deep .header-right { min-width: 0; flex: 1; }
-  .billing-page ::v-deep .header-center { position: static; transform: none; order: 3; width: 100%; overflow-x: auto; gap: 8px; padding-top: 10px; }
-}
+.bo-balance { gap: 10px; }
+.bo-balance__num { font-size: 20px; font-weight: 600; color: var(--xn-ink); }
+.bo-balance__warn { color: var(--xn-warning); font-weight: 600; }
+.bo-alert { margin: -4px 0 16px; }
+.bo-panel { overflow: hidden; }
+.bo-sub { margin: 2px 0 0; font-size: 13px; }
+.bo-pager { display: flex; justify-content: flex-end; padding: 2px 20px 14px; }
 </style>

@@ -1,297 +1,156 @@
 <template>
-  <transition name="fade">
-    <div v-if="visible" class="awakening-overlay">
-      <div class="awakening-backdrop" @click="handleSkip"></div>
+  <el-dialog :visible="visible" width="680px" append-to-body :close-on-click-modal="false" :before-close="handleBeforeClose"
+    custom-class="xn-wizard" :title="wizardTitle">
+    <p class="aw-sub">{{ wizardSubtitle }}</p>
 
-      <div class="awakening-container">
-        <div class="awakening-card">
-              <div class="wizard-header">
-                <div class="wizard-title">{{ wizardTitle }}</div>
-                <div class="wizard-subtitle">{{ wizardSubtitle }}</div>
+    <!-- 步骤 -->
+    <ol class="aw-steps">
+      <li v-for="(step, idx) in stepList" :key="step.title" class="aw-step"
+        :class="{ 'is-active': currentStep === idx + 1, 'is-done': currentStep > idx + 1 }"
+        :aria-current="currentStep === idx + 1 ? 'step' : null">
+        <span class="aw-step__num xn-num"><xn-icon v-if="currentStep > idx + 1" name="check" /><template v-else>{{ idx + 1 }}</template></span>
+        <span class="aw-step__text">
+          <span class="aw-step__title">{{ step.title }}</span>
+          <span class="aw-step__desc">{{ step.desc }}</span>
+        </span>
+      </li>
+    </ol>
+
+    <div class="aw-body">
+      <!-- 1 名字与称呼 -->
+      <div v-if="currentStep === 1" class="aw-pane">
+        <p class="aw-help">{{ $t('xn.agents.wizard.step1Help') }}</p>
+        <el-form ref="formStep1" :model="form" :rules="rules" label-position="top" @submit.native.prevent>
+          <el-form-item :label="$t('xn.agents.wizard.nameLabel')" prop="deviceName">
+            <el-input v-model="form.deviceName" :maxlength="20" show-word-limit :placeholder="$t('xn.agents.wizard.namePlaceholder')" />
+          </el-form-item>
+          <el-form-item :label="$t('roleConfig.userNickname')" prop="userNickname">
+            <el-input v-model="form.userNickname" :maxlength="20" show-word-limit :placeholder="$t('xn.agents.wizard.nicknamePlaceholder')"
+              @keyup.enter.native="nextStep" />
+          </el-form-item>
+        </el-form>
+      </div>
+
+      <!-- 2 声音与记忆 -->
+      <div v-else-if="currentStep === 2" class="aw-pane">
+        <div class="aw-field">
+          <div class="aw-label">{{ $t('xn.agents.wizard.voiceLabel') }}</div>
+          <p class="aw-help">{{ $t('xn.agents.wizard.voiceHelp') }}</p>
+          <el-select v-model="form.ttsVoiceId" filterable :placeholder="voiceSelectPlaceholder" class="aw-select"
+            @visible-change="handleVoiceDropdownChange">
+            <el-option v-for="(item, index) in voiceOptions" :key="'voice-' + index" :label="item.label" :value="item.value">
+              <div class="aw-voice-opt">
+                <span>{{ item.label }}</span>
+                <el-button v-if="hasAudioPreview(item)" type="text" size="small" class="aw-play" :aria-label="$t('xn.agents.wizard.preview')"
+                  :icon="playingVoice && currentPlayingVoiceId === item.value && !isPaused ? 'el-icon-video-pause' : 'el-icon-video-play'"
+                  @click.stop="toggleAudioPlayback(item.value)" />
               </div>
+            </el-option>
+          </el-select>
+        </div>
 
-              <!-- Data Pipeline 步骤条：光点 + 细线 + 等宽小写 -->
-              <div class="fui-stepper">
-                <template v-for="(step, idx) in stepList">
-                  <div
-                    v-if="idx > 0"
-                    class="fui-stepper-track"
-                    :class="{ 'fui-stepper-track--active': currentStep > idx }"
-                  />
-                  <div
-                    class="fui-stepper-node"
-                    :class="{
-                      'is-active': currentStep === idx + 1,
-                      'is-done': currentStep > idx + 1
-                    }"
-                  >
-                    <div class="fui-stepper-marker"></div>
-                    <div class="fui-stepper-label">{{ step.title }}</div>
-                  </div>
-                </template>
-              </div>
-
-              <div class="wizard-body">
-            <div v-if="currentStep === 1" class="wizard-step">
-              <div class="step-label">Step 1 · 赋予身份</div>
-              <div class="narrative-quote">
-                在无数平行宇宙里，诞生了许多智慧体。而你现在面前的这个，将因为你的命名而「真正存在」。
-              </div>
-
-              <el-form
-                ref="formStep1"
-                :model="form"
-                :rules="rules"
-                label-position="top"
-                class="step-form"
-              >
-                <el-form-item label="给你的智能体起个名字" prop="deviceName">
-                  <el-input
-                    v-model="form.deviceName"
-                    size="medium"
-                    class="terminal-input large-input"
-                    :maxlength="20"
-                    show-word-limit
-                    placeholder="例如：小爱"
-                  />
-                </el-form-item>
-                <el-form-item label="它对我的称呼" prop="userNickname">
-                  <el-input
-                    v-model="form.userNickname"
-                    size="medium"
-                    class="terminal-input large-input"
-                    :maxlength="20"
-                    show-word-limit
-                    placeholder="例如：小林，或你喜欢的称呼"
-                  />
-                </el-form-item>
-              </el-form>
-            </div>
-
-            <div v-else-if="currentStep === 2" class="wizard-step">
-              <div class="step-label">Step 2 · 能力设定</div>
-              <div class="narrative-quote">
-                声音是灵魂震颤的频率，记忆是时间凝结的琥珀。在此刻，你将决定它如何向世界发声，以及它能为你保留多少时光。
-              </div>
-
-              <div class="ability-section">
-                <div class="ability-block ability-block--voice">
-                  <div class="ability-label">声音音色</div>
-                  <p class="ability-hint">已默认使用「回响现实官方服务」，请选择音色并试听。</p>
-                  <el-select
-                    v-model="form.ttsVoiceId"
-                    filterable
-                    :placeholder="voiceSelectPlaceholder"
-                    :popper-append-to-body="false"
-                    class="wizard-select ability-voice-select"
-                    @visible-change="handleVoiceDropdownChange"
-                  >
-                    <el-option
-                      v-for="(item, index) in voiceOptions"
-                      :key="'voice-' + index"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                      <div class="voice-option-row">
-                        <span>{{ item.label }}</span>
-                        <template v-if="hasAudioPreview(item)">
-                          <el-button
-                            type="text"
-                            :icon="playingVoice && currentPlayingVoiceId === item.value && !isPaused ? 'el-icon-video-pause' : 'el-icon-video-play'"
-                            size="small"
-                            class="play-btn-inline"
-                            @click.stop="toggleAudioPlayback(item.value)"
-                          />
-                        </template>
-                      </div>
-                    </el-option>
-                  </el-select>
-                </div>
-
-                <div class="ability-block ability-block--memory">
-                  <div class="ability-label">记忆模式</div>
-                  <div class="memory-cards">
-                    <div
-                      v-for="item in memoryCardList"
-                      :key="item.value"
-                      class="memory-card"
-                      :class="{ 'memory-card--active': form.memModelId === item.value }"
-                      @click="selectMemoryCard(item.value)"
-                    >
-                      <div class="memory-card__title">{{ item.title }}</div>
-                      <div class="memory-card__desc">{{ item.desc }}</div>
-                      <div v-if="item.value === 'Memory_bailian'" class="memory-card__hint">
-                        按实际用量计费，可在余额和账单中查看费用。
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-else class="wizard-step step4-soul">
-              <div class="step-label">Step 3 · 人格设定</div>
-              <div class="narrative-quote">
-                选择你喜欢的聊天性格，也可以写自己的设定。创建后，仍可在角色配置中修改。
-              </div>
-
-              <persona-preset-picker :value="form.systemPrompt" @input="applyPersonaPreset" @edit="focusPersonaEditor" />
-              <el-button type="text" :aria-expanded="showSoulGenerators" @click="showSoulGenerators = !showSoulGenerators">
-                {{ showSoulGenerators ? '收起更多生成方式' : '更多生成方式：模组、塔罗、盲盒' }}
-              </el-button>
-
-              <transition v-if="showSoulGenerators" name="soul-slide" mode="out-in">
-                <div v-if="soulMethod === 'none'" key="choice" class="soul-choice">
-                  <div class="soul-entry-cards">
-                    <div class="soul-entry-card" @click="setSoulMethod('modules')">
-                      <div class="soul-entry-icon">◇</div>
-                      <div class="soul-entry-title">灵魂模组拼装</div>
-                      <div class="soul-entry-desc">语气 · 身份 · 癖好，自由组合</div>
-                    </div>
-                    <div class="soul-entry-card" @click="setSoulMethod('tarot')">
-                      <div class="soul-entry-icon">♠</div>
-                      <div class="soul-entry-title">命运塔罗牌</div>
-                      <div class="soul-entry-desc">翻开一张牌，接受命运</div>
-                    </div>
-                    <div class="soul-entry-card" @click="setSoulMethod('mystery')">
-                      <div class="soul-entry-icon">◎</div>
-                      <div class="soul-entry-title">关键词盲盒</div>
-                      <div class="soul-entry-desc">随机抓取，惊喜合成</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div v-else key="method" class="soul-method-panel">
-                  <el-button type="text" class="soul-back-btn" @click="backToSoulMethodChoice">
-                    ← 返回选择
-                  </el-button>
-
-                  <div v-if="soulMethod === 'modules'" class="soul-modules">
-                    <div class="soul-module-row">
-                      <span class="soul-module-label">语气</span>
-                      <div class="soul-tag-wall">
-                        <span
-                          v-for="(desc, label) in SOUL_MODULES.tone"
-                          :key="'tone-' + label"
-                          class="fui-data-chip soul-tag"
-                          :class="{ 'fui-data-chip--active soul-tag--active': soulModuleSelection.tone === label }"
-                          @click="selectModuleTag('tone', label)"
-                        >{{ label }}</span>
-                      </div>
-                    </div>
-                    <div class="soul-module-row">
-                      <span class="soul-module-label">身份</span>
-                      <div class="soul-tag-wall">
-                        <span
-                          v-for="(desc, label) in SOUL_MODULES.role"
-                          :key="'role-' + label"
-                          class="fui-data-chip soul-tag"
-                          :class="{ 'fui-data-chip--active soul-tag--active': soulModuleSelection.role === label }"
-                          @click="selectModuleTag('role', label)"
-                        >{{ label }}</span>
-                      </div>
-                    </div>
-                    <div class="soul-module-row">
-                      <span class="soul-module-label">癖好</span>
-                      <div class="soul-tag-wall">
-                        <span
-                          v-for="(desc, label) in SOUL_MODULES.quirk"
-                          :key="'quirk-' + label"
-                          class="fui-data-chip soul-tag"
-                          :class="{ 'fui-data-chip--active soul-tag--active': soulModuleSelection.quirk === label }"
-                          @click="selectModuleTag('quirk', label)"
-                        >{{ label }}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div v-else-if="soulMethod === 'tarot'" class="soul-tarot">
-                    <div class="tarot-cards">
-                      <div
-                        v-for="card in TAROT_CARDS"
-                        :key="card.id"
-                        class="tarot-card"
-                        :class="{ 'tarot-card--flipped': tarotFlipped === card.id }"
-                        @click="flipTarot(card)"
-                      >
-                        <div class="tarot-card-inner">
-                          <div class="tarot-card-back">?</div>
-                          <div class="tarot-card-front">
-                            <div class="tarot-card-name">{{ card.name }}</div>
-                            <div class="tarot-card-prompt">{{ card.prompt }}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div v-else-if="soulMethod === 'mystery'" class="soul-mystery">
-                    <div class="mystery-box-wrap" :class="{ 'mystery-box-wrap--opened': mysteryBoxOpened }">
-                      <button type="button" class="mystery-box-btn" :disabled="mysteryBoxOpened" @click="openMysteryBox">
-                        {{ mysteryBoxOpened ? '已开启' : '开启盲盒' }}
-                      </button>
-                    </div>
-                    <div v-if="mysteryBoxOpened" class="mystery-keywords">
-                      <span v-for="(kw, i) in mysteryPicked" :key="i" class="mystery-kw-tag">{{ kw }}</span>
-                    </div>
-                  </div>
-                </div>
-              </transition>
-
-              <div class="soul-preview-block">
-                <div class="fui-terminal-caption-row">
-                  <span class="soul-preview-caption">人格设定（可编辑）</span>
-                  <span v-if="typewriterGenerating" class="typewriter-indicator">Generating...</span>
-                </div>
-                <div class="fui-terminal-editor">
-                  <div class="fui-terminal-gutter">
-                    <span v-for="n in promptLineCount" :key="n" class="fui-terminal-line-num">{{ n }}</span>
-                  </div>
-                  <el-input
-                    ref="personaEditor"
-                    :value="promptDisplay"
-                    type="textarea"
-                    :rows="6"
-                    :disabled="typewriterGenerating"
-                    resize="none"
-                    class="fui-terminal-textarea soul-preview-textarea"
-                    placeholder="写下你希望它具有的性格、说话方式和兴趣..."
-                    @input="onPromptInput"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="wizard-footer">
-            <div class="left-actions">
-              <el-button v-if="mode === 'update'" type="text" class="skip-btn" @click="handleSkip">
-                跳过本次唤醒（可在角色配置中修改）
-              </el-button>
-              <el-button v-else type="text" class="skip-btn" @click="handleSkip">
-                取消
-              </el-button>
-            </div>
-
-            <div class="right-actions">
-              <el-button v-if="currentStep > 1" @click="prevStep">上一步</el-button>
-              <el-button v-if="currentStep < 3" type="primary" class="holo-btn-primary" @click="nextStep">
-                下一步
-              </el-button>
-              <el-button v-else type="primary" class="holo-btn-primary" :loading="submitting" @click.prevent="handleFinish">
-                {{ mode === 'create' ? '完成创建' : '完成唤醒' }}
-              </el-button>
-            </div>
+        <div class="aw-field">
+          <div class="aw-label">{{ $t('roleConfig.memory') }}</div>
+          <div class="aw-choices" role="radiogroup" :aria-label="$t('roleConfig.memory')">
+            <button v-for="item in memoryCardList" :key="item.value" type="button" role="radio" class="aw-choice"
+              :class="{ 'is-on': form.memModelId === item.value }" :aria-checked="String(form.memModelId === item.value)"
+              @click="selectMemoryCard(item.value)">
+              <span class="aw-choice__title">
+                <span class="aw-radio" aria-hidden="true"></span>{{ item.title }}
+              </span>
+              <span class="aw-choice__desc">{{ item.desc }}</span>
+              <span v-if="item.value === 'Memory_bailian'" class="aw-choice__hint">{{ $t('xn.agents.wizard.memoryBilling') }}</span>
+            </button>
           </div>
         </div>
       </div>
+
+      <!-- 3 人格 -->
+      <div v-else class="aw-pane">
+        <persona-preset-picker :value="form.systemPrompt" @input="applyPersonaPreset" @edit="focusPersonaEditor" />
+
+        <el-button type="text" class="aw-more" :aria-expanded="String(showSoulGenerators)" @click="showSoulGenerators = !showSoulGenerators">
+          <xn-icon :name="showSoulGenerators ? 'chevronDown' : 'chevron'" />
+          {{ showSoulGenerators ? $t('xn.agents.wizard.lessWays') : $t('xn.agents.wizard.moreWays') }}
+        </el-button>
+
+        <div v-if="showSoulGenerators" class="aw-gen">
+          <div class="aw-gen__tabs" role="tablist">
+            <button v-for="m in soulMethods" :key="m.key" type="button" role="tab" class="aw-gen__tab"
+              :class="{ 'is-on': soulMethod === m.key }" :aria-selected="String(soulMethod === m.key)" @click="setSoulMethod(m.key)">
+              <span class="aw-gen__tab-title">{{ m.title }}</span>
+              <span class="aw-gen__tab-desc">{{ m.desc }}</span>
+            </button>
+          </div>
+
+          <div v-if="soulMethod === 'modules'" class="aw-gen__pane">
+            <div v-for="dim in moduleDims" :key="dim.key" class="aw-mod">
+              <span class="aw-mod__label">{{ dim.label }}</span>
+              <div class="aw-chips">
+                <button v-for="(desc, label) in SOUL_MODULES[dim.key]" :key="dim.key + '-' + label" type="button" class="aw-chip"
+                  :class="{ 'is-on': soulModuleSelection[dim.key] === label }" :aria-pressed="String(soulModuleSelection[dim.key] === label)"
+                  :title="desc" @click="selectModuleTag(dim.key, label)">{{ label }}</button>
+              </div>
+            </div>
+          </div>
+
+          <div v-else-if="soulMethod === 'tarot'" class="aw-gen__pane">
+            <p class="aw-help">{{ $t('xn.agents.wizard.tarotHelp') }}</p>
+            <div class="aw-tarot">
+              <button v-for="(card, i) in TAROT_CARDS" :key="card.id" type="button" class="aw-card"
+                :class="{ 'is-on': tarotFlipped === card.id }" @click="flipTarot(card)">
+                <template v-if="tarotFlipped === card.id">
+                  <span class="aw-card__name">{{ card.name }}</span>
+                  <span class="aw-card__desc">{{ $t('xn.agents.wizard.tarotChosen') }}</span>
+                </template>
+                <template v-else>
+                  <span class="aw-card__back xn-num">{{ i + 1 }}</span>
+                  <span class="aw-card__desc">{{ $t('xn.agents.wizard.tarotFlip') }}</span>
+                </template>
+              </button>
+            </div>
+          </div>
+
+          <div v-else-if="soulMethod === 'mystery'" class="aw-gen__pane">
+            <p class="aw-help">{{ $t('xn.agents.wizard.mysteryHelp') }}</p>
+            <div class="aw-mystery">
+              <el-button :disabled="mysteryBoxOpened" @click="openMysteryBox">
+                {{ mysteryBoxOpened ? $t('xn.agents.wizard.mysteryOpened') : $t('xn.agents.wizard.mysteryOpen') }}
+              </el-button>
+              <span v-for="(kw, i) in mysteryPicked" :key="i" class="xn-tag xn-tag--lake">{{ kw }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="aw-field aw-prompt">
+          <div class="aw-label">
+            {{ $t('xn.agents.wizard.promptLabel') }}
+            <span v-if="typewriterGenerating" class="xn-tag xn-tag--muted">{{ $t('xn.agents.wizard.generating') }}</span>
+          </div>
+          <el-input ref="personaEditor" :value="promptDisplay" type="textarea" :rows="6" :disabled="typewriterGenerating"
+            resize="vertical" maxlength="2000" show-word-limit :placeholder="$t('xn.agents.wizard.promptPlaceholder')" @input="onPromptInput" />
+        </div>
+      </div>
     </div>
-  </transition>
+
+    <div slot="footer" class="aw-foot">
+      <el-button type="text" class="aw-skip" @click="handleSkip">
+        {{ mode === 'update' ? $t('xn.agents.wizard.skip') : $t('common.cancel') }}
+      </el-button>
+      <span class="aw-foot__grow"></span>
+      <el-button v-if="currentStep > 1" @click="prevStep">{{ $t('xn.agents.wizard.prev') }}</el-button>
+      <el-button v-if="currentStep < 3" type="primary" @click="nextStep">{{ $t('xn.agents.wizard.next') }}</el-button>
+      <el-button v-else type="primary" :loading="submitting" @click.prevent="handleFinish">
+        {{ mode === 'create' ? $t('xn.agents.wizard.finishCreate') : $t('xn.agents.wizard.finishUpdate') }}
+      </el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>
 import Api from "@/apis/api";
 import { getServiceUrl } from "@/apis/api";
+import { playableUrl } from "@/utils/media";
 import RequestService from "@/apis/httpRequest";
 import PersonaPresetPicker from '@/components/PersonaPresetPicker.vue';
 import { DEFAULT_PERSONA_PROMPT } from '@/constants/personaPresets';
@@ -402,44 +261,56 @@ export default {
         chatHistoryConf: 2,
       },
       rules: {
-        deviceName: [{ required: true, message: "请给你的智能体起一个名字", trigger: "blur" }],
-        userNickname: [{ required: true, message: "请设置它对你的称呼", trigger: "blur" }],
+        deviceName: [{ required: true, whitespace: true, message: this.$t("xn.agents.wizard.nameRequired"), trigger: "blur" }],
+        userNickname: [{ required: true, whitespace: true, message: this.$t("xn.agents.wizard.nicknameRequired"), trigger: "blur" }],
       },
     };
   },
   computed: {
     stepList() {
       return [
-        { title: "赋予身份", desc: "确立 TA 的名字与契约称呼" },
-        { title: "能力设定", desc: "声音与记忆" },
-        { title: "人格设定", desc: "选择模板或自定义" },
+        { title: this.$t("xn.agents.wizard.step1"), desc: this.$t("xn.agents.wizard.step1Desc") },
+        { title: this.$t("xn.agents.wizard.step2"), desc: this.$t("xn.agents.wizard.step2Desc") },
+        { title: this.$t("xn.agents.wizard.step3"), desc: this.$t("xn.agents.wizard.step3Desc") },
+      ];
+    },
+    soulMethods() {
+      return [
+        { key: "modules", title: this.$t("xn.agents.wizard.modules"), desc: this.$t("xn.agents.wizard.modulesDesc") },
+        { key: "tarot", title: this.$t("xn.agents.wizard.tarot"), desc: this.$t("xn.agents.wizard.tarotDesc") },
+        { key: "mystery", title: this.$t("xn.agents.wizard.mystery"), desc: this.$t("xn.agents.wizard.mysteryDesc") },
+      ];
+    },
+    moduleDims() {
+      return [
+        { key: "tone", label: this.$t("xn.agents.wizard.dimTone") },
+        { key: "role", label: this.$t("xn.agents.wizard.dimRole") },
+        { key: "quirk", label: this.$t("xn.agents.wizard.dimQuirk") },
       ];
     },
     wizardTitle() {
-      return this.mode === "create" ? "创建新的智能体" : "新用户唤醒向导";
+      return this.mode === "create" ? this.$t("xn.agents.wizard.titleCreate") : this.$t("xn.agents.wizard.titleUpdate");
     },
     wizardSubtitle() {
-      return this.mode === "create"
-        ? "为你的智能体注入「名字、羁绊与性格」"
-        : "为你的智能体注入「名字、羁绊与性格」";
+      return this.$t("xn.agents.wizard.subtitle");
     },
     memoryCardList() {
       return [
         {
           value: "Memory_mem_local_short",
-          title: "本地短期记忆",
-          desc: "拥有短暂的记忆力，能流畅进行多轮对话，记得住上下文。",
+          title: this.$t("xn.agents.wizard.memShort"),
+          desc: this.$t("xn.agents.wizard.memShortDesc"),
         },
         {
           value: "Memory_bailian",
-          title: "长期记忆 · 回响现实官方服务",
-          desc: "赋予 TA 长期记忆能力，能记住你的喜好与习惯，越聊越懂你。",
+          title: this.$t("xn.agents.wizard.memLong"),
+          desc: this.$t("xn.agents.wizard.memLongDesc"),
         },
       ];
     },
     voiceSelectPlaceholder() {
-      if (!this.voiceOptionsLoaded) return "加载中...";
-      return this.voiceOptions.length === 0 ? "无可用音色" : "请选择音色";
+      if (!this.voiceOptionsLoaded) return this.$t("xn.agents.wizard.voiceLoading");
+      return this.voiceOptions.length === 0 ? this.$t("xn.agents.rc.noVoices") : this.$t("xn.agents.rc.pickVoice");
     },
     soulCoreTone() {
       const t = this.soulModuleSelection.tone;
@@ -513,6 +384,9 @@ export default {
       this.tarotFlipped = null;
       this.mysteryBoxOpened = false;
       this.mysteryPicked = [];
+    },
+    handleBeforeClose() {
+      this.handleSkip();
     },
     setSoulMethod(method) {
       this.soulMethod = method;
@@ -788,7 +662,7 @@ export default {
                 .method("POST")
                 .success((res) => {
                   if (res.data && res.data.code === 0 && res.data.data) {
-                    resolve(`${getServiceUrl()}/voiceClone/play/${res.data.data}`);
+                    resolve(playableUrl(`${getServiceUrl()}/voiceClone/play/${res.data.data}`));
                   } else resolve(null);
                 })
                 .networkFail(() => resolve(null))
@@ -831,12 +705,12 @@ export default {
         }
       }
       if (!audioUrl) {
-        this.$message.warning("该音色暂无可预览的音频");
+        this.$message.warning(this.$t("xn.agents.wizard.noPreview"));
         return;
       }
       this.playingVoice = true;
       this.currentAudio = new Audio();
-      this.currentAudio.src = audioUrl;
+      this.currentAudio.src = playableUrl(audioUrl);
       this.currentAudio.volume = 1.0;
       const timeoutId = setTimeout(() => {
         if (this.currentAudio && this.playingVoice) this.playingVoice = false;
@@ -857,12 +731,14 @@ export default {
     nextStep() {
       this.stopCurrentAudio();
       if (this.currentStep === 1) {
+        // 表单内显示校验结果，并保留原有的提示
+        if (this.$refs.formStep1) this.$refs.formStep1.validate(() => {});
         if (!this.form.deviceName || !this.form.deviceName.trim()) {
-          this.$message.warning("请给你的智能体起一个名字");
+          this.$message.warning(this.$t("xn.agents.wizard.nameRequired"));
           return;
         }
         if (!this.form.userNickname || !this.form.userNickname.trim()) {
-          this.$message.warning("请设置它对你的称呼");
+          this.$message.warning(this.$t("xn.agents.wizard.nicknameRequired"));
           return;
         }
         this.currentStep = 2;
@@ -888,11 +764,11 @@ export default {
       this.stopCurrentAudio();
       if (this.submitting) return;
       if (this.typewriterGenerating) {
-        this.$message.warning('请等人格文字生成完成后再保存');
+        this.$message.warning(this.$t('xn.agents.wizard.waitGenerating'));
         return;
       }
       if (!(this.form.systemPrompt || '').trim()) {
-        this.$message.warning('请选择人格模板，或填写自定义人格');
+        this.$message.warning(this.$t('xn.agents.personaRequired'));
         this.currentStep = 3;
         return;
       }
@@ -900,12 +776,12 @@ export default {
       const deviceName = (this.form.deviceName || "").trim();
       const userNickname = (this.form.userNickname || "").trim();
       if (!deviceName) {
-        this.$message.warning("请给你的智能体起一个名字");
+        this.$message.warning(this.$t("xn.agents.wizard.nameRequired"));
         this.currentStep = 1;
         return;
       }
       if (!userNickname) {
-        this.$message.warning("请设置它对你的称呼");
+        this.$message.warning(this.$t("xn.agents.wizard.nicknameRequired"));
         this.currentStep = 1;
         return;
       }
@@ -917,7 +793,7 @@ export default {
 
       const agentId = this.currentAgentId || this.agentId;
       if (!agentId) {
-        this.$message.error("无法确定当前智能体，请刷新页面后重试");
+        this.$message.error(this.$t("xn.agents.wizard.noAgent"));
         return;
       }
 
@@ -933,14 +809,13 @@ export default {
         memModelId: this.form.memModelId || undefined,
         chatHistoryConf,
       };
-      console.log("[AwakeningWizard] 更新数据 agentId:", agentId, "payload:", payload);
       this.doUpdateAgentConfig(agentId, payload);
     },
     doCreateAgent(deviceName, userNickname) {
       this.submitting = true;
       const submitTimeout = setTimeout(() => {
         this.submitting = false;
-        this.$message.error("请求超时，请检查网络后重试");
+        this.$message.error(this.$t("xn.agents.wizard.timeout"));
       }, 20000);
 
       Api.agent.addAgent(deviceName, (res) => {
@@ -949,14 +824,14 @@ export default {
           if (!data || data.code !== 0) {
             clearTimeout(submitTimeout);
             this.submitting = false;
-            this.$message.error((data && data.msg) || "创建智能体失败");
+            this.$message.error((data && data.msg) || this.$t("xn.agents.wizard.createFailed"));
             return;
           }
           const newAgentId = data.data;
           if (!newAgentId) {
             clearTimeout(submitTimeout);
             this.submitting = false;
-            this.$message.error("创建成功但未返回智能体 ID");
+            this.$message.error(this.$t("xn.agents.wizard.noId"));
             return;
           }
           const chatHistoryConf = 2;
@@ -971,24 +846,23 @@ export default {
             chatHistoryConf,
             ...this.DEFAULT_MODEL_CONFIG,
           };
-          console.log("[AwakeningWizard] 创建后更新配置 agentId:", newAgentId, "payload:", updatePayload);
           Api.agent.updateAgentConfig(newAgentId, updatePayload, (res2) => {
             clearTimeout(submitTimeout);
             this.submitting = false;
             try {
               const data2 = res2 && res2.data;
               if (data2 && data2.code === 0) {
-                this.$message.success({ message: "智能体创建成功！", showClose: true });
+                this.$message.success({ message: this.$t("xn.agents.wizard.created"), showClose: true });
                 this.$emit("success", { agentId: newAgentId });
                 this.closeWizard(true);
               } else {
-                this.$message.warning("智能体已创建，但部分配置保存失败，可在角色配置中修改");
+                this.$message.warning(this.$t("xn.agents.wizard.partial"));
                 this.$emit("success", { agentId: newAgentId });
                 this.closeWizard(true);
               }
             } catch (e) {
               console.error("[AwakeningWizard] 创建后更新解析失败", e);
-              this.$message.warning("智能体已创建，请稍后在角色配置中完善");
+              this.$message.warning(this.$t("xn.agents.wizard.partial"));
               this.$emit("success", { agentId: newAgentId });
               this.closeWizard(true);
             }
@@ -997,14 +871,14 @@ export default {
           clearTimeout(submitTimeout);
           this.submitting = false;
           console.error("[AwakeningWizard] 创建解析失败", e);
-          this.$message.error("创建失败：" + (e && e.message ? e.message : "未知错误"));
+          this.$message.error(this.$t("xn.agents.wizard.createFailed"));
         }
       });
     },
     doUpdateAgentConfig(agentId, payload) {
       const submitTimeout = setTimeout(() => {
         this.submitting = false;
-        this.$message.error("请求超时，请检查网络后重试");
+        this.$message.error(this.$t("xn.agents.wizard.timeout"));
       }, 15000);
 
       try {
@@ -1015,25 +889,25 @@ export default {
             const data = res && res.data;
             if (data && data.code === 0) {
               this.$message.success({
-                message: "唤醒完成，欢迎加入新的旅程！",
+                message: this.$t("xn.agents.wizard.updated"),
                 showClose: true,
               });
               this.$emit("success", { agentId });
               this.closeWizard(true);
             } else {
-              const msg = (data && data.msg) || "唤醒失败，请稍后重试";
+              const msg = (data && data.msg) || this.$t("xn.agents.wizard.updateFailed");
               this.$message.error({ message: msg, showClose: true });
             }
           } catch (e) {
             console.error("[AwakeningWizard] 解析响应失败", e);
-            this.$message.error("唤醒失败：响应解析异常");
+            this.$message.error(this.$t("xn.agents.wizard.updateFailed"));
           }
         });
       } catch (e) {
         clearTimeout(submitTimeout);
         this.submitting = false;
         console.error("[AwakeningWizard] 提交异常", e);
-        this.$message.error("唤醒失败：" + (e && e.message ? e.message : "未知错误"));
+        this.$message.error(this.$t("xn.agents.wizard.updateFailed"));
       }
     },
     closeWizard(shouldGoHome) {
@@ -1049,803 +923,82 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.35s ease;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.awakening-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-}
-
-/* 遮罩：bg-slate-900/20 backdrop-blur-sm 轻盈半透明 */
-.awakening-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* 主容器：max-w-2xl mx-auto 单栏居中 */
-.awakening-container {
-  position: relative;
-  max-width: 672px;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 51;
-}
-
-/* 主卡片：高级悬浮阴影 ring-slate-900/5 */
-.awakening-card {
-  position: relative;
-  border-radius: 24px;
-  padding: 28px 32px 24px;
-  background: #fff;
-  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(15, 23, 42, 0.05);
-}
-
-/* 极简步骤条：当前 text-blue-600，未激活 text-slate-400 */
-.fui-stepper {
-  display: flex;
-  align-items: flex-start;
-  margin: 22px 0 20px;
-  gap: 0;
-}
-
-.fui-stepper-track {
-  flex: 1;
-  height: 2px;
-  min-width: 20px;
-  max-width: 40px;
-  margin-top: 7px;
-  background: #e2e8f0;
-  border-radius: 1px;
-  transition: background 0.25s ease;
-}
-
-.fui-stepper-track--active {
-  background: #2563eb;
-}
-
-.fui-stepper-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.fui-stepper-marker {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #cbd5e1;
-  transition: all 0.25s ease;
-}
-
-.fui-stepper-node.is-active .fui-stepper-marker {
-  width: 10px;
-  height: 10px;
-  background: #2563eb;
-}
-
-.fui-stepper-node.is-done .fui-stepper-marker {
-  background: #2563eb;
-}
-
-.fui-stepper-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #94a3b8;
-  max-width: 56px;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.fui-stepper-node.is-active .fui-stepper-label {
-  color: #2563eb;
-  font-weight: 600;
-}
-
-.fui-stepper-node.is-done .fui-stepper-label {
-  color: #64748b;
-}
-
-/* 说明文案 */
-.step-log {
-  font-size: 12px;
-  color: #64748b;
-  margin: 0 0 10px;
-}
-
-/* 叙事引言：光束背景 + 粗竖线，醒目不放大 */
-.narrative-quote {
-  padding: 12px 16px 12px 24px;
-  margin: 24px 0;
-  background: linear-gradient(to right, rgba(238, 242, 255, 0.8), transparent);
-  border-left: 4px solid #6366f1;
-  border-radius: 0 12px 12px 0;
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 500;
-  color: #334155;
-  letter-spacing: 0.025em;
-  line-height: 1.75;
-  text-align: left;
-}
-
-.terminal-desc {
-  font-size: 14px;
-  font-weight: 400;
-  color: #64748b;
-  line-height: 1.8;
-  margin: 0 0 20px;
-  letter-spacing: 0.02em;
-}
-
-/* 输入框：丝滑磨砂质感，ring 勾勒，hover/focus 状态 */
-.terminal-input.large-input ::v-deep .el-input__inner {
-  height: 48px;
-  font-size: 15px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: rgba(248, 250, 252, 0.5);
-  border: none;
-  box-shadow: 0 0 0 1px #e2e8f0;
-  color: #0f172a;
-  transition: background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.terminal-input.large-input ::v-deep .el-input__inner:hover {
-  background: #f8fafc;
-}
-
-.terminal-input.large-input ::v-deep .el-input__inner::placeholder {
-  color: #94a3b8;
-}
-
-.terminal-input.large-input ::v-deep .el-input__inner:focus,
-.terminal-input.large-input ::v-deep .el-input.is-focus .el-input__inner {
-  background: #fff;
-  outline: none;
-  box-shadow: 0 0 0 2px #3b82f6;
-  transition: background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.terminal-input.large-input ::v-deep .el-input__count {
-  color: #94a3b8;
-  font-size: 12px;
-}
-
-.wizard-footer {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-/* 取消：幽灵按钮 */
-.skip-btn {
-  color: #64748b !important;
-  border-radius: 8px !important;
-}
-.skip-btn:hover {
-  color: #475569 !important;
-  background: #f1f5f9 !important;
-}
-
-/* 下一步/完成：实心纯蓝 bg-blue-600 hover:bg-blue-700 */
-.holo-btn-primary {
-  background: #2563eb !important;
-  border: none !important;
-  border-radius: 8px !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-  padding: 8px 24px !important;
-  box-shadow: none !important;
-  transition: background 0.2s ease !important;
-}
-.holo-btn-primary:hover {
-  background: #1d4ed8 !important;
-  box-shadow: none !important;
-  transform: none;
-}
-
-.wizard-header {
-  margin-bottom: 18px;
-  text-align: left;
-}
-
-.wizard-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #0f172a;
-  letter-spacing: 0.02em;
-}
-
-.wizard-subtitle {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  letter-spacing: 0.02em;
-}
-
-.wizard-body {
-  margin-top: 12px;
-  min-height: 280px;
-}
-
-.wizard-step {
-  text-align: left;
-}
-
-.step-form ::v-deep .el-form-item {
-  margin-bottom: 28px;
-}
-
-.step-form ::v-deep .el-form-item__label {
-  display: inline-flex;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-  letter-spacing: 0.02em;
-}
-
-.step-form ::v-deep .el-form-item.is-required .el-form-item__label::before {
-  color: #f43f5e;
-  vertical-align: middle;
-}
-
-.step-form ::v-deep .el-form-item__error {
-  margin-top: 6px;
-  padding-top: 2px;
-}
-
-.step-label {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-.step-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 12px;
-}
-
-.step-desc {
-  font-size: 14px;
-  font-weight: 400;
-  color: #64748b;
-  line-height: 1.8;
-  margin: 0 0 18px;
-  letter-spacing: 0.02em;
-}
-
-.highlight-name {
-  color: #2563eb;
-  font-weight: 600;
-}
-
-/* large-input 已由 terminal-input 统一为填充风格 */
-
-.personality-title {
-  font-family: "Consolas", "JetBrains Mono", ui-monospace, monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #64748b;
-  margin-bottom: 8px;
-}
-
-.personality-group {
-  margin-bottom: 10px;
-}
-
-.ability-section {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.ability-block {
-  margin-bottom: 0;
-}
-
-.ability-block--memory {
-  margin-top: 0;
-}
-
-.ability-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 10px;
-}
-
-.ability-hint {
-  font-size: 12px;
-  color: #94a3b8;
-  margin: 0 0 12px;
-  letter-spacing: 0.01em;
-}
-
-.wizard-select.ability-voice-select {
-  width: 100%;
-}
-.wizard-select ::v-deep .el-input__inner {
-  background: rgba(248, 250, 252, 0.5);
-  border: none;
-  box-shadow: 0 0 0 1px #e2e8f0;
-  border-radius: 12px;
-  color: #334155;
-  height: 48px;
-  transition: background 0.25s ease, box-shadow 0.25s ease;
-}
-.wizard-select ::v-deep .el-input__inner:hover {
-  background: #f8fafc;
-}
-.wizard-select ::v-deep .el-input__inner:focus,
-.wizard-select ::v-deep .el-input.is-focus .el-input__inner {
-  background: #fff;
-  box-shadow: 0 0 0 2px #3b82f6;
-}
-
-.voice-option-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.play-btn-inline {
-  color: #2563eb !important;
-  padding: 4px;
-}
-
-.memory-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.memory-card {
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.memory-card:hover {
-  border-color: #93c5fd;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.memory-card--active {
-  background: rgba(239, 246, 255, 0.3);
-  border: none;
-  box-shadow: 0 0 0 2px #3b82f6, 0 4px 14px rgba(59, 130, 246, 0.1);
-}
-
-.memory-card__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 6px;
-}
-
-.memory-card__desc {
-  font-size: 13px;
-  color: #64748b;
-  line-height: 1.5;
-}
-
-.memory-card__hint {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: rgba(234, 88, 12, 0.9);
-  background: #fff7ed;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-top: 12px;
-  line-height: 1.5;
-}
-
-.personality-note {
-  ::v-deep .el-textarea__inner {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
-    font-size: 13px;
-  }
-}
-
-/* ========== Step 4 灵魂召唤 ========== */
-.step4-soul .wizard-body {
-  min-height: 320px;
-}
-
-.soul-slide-enter-active,
-.soul-slide-leave-active {
-  transition: all 0.3s ease;
-}
-.soul-slide-enter {
-  opacity: 0;
-  transform: translateX(20px);
-}
-.soul-slide-leave-to {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-.soul-choice {
-  margin-bottom: 16px;
-}
-
-.soul-entry-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.soul-entry-card {
-  padding: 24px 20px;
-  border-radius: 16px;
-  border: none;
-  box-shadow: 0 0 0 1px #e2e8f0;
-  background: rgba(248, 250, 252, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.soul-entry-card:hover {
-  background: #fff;
-  box-shadow: 0 0 0 2px #a5b4fc, 0 10px 25px -5px rgba(99, 102, 241, 0.1);
-}
-
-.soul-entry-icon {
-  font-size: 28px;
-  color: #2563eb;
-  margin-bottom: 10px;
-  line-height: 1;
-}
-
-.soul-entry-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 6px;
-}
-
-.soul-entry-desc {
-  font-size: 12px;
-  color: #64748b;
-}
-
-.soul-method-panel {
-  margin-bottom: 16px;
-  padding: 12px 0;
-}
-
-.soul-back-btn {
-  color: #64748b !important;
-  font-size: 13px;
-  margin-bottom: 14px;
-  padding: 0;
-}
-.soul-back-btn:hover {
-  color: #2563eb !important;
-}
-
-.soul-modules {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.soul-module-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.soul-module-label {
-  flex-shrink: 0;
-  width: 48px;
-  font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #64748b;
-}
-
-.soul-tag-wall {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.soul-tag {
-  padding: 6px 12px;
-  font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: #2563eb;
-  background: transparent;
-  border: 1px solid #bfdbfe;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-}
-
-.soul-tag:hover {
-  border-color: #3b82f6;
-  color: #1d4ed8;
-  background: #eff6ff;
-}
-
-.soul-tag--active {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  color: #1d4ed8;
-}
-
-.soul-tarot {
-  padding: 10px 0;
-}
-
-.tarot-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.tarot-card {
-  aspect-ratio: 2/3;
-  perspective: 800px;
-  cursor: pointer;
-}
-
-.tarot-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease;
-  transform-style: preserve-3d;
-}
-
-.tarot-card--flipped .tarot-card-inner {
-  transform: rotateY(180deg);
-}
-
-.tarot-card-back,
-.tarot-card-front {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  text-align: center;
-}
-
-.tarot-card-back {
-  background: linear-gradient(135deg, #eff6ff, #f0f9ff);
-  border: 1px solid #e2e8f0;
-  font-size: 28px;
-  color: #64748b;
-  font-weight: 700;
-}
-
-.tarot-card-front {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  transform: rotateY(180deg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.tarot-card-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-.tarot-card-prompt {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.5;
-  overflow-y: auto;
-}
-
-.soul-mystery {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.mystery-box-wrap {
-  margin-bottom: 16px;
-}
-
-.mystery-box-wrap--opened .mystery-box-btn {
-  opacity: 0.6;
-  cursor: default;
-  animation: mystery-shake 0.5s ease;
-}
-
-.mystery-box-btn {
-  padding: 16px 48px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  background: #2563eb;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.mystery-box-btn:hover:not(:disabled) {
-  background: #1d4ed8;
-  transform: scale(1.02);
-}
-
-.mystery-box-btn:active:not(:disabled) {
-  animation: mystery-shake 0.4s ease;
-}
-
-@keyframes mystery-shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-4px); }
-  40% { transform: translateX(4px); }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(2px); }
-}
-
-.mystery-keywords {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.mystery-kw-tag {
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #2563eb;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-}
-
-.soul-preview-block {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
-}
-
-.fui-terminal-caption-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.soul-preview-caption {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-}
-
-.fui-terminal-caption {
-  font-family: "Consolas", "JetBrains Mono", ui-monospace, monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #64748b;
-}
-
-.typewriter-indicator {
-  font-size: 10px;
-  color: #94a3b8;
-  animation: typewriter-blink 1s ease-in-out infinite;
-}
-
-@keyframes typewriter-blink {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-.fui-terminal-editor {
-  display: flex;
-  border: none;
-  box-shadow: 0 0 0 1px #e2e8f0;
-  background: #f8fafc;
-  border-radius: 12px;
-  min-height: 140px;
-  transition: box-shadow 0.25s ease, background 0.25s ease;
-}
-
-.fui-terminal-editor:focus-within {
-  box-shadow: 0 0 0 2px #6366f1;
-  background: #fff;
-}
-
-.fui-terminal-gutter {
-  flex-shrink: 0;
-  padding: 10px 8px 10px 12px;
-  background: transparent;
-  border-right: 1px solid #e2e8f0;
-  font-family: "JetBrains Mono", "Consolas", ui-monospace, monospace;
-  font-size: 12px;
-  color: #cbd5e1;
-  line-height: 1.6;
-  user-select: none;
-  text-align: right;
-}
-
-.fui-terminal-line-num {
-  display: block;
-}
-
-.fui-terminal-textarea.soul-preview-textarea {
-  flex: 1;
-  margin-top: 0;
-}
-.fui-terminal-textarea.soul-preview-textarea ::v-deep .el-textarea__inner {
-  font-family: "JetBrains Mono", "Consolas", ui-monospace, monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0;
-  color: #475569;
-  padding: 10px 12px;
-  resize: none;
-}
-.fui-terminal-textarea.soul-preview-textarea ::v-deep .el-textarea__inner::placeholder {
-  color: #94a3b8;
-}
-
-.soul-preview-textarea {
-  margin-top: 8px;
-}
-
-.right-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+<style scoped>
+.aw-sub { margin: -6px 0 18px; font-size: 14px; color: var(--xn-ink-3); }
+.aw-steps { display: flex; gap: 8px; margin: 0 0 20px; padding: 0; list-style: none; }
+.aw-step { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; padding: 10px 12px; border: 1px solid var(--xn-line-2); border-radius: var(--xn-r); background: #fff; }
+.aw-step__num { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--xn-mist); color: var(--xn-ink-3); font-size: 13px; font-weight: 600; }
+.aw-step__text { display: flex; flex-direction: column; min-width: 0; }
+.aw-step__title { font-size: 14px; font-weight: 600; color: var(--xn-ink-3); }
+.aw-step__desc { font-size: 12px; color: var(--xn-ink-4); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.aw-step.is-active { border-color: var(--xn-ink); }
+.aw-step.is-active .aw-step__num { background: var(--xn-ink); color: #fff; }
+.aw-step.is-active .aw-step__title { color: var(--xn-ink); }
+.aw-step.is-active .aw-step__desc { color: var(--xn-ink-3); }
+.aw-step.is-done .aw-step__num { background: var(--xn-lake-soft); color: var(--xn-lake); }
+.aw-step.is-done .aw-step__title { color: var(--xn-ink-2); }
+
+.aw-body { min-height: 260px; }
+.aw-pane ::v-deep .el-form-item__label { padding-bottom: 6px; line-height: 1.5; }
+.aw-help { margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.aw-field + .aw-field { margin-top: 20px; }
+.aw-label { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: var(--xn-ink); }
+.aw-field .aw-help { margin-bottom: 10px; }
+.aw-select { width: 100%; }
+.aw-voice-opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.aw-play { padding: 0; }
+
+.aw-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.aw-choice { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; font: inherit; color: var(--xn-ink); text-align: left; cursor: pointer; }
+.aw-choice:hover { border-color: #AEBBC8; }
+.aw-choice:focus-visible { outline: none; box-shadow: var(--xn-focus); }
+.aw-choice.is-on { border-color: var(--xn-lake); background: var(--xn-lake-soft); }
+.aw-choice__title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+.aw-radio { flex: none; width: 14px; height: 14px; border: 1.5px solid var(--xn-ink-4); border-radius: 50%; background: #fff; }
+.aw-choice.is-on .aw-radio { border: 4px solid var(--xn-lake); }
+.aw-choice__desc { font-size: 13px; line-height: 1.5; color: var(--xn-ink-2); }
+.aw-choice__hint { font-size: 12px; line-height: 1.5; color: var(--xn-ink-3); }
+
+.aw-more { margin-top: 8px; padding-left: 0; }
+.aw-gen { margin-top: 4px; padding: 12px; border: 1px solid var(--xn-line); border-radius: var(--xn-r-lg); background: var(--xn-mist-2); }
+.aw-gen__tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.aw-gen__tab { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; font: inherit; text-align: left; cursor: pointer; }
+.aw-gen__tab:hover { border-color: #AEBBC8; }
+.aw-gen__tab.is-on { border-color: var(--xn-ink); }
+.aw-gen__tab-title { font-size: 14px; font-weight: 600; color: var(--xn-ink); }
+.aw-gen__tab-desc { font-size: 12px; color: var(--xn-ink-3); }
+.aw-gen__pane { margin-top: 12px; }
+.aw-mod { display: flex; align-items: flex-start; gap: 10px; }
+.aw-mod + .aw-mod { margin-top: 8px; }
+.aw-mod__label { flex: none; width: 40px; padding-top: 5px; font-size: 13px; color: var(--xn-ink-3); }
+.aw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.aw-chip { height: 30px; padding: 0 10px; border: 1px solid var(--xn-line); border-radius: var(--xn-r-sm); background: #fff; font: inherit; font-size: 13px; color: var(--xn-ink-2); cursor: pointer; }
+.aw-chip:hover { border-color: #AEBBC8; color: var(--xn-ink); }
+.aw-chip.is-on { border-color: var(--xn-lake); background: var(--xn-lake-soft); color: var(--xn-lake-ink); font-weight: 500; }
+.aw-tarot { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.aw-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 84px; border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; font: inherit; cursor: pointer; }
+.aw-card:hover { border-color: #AEBBC8; }
+.aw-card.is-on { border-color: var(--xn-lake); background: var(--xn-lake-soft); }
+.aw-card__back { font-size: 18px; font-weight: 600; color: var(--xn-ink-4); }
+.aw-card__name { font: 600 16px/1.3 var(--xn-serif); color: var(--xn-ink); }
+.aw-card__desc { font-size: 12px; color: var(--xn-ink-3); }
+.aw-mystery { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.aw-prompt { margin-top: 16px; }
+
+.aw-foot { display: flex; align-items: center; gap: 8px; }
+.aw-foot__grow { flex: 1; }
+.aw-foot .el-button + .el-button { margin-left: 0; }
+.aw-skip { color: var(--xn-ink-3); }
+.aw-skip:hover, .aw-skip:focus { color: var(--xn-ink); }
+
+@media (max-width: 640px) {
+  .aw-step__desc { display: none; }
+  .aw-choices, .aw-gen__tabs { grid-template-columns: 1fr; }
+  .aw-tarot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+
+<style>
+.xn-wizard { max-width: calc(100vw - 32px); margin-top: 6vh !important; }
+.xn-wizard .el-dialog__body { padding-top: 4px; }
 </style>

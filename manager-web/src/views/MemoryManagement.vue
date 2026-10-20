@@ -1,115 +1,69 @@
 <template>
-    <div class="welcome">
-        <HeaderBar />
+    <div class="xn-page">
+        <page-header :title="$t('memoryManagement.pageTitle')" :description="$t('xn.knowledge.memoryDesc')" />
 
-        <div class="operation-bar">
-            <h2 class="page-title">{{ $t('memoryManagement.pageTitle') }}</h2>
-            <div class="action-group">
-                <div class="search-group">
-                    <el-input
-                        :placeholder="$t('memoryManagement.searchPlaceholder')"
-                        v-model="searchDeviceId"
-                        class="search-input"
-                        clearable
-                        @keyup.enter.native="handleSearch"
-                        style="width: 260px"
-                    />
-                    <el-button class="btn-search" @click="handleSearch">
-                        {{ $t('memoryManagement.search') }}
-                    </el-button>
-                </div>
-                <el-button
-                    v-if="searchDeviceId && tableData.length > 0"
-                    type="danger"
-                    class="btn-clear-device"
-                    @click="handleClearDevice"
-                >
-                    {{ $t('memoryManagement.clearDevice') }}
-                </el-button>
-            </div>
+        <div class="xn-toolbar">
+            <el-input v-model="searchDeviceId" :placeholder="$t('memoryManagement.searchPlaceholder')" clearable
+                @keyup.enter.native="handleSearch" @clear="handleSearch">
+                <xn-icon slot="prefix" name="search" class="mm-search-icon" />
+            </el-input>
+            <el-button @click="handleSearch">{{ $t('memoryManagement.search') }}</el-button>
+            <span v-if="activeDeviceId" class="xn-tag xn-tag--lake mm-filter">
+                {{ $t('xn.knowledge.memoryFilter', { id: activeDeviceId }) }}
+                <button type="button" class="mm-filter__x" :aria-label="$t('xn.knowledge.clearFilter')" @click="resetFilter"><xn-icon name="close" /></button>
+            </span>
+            <span class="xn-toolbar__grow"></span>
+            <el-button v-if="activeDeviceId && tableData.length > 0" type="danger" plain size="small" @click="handleClearDevice">
+                <xn-icon name="trash" /> {{ $t('memoryManagement.clearDevice') }}
+            </el-button>
         </div>
 
-        <div class="main-wrapper">
-            <div class="content-panel">
-                <el-table
-                    :data="tableData"
-                    v-loading="loading"
-                    style="width: 100%"
-                    :header-cell-style="{ background: '#f5f7fb', color: '#606266' }"
-                >
-                    <el-table-column
-                        prop="device_id"
-                        :label="$t('memoryManagement.deviceId')"
-                        min-width="200"
-                        show-overflow-tooltip
-                    />
-                    <el-table-column
-                        prop="category"
-                        :label="$t('memoryManagement.category')"
-                        width="130"
-                        align="center"
-                    >
-                        <template slot-scope="scope">
-                            <el-tag :type="getCategoryTag(scope.row.category)" size="small">
-                                {{ $t('memoryManagement.category_' + scope.row.category) || scope.row.category }}
-                            </el-tag>
+        <div class="xn-panel xn-panel--flush mm-panel">
+            <xn-empty v-if="loadFailed && !loading" error @retry="loadData" />
+            <template v-else>
+                <el-table :data="tableData" v-loading="loading" row-key="id">
+                    <el-table-column prop="device_id" :label="$t('memoryManagement.deviceId')" min-width="150" show-overflow-tooltip>
+                        <template slot-scope="{ row }"><span class="xn-num">{{ row.device_id }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="category" :label="$t('memoryManagement.category')" width="100">
+                        <template slot-scope="{ row }">
+                            <span class="xn-tag" :class="'mm-cat--' + getCategoryTag(row.category)">{{ categoryText(row.category) }}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column
-                        prop="fact"
-                        :label="$t('memoryManagement.fact')"
-                        min-width="300"
-                        show-overflow-tooltip
-                    />
-                    <el-table-column
-                        prop="updated_at"
-                        :label="$t('memoryManagement.updatedAt')"
-                        width="180"
-                        align="center"
-                    />
-                    <el-table-column
-                        :label="$t('memoryManagement.action')"
-                        width="100"
-                        align="center"
-                        fixed="right"
-                    >
+                    <el-table-column prop="fact" :label="$t('memoryManagement.fact')" min-width="300" show-overflow-tooltip />
+                    <el-table-column prop="updated_at" :label="$t('memoryManagement.updatedAt')" width="170" class-name="mm-nowrap">
+                        <template slot-scope="{ row }"><span class="xn-num">{{ row.updated_at }}</span></template>
+                    </el-table-column>
+                    <el-table-column :label="$t('memoryManagement.action')" width="90" align="right">
                         <template slot-scope="scope">
-                            <el-button
-                                type="text"
-                                class="btn-delete"
-                                @click="handleDelete(scope.row)"
-                            >
-                                {{ $t('memoryManagement.delete') }}
-                            </el-button>
+                            <el-button type="text" class="mm-danger" @click="handleDelete(scope.row)">{{ $t('memoryManagement.delete') }}</el-button>
                         </template>
                     </el-table-column>
+                    <template slot="empty">
+                        <xn-empty v-if="activeDeviceId" icon="search" :title="$t('xn.knowledge.memoryNoMatch')"
+                            :description="$t('xn.knowledge.memoryNoMatchDesc')" />
+                        <xn-empty v-else icon="memory" :title="$t('xn.knowledge.memoryEmptyTitle')"
+                            :description="$t('xn.knowledge.memoryEmptyDesc')" />
+                    </template>
                 </el-table>
-
-                <div class="pagination-wrapper">
-                    <el-pagination
-                        background
-                        layout="total, prev, pager, next"
-                        :total="total"
-                        :page-size="pageSize"
-                        :current-page="currentPage"
-                        @current-change="handlePageChange"
-                    />
+                <div v-if="total > 0" class="mm-foot">
+                    <el-pagination background layout="total, prev, pager, next" :total="total" :page-size="pageSize"
+                        :current-page="currentPage" @current-change="handlePageChange" />
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
 
 <script>
-import HeaderBar from "@/components/HeaderBar.vue";
 import Api from "@/apis/api";
 
 export default {
     name: "MemoryManagement",
-    components: { HeaderBar },
     data() {
         return {
             loading: false,
+            loadFailed: false,
             tableData: [],
             total: 0,
             currentPage: 1,
@@ -124,6 +78,7 @@ export default {
     methods: {
         loadData() {
             this.loading = true;
+            this.loadFailed = false;
             Api.memory.getMemoryList(
                 {
                     device_id: this.activeDeviceId,
@@ -135,9 +90,15 @@ export default {
                     if (res && res.code === 0 && res.data) {
                         this.tableData = res.data.list || [];
                         this.total = res.data.total || 0;
+                        // 删除最后一页的最后一条后回到上一页
+                        if (!this.tableData.length && this.total > 0 && this.currentPage > 1) {
+                            this.currentPage = Math.max(1, Math.ceil(this.total / this.pageSize));
+                            this.loadData();
+                        }
                     } else {
                         this.tableData = [];
                         this.total = 0;
+                        this.loadFailed = true;
                         this.$message.error(this.$t("memoryManagement.loadFail"));
                     }
                 }
@@ -172,7 +133,13 @@ export default {
             }).catch(() => {});
         },
 
+        resetFilter() {
+            this.searchDeviceId = "";
+            this.handleSearch();
+        },
+
         handleClearDevice() {
+            if (!this.activeDeviceId) return;
             this.$confirm(
                 this.$t("memoryManagement.clearDeviceConfirm", { id: this.activeDeviceId }),
                 this.$t("memoryManagement.clearDeviceTitle"),
@@ -199,81 +166,30 @@ export default {
             };
             return map[category] || "info";
         },
+        categoryText(category) {
+            const key = "memoryManagement.category_" + category;
+            return this.$te(key) ? this.$t(key) : category;
+        },
     },
 };
 </script>
 
 <style scoped>
-.welcome {
-    min-height: 100vh;
-    background: #f5f7fb;
+.mm-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
+.mm-filter { height: 28px; padding-right: 4px; font-size: 13px; }
+.mm-filter__x {
+    display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 0;
+    border: 0; border-radius: 4px; background: none; color: inherit; cursor: pointer;
 }
-
-.operation-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px 0;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin: 0;
-}
-
-.action-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.search-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-search {
-    background: #4f6ef6;
-    border-color: #4f6ef6;
-    color: #fff;
-    border-radius: 8px;
-}
-
-.btn-search:hover {
-    background: #3a5bd9;
-    border-color: #3a5bd9;
-}
-
-.btn-clear-device {
-    border-radius: 8px;
-}
-
-.main-wrapper {
-    padding: 24px 32px;
-}
-
-.content-panel {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    padding: 0 0 16px;
-}
-
-.pagination-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px 24px 0;
-}
-
-.btn-delete {
-    color: #f56c6c;
-}
-
-.btn-delete:hover {
-    color: #d9363e;
-}
+.mm-filter__x:hover { background: rgba(47, 111, 149, 0.14); }
+.mm-panel { overflow: hidden; }
+.mm-panel ::v-deep .mm-nowrap .cell { white-space: nowrap; }
+.mm-cat--primary { background: var(--xn-lake-soft); color: var(--xn-lake-ink); }
+.mm-cat--success { background: var(--xn-success-soft); color: var(--xn-success); }
+.mm-cat--warning { background: var(--xn-warning-soft); color: var(--xn-warning); }
+.mm-cat--danger { background: var(--xn-mist-2); color: var(--xn-ink-2); box-shadow: inset 0 0 0 1px var(--xn-line); }
+.mm-cat--info { background: var(--xn-mist-2); color: var(--xn-ink-2); }
+.mm-danger { color: var(--xn-danger); }
+.mm-danger:hover, .mm-danger:focus { color: #8D3523; }
+.mm-foot { display: flex; justify-content: flex-end; padding: 4px 16px 14px; border-top: 1px solid var(--xn-line-2); }
 </style>

@@ -1,63 +1,48 @@
 <template>
-    <div class="welcome">
-        <HeaderBar />
+    <div class="xn-page">
+        <page-header :title="$t('memoryExtract.pageTitle')" :description="$t('xn.knowledge.memoryExtractDesc')" />
 
-        <div class="operation-bar">
-            <h2 class="page-title">{{ $t('memoryExtract.pageTitle') }}</h2>
-        </div>
+        <div class="xn-panel cfg-panel">
+            <div class="xn-panel__head">
+                <h2 class="xn-panel__title">{{ $t('xn.knowledge.cfgModelTitle') }}</h2>
+            </div>
+            <div class="xn-panel__body">
+                <el-form ref="configForm" :model="form" label-width="140px" v-loading="loading" class="cfg-form" @submit.native.prevent>
+                    <el-form-item :label="$t('memoryExtract.enabled')">
+                        <el-switch v-model="form.enabled" />
+                        <p class="cfg-tip">{{ $t('memoryExtract.enabledTip') }}</p>
+                    </el-form-item>
 
-        <div class="main-wrapper">
-            <div class="content-panel">
-                <div class="content-area">
-                    <el-card class="params-card" shadow="never">
-                        <el-form ref="configForm" :model="form" label-width="160px" v-loading="loading"
-                            class="config-form">
+                    <el-form-item :label="$t('memoryExtract.baseUrl')" prop="base_url">
+                        <el-input v-model="form.base_url" :placeholder="$t('memoryExtract.baseUrlPlaceholder')" clearable :disabled="!form.enabled" />
+                    </el-form-item>
 
-                            <el-form-item :label="$t('memoryExtract.enabled')">
-                                <el-switch v-model="form.enabled" active-color="#4f6ef6" />
-                                <span class="form-tip">{{ $t('memoryExtract.enabledTip') }}</span>
-                            </el-form-item>
+                    <el-form-item :label="$t('memoryExtract.apiKey')" prop="api_key">
+                        <el-input v-model="form.api_key" :type="showApiKey ? 'text' : 'password'" autocomplete="new-password"
+                            :placeholder="$t('memoryExtract.apiKeyPlaceholder')" clearable :disabled="!form.enabled">
+                            <el-button slot="append" @click="showApiKey = !showApiKey">
+                                {{ showApiKey ? $t('memoryExtract.hide') : $t('memoryExtract.show') }}
+                            </el-button>
+                        </el-input>
+                        <p class="cfg-tip">{{ $t('xn.knowledge.cfgKeyTip') }}</p>
+                    </el-form-item>
 
-                            <el-form-item :label="$t('memoryExtract.baseUrl')" prop="base_url">
-                                <el-input v-model="form.base_url"
-                                    :placeholder="$t('memoryExtract.baseUrlPlaceholder')" clearable
-                                    :disabled="!form.enabled" />
-                            </el-form-item>
+                    <el-form-item :label="$t('memoryExtract.model')" prop="model">
+                        <el-input v-model="form.model" :placeholder="$t('memoryExtract.modelPlaceholder')" clearable :disabled="!form.enabled" />
+                    </el-form-item>
 
-                            <el-form-item :label="$t('memoryExtract.apiKey')" prop="api_key">
-                                <el-input v-model="form.api_key" :type="showApiKey ? 'text' : 'password'"
-                                    :placeholder="$t('memoryExtract.apiKeyPlaceholder')" clearable
-                                    :disabled="!form.enabled">
-                                    <el-button slot="append" @click="showApiKey = !showApiKey">
-                                        {{ showApiKey ? $t('memoryExtract.hide') : $t('memoryExtract.show') }}
-                                    </el-button>
-                                </el-input>
-                            </el-form-item>
-
-                            <el-form-item :label="$t('memoryExtract.model')" prop="model">
-                                <el-input v-model="form.model" :placeholder="$t('memoryExtract.modelPlaceholder')"
-                                    clearable :disabled="!form.enabled" />
-                            </el-form-item>
-
-                            <el-form-item>
-                                <el-button type="primary" class="btn-save" @click="handleSave" :loading="saving">
-                                    {{ $t('memoryExtract.save') }}
-                                </el-button>
-                            </el-form-item>
-                        </el-form>
-                    </el-card>
-                </div>
+                    <el-form-item class="cfg-actions">
+                        <el-button type="primary" @click="handleSave" :loading="saving">{{ $t('memoryExtract.save') }}</el-button>
+                        <el-button :disabled="loading || saving" @click="loadConfig">{{ $t('xn.knowledge.cfgRevert') }}</el-button>
+                    </el-form-item>
+                </el-form>
             </div>
         </div>
-
-        <VersionFooter />
     </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 
 // param_code -> form field 映射
 const PARAM_MAP = {
@@ -69,7 +54,6 @@ const PARAM_MAP = {
 
 export default {
     name: "MemoryExtractConfig",
-    components: { HeaderBar, VersionFooter },
     data() {
         return {
             loading: false,
@@ -96,8 +80,11 @@ export default {
                 { page: 1, limit: 20, paramCode: "memory_extract" },
                 (res) => {
                     this.loading = false;
-                    if (res && res.data && res.data.list) {
-                        res.data.list.forEach((item) => {
+                    // admin.js 传入的是完整响应对象，响应体在 res.data（原代码直接读 res.data.list，读不到参数）
+                    const body = res && res.data ? res.data : res;
+                    const page = body && body.code === 0 ? body.data : (body && body.list ? body : null);
+                    if (page && page.list) {
+                        page.list.forEach((item) => {
                             const field = PARAM_MAP[item.paramCode];
                             if (field) {
                                 this.paramRecords[item.paramCode] = item;
@@ -161,65 +148,12 @@ export default {
 </script>
 
 <style scoped>
-.welcome {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #e8ecf8 0%, #f0f4ff 50%, #e8ecf8 100%);
-}
-
-.operation-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px 0;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-}
-
-.main-wrapper {
-    padding: 20px 40px;
-}
-
-.content-panel {
-    background: transparent;
-}
-
-.params-card {
-    border-radius: 12px;
-    border: none;
-}
-
-.params-card >>> .el-card__body {
-    padding: 30px 40px;
-}
-
-.config-form {
-    max-width: 700px;
-}
-
-.config-form >>> .el-form-item__label {
-    font-weight: 500;
-    color: #333;
-}
-
-.form-tip {
-    margin-left: 12px;
-    font-size: 12px;
-    color: #999;
-}
-
-.btn-save {
-    background: #4f6ef6;
-    border-color: #4f6ef6;
-    border-radius: 8px;
-    padding: 10px 40px;
-}
-
-.btn-save:hover {
-    background: #3a5bd9;
-    border-color: #3a5bd9;
+.cfg-panel { max-width: 820px; }
+.cfg-form { max-width: 640px; }
+.cfg-tip { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.cfg-actions { margin-bottom: 0; }
+@media (max-width: 640px) {
+    .cfg-form ::v-deep .el-form-item__label { float: none; display: block; text-align: left; }
+    .cfg-form ::v-deep .el-form-item__content { margin-left: 0 !important; }
 }
 </style>

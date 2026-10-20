@@ -71,32 +71,48 @@ route('POST', '/device/manual-add', ({ body, db, user }) => {
   return ok(null);
 });
 
-/* ───── 设备视觉资源（DeviceAssetsDialog）───── */
+/* ───── 设备视觉资源（DeviceAssetsDialog）─────
+ * 调用方 components/DeviceAssetsDialog.vue（回调 res，读 res.data.code / res.data.data / res.data.msg）：
+ * - GET  /device/assets/list?device_id=        → data: [{ id, deviceId, fileType: emoji|wallpaper, fileUrl, version, fileName, createDate }]
+ * - POST /device/assets/upload (FormData device_id, file_type, file) → 新记录；同一设备同一类型 version 递增（待确认）
+ * - POST /device/assets/sync-assets?device_id=  → 只记录同步时间，不向设备下发任何内容
+ * fileUrl 是浏览器内生成的占位图（data URL），上传的文件不离开本机。 */
 
-route('GET', '/device/assets/list', ({ query, db, user }) => {
+const ASSET_TYPES = ['emoji', 'wallpaper'];
+
+route('GET', '/device/assets/list', ({ query, db, user, scenario }) => {
   const d = ownDevice(db, user, query.device_id);
   if (!d) return fail('设备不存在或无权查看');
+  if (scenario.data === 'empty') return ok([]);
   db.deviceAssets = db.deviceAssets || {};
-  return ok(db.deviceAssets[d.id] || []);
+  return ok((db.deviceAssets[d.id] || []).filter((x) => x && x.fileUrl).slice().reverse());
 });
 
 route('POST', '/device/assets/upload', ({ body, db, user }) => {
-  const d = ownDevice(db, user, body.device_id || body.deviceId);
+  const d = ownDevice(db, user, body.device_id);
   if (!d) return fail('设备不存在或无权操作');
-  const file = body.file || {};
+  const fileType = body.file_type;
+  if (!ASSET_TYPES.includes(fileType)) return fail('请选择图片类型');
+  const file = body.file;
+  if (!file || !file.__file) return fail('请选择图片');
+  if (!/^image\/(jpeg|jpg|png)$/.test(file.type || '')) return fail('仅支持 JPG、PNG 格式');
+  if (file.size >= 5 * 1024 * 1024) return fail('图片大小不能超过 5MB');
   db.deviceAssets = db.deviceAssets || {};
-  const list = db.deviceAssets[d.id] || (db.deviceAssets[d.id] = []);
+  const list = (db.deviceAssets[d.id] || []).filter((x) => x && x.fileUrl);
+  db.deviceAssets[d.id] = list;
+  const version = list.filter((x) => x.fileType === fileType).reduce((m, x) => Math.max(m, Number(x.version) || 0), 0) + 1;
+  const label = fileType === 'emoji' ? '表情图片' : '壁纸图片';
   list.push({
-    id: `demo-asset-${nextId()}`, device_id: d.id, file_type: body.file_type || body.fileType || 'image',
-    file_name: file.name || '演示图片.png', file_size: file.size || 0,
-    url: placeholderImage(file.name || '演示资源', 240, 240), status: 'pending', created_at: nowStr(),
+    id: `demo-asset-${nextId()}`, deviceId: d.id, fileType, version, fileName: file.name || `${label}.png`,
+    fileUrl: placeholderImage(label, 240, 240, fileType === 'emoji' ? '#EFE7DA' : '#DCE7EF'), createDate: nowStr(),
   });
-  return ok(null, '已上传（演示：文件未离开本机）');
+  return ok(null, '已上传（演示：文件没有离开本机）');
 });
 
 route('POST', '/device/assets/sync-assets', ({ query, db, user }) => {
   const d = ownDevice(db, user, query.device_id);
   if (!d) return fail('设备不存在或无权操作');
-  ((db.deviceAssets || {})[d.id] || []).forEach((x) => { x.status = 'synced'; });
-  return ok(null, '已同步（演示：未向设备下发）');
+  db.deviceAssetSync = db.deviceAssetSync || {};
+  db.deviceAssetSync[d.id] = nowStr();
+  return ok(null, '已提交同步（演示：没有向设备下发任何内容）');
 });

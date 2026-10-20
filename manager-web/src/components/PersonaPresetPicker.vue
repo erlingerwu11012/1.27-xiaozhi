@@ -1,16 +1,21 @@
 <template>
-  <div class="persona-presets">
-    <div class="persona-presets__heading">选择一个人格模板</div>
-    <p class="persona-presets__hint">模板只是起点，选好后可以继续编辑，也可以直接写自己的设定。</p>
-    <div class="persona-presets__grid">
+  <div class="pp">
+    <div class="pp__head">
+      <span class="pp__title">{{ $t('xn.agents.persona.title') }}</span>
+      <el-button type="text" class="pp__edit" @click="$emit('edit')"><xn-icon name="edit" /> {{ $t('xn.agents.persona.custom') }}</el-button>
+    </div>
+    <p class="pp__hint">{{ $t('xn.agents.persona.hint') }}</p>
+    <div class="pp__grid" role="group" :aria-label="$t('xn.agents.persona.title')">
       <button v-for="preset in presets" :key="preset.id" type="button"
-        class="persona-presets__card" :class="{ 'is-selected': selectedId === preset.id }"
-        :aria-pressed="selectedId === preset.id" @click="selectPreset(preset)">
-        <span class="persona-presets__name">{{ preset.name }}</span>
-        <span class="persona-presets__description">{{ preset.description }}</span>
+        class="pp__card" :class="{ 'is-on': selectedId === preset.id }"
+        :aria-pressed="String(selectedId === preset.id)" @click="selectPreset(preset)">
+        <span class="pp__name">
+          {{ preset.name }}
+          <xn-icon v-if="selectedId === preset.id" name="check" class="pp__check" />
+        </span>
+        <span class="pp__desc">{{ preset.description }}</span>
       </button>
     </div>
-    <el-button type="text" @click="$emit('edit')">直接自定义 / 修改当前设定</el-button>
   </div>
 </template>
 
@@ -30,13 +35,13 @@ export default {
       this.selectionPending = true;
       try {
         if (String(this.value || '').trim() && !matchingPersonaPreset(this.value)) {
-          await this.$confirm('选择模板会替换当前自定义的人格文字。是否替换？', '替换人格设定', {
-            confirmButtonText: '替换', cancelButtonText: '保留当前文字', type: 'warning',
+          await this.$confirm(this.$t('xn.agents.persona.replaceMsg'), this.$t('xn.agents.persona.replaceTitle'), {
+            confirmButtonText: this.$t('xn.agents.persona.replace'), cancelButtonText: this.$t('xn.agents.persona.keep'), type: 'warning',
           });
         }
         this.$emit('input', preset.prompt);
       } catch (_) {
-        // Closing or cancelling leaves the draft untouched.
+        // 关闭或取消时保留当前文字
       } finally {
         this.selectionPending = false;
       }
@@ -46,14 +51,19 @@ export default {
 </script>
 
 <style scoped>
-.persona-presets__heading { font-weight: 600; color: #18243b; }
-.persona-presets__hint { margin: 6px 0 12px; color: #66758d; font-size: 13px; line-height: 1.6; }
-.persona-presets__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.persona-presets__card { text-align: left; padding: 12px; background: #fff; border: 1px solid #dce3ef; border-radius: 10px; cursor: pointer; font: inherit; }
-.persona-presets__card:hover, .persona-presets__card:focus-visible { border-color: #326bff; outline: 2px solid #dbe6ff; }
-.persona-presets__card.is-selected { border-color: #326bff; background: #f0f5ff; }
-.persona-presets__name, .persona-presets__description { display: block; }
-.persona-presets__name { color: #18243b; font-weight: 600; font-size: 14px; }
-.persona-presets__description { margin-top: 5px; color: #66758d; font-size: 12px; line-height: 1.5; }
-@media (max-width: 420px) { .persona-presets__grid { grid-template-columns: 1fr; } }
+.pp__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pp__title { font-size: 14px; font-weight: 600; color: var(--xn-ink); }
+.pp__edit { padding: 0; }
+.pp__hint { margin: 2px 0 12px; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.pp__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.pp__card {
+  display: block; padding: 10px 12px; text-align: left; cursor: pointer;
+  border: 1px solid var(--xn-line); border-radius: var(--xn-r); background: #fff; font: inherit; color: var(--xn-ink);
+}
+.pp__card:hover { border-color: #AEBBC8; }
+.pp__card:focus-visible { outline: none; box-shadow: var(--xn-focus); }
+.pp__card.is-on { border-color: var(--xn-lake); background: var(--xn-lake-soft); }
+.pp__name { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 14px; font-weight: 600; line-height: 1.4; }
+.pp__check { color: var(--xn-lake); font-size: 16px; }
+.pp__desc { display: block; margin-top: 2px; font-size: 13px; line-height: 1.5; color: var(--xn-ink-3); }
 </style>

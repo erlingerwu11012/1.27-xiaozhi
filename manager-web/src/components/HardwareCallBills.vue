@@ -1,48 +1,57 @@
 <template>
-  <section v-if="available || error" class="hardware-bills">
-    <div class="section-toolbar">
-      <span class="section-title">调用明细</span>
-      <el-button type="text" icon="el-icon-refresh" :loading="loading" @click="load">刷新</el-button>
+  <section v-if="available || error" class="xn-panel hcb">
+    <div class="xn-panel__head">
+      <div>
+        <h2 class="xn-panel__title">{{ $t('xn.billing.callsTitle') }}</h2>
+        <p class="hcb-sub xn-muted">{{ $t('xn.billing.callsDesc') }}</p>
+      </div>
+      <el-button type="text" :loading="loading" @click="load"><xn-icon v-if="!loading" name="refresh" /> {{ $t('xn.billing.refresh') }}</el-button>
     </div>
-    <el-alert v-if="error" :title="error" type="error" :closable="false" show-icon />
-    <el-table v-else :data="rows" v-loading="loading" empty-text="暂无调用账单" style="width:100%">
-      <el-table-column type="expand">
-        <template slot-scope="scope">
-          <el-descriptions :column="2" size="small" border>
-            <el-descriptions-item label="输入 token">{{ known(scope.row.inputTokens) }}</el-descriptions-item>
-            <el-descriptions-item label="输出 token">{{ known(scope.row.outputTokens) }}</el-descriptions-item>
-            <el-descriptions-item label="缓存命中 token">{{ known(scope.row.cachedTokens) }}</el-descriptions-item>
-            <el-descriptions-item label="其他用量">{{ scope.row.units == null ? '—' : scope.row.units + ' ' + unitLabel(scope.row.unit) }}</el-descriptions-item>
-            <el-descriptions-item label="旧余额扣点">{{ amount(scope.row.legacyPoints) }}</el-descriptions-item>
-            <el-descriptions-item label="预留点数">{{ amount(scope.row.reservedPoints) }}</el-descriptions-item>
-            <el-descriptions-item label="调用编号" :span="2">{{ scope.row.id }}</el-descriptions-item>
-          </el-descriptions>
+    <xn-empty v-if="error" error :description="error" @retry="load" />
+    <template v-else>
+      <el-table :data="rows" v-loading="loading" row-key="id" class="hcb-table">
+        <el-table-column type="expand">
+          <template slot-scope="scope">
+            <dl class="hcb-detail">
+              <div><dt>{{ $t('xn.billing.inputTokens') }}</dt><dd class="xn-num">{{ known(scope.row.inputTokens) }}</dd></div>
+              <div><dt>{{ $t('xn.billing.outputTokens') }}</dt><dd class="xn-num">{{ known(scope.row.outputTokens) }}</dd></div>
+              <div><dt>{{ $t('xn.billing.cachedTokens') }}</dt><dd class="xn-num">{{ known(scope.row.cachedTokens) }}</dd></div>
+              <div><dt>{{ $t('xn.billing.otherUnits') }}</dt><dd class="xn-num">{{ scope.row.units == null ? '—' : scope.row.units + ' ' + unitLabel(scope.row.unit) }}</dd></div>
+              <div><dt>{{ $t('xn.billing.legacyPoints') }}</dt><dd class="xn-num">{{ amount(scope.row.legacyPoints) }}</dd></div>
+              <div><dt>{{ $t('xn.billing.reservedPoints') }}</dt><dd class="xn-num">{{ amount(scope.row.reservedPoints) }}</dd></div>
+              <div class="is-wide"><dt>{{ $t('xn.billing.callId') }}</dt><dd class="xn-num">{{ scope.row.id }}</dd></div>
+            </dl>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('xn.billing.colTime')" min-width="165">
+          <template slot-scope="scope"><span class="xn-num">{{ date(scope.row.createdAt) }}</span></template>
+        </el-table-column>
+        <el-table-column :label="$t('xn.billing.colFeature')" min-width="95">
+          <template slot-scope="scope">{{ operationLabel(scope.row.operation) }}</template>
+        </el-table-column>
+        <el-table-column prop="model" :label="$t('xn.billing.colModel')" min-width="160" show-overflow-tooltip />
+        <el-table-column :label="$t('xn.billing.colPoints')" min-width="100" align="right">
+          <template slot-scope="scope"><span class="xn-num">{{ amount(scope.row.points) }}</span></template>
+        </el-table-column>
+        <el-table-column :label="$t('xn.billing.colPaidAmount')" min-width="130" align="right">
+          <template slot-scope="scope"><span class="xn-num">{{ scope.row.paidAmountCny == null ? '—' : '¥' + amount(scope.row.paidAmountCny) }}</span></template>
+        </el-table-column>
+        <el-table-column :label="$t('xn.billing.colState')" min-width="105">
+          <template slot-scope="scope"><span class="xn-tag" :class="stateClass(scope.row.state)">{{ stateLabel(scope.row.state) }}</span></template>
+        </el-table-column>
+        <template slot="empty">
+          <xn-empty icon="receipt" :title="$t('xn.billing.callsEmpty')" :description="$t('xn.billing.callsEmptyDesc')" />
         </template>
-      </el-table-column>
-      <el-table-column label="时间" min-width="165">
-        <template slot-scope="scope">{{ date(scope.row.createdAt) }}</template>
-      </el-table-column>
-      <el-table-column label="功能" min-width="95">
-        <template slot-scope="scope">{{ operationLabel(scope.row.operation) }}</template>
-      </el-table-column>
-      <el-table-column prop="model" label="模型" min-width="160" />
-      <el-table-column label="扣点" min-width="100">
-        <template slot-scope="scope">{{ amount(scope.row.points) }}</template>
-      </el-table-column>
-      <el-table-column label="新付费余额费用" min-width="130">
-        <template slot-scope="scope">{{ scope.row.paidAmountCny == null ? '—' : '¥' + amount(scope.row.paidAmountCny) }}</template>
-      </el-table-column>
-      <el-table-column label="状态" min-width="105">
-        <template slot-scope="scope"><el-tag size="mini" :type="scope.row.state === 'settled' ? 'success' : 'info'">{{ stateLabel(scope.row.state) }}</el-tag></template>
-      </el-table-column>
-    </el-table>
-    <el-pagination v-if="total > pageSize" class="bill-pagination" layout="prev, pager, next" :total="total"
-      :page-size="pageSize" :current-page="page" @current-change="changePage" />
+      </el-table>
+      <el-pagination v-if="total > pageSize" class="hcb-pagination" background layout="total, prev, pager, next" :total="total"
+        :page-size="pageSize" :current-page="page" @current-change="changePage" />
+    </template>
   </section>
 </template>
 
 <script>
 import Api from '@/apis/api';
+
 export default {
   name: 'HardwareCallBills',
   data() { return { available: false, loading: false, error: '', rows: [], total: 0, page: 1, pageSize: 20, sequence: 0 }; },
@@ -57,7 +66,7 @@ export default {
       Api.pay.hardwareCalls(this.page, this.pageSize, res => {
         if (seq !== this.sequence) return;
         this.loading = false;
-        if (!res || res.code !== 0) { this.error = (res && res.msg) || '调用账单读取失败'; return; }
+        if (!res || res.code !== 0) { this.error = (res && res.msg) || this.$t('xn.billing.callsLoadFail'); return; }
         const data = res.data || {};
         this.available = data.available === true;
         this.rows = Array.isArray(data.list) ? data.list : [];
@@ -65,25 +74,44 @@ export default {
       });
     },
     changePage(page) { this.page = page; this.load(); },
-    known(value) { return value == null ? '未知' : value; },
+    known(value) { return value == null ? this.$t('xn.billing.unknown') : value; },
     amount(value) {
       if (value == null) return '—';
       const n = Number(value);
-      if (!Number.isFinite(n)) return '未知';
+      if (!Number.isFinite(n)) return this.$t('xn.billing.unknown');
       if (n > 0 && n < 0.000001) return '<0.000001';
       return n.toFixed(6).replace(/\.?0+$/, '') || '0';
     },
     date(seconds) { return seconds ? new Date(Number(seconds) * 1000).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }) : '—'; },
-    unitLabel(unit) { return ({ weighted_character: '计费字符', audio_second: '秒', official_units: '官方计量单位' })[unit] || unit; },
-    stateLabel(state) { return ({ settled: '已结算', pending: '待核对', outstanding: '待补缴', reserved: '已预留', refunded: '已退款', cancelled: '已释放' })[state] || state; },
-    operationLabel(op) { return ({ llm: '对话', summary: '压缩摘要', habit: '习惯分析', vision: '视觉理解', asr: '语音识别', tts: '语音合成', fact_add: '事实写入', portrait_add: '画像抽取', search: '记忆检索', storage_item_hour: '记忆存储' })[op] || op; }
-  }
+    unitLabel(unit) {
+      const key = ({ weighted_character: 'unitChar', audio_second: 'unitSecond', official_units: 'unitOfficial' })[unit];
+      return key ? this.$t('xn.billing.' + key) : unit;
+    },
+    stateLabel(state) {
+      const key = ({ settled: 'stSettled', pending: 'stPending', outstanding: 'stOutstanding', reserved: 'stReserved', refunded: 'stRefunded', cancelled: 'stCancelled' })[state];
+      return key ? this.$t('xn.billing.' + key) : state;
+    },
+    stateClass(state) {
+      if (state === 'settled') return 'xn-tag--success';
+      if (state === 'outstanding') return 'xn-tag--warning';
+      if (state === 'pending' || state === 'reserved') return 'xn-tag--lake';
+      return 'xn-tag--muted';
+    },
+    operationLabel(op) {
+      const key = ({ llm: 'opLlm', summary: 'opSummary', habit: 'opHabit', vision: 'opVision', asr: 'opAsr', tts: 'opTts', fact_add: 'opFact', portrait_add: 'opPortrait', search: 'opSearch', storage_item_hour: 'opStorage' })[op];
+      return key ? this.$t('xn.billing.' + key) : op;
+    },
+  },
 };
 </script>
 
 <style scoped>
-.hardware-bills { margin-top: 24px; }
-.section-toolbar { display:flex; align-items:center; justify-content:space-between; margin:18px 0 12px; }
-.section-title { font-size:16px; font-weight:600; }
-.bill-pagination { margin-top:16px; text-align:right; }
+.hcb-sub { margin: 2px 0 0; font-size: 13px; }
+.hcb-table { border-radius: 0 0 var(--xn-r-lg) var(--xn-r-lg); }
+.hcb-detail { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 8px; }
+.hcb-detail div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--xn-line-2); font-size: 13px; }
+.hcb-detail .is-wide { grid-column: 1 / -1; }
+.hcb-detail dt { color: var(--xn-ink-3); }
+.hcb-detail dd { margin: 0; color: var(--xn-ink); word-break: break-all; text-align: right; }
+.hcb-pagination { padding: 14px 20px; text-align: right; }
 </style>

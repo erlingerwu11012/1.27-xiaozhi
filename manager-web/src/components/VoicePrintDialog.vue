@@ -1,53 +1,52 @@
 <template>
-  <el-dialog :title="title" :visible.sync="visible" width="520px" class="param-dialog-wrapper" :append-to-body="true"
-    :close-on-click-modal="false" :key="dialogKey" custom-class="custom-param-dialog" :show-close="false">
-    <div class="dialog-container">
-      <div class="dialog-header">
-        <h2 class="dialog-title">{{ title }}</h2>
-        <button class="custom-close-btn" @click="cancel">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </button>
-      </div>
+  <el-dialog :title="title" :visible="visible" width="520px" append-to-body :close-on-click-modal="false" :key="dialogKey"
+    @close="cancel">
+    <el-form :model="form" :rules="rules" ref="form" label-position="top" class="vp-form">
+      <el-form-item :label="$t('voicePrintDialog.voicePrintVector')" prop="audioId">
+        <p class="vp-help">{{ $t('xn.visuals.voice.sampleHelp') }}</p>
+        <el-select v-model="form.audioId" :placeholder="$t('voicePrintDialog.selectVoiceMessage')" :loading="samplesLoading"
+          :no-data-text="$t('xn.visuals.voice.noSamples')" popper-class="vp-popper" class="vp-full">
+          <el-option v-for="item in valueTypeOptions" :key="item.audioId" :label="item.content || $t('xn.visuals.voice.untitled')" :value="item.audioId">
+            <span class="vp-opt">
+              <span class="vp-opt__text xn-clip">{{ item.content || $t('xn.visuals.voice.untitled') }}</span>
+              <button type="button" class="vp-play" :class="{ 'is-on': playingAudioId === item.audioId }"
+                :aria-label="playingAudioId === item.audioId ? $t('xn.visuals.voice.stop') : $t('xn.visuals.voice.play')"
+                :title="playingAudioId === item.audioId ? $t('xn.visuals.voice.stop') : $t('xn.visuals.voice.play')"
+                @click.stop="playAudio(item.audioId)">
+                <i :class="getAudioIconClass(item.audioId)"></i>
+              </button>
+            </span>
+          </el-option>
+        </el-select>
+        <p v-if="!samplesLoading && !valueTypeOptions.length" class="vp-empty">{{ $t('xn.visuals.voice.noSamples') }}</p>
+      </el-form-item>
 
-      <el-form :model="form" :rules="rules" ref="form" label-width="auto" label-position="left" class="param-form">
-        <el-form-item :label="$t('voicePrintDialog.voicePrintVector')" prop="audioId" class="form-item">
-          <el-select v-model="form.audioId" :placeholder="$t('voicePrintDialog.selectVoiceMessage')" class="custom-select">
-            <el-option v-for="item in valueTypeOptions" :key="item.audioId" :label="item.content" :value="item.audioId">
-              <span style="float: left">{{ item.content }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">
-                <i :class="getAudioIconClass(item.audioId)" @click.stop="playAudio(item.audioId)"
-                  class="audio-icon"></i>
-              </span>
-            </el-option>
-          </el-select>
-        </el-form-item>
+      <el-form-item :label="$t('voicePrintDialog.name')" prop="sourceName">
+        <el-input v-model="form.sourceName" :readonly="memberBound" :class="{ 'vp-readonly': memberBound }"
+          :placeholder="$t('voicePrintDialog.enterName')" maxlength="64" />
+      </el-form-item>
 
-        <el-form-item :label="$t('voicePrintDialog.name')" prop="sourceName" class="form-item">
-          <el-input v-model="form.sourceName" :readonly="memberBound" :placeholder="$t('voicePrintDialog.enterName')" class="custom-input"></el-input>
-        </el-form-item>
+      <el-form-item :label="$t('voicePrintDialog.description')" prop="introduce">
+        <el-input type="textarea" v-model="form.introduce" :placeholder="$t('voicePrintDialog.enterDescription')" :rows="3"
+          maxlength="100" show-word-limit />
+      </el-form-item>
+    </el-form>
 
-        <el-form-item :label="$t('voicePrintDialog.description')" prop="introduce" class="form-item remark-item">
-          <el-input type="textarea" v-model="form.introduce" :placeholder="$t('voicePrintDialog.enterDescription')" :rows="3" class="custom-textarea"
-            maxlength="100" show-word-limit></el-input>
-        </el-form-item>
-      </el-form>
-
-      <div class="dialog-footer">
-        <el-button type="primary" @click="submit" class="save-btn" :loading="saving" :disabled="saving">
-          {{ $t('voicePrintDialog.save') }}
-        </el-button>
-        <el-button @click="cancel" class="cancel-btn">
-          {{ $t('voicePrintDialog.cancel') }}
-        </el-button>
-      </div>
-    </div>
+    <span slot="footer">
+      <el-button @click="cancel">{{ $t('voicePrintDialog.cancel') }}</el-button>
+      <el-button type="primary" @click="submit" :loading="saving" :disabled="saving">{{ $t('voicePrintDialog.save') }}</el-button>
+    </span>
   </el-dialog>
 </template>
 
 <script>
+/**
+ * 声纹录入 / 编辑。被 UnifiedUserManagement（memberBound：名称固定为成员昵称）与旧版 VoicePrint 页使用。
+ * props / 事件不变：submit({ form, done })、cancel；关闭时通过 cancel 通知父组件（父组件用 .sync 或 @cancel 关闭）。
+ * 声音样本来自该智能体最近 50 条用户语音（/agent/{id}/chat-history/user），试听走 src/utils/media.js 的 playableUrl。
+ */
 import api from '@/apis/api';
+import { playableUrl } from '@/utils/media';
 
 export default {
   props: {
@@ -77,61 +76,68 @@ export default {
     return {
       dialogKey: Date.now(),
       saving: false,
+      samplesLoading: false,
       playingAudioId: null,
       audioElement: null,
-      valueTypeOptions: [
-        { audioId: '', content: '' }
-      ],
-      rules: {
+      valueTypeOptions: [],
+    };
+  },
+  computed: {
+    rules() {
+      return {
         introduce: [
-          { max: 100, message: '描述不能超过100字', trigger: "blur" }
+          { max: 100, message: this.$t('xn.visuals.voice.descTooLong'), trigger: 'blur' }
         ],
         sourceName: [
-          { required: true, message: '请输入名称', trigger: "blur" }
+          { required: true, message: this.$t('xn.visuals.voice.nameRequired'), trigger: 'blur' }
         ],
         audioId: [
-          { required: true, message: '请选择音频向量', trigger: "change" }
+          { required: true, message: this.$t('voicePrintDialog.requiredAudioVector'), trigger: 'change' }
         ]
-      }
-    };
+      };
+    },
+  },
+  beforeDestroy() {
+    this.stopAudio();
   },
   methods: {
     getAudioIconClass(audioId) {
-      if (this.playingAudioId === audioId) {
-        return 'el-icon-loading';
-      }
-      return 'el-icon-video-play';
+      return this.playingAudioId === audioId ? 'el-icon-video-pause' : 'el-icon-video-play';
     },
-    playAudio(audioId) {
-      if (this.playingAudioId === audioId) {
-        // 如果正在播放当前音频，则停止播放
-        if (this.audioElement) {
-          this.audioElement.pause();
-          this.audioElement = null;
-        }
-        this.playingAudioId = null;
-        return;
-      }
-
-      // 停止当前正在播放的音频
+    stopAudio() {
       if (this.audioElement) {
         this.audioElement.pause();
         this.audioElement = null;
       }
+      this.playingAudioId = null;
+    },
+    playAudio(audioId) {
+      if (this.playingAudioId === audioId) {
+        // 如果正在播放当前音频，则停止播放
+        this.stopAudio();
+        return;
+      }
+
+      // 停止当前正在播放的音频
+      this.stopAudio();
 
       // 先获取音频下载ID
       this.playingAudioId = audioId;
       api.agent.getAudioId(audioId, (res) => {
+        if (this.playingAudioId !== audioId) return;
         if (res.data && res.data.data) {
-          // 使用获取到的下载ID播放音频
-          this.audioElement = new Audio(api.getServiceUrl() + `/agent/play/${res.data.data}`);
+          // 使用获取到的下载ID播放音频（mock 模式下 playableUrl 返回本机生成的演示音频）
+          this.audioElement = new Audio(playableUrl(api.getServiceUrl() + `/agent/play/${res.data.data}`));
 
           this.audioElement.onended = () => {
             this.playingAudioId = null;
             this.audioElement = null;
           };
 
-          this.audioElement.play();
+          const p = this.audioElement.play();
+          if (p && p.catch) p.catch(() => { this.playingAudioId = null; this.audioElement = null; });
+        } else {
+          this.playingAudioId = null;
         }
       });
     },
@@ -151,6 +157,8 @@ export default {
     },
     cancel() {
       this.saving = false; // 取消时重置状态
+      this.stopAudio();
+      this.$emit('update:visible', false);
       this.$emit('cancel');
     }
   },
@@ -158,11 +166,19 @@ export default {
     visible(newVal) {
       if (newVal) {
         this.dialogKey = Date.now();
+        this.valueTypeOptions = [];
+        this.samplesLoading = true;
         api.agent.getRecentlyFiftyByAgentId(this.agentId, ((data) => {
-          this.valueTypeOptions = ((data && data.data && data.data.code === 0 && data.data.data) || []).map(item => ({
+          this.samplesLoading = false;
+          const list = ((data && data.data && data.data.code === 0 && data.data.data) || []).map(item => ({
             ...item
           }));
+          // 保留编辑时已经补进来的当前样本
+          const current = this.valueTypeOptions.filter((o) => !list.some((x) => x.audioId === o.audioId));
+          this.valueTypeOptions = current.concat(list);
         }))
+      } else {
+        this.stopAudio();
       }
     },
     'form.audioId'(newVal) {
@@ -173,6 +189,7 @@ export default {
         return;
       }
       api.agent.getContentByAudioId(newVal, ((data) => {
+        if (this.valueTypeOptions.some(item => item.audioId === newVal)) return;
         this.valueTypeOptions.push({
           audioId: newVal, content: data.data.data
         })
@@ -182,240 +199,22 @@ export default {
 };
 </script>
 
-<style>
-.custom-param-dialog {
-  border-radius: 16px !important;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
-  border: none !important;
-
-  .el-dialog__header {
-    display: none;
-  }
-
-  .el-dialog__body {
-    padding: 0 !important;
-    border-radius: 16px;
-  }
-}
-@media (max-width: 600px) {
-  .custom-param-dialog { width: calc(100% - 24px) !important; }
-}
+<style scoped>
+.vp-form ::v-deep .el-form-item__label { padding-bottom: 4px; line-height: 1.5; }
+.vp-help { margin: 0 0 8px; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.vp-full { width: 100%; }
+.vp-empty { margin: 8px 0 0; font-size: 13px; line-height: 1.6; color: var(--xn-warning); }
+.vp-readonly ::v-deep .el-input__inner { background: var(--xn-mist-2); color: var(--xn-ink-2); cursor: default; }
 </style>
 
-<style scoped lang="scss">
-.audio-icon {
-  font-size: 20px;
-  cursor: pointer;
-  margin: 0 5px;
-  color: #1890ff;
+<style>
+/* 下拉层挂在 body 上，不能用 scoped */
+.vp-popper .el-select-dropdown__item { display: flex; align-items: center; }
+.vp-opt { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; }
+.vp-opt__text { flex: 1; min-width: 0; }
+.vp-play {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0;
+  border: 0; border-radius: 6px; background: none; color: var(--xn-lake); cursor: pointer;
 }
-
-.param-dialog-wrapper {
-  .dialog-container {
-    padding: 24px 32px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  }
-
-  .dialog-header {
-    position: relative;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-
-  .dialog-title {
-    font-size: 20px;
-    color: #1e293b;
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .custom-close-btn {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: none;
-    background: #f1f5f9;
-    color: #64748b;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    outline: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      color: #ffffff;
-      background: #ef4444;
-      transform: rotate(90deg);
-      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
-    }
-
-    svg {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  }
-
-  .param-form {
-    .form-item {
-      margin-bottom: 20px;
-
-      :deep(.el-form-item__label) {
-        color: #475569;
-        font-weight: 500;
-        padding-right: 12px;
-        text-align: right;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-      }
-    }
-
-    .custom-input {
-      :deep(.el-input__inner) {
-        background-color: #ffffff;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        height: 42px;
-        padding: 0 14px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-size: 14px;
-        color: #334155;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-        &:focus {
-          border-color: #3b82f6;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-          background-color: #ffffff;
-        }
-
-        &::placeholder {
-          color: #94a3b8;
-          font-weight: 400;
-        }
-      }
-    }
-
-    .custom-select {
-      width: 100%;
-
-      :deep(.el-input__inner) {
-        background-color: #ffffff;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        height: 42px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-size: 14px;
-        color: #334155;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-        &:focus {
-          border-color: #3b82f6;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-          background-color: #ffffff;
-        }
-
-        &::placeholder {
-          color: #94a3b8;
-          font-weight: 400;
-        }
-      }
-    }
-
-    .custom-textarea {
-      :deep(.el-textarea__inner) {
-        background-color: #ffffff;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        padding: 12px 14px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-size: 14px;
-        color: #334155;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        line-height: 1.5;
-
-        &:focus {
-          border-color: #3b82f6;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-          background-color: #ffffff;
-        }
-
-        &::placeholder {
-          color: #94a3b8;
-          font-weight: 400;
-        }
-      }
-    }
-
-    .remark-item :deep(.el-form-item__label) {
-      margin-top: -4px;
-    }
-  }
-
-  .dialog-footer {
-    display: flex;
-    justify-content: center;
-    padding: 16px 0 0;
-    margin-top: 16px;
-
-    .save-btn {
-      width: 120px;
-      height: 42px;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 8px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: #3b82f6;
-      color: white;
-      border: none;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
-
-      &:hover {
-        background: #2563eb;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
-      }
-
-      &:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 3px rgba(59, 130, 246, 0.2);
-      }
-    }
-
-    .cancel-btn {
-      width: 120px;
-      height: 42px;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 8px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: #ffffff;
-      color: #64748b;
-      border: 1px solid #e2e8f0;
-      margin-left: 16px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-      &:hover {
-        background: #f8fafc;
-        color: #475569;
-        border-color: #cbd5e1;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      &:active {
-        transform: translateY(0);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      }
-    }
-  }
-}
+.vp-play:hover, .vp-play.is-on { background: var(--xn-lake-soft); }
 </style>

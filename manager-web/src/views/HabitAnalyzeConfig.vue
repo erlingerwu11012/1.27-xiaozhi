@@ -1,60 +1,47 @@
 <template>
-    <div class="welcome">
-        <HeaderBar />
+    <div class="xn-page">
+        <page-header :title="$t('habitAnalyze.pageTitle')" :description="$t('xn.knowledge.habitAnalyzeDesc')" />
 
-        <div class="operation-bar">
-            <h2 class="page-title">{{ $t('habitAnalyze.pageTitle') }}</h2>
-        </div>
+        <div class="xn-panel cfg-panel">
+            <div class="xn-panel__head">
+                <h2 class="xn-panel__title">{{ $t('xn.knowledge.cfgModelTitle') }}</h2>
+            </div>
+            <div class="xn-panel__body">
+                <el-form ref="configForm" :model="form" label-width="140px" v-loading="loading" class="cfg-form" @submit.native.prevent>
+                    <el-form-item :label="$t('habitAnalyze.enabled')">
+                        <el-switch v-model="form.enabled" />
+                        <p class="cfg-tip">{{ $t('habitAnalyze.enabledTip') }}</p>
+                    </el-form-item>
 
-        <div class="main-wrapper">
-            <div class="content-panel">
-                <div class="content-area">
-                    <el-card class="params-card" shadow="never">
-                        <el-form ref="configForm" :model="form" label-width="160px" v-loading="loading"
-                            class="config-form">
+                    <el-form-item :label="$t('habitAnalyze.baseUrl')" prop="base_url">
+                        <el-input v-model="form.base_url" :placeholder="$t('habitAnalyze.baseUrlPlaceholder')" clearable />
+                    </el-form-item>
 
-                            <el-form-item :label="$t('habitAnalyze.enabled')">
-                                <el-switch v-model="form.enabled" active-color="#4f6ef6" />
-                                <span class="form-tip">{{ $t('habitAnalyze.enabledTip') }}</span>
-                            </el-form-item>
+                    <el-form-item :label="$t('habitAnalyze.apiKey')" prop="api_key">
+                        <el-input v-model="form.api_key" :type="showApiKey ? 'text' : 'password'" autocomplete="new-password"
+                            :placeholder="$t('habitAnalyze.apiKeyPlaceholder')" clearable>
+                            <el-button slot="append" @click="showApiKey = !showApiKey">
+                                {{ showApiKey ? $t('habitAnalyze.hide') : $t('habitAnalyze.show') }}
+                            </el-button>
+                        </el-input>
+                        <p class="cfg-tip">{{ $t('xn.knowledge.cfgKeyTip') }}</p>
+                    </el-form-item>
 
-                            <el-form-item :label="$t('habitAnalyze.baseUrl')">
-                                <el-input v-model="form.base_url" :placeholder="$t('habitAnalyze.baseUrlPlaceholder')"
-                                    class="config-input" />
-                            </el-form-item>
+                    <el-form-item :label="$t('habitAnalyze.model')" prop="model">
+                        <el-input v-model="form.model" :placeholder="$t('habitAnalyze.modelPlaceholder')" clearable />
+                    </el-form-item>
 
-                            <el-form-item :label="$t('habitAnalyze.apiKey')">
-                                <el-input v-model="form.api_key" :type="showApiKey ? 'text' : 'password'"
-                                    :placeholder="$t('habitAnalyze.apiKeyPlaceholder')" class="config-input">
-                                    <template slot="append">
-                                        <el-button @click="showApiKey = !showApiKey">
-                                            {{ showApiKey ? $t('habitAnalyze.hide') : $t('habitAnalyze.show') }}
-                                        </el-button>
-                                    </template>
-                                </el-input>
-                            </el-form-item>
-
-                            <el-form-item :label="$t('habitAnalyze.model')">
-                                <el-input v-model="form.model" :placeholder="$t('habitAnalyze.modelPlaceholder')"
-                                    class="config-input" />
-                            </el-form-item>
-
-                            <el-form-item>
-                                <el-button type="primary" class="btn-save" @click="handleSave" :loading="saving">
-                                    {{ $t('habitAnalyze.save') }}
-                                </el-button>
-                            </el-form-item>
-
-                        </el-form>
-                    </el-card>
-                </div>
+                    <el-form-item class="cfg-actions">
+                        <el-button type="primary" @click="handleSave" :loading="saving">{{ $t('habitAnalyze.save') }}</el-button>
+                        <el-button :disabled="loading || saving" @click="loadConfig">{{ $t('xn.knowledge.cfgRevert') }}</el-button>
+                    </el-form-item>
+                </el-form>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import HeaderBar from "@/components/HeaderBar.vue";
 import Api from "@/apis/api";
 
 const PARAM_MAP = {
@@ -66,7 +53,6 @@ const PARAM_MAP = {
 
 export default {
     name: "HabitAnalyzeConfig",
-    components: { HeaderBar },
     data() {
         return {
             loading: false,
@@ -151,67 +137,12 @@ export default {
 </script>
 
 <style scoped>
-.welcome {
-    min-height: 100vh;
-    background: #f5f7fb;
-}
-
-.operation-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px 0;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin: 0;
-}
-
-.main-wrapper {
-    padding: 24px 32px;
-}
-
-.content-panel {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-}
-
-.content-area {
-    padding: 24px;
-}
-
-.params-card {
-    border: none;
-}
-
-.config-form {
-    max-width: 640px;
-}
-
-.config-input {
-    width: 100%;
-}
-
-.form-tip {
-    margin-left: 12px;
-    color: #909399;
-    font-size: 13px;
-}
-
-.btn-save {
-    background: #4f6ef6;
-    border-color: #4f6ef6;
-    border-radius: 8px;
-    padding: 10px 40px;
-}
-
-.btn-save:hover {
-    background: #3a5bd9;
-    border-color: #3a5bd9;
+.cfg-panel { max-width: 820px; }
+.cfg-form { max-width: 640px; }
+.cfg-tip { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--xn-ink-3); }
+.cfg-actions { margin-bottom: 0; }
+@media (max-width: 640px) {
+    .cfg-form ::v-deep .el-form-item__label { float: none; display: block; text-align: left; }
+    .cfg-form ::v-deep .el-form-item__content { margin-left: 0 !important; }
 }
 </style>

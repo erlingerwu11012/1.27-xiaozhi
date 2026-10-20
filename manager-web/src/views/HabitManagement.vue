@@ -1,178 +1,95 @@
 <template>
-    <div class="habit-management">
-        <HeaderBar />
+    <div class="xn-page">
+        <page-header :title="$t('habitManagement.pageTitle')" :description="$t('xn.knowledge.habitDesc')">
+            <el-button type="primary" @click="openCreateDialog"><xn-icon name="plus" /> {{ $t('habitManagement.addHabit') }}</el-button>
+        </page-header>
 
-        <div class="operation-bar">
-            <h2 class="page-title">{{ $t('habitManagement.pageTitle') }}</h2>
-            <el-button type="primary" class="btn-add" @click="openCreateDialog">
-                + {{ $t('habitManagement.addHabit') }}
-            </el-button>
-        </div>
-
-        <div class="main-wrapper">
-            <div class="content-panel">
-                <div class="content-area">
-                    <!-- 习惯列表 -->
-                    <el-table
-                        :data="habitList"
-                        v-loading="loading"
-                        style="width: 100%"
-                        empty-text="暂无手动习惯，点击右上角「+ 添加习惯」创建"
-                    >
-                        <el-table-column
-                            prop="description"
-                            :label="$t('habitManagement.col.description')"
-                            min-width="140"
-                        />
-                        <el-table-column
-                            :label="$t('habitManagement.col.triggerTime')"
-                            width="120"
-                        >
-                            <template slot-scope="{ row }">
-                                {{ formatTime(row.hour, row.minute) }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            prop="advanceMinutes"
-                            :label="$t('habitManagement.col.advanceMinutes')"
-                            width="130"
-                        >
-                            <template slot-scope="{ row }">
-                                {{ row.advanceMinutes }} {{ $t('habitManagement.minutesBefore') }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            :label="$t('habitManagement.col.source')"
-                            width="100"
-                        >
-                            <template slot-scope="{ row }">
-                                <el-tag
-                                    :type="row.source === 'manual' ? 'primary' : 'info'"
-                                    size="small"
-                                >
-                                    {{ row.source === 'manual'
-                                        ? $t('habitManagement.sourceManual')
-                                        : $t('habitManagement.sourceAuto') }}
-                                </el-tag>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            :label="$t('habitManagement.col.synced')"
-                            width="100"
-                        >
-                            <template slot-scope="{ row }">
-                                <el-tag
-                                    :type="row.syncState === 'synced' ? 'success' : 'warning'"
-                                    size="small"
-                                >
-                                    {{ statusText(row) }}
-                                </el-tag>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            prop="createdAt"
-                            :label="$t('habitManagement.col.createdAt')"
-                            width="160"
-                        />
-                        <el-table-column
-                            :label="$t('habitManagement.col.actions')"
-                            width="160"
-                            fixed="right"
-                        >
-                            <template slot-scope="{ row }">
-                                <el-button size="mini" @click="editHabit(row)" :disabled="row.enabled !== 1">编辑</el-button>
-                                <el-button
-                                    :disabled="row.enabled !== 1"
-                                    type="danger"
-                                    size="mini"
-                                    @click="handleDelete(row)"
-                                >
-                                    {{ $t('habitManagement.delete') }}
-                                </el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
+        <div class="xn-panel xn-panel--flush hm-panel">
+            <xn-empty v-if="loadFailed && !loading" error @retry="loadHabits" />
+            <template v-else>
+                <el-table :data="habitList" v-loading="loading && !loaded" row-key="id" :row-class-name="rowClass">
+                    <el-table-column prop="description" :label="$t('habitManagement.col.description')" min-width="160">
+                        <template slot-scope="{ row }"><span class="hm-name">{{ row.description }}</span></template>
+                    </el-table-column>
+                    <el-table-column :label="$t('habitManagement.col.triggerTime')" width="100">
+                        <template slot-scope="{ row }"><span class="xn-num">{{ formatTime(row.hour, row.minute) }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="advanceMinutes" :label="$t('habitManagement.col.advanceMinutes')" width="120">
+                        <template slot-scope="{ row }">
+                            <span v-if="row.advanceMinutes > 0"><span class="xn-num">{{ row.advanceMinutes }}</span> {{ $t('habitManagement.minutesBefore') }}</span>
+                            <span v-else class="xn-muted">{{ $t('xn.knowledge.onTime') }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column :label="$t('habitManagement.col.source')" width="90">
+                        <template slot-scope="{ row }">
+                            <span class="xn-tag" :class="row.source === 'manual' ? 'xn-tag--lake' : 'xn-tag--muted'">
+                                {{ row.source === 'manual' ? $t('habitManagement.sourceManual') : $t('habitManagement.sourceAuto') }}
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column :label="$t('habitManagement.col.synced')" min-width="170">
+                        <template slot-scope="{ row }">
+                            <span class="xn-tag hm-sync" :class="statusClass(row)" :title="statusText(row)">{{ statusText(row) }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="createdAt" :label="$t('habitManagement.col.createdAt')" width="160" class-name="hm-nowrap">
+                        <template slot-scope="{ row }"><span class="xn-num">{{ (row.createdAt || '').slice(0, 16) }}</span></template>
+                    </el-table-column>
+                    <el-table-column :label="$t('habitManagement.col.actions')" width="120" align="right">
+                        <template slot-scope="{ row }">
+                            <el-button type="text" :disabled="row.enabled !== 1" @click="editHabit(row)">{{ $t('xn.knowledge.edit') }}</el-button>
+                            <el-button type="text" class="hm-danger" :disabled="row.enabled !== 1" @click="handleDelete(row)">{{ $t('habitManagement.delete') }}</el-button>
+                        </template>
+                    </el-table-column>
+                    <template slot="empty">
+                        <xn-empty icon="chat" :title="$t('xn.knowledge.habitEmptyTitle')" :description="$t('xn.knowledge.habitEmptyDesc')">
+                            <el-button type="primary" @click="openCreateDialog"><xn-icon name="plus" /> {{ $t('habitManagement.addHabit') }}</el-button>
+                        </xn-empty>
+                    </template>
+                </el-table>
+                <div v-if="habitList.length" class="hm-foot">
+                    <span class="xn-muted hm-note"><xn-icon name="info" /> {{ $t('xn.knowledge.habitSyncNote') }}</span>
+                    <span class="xn-muted hm-count">{{ $t('xn.knowledge.habitCount', { n: habitList.length }) }}</span>
                 </div>
-            </div>
+            </template>
         </div>
 
-        <!-- 创建习惯对话框 -->
-        <el-dialog
-            :title="$t('habitManagement.createTitle')"
-            :visible.sync="dialogVisible"
-            width="480px"
-            @close="resetForm"
-        >
-            <el-form
-                ref="createForm"
-                :model="form"
-                :rules="rules"
-                label-width="120px"
-            >
-                <el-form-item
-                    :label="$t('habitManagement.form.description')"
-                    prop="description"
-                >
-                    <el-input
-                        v-model="form.description"
-                        :placeholder="$t('habitManagement.form.descriptionPlaceholder')"
-                        maxlength="32"
-                        show-word-limit
-                    />
+        <!-- 新建 / 编辑习惯 -->
+        <el-dialog :title="editingId ? $t('xn.knowledge.habitEditTitle') : $t('habitManagement.createTitle')"
+            :visible.sync="dialogVisible" width="520px" append-to-body @close="resetForm">
+            <el-form ref="createForm" :model="form" :rules="rules" label-position="top" v-loading="optionsLoading" @submit.native.prevent>
+                <el-form-item :label="$t('habitManagement.form.description')" prop="description">
+                    <el-input v-model="form.description" :placeholder="$t('habitManagement.form.descriptionPlaceholder')" maxlength="32" show-word-limit />
                 </el-form-item>
-
-                <el-form-item
-                    :label="$t('habitManagement.form.triggerTime')"
-                    prop="hour"
-                >
-                    <el-time-picker
-                        v-model="form.timeValue"
-                        format="HH:mm"
-                        value-format="HH:mm"
-                        :placeholder="$t('habitManagement.form.timePlaceholder')"
-                        style="width: 100%"
-                        @change="onTimeChange"
-                    />
-                </el-form-item>
-
-                <el-form-item
-                    :label="$t('habitManagement.form.advanceMinutes')"
-                    prop="advanceMinutes"
-                >
-                    <el-input-number
-                        v-model="form.advanceMinutes"
-                        :min="0"
-                        :max="30"
-                        :step="1"
-                        style="width: 100%"
-                    />
-                    <span class="form-tip">{{ $t('habitManagement.form.advanceTip') }}</span>
-                </el-form-item>
-
-                <el-form-item label="提醒设备" prop="deviceId">
-                    <el-select v-model="form.deviceId" placeholder="选择本账号的设备" style="width:100%">
-                        <el-option v-for="d in devices" :key="d.deviceId" :value="d.deviceId" :label="(d.deviceName || d.alias || '设备') + ' · ' + d.deviceId" />
+                <div class="hm-row">
+                    <el-form-item :label="$t('habitManagement.form.triggerTime')" prop="hour">
+                        <el-time-picker v-model="form.timeValue" format="HH:mm" value-format="HH:mm"
+                            :placeholder="$t('habitManagement.form.timePlaceholder')" style="width: 100%" @change="onTimeChange" />
+                    </el-form-item>
+                    <el-form-item :label="$t('habitManagement.form.advanceMinutes')" prop="advanceMinutes">
+                        <el-input-number v-model="form.advanceMinutes" :min="0" :max="30" :step="1" step-strictly style="width: 100%" />
+                    </el-form-item>
+                </div>
+                <p class="hm-tip hm-tip--inline">{{ $t('xn.knowledge.habitAdvanceTip') }}</p>
+                <el-form-item :label="$t('xn.knowledge.habitDevice')" prop="deviceId">
+                    <el-select v-model="form.deviceId" :placeholder="$t('xn.knowledge.habitDevicePlaceholder')" style="width:100%"
+                        :no-data-text="$t('xn.knowledge.habitNoDevice')">
+                        <el-option v-for="d in devices" :key="d.deviceId" :value="d.deviceId" :label="deviceLabel(d)" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="接收人" prop="recipientPersonId">
-                    <el-select v-model="form.recipientPersonId" placeholder="明确选择接收人" style="width:100%">
-                        <el-option label="公共接收人（all）" value="all" />
+                <el-form-item :label="$t('xn.knowledge.habitRecipient')" prop="recipientPersonId">
+                    <el-select v-model="form.recipientPersonId" :placeholder="$t('xn.knowledge.habitRecipientPlaceholder')" style="width:100%">
+                        <el-option :label="$t('xn.knowledge.habitRecipientAll')" value="all" />
                         <el-option v-for="p in people" :key="p.user_id" :label="p.display_name" :value="p.user_id" />
                     </el-select>
                 </el-form-item>
-                <p class="form-tip">设备保存成功后才显示“已同步”。旧记录请先编辑绑定，旧固件需要升级。删除后需设备在线确认停止提醒。</p>
+                <p class="hm-tip">{{ $t('xn.knowledge.habitFormNote') }}</p>
             </el-form>
 
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">
-                    {{ $t('habitManagement.cancel') }}
-                </el-button>
-                <el-button
-                    type="primary"
-                    :loading="saving"
-                    @click="handleCreate"
-                >
-                    {{ $t('habitManagement.confirm') }}
+            <span slot="footer">
+                <el-button @click="dialogVisible = false">{{ $t('habitManagement.cancel') }}</el-button>
+                <el-button type="primary" :loading="saving" @click="handleCreate">
+                    {{ editingId ? $t('xn.knowledge.saveChanges') : $t('habitManagement.confirm') }}
                 </el-button>
             </span>
         </el-dialog>
@@ -180,15 +97,16 @@
 </template>
 
 <script>
-import HeaderBar from "@/components/HeaderBar.vue";
 import Api from "@/apis/api";
 
 export default {
     name: "HabitManagement",
-    components: { HeaderBar },
     data() {
         return {
             loading: false,
+            loaded: false,
+            loadFailed: false,
+            optionsLoading: false,
             saving: false,
             dialogVisible: false,
             habitList: [],
@@ -207,11 +125,11 @@ export default {
     computed: {
         rules() {
             return {
-                deviceId: [{required:true,message:"请选择提醒设备",trigger:"change"}],
-                recipientPersonId: [{required:true,message:"请选择接收人",trigger:"change"}],
+                deviceId: [{required:true,message:this.$t("xn.knowledge.habitDeviceRequired"),trigger:"change"}],
+                recipientPersonId: [{required:true,message:this.$t("xn.knowledge.habitRecipientRequired"),trigger:"change"}],
                 description: [
                     { required: true, message: this.$t("habitManagement.form.descriptionRequired"), trigger: "blur" },
-                    { min: 1, max: 32, message: this.$t("habitManagement.form.descriptionLength"), trigger: "blur" },
+                    { min: 1, max: 32, message: this.$t("xn.knowledge.habitNameLength"), trigger: "blur" },
                 ],
                 hour: [
                     { required: true, message: this.$t("habitManagement.form.timeRequired"), trigger: "change" },
@@ -232,21 +150,39 @@ export default {
             this.loading = true;
             Api.habit.listHabits({ enabledOnly: false }, (res) => {
                 this.loading = false;
+                this.loaded = true;
                 if (res && res.code === 0 && res.data) {
                     this.habitList = res.data;
+                    this.loadFailed = false;
                 } else {
+                    // 定时刷新失败时保留已有列表，只有首次加载失败才显示失败状态
+                    if (!this.habitList.length) this.loadFailed = true;
                     this.$message.error(this.$t("habitManagement.loadFail"));
                 }
             });
         },
 
         loadOptions() {
-            Api.habit.bindingOptions(res => { if(res && res.code===0) { this.devices=res.data.devices; this.people=res.data.people; } });
+            this.optionsLoading = true;
+            Api.habit.bindingOptions(res => {
+                this.optionsLoading = false;
+                if(res && res.code===0) { this.devices=res.data.devices; this.people=res.data.people; }
+                else { this.$message.error(this.$t("xn.knowledge.habitOptionsFailed")); }
+            });
         },
         statusText(row) {
-            const labels={needs_binding:'待绑定',pending:'待同步',upgrade_required:'需升级固件',failed:'同步失败',synced:row.enabled===1?'已同步':'已停止提醒'};
-            const reasons={device_offline:'设备离线',receipt_timeout:'回执超时，将核对重试',storage_full:'存储空间不足',storage_error:'保存失败',quota_exceeded:'规则数量已满',identity_mismatch:'人员目录不匹配',directory_not_ready:'人员目录同步中',legacy_ambiguous:'旧规则存在歧义',ownership_mismatch:'设备归属不匹配',recipient_missing:'接收人已移除'};
-            return (labels[row.syncState] || '待同步') + (reasons[row.syncError] ? '：'+reasons[row.syncError] : '');
+            const state = row.syncState === 'synced' && row.enabled !== 1 ? 'stopped' : row.syncState;
+            const known = ['needs_binding', 'pending', 'upgrade_required', 'failed', 'synced', 'stopped'];
+            const label = this.$t('xn.knowledge.sync.' + (known.includes(state) ? state : 'pending'));
+            const reasonKey = 'xn.knowledge.syncError.' + row.syncError;
+            return label + (row.syncError && this.$te(reasonKey) ? this.$t('xn.knowledge.syncSep') + this.$t(reasonKey) : '');
+        },
+        statusClass(row) {
+            if (row.enabled !== 1) return row.syncState === 'synced' ? 'xn-tag--muted' : 'xn-tag--warning';
+            return { synced: 'xn-tag--success', failed: 'xn-tag--danger', upgrade_required: 'xn-tag--warning', needs_binding: 'xn-tag--warning' }[row.syncState] || 'xn-tag--lake';
+        },
+        deviceLabel(d) {
+            return (d.deviceName || d.alias || this.$t('xn.knowledge.habitDeviceFallback')) + ' · ' + d.deviceId;
         },
         openCreateDialog() { this.resetForm(); this.loadOptions(); this.dialogVisible=true; },
         editHabit(row) {
@@ -299,11 +235,11 @@ export default {
                 submit(payload, (res) => {
                     this.saving = false;
                     if (res && res.code === 0) {
-                        this.$message.success(this.$t("habitManagement.createSuccess"));
+                        this.$message.success(this.$t(this.editingId ? "xn.knowledge.habitUpdated" : "habitManagement.createSuccess"));
                         this.dialogVisible = false;
                         this.loadHabits();
                     } else {
-                        this.$message.error(res.msg || this.$t("habitManagement.createFail"));
+                        this.$message.error((res && res.msg) || this.$t("habitManagement.createFail"));
                     }
                 });
             });
@@ -324,12 +260,15 @@ export default {
                         this.$message.success(this.$t("habitManagement.deleteSuccess"));
                         this.loadHabits();
                     } else {
-                        this.$message.error(res.msg || this.$t("habitManagement.deleteFail"));
+                        this.$message.error((res && res.msg) || this.$t("habitManagement.deleteFail"));
                     }
                 });
             }).catch(() => {});
         },
 
+        rowClass({ row }) {
+            return row.enabled !== 1 ? 'hm-row--off' : '';
+        },
         formatTime(hour, minute) {
             return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
         },
@@ -338,54 +277,19 @@ export default {
 </script>
 
 <style scoped>
-.habit-management {
-    min-height: 100vh;
-    background: #f5f7fb;
-}
-
-.operation-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px 0;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin: 0;
-}
-
-.btn-add {
-    background: #4f6ef6;
-    border-color: #4f6ef6;
-    border-radius: 8px;
-}
-
-.btn-add:hover {
-    background: #3a5bd9;
-    border-color: #3a5bd9;
-}
-
-.main-wrapper {
-    padding: 24px 32px;
-}
-
-.content-panel {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-}
-
-.content-area {
-    padding: 24px;
-}
-
-.form-tip {
-    margin-left: 8px;
-    color: #909399;
-    font-size: 12px;
-}
+.hm-panel { overflow: hidden; }
+.hm-panel ::v-deep .hm-nowrap .cell { white-space: nowrap; }
+.hm-name { font-weight: 500; }
+.hm-panel ::v-deep .hm-row--off .hm-name { color: var(--xn-ink-3); text-decoration: line-through; text-decoration-color: var(--xn-ink-4); }
+.hm-sync { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.hm-danger { color: var(--xn-danger); }
+.hm-danger:hover, .hm-danger:focus { color: #8D3523; }
+.hm-danger.is-disabled, .hm-danger.is-disabled:hover { color: var(--xn-ink-4); }
+.hm-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 16px 14px; border-top: 1px solid var(--xn-line-2); }
+.hm-note { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.hm-count { font-size: 13px; }
+.hm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.hm-tip { margin: 0; font-size: 13px; line-height: 1.7; color: var(--xn-ink-3); }
+.hm-tip--inline { margin: -10px 0 16px; }
+@media (max-width: 560px) { .hm-row { grid-template-columns: 1fr; } }
 </style>

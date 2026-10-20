@@ -1,6 +1,5 @@
 <template>
     <div class="welcome">
-        <HeaderBar />
 
         <div class="operation-bar">
             <h2 class="page-title">{{ $t('voicePrint.pageTitle') }}</h2>
@@ -41,18 +40,15 @@
         <voice-print-dialog :title="dialogTitle" :visible.sync="dialogVisible" :agentId="agentId" :form="paramForm"
             @submit="handleSubmit" @cancel="dialogVisible = false" />
         <el-footer>
-            <version-footer />
         </el-footer>
     </div>
 </template>
 
 <script>
 import Api from "@/apis/api";
-import HeaderBar from "@/components/HeaderBar.vue";
-import VersionFooter from "@/components/VersionFooter.vue";
 import VoicePrintDialog from "@/components/VoicePrintDialog.vue";
 export default {
-    components: { HeaderBar, VoicePrintDialog, VersionFooter },
+    components: { VoicePrintDialog },
     data() {
         return {
             voicePrintList: [],

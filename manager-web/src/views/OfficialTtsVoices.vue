@@ -2,271 +2,155 @@
   <div class="ot-page">
   <OfficialTtsStudioShell
     :active-tab="mode"
-    :warning="actionBlockedReason"
+    :warning="caps ? actionBlockedReason : ''"
     :compact="mode === 'clone' && !!cloneFile"
   >
-    <template #hero>
-      <h1>{{ heroTitle }}</h1>
-    </template>
+    <template #hero>{{ heroTitle }}</template>
 
     <template #composer>
       <template v-if="mode === 'design'">
+        <label class="ot-label" for="ot-design-prompt">{{ $t('xn.tts.designLabel') }}</label>
         <el-input
+          id="ot-design-prompt"
           type="textarea"
           class="ot-composer__textarea"
-          :rows="2"
+          :rows="3"
           v-model="designPrompt"
           resize="none"
-          placeholder="描述你想要的音色，例如：温柔女声，语速适中，适合有声书旁白"
+          maxlength="500"
+          :placeholder="$t('xn.tts.designPlaceholder')"
         />
-        <div class="ot-composer__toolbar">
-          <div class="ot-composer__tools">
-            <button type="button" class="ot-tool" @click="openPreviewDialog">
-              <i class="el-icon-document" />
-              <span>文本预览</span>
-            </button>
-          </div>
-          <div class="ot-composer__actions">
-            <button
-              type="button"
-              class="ot-btn-send"
-              :class="{ 'is-ready': canSubmitDesign }"
-              :disabled="!canSubmitDesign || submitting"
-              :title="sendTitle"
-              @click="createDesign"
-            >
-              <i class="el-icon-top" />
-            </button>
-          </div>
+        <div class="ot-composer__bar">
+          <button type="button" class="ot-tool" @click="openPreviewDialog">
+            <xn-icon name="edit" />
+            <span>{{ $t('xn.tts.previewText') }}</span>
+            <span class="ot-tool__val">{{ previewText }}</span>
+          </button>
+          <span class="xn-toolbar__grow"></span>
+          <el-button type="primary" :disabled="!canSubmitDesign || submitting" :loading="submitting" :title="sendTitle" @click="createDesign">
+            {{ $t('xn.tts.startDesign') }}
+          </el-button>
         </div>
       </template>
 
       <template v-else>
-        <div v-if="recording" class="ot-recorder">
-          <button type="button" class="ot-recorder__stop" title="结束录制" @click="stopRecord(false)">
+        <div v-if="recording" class="ot-recorder" role="status">
+          <button type="button" class="ot-recorder__stop" :title="$t('xn.tts.stopRecord')" :aria-label="$t('xn.tts.stopRecord')" @click="stopRecord(false)">
             <span class="ot-recorder__stop-square" />
           </button>
-          <div class="ot-recorder__wave">
-            <span
-              v-for="(h, i) in recordBars"
-              :key="i"
-              class="ot-recorder__bar"
-              :class="{ 'is-active': i <= recordIndex }"
-              :style="{ height: h + '%' }"
-            />
+          <div class="ot-recorder__wave" aria-hidden="true">
+            <span v-for="(h, i) in recordBars" :key="i" class="ot-recorder__bar" :class="{ 'is-active': i <= recordIndex }" :style="{ height: h + '%' }" />
           </div>
-          <span class="ot-recorder__time">{{ recordClock }} / {{ maxRecordClock }}</span>
-          <button type="button" class="ot-recorder__close" title="取消录制" @click="stopRecord(true)">
-            <i class="el-icon-close" />
-          </button>
+          <span class="ot-recorder__time xn-num">{{ recordClock }} / {{ maxRecordClock }}</span>
+          <el-button size="small" @click="stopRecord(true)">{{ $t('xn.tts.cancelRecord') }}</el-button>
         </div>
 
         <template v-else>
           <div v-if="cloneFile" class="ot-clone-file">
-            <div class="ot-clone-file__thumb">
-              <span class="ot-clone-file__bar is-1" />
-              <span class="ot-clone-file__bar is-2" />
-              <span class="ot-clone-file__bar is-3" />
-              <span class="ot-clone-file__bar is-4" />
-              <span class="ot-clone-file__bar is-5" />
-            </div>
+            <span class="ot-clone-file__icon" aria-hidden="true"><xn-icon name="voice" /></span>
             <div class="ot-clone-file__main">
               <p class="ot-clone-file__title" :title="cloneFileTooltip">{{ cloneFileTitle }}</p>
-              <p class="ot-clone-file__sub">音频</p>
+              <p class="ot-clone-file__sub xn-num">{{ cloneFileMeta }}</p>
             </div>
-            <button
-              type="button"
-              class="ot-clone-file__clear"
-              title="移除后重新上传或录制"
-              @click="clearCloneFile"
-            >
-              <i class="el-icon-close" />
-            </button>
+            <el-button size="small" @click="clearCloneFile">{{ $t('xn.tts.removeFile') }}</el-button>
           </div>
 
           <div v-else class="ot-clone-pick">
-            <input
-              ref="cloneFileInput"
-              type="file"
-              accept="audio/wav,audio/x-wav,.wav,audio/*"
-              class="ot-clone-pick__hidden"
-              @change="onCloneFilePicked"
-            />
-            <button
-              type="button"
-              class="ot-clone-pick__card"
-              :disabled="!actionsEnabled"
-              @click="triggerCloneUpload"
-            >
-              <i class="el-icon-upload2" />
-              <span>上传声音</span>
+            <input ref="cloneFileInput" type="file" accept="audio/wav,audio/x-wav,.wav,audio/*" class="ot-clone-pick__hidden" @change="onCloneFilePicked" />
+            <button type="button" class="ot-clone-pick__card" :disabled="!actionsEnabled" @click="triggerCloneUpload">
+              <xn-icon name="upload" />
+              <span class="ot-clone-pick__title">{{ $t('xn.tts.uploadVoice') }}</span>
+              <span class="ot-clone-pick__hint">{{ $t('xn.tts.uploadHint') }}</span>
             </button>
-            <span class="ot-clone-pick__or">or</span>
-            <button
-              type="button"
-              class="ot-clone-pick__card"
-              :disabled="!actionsEnabled"
-              @click="toggleRecord"
-            >
-              <i class="el-icon-microphone" />
-              <span>录制声音</span>
+            <button type="button" class="ot-clone-pick__card" :disabled="!actionsEnabled" @click="toggleRecord">
+              <xn-icon name="mic" />
+              <span class="ot-clone-pick__title">{{ $t('xn.tts.recordVoice') }}</span>
+              <span class="ot-clone-pick__hint">{{ $t('xn.tts.recordHint', { n: maxRecordSeconds }) }}</span>
             </button>
           </div>
 
-          <div class="ot-composer__toolbar">
-            <div class="ot-composer__tools">
-              <button type="button" class="ot-tool" @click="openPreviewDialog">
-                <i class="el-icon-document" />
-                <span>文本预览</span>
-              </button>
-            </div>
-            <div class="ot-composer__actions">
-              <button
-                type="button"
-                class="ot-btn-send"
-                :class="{ 'is-ready': canSubmitClone }"
-                :disabled="!canSubmitClone || submitting"
-                :title="cloneSendTitle"
-                @click="submitClone"
-              >
-                <i class="el-icon-top" />
-              </button>
-            </div>
+          <div class="ot-composer__bar">
+            <span class="ot-composer__note xn-muted">{{ mock ? $t('xn.tts.mockUploadNote') : $t('xn.tts.cloneNote') }}</span>
+            <span class="xn-toolbar__grow"></span>
+            <el-button type="primary" :disabled="!canSubmitClone || submitting" :loading="submitting" :title="cloneSendTitle" @click="submitClone">
+              {{ $t('xn.tts.startClone') }}
+            </el-button>
           </div>
         </template>
       </template>
     </template>
 
     <template #bottom>
-      <div class="ot-bottom__bar">
-        <div class="ot-bottom__tabs ot-bottom__tabs--text">
-          <button type="button" class="ot-bottom__tab is-active">资产</button>
+      <section class="xn-panel xn-panel--flush ot-list">
+        <div class="xn-panel__head">
+          <h2 class="xn-panel__title">
+            {{ mode === 'design' ? $t('xn.tts.myDesigns') : $t('xn.tts.myClones') }}
+            <span class="ot-count xn-num">{{ filteredVoices.length }}</span>
+          </h2>
+          <span class="ot-list__head-right">
+            <span v-if="showGenerating" class="xn-tag xn-tag--lake" role="status"><i class="el-icon-loading"></i>{{ $t('xn.tts.generating') }}</span>
+            <demo-tag />
+          </span>
         </div>
-      </div>
-
-      <div v-if="showGenerating" class="ot-generating" role="status" aria-live="polite">
-        <span class="ot-generating__text">
-          <i class="el-icon-loading" />
-          生成中，请等待…
-        </span>
-      </div>
-
-      <div class="ot-voice-asset-list" v-loading="loading">
-        <div v-if="!loading && !filteredVoices.length && !showGenerating" class="ot-empty">
-          {{ mode === "design" ? "暂无音色设计资产" : "暂无音色复刻资产" }}
-        </div>
-        <div
-          v-for="(row, idx) in filteredVoices"
-          :key="row.id"
-          class="ot-voice-asset"
-        >
-          <button
-            type="button"
-            class="ot-voice-asset__avatar"
-            :class="avatarClass(row, idx)"
-            :disabled="!canPlay(row) || loadingId === row.id"
-            :title="canPlay(row) ? '试听' : '暂无预览'"
-            @click="togglePlay(row)"
-          >
-            <i :class="playingId === row.id && !playPaused ? 'el-icon-video-pause' : 'el-icon-video-play'" />
-          </button>
-          <div class="ot-voice-asset__main">
-            <p class="ot-voice-asset__title">
-              {{ voiceTitle(row) }}
-              <i
-                v-if="row.errorMsg && !String(row.errorMsg).startsWith('task:')"
-                class="el-icon-info"
-                :title="row.errorMsg"
-              />
-            </p>
-            <p class="ot-voice-asset__sub">
-              {{ row.kind === "clone" ? "我的复刻" : "我的设计" }}
-              <template v-if="row.upstreamVoiceId"> · 音色 ID {{ shortVoiceId(row.upstreamVoiceId) }}</template>
-              <template v-if="row.status !== 'available'"> · {{ statusLabel(row.status) }}</template>
-            </p>
-          </div>
-          <div class="ot-voice-asset__right">
-            <span class="ot-voice-asset__time">{{ formatTime(row.createdAt) }}</span>
-            <div class="ot-voice-asset__actions">
-              <button
-                type="button"
-                class="ot-voice-asset__icon-btn"
-                :disabled="!canGoSynth(row)"
-                :title="canGoSynth(row) ? '去合成' : '音色尚未就绪'"
-                aria-label="去合成"
-                @click="goSynth(row)"
-              >
-                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-                  <path d="M2 9.3V6.7M5 12V4M8 10.4V5.6M11 12V4M14 9.3V6.7" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="ot-voice-asset__icon-btn"
-                title="重命名"
-                aria-label="重命名"
-                @click="rename(row)"
-              >
-                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-                  <path d="M11.1 2.4l2.5 2.5-7.9 7.9-2.9.7.7-2.9 7.6-8.2z" />
-                  <path d="M9.7 3.8l2.5 2.5" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="ot-voice-asset__icon-btn is-danger"
-                title="删除"
-                aria-label="删除"
-                @click="remove(row)"
-              >
-                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-                  <path d="M2.8 4.4h10.4" />
-                  <path d="M6.1 4.4V2.9h3.8v1.5" />
-                  <path d="M4.2 4.4l.6 8.6h6.4l.6-8.6" />
-                  <path d="M6.7 6.9v3.7M9.3 6.9v3.7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <p v-if="filteredVoices.length" class="ot-voice-asset__more">没有更多了</p>
-        <audio
-          ref="audioEl"
-          class="ot-asset__audio-el"
-          @timeupdate="onAudioTime"
-          @loadedmetadata="onAudioMeta"
-          @ended="onAudioEnded"
-          @pause="playPaused = true"
-          @play="playPaused = false"
-        />
-      </div>
+        <xn-empty v-if="loadFailed && !loading" error @retry="reload()" />
+        <el-table v-else :data="filteredVoices" v-loading="loading" row-key="id" class="ot-table">
+          <el-table-column :label="$t('xn.tts.colVoice')" min-width="260">
+            <template slot-scope="{ row }">
+              <div class="ot-voice">
+                <button type="button" class="ot-play" :class="{ 'is-on': playingId === row.id && !playPaused }"
+                  :disabled="!canPlay(row) || loadingId === row.id"
+                  :title="canPlay(row) ? $t('xn.tts.play') : $t('xn.tts.noPreview')"
+                  :aria-label="(playingId === row.id && !playPaused ? $t('xn.tts.pause') : $t('xn.tts.play')) + ' ' + voiceTitle(row)"
+                  @click="togglePlay(row)">
+                  <i v-if="loadingId === row.id" class="el-icon-loading"></i>
+                  <svg v-else-if="playingId === row.id && !playPaused" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+                  <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z" /></svg>
+                </button>
+                <div class="ot-voice__text">
+                  <span class="ot-voice__name xn-clip">{{ voiceTitle(row) }}</span>
+                  <span v-if="row.upstreamVoiceId" class="ot-voice__sub xn-muted xn-clip xn-num" :title="row.upstreamVoiceId">{{ $t('xn.tts.voiceId') }} {{ shortVoiceId(row.upstreamVoiceId) }}</span>
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colStatus')" min-width="120">
+            <template slot-scope="{ row }">
+              <span class="xn-tag" :class="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
+              <el-tooltip v-if="row.errorMsg && !String(row.errorMsg).startsWith('task:')" :content="row.errorMsg" placement="top" popper-class="xn-tip-wide">
+                <button type="button" class="ot-info" :aria-label="row.errorMsg"><xn-icon name="info" /></button>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colCreated')" min-width="130">
+            <template slot-scope="{ row }"><span class="xn-num">{{ formatTime(row.createdAt) }}</span></template>
+          </el-table-column>
+          <el-table-column :label="$t('xn.tts.colActions')" min-width="210" align="right">
+            <template slot-scope="{ row }">
+              <el-button type="text" :disabled="!canGoSynth(row)" :title="canGoSynth(row) ? '' : $t('xn.tts.notReady')" @click="goSynth(row)">{{ $t('xn.tts.goSynth') }}</el-button>
+              <el-button type="text" @click="rename(row)">{{ $t('xn.tts.rename') }}</el-button>
+              <el-button type="text" class="ot-danger" @click="remove(row)">{{ $t('xn.tts.delete') }}</el-button>
+            </template>
+          </el-table-column>
+          <template slot="empty">
+            <xn-empty icon="voice" :title="mode === 'design' ? $t('xn.tts.emptyDesign') : $t('xn.tts.emptyClone')"
+              :description="mode === 'design' ? $t('xn.tts.emptyDesignDesc') : $t('xn.tts.emptyCloneDesc')" />
+          </template>
+        </el-table>
+        <audio ref="audioEl" class="ot-audio-el" @timeupdate="onAudioTime" @loadedmetadata="onAudioMeta" @ended="onAudioEnded"
+          @pause="playPaused = true" @play="playPaused = false" />
+      </section>
     </template>
   </OfficialTtsStudioShell>
 
-    <el-dialog
-      title="预览文本"
-      :visible.sync="previewDialogVisible"
-      width="560px"
-      custom-class="ot-preview-text-dialog"
-      append-to-body
-      :close-on-click-modal="false"
-    >
-      <el-input
-        type="textarea"
-        v-model="previewDraft"
-        :rows="8"
-        resize="none"
-        maxlength="230"
-        :placeholder="previewPlaceholder"
-      />
-      <div class="ot-preview-text-dialog__bar">
-        <span>{{ previewDraftLength }}/230字符</span>
-        <button type="button" class="ot-preview-text-dialog__clear" title="清空" @click="previewDraft = ''">
-          <i class="el-icon-delete" />
-        </button>
-      </div>
-      <span slot="footer">
-        <button type="button" class="ot-preview-text-dialog__ok" @click="confirmPreviewText">确认</button>
+    <el-dialog :title="$t('xn.tts.previewDialogTitle')" :visible.sync="previewDialogVisible" width="560px" append-to-body :close-on-click-modal="false">
+      <p class="ot-dialog-help">{{ $t('xn.tts.previewDialogHelp') }}</p>
+      <el-input type="textarea" v-model="previewDraft" :rows="6" resize="none" maxlength="230" :placeholder="previewPlaceholder" />
+      <div class="ot-dialog-count xn-muted xn-num">{{ previewDraftLength }} / 230</div>
+      <span slot="footer" class="ot-dialog-foot">
+        <el-button type="text" :disabled="!previewDraft" @click="previewDraft = ''">{{ $t('xn.tts.clearText') }}</el-button>
+        <span class="xn-toolbar__grow"></span>
+        <el-button @click="previewDialogVisible = false">{{ $t('xn.common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirmPreviewText">{{ $t('xn.tts.usePreviewText') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -275,6 +159,7 @@
 <script>
 import OfficialTtsStudioShell from "@/components/OfficialTtsStudioShell.vue";
 import officialTts from "@/apis/module/officialTts";
+import { isMockMode } from "@/mock/config";
 
 const DEFAULT_PREVIEW = "欢迎使用文本朗读，这是一段设计的音色。";
 
@@ -295,6 +180,8 @@ export default {
       caps: null,
       voices: [],
       loading: false,
+      loadFailed: false,
+      mock: isMockMode(),
       submitting: false,
       cloneName: "我的音色",
       cloneFile: null,
@@ -334,9 +221,7 @@ export default {
       return m === "design" ? "design" : "clone";
     },
     heroTitle() {
-      return this.mode === "design"
-        ? "欢迎体验音色设计，今天想创造什么声音？"
-        : "欢迎体验音色复刻，今天想复刻什么？";
+      return this.mode === "design" ? this.$t("xn.tts.heroDesign") : this.$t("xn.tts.heroClone");
     },
     filteredVoices() {
       return (this.voices || []).filter((v) => {
@@ -372,10 +257,10 @@ export default {
       }
       if (this.caps.accessStatusText) return this.caps.accessStatus === "ready" ? "" : this.caps.accessStatusText;
       if (this.caps.enhancedEnabled === false) {
-        return "官方增强功能尚未启用（总开关关闭或未加入灰度名单），因此无法试用。";
+        return "官方语音功能尚未对你的账号开放，暂时无法使用。";
       }
       if (this.caps.pricingStatus === "pricing_pending") {
-        return "该操作尚未配置并发布有效售价，无法发起收费/试用调用。";
+        return "该功能暂未开放计费，暂时无法使用。";
       }
       if (this.caps.customerCallable === false) return "当前不可用";
       if (this.caps.customerCallable !== true) return "当前不可用";
@@ -469,6 +354,13 @@ export default {
     apiMsg(err, fallback) {
       return (err && err.data && (err.data.msg || err.data.message)) || fallback;
     },
+    statusClass(status) {
+      if (status === "available") return "xn-tag--success";
+      if (status === "failed") return "xn-tag--danger";
+      if (status === "pending_authorization") return "xn-tag--warning";
+      if (status === "processing" || status === "uncertain") return "xn-tag--lake";
+      return "xn-tag--muted";
+    },
     statusLabel(status) {
       return STATUS_LABEL[status] || status || "-";
     },
@@ -540,7 +432,11 @@ export default {
       officialTts.listVoices((res) => {
         this.voices = (res.data && res.data.data) || [];
         this.loading = false;
-      }, () => { this.loading = false; });
+        this.loadFailed = false;
+      }, () => {
+        this.loading = false;
+        if (!silent) this.loadFailed = true;
+      });
     },
     triggerCloneUpload() {
       if (!this.actionsEnabled) {
