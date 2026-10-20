@@ -5,6 +5,7 @@ import zhTW from './zh_TW';
 import en from './en';
 import de from './de';
 import vi from './vi';
+import { redesignZh, redesignEn } from './redesign';
 
 Vue.use(VueI18n);
 
@@ -34,11 +35,11 @@ const i18n = new VueI18n({
   locale: getDefaultLanguage(),
   fallbackLocale: 'zh_CN',
   messages: {
-    'zh_CN': zhCN,
-    'zh_TW': zhTW,
-    'en': en,
-    'de': de,
-    'vi': vi
+    'zh_CN': { ...zhCN, ...redesignZh },
+    'zh_TW': { ...zhTW, ...redesignZh },
+    'en': { ...en, ...redesignEn },
+    'de': { ...de, ...redesignEn },
+    'vi': { ...vi, ...redesignEn }
   }
 });
 

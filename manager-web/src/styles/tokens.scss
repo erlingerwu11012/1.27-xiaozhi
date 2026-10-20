@@ -1,0 +1,29 @@
+/* 小念控制台设计规范（tokens）。页面 scoped 样式里优先用 CSS 变量 var(--xn-*)，
+   需要在 SCSS 里计算时 @import '@/styles/tokens.scss' 使用同名 $xn-* 变量。 */
+
+// 颜色：雾白底、纯白面板、深墨蓝文字与主按钮、湖蓝强调
+$xn-mist: #EEF2F5;        // 页面底色
+$xn-mist-2: #F6F8FA;      // 表头、浅底区块
+$xn-white: #FFFFFF;       // 面板
+$xn-ink: #1E2B40;         // 正文、标题、主按钮
+$xn-ink-2: #44546A;       // 次级正文、表单标签
+$xn-ink-3: #66748A;       // 辅助说明（白底对比度 ≥ 4.5:1）
+$xn-ink-4: #97A2B2;       // 占位、禁用
+$xn-lake: #2F6F95;        // 链接、选中、已绑定
+$xn-lake-ink: #245A7A;    // 湖蓝文字（悬停 / 深一级）
+$xn-lake-soft: #E4EEF4;   // 选中底色
+$xn-line: #DCE3EA;        // 面板描边
+$xn-line-2: #E8EDF2;      // 内部分隔
+$xn-success: #2F7A55;  $xn-success-soft: #E3F1E9;
+$xn-warning: #9A6212;  $xn-warning-soft: #FBF1DF;
+$xn-danger: #A3402C;   $xn-danger-soft: #F7E7E2;
+$xn-demo: #874C1B;     $xn-demo-soft: #FBEEDF;   // “演示数据”标记专用，不用于业务状态
+
+// 圆角：标签 6 · 控件 8 · 面板 12 · 弹窗 / 抽屉 16
+$xn-r-sm: 6px; $xn-r: 8px; $xn-r-lg: 12px; $xn-r-xl: 16px;
+
+// 字体：界面用系统无衬线；智能体名称与页面标题用 Noto Serif SC（常用字子集，缺字回落系统衬线）
+$xn-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", sans-serif;
+$xn-serif: "XN Serif", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+
+$xn-shadow-pop: 0 14px 36px rgba(30, 43, 64, 0.14);   // 只用于浮层（下拉、弹窗），面板不加阴影

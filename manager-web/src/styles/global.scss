@@ -1,107 +1,222 @@
-// 覆盖 autofill 样式
+/* 小念控制台：全局样式（设计规范、Element 细化、页面骨架类）。
+   规则：面板用 1px 描边、不加阴影；阴影只给浮层；不用渐变、发光、彩虹描边。 */
+@import './tokens.scss';
+
+@font-face {
+  font-family: "XN Serif";
+  src: url("~@/assets/fonts/NotoSerifSC-600-common.woff2") format("woff2");
+  font-weight: 500 700;
+  font-display: swap;
+}
+
+:root {
+  --xn-mist: #{$xn-mist}; --xn-mist-2: #{$xn-mist-2}; --xn-white: #{$xn-white};
+  --xn-ink: #{$xn-ink}; --xn-ink-2: #{$xn-ink-2}; --xn-ink-3: #{$xn-ink-3}; --xn-ink-4: #{$xn-ink-4};
+  --xn-lake: #{$xn-lake}; --xn-lake-ink: #{$xn-lake-ink}; --xn-lake-soft: #{$xn-lake-soft};
+  --xn-line: #{$xn-line}; --xn-line-2: #{$xn-line-2};
+  --xn-success: #{$xn-success}; --xn-success-soft: #{$xn-success-soft};
+  --xn-warning: #{$xn-warning}; --xn-warning-soft: #{$xn-warning-soft};
+  --xn-danger: #{$xn-danger}; --xn-danger-soft: #{$xn-danger-soft};
+  --xn-demo: #{$xn-demo}; --xn-demo-soft: #{$xn-demo-soft};
+  --xn-r-sm: #{$xn-r-sm}; --xn-r: #{$xn-r}; --xn-r-lg: #{$xn-r-lg}; --xn-r-xl: #{$xn-r-xl};
+  --xn-sans: #{$xn-sans}; --xn-serif: #{$xn-serif};
+  --xn-shadow-pop: #{$xn-shadow-pop};
+  --xn-focus: 0 0 0 3px rgba(47, 111, 149, 0.28);
+  --xn-sidebar-w: 232px;
+  --xn-topbar-h: 64px;
+}
+
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body {
+  background: $xn-mist;
+  color: $xn-ink;
+  font: 14px/1.6 $xn-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#app { min-height: 100vh; text-align: left; color: $xn-ink; font-family: $xn-sans; }
+a { color: $xn-lake; text-decoration: none; }
+a:hover { color: $xn-lake-ink; }
+:focus-visible { outline: none; box-shadow: var(--xn-focus); }
+::selection { background: $xn-lake-soft; }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  -webkit-text-fill-color: $xn-ink;
   transition: background-color 5000s ease-in-out 0s;
-  background-color: transparent;
 }
 
-.el-footer {
-  height: 35px !important; /* 使用 !important 确保覆盖默认样式 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-.el-icon-video-play, .el-icon-video-pause { 
-  font-size: 18px !important;
+/* ───────── 页面骨架 ───────── */
+.xn-page { padding: 24px 32px 48px; min-width: 0; }
+.xn-page-header {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.xn-page-header__title { margin: 0; font: 600 24px/1.3 $xn-serif; letter-spacing: 0.02em; color: $xn-ink; }
+.xn-page-header__desc { margin: 6px 0 0; font-size: 14px; color: $xn-ink-3; max-width: 72ch; }
+.xn-page-header__actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.xn-panel { background: $xn-white; border: 1px solid $xn-line; border-radius: $xn-r-lg; }
+.xn-panel + .xn-panel { margin-top: 16px; }
+.xn-panel__head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 20px; border-bottom: 1px solid $xn-line-2;
+}
+.xn-panel__title { margin: 0; font-size: 16px; font-weight: 600; color: $xn-ink; }
+.xn-panel__body { padding: 20px; }
+.xn-panel--flush .xn-panel__body { padding: 0; }
+
+/* 工具栏：搜索 + 筛选 + 右侧操作 */
+.xn-toolbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px; margin-bottom: 16px;
+  background: $xn-white; border: 1px solid $xn-line; border-radius: $xn-r-lg;
+}
+.xn-toolbar__grow { flex: 1 1 auto; }
+.xn-toolbar .el-input { width: 280px; max-width: 100%; }
+.xn-toolbar--inline { padding: 0; border: 0; background: transparent; }
+
+/* 空状态与失败状态：说明发生了什么、下一步做什么 */
+.xn-empty { padding: 48px 24px; text-align: center; color: $xn-ink-3; }
+.xn-empty__icon { width: 44px; height: 44px; margin: 0 auto 12px; color: $xn-ink-4; }
+.xn-empty__title { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: $xn-ink; }
+.xn-empty__desc { margin: 0 auto 16px; max-width: 46ch; font-size: 14px; }
+
+/* 状态标签 */
+.xn-tag {
+  display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 8px;
+  border-radius: $xn-r-sm; font-size: 12px; font-weight: 500; line-height: 1; white-space: nowrap;
+  background: $xn-mist-2; color: $xn-ink-2;
+}
+.xn-tag i.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.xn-tag--lake { background: $xn-lake-soft; color: $xn-lake-ink; }
+.xn-tag--success { background: $xn-success-soft; color: $xn-success; }
+.xn-tag--warning { background: $xn-warning-soft; color: $xn-warning; }
+.xn-tag--danger { background: $xn-danger-soft; color: $xn-danger; }
+.xn-tag--muted { background: transparent; color: $xn-ink-3; box-shadow: inset 0 0 0 1px $xn-line; }
+.xn-tag--demo { background: $xn-demo-soft; color: $xn-demo; }
+
+.xn-muted { color: $xn-ink-3; }
+.xn-num { font-variant-numeric: tabular-nums; }
+.xn-serif { font-family: $xn-serif; }
+.xn-clip { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xn-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+/* ───────── Element UI 细化（变量之外的部分） ───────── */
+.el-button { border-radius: $xn-r; }
+.el-button--primary, .el-button--primary:focus {
+  background: $xn-ink; border-color: $xn-ink; color: #fff;
+}
+.el-button--primary:hover { background: #2B3C57; border-color: #2B3C57; color: #fff; }
+.el-button--primary:active { background: #17223A; border-color: #17223A; }
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:hover {
+  background: #A3AEBB; border-color: #A3AEBB; color: #fff;
+}
+.el-button--primary.is-plain { background: $xn-lake-soft; border-color: transparent; color: $xn-lake-ink; }
+.el-button--primary.is-plain:hover { background: $xn-lake; border-color: $xn-lake; color: #fff; }
+.el-button--default:hover, .el-button--default:focus { background: #fff; border-color: #AEBBC8; color: $xn-ink; }
+.el-button--text { color: $xn-lake; padding-left: 4px; padding-right: 4px; }
+.el-button--text:hover, .el-button--text:focus { color: $xn-lake-ink; }
+.el-button--text.is-disabled { color: $xn-ink-4; }
+.el-button--danger.is-plain { background: $xn-danger-soft; border-color: transparent; color: $xn-danger; }
+.el-button--danger.is-plain:hover { background: $xn-danger; color: #fff; }
+.el-button + .el-button { margin-left: 8px; }
+
+.el-input__inner, .el-textarea__inner { color: $xn-ink; }
+.el-input__inner:focus, .el-textarea__inner:focus { box-shadow: var(--xn-focus); }
+.el-form-item__label { color: $xn-ink-2; font-weight: 500; }
+.el-form-item__error { color: $xn-danger; }
+
+.el-tag { border-radius: $xn-r-sm; }
+
+.el-table { color: $xn-ink; font-size: 14px; }
+.el-table th.el-table__cell { font-weight: 600; font-size: 13px; }
+.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf { border-bottom-color: $xn-line-2; }
+.el-table::before { background-color: $xn-line-2; }
+.el-table .cell { line-height: 1.5; }
+.el-table__empty-text { color: $xn-ink-3; }
+
+.el-pagination { padding: 14px 0 2px; color: $xn-ink-2; font-weight: 400; }
+.el-pagination.is-background .el-pager li:not(.disabled).active { background-color: $xn-ink; }
+.el-pagination.is-background .el-pager li, .el-pagination.is-background .btn-prev, .el-pagination.is-background .btn-next {
+  background: #fff; border: 1px solid $xn-line; border-radius: $xn-r-sm;
 }
 
-/* —— 全局 MessageBox：圆角（对齐百炼风格） —— */
-.el-message-box,
-.ot-msg-box {
-  border-radius: 16px !important;
-  padding-bottom: 20px;
-  box-shadow: 0 12px 40px rgba(29, 33, 41, 0.16);
-  overflow: hidden;
-}
+.el-dialog { border-radius: $xn-r-xl; overflow: hidden; }
+.el-dialog__header { padding: 22px 24px 8px; }
+.el-dialog__title { font-weight: 600; color: $xn-ink; }
+.el-dialog__body { padding: 12px 24px 8px; color: $xn-ink-2; }
+.el-dialog__footer { padding: 12px 24px 22px; }
+.el-dialog__headerbtn { top: 20px; right: 20px; }
 
-.el-message-box__header {
-  padding: 20px 20px 8px;
-}
+.el-drawer { border-radius: $xn-r-xl 0 0 $xn-r-xl; }
+.el-drawer__header { margin-bottom: 0; padding: 22px 24px 16px; color: $xn-ink; font-size: 18px; font-weight: 600; border-bottom: 1px solid $xn-line-2; }
+.el-drawer__body { padding: 20px 24px; }
 
-.el-message-box__title {
-  font-size: 17px;
-  font-weight: 600;
-  color: #1d2129;
-  line-height: 1.4;
-}
+.el-card { border-radius: $xn-r-lg; border-color: $xn-line; }
+.el-card.is-always-shadow, .el-card.is-hover-shadow:hover { box-shadow: none; }
+.el-card__header { border-bottom-color: $xn-line-2; font-weight: 600; }
 
-.el-message-box__content {
-  padding: 8px 20px 12px;
-  color: #86909c;
-  font-size: 14px;
-  line-height: 1.6;
-}
+.el-tabs__item { font-weight: 500; }
+.el-tabs__item.is-active { color: $xn-ink; }
+.el-tabs__active-bar { background-color: $xn-ink; }
 
-.el-message-box__btns {
-  padding: 8px 20px 4px;
-}
+.el-alert { border-radius: $xn-r; }
+.el-alert--info.is-light { background: $xn-lake-soft; color: $xn-lake-ink; }
+.el-alert--warning.is-light { background: $xn-warning-soft; color: $xn-warning; }
 
-.el-message-box__btns .el-button {
-  border-radius: 999px !important;
-  min-width: 76px;
-  height: 34px;
-  padding: 0 18px;
-  font-size: 14px;
+.el-dropdown-menu, .el-select-dropdown, .el-popover, .el-picker-panel, .el-cascader__dropdown {
+  border-radius: $xn-r-lg; border-color: $xn-line; box-shadow: $xn-shadow-pop;
 }
+.el-dropdown-menu__item:not(.is-disabled):hover, .el-dropdown-menu__item:focus { background: $xn-mist-2; color: $xn-ink; }
 
-.el-message-box__btns .el-button + .el-button {
-  margin-left: 10px;
+.el-message { min-width: 320px; border-radius: $xn-r; border-width: 0; box-shadow: $xn-shadow-pop; }
+.el-message--success { background: #fff; }
+.el-message--success .el-message__content { color: $xn-ink; }
+.el-message--error { background: #fff; }
+.el-message--error .el-message__content { color: $xn-danger; }
+.el-message--warning { background: #fff; }
+.el-message--warning .el-message__content { color: $xn-warning; }
+.el-message--info { background: #fff; }
+.el-message--info .el-message__content { color: $xn-ink; }
+
+.el-upload-dragger { border-radius: $xn-r-lg; border-color: $xn-line; background: $xn-mist-2; }
+.el-upload-dragger:hover { border-color: $xn-lake; }
+
+.el-footer { height: auto !important; }
+.el-icon-video-play, .el-icon-video-pause { font-size: 18px; }
+
+/* ───────── MessageBox（全局确认框；main.js 会给删除类确认加 ot-delete-confirm） ───────── */
+.el-message-box, .ot-msg-box {
+  width: 440px; max-width: calc(100vw - 32px);
+  padding-bottom: 20px; border: 0; border-radius: $xn-r-xl; box-shadow: $xn-shadow-pop;
 }
-
-.el-message-box__headerbtn .el-message-box__close {
-  color: #86909c;
-}
-
-/* 删除确认：隐藏默认警告图标，危险主按钮为红色胶囊 */
-.ot-delete-confirm .el-message-box__status {
-  display: none !important;
-}
-
-.ot-delete-confirm .el-message-box__message {
-  padding-left: 0 !important;
-}
-
-.ot-delete-confirm .el-message-box__title {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.ot-delete-confirm__cancel {
-  background: #fff !important;
-  border: 1px solid rgba(29, 33, 41, 0.16) !important;
-  color: #1d2129 !important;
-}
-
-.ot-delete-confirm__cancel:hover {
-  border-color: rgba(29, 33, 41, 0.35) !important;
-  color: #000 !important;
-}
-
+.el-message-box__header { padding: 22px 24px 8px; }
+.el-message-box__title { font-size: 17px; font-weight: 600; color: $xn-ink; line-height: 1.4; }
+.el-message-box__content { padding: 6px 24px 14px; color: $xn-ink-2; font-size: 14px; line-height: 1.7; }
+.el-message-box__btns { padding: 6px 24px 0; }
+.el-message-box__btns .el-button { min-width: 80px; }
+.ot-delete-confirm .el-message-box__status { display: none !important; }
+.ot-delete-confirm .el-message-box__message { padding-left: 0 !important; }
+.ot-delete-confirm__cancel { background: #fff; border: 1px solid $xn-line; color: $xn-ink; }
 .ot-delete-confirm__danger,
-.ot-delete-confirm .el-button--primary {
-  background: #f53f3f !important;
-  border-color: #f53f3f !important;
-  color: #fff !important;
+.ot-delete-confirm .el-button--primary,
+.ot-delete-confirm .el-button--primary:focus {
+  background: $xn-danger; border-color: $xn-danger; color: #fff;
 }
-
 .ot-delete-confirm__danger:hover,
-.ot-delete-confirm .el-button--primary:hover {
-  background: #e13c39 !important;
-  border-color: #e13c39 !important;
+.ot-delete-confirm .el-button--primary:hover { background: #8D3523; border-color: #8D3523; }
+
+/* 窄窗口 */
+@media (max-width: 960px) {
+  .xn-page { padding: 16px 16px 40px; }
+  .xn-toolbar .el-input { width: 100%; }
 }

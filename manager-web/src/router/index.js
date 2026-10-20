@@ -77,14 +77,16 @@ const routes = [
     name: 'UserManagement',
     component: function () {
       return import('../views/UserManagement.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   {
     path: '/model-config',
     name: 'ModelConfig',
     component: function () {
       return import('../views/ModelConfig.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   { path: '/params-management',
     name: 'ParamsManagement',
@@ -92,6 +94,7 @@ const routes = [
       return import('../views/ParamsManagement.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '参数管理'
     }
@@ -102,6 +105,7 @@ const routes = [
       return import('../views/MemoryExtractConfig.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '记忆提取配置'
     }
@@ -112,6 +116,7 @@ const routes = [
       return import('../views/HabitAnalyzeConfig.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '习惯分析配置'
     }
@@ -122,6 +127,7 @@ const routes = [
       return import('../views/HabitManagement.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '习惯管理'
     }
@@ -152,6 +158,7 @@ const routes = [
       return import('../views/MemoryManagement.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '记忆管理'
     }
@@ -184,6 +191,7 @@ const routes = [
       return import('../views/ServerSideManager.vue')
     },
     meta: {
+      adminOnly: true,
       requiresAuth: true,
       title: '服务端管理'
     }
@@ -197,14 +205,16 @@ const routes = [
     name: 'DictManagement',
     component: function () {
       return import('../views/DictManagement.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   {
     path: '/provider-management',
     name: 'ProviderManagement',
     component: function () {
       return import('../views/ProviderManagement.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   // 添加默认角色管理路由
   {
@@ -212,7 +222,8 @@ const routes = [
     name: 'AgentTemplateManagement',
     component: function () {
       return import('../views/AgentTemplateManagement.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   // 添加模板快速配置路由
   {
@@ -220,7 +231,8 @@ const routes = [
     name: 'TemplateQuickConfig',
     component: function () {
       return import('../views/TemplateQuickConfig.vue')
-    }
+    },
+    meta: { adminOnly: true }
   },
   { path: '/billing/packages',
     name: 'BillingPackages',
@@ -274,7 +286,8 @@ const routes = [
     component: function () {
       return import('../views/OfficialTtsAdmin.vue')
     },
-    meta: { requiresAuth: true, title: '官方TTS管理' }
+    meta: {
+      adminOnly: true, requiresAuth: true, title: '官方TTS管理' }
   },
 ]
 const router = new VueRouter({

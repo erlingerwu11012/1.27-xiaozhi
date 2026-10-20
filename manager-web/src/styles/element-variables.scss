@@ -1,0 +1,51 @@
+/* Element UI 主题：用 theme-chalk 源码 + 小念控制台的变量重新编译（官方的定制方式）。
+   湖蓝是交互强调色（选中、复选、标签页、分页、链接）；主按钮单独改为深墨蓝（见 global.scss）。 */
+
+$--color-primary: #2F6F95;
+$--color-success: #2F7A55;
+$--color-warning: #9A6212;
+$--color-danger: #A3402C;
+$--color-info: #66748A;
+
+$--color-text-primary: #1E2B40;
+$--color-text-regular: #44546A;
+$--color-text-secondary: #66748A;
+$--color-text-placeholder: #97A2B2;
+
+$--border-color-base: #D5DDE5;
+$--border-color-light: #DCE3EA;
+$--border-color-lighter: #E8EDF2;
+$--border-color-extra-light: #F1F4F7;
+$--border-color-hover: #AEBBC8;
+$--background-color-base: #EEF2F5;
+
+$--border-radius-base: 8px;
+$--border-radius-small: 6px;
+
+$--font-size-base: 14px;
+$--font-weight-primary: 500;
+
+$--input-height: 40px;
+$--input-medium-height: 36px;
+$--input-small-height: 32px;
+$--input-mini-height: 28px;
+
+$--button-font-weight: 500;
+$--button-default-padding-horizontal: 18px;
+
+$--dialog-box-shadow: 0 24px 64px rgba(30, 43, 64, 0.22);
+$--dialog-title-font-size: 18px;
+$--dialog-padding-primary: 24px;
+
+$--table-header-font-color: #44546A;
+$--table-header-background-color: #F6F8FA;
+$--table-row-hover-background-color: #F6F8FA;
+$--table-current-row-background-color: #E4EEF4;
+
+$--tooltip-fill: #1E2B40;
+$--message-shadow: 0 10px 28px rgba(30, 43, 64, 0.16);
+$--popover-padding: 14px;
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import '~element-ui/packages/theme-chalk/src/index';

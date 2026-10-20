@@ -4,6 +4,12 @@ import Constant from '../utils/constant';
 import { goToPage, isNotNull, showDanger, showWarning } from '../utils/index';
 import i18n from '../i18n/index';
 
+// 数据模式在构建期确定：只有 VUE_APP_DATA_MODE=real 才走真实接口，其余一律 mock。
+// 条件是构建期常量，real 构建时 webpack 会整段剔除 src/mock，不把演示数据打进正式包。
+// （必须写成小写 real；留空或其他任何值都是 mock）
+const USE_MOCK = process.env.VUE_APP_DATA_MODE !== 'real'
+const mockRequest = process.env.VUE_APP_DATA_MODE !== 'real' ? require('../mock/index').mockRequest : null
+
 const fly = new Fly()
 // 设置超时
 fly.config.timeout = 30000
@@ -42,8 +48,9 @@ function sendRequest() {
                 this._header.Authorization = 'Bearer ' + (JSON.parse(store.getters.getToken)).token
             }
 
-            // 打印请求信息
-            fly.request(this._url, this._data, {
+            // mock 模式（默认）由 src/mock 在浏览器内应答，不发出网络请求；real 模式走原 flyio
+            const transport = USE_MOCK ? mockRequest : fly.request.bind(fly);
+            transport(this._url, this._data, {
                 method: this._method,
                 headers: this._header,
                 responseType: this._responseType

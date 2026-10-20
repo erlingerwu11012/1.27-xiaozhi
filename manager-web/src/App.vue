@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
+    <!-- 登录、注册、找回密码等页面不带外壳；其余页面统一放进侧栏 + 顶栏布局 -->
+    <app-layout v-if="withShell">
+      <router-view />
+    </app-layout>
+    <router-view v-else />
     <cache-viewer v-if="isCDNEnabled" :visible.sync="showCacheViewer" />
-    <!-- Matrix 转场：全屏爆白层 -->
+    <!-- 登录成功后的转场：全屏白场 -->
     <div
       v-if="matrixFlash"
       class="matrix-flash-overlay"
@@ -12,109 +16,38 @@
 </template>
 
 <style lang="scss">
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
-
-body {
-  /* 欧泊云海：多重径向渐变弥散背景 */
-  background-color: #f8fafc !important; /* 极浅的冷灰蓝色作为底漆，压住死白 */
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08), transparent 25%), /* 左上清透天空蓝光斑 */
-    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.06), transparent 25%) !important; /* 右下极淡靛蓝光斑 */
-  background-attachment: fixed !important; /* 让背景固定，滚动时卡片像在光斑上滑过 */
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  min-height: 100vh;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #0f172a;
-
-    &.router-link-exact-active {
-      color: #2563eb;
-    }
-  }
-}
-
-.copyright {
-  text-align: center;
-  color: rgb(0, 0, 0);
-  font-size: 12px;
-  font-weight: 400;
-  margin-top: auto;
-  padding: 30px 0 20px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-}
-
-.el-message {
-  top: 70px !important;
-  z-index: 99999 !important;
-}
-
-/* Matrix 转场：全屏爆白层 */
 .matrix-flash-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 99999;
   pointer-events: none;
   background: #ffffff;
   opacity: 0;
 }
-
-.matrix-flash-overlay.flash-burst {
-  animation: matrixFlashBurst 300ms cubic-bezier(0.4, 0, 1, 1) forwards;
-}
-
-.matrix-flash-overlay.flash-fadeout {
-  opacity: 1;
-  animation: matrixFlashFadeout 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes matrixFlashBurst {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes matrixFlashFadeout {
-  to {
-    opacity: 0;
-  }
-}
+.matrix-flash-overlay.flash-burst { animation: matrixFlashBurst 300ms cubic-bezier(0.4, 0, 1, 1) forwards; }
+.matrix-flash-overlay.flash-fadeout { opacity: 1; animation: matrixFlashFadeout 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes matrixFlashBurst { to { opacity: 1; } }
+@keyframes matrixFlashFadeout { to { opacity: 0; } }
 </style>
 <script>
 import CacheViewer from '@/components/CacheViewer.vue';
+import AppLayout from '@/components/layout/AppLayout.vue';
 import { logCacheStatus } from '@/utils/cacheViewer';
 import { mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: {
-    CacheViewer
+    CacheViewer,
+    AppLayout
   },
   computed: {
-    ...mapState(['matrixFlash'])
+    ...mapState(['matrixFlash']),
+    /** 认证页面（及尚未匹配到路由时）不显示外壳 */
+    withShell() {
+      const bare = ['welcome', 'login', 'Register', 'RetrievePassword'];
+      return !!this.$route.name && !bare.includes(this.$route.name);
+    }
   },
   data() {
     return {

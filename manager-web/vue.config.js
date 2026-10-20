@@ -64,6 +64,18 @@ module.exports = defineConfig({
     },
   },
   publicPath: process.env.VUE_APP_PUBLIC_PATH || "/",
+  // 主题从 element-ui/packages/theme-chalk 源码编译（src/styles/element-variables.scss）。
+  // theme-chalk 使用旧版 Sass 写法，这里只屏蔽它带来的弃用提示，不改变编译结果。
+  css: {
+    loaderOptions: {
+      sass: {
+        sassOptions: {
+          quietDeps: true,
+          silenceDeprecations: ['legacy-js-api', 'import', 'slash-div', 'global-builtin', 'color-functions', 'mixed-decls', 'function-units']
+        }
+      }
+    }
+  },
   chainWebpack: config => {
 
     // 修改 HTML 插件配置，动态插入 CDN 链接

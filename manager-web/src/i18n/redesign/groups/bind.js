@@ -1,0 +1,31 @@
+/* 添加设备弹窗 */
+export default {
+  zh_CN: {
+    'xn.bind.agent': '绑定到智能体',
+    'xn.bind.agentPlaceholder': '选择智能体',
+    'xn.bind.boundCount': '已绑定 {n} 台',
+    'xn.bind.codeHelp': '设备开机联网后会语音播报 6 位验证码，把它填在下面。',
+    'xn.bind.recoverHelp': '设备提示需要恢复连接时，屏幕上会显示 6 位确认码。确认后请保持设备在线，以领取新的连接凭据。',
+    'xn.bind.recoverCode': '设备上显示的 6 位确认码',
+    'xn.bind.manualHelp': '没有验证码时，可以按设备型号、固件版本和 MAC 地址手动添加。',
+    'xn.bind.digit': '第 {n} 位',
+    'xn.bind.bindSubmit': '绑定设备',
+    'xn.bind.recoverSubmit': '确认恢复',
+    'xn.bind.noAgentTitle': '还没有智能体',
+    'xn.bind.noAgentDesc': '设备要绑定到一个智能体上。先创建一个智能体，再回来添加设备。',
+  },
+  en: {
+    'xn.bind.agent': 'Bind to agent',
+    'xn.bind.agentPlaceholder': 'Choose an agent',
+    'xn.bind.boundCount': '{n} bound',
+    'xn.bind.codeHelp': 'After the device starts and connects, it reads out a 6-digit code. Enter it below.',
+    'xn.bind.recoverHelp': 'When the device asks to recover its connection, its screen shows a 6-digit code. Keep the device online after confirming so it can receive new credentials.',
+    'xn.bind.recoverCode': '6-digit code shown on the device',
+    'xn.bind.manualHelp': 'No code? Add the device by model, firmware version and MAC address.',
+    'xn.bind.digit': 'Digit {n}',
+    'xn.bind.bindSubmit': 'Bind device',
+    'xn.bind.recoverSubmit': 'Confirm recovery',
+    'xn.bind.noAgentTitle': 'No agents yet',
+    'xn.bind.noAgentDesc': 'A device is bound to an agent. Create an agent first, then add the device.',
+  },
+};
