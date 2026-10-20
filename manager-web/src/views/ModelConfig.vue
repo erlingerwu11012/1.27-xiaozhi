@@ -62,7 +62,7 @@
                   <el-button v-else type="text" @click="handleDefaultChange(scope.row)">{{ $t('xn.admin.model.setDefault') }}</el-button>
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('modelConfig.action')" :width="activeTab === 'tts' ? 220 : 160" align="right">
+              <el-table-column :label="$t('modelConfig.action')" :width="activeTab === 'tts' ? 260 : 170" align="right">
                 <template slot-scope="scope">
                   <el-button v-if="activeTab === 'tts'" type="text" @click="openTtsDialog(scope.row)">{{ $t("modelConfig.voiceManagement") }}</el-button>
                   <el-button type="text" @click="editModel(scope.row)">{{ $t("modelConfig.edit") }}</el-button>
@@ -418,6 +418,7 @@ export default {
 .mc-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--xn-ink-3); word-break: break-all; }
 .xa-search-icon { height: 100%; margin: 0 2px 0 4px; font-size: 16px; color: var(--xn-ink-3); }
 .xa-panel { overflow: hidden; }
+.xa-panel ::v-deep .el-table td.el-table__cell:last-child .cell { white-space: nowrap; }
 .xa-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; word-break: break-all; }
 .xa-danger { color: var(--xn-danger); }
 .xa-danger:hover, .xa-danger:focus { color: #8D3523; }
