@@ -1,0 +1,355 @@
+<title>小念宣传片分镜 v2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: screening-room contact sheet. One column of shots; on wide screens frame left, notes right. */
+:root {
+  --bg: #0f1113; --panel: #171a1d; --line: #2a2e33; --fg: #ece8e1; --dim: #9a978f; --amber: #e3b06a; --cold: #8fa9c9; --pain: #d9806f;
+  --display: "Noto Serif SC", "Songti SC", serif; --body: "Noto Sans SC", "Microsoft YaHei", sans-serif; --mono: "JetBrains Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.65; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 80px; }
+.hero { display: grid; gap: 18px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--amber); text-transform: uppercase; }
+h1 { font-family: var(--display); font-weight: 300; font-size: clamp(34px, 6vw, 64px); letter-spacing: .12em; line-height: 1.2; margin: 0; text-wrap: balance; }
+h1 b { font-weight: 500; color: var(--amber); }
+.logline { color: var(--dim); max-width: 62ch; margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 28px; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+.stats b { display: block; color: var(--fg); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+section { padding-block: 36px; border-bottom: 1px solid var(--line); }
+h3 { font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: .08em; margin: 0 0 16px; }
+.ask { background: var(--panel); border: 1px solid var(--amber); border-radius: 10px; padding: 20px 22px; }
+.ask ol { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; }
+.ask li::marker { color: var(--amber); font-family: var(--mono); }
+.preview video { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 6px; }
+.note { color: var(--dim); font-size: 13px; margin: 12px 0 0; max-width: 80ch; }
+.cast { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.cast div { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.cast b { display: block; font-weight: 500; }
+.cast span { color: var(--dim); font-size: 13px; }
+.act { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; font-family: var(--display); font-weight: 500; font-size: 24px; letter-spacing: .1em; margin: 56px 0 18px; }
+.act em { font-family: var(--body); font-style: normal; font-size: 13px; color: var(--dim); letter-spacing: .04em; }
+.shot { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 22px; padding-block: 20px; border-top: 1px solid var(--line); }
+.shot figure { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 4px; background: #000; }
+.meta { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.meta header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; font-family: var(--mono); }
+.meta header strong { font-size: 20px; color: var(--amber); font-weight: 500; }
+.tc, .dur { font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.src { font-family: var(--body); font-size: 12px; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--dim); }
+.src-3d, .src-3dplate { border-color: rgba(227,176,106,.5); color: var(--amber); }
+.pic { margin: 0; }
+.lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lines li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) auto; gap: 10px; font-size: 14px; }
+.lines b { font-weight: 400; color: var(--dim); font-size: 13px; }
+.lines i { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--dim); }
+.w-X b, .w-X2 b { color: var(--amber); } .w-D b { color: var(--pain); } .w-U b { color: var(--cold); }
+.caps { margin: 0; padding-left: 1.1em; color: var(--dim); font-size: 13px; }
+.sfx { margin: 0; color: var(--dim); font-size: 13px; }
+.notes ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--dim); max-width: 80ch; }
+code { font-family: var(--mono); font-size: 13px; color: var(--fg); }
+@media (max-width: 760px) { .shot { grid-template-columns: 1fr; } .lines li { grid-template-columns: 6.5em minmax(0, 1fr); } .lines i { display: none; } }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Storyboard v2 · 2026-10-18 · 1920×1080 · 30fps</div>
+    <h1>念念不忘，<b>必有回响</b></h1>
+    <p class="logline">一句话有没有回响。痛点阶段，说出口的话都落空了，最后归结为缺少陪伴。转折点是一声「你好，小念」，桌上的屏幕亮起，小念回答「我在」。后面每个功能，都是对某一句话的回响。</p>
+    <div class="stats">
+      <div><b>1:54.80</b>全片时长（按配音实测）</div>
+      <div><b>24</b>镜头</div>
+      <div><b>25</b>句配音，已合成并核对</div>
+      <div><b>15</b>个镜头用真实 CAD 渲染</div>
+    </div>
+  </header>
+
+  <section class="preview">
+    <h3>代理预览</h3>
+    <video src="web/proxy_preview.mp4" poster="web/poster.jpg" controls playsinline preload="metadata"></video>
+    <p class="note">640×360 低分辨率预览：每 3 帧渲染 1 帧，Cycles 16 采样，所以画面有颗粒、动作略顿。正式版是 1080p 逐帧渲染。声音是完整混音（−14 LUFS），请戴耳机听。</p>
+  </section>
+
+  <section>
+    <div class="ask">
+      <h3>需要你确认</h3>
+      <ol>
+        <li>整体结构和登场方式：声音先到，光再到。用唤醒词「你好，小念」作为产品登场的动作，替代原来的 7 秒开场。</li>
+        <li>配音音色：旁白和「你」用男声 Yichen，小念用女声 Xiaoyin，自定义音色段用女声 Jing。音频文件在 <code>audio/vo/</code>，请重点听 L11「我在」、L14、L23。</li>
+        <li>S19 的演示形象：按你给的参考生成的原创半身角色和黄昏书房壁纸，画面上标注「演示形象」。不满意可以换一版，每版约 44 积分。</li>
+        <li>L23「你说过的，我都放在心上」是情感表达。如果担心被理解成"全部保存"，可以改成「你在意的事，我会记得」。</li>
+        <li>代理预览已经完成（见上方）。正式渲染的耗时：实测 1080p、Cycles 40 采样每帧约 24 秒，全片 3D 部分共 2370 帧，约 15–16 小时，适合整夜在后台跑。EEVEE 快 2–3 倍，但会丢掉台灯的光影，不推荐。确认后再开始。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h3>配音角色</h3>
+    <div class="cast">
+      <div><b>旁白 · 你</b><span>男声 Inworld Yichen，负责发问</span></div>
+      <div><b>小念</b><span>女声 Inworld Xiaoyin，负责回答</span></div>
+      <div><b>小念 · 新音色</b><span>女声 Inworld Jing，只在 S19 出现</span></div>
+      <div><b>某智能设备</b><span>女声 Inworld Xinyi，加窄带和机械感处理</span></div>
+    </div>
+  </section>
+
+  <h2 class="act"><span>第一幕 · 发问</span><em>音乐：低频长音铺底</em></h2>
+<article class="shot" id="S01">
+  <figure><img src="web/S01.jpg" alt="S01 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S01</strong><span class="tc">0:00.00 – 0:03.77</span><span class="dur">3.8s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">深夜电脑桌远景，屏幕未亮，产品隐在暗处；镜头极慢推近</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>你说过的话，有回响吗？</span><i>0:00.80</i></li></ul>
+    
+    
+  </div>
+</article>
+<article class="shot" id="S02">
+  <figure><img src="web/S02.jpg" alt="S02 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S02</strong><span class="tc">0:03.77 – 0:05.37</span><span class="dur">1.6s</span><span class="src src-card">图形卡</span></header>
+    <p class="pic">画面压暗，遮幅合拢成 2.39:1，宣传语小字一闪而过</p>
+    
+    <ul class="caps"><li>小字：念念不忘，必有回响</li></ul>
+    
+  </div>
+</article>
+<h2 class="act"><span>第二幕 · 痛点</span><em>音乐：冷色氛围，S06 末尾完全静默</em></h2>
+<article class="shot" id="S03">
+  <figure><img src="web/S03.jpg" alt="S03 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S03</strong><span class="tc">0:05.37 – 0:10.47</span><span class="dur">5.1s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">门缝透进走廊的光，屋里一片暗（复用 v1 底片）</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>每天回到家，你说的第一句话，是对谁说的？</span><i>0:05.67</i></li></ul>
+    
+    <p class="sfx">音效：门锁/钥匙</p>
+  </div>
+</article>
+<article class="shot" id="S04a">
+  <figure><img src="web/S04a.jpg" alt="S04a 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S04a</strong><span class="tc">0:10.47 – 0:14.33</span><span class="dur">3.9s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">某智能设备特写，冷白光环亮起，答非所问</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>今天有点累。</span><i>0:10.52</i></li><li class="w-D"><b>某智能设备</b><span>为您播放白噪音。</span><i>0:12.18</i></li></ul>
+    <ul class="caps"><li>标签：没温度</li></ul>
+    <p class="sfx">音效：机械提示音</p>
+  </div>
+</article>
+<article class="shot" id="S04b">
+  <figure><img src="web/S04b.jpg" alt="S04b 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S04b</strong><span class="tc">0:14.33 – 0:15.53</span><span class="dur">1.2s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">同一机位推近、去色，光环熄灭，它一直沉默</p>
+    
+    <ul class="caps"><li>标签：不主动</li></ul>
+    
+  </div>
+</article>
+<article class="shot" id="S04c">
+  <figure><img src="web/S04c.jpg" alt="S04c 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S04c</strong><span class="tc">0:15.53 – 0:20.67</span><span class="dur">5.1s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">光环再亮，问它上周的事，它记不得</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>上周跟你说的面试……</span><i>0:15.58</i></li><li class="w-D"><b>某智能设备</b><span>抱歉，我不太明白。</span><i>0:18.00</i></li></ul>
+    <ul class="caps"><li>标签：记不住</li></ul>
+    <p class="sfx">音效：错误提示音</p>
+  </div>
+</article>
+<article class="shot" id="S05">
+  <figure><img src="web/S05.jpg" alt="S05 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S05</strong><span class="tc">0:20.67 – 0:24.53</span><span class="dur">3.9s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">空荡的公寓全景，三个标签收拢</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>它们不主动，没温度，也记不住。</span><i>0:20.97</i></li></ul>
+    <ul class="caps"><li>不主动 · 没温度 · 记不住</li></ul>
+    
+  </div>
+</article>
+<article class="shot" id="S06">
+  <figure><img src="web/S06.jpg" alt="S06 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S06</strong><span class="tc">0:24.53 – 0:34.10</span><span class="dur">9.6s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">窗边的背影，城市夜景；镜头后拉，人越来越小，停在大字上</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>可我们真正缺的，从来不是一台更聪明的机器，</span><i>0:24.93</i></li><li class="w-N"><b>旁白（男）</b><span>是一个，会陪着你的人。</span><i>0:29.94</i></li></ul>
+    <ul class="caps"><li>大字：缺少的，是陪伴</li></ul>
+    
+  </div>
+</article>
+<h2 class="act"><span>第三幕 · 回响登场</span><em>音乐：钢琴单音 → 温暖和弦铺开 → 主旋律进入</em></h2>
+<article class="shot" id="S07">
+  <figure><img src="web/S07.jpg" alt="S07 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S07</strong><span class="tc">0:34.10 – 0:37.13</span><span class="dur">3.0s</span><span class="src src-card">图形卡</span></header>
+    <p class="pic">全黑。一声轻语，画面中央浮现唤醒词</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>你好，小念。</span><i>0:35.00</i></li></ul>
+    <ul class="caps"><li>字：你好，小念</li></ul>
+    
+  </div>
+</article>
+<article class="shot" id="S08">
+  <figure><img src="web/S08.jpg" alt="S08 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S08</strong><span class="tc">0:37.13 – 0:40.73</span><span class="dur">3.6s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">近景：屏幕亮起，原开机动画的光照亮白色前盖倒角和齿纹旋钮</p>
+    
+    
+    <p class="sfx">音效：原 boot.ogg</p>
+  </div>
+</article>
+<article class="shot" id="S09">
+  <figure><img src="web/S09.jpg" alt="S09 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S09</strong><span class="tc">0:40.73 – 0:45.10</span><span class="dur">4.4s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">从近景拉开成三分之四中景；原壁纸和 Spine 角色亮起，台灯随后亮起，遮幅打开</p>
+    <ul class="lines"><li class="w-X"><b>小念（女）</b><span>我在。</span><i>0:42.33</i></li></ul>
+    
+    <p class="sfx">音效：台灯开关</p>
+  </div>
+</article>
+<article class="shot" id="S10">
+  <figure><img src="web/S10.jpg" alt="S10 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S10</strong><span class="tc">0:45.10 – 0:48.90</span><span class="dur">3.8s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">产品偏右，左侧主标题</p>
+    
+    <ul class="caps"><li>主标题：念念不忘，必有回响 / 你的桌面 AI 伙伴</li></ul>
+    
+  </div>
+</article>
+<h2 class="act"><span>第四幕 · 回响的方式</span><em>音乐：温暖 lo-fi 钢琴 + 弦乐，人声出现时自动避让</em></h2>
+<article class="shot" id="S11">
+  <figure><img src="web/S11.jpg" alt="S11 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S11</strong><span class="tc">0:48.90 – 0:51.30</span><span class="dur">2.4s</span><span class="src src-plate">Higgsfield 底片</span></header>
+    <p class="pic">傍晚的玄关，一只手放下钥匙（只拍手）</p>
+    
+    
+    <p class="sfx">音效：钥匙落盘</p>
+  </div>
+</article>
+<article class="shot" id="S12">
+  <figure><img src="web/S12.jpg" alt="S12 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S12</strong><span class="tc">0:51.30 – 0:56.17</span><span class="dur">4.9s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">桌搭中景，产品前方一圈淡淡的感应光扫过（功能示意）</p>
+    <ul class="lines"><li class="w-X"><b>小念（女）</b><span>回来啦，今天过得怎么样？</span><i>0:51.90</i></li></ul>
+    <ul class="caps"><li>章节 01 主动交互：你走近，它先开口</li></ul>
+    <p class="sfx">音效：轻柔提示音</p>
+  </div>
+</article>
+<article class="shot" id="S13">
+  <figure><img src="web/S13.jpg" alt="S13 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S13</strong><span class="tc">0:56.17 – 1:05.27</span><span class="dur">9.1s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">坐在桌前的视角，显示器和产品同框，对话逐句出现</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>今天有点累。</span><i>0:56.47</i></li><li class="w-X"><b>小念（女）</b><span>那就先歇一会儿。想聊聊，还是我陪你安静待着？</span><i>0:58.48</i></li></ul>
+    <ul class="caps"><li>章节 02 自然对话：听得出情绪，也接得住话</li></ul>
+    
+  </div>
+</article>
+<article class="shot" id="S14">
+  <figure><img src="web/S14.jpg" alt="S14 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S14</strong><span class="tc">1:05.27 – 1:08.47</span><span class="dur">3.2s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">台灯、显示器、产品同框的桌面全景，暖光</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>安静待着吧，灯暗一点。</span><i>1:05.47</i></li></ul>
+    
+    
+  </div>
+</article>
+<article class="shot" id="S15">
+  <figure><img src="web/S15.jpg" alt="S15 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S15</strong><span class="tc">1:08.47 – 1:14.30</span><span class="dur">5.8s</span><span class="src src-3dplate">Blender → Higgsfield 底片</span></header>
+    <p class="pic">桌面台灯渐暗（Blender），随后切到客厅：主灯熄灭、窗帘合上（Higgsfield 底片，开灯/关灯交叉淡化）</p>
+    <ul class="lines"><li class="w-X"><b>小念（女）</b><span>好，台灯调暗了，客厅的灯也帮你关了。</span><i>1:08.67</i></li></ul>
+    <ul class="caps"><li>章节 03 接入 Home Assistant：一句话，照顾全屋</li></ul>
+    <p class="sfx">音效：关灯、窗帘电机</p>
+  </div>
+</article>
+<article class="shot" id="S16">
+  <figure><img src="web/S16.jpg" alt="S16 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S16</strong><span class="tc">1:14.30 – 1:17.93</span><span class="dur">3.6s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">夜晚，台灯低档，产品近景；角标「此前」</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>周三要面试，有点紧张。</span><i>1:14.70</i></li></ul>
+    <ul class="caps"><li>角标：此前</li></ul>
+    
+  </div>
+</article>
+<article class="shot" id="S17">
+  <figure><img src="web/S17.jpg" alt="S17 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S17</strong><span class="tc">1:17.93 – 1:24.53</span><span class="dur">6.6s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">同一张桌子换成清晨的光，角标「周三 · 早上」</p>
+    <ul class="lines"><li class="w-X"><b>小念（女）</b><span>今天面试对吧？别紧张，你准备了那么久。</span><i>1:18.83</i></li></ul>
+    <ul class="caps"><li>章节 04 永久记忆：跨越每一次对话，记得你在意的事</li><li>角标：周三 · 早上</li></ul>
+    <p class="sfx">音效：鸟鸣</p>
+  </div>
+</article>
+<article class="shot" id="S18">
+  <figure><img src="web/S18.jpg" alt="S18 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S18</strong><span class="tc">1:24.53 – 1:28.43</span><span class="dur">3.9s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">产品侧面中景，设置卡片里的唤醒词被改写成别的名字后又改回</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>名字，你来取。</span><i>1:25.03</i></li></ul>
+    <ul class="caps"><li>卖点：自定义唤醒词</li></ul>
+    <p class="sfx">音效：打字</p>
+  </div>
+</article>
+<article class="shot" id="S19">
+  <figure><img src="web/S19.jpg" alt="S19 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S19</strong><span class="tc">1:28.43 – 1:33.50</span><span class="dur">5.1s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">产品正面近景，屏幕内容整体淡出淡入，换成演示形象和新壁纸</p>
+    <ul class="lines"><li class="w-X2"><b>小念 · 新音色（女）</b><span>换个样子，换个声音，也还是我。</span><i>1:29.43</i></li></ul>
+    <ul class="caps"><li>角标：演示形象</li><li>卖点：自定义角色形象与音色</li></ul>
+    <p class="sfx">音效：切换音</p>
+  </div>
+</article>
+<article class="shot" id="S20">
+  <figure><img src="web/S20.jpg" alt="S20 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S20</strong><span class="tc">1:33.50 – 1:41.33</span><span class="dur">7.8s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">产品背面三分之四，慢速环绕；右侧线条图逐级展开</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>自研 Harness 框架，自制硬件主板，接入你自己的大模型。</span><i>1:33.90</i></li></ul>
+    <ul class="caps"><li>卖点：自定义 API</li><li>线条图：自制硬件主板 → 云端 Harness → 大模型 / ASR / TTS；自定义 API</li></ul>
+    
+  </div>
+</article>
+<h2 class="act"><span>第五幕 · 收尾</span><em>音乐：收束，最后一个和弦</em></h2>
+<article class="shot" id="S21">
+  <figure><img src="web/S21.jpg" alt="S21 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S21</strong><span class="tc">1:41.33 – 1:48.27</span><span class="dur">6.9s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">深夜桌面全景，台灯最暗档，只剩屏幕里的角色在微动；镜头拉远</p>
+    <ul class="lines"><li class="w-U"><b>你（男）</b><span>晚安，小念。</span><i>1:41.93</i></li><li class="w-X"><b>小念（女）</b><span>晚安。你说过的，我都放在心上。</span><i>1:43.95</i></li></ul>
+    
+    <p class="sfx">音效：台灯开关</p>
+  </div>
+</article>
+<article class="shot" id="S22">
+  <figure><img src="web/S22.jpg" alt="S22 关键帧" loading="lazy" width="1280" height="720"></figure>
+  <div class="meta">
+    <header><strong>S22</strong><span class="tc">1:48.27 – 1:54.80</span><span class="dur">6.5s</span><span class="src src-3d">Blender · 真实 CAD</span></header>
+    <p class="pic">产品居中靠下，宣传语和功能清单逐行浮现，淡出</p>
+    <ul class="lines"><li class="w-N"><b>旁白（男）</b><span>念念不忘，</span><i>1:48.87</i></li><li class="w-X"><b>小念（女）</b><span>必有回响。</span><i>1:50.44</i></li></ul>
+    <ul class="caps"><li>念念不忘，必有回响 ｜ 6 项功能 ｜「你好，小念」</li></ul>
+    
+  </div>
+</article>
+
+  <section class="notes">
+    <h3>合规与制作说明</h3>
+    <ul>
+      <li>产品镜头全部用 Blender 渲染真实 CAD：8 个零件共用原装配坐标，只做统一缩放和放置。屏幕贴在 LCD 有效区 71.14×69.82mm 上，保留厚黑边。</li>
+      <li>屏幕内容用原 nvhai.skel / atlas / texture / room.png，通过官方 Spine 4.2.43 运行时逐帧烘焙原 idle；开机动画用原 80 帧，按 1.6 倍速播放。</li>
+      <li>Higgsfield 只用来生成不含本产品的底片（S06、S11、S15）和 S19 的演示形象；痛点底片复用 v1。</li>
+      <li>旧设备统一叫「某智能设备」，没有品牌。画面中不出现人脸，最多出现手、背影。感应光只是功能示意；不出现人脸识别框，也不暗示响应速度。</li>
+      <li>不放品牌名、价格、参数或平台 logo。「永久记忆」写成「跨越每一次对话，记得你在意的事」。</li>
+      <li>当前关键帧为单帧 Cycles 渲染；镜头运动、台灯渐暗、屏幕切换等动态会在代理预览中呈现。</li>
+    </ul>
+  </section>
+</div>
