@@ -1,0 +1,177 @@
+{
+ "L01": {
+  "text": "你说过的话，有回响吗？",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "03d6c020-8ff3-44ef-8009-ad71f3f80ebc",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033747_03d6c020-8ff3-44ef-8009-ad71f3f80ebc.wav"
+ },
+ "L02": {
+  "text": "每天回到家，你说的第一句话，是对谁说的？",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "e322f63f-b5a4-4f7e-827c-4db59f6428d8",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033800_e322f63f-b5a4-4f7e-827c-4db59f6428d8.wav"
+ },
+ "L03": {
+  "text": "今天有点累。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "e32a835f-82b7-488e-a544-d34420679914",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033814_e32a835f-82b7-488e-a544-d34420679914.wav"
+ },
+ "L04": {
+  "text": "为您播放白噪音。",
+  "who": "D",
+  "voice": "Xinyi (zh)",
+  "job": "c28a79da-3676-433a-8452-1cdd65a842ab",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033829_c28a79da-3676-433a-8452-1cdd65a842ab.wav"
+ },
+ "L05": {
+  "text": "上周跟你说的面试……",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "85a2325f-1e39-403f-b9d8-8e5b22ac5868",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033843_85a2325f-1e39-403f-b9d8-8e5b22ac5868.wav"
+ },
+ "L06": {
+  "text": "抱歉，我不太明白。",
+  "who": "D",
+  "voice": "Xinyi (zh)",
+  "job": "7c842666-10ab-4a00-bb57-0c9fe0b1d0a5",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033859_7c842666-10ab-4a00-bb57-0c9fe0b1d0a5.wav"
+ },
+ "L07": {
+  "text": "它们不主动，没温度，也记不住。",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "9141badc-e554-4bbd-bffd-23474d96f01a",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033914_9141badc-e554-4bbd-bffd-23474d96f01a.wav"
+ },
+ "L08": {
+  "text": "可我们真正缺的，从来不是一台更聪明的机器，",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "90cee2c9-1c27-4e2c-8b8f-26107d8b42fe",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033926_90cee2c9-1c27-4e2c-8b8f-26107d8b42fe.wav"
+ },
+ "L09": {
+  "text": "是一个，会陪着你的人。",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "72167b39-8584-4eb0-9035-ec2dd0214f08",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033939_72167b39-8584-4eb0-9035-ec2dd0214f08.wav"
+ },
+ "L10": {
+  "text": "你好，小念。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "d11a7580-ad86-4295-88f0-88d6d30a331e",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_033953_d11a7580-ad86-4295-88f0-88d6d30a331e.wav"
+ },
+ "L11": {
+  "text": "我在。",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "41f4f023-19dc-4438-a318-3cef7e0bf5e2",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034008_41f4f023-19dc-4438-a318-3cef7e0bf5e2.wav"
+ },
+ "L12": {
+  "text": "回来啦，今天过得怎么样？",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "d0e8d5e3-29ce-4ca7-9ccc-dd270d1d476f",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034022_d0e8d5e3-29ce-4ca7-9ccc-dd270d1d476f.wav"
+ },
+ "L13": {
+  "text": "今天有点累。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "754ef7ee-33b0-4288-bdb2-128552395ea2",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034050_754ef7ee-33b0-4288-bdb2-128552395ea2.wav"
+ },
+ "L14": {
+  "text": "那就先歇一会儿。想聊聊，还是我陪你安静待着？",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "95dae3ba-b622-4c28-99dc-1df328b9aec6",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034104_95dae3ba-b622-4c28-99dc-1df328b9aec6.wav"
+ },
+ "L15": {
+  "text": "安静待着吧，灯暗一点。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "1cf6d81f-6d7d-4cbe-adf2-38f84f7034a6",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034118_1cf6d81f-6d7d-4cbe-adf2-38f84f7034a6.wav"
+ },
+ "L16": {
+  "text": "好，台灯调暗了，客厅的灯也帮你关了。",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "5d24c38f-5df2-450b-bc8e-3247dc67a392",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034131_5d24c38f-5df2-450b-bc8e-3247dc67a392.wav"
+ },
+ "L17": {
+  "text": "周三要面试，有点紧张。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "3b8d82da-2ebf-4100-8f2c-01ba11cb1f40",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034145_3b8d82da-2ebf-4100-8f2c-01ba11cb1f40.wav"
+ },
+ "L18": {
+  "text": "今天面试对吧？别紧张，你准备了那么久。",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "9d9b6460-309a-435d-a4ab-8d51bd29f68b",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034159_9d9b6460-309a-435d-a4ab-8d51bd29f68b.wav"
+ },
+ "L19": {
+  "text": "名字，你来取。",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "05b04cbb-ce1a-4d62-934a-93b2975a4947",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034215_05b04cbb-ce1a-4d62-934a-93b2975a4947.wav"
+ },
+ "L20": {
+  "text": "换个样子，换个声音，也还是我。",
+  "who": "X2",
+  "voice": "Jing (zh)",
+  "job": "d2f8b68d-0aa0-48d1-b143-192013481eb6",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034229_d2f8b68d-0aa0-48d1-b143-192013481eb6.wav"
+ },
+ "L21": {
+  "text": "自研 Harness 框架，自制硬件主板，接入你自己的大模型。",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "8890678c-301e-42e8-adb4-4134cf40bacf",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034241_8890678c-301e-42e8-adb4-4134cf40bacf.wav"
+ },
+ "L23": {
+  "text": "晚安。你说过的，我都放在心上。",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "16d47461-1f0c-4483-8749-01419e60f630",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034312_16d47461-1f0c-4483-8749-01419e60f630.wav"
+ },
+ "L24": {
+  "text": "念念不忘，",
+  "who": "N",
+  "voice": "Yichen (zh)",
+  "job": "d7a83146-6efa-4e91-956b-9dfb33e7fab4",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034326_d7a83146-6efa-4e91-956b-9dfb33e7fab4.wav"
+ },
+ "L25": {
+  "text": "必有回响。",
+  "who": "X",
+  "voice": "Xiaoyin (zh)",
+  "job": "31ee58fe-ca14-41a2-9e92-640bfbb0df99",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_034341_31ee58fe-ca14-41a2-9e92-640bfbb0df99.wav"
+ },
+ "L22": {
+  "text": "晚安，小念。",
+  "who": "U",
+  "voice": "Yichen (zh)",
+  "job": "3b65ab50-7af9-49f0-9e57-9d85eacb6e65",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KizEQBKN5ExQDtX2zLZQJyBk1q/hf_20261018_041936_3b65ab50-7af9-49f0-9e57-9d85eacb6e65.wav"
+ }
+}
