@@ -1,0 +1,111 @@
+<title>小念宣传片分镜 v2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: screening-room contact sheet. One column of shots; on wide screens frame left, notes right. */
+:root {
+  --bg: #0f1113; --panel: #171a1d; --line: #2a2e33; --fg: #ece8e1; --dim: #9a978f; --amber: #e3b06a; --cold: #8fa9c9; --pain: #d9806f;
+  --display: "Noto Serif SC", "Songti SC", serif; --body: "Noto Sans SC", "Microsoft YaHei", sans-serif; --mono: "JetBrains Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.65; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 80px; }
+.hero { display: grid; gap: 18px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--amber); text-transform: uppercase; }
+h1 { font-family: var(--display); font-weight: 300; font-size: clamp(34px, 6vw, 64px); letter-spacing: .12em; line-height: 1.2; margin: 0; text-wrap: balance; }
+h1 b { font-weight: 500; color: var(--amber); }
+.logline { color: var(--dim); max-width: 62ch; margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 28px; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+.stats b { display: block; color: var(--fg); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+section { padding-block: 36px; border-bottom: 1px solid var(--line); }
+h3 { font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: .08em; margin: 0 0 16px; }
+.ask { background: var(--panel); border: 1px solid var(--amber); border-radius: 10px; padding: 20px 22px; }
+.ask ol { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; }
+.ask li::marker { color: var(--amber); font-family: var(--mono); }
+.preview video { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 6px; }
+.note { color: var(--dim); font-size: 13px; margin: 12px 0 0; max-width: 80ch; }
+.cast { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.cast div { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.cast b { display: block; font-weight: 500; }
+.cast span { color: var(--dim); font-size: 13px; }
+.act { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; font-family: var(--display); font-weight: 500; font-size: 24px; letter-spacing: .1em; margin: 56px 0 18px; }
+.act em { font-family: var(--body); font-style: normal; font-size: 13px; color: var(--dim); letter-spacing: .04em; }
+.shot { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 22px; padding-block: 20px; border-top: 1px solid var(--line); }
+.shot figure { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 4px; background: #000; }
+.meta { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.meta header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; font-family: var(--mono); }
+.meta header strong { font-size: 20px; color: var(--amber); font-weight: 500; }
+.tc, .dur { font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.src { font-family: var(--body); font-size: 12px; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--dim); }
+.src-3d, .src-3dplate { border-color: rgba(227,176,106,.5); color: var(--amber); }
+.pic { margin: 0; }
+.lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lines li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) auto; gap: 10px; font-size: 14px; }
+.lines b { font-weight: 400; color: var(--dim); font-size: 13px; }
+.lines i { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--dim); }
+.w-X b, .w-X2 b { color: var(--amber); } .w-D b { color: var(--pain); } .w-U b { color: var(--cold); }
+.caps { margin: 0; padding-left: 1.1em; color: var(--dim); font-size: 13px; }
+.sfx { margin: 0; color: var(--dim); font-size: 13px; }
+.notes ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--dim); max-width: 80ch; }
+code { font-family: var(--mono); font-size: 13px; color: var(--fg); }
+@media (max-width: 760px) { .shot { grid-template-columns: 1fr; } .lines li { grid-template-columns: 6.5em minmax(0, 1fr); } .lines i { display: none; } }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Storyboard v2 · 2026-10-18 · 1920×1080 · 30fps</div>
+    <h1>念念不忘，<b>必有回响</b></h1>
+    <p class="logline">一句话有没有回响。痛点阶段，说出口的话都落空了，最后归结为缺少陪伴。转折点是一声「你好，小念」，桌上的屏幕亮起，小念回答「我在」。后面每个功能，都是对某一句话的回响。</p>
+    <div class="stats">
+      <div><b>{{DURATION}}</b>全片时长（按配音实测）</div>
+      <div><b>{{NSHOTS}}</b>镜头</div>
+      <div><b>25</b>句配音，已合成并核对</div>
+      <div><b>15</b>个镜头用真实 CAD 渲染</div>
+    </div>
+  </header>
+
+  <section class="preview">
+    <h3>代理预览</h3>
+    <video src="web/proxy_preview.mp4" poster="web/poster.jpg" controls playsinline preload="metadata"></video>
+    <p class="note">640×360 低分辨率预览：每 3 帧渲染 1 帧，Cycles 16 采样，所以画面有颗粒、动作略顿。正式版是 1080p 逐帧渲染。声音是完整混音（−14 LUFS），请戴耳机听。</p>
+  </section>
+
+  <section>
+    <div class="ask">
+      <h3>需要你确认</h3>
+      <ol>
+        <li>整体结构和登场方式：声音先到，光再到。用唤醒词「你好，小念」作为产品登场的动作，替代原来的 7 秒开场。</li>
+        <li>配音音色：旁白和「你」用男声 Yichen，小念用女声 Xiaoyin，自定义音色段用女声 Jing。音频文件在 <code>audio/vo/</code>，请重点听 L11「我在」、L14、L23。</li>
+        <li>S19 的演示形象：按你给的参考生成的原创半身角色和黄昏书房壁纸，画面上标注「演示形象」。不满意可以换一版，每版约 44 积分。</li>
+        <li>L23「你说过的，我都放在心上」是情感表达。如果担心被理解成"全部保存"，可以改成「你在意的事，我会记得」。</li>
+        <li>代理预览已经完成（见上方）。正式渲染的耗时：实测 1080p、Cycles 40 采样每帧约 24 秒，全片 3D 部分共 2370 帧，约 15–16 小时，适合整夜在后台跑。EEVEE 快 2–3 倍，但会丢掉台灯的光影，不推荐。确认后再开始。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h3>配音角色</h3>
+    <div class="cast">
+      <div><b>旁白 · 你</b><span>男声 Inworld Yichen，负责发问</span></div>
+      <div><b>小念</b><span>女声 Inworld Xiaoyin，负责回答</span></div>
+      <div><b>小念 · 新音色</b><span>女声 Inworld Jing，只在 S19 出现</span></div>
+      <div><b>某智能设备</b><span>女声 Inworld Xinyi，加窄带和机械感处理</span></div>
+    </div>
+  </section>
+
+  {{SHOTS}}
+
+  <section class="notes">
+    <h3>合规与制作说明</h3>
+    <ul>
+      <li>产品镜头全部用 Blender 渲染真实 CAD：8 个零件共用原装配坐标，只做统一缩放和放置。屏幕贴在 LCD 有效区 71.14×69.82mm 上，保留厚黑边。</li>
+      <li>屏幕内容用原 nvhai.skel / atlas / texture / room.png，通过官方 Spine 4.2.43 运行时逐帧烘焙原 idle；开机动画用原 80 帧，按 1.6 倍速播放。</li>
+      <li>Higgsfield 只用来生成不含本产品的底片（S06、S11、S15）和 S19 的演示形象；痛点底片复用 v1。</li>
+      <li>旧设备统一叫「某智能设备」，没有品牌。画面中不出现人脸，最多出现手、背影。感应光只是功能示意；不出现人脸识别框，也不暗示响应速度。</li>
+      <li>不放品牌名、价格、参数或平台 logo。「永久记忆」写成「跨越每一次对话，记得你在意的事」。</li>
+      <li>当前关键帧为单帧 Cycles 渲染；镜头运动、台灯渐暗、屏幕切换等动态会在代理预览中呈现。</li>
+    </ul>
+  </section>
+</div>

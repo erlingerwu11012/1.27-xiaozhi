@@ -1,0 +1,36 @@
+{
+  "voices": {
+    "N":  {"model": "inworld_text_to_speech", "voice": "Yichen (zh)", "role": "旁白（男）"},
+    "U":  {"model": "inworld_text_to_speech", "voice": "Yichen (zh)", "role": "你（男）"},
+    "X":  {"model": "inworld_text_to_speech", "voice": "Xiaoyin (zh)", "role": "小念（女）"},
+    "X2": {"model": "inworld_text_to_speech", "voice": "Jing (zh)", "role": "小念·新音色（女）"},
+    "D":  {"model": "inworld_text_to_speech", "voice": "Xinyi (zh)", "role": "某智能设备", "fx": "robot"}
+  },
+  "lines": [
+    {"id": "L01", "who": "N",  "text": "你说过的话，有回响吗？", "shot": "S01"},
+    {"id": "L02", "who": "N",  "text": "每天回到家，你说的第一句话，是对谁说的？", "shot": "S03"},
+    {"id": "L03", "who": "U",  "text": "今天有点累。", "shot": "S04a"},
+    {"id": "L04", "who": "D",  "text": "为您播放白噪音。", "shot": "S04a"},
+    {"id": "L05", "who": "U",  "text": "上周跟你说的面试……", "shot": "S04c"},
+    {"id": "L06", "who": "D",  "text": "抱歉，我不太明白。", "shot": "S04c"},
+    {"id": "L07", "who": "N",  "text": "它们不主动，没温度，也记不住。", "shot": "S05"},
+    {"id": "L08", "who": "N",  "text": "可我们真正缺的，从来不是一台更聪明的机器，", "shot": "S06"},
+    {"id": "L09", "who": "N",  "text": "是一个，会陪着你的人。", "shot": "S06"},
+    {"id": "L10", "who": "U",  "text": "你好，小念。", "shot": "S07"},
+    {"id": "L11", "who": "X",  "text": "我在。", "shot": "S09"},
+    {"id": "L12", "who": "X",  "text": "回来啦，今天过得怎么样？", "shot": "S12"},
+    {"id": "L13", "who": "U",  "text": "今天有点累。", "shot": "S13"},
+    {"id": "L14", "who": "X",  "text": "那就先歇一会儿。想聊聊，还是我陪你安静待着？", "shot": "S13"},
+    {"id": "L15", "who": "U",  "text": "安静待着吧，灯暗一点。", "shot": "S14"},
+    {"id": "L16", "who": "X",  "text": "好，台灯调暗了，客厅的灯也帮你关了。", "shot": "S15"},
+    {"id": "L17", "who": "U",  "text": "周三要面试，有点紧张。", "shot": "S16"},
+    {"id": "L18", "who": "X",  "text": "今天面试对吧？别紧张，你准备了那么久。", "shot": "S17"},
+    {"id": "L19", "who": "N",  "text": "名字，你来取。", "shot": "S18"},
+    {"id": "L20", "who": "X2", "text": "换个样子，换个声音，也还是我。", "shot": "S19"},
+    {"id": "L21", "who": "N",  "text": "自研 Harness 框架，自制硬件主板，接入你自己的大模型。", "shot": "S20"},
+    {"id": "L22", "who": "U",  "text": "晚安，小念。", "shot": "S21"},
+    {"id": "L23", "who": "X",  "text": "晚安。你说过的，我都放在心上。", "shot": "S21"},
+    {"id": "L24", "who": "N",  "text": "念念不忘，", "shot": "S22"},
+    {"id": "L25", "who": "X",  "text": "必有回响。", "shot": "S22"}
+  ]
+}

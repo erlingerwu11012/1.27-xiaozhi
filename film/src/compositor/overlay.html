@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "NotoSC"; src: url("../../assets/fonts/NotoSansSC-VF.ttf"); font-weight: 100 900; }
+:root { --fg: #f4f1ea; --dim: rgba(244,241,234,.62); --warm: #f2c58a; --cold: #9fb6d6; --pain: #e0796a; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1920px; height: 1080px; background: transparent; overflow: hidden; font-family: "NotoSC", "Microsoft YaHei", sans-serif; color: var(--fg); }
+#stage { position: absolute; inset: 0; overflow: hidden; }
+#bg { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+#bg2 { position: absolute; top: 0; height: 1080px; object-fit: cover; }
+.split-line { position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(0,0,0,.85); }
+.bar { position: absolute; left: 0; right: 0; background: #000; height: 138px; }
+.bar.t { top: 0 } .bar.b { bottom: 0 }
+.vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.35) 100%); pointer-events: none; }
+.sub { position: absolute; left: 0; right: 0; bottom: 74px; text-align: center; font-size: 40px; font-weight: 400; letter-spacing: .06em;
+       text-shadow: 0 2px 14px rgba(0,0,0,.75), 0 0 2px rgba(0,0,0,.9); }
+.lb .sub { bottom: 40px; font-size: 38px; }
+.bubble { position: absolute; max-width: 560px; padding: 20px 28px 22px; border-radius: 18px; background: rgba(18,20,24,.46);
+          backdrop-filter: blur(22px) saturate(1.2); border: 1px solid rgba(255,255,255,.14); box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+.bubble .who { font-size: 20px; letter-spacing: .12em; color: var(--dim); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.bubble .who i { width: 8px; height: 8px; border-radius: 50%; background: var(--cold); display: inline-block; }
+.bubble.x .who i { background: var(--warm); box-shadow: 0 0 10px var(--warm); }
+.bubble.d .who i { background: #8a8f96; }
+.bubble.x { border-color: rgba(242,197,138,.35); }
+.bubble .txt { font-size: 34px; line-height: 1.45; font-weight: 400; letter-spacing: .03em; }
+.chapter { position: absolute; top: 120px; }
+.chapter .no { font-size: 22px; letter-spacing: .3em; color: var(--warm); font-weight: 500; }
+.chapter .name { font-size: 64px; font-weight: 300; letter-spacing: .08em; margin-top: 10px; }
+.chapter .desc { font-size: 26px; color: var(--dim); margin-top: 16px; letter-spacing: .1em; font-weight: 300; }
+.chapter .rule { width: 56px; height: 2px; background: var(--warm); margin-top: 22px; opacity: .8; }
+.tag { position: absolute; font-size: 30px; letter-spacing: .3em; font-weight: 500; color: var(--pain); padding: 10px 22px; border: 1.5px solid rgba(224,121,106,.7); border-radius: 6px; background: rgba(0,0,0,.25); }
+.tagsub { position: absolute; font-size: 24px; color: var(--dim); letter-spacing: .12em; }
+.tags-all { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-size: 56px; letter-spacing: .25em; font-weight: 300; color: var(--fg); text-shadow: 0 2px 20px rgba(0,0,0,.8); }
+.tags-all span { color: var(--pain); margin: 0 .2em; }
+.big { position: absolute; left: 0; right: 0; top: 455px; text-align: center; font-size: 92px; font-weight: 300; letter-spacing: .18em; text-shadow: 0 4px 30px rgba(0,0,0,.85); }
+.whisper { position: absolute; left: 0; right: 0; top: 500px; text-align: center; font-size: 46px; font-weight: 200; letter-spacing: .5em; color: rgba(244,241,234,.86); }
+.title { position: absolute; left: 150px; top: 360px; }
+.title .main { font-size: 96px; font-weight: 200; letter-spacing: .14em; line-height: 1.25; text-shadow: 0 4px 30px rgba(0,0,0,.6); }
+.title .main b { font-weight: 400; color: var(--warm); }
+.title .s { font-size: 30px; font-weight: 300; letter-spacing: .3em; color: var(--dim); margin-top: 26px; }
+.small-title { position: absolute; left: 0; right: 0; top: 515px; text-align: center; font-size: 30px; letter-spacing: .6em; font-weight: 300; color: var(--dim); }
+.corner { position: absolute; top: 72px; left: 96px; font-size: 26px; letter-spacing: .3em; padding: 8px 18px; border-left: 3px solid var(--warm); background: rgba(0,0,0,.25); }
+.corner-r { position: absolute; top: 72px; right: 96px; font-size: 20px; letter-spacing: .2em; color: var(--dim); padding: 6px 14px; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; }
+.feature { position: absolute; bottom: 150px; font-size: 52px; font-weight: 300; letter-spacing: .12em; text-shadow: 0 2px 20px rgba(0,0,0,.6); }
+.feature small { display: block; font-size: 22px; letter-spacing: .4em; color: var(--warm); margin-bottom: 14px; font-weight: 500; }
+.wake { position: absolute; width: 520px; padding: 26px 30px; border-radius: 20px; background: rgba(18,20,24,.5); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.14); }
+.wake .k { font-size: 20px; letter-spacing: .2em; color: var(--dim); }
+.wake .v { font-size: 44px; margin-top: 10px; letter-spacing: .08em; border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: 12px; }
+.wake .v .cur { display: inline-block; width: 3px; height: 40px; background: var(--warm); vertical-align: -6px; margin-left: 4px; }
+.wake .hint { font-size: 20px; color: var(--dim); margin-top: 14px; letter-spacing: .1em; }
+.diagram { position: absolute; right: 120px; top: 200px; width: 620px; }
+.diagram .node { padding: 16px 22px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; background: rgba(12,14,18,.45); backdrop-filter: blur(16px); font-size: 26px; letter-spacing: .06em; }
+.diagram .node small { display: block; font-size: 18px; color: var(--dim); margin-top: 6px; letter-spacing: .08em; }
+.diagram .arrow { height: 44px; width: 2px; background: linear-gradient(var(--warm), rgba(242,197,138,.2)); margin-left: 40px; }
+.diagram .row { display: flex; gap: 14px; }
+.diagram .row .node { flex: 1; text-align: center; font-size: 22px; }
+.diagram .hl { border-color: rgba(242,197,138,.75); color: var(--warm); margin-top: 18px; text-align: center; }
+.ring { position: absolute; border-radius: 50%; border: 2px solid rgba(242,197,138,.55); box-shadow: 0 0 40px rgba(242,197,138,.25), inset 0 0 30px rgba(242,197,138,.15); }
+.ring.r2 { border-color: rgba(242,197,138,.25); }
+.end { position: absolute; left: 0; right: 0; top: 110px; text-align: center; }
+.end .main { font-size: 104px; font-weight: 200; letter-spacing: .22em; text-shadow: 0 4px 40px rgba(0,0,0,.9); }
+.end .f1 { font-size: 30px; letter-spacing: .5em; margin-top: 46px; color: var(--fg); font-weight: 300; }
+.end .f2 { font-size: 22px; letter-spacing: .25em; margin-top: 18px; color: var(--dim); font-weight: 300; }
+.end .wk { font-size: 22px; letter-spacing: .4em; margin-top: 28px; color: var(--warm); }
+.blackout { position: absolute; inset: 0; background: #000; }
+</style></head><body><div id="stage"></div>
+<script>
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+window.render = (st) => {
+  const S = document.getElementById('stage'); let h = '';
+  if (st.bg) h += `<img id="bg" src="${st.bg}" style="${st.bgMove ? `transform:scale(${st.bgMove.s}) translate(${st.bgMove.x}%,${st.bgMove.y}%)` : ''}">`;
+  if (st.bgB) h += `<img id="bg" src="${st.bgB}" style="opacity:${st.bgBk ?? 1};${st.bgMove ? `transform:scale(${st.bgMove.s}) translate(${st.bgMove.x}%,${st.bgMove.y}%)` : ''}">`;
+  if (st.bg2) h += `<img id="bg2" src="${st.bg2}" style="left:${st.split}px;width:${1920 - st.split}px">` + (st.bg2b ? `<img id="bg2" src="${st.bg2b}" style="left:${st.split}px;width:${1920 - st.split}px;opacity:${st.bg2k ?? 1}">` : '') + `<div class="split-line" style="left:${st.split - 1}px"></div>`;
+  if (st.black) h += `<div class="blackout" style="opacity:${st.black}"></div>`;
+  if (st.vignette !== false) h += `<div class="vignette"></div>`;
+  for (const r of st.rings || []) h += `<div class="ring ${r.cls || ''}" style="left:${r.x - r.w / 2}px;top:${r.y - r.h / 2}px;width:${r.w}px;height:${r.h}px;opacity:${r.o ?? 1}"></div>`;
+  for (const b of st.bubbles || []) h += `<div class="bubble ${b.cls}" style="left:${b.x}px;top:${b.y}px;opacity:${b.o ?? 1}"><div class="who"><i></i>${esc(b.who)}</div><div class="txt">${esc(b.text)}</div></div>`;
+  if (st.chapter) h += `<div class="chapter" style="opacity:${st.chapterO ?? 1};${st.chapter.side === 'r' ? 'right:130px;text-align:right' : 'left:130px'}"><div class="no">${st.chapter.no}</div><div class="name">${esc(st.chapter.name)}</div><div class="desc">${esc(st.chapter.desc)}</div><div class="rule" style="${st.chapter.side === 'r' ? 'margin-left:auto' : ''}"></div></div>`;
+  if (st.tag) h += `<div class="tag" style="opacity:${st.tagO ?? 1};left:${st.tag.x}px;top:${st.tag.y}px">${esc(st.tag.text)}</div>` + (st.tag.sub ? `<div class="tagsub" style="opacity:${st.tagO ?? 1};left:${st.tag.x}px;top:${st.tag.y + 74}px">${esc(st.tag.sub)}</div>` : '');
+  if (st.tagsAll) h += `<div class="tags-all" style="opacity:${st.tagsAllO ?? 1}"><span>不主动</span>·<span>没温度</span>·<span>记不住</span></div>`;
+  if (st.big) h += `<div class="big" style="opacity:${st.bigO ?? 1}">${esc(st.big)}</div>`;
+  if (st.whisper) h += `<div class="whisper" style="opacity:${st.whisperO ?? 1}">${esc(st.whisper)}</div>`;
+  if (st.smallTitle) h += `<div class="small-title" style="opacity:${st.smallTitleO ?? 1}">${esc(st.smallTitle)}</div>`;
+  if (st.title) h += `<div class="title" style="opacity:${st.titleO ?? 1}"><div class="main">念念不忘，<br><b>必有回响</b></div><div class="s">${esc(st.title.sub)}</div></div>`;
+  if (st.corner) h += `<div class="corner" style="opacity:${st.cornerO ?? 1};${st.lb ? 'top:170px;' : ''}${st.cornerSide === 'r' ? 'left:auto;right:96px;border-left:0;border-right:3px solid var(--warm)' : ''}">${esc(st.corner)}</div>`;
+  if (st.cornerR) h += `<div class="corner-r">${esc(st.cornerR)}</div>`;
+  if (st.feature) h += `<div class="feature" style="opacity:${st.featureO ?? 1};${st.feature.side === 'r' ? 'right:130px;text-align:right' : 'left:130px'}"><small>${esc(st.feature.kicker)}</small>${esc(st.feature.text)}</div>`;
+  if (st.wake) h += `<div class="wake" style="opacity:${st.wakeO ?? 1};left:${st.wake.x}px;top:${st.wake.y}px"><div class="k">唤醒词</div><div class="v">${esc(st.wake.text)}<span class="cur"></span></div><div class="hint">起一个只属于你们的名字</div></div>`;
+  if (st.diagram) { const k = st.diagramStep ?? 4, o = i => `style="opacity:${i <= k ? 1 : 0.0};transition:none"`;
+    h += `<div class="diagram"><div class="node" ${o(0)}>自制硬件主板<small>麦克风 · 传感器信号</small></div><div class="arrow" ${o(1)}></div><div class="node" ${o(1)}>云端 · 自研 Harness<small>对话编排 · 记忆 · 设备控制</small></div><div class="arrow" ${o(2)}></div><div class="row" ${o(2)}><div class="node">大模型</div><div class="node">语音识别</div><div class="node">语音合成</div></div><div class="node hl" ${o(3)}>自定义 API · 接入你自己的大模型</div></div>`; }
+  if (st.end) { const e = st.endStep || [1, 1, 1, 1];
+    h += `<div class="end"><div class="main" style="opacity:${e[0]}">念念不忘，必有回响</div><div class="f1" style="opacity:${e[1]}">主动交互 · 自然对话 · 永久记忆</div><div class="f2" style="opacity:${e[2]}">接入 Home Assistant ｜ 自定义唤醒词 ｜ 自定义角色与音色 ｜ 自定义 API</div><div class="wk" style="opacity:${e[3]}">「你好，小念」</div></div>`; }
+  if (st.lb) h += `<div class="bar t" style="height:${st.lbh ?? 138}px"></div><div class="bar b" style="height:${st.lbh ?? 138}px"></div>`;
+  if (st.sub) h += `<div class="sub">${esc(st.sub)}</div>`;
+  S.className = st.lb ? 'lb' : '';
+  S.innerHTML = h;
+  return Promise.all([...S.querySelectorAll('img')].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })));
+};
+window.ready = true;
+</script></body></html>

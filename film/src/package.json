@@ -1,0 +1,9 @@
+{
+  "name": "xiaonian-promo-v2",
+  "private": true,
+  "type": "module",
+  "description": "Promo video v2 build scripts (screen baking, compositing)",
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

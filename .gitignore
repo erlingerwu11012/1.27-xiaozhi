@@ -1,0 +1,8 @@
+film/src/node_modules/
+**/__pycache__/
+film/build/screen/
+film/build/proxy3d/
+film/build/proxy_frames/
+film/build/final3d/
+film/build/final_frames/
+.env

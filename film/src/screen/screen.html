@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><body style="margin:0;background:#000">
+<canvas id="out" width="640" height="640"></canvas>
+<script src="/assets/spine/spine-webgl.js"></script>
+<script>
+// Original LCD content: original room.png + original nvhai.skel idle via official Spine 4.2 runtime.
+// Layout copied from assets/spine/full-screen.html (pos 170.764,42.510; rear slots scissored; arms unclipped).
+const A = '/assets/';
+window.ready = false;
+(async () => {
+  const out = document.getElementById('out'), ctx = out.getContext('2d');
+  const c = document.createElement('canvas'); c.width = c.height = 640;
+  const gl = c.getContext('webgl', { alpha: true, premultipliedAlpha: true, preserveDrawingBuffer: true });
+  const r = new spine.SceneRenderer(c, gl), a = new spine.AssetManager(gl, A + 'spine/');
+  a.loadBinary('nvhai.skel'); a.loadTextureAtlas('nvhai.atlas');
+  while (!a.isLoadingComplete()) await new Promise(x => setTimeout(x, 20));
+  if (a.hasErrors()) throw Error(JSON.stringify(a.getErrors()));
+  const data = new spine.SkeletonBinary(new spine.AtlasAttachmentLoader(a.get('nvhai.atlas'))).readSkeletonData(a.get('nvhai.skel'));
+  const s = new spine.Skeleton(data); s.setSkinByName('default'); s.setToSetupPose(); s.x = 170.764; s.y = 42.510;
+  r.camera.position.x = r.camera.position.y = 160; r.camera.viewportWidth = r.camera.viewportHeight = 320; r.camera.update();
+  const st = new spine.AnimationState(new spine.AnimationStateData(data)); st.setAnimation(0, 'idle', true);
+  const load = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const bg = await load(A + 'spine/room.png');
+  const boot = await Promise.all([...Array(80).keys()].map(i => load(A + 'boot-frames/' + String(i).padStart(3, '0') + '.png')));
+  const rear = new Set(['shenti', 'dabir', 'dabil', 'yiling']);
+  st.update(0); st.apply(s); s.update(0); s.updateWorldTransform(spine.Physics.reset);
+  // advance the idle simulation continuously by dt (sub-stepped at 1/120 s for stable physics)
+  window.advance = dt => {
+    while (dt > 1e-6) { const d = Math.min(1 / 120, dt); st.update(d); st.apply(s); s.update(d); s.updateWorldTransform(spine.Physics.update); dt -= d; }
+  };
+  window.drawIdle = () => {
+    gl.viewport(0, 0, 640, 640); gl.disable(gl.SCISSOR_TEST); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    for (const slot of s.drawOrder) {
+      if (rear.has(slot.data.name)) { gl.enable(gl.SCISSOR_TEST); gl.scissor(0, 104, 640, 536); } else gl.disable(gl.SCISSOR_TEST);
+      r.begin(); r.drawSkeleton(s, false, slot.data.index, slot.data.index); r.end();
+    }
+    gl.disable(gl.SCISSOR_TEST);
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.clearRect(0, 0, 640, 640); ctx.drawImage(bg, 0, 0, 640, 640); ctx.drawImage(c, 0, 0);
+    return out.toDataURL('image/png');
+  };
+  // boot: original 80 frames @20fps, retimed 1.6x -> 2.5 s
+  window.drawBoot = t => {
+    const f = Math.min(79, Math.max(0, Math.floor(t * 20 * 1.6)));
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 640, 640); ctx.drawImage(boot[f], 0, 0, 640, 640);
+    return out.toDataURL('image/png');
+  };
+  window.spineVersion = data.version;
+  window.ready = true;
+})().catch(e => { console.error(e.stack); window.err = String(e.stack); });
+</script></body></html>
