@@ -15,7 +15,7 @@ This branch contains a review draft and editable production materials. The previ
 - `film/plates/` and `film/custom-character/`: existing creative media.
 - `film/build/`: product screen bounds and keyframe renders used by the storyboard compositor.
 
-The English project notes contain no local user path, calendar date, or region setting. Original creative files retain the existing language. No account credentials or private conversation log are included.
+Original creative files retain the existing language.
 
 ## Local use
 

@@ -1,0 +1,31 @@
+Continue revising my existing desktop AI companion product film. This is a continuation of an existing project, not a request to invent a new product or replace the film with a generic advertisement.
+
+Repository: https://github.com/erlingerwu11012/1.27-xiaozhi
+Branch: codex/promo-video-continuation
+
+Clone that branch into a separate working directory. Read CLAUDE.md, README.md, PROJECT_MEMORY.md, and CONTINUE.md. Inspect the storyboard, film/output/proxy_preview.mp4, the editable sources, and the supplied CAD and screen assets before editing. Treat the proxy as a review draft. If I supply an earlier storyboard, use it as the visual reference instead of assuming the proxy is my preferred version.
+
+The most important issue is hardware fidelity: previous generated product images did not sufficiently resemble the real device. Establish which supplied CAD or mesh files represent the real product. Preserve the geometry, proportions, bezel and black screen border, camera position, side controls, supports, base thickness, assembly, and colors. Do not redesign the enclosure. Use the original screen artwork and Spine animation assets, preserving character identity and animation timing. If an essential reference is missing, identify it specifically instead of inventing the missing hardware.
+
+Use all three tools in a coordinated production workflow:
+
+1. Blender: Use the supplied real CAD or mesh geometry for every shot containing the product. Set up physically plausible materials, lighting, camera perspective, shadows, reflections, and color management. Prefer Cycles for final photorealistic rendering when hardware permits. Use GPU rendering only after checking availability. Render transparent product passes or complete scenes as appropriate. Start with one representative still for review before rendering an animation.
+
+2. FFmpeg: Inspect the existing media, assemble rendered sequences, composite approved passes and screen content, mix existing narration/music/effects, and encode playable MP4 previews and the final film. Check frame rate, resolution, duration, audio synchronization, and visible screen alignment. Preserve existing media when it remains usable. Do not claim that upscaling a low-resolution proxy produces a new full-quality master.
+
+3. Higgsfield: Use it for proposed environment/background generation or suitable background motion, while keeping the device itself sourced from Blender. Do not let generated backgrounds redraw, distort, or replace the product. Confirm available models, tools, credit costs, and output limits before generation. Present the exact proposed paid job and obtain my approval before spending credits. If access is unavailable, continue with Blender and existing assets, and report the limitation honestly.
+
+Use Chinese for the video narration, dialogue, and on-screen text.
+
+Preserve the established warm, realistic desktop atmosphere and the central companionship theme. Show everyday situations and the feeling of receiving a response. Avoid repetitive framing, excessive product close-ups during the opening problem sequence, and unsupported product claims. Preserve existing voice assignments unless I revise them.
+
+Work in stages:
+- First inspect the project and report the actual film structure, available tools, and source files controlling the requested edits.
+- Create a separate revision directory and preserve the originals.
+- Produce one hardware-faithful still and a short representative motion sample for my review.
+- After I accept that sample, apply the agreed treatment to the remaining shots and render the complete film.
+- Deliver a playable MP4, editable Blender scenes and scripts, FFmpeg assembly instructions, and a concise list of verified results and unresolved issues.
+
+Use the local tools and assets when accessible. If running in a restricted web environment, do not claim to control my computer: use the repository assets and available runtime, then provide executable scripts for any steps that genuinely require my local machine. Do not silently substitute AI-generated product geometry for Blender rendering.
+
+Begin by inspecting the repository and producing the first faithful product-render test. I will provide the detailed content revisions separately.
